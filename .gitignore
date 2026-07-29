@@ -1,1 +1,13 @@
 .claude/
+
+# LaTeX build artifacts
+arxiv/*.aux
+arxiv/*.log
+arxiv/*.out
+arxiv/*.toc
+arxiv/*.fls
+arxiv/*.fdb_latexmk
+arxiv/*.synctex.gz
+arxiv/*.bbl
+arxiv/*.blg
+arxiv/main.pdf

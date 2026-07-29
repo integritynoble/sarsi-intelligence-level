@@ -4,7 +4,11 @@
 
 ## Start here
 
-**[`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md)** — the consolidated paper. It supersedes everything else in this repository.
+**[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — the paper, typeset (25 pp).
+**[`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md)** — the same paper in Markdown.
+**[`arxiv/`](arxiv/)** — arXiv submission package: LaTeX source, upload tarball, and submission guide.
+
+It supersedes everything else in this repository.
 
 Its central claim: recursive self-improvement is *substrate-indexed*. An improvement loop is always a loop over some substrate the system can modify, and the binding constraint migrates from one substrate to the next as each is mastered. The standard intelligence-explosion argument establishes that RSI is possible; it says nothing about the rate, because "the" recursion rate is not a single parameter.
 
@@ -19,7 +23,10 @@ Principal results:
 
 | File | Status |
 |---|---|
-| `SARSI-L_Paper_v3.md` | **Current.** Consolidated paper, v3.0 |
+| `SARSI-L_Paper_v3.pdf` | **Current.** Typeset paper, 25 pp |
+| `SARSI-L_Paper_v3.md` | **Current.** Consolidated paper, v3.0, Markdown |
+| `arxiv/main.tex` | LaTeX source (author block has placeholders — see `arxiv/README.md`) |
+| `arxiv/sarsi-l-v3-arxiv.tar.gz` | arXiv upload package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
