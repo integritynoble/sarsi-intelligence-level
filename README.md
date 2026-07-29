@@ -4,11 +4,15 @@
 
 ## Start here
 
-**[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — the paper, typeset (25 pp).
-**[`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md)** — the same paper in Markdown.
-**[`arxiv/`](arxiv/)** — arXiv submission package: LaTeX source, upload tarball, and submission guide.
+Two papers, one program — a system scale and an agent scale.
 
-It supersedes everything else in this repository.
+**[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
+
+**[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (31 pp). The agent-scale companion. Source in [`self_awareness/`](self_awareness/).
+
+Together they supersede everything else in this repository.
+
+## The system-scale paper
 
 Its central claim: recursive self-improvement is *substrate-indexed*. An improvement loop is always a loop over some substrate the system can modify, and the binding constraint migrates from one substrate to the next as each is mastered. The standard intelligence-explosion argument establishes that RSI is possible; it says nothing about the rate, because "the" recursion rate is not a single parameter.
 
@@ -23,10 +27,11 @@ Principal results:
 
 | File | Status |
 |---|---|
-| `SARSI-L_Paper_v3.pdf` | **Current.** Typeset paper, 25 pp |
-| `SARSI-L_Paper_v3.md` | **Current.** Consolidated paper, v3.0, Markdown |
-| `arxiv/main.tex` | LaTeX source (author block has placeholders — see `arxiv/README.md`) |
-| `arxiv/sarsi-l-v3-arxiv.tar.gz` | arXiv upload package |
+| `SARSI-L_Paper_v3.pdf` | **Current.** System-scale paper, 25 pp |
+| `SARSI-L_Paper_v3.md` | **Current.** Same paper, Markdown |
+| `arxiv/` | LaTeX source, upload package, submission guide |
+| `SARSI_Functional_Self_Awareness.pdf` | **Current.** Agent-scale companion, 31 pp |
+| `self_awareness/` | LaTeX source, bibliography, upload package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
@@ -36,12 +41,20 @@ Principal results:
 
 See Appendix D of the paper for the full supersession record.
 
+## How the two papers relate
+
+SARSI-L identifies the rate-limiting bottleneck on the first loop closure as *trusted autonomy* — an institutional question, not a technical one — and then admits (§10.6) that it has no representation of institutions. The companion paper supplies the evidential half of that representation, and does so in SARSI-L's own machinery rather than by analogy:
+
+SARSI-L's Amdahl bound caps a compensated loop's iteration rate at `ρ_max = 1/Σ T_j` over its externally-gated steps. For a mature software loop that set contains exactly one member — deploy — so `ρ_max = 1/T_δ`. **Authority closure is the removal of that step from the gated set.** Capability closure drives every automated step toward zero and cannot touch `T_δ`.
+
+The pairing also bounds the companion's claim honestly. `T_δ` is review latency, so it is a *throughput* floor and removable; but by the same distinction the instrument moves no *physical* floor, and SARSI-L's matter bottleneck says physical floors bind immediately after Loop I. An agent-scale trust instrument is necessary for the first closure and nearly irrelevant to the pace of the rest.
+
 ## Status of the claims
 
 The paper is explicit about what it cannot support. Two problems are load-bearing and unresolved:
 
 1. **The compensation ceiling** (§10.1) — whether per-iteration returns to compensation diminish. If they do not, loop closure is not a phase transition and the framework's central prediction fails. §4.5 states this as two rival hypotheses with discriminating observations.
-2. **Governance** (§10.6) — the framework's own analysis locates the binding constraint on the first and most consequential loop closure in institutional authorization rather than technical capability, and the framework has no representation of institutions.
+2. **Governance** (§10.6) — the framework's own analysis locates the binding constraint on the first and most consequential loop closure in institutional authorization rather than technical capability, and the framework has no representation of institutions. The companion paper answers the evidential half of this; the political half — who decides — remains open in both.
 
 Timelines are four-scenario ranges (Fast / Central / Slow / Blocked) conditioned on stated critical-path conditions, never point estimates. §6.2 gives the base rate for AI forecasting, which applies to this paper as much as to any other.
 

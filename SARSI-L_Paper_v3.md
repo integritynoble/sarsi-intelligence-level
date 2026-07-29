@@ -600,6 +600,8 @@ The proposed replacement is a two-component vector, both externally anchored: **
 
 This means the framework's own analysis identifies a constraint its structure cannot represent. If institutional capacity to make decisions about autonomous systems grows more slowly than the capability of those systems — and there is no particular reason to expect otherwise — then governance is the binding constraint across multiple domains simultaneously, and the circle model is analyzing the wrong bottleneck. Adding governance maturity as a dimension of analysis alongside completion and critical path is the minimum response. It is not obviously sufficient.
 
+A partial answer exists for the evidential half. The companion paper (`self_awareness/`) splits Loop I completion into a capability coordinate and an authority coordinate and supplies an instrument — an evidence-linked agent self-state — for the second. It observes that authority closure is exactly the removal of the deploy step from the externally-gated set *E* of Proposition 1, so that ρ_max = 1/T_δ until it is granted; and that T_δ, being review latency rather than physics, is a throughput floor and therefore removable. It represents what can be *shown* about a system, not the political question of who decides.
+
 ---
 
 ## 11. Conclusion
@@ -632,6 +634,7 @@ The earlier versions of this work described a civilization curing cancer, revers
 
 | Level | Range | Operational meaning |
 |---|---|---|
+| **Unmeasured** | ⊥ | No instrument exists for this loop. Off the scale, not the bottom of it |
 | **Negligible** | <10% | Isolated sub-tasks can be automated; no autonomous pipeline exists |
 | **Early** | 10–35% | Some stages autonomous; human decision required at most points |
 | **Meaningful** | 35–65% | Majority of stages autonomous; human oversight at critical decisions only |

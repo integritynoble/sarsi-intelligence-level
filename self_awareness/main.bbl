@@ -1,0 +1,268 @@
+\begin{thebibliography}{40}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amodei et~al.(2016)Amodei, Olah, Steinhardt, Christiano, Schulman, and
+  Man{\'e}]{amodei2016concrete}
+Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and
+  Dan Man{\'e}.
+\newblock Concrete problems in {AI} safety.
+\newblock \emph{arXiv preprint arXiv:1606.06565}, 2016.
+
+\bibitem[Binder et~al.(2024)Binder, Chua, Korbak, Sleight, Hughes, Long, Perez,
+  Turpin, and Evans]{binder2024introspection}
+Felix~J. Binder, James Chua, Tomek Korbak, Henry Sleight, John Hughes, Robert
+  Long, Ethan Perez, Miles Turpin, and Owain Evans.
+\newblock Looking inward: Language models can learn about themselves by
+  introspection.
+\newblock \emph{arXiv preprint arXiv:2410.13787}, 2024.
+
+\bibitem[Bongard et~al.(2006)Bongard, Zykov, and Lipson]{bongard2006resilient}
+Josh Bongard, Victor Zykov, and Hod Lipson.
+\newblock Resilient machines through continuous self-modeling.
+\newblock \emph{Science}, 314\penalty0 (5802):\penalty0 1118--1121, 2006.
+
+\bibitem[Butlin et~al.(2023)Butlin, Long, Elmoznino, Bengio, Birch, Constant,
+  Deane, Fleming, Frith, Ji, et~al.]{butlin2023consciousness}
+Patrick Butlin, Robert Long, Eric Elmoznino, Yoshua Bengio, Jonathan Birch,
+  Axel Constant, George Deane, Stephen~M. Fleming, Chris Frith, Xu~Ji, et~al.
+\newblock Consciousness in artificial intelligence: Insights from the science
+  of consciousness.
+\newblock \emph{arXiv preprint arXiv:2308.08708}, 2023.
+
+\bibitem[Cox et~al.(2022)Cox, Dannenhauer, and Larue]{cox2022metacognition}
+Michael~T. Cox, Dustin Dannenhauer, and Othalia Larue.
+\newblock Computational metacognition.
+\newblock \emph{arXiv preprint arXiv:2201.12885}, 2022.
+
+\bibitem[Dehaene and Changeux(2011)]{dehaene2011conscious}
+Stanislas Dehaene and Jean-Pierre Changeux.
+\newblock Experimental and theoretical approaches to conscious processing.
+\newblock \emph{Neuron}, 70\penalty0 (2):\penalty0 200--227, 2011.
+
+\bibitem[Dehaene et~al.(1998)Dehaene, Kerszberg, and
+  Changeux]{dehaene1998workspace}
+Stanislas Dehaene, Michel Kerszberg, and Jean-Pierre Changeux.
+\newblock A neuronal model of a global workspace in effortful cognitive tasks.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 95\penalty0
+  (24):\penalty0 14529--14534, 1998.
+
+\bibitem[Dyson(1960)]{dyson1960search}
+Freeman~J. Dyson.
+\newblock Search for artificial stellar sources of infrared radiation.
+\newblock \emph{Science}, 131\penalty0 (3414):\penalty0 1667--1668, 1960.
+
+\bibitem[Flavell(1979)]{flavell1979metacognition}
+John~H. Flavell.
+\newblock Metacognition and cognitive monitoring: A new area of
+  cognitive-developmental inquiry.
+\newblock \emph{American Psychologist}, 34\penalty0 (10):\penalty0 906--911,
+  1979.
+
+\bibitem[Fleming and Dolan(2012)]{fleming2012neural}
+Stephen~M. Fleming and Raymond~J. Dolan.
+\newblock The neural basis of metacognitive ability.
+\newblock \emph{Philosophical Transactions of the Royal Society B},
+  367\penalty0 (1594):\penalty0 1338--1349, 2012.
+
+\bibitem[Fleming et~al.(2010)Fleming, Weil, Nagy, Dolan, and
+  Rees]{fleming2010introspective}
+Stephen~M. Fleming, Rimona~S. Weil, Zoltan Nagy, Raymond~J. Dolan, and Geraint
+  Rees.
+\newblock Relating introspective accuracy to individual differences in brain
+  structure.
+\newblock \emph{Science}, 329\penalty0 (5998):\penalty0 1541--1543, 2010.
+
+\bibitem[Friston(2010)]{friston2010freeenergy}
+Karl Friston.
+\newblock The free-energy principle: A unified brain theory?
+\newblock \emph{Nature Reviews Neuroscience}, 11\penalty0 (2):\penalty0
+  127--138, 2010.
+
+\bibitem[Goodhart(1984)]{goodhart1984monetary}
+Charles A.~E. Goodhart.
+\newblock Problems of monetary management: The {UK} experience.
+\newblock \emph{Monetary Theory and Practice}, pages 91--121, 1984.
+
+\bibitem[Guo et~al.(2017)Guo, Pleiss, Sun, and Weinberger]{guo2017calibration}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q. Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock In \emph{Proceedings of the 34th International Conference on Machine
+  Learning}, pages 1321--1330, 2017.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+  Narasimhan]{jimenez2024swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
+  Press, and Karthik Narasimhan.
+\newblock {SWE-bench}: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Kadavath et~al.(2022)Kadavath, Conerly, Askell, Henighan, Drain,
+  Perez, Schiefer, Hatfield-Dodds, DasSarma, Tran-Johnson,
+  et~al.]{kadavath2022know}
+Saurav Kadavath, Tom Conerly, Amanda Askell, Tom Henighan, Dawn Drain, Ethan
+  Perez, Nicholas Schiefer, Zac Hatfield-Dodds, Nova DasSarma, Eli
+  Tran-Johnson, et~al.
+\newblock Language models (mostly) know what they know.
+\newblock \emph{arXiv preprint arXiv:2207.05221}, 2022.
+
+\bibitem[Kardashev(1964)]{kardashev1964transmission}
+Nikolai~S. Kardashev.
+\newblock Transmission of information by extraterrestrial civilizations.
+\newblock \emph{Soviet Astronomy}, 8:\penalty0 217--221, 1964.
+
+\bibitem[Li et~al.(2025)Li, Xiong, Wilson, Mattar, and
+  Benna]{li2025metacognitive}
+Ji-An Li, Hua-Dong Xiong, Robert~C. Wilson, Marcelo~G. Mattar, and Marcus~K.
+  Benna.
+\newblock Language models are capable of metacognitive monitoring and control
+  of their internal activations.
+\newblock \emph{arXiv preprint arXiv:2505.13763}, 2025.
+
+\bibitem[Liu et~al.(2024)Liu, Yu, Zhang, Xu, Lei, Lai, Gu, Ding, Men, Yang,
+  et~al.]{liu2024agentbench}
+Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu Lei, Hanyu Lai, Yu~Gu,
+  Hangliang Ding, Kaiwen Men, Kejuan Yang, et~al.
+\newblock {AgentBench}: Evaluating {LLMs} as agents.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+
+\bibitem[Mialon et~al.(2023)Mialon, Fourrier, Swift, Wolf, LeCun, and
+  Scialom]{mialon2023gaia}
+Gr{\'e}goire Mialon, Cl{\'e}mentine Fourrier, Craig Swift, Thomas Wolf, Yann
+  LeCun, and Thomas Scialom.
+\newblock {GAIA}: A benchmark for general {AI} assistants.
+\newblock \emph{arXiv preprint arXiv:2311.12983}, 2023.
+
+\bibitem[Naphade et~al.(2026)Naphade, Bhargav, Lim, and
+  Shah]{naphade2026introspection}
+Atharv Naphade, Samarth Bhargav, Sean Lim, and Mcnair Shah.
+\newblock Me, myself, and $\pi$: Evaluating and explaining {LLM} introspection.
+\newblock \emph{arXiv preprint arXiv:2603.20276}, 2026.
+
+\bibitem[{National Institute of Standards and Technology}(2023)]{nist2023rmf}
+{National Institute of Standards and Technology}.
+\newblock Artificial intelligence risk management framework ({AI RMF} 1.0).
+\newblock NIST AI 100-1, 2023.
+
+\bibitem[Nelson and Narens(1990)]{nelson1990metamemory}
+Thomas~O. Nelson and Louis Narens.
+\newblock Metamemory: A theoretical framework and new findings.
+\newblock \emph{Psychology of Learning and Motivation}, 26:\penalty0 125--173,
+  1990.
+
+\bibitem[Packer et~al.(2023)Packer, Wooders, Lin, Fang, Patil, Stoica, and
+  Gonzalez]{packer2023memgpt}
+Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir~G. Patil, Ion
+  Stoica, and Joseph~E. Gonzalez.
+\newblock {MemGPT}: Towards {LLMs} as operating systems.
+\newblock \emph{arXiv preprint arXiv:2310.08560}, 2023.
+
+\bibitem[Park et~al.(2023)Park, O'Brien, Cai, Morris, Liang, and
+  Bernstein]{park2023generative}
+Joon~Sung Park, Joseph~C. O'Brien, Carrie~J. Cai, Meredith~Ringel Morris, Percy
+  Liang, and Michael~S. Bernstein.
+\newblock Generative agents: Interactive simulacra of human behavior.
+\newblock In \emph{Proceedings of the 36th Annual ACM Symposium on User
+  Interface Software and Technology}, pages 1--22, 2023.
+
+\bibitem[Perrier and Bennett(2025)]{perrier2025identity}
+Elija Perrier and Michael~Timothy Bennett.
+\newblock Agent identity evals: Measuring agentic identity.
+\newblock \emph{arXiv preprint arXiv:2507.17257}, 2025.
+
+\bibitem[Qian et~al.(2025)Qian, Acikgoz, Wang, Chen, Sil, Hakkani-Tur, Tur, and
+  Ji]{qian2025smart}
+Cheng Qian, Emre~Can Acikgoz, Hongru Wang, Xiusi Chen, Avirup Sil, Dilek
+  Hakkani-Tur, Gokhan Tur, and Heng Ji.
+\newblock {SMART}: Self-aware agent for tool overuse mitigation.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  ACL 2025}, 2025.
+
+\bibitem[Rao and Ballard(1999)]{rao1999predictive}
+Rajesh P.~N. Rao and Dana~H. Ballard.
+\newblock Predictive coding in the visual cortex: A functional interpretation
+  of some extra-classical receptive-field effects.
+\newblock \emph{Nature Neuroscience}, 2\penalty0 (1):\penalty0 79--87, 1999.
+
+\bibitem[Shinn et~al.(2023)Shinn, Cassano, Berman, Gopinath, Narasimhan, and
+  Yao]{shinn2023reflexion}
+Noah Shinn, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik
+  Narasimhan, and Shunyu Yao.
+\newblock Reflexion: Language agents with verbal reinforcement learning.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36, 2023.
+
+\bibitem[Shumailov et~al.(2024)Shumailov, Shumaylov, Zhao, Papernot, Anderson,
+  and Gal]{shumailov2024collapse}
+Ilia Shumailov, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson,
+  and Yarin Gal.
+\newblock {AI} models collapse when trained on recursively generated data.
+\newblock \emph{Nature}, 631:\penalty0 755--759, 2024.
+
+\bibitem[Sumers et~al.(2024)Sumers, Yao, Narasimhan, and
+  Griffiths]{sumers2024coala}
+Theodore~R. Sumers, Shunyu Yao, Karthik Narasimhan, and Thomas~L. Griffiths.
+\newblock Cognitive architectures for language agents.
+\newblock \emph{Transactions on Machine Learning Research}, 2024.
+
+\bibitem[Valiente and Pilly(2025)]{valiente2025muse}
+Rodolfo Valiente and Praveen~K. Pilly.
+\newblock Competence-aware {AI} agents with metacognition for unknown
+  situations and environments ({MUSE}).
+\newblock \emph{Neural Networks}, 2025.
+
+\bibitem[Wang and Shu(2026)]{wang2026metacogagent}
+Chenyu Wang and Yang Shu.
+\newblock {MetaCogAgent}: A metacognitive multi-agent {LLM} framework with
+  self-aware task delegation.
+\newblock \emph{arXiv preprint arXiv:2605.17292}, 2026.
+
+\bibitem[Wang et~al.(2023)Wang, Xie, Jiang, Mandlekar, Xiao, Zhu, Fan, and
+  Anandkumar]{wang2023voyager}
+Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu,
+  Linxi Fan, and Anima Anandkumar.
+\newblock Voyager: An open-ended embodied agent with large language models.
+\newblock \emph{Transactions on Machine Learning Research}, 2023.
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026brain}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: A brain-inspired
+  dynamic state-space architecture for metacognition, evidence-grounded
+  self-modeling, and recursive improvement.
+\newblock Preprint, 2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026evidence}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: A layered self-model,
+  metacognitive control, and benchmarking framework.
+\newblock Preprint, 2026{\natexlab{b}}.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026imaging}
+Chengshuai Yang.
+\newblock {SARSI-CI}: Self-aware recursively self-improving computational
+  imaging agents for continual, verifiable, and collaborative discovery.
+\newblock Preprint, 2026{\natexlab{c}}.
+
+\bibitem[Yang(2026{\natexlab{d}})]{yang2026sarsil}
+Chengshuai Yang.
+\newblock Recursive self-improvement is substrate-indexed: A falsifiable
+  framework for intelligence trajectories from language models to stellar
+  engineering.
+\newblock {SARSI-L} consolidated paper, version 3.0, 2026{\natexlab{d}}.
+
+\bibitem[Yang(2026{\natexlab{e}})]{yang2026science}
+Chengshuai Yang.
+\newblock {SARSI} for science: Self-aware recursively self-improving agents for
+  autonomous, verifiable scientific discovery.
+\newblock Preprint, 2026{\natexlab{e}}.
+
+\bibitem[Yao et~al.(2023)Yao, Zhao, Yu, Du, Shafran, Narasimhan, and
+  Cao]{yao2023react}
+Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan,
+  and Yuan Cao.
+\newblock {ReAct}: Synergizing reasoning and acting in language models.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+
+\end{thebibliography}

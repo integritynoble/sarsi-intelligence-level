@@ -12,17 +12,9 @@ Verified: extracts to an empty directory and compiles with plain `pdflatex` in t
 
 ---
 
-## Before you submit: two placeholders
+## Author
 
-`main.tex` has an author block that must be filled in (search for `TODO`):
-
-```latex
-\author{[AUTHOR NAME]\\[0.3em]
-\normalsize [Affiliation]\\
-\normalsize \texttt{[email]}}
-```
-
-Replace all three, recompile, and rebuild the tarball:
+Filled in from the companion paper: **Chengshuai Yang, NextGen PlatformAI C Corp., spiritai@platformai.org**. Correct it in `main.tex` if any of that is wrong, then rebuild:
 
 ```bash
 cd arxiv

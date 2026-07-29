@@ -11,3 +11,11 @@ arxiv/*.synctex.gz
 arxiv/*.bbl
 arxiv/*.blg
 arxiv/main.pdf
+self_awareness/*.aux
+self_awareness/*.log
+self_awareness/*.out
+self_awareness/*.toc
+self_awareness/*.blg
+self_awareness/*.fls
+self_awareness/*.fdb_latexmk
+self_awareness/main.pdf

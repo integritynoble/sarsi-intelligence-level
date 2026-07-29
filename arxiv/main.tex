@@ -41,9 +41,9 @@
 % ---------------------------------------------------------------------------
 % TODO before arXiv submission: replace the placeholders below.
 % ---------------------------------------------------------------------------
-\author{[AUTHOR NAME]\\[0.3em]
-\normalsize [Affiliation]\\
-\normalsize \texttt{[email]}}
+\author{Chengshuai Yang\\[0.3em]
+\normalsize NextGen PlatformAI C Corp.\\
+\normalsize \texttt{spiritai@platformai.org}}
 
 \date{29 July 2026}
 
@@ -789,6 +789,8 @@ The proposed replacement is a two-component vector, both externally anchored: \t
 
 This means the framework's own analysis identifies a constraint its structure cannot represent. If institutional capacity to make decisions about autonomous systems grows more slowly than the capability of those systems---and there is no particular reason to expect otherwise---then governance is the binding constraint across multiple domains simultaneously, and the loop model is analyzing the wrong bottleneck. Adding governance maturity as a dimension of analysis alongside completion and critical path is the minimum response. It is not obviously sufficient.
 
+A partial answer exists for the evidential half of the problem. \citet{yang2026selfaware} splits Loop~I completion into a capability coordinate and an authority coordinate, and supplies an instrument --- an evidence-linked agent self-state --- for the second. That work observes that authority closure is exactly the removal of the deploy step from the externally-gated set $E$ of Proposition~\ref{prop:amdahl}, so that $\rho_{\max}=1/T_\delta$ until it is granted; and that $T_\delta$, being review latency rather than physics, is a throughput floor and therefore removable. It represents what can be \emph{shown} about a system, not the political question of who decides. The remainder of \S10.6 stands.
+
 % ===========================================================================
 \section{Conclusion}
 
@@ -829,6 +831,9 @@ V+ & build/operate collectors $\to$ power further construction $\to$ \textbf{net
 \section{Loop Completion Scale}
 \label{app:scale}
 
+\noindent A coordinate with nothing to measure is $\bot$, never $0$: zero asserts an observed failure, $\bot$ reports that no observation exists. A gate that treats $\bot$ as $0$ blocks every new capability; one that treats it as $1$ promotes on no evidence.
+
+
 \begin{table}[h]
 \centering
 \footnotesize
@@ -836,6 +841,7 @@ V+ & build/operate collectors $\to$ power further construction $\to$ \textbf{net
 \toprule
 Level & Range & Operational meaning \\
 \midrule
+Unmeasured    & $\bot$     & No instrument exists for this loop. Off the scale, not the bottom of it \\
 Negligible    & $<10\%$    & Isolated sub-tasks can be automated; no autonomous pipeline exists \\
 Early         & 10--35\%   & Some stages autonomous; human decision required at most points \\
 Meaningful    & 35--65\%   & Majority of stages autonomous; human oversight at critical decisions only \\
@@ -927,6 +933,9 @@ Moravec, H. (1988). \emph{Mind Children: The Future of Robot and Human Intellige
 
 \bibitem[von Neumann(1966)]{vonneumann1966}
 von Neumann, J. (1966). \emph{Theory of Self-Reproducing Automata} (A. Burks, Ed.). University of Illinois Press.
+
+\bibitem[Yang(2026)]{yang2026selfaware}
+Yang, C. (2026). Functional Self-Awareness for SARSI Agents: A Brain-Inspired Dynamic State Space, Unified with Loop-Closure Levels and Deployed Applications. Companion paper to this framework.
 
 \bibitem[Yudkowsky(2013)]{yudkowsky2013}
 Yudkowsky, E. (2013). Intelligence Explosion Microeconomics. MIRI Technical Report 2013-1.
