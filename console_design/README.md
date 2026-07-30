@@ -2,7 +2,9 @@
 
 **Designing the Manager-Fronted SARSI Console: Per-Agent Self-Awareness, Nested Workspaces, and the Four Channels by Which Agents Affect Each Other**
 
-PDF: [`../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf) (14 pp).
+PDF: [`../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf) (33 pp).
+
+Organised in three parts. **Part I** specifies the substrate every agent shares: the ten self-state coordinates and their admission discipline, the bounded workspace and its salience function, the fast and slow loops as algorithms, the action repertoire with preconditions, the seven-level evidence ladder, and the four inter-agent channels. **Part II** specifies each of the five agents in full — role, ten coordinates instantiated, workspace admission policy with concrete salience weights and caps, fast loop as an algorithm, action repertoire with per-action authority, evidence sources, failure modes, and deployment status. **Part III** covers the chat surface, agent mode, and cross-agent dynamics.
 
 Designs the deployed console against Version 3.0 (the architecture) and Version 3.1 (what is actually built).
 
