@@ -8,7 +8,7 @@ Two papers, one program — a system scale and an agent scale.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
-**[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (33 pp). The agent-scale companion. Source and submission package in [`self_awareness/`](self_awareness/).
+**[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (34 pp). The agent-scale companion. Source and submission package in [`self_awareness/`](self_awareness/).
 
 Together they supersede everything else in this repository.
 
@@ -30,7 +30,7 @@ Principal results:
 | `SARSI-L_Paper_v3.pdf` | **Current.** System-scale paper, 25 pp |
 | `SARSI-L_Paper_v3.md` | **Current.** Same paper, Markdown |
 | `arxiv/` | LaTeX source, bibliography, upload package, submission guide |
-| `SARSI_Functional_Self_Awareness.pdf` | **Current.** Agent-scale companion, 33 pp |
+| `SARSI_Functional_Self_Awareness.pdf` | **Current.** Agent-scale companion, 34 pp |
 | `self_awareness/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |

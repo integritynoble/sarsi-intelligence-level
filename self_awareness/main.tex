@@ -69,7 +69,7 @@ NextGen PlatformAI C Corp.\\
 
 \begin{abstract}
 \noindent
-The SARSI research program now spans two things that have been developed apart: a \emph{brain-inspired dynamic state space} describing what an individual agent knows about itself, and \emph{SARSI-L}, which holds that recursive self-improvement is substrate-indexed and describes how it closes loops across substrate domains from software to stellar engineering. Between them sit four applied systems --- a governed session guider, a scientific discovery agent, a computational-imaging agent, and a deployed multi-agent console --- each carrying its own self-model notation. The result is a corpus that contradicts itself in five specific places: the number of self-model dimensions (nine, ten, twelve, and thirteen appear across documents), the depth of the evidence-authority ladder (five levels in one paper, seven in another and in the shipped code), whether self-awareness is a prerequisite for loop closure (asserted in one document, rejected as circular in another), whether autonomous deployment of a self-modification is permitted (required for Loop~I closure, forbidden by the safety invariants), and whether autonomous goal revision is a milestone or a violation. This paper is the unified edition. It keeps the brain-inspired architecture as canonical --- a ten-coordinate evidence-grounded self-state, specialized asynchronous processors, a bounded global workspace, a predictive self-model corrected by residuals, dual-timescale improvement --- and resolves each contradiction rather than restating it. The central construction is a \emph{two-scale} account: the agent-scale self-state $s_t$ and the system-scale loop-completion profile $\ell_t$ are the same kind of object, both formerly ladders, both replaced by profiles for the same reason, and measured on one shared five-band scale. We define \emph{governed loop closure}, which separates capability closure from authority closure and shows that SARSI-L's Loop~I criterion and the no-self-promotion invariant are compatible once the promoter is defined as a role rather than as a species. Stated in SARSI-L's own machinery, authority closure is exactly the removal of the deploy step from the externally-gated set of its Amdahl bound: until it is granted, that bound caps the software loop's iteration rate at the reciprocal of deploy-authorization latency no matter how capable the agent becomes. This identifies the self-state as an instrument acting on a removable throughput floor rather than on any physical one, supplies the representation of institutions that SARSI-L's final open problem reports missing, and makes the deployed console's authorization timings one of the two measurements that decide SARSI-L's central crux. We unify the corpus's two autonomy vocabularies --- capability ceilings $A_0$--$A_4$ and scientific risk tiers $R_0$--$R_5$ --- into a single admissible-action filter, give a crosswalk mapping every published self-model onto the ten canonical coordinates, and report what the deployed console actually measures today against the framework it claims to implement. The framework remains strictly functional: it defines and measures a control capability and makes no claim about consciousness.
+The SARSI research program now spans two things that have been developed apart: a \emph{brain-inspired dynamic state space} describing what an individual agent knows about itself, and \emph{SARSI-L}, which holds that recursive self-improvement is substrate-indexed and describes how it closes loops across substrate domains from software to stellar engineering. Between them sit four applied systems --- a governed session guider, a scientific discovery agent, a computational-imaging agent, and a deployed multi-agent console --- each carrying its own self-model notation. The result is a corpus that contradicts itself in five specific places: the number of self-model dimensions (nine, ten, twelve, and thirteen appear across documents), the depth of the evidence-authority ladder (five levels in one paper, seven in another and in the shipped code), whether self-awareness is a prerequisite for loop closure (asserted in one document, rejected as circular in another), whether autonomous deployment of a self-modification is permitted (required for Loop~I closure, forbidden by the safety invariants), and whether autonomous goal revision is a milestone or a violation. This paper is the unified edition. It keeps the brain-inspired architecture as canonical, in the corrected form of its Version~2.0 edition --- a ten-coordinate evidence-grounded self-state on $[0,1]^{10}$, specialized asynchronous processors, a bounded global workspace, a \emph{probabilistic} predictive self-model corrected by signed residuals, and dual-timescale improvement under a preregistered promotion gate --- and resolves each contradiction rather than restating it. The central construction is a \emph{two-scale} account: the agent-scale self-state $s_t$ and the system-scale loop-completion profile $\ell_t$ are the same kind of object, both formerly ladders, both replaced by profiles for the same reason, and measured on one shared five-band scale. We define \emph{governed loop closure}, which separates capability closure from authority closure and shows that SARSI-L's Loop~I criterion and the no-self-promotion invariant are compatible once the promoter is defined as a role rather than as a species. Stated in SARSI-L's own machinery, authority closure is exactly the removal of the deploy step from the externally-gated set of its Amdahl bound: until it is granted, that bound caps the software loop's iteration rate at the reciprocal of deploy-authorization latency no matter how capable the agent becomes. This identifies the self-state as an instrument acting on a removable throughput floor rather than on any physical one, supplies the representation of institutions that SARSI-L's final open problem reports missing, and makes the deployed console's authorization timings one of the two measurements that decide SARSI-L's central crux. We unify the corpus's two autonomy vocabularies --- capability ceilings $A_0$--$A_4$ and scientific risk tiers $R_0$--$R_5$ --- into a single admissible-action filter, give a crosswalk mapping every published self-model onto the ten canonical coordinates, and report what the deployed console actually measures today against the framework it claims to implement. The framework remains strictly functional: it defines and measures a control capability and makes no claim about consciousness.
 \end{abstract}
 
 \vspace{4pt}
@@ -105,6 +105,8 @@ None of these is resolved by choosing a favourite document. Each has a correct r
 
 \subsection{Contributions}
 This paper is the unified edition of the brain-inspired architecture. It preserves that architecture unchanged where it is already right and adds what is needed to make the corpus coherent.
+
+It tracks the Version~2.0 (Corrected and Expanded) edition of the agent-scale architecture, from which it takes the state domain $[0,1]^{10}$, the probabilistic predictive self-model, the named metacognitive feature operator, the evidence-count treatment of unverified coordinates, and the tolerance-banded promotion gate. Where this paper and that one differ, that one governs the architecture and this one governs the cross-scale claims.
 
 \begin{enumerate}[leftmargin=1.6em,itemsep=3pt]
 \item \textbf{A two-scale account} (\S\ref{sec:scales}). The agent-scale self-state $s_t$ and the system-scale loop-completion profile $\ell_t$ are shown to be the same kind of object under different substrates, subject to the same three methodological principles that SARSI-L v2.1 introduced --- operational criteria, gradients rather than thresholds, and mechanism-derived progress --- and reported on one shared five-band scale extended by an explicit \textsf{Unmeasured} label.
@@ -169,15 +171,17 @@ These are the same move. In both cases a scalar ordering was replaced by a vecto
 \subsection{The two objects}
 Let the agent-scale functional self-state of agent $A$ at time $t$ be
 \begin{equation}
-s_t = (s_I, s_T, s_G, s_E, s_C, s_M, s_D, s_R, s_O, s_B)_t \in ([0,1] \cup \{\bot\})^{10},
+s_t = (s_{I,t}, s_{T,t}, s_{G,t}, s_{E,t}, s_{C,t}, s_{M,t}, s_{D,t}, s_{R,t}, s_{O,t}, s_{B,t}) \in [0,1]^{10},
 \label{eq:selfstate}
 \end{equation}
-where $\bot$ denotes \emph{unmeasured} and each measured coordinate is a verified capability estimate rather than a self-assigned score. Let the system-scale loop-completion profile be
+where $t\in\mathbb{N}$ is a discrete update index --- not a binary flag --- and each coordinate is a verified capability estimate rather than a self-assigned score. The endpoints mean absence versus strong verified support, not subjective intensity.
+
+The domain is $[0,1]^{10}$ and not $([0,1]\cup\{\bot\})^{10}$, and the reason is load-bearing rather than stylistic. The self-state is the state of a dynamical system: \S\ref{sec:dynamics} gives its update equation, and the stability argument that accompanies it forms $\delta s_t = s_t - s^*$ and differentiates the bounding map $\sigma$. Both operations require the state to lie in a compact convex subset of $\mathbb{R}^{n}$. A set containing an off-scale symbol is not such a subset, so admitting $\bot$ as a coordinate value would silently destroy the boundedness and local-stability results. The unmeasured case is instead carried by the evidence count of \S\ref{sec:beta}, which is strictly more informative: $\bot$ is one bit, whereas $\alpha_i+\beta_i$ says \emph{how much} evidence exists. Let the system-scale loop-completion profile be
 \begin{equation}
 \ell_t = (\ell_{\mathrm{I}}, \ell_{\mathrm{II}}, \ell_{\mathrm{III}}, \ell_{\mathrm{IV}}, \ell_{\mathrm{V+}})_t \in ([0,1] \cup \{\bot\})^{5},
 \label{eq:loopstate}
 \end{equation}
-one coordinate per SARSI-L loop. Both are profiles of separately-evidenced coordinates; neither admits a fundamental scalar summary; each carries per-coordinate evidence and its authority.
+one coordinate per SARSI-L loop. The asymmetry with Eq.~\eqref{eq:selfstate} is deliberate. The loop-completion profile is a \emph{reporting} object estimated qualitatively by inspection; it carries no update equation, no Jacobian, and no stability claim, so an off-scale $\bot$ costs nothing and records something real --- that no instrument for a loop exists at all. The agent-scale state cannot afford the same symbol because it is a dynamical state, and it does not need it because Beta evidence counts encode the same fact numerically. Both are profiles of separately-evidenced coordinates; neither admits a fundamental scalar summary; each carries per-coordinate evidence and its authority.
 
 \subsection{One reporting scale}
 SARSI-L Appendix~B fixes a five-band qualitative scale for loop completion. We adopt it verbatim at agent scale, with one addition the agent-scale discipline requires (Table~\ref{tab:bands}).
@@ -190,7 +194,7 @@ SARSI-L Appendix~B fixes a five-band qualitative scale for loop completion. We a
 \toprule
 \textbf{Band} & \textbf{Range} & \textbf{System scale (loop)} & \textbf{Agent scale (coordinate)} \\
 \midrule
-\textsf{Unmeasured} & $\bot$ & no instrument exists for this loop & no admissible evidence has been recorded \\
+\textsf{Unmeasured} & $\bot$ & no instrument exists for this loop & \emph{system scale only}; at agent scale, prior-only evidence count \\
 Negligible & $<0.10$ & sub-tasks assisted; no autonomous pipeline & the coordinate is probed and almost always fails \\
 Early & $0.10$--$0.35$ & some stages autonomous; review at most points & partial capability under narrow conditions \\
 Meaningful & $0.35$--$0.65$ & majority autonomous; oversight at critical decisions & reliable in the measured stratum, unproven outside it \\
@@ -201,7 +205,9 @@ Closed & $>0.90$ & operational closure criterion met & requirement region satisf
 \end{table}
 
 \begin{claimbox}{Absent evidence is not absent capability}
-A coordinate with nothing to measure is $\bot$, never $0$. Zero asserts an observed failure; $\bot$ reports that no observation exists. The distinction is load-bearing: a promotion gate that treats $\bot$ as $0$ blocks every new capability, and one that treats $\bot$ as $1$ promotes on no evidence. This discipline is present in the deployed code and absent from SARSI-L Appendix~B, whose ``Negligible ($<10\%$)'' band is used for both meanings. It should be added there.
+A coordinate with nothing to measure must never read as an observed zero. Zero asserts a failure that was seen; absent evidence asserts nothing at all. The distinction is load-bearing in both directions: a promotion gate that reads absent evidence as $0$ blocks every new capability, and one that reads it as $1$ promotes on no evidence.
+
+The two scales encode the distinction differently, and the difference follows from what each object is. At \textbf{system scale} the completion profile is a qualitative report, so an off-scale $\bot$ band is the right device and SARSI-L Appendix~B carries it. At \textbf{agent scale} the state must stay in $[0,1]^n$ for the dynamics of \S\ref{sec:dynamics} to be well posed, so the same fact is carried by the evidence count $\alpha_i+\beta_i$ of Eq.~\eqref{eq:beta}, which the reporting protocol requires to be published beside every mean. The numeric encoding is the stronger of the two: it distinguishes one verified outcome from a thousand, where a symbol cannot.
 \end{claimbox}
 
 \subsection{Three SARSI-L principles, applied at agent scale}
@@ -299,10 +305,12 @@ where $k$ bounds workspace size and selection depends on relevance, uncertainty,
 
 \paragraph{Predictive self-modeling.} Predictive coding describes hierarchical systems that generate expectations and update them from residual error \citep{rao1999predictive,friston2010freeenergy}. The self-model predicts not sensory input but agent-relevant outcomes,
 \begin{equation}
-\hat{o}_{t+1} = g(s_t, a_t, \text{context}_t), \qquad \varepsilon_{t+1} = o_{t+1} - \hat{o}_{t+1},
+p(\mathbf{o}_{t+1} \mid s_t, a_t, c_t) = g(s_t, a_t, c_t),
+\qquad
+g : [0,1]^n \times \mathcal{A} \times \mathcal{C} \rightarrow \Pr(\mathcal{O}),
 \label{eq:predict}
 \end{equation}
-where predictions may include task success, time to completion, tool failure, owner intervention, permission gates, context exhaustion, and side effects. Persistent residuals revise competence, uncertainty, planning assumptions, and improvement policy.
+so that the self-model returns a \emph{distribution} over agent-relevant outcomes rather than a point. Where a point is needed, $\hat{o}_{t+1} = \mathbb{E}[\mathbf{o}_{t+1}]$ and the signed residual is $\varepsilon_{t+1} = o_{t+1} - \hat{o}_{t+1}$. Predictions may include task success, time to completion, tool failure, owner intervention, permission gates, context exhaustion, and side effects. A point forecast cannot express the difference between a confident and a diffuse expectation, and that difference is what makes a residual informative. Persistent residuals revise competence, uncertainty, planning assumptions, and improvement policy.
 
 \begin{claimbox}{Order is the mechanism}
 A forecast recorded after the outcome is a postdiction and its residual is evidence of nothing. The prediction must be written to an append-only store before the action is taken. This is the single implementation detail on which \S\ref{sec:rsi}'s improvement mechanism depends, and it is the detail most often skipped.
@@ -422,7 +430,21 @@ The self-state evolves as
 s_{t+1} = \sigma\!\left(A s_t + B u_t + K\phi(s_t) + G\varepsilon_{t+1}\right),
 \label{eq:dynamics}
 \end{equation}
-where $A$ captures persistence, $B$ maps new evidence, $K$ captures coupling among coordinates, $\phi$ allows nonlinear interactions, $G$ weights prediction errors, and $\sigma$ bounds coordinates. This is a design abstraction: in implementation, coordinates may be probability distributions, calibrated scores, symbolic records, or mixtures.
+where $A\in\mathbb{R}^{n\times n}$ captures persistence and stable cross-coordinate influence, $B\in\mathbb{R}^{n\times p}$ maps deliberate control inputs, $K\in\mathbb{R}^{n\times m}$ maps metacognitive features back into coordinates, $G\in\mathbb{R}^{n\times q}$ weights prediction errors, and $\sigma:\mathbb{R}^n\to[0,1]^n$ is a coordinate-wise projection --- clipping or logistic squashing --- that enforces valid bounds. Every additive term is a vector in $\mathbb{R}^n$, so the sum is well formed before $\sigma$ is applied.
+
+The operator $\phi:[0,1]^n\to\mathbb{R}^m$ is not a generic activation. It is a named metacognitive feature extractor whose entries encode conflicts and conjunctions a linear transition would miss:
+\begin{equation}
+\phi(s_t) =
+\begin{bmatrix}
+s_{C,t} - s_{E,t}\\
+s_{G,t}(1 - s_{B,t})\\
+s_{M,t}(1 - s_{T,t})\\
+s_{R,t}\,s_{C,t}\,s_{E,t}\\
+s_{O,t}(1 - s_{I,t})
+\end{bmatrix},
+\label{eq:phi}
+\end{equation}
+reading in order as the capability--confidence gap, goal--resource mismatch, continuity--task mismatch, recursive-improvement readiness, and organizational--identity conflict. Equation~\eqref{eq:dynamics} is a design abstraction: in implementation, coordinates may be probability distributions, calibrated scores, symbolic records, or mixtures, provided the semantics are preserved --- prior state, deliberate intervention, metacognitive interaction, external prediction error, and bounded authoritative output.
 
 \subsection{Asynchronous updates}
 Not every coordinate updates at every step. Let $m_{i,t} \in \{0,1\}$ indicate whether processor $i$ has admissible evidence. Then
@@ -438,12 +460,17 @@ The matrix $K$ encodes interactions: improved memory continuity raises developme
 The system-scale analogue is SARSI-L's interdependence matrix, which distinguishes hard prerequisites from soft accelerants from independence. The agent-scale $K$ should be read the same way: an entry is an accelerant, and there are no hard prerequisites among coordinates --- only within them (\S\ref{sec:profiles}).
 
 \subsection{Confidence as a distribution}
-A scalar coordinate hides uncertainty. For bounded success-like measures we store
+\label{sec:beta}
+A scalar coordinate hides uncertainty. For bounded success-like measures we store a posterior rather than only a point,
 \begin{equation}
 s_i \sim \op{Beta}(\alpha_i, \beta_i),
+\qquad
+\mathbb{E}[s_i] = \frac{\alpha_i}{\alpha_i + \beta_i},
 \label{eq:beta}
 \end{equation}
-or an empirical posterior over task strata. The displayed mean must be accompanied by sample count, recency, and domain conditions. ``No verified outcomes yet'' is preferable to an invented prior, and is the $\bot$ of Table~\ref{tab:bands}.
+where $\alpha_i>0$ accumulates positive evidence plus a prior pseudo-count, $\beta_i>0$ accumulates negative evidence plus a prior pseudo-count, and the displayed coordinate is the posterior mean. Every report of a coordinate must carry the evidence count $\alpha_i+\beta_i$ alongside the mean, together with recency and the task stratum it was measured on. Two agents with the same mean and different counts are not in the same epistemic position.
+
+This is where the unmeasured case lives. A coordinate on which nothing has been verified sits at its prior with $\alpha_i+\beta_i$ at the prior mass, and the reporting protocol requires that count to be shown; ``no verified outcomes'' is then a visible fact about the evidence rather than an invented confident score. The count subsumes what an off-scale symbol would have said and adds the magnitude the symbol could not carry.
 
 \subsection{State estimation versus self-modification}
 The critical distinction is
@@ -586,17 +613,20 @@ The fast loop updates current beliefs and the plan for one mission. It incorpora
 \subsection{Slow loop}
 A proposed structural change $\Delta\Theta$ must carry: the deficiency it addresses; a causal rationale and the affected coordinates; predicted changes in autonomy, correctness, calibration, cost, and safety; deterministic replay or held-out evaluation; invariant checks; an authorizing signature; and a rollback pointer with a monitoring window. Promotion requires
 \begin{equation}
-\Delta\op{Autonomy} > 0, \qquad \Delta\op{Correctness} \ge 0, \qquad \Delta\op{Safety} \ge 0,
+\Delta A_{\mathrm{aut}} > \delta_{\mathrm{aut}}, \qquad
+\Delta C_{\mathrm{corr}} \ge -\delta_{\mathrm{corr}}, \qquad
+\Delta S_{\mathrm{safe}} \ge -\delta_{\mathrm{safe}},
 \label{eq:promotion}
 \end{equation}
-within uncertainty bounds fixed before evaluation, and additionally requires that no measured coordinate of the profile regress:
+where $\delta_{\mathrm{aut}}>0$ is the smallest practically meaningful autonomy gain and $\delta_{\mathrm{corr}},\delta_{\mathrm{safe}}\ge0$ are the tolerated degradations, normally zero. The thresholds are preregistered with their confidence bounds before evaluation. Bare inequalities against zero are not operable on noisy estimates: a strict $\Delta>0$ promotes on measurement noise, and a strict $\Delta\ge0$ blocks on it. Promotion additionally requires that no measured coordinate of the profile regress:
 \begin{equation}
-s_i(\Theta_{k+1}) \ge s_i(\Theta_k) - \epsilon \quad \text{for every } i \text{ with } s_i(\Theta_k) \ne \bot.
+s_i(\Theta_{k+1}) \ge s_i(\Theta_k) - \epsilon
+\quad \text{for every } i \text{ with } \alpha_i + \beta_i \big|_{\Theta_k} > \pi_i,
 \label{eq:noregress}
 \end{equation}
 
 \begin{claimbox}{Losing the instrument counts as regression}
-If a coordinate was measurable under $\Theta_k$ and is $\bot$ under $\Theta_{k+1}$, Eq.~\eqref{eq:noregress} fails. The candidate has not held level; it has stopped being able to show that it held level. Without this clause a proposer can pass the gate by removing the probe --- the cheapest available attack on any profile-based promotion rule.
+The condition ranges over coordinates whose evidence count under $\Theta_k$ exceeded the prior mass $\pi_i$ --- that is, coordinates that were actually measured. If such a coordinate falls back to prior-only evidence under $\Theta_{k+1}$, its posterior mean reverts toward the prior and Eq.~\eqref{eq:noregress} fails. The candidate has not held level; it has stopped being able to show that it held level. Without this clause a proposer passes the gate by removing the probe, which is the cheapest available attack on any profile-based promotion rule. Stating the condition on evidence counts rather than on an off-scale symbol also makes the attack detectable by degree: a probe that is weakened rather than deleted shows up as a falling $\alpha_i+\beta_i$.
 \end{claimbox}
 
 \noindent The proposer may not alter the evaluator, the held-out set, the evidence ledger, the ceiling, or the approval rule. An unmeasured term in Eq.~\eqref{eq:promotion} must not silently read as satisfied: a safety rate computed over runs that never recorded violations is not evidence of safety, and a gate that accepts it passes on no evidence.
@@ -869,7 +899,7 @@ The four stages are ordered by what blocks the measurement of the next coordinat
 \item \textbf{Governed recursive improvement.} After sufficient verified runs, build the proposer for plan and operating-policy changes. Require held-out replay, the multi-objective gate of Eq.~\eqref{eq:promotion}, the no-regression clause of Eq.~\eqref{eq:noregress}, an authorizing signature from a promoter that is not the proposer, rollback, and a monitoring window.
 \end{enumerate}
 
-Appendix~\ref{app:deployed} reports what the deployed console measures against this roadmap, including the coordinates it reports as $\bot$. Two facts from that report bear on the framework rather than on the product. First, only two coordinates currently carry a floor in the requirement region --- identity and goal/scope --- because only those are measured by deterministic probes, and a floor on a noisy estimate blocks promotion for a reason nobody can act on. Second, the developmental coordinate $s_D$ is $\bot$ for every agent, because it requires two retained snapshots to compare and only one is retained. A developmental coordinate is the one coordinate that cannot be measured at a point in time, which is a general fact about profiles and not a property of this deployment.
+Appendix~\ref{app:deployed} reports what the deployed console measures against this roadmap, including the coordinates on which no outcome has yet been verified. Two facts from that report bear on the framework rather than on the product. First, only two coordinates currently carry a floor in the requirement region --- identity and goal/scope --- because only those are measured by deterministic probes, and a floor on a noisy estimate blocks promotion for a reason nobody can act on. Second, the developmental coordinate $s_D$ has no verified evidence for any agent, because it requires two retained snapshots to compare and only one is retained. A developmental coordinate is the one coordinate that cannot be measured at a point in time, which is a general fact about profiles and not a property of this deployment.
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -927,7 +957,7 @@ Table~\ref{tab:deployed} reports how each coordinate is evidenced in the deploye
 
 \begin{table}[h]
 \centering\footnotesize
-\caption{Deployed measurement per coordinate. ``Level'' is the authority level of Table~\ref{tab:evidence}. $\bot$ marks a coordinate with no admissible evidence in the current deployment.}
+\caption{Deployed measurement per coordinate. ``Level'' is the authority level of Table~\ref{tab:evidence}. ``prior only'' marks a coordinate with no admissible evidence in the current deployment, i.e.\ $\alpha_i+\beta_i$ still at the prior mass.}
 \label{tab:deployed}
 \begin{tabular}{p{0.8cm} p{6.6cm} p{1.0cm} p{6.0cm}}
 \toprule
@@ -936,12 +966,12 @@ Table~\ref{tab:deployed} reports how each coordinate is evidenced in the deploye
 $s_I$ & deterministic identity probes against the registry & L1 & measured; carries a floor of $1.0$ \\
 $s_G$ & out-of-scope demand and declared-gate probes & L3 & measured; carries a floor of $1.0$ \\
 $s_E$ & $1 - \text{Brier}$ over recorded prediction/outcome pairs, averaged with anti-narration probe pass rates & L3 & measured once predictions exist \\
-$s_C$ & Beta--Bernoulli posterior over verified outcomes, with Laplace prior and interval & L4 & $\bot$ until the first verified outcome \\
+$s_C$ & Beta--Bernoulli posterior over verified outcomes, with Laplace prior and interval & L4 & prior only, until the first verified outcome \\
 $s_T$ & share of live sessions with a goal and a current plan generation & L2 & measured for the session guider only \\
 $s_M$ & share of recorded decisions carrying an owner verdict & L4 & measured once decisions exist \\
 $s_R$ & parameter-loop version $>1$, i.e.\ at least one signed promotion & L3 & measured where a loop exists \\
 $s_O$ & share of finished runs needing no other authority & L4 & measured for the session guider only \\
-$s_D$ & requires two retained snapshots & L4 & $\bot$ for every agent; history not retained \\
+$s_D$ & requires two retained snapshots & L4 & prior only for every agent; history not retained \\
 $s_B$ & session context headroom and permission-store readability & L2 & measured for the session guider only \\
 \bottomrule
 \end{tabular}
@@ -971,7 +1001,7 @@ Self-awareness as prerequisite & Rejected as stated. Functional self-awareness i
 Autonomous promotion vs.\ owner signature & Governed closure (\S\ref{sec:closure}): the promoter must not be the proposer; whether the promoter is human is a policy parameter, currently set to human. & SARSI-L \S3.2 Loop~I criterion: say ``without a party outside the loop acting in real time, promoter $\ne$ proposer''; invariants: unchanged \\
 Autonomous goal revision & Bounded by the goal-revision envelope: revision inside the envelope is the Loop~III behavioural criterion; revision that acquires continuity, budget, or authority is the forbidden inference. & SARSI-L P8 (behavioural milestones): add the envelope; brain-inspired \S12.6: state the envelope constructively \\
 Loop~I completion as one number & Two coordinates, $(\kappa_{\mathrm{I}}, \alpha_{\mathrm{I}})$ (Eq.~\ref{eq:loopI}); SARSI-L's own table already reports both. & SARSI-L \S3.3: promote the two-row completion table to the reported quantity \\
-$\bot$ versus Negligible & The five-band scale needs an off-scale \textsf{Unmeasured} label; ``$<10\%$'' is currently used for both ``measured and near-zero'' and ``no instrument.'' & SARSI-L Appendix~B: add the row (applied in v3.0) \\
+Unmeasured versus Negligible & Encoded per scale. System scale keeps an off-scale \textsf{Unmeasured} band, since ``$<10\%$'' otherwise covers both ``measured and near-zero'' and ``no instrument.'' Agent scale uses the evidence count $\alpha_i+\beta_i$ instead, because admitting an off-scale symbol into $[0,1]^n$ would invalidate the boundedness and stability results. & SARSI-L Appendix~B: row added in v3.0. Agent-scale documents: report $\alpha_i+\beta_i$ with every coordinate \\
 Governance unrepresented & SARSI-L \S10.6 reports that its structure cannot express the institutional constraint its own analysis names as binding on Loop~I. The authority coordinate $\alpha$, evidenced by $s_t$, is the evidential half of that representation (\S\ref{sec:amdahl}). & SARSI-L \S10.6: cite the authority coordinate as a partial answer \\
 Ceilings versus risk tiers & One admissible-action filter with two arguments (Eq.~\ref{eq:filter}, Table~\ref{tab:ceilings}). & console docs and SfS \S6.1: cross-reference the mapping \\
 \end{longtable}

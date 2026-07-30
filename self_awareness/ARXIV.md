@@ -10,9 +10,9 @@ Both SARSI papers use an identical submission setup, so these instructions diffe
 | `main.tex` | LaTeX source |
 | `main.bbl` | Pre-built bibliography — see below |
 | `references.bib` | Kept for regeneration; **not** in the tarball |
-| `../SARSI_Functional_Self_Awareness.pdf` | Compiled PDF, 33 pages |
+| `../SARSI_Functional_Self_Awareness.pdf` | Compiled PDF, 34 pages |
 
-Verified: extracts to an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, 33 pages. That is arXiv's exact process.
+Verified: extracts to an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, 34 pages. That is arXiv's exact process.
 
 ## Three setup choices, shared by both papers
 
@@ -39,7 +39,7 @@ tar czf sarsi-selfaware-arxiv.tar.gz main.tex main.bbl
 
 **Comments field.** Suggested:
 
-> 33 pages, 13 tables, 1 figure. Companion: arXiv:XXXX.XXXXX (SARSI-L, system scale).
+> 34 pages, 13 tables, 1 figure. Companion: arXiv:XXXX.XXXXX (SARSI-L, system scale).
 
 **Submit this paper second**, so the identifier above is real. If you must submit both at once, drop the cross-reference rather than guessing an identifier.
 

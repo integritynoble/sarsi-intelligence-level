@@ -15,3 +15,6 @@
 # Per-paper PDFs are published at the repo root, not beside the source
 arxiv/main.pdf
 self_awareness/main.pdf
+
+# Stray file from an unrelated process; not part of this corpus
+plan0.md
