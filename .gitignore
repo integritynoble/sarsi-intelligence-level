@@ -1,21 +1,17 @@
 .claude/
 
-# LaTeX build artifacts
-arxiv/*.aux
-arxiv/*.log
-arxiv/*.out
-arxiv/*.toc
-arxiv/*.fls
-arxiv/*.fdb_latexmk
-arxiv/*.synctex.gz
-arxiv/*.bbl
-arxiv/*.blg
+# LaTeX build artifacts.
+# main.bbl is NOT ignored: it ships inside the arXiv tarballs, because
+# arXiv does not run BibTeX. It is a build input, not an artifact.
+*.aux
+*.log
+*.out
+*.toc
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Per-paper PDFs are published at the repo root, not beside the source
 arxiv/main.pdf
-self_awareness/*.aux
-self_awareness/*.log
-self_awareness/*.out
-self_awareness/*.toc
-self_awareness/*.blg
-self_awareness/*.fls
-self_awareness/*.fdb_latexmk
 self_awareness/main.pdf

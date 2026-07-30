@@ -1,0 +1,128 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amdahl(1967)]{amdahl1967}
+Gene~M. Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In \emph{AFIPS Conference Proceedings}, volume~30, pages 483--485,
+  1967.
+
+\bibitem[Armstrong et~al.(2014)Armstrong, Sotala, and
+  {\'O}~h{\'E}igeartaigh]{armstrong2014}
+Stuart Armstrong, Kaj Sotala, and Se{\'a}n~S. {\'O}~h{\'E}igeartaigh.
+\newblock The errors, insights and lessons of famous {AI} predictions --- and
+  what they mean for the future.
+\newblock \emph{Journal of Experimental \& Theoretical Artificial
+  Intelligence}, 26\penalty0 (3):\penalty0 317--342, 2014.
+
+\bibitem[Bostrom(2014)]{bostrom2014}
+Nick Bostrom.
+\newblock \emph{Superintelligence: Paths, Dangers, Strategies}.
+\newblock Oxford University Press, 2014.
+
+\bibitem[Chalmers(2010)]{chalmers2010}
+David~J. Chalmers.
+\newblock The singularity: A philosophical analysis.
+\newblock \emph{Journal of Consciousness Studies}, 17\penalty0
+  (9--10):\penalty0 7--65, 2010.
+
+\bibitem[Dyson(1960)]{dyson1960}
+Freeman~J. Dyson.
+\newblock Search for artificial stellar sources of infrared radiation.
+\newblock \emph{Science}, 131\penalty0 (3414):\penalty0 1667--1668, 1960.
+
+\bibitem[Freitas and Merkle(2004)]{freitas2004}
+Robert~A. Freitas and Ralph~C. Merkle.
+\newblock \emph{Kinematic Self-Replicating Machines}.
+\newblock Landes Bioscience, 2004.
+
+\bibitem[Good(1965)]{good1965}
+Irving~John Good.
+\newblock Speculations concerning the first ultraintelligent machine.
+\newblock \emph{Advances in Computers}, 6:\penalty0 31--88, 1965.
+
+\bibitem[Grace et~al.(2018)Grace, Salvatier, Dafoe, Zhang, and
+  Evans]{grace2018}
+Katja Grace, John Salvatier, Allan Dafoe, Baobao Zhang, and Owain Evans.
+\newblock When will {AI} exceed human performance? evidence from {AI} experts.
+\newblock \emph{Journal of Artificial Intelligence Research}, 62:\penalty0
+  729--754, 2018.
+
+\bibitem[Grace et~al.(2024)Grace, Stewart, Sandk{\"u}hler, Thomas,
+  Weinstein-Raun, and Brauner]{grace2024}
+Katja Grace, Harlan Stewart, Julia~Fabienne Sandk{\"u}hler, Stephen Thomas, Ben
+  Weinstein-Raun, and Jan Brauner.
+\newblock Thousands of {AI} authors on the future of {AI}.
+\newblock \emph{arXiv preprint arXiv:2401.02843}, 2024.
+
+\bibitem[Kardashev(1964)]{kardashev1964}
+Nikolai~S. Kardashev.
+\newblock Transmission of information by extraterrestrial civilizations.
+\newblock \emph{Soviet Astronomy}, 8:\penalty0 217, 1964.
+
+\bibitem[Kokotajlo et~al.(2025)Kokotajlo, Alexander, Larsen, Lifland, and
+  Dean]{kokotajlo2025}
+Daniel Kokotajlo, Scott Alexander, Thomas Larsen, Eli Lifland, and Romeo Dean.
+\newblock {AI} 2027.
+\newblock \url{https://ai-2027.com}, 2025.
+
+\bibitem[Kurzweil(2005)]{kurzweil2005}
+Ray Kurzweil.
+\newblock \emph{The Singularity Is Near}.
+\newblock Viking, 2005.
+
+\bibitem[Kurzweil(2024)]{kurzweil2024}
+Ray Kurzweil.
+\newblock \emph{The Singularity Is Nearer}.
+\newblock Viking, 2024.
+
+\bibitem[L{\'o}pez-Ot{\'i}n et~al.(2013)L{\'o}pez-Ot{\'i}n, Blasco, Partridge,
+  Serrano, and Kroemer]{lopezotin2013}
+Carlos L{\'o}pez-Ot{\'i}n, Maria~A. Blasco, Linda Partridge, Manuel Serrano,
+  and Guido Kroemer.
+\newblock The hallmarks of aging.
+\newblock \emph{Cell}, 153\penalty0 (6):\penalty0 1194--1217, 2013.
+
+\bibitem[L{\'o}pez-Ot{\'i}n et~al.(2023)L{\'o}pez-Ot{\'i}n, Blasco, Partridge,
+  Serrano, and Kroemer]{lopezotin2023}
+Carlos L{\'o}pez-Ot{\'i}n, Maria~A. Blasco, Linda Partridge, Manuel Serrano,
+  and Guido Kroemer.
+\newblock Hallmarks of aging: An expanding universe.
+\newblock \emph{Cell}, 186\penalty0 (2):\penalty0 243--278, 2023.
+
+\bibitem[Mirhoseini et~al.(2021)Mirhoseini, Goldie, Yazgan, Jiang, Songhori,
+  Wang, Lee, Johnson, Pathak, Nazi, Pak, Tong, Srinivasa, Hang, Tuncer, Le,
+  Laudon, Ho, Carpenter, and Dean]{mirhoseini2021}
+Azalia Mirhoseini, Anna Goldie, Mustafa Yazgan, Joe~Wenjie Jiang, Ebrahim
+  Songhori, Shen Wang, Young-Joon Lee, Eric Johnson, Omkar Pathak, Azade Nazi,
+  Jiwoo Pak, Andy Tong, Kavya Srinivasa, William Hang, Emre Tuncer, Quoc~V. Le,
+  James Laudon, Richard Ho, Roger Carpenter, and Jeff Dean.
+\newblock A graph placement methodology for fast chip design.
+\newblock \emph{Nature}, 594:\penalty0 207--212, 2021.
+\newblock Subsequently contested on reproduction and baseline grounds.
+
+\bibitem[von Neumann(1966)]{vonneumann1966}
+John von Neumann.
+\newblock \emph{Theory of Self-Reproducing Automata}.
+\newblock University of Illinois Press, 1966.
+\newblock Edited and completed by Arthur W. Burks.
+
+\bibitem[Yang(2026)]{yang2026selfaware}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: A brain-inspired
+  dynamic state space, unified with loop-closure levels and deployed
+  applications.
+\newblock Companion paper to this framework, agent scale, 2026.
+
+\bibitem[Yudkowsky(2013)]{yudkowsky2013}
+Eliezer Yudkowsky.
+\newblock Intelligence explosion microeconomics.
+\newblock Technical Report 2013-1, Machine Intelligence Research Institute,
+  2013.
+
+\end{thebibliography}

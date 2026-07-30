@@ -1,54 +1,67 @@
+% arXiv: force the pdflatex path.
+\pdfoutput=1
+
 % ============================================================================
 %  Recursive Self-Improvement Is Substrate-Indexed
 %  SARSI-L Consolidated Paper, Version 3.0
 %
-%  arXiv submission source. Single file, no external dependencies,
-%  no figures, bibliography inlined via thebibliography (arXiv does not
-%  run BibTeX, so this avoids any .bbl requirement).
-%  Compile: pdflatex main.tex  (twice, for cross-references)
+%  arXiv submission source. No figures, no external dependencies beyond
+%  standard packages. Bibliography from references.bib; the submission
+%  package ships main.tex + main.bbl because arXiv does not run BibTeX.
+%  Compile: pdflatex, bibtex, pdflatex, pdflatex
 % ============================================================================
 
 \documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
 \usepackage{mathptmx}
-\usepackage{amsmath,amssymb}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{enumitem}
+\usepackage{caption}
 \usepackage{microtype}
-\usepackage[authoryear,round]{natbib}
-\usepackage[margin=1.1in]{geometry}
-\usepackage[hidelinks,breaklinks]{hyperref}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
 \usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Recursive Self-Improvement Is Substrate-Indexed}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
+\newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
-\newtheorem{definition}{Definition}
 
 \setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
 \renewcommand{\arraystretch}{1.15}
 
-\title{\bfseries Recursive Self-Improvement Is Substrate-Indexed\\[0.4em]
-\large A Falsifiable Framework for Intelligence Trajectories\\
-\large from Language Models to Stellar Engineering}
+\title{\LARGE Recursive Self-Improvement Is Substrate-Indexed\\[4pt]
+\Large A Falsifiable Framework for Intelligence Trajectories\\
+\Large from Language Models to Stellar Engineering}
 
-% ---------------------------------------------------------------------------
-% TODO before arXiv submission: replace the placeholders below.
-% ---------------------------------------------------------------------------
-\author{Chengshuai Yang\\[0.3em]
-\normalsize NextGen PlatformAI C Corp.\\
-\normalsize \texttt{spiritai@platformai.org}}
+\author{Chengshuai Yang\\
+NextGen PlatformAI C Corp.\\
+\texttt{spiritai@platformai.org}}
 
-\date{29 July 2026}
+\date{July 29, 2026}
 
 \begin{document}
 \maketitle
+\thispagestyle{empty}
 
 \begin{abstract}
 \noindent
@@ -877,69 +890,7 @@ $D_n(t)$ & Dominance of loop $n$ at time $t$ (illustrative only---\S\ref{sec:dom
 \end{table}
 
 % ===========================================================================
-\begin{thebibliography}{99}
-\setlength{\itemsep}{2pt}
-
-\bibitem[Amdahl(1967)]{amdahl1967}
-Amdahl, G. (1967). Validity of the single processor approach to achieving large scale computing capabilities. \emph{AFIPS Conference Proceedings}, 30, 483--485.
-
-\bibitem[Armstrong et al.(2014)]{armstrong2014}
-Armstrong, S., Sotala, K., \& \'O h\'Eigeartaigh, S. (2014). The errors, insights and lessons of famous AI predictions---and what they mean for the future. \emph{Journal of Experimental \& Theoretical Artificial Intelligence}, 26(3), 317--342.
-
-\bibitem[Bostrom(2014)]{bostrom2014}
-Bostrom, N. (2014). \emph{Superintelligence: Paths, Dangers, Strategies}. Oxford University Press.
-
-\bibitem[Chalmers(2010)]{chalmers2010}
-Chalmers, D. (2010). The Singularity: A Philosophical Analysis. \emph{Journal of Consciousness Studies}, 17(9--10), 7--65.
-
-\bibitem[Dyson(1960)]{dyson1960}
-Dyson, F. (1960). Search for Artificial Stellar Sources of Infrared Radiation. \emph{Science}, 131(3414), 1667--1668.
-
-\bibitem[Freitas \& Merkle(2004)]{freitas2004}
-Freitas, R., \& Merkle, R. (2004). \emph{Kinematic Self-Replicating Machines}. Landes Bioscience.
-
-\bibitem[Good(1965)]{good1965}
-Good, I.\,J. (1965). Speculations Concerning the First Ultraintelligent Machine. \emph{Advances in Computers}, 6, 31--88.
-
-\bibitem[Grace et al.(2018)]{grace2018}
-Grace, K., Salvatier, J., Dafoe, A., Zhang, B., \& Evans, O. (2018). When Will AI Exceed Human Performance? Evidence from AI Experts. \emph{Journal of Artificial Intelligence Research}, 62, 729--754.
-
-\bibitem[Grace et al.(2024)]{grace2024}
-Grace, K., Stewart, H., Sandkühler, J.\,F., Thomas, S., Weinstein-Raun, B., \& Brauner, J. (2024). Thousands of AI Authors on the Future of AI. arXiv:2401.02843.
-
-\bibitem[Kardashev(1964)]{kardashev1964}
-Kardashev, N. (1964). Transmission of Information by Extraterrestrial Civilizations. \emph{Soviet Astronomy}, 8, 217.
-
-\bibitem[Kokotajlo et al.(2025)]{kokotajlo2025}
-Kokotajlo, D., Alexander, S., Larsen, T., Lifland, E., \& Dean, R. (2025). AI 2027. \url{https://ai-2027.com}.
-
-\bibitem[Kurzweil(2005)]{kurzweil2005}
-Kurzweil, R. (2005). \emph{The Singularity Is Near}. Viking.
-
-\bibitem[Kurzweil(2024)]{kurzweil2024}
-Kurzweil, R. (2024). \emph{The Singularity Is Nearer}. Viking.
-
-\bibitem[López-Otín et al.(2013)]{lopezotin2013}
-López-Otín, C., Blasco, M., Partridge, L., Serrano, M., \& Kroemer, G. (2013). The Hallmarks of Aging. \emph{Cell}, 153(6), 1194--1217.
-
-\bibitem[López-Otín et al.(2023)]{lopezotin2023}
-López-Otín, C., Blasco, M., Partridge, L., Serrano, M., \& Kroemer, G. (2023). Hallmarks of aging: An expanding universe. \emph{Cell}, 186(2), 243--278.
-
-\bibitem[Mirhoseini et al.(2021)]{mirhoseini2021}
-Mirhoseini, A., Goldie, A., Yazgan, M., et al. (2021). A graph placement methodology for fast chip design. \emph{Nature}, 594, 207--212. (Subsequently contested on reproduction and baseline grounds.)
-
-\bibitem[Moravec(1988)]{moravec1988}
-Moravec, H. (1988). \emph{Mind Children: The Future of Robot and Human Intelligence}. Harvard University Press.
-
-\bibitem[von Neumann(1966)]{vonneumann1966}
-von Neumann, J. (1966). \emph{Theory of Self-Reproducing Automata} (A. Burks, Ed.). University of Illinois Press.
-
-\bibitem[Yang(2026)]{yang2026selfaware}
-Yang, C. (2026). Functional Self-Awareness for SARSI Agents: A Brain-Inspired Dynamic State Space, Unified with Loop-Closure Levels and Deployed Applications. Companion paper to this framework.
-
-\bibitem[Yudkowsky(2013)]{yudkowsky2013}
-Yudkowsky, E. (2013). Intelligence Explosion Microeconomics. MIRI Technical Report 2013-1.
-
-\end{thebibliography}
+\bibliographystyle{plainnat}
+\bibliography{references}
 
 \end{document}

@@ -8,7 +8,7 @@ Two papers, one program — a system scale and an agent scale.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
-**[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (31 pp). The agent-scale companion. Source and submission package in [`self_awareness/`](self_awareness/).
+**[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (33 pp). The agent-scale companion. Source and submission package in [`self_awareness/`](self_awareness/).
 
 Together they supersede everything else in this repository.
 
@@ -29,8 +29,8 @@ Principal results:
 |---|---|
 | `SARSI-L_Paper_v3.pdf` | **Current.** System-scale paper, 25 pp |
 | `SARSI-L_Paper_v3.md` | **Current.** Same paper, Markdown |
-| `arxiv/` | LaTeX source, upload package, submission guide |
-| `SARSI_Functional_Self_Awareness.pdf` | **Current.** Agent-scale companion, 31 pp |
+| `arxiv/` | LaTeX source, bibliography, upload package, submission guide |
+| `SARSI_Functional_Self_Awareness.pdf` | **Current.** Agent-scale companion, 33 pp |
 | `self_awareness/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
@@ -48,6 +48,12 @@ SARSI-L identifies the rate-limiting bottleneck on the first loop closure as *tr
 SARSI-L's Amdahl bound caps a compensated loop's iteration rate at `ρ_max = 1/Σ T_j` over its externally-gated steps. For a mature software loop that set contains exactly one member — deploy — so `ρ_max = 1/T_δ`. **Authority closure is the removal of that step from the gated set.** Capability closure drives every automated step toward zero and cannot touch `T_δ`.
 
 The pairing also bounds the companion's claim honestly. `T_δ` is review latency, so it is a *throughput* floor and removable; but by the same distinction the instrument moves no *physical* floor, and SARSI-L's matter bottleneck says physical floors bind immediately after Loop I. An agent-scale trust instrument is necessary for the first closure and nearly irrelevant to the pace of the rest.
+
+## arXiv packages
+
+Both papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Both verified by extracting the tarball into an empty directory and compiling with plain `pdflatex`. Submission guides: [`arxiv/README.md`](arxiv/README.md) and [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md).
+
+Submit the system-scale paper first — the companion's comments field cites its arXiv identifier.
 
 ## Status of the claims
 

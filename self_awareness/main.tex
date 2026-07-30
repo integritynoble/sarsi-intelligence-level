@@ -4,9 +4,13 @@
 
 \documentclass[11pt]{article}
 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -18,7 +22,11 @@
 \usepackage{caption}
 \usepackage{enumitem}
 \usepackage{longtable}
-\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
 \usepackage{fancyhdr}
 
 \pagestyle{fancy}
@@ -29,6 +37,10 @@
 \renewcommand{\headrulewidth}{0.3pt}
 
 \newcommand{\op}[1]{\operatorname{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
 
 \usepackage{framed}
 \definecolor{shadecolor}{gray}{0.93}
@@ -38,6 +50,7 @@
 
 \newtheorem{definition}{Definition}
 \newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
 
 \title{\LARGE Functional Self-Awareness for SARSI Agents\\[4pt]
 \Large A Brain-Inspired Dynamic State Space, Unified with\\
@@ -61,6 +74,9 @@ The SARSI research program now spans two things that have been developed apart: 
 
 \vspace{4pt}
 \noindent\textbf{Keywords:} SARSI; functional self-awareness; brain-inspired AI; metacognition; predictive processing; global workspace; dynamic state space; recursive self-improvement; loop closure; intelligence levels; AI governance.
+
+\tableofcontents
+\newpage
 
 \section{Introduction}
 \label{sec:intro}
