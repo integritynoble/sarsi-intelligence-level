@@ -4,11 +4,13 @@
 
 ## Start here
 
-Two papers, one program — a system scale and an agent scale.
+Three papers, one program — a system scale, an agent scale, and a fleet scale.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
 **[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (34 pp). The agent-scale companion. Source and submission package in [`self_awareness/`](self_awareness/).
+
+**[`SARSI_Manager_Is_Not_A_Controller.pdf`](SARSI_Manager_Is_Not_A_Controller.pdf)** — *A Manager Is Not a Controller* (14 pp). The fleet scale: what one agent may assert about another. Source and submission package in [`fleet/`](fleet/).
 
 Together they supersede everything else in this repository.
 
@@ -32,6 +34,8 @@ Principal results:
 | `arxiv/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI_Functional_Self_Awareness.pdf` | **Current.** Agent-scale companion, 34 pp |
 | `self_awareness/` | LaTeX source, bibliography, upload package, submission guide |
+| `SARSI_Manager_Is_Not_A_Controller.pdf` | **Current.** Fleet-scale paper, 14 pp |
+| `fleet/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
@@ -49,9 +53,15 @@ SARSI-L's Amdahl bound caps a compensated loop's iteration rate at `ρ_max = 1/�
 
 The pairing also bounds the companion's claim honestly. `T_δ` is review latency, so it is a *throughput* floor and removable; but by the same distinction the instrument moves no *physical* floor, and SARSI-L's matter bottleneck says physical floors bind immediately after Loop I. An agent-scale trust instrument is necessary for the first closure and nearly irrelevant to the pace of the rest.
 
+## The fleet-scale paper
+
+A manager coordinating specialists is not a controller: specialists filter what it sends through their own admission masks, the coupling is recurrent, and owner pre-emption outranks both. The paper's result is that the governance prohibition — no agent may write another's self-state — is *the same constraint* as the architecture's stability condition. Forbid the write and the top-down block of the recurrent coupling vanishes, the coupling is nilpotent, and a fleet verified agent by agent is verified as a fleet. Permit it and the feedback loop returns, and stability must be tuned against fleet size.
+
+The through-line across all three papers is one rule at three scales: the system-scale paper argues authority closure needs an evidence base, the agent-scale paper supplies it and requires promoter ≠ proposer, and the fleet-scale paper extends that to what one agent may assert about another.
+
 ## arXiv packages
 
-Both papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Both verified by extracting the tarball into an empty directory and compiling with plain `pdflatex`. Submission guides: [`arxiv/README.md`](arxiv/README.md) and [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md).
+All three papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Both verified by extracting the tarball into an empty directory and compiling with plain `pdflatex`. Submission guides: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), and [`fleet/ARXIV.md`](fleet/ARXIV.md).
 
 Submit the system-scale paper first — the companion's comments field cites its arXiv identifier.
 

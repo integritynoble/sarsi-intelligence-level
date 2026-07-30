@@ -18,3 +18,10 @@ self_awareness/main.pdf
 
 # Stray file from an unrelated process; not part of this corpus
 plan0.md
+
+fleet/*.aux
+fleet/*.log
+fleet/*.out
+fleet/*.toc
+fleet/*.blg
+fleet/main.pdf

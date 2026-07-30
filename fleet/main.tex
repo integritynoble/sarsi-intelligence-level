@@ -1,0 +1,539 @@
+% arXiv: force the pdflatex path. The figure is inline TikZ, there are no
+% .eps files, and this must stay within the first few lines to take effect.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small A Manager Is Not a Controller}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{invariant}{Invariant}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{equationguide}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.55pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,title=\textbf{Equation guide: #1},fonttitle=\small,before skip=5pt,after skip=9pt,fontupper=\small}
+
+% Notation carried over from the base paper, unchanged.
+\newcommand{\sM}{\mathbf{s}^{M}}
+\newcommand{\sJ}{\mathbf{s}^{j}}
+\newcommand{\WM}{\mathcal{W}^{M}}
+\newcommand{\WJ}{\mathcal{W}^{j}}
+\newcommand{\DMJ}{\mathbf{d}^{M\rightarrow j}}
+\newcommand{\RJM}{\mathbf{r}^{j\rightarrow M}}
+\newcommand{\IU}{\boldsymbol{\iota}^{U}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Select}{\operatorname{Select}}
+\newcommand{\op}[1]{\operatorname{#1}}
+
+\title{\LARGE A Manager Is Not a Controller\\[6pt]
+\Large Global-Workspace Coordination for SARSI Fleets:\\
+\Large Bidirectional Influence, Owner Pre-emption,\\
+\Large and Why a Manager May Not Write Another Agent's Self-State}
+
+\author{Chengshuai Yang\\
+\small NextGen PlatformAI C Corp.\\
+\small \texttt{spiritai@platformai.org}}
+
+\date{July 30, 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent
+\emph{Functional Self-Awareness for Hierarchical SARSI Multi-Agent Systems: Version~3.0}~\citep{yang2026hierarchical} specifies a manager--specialist architecture: nested workspaces, typed directives and reports, evidence-calibrated reliability, soft influence weighting, interrupt precedence, and a local stability condition on the coupled hierarchy. It describes the manager as an executive-control hub. That description is natural, and it invites an implementation the architecture's own invariants forbid --- a manager that holds beliefs about each specialist and writes them into that specialist's state.
+
+This paper argues that the manager is not a controller in the control-theoretic sense, and that the point is structural rather than terminological. Three disanalogies hold. The specialists filter what the manager sends through their own admission masks, so influence is offered rather than applied. The coupling is recurrent, so the manager's own state is revised by the agents it coordinates. And neither party is sovereign, since owner pre-emption outranks both. Global workspace theory, from which the base architecture draws, contains no homunculus directing specialized processors; it contains a bounded broadcast channel they compete for. We take that reading literally.
+
+The central result is that the governance prohibition and the stability condition are the same constraint. Version~3.0 requires the spectral radius of its linearized hierarchy to fall below one, where a recurrent block carries both directions of manager--specialist coupling. We show that under the base paper's own bias invariant --- a directive may change precision, attention, and evidence order, but not the conditional mean of any specialist estimator --- the top-down block of that coupling vanishes in the mean linearization. The recurrent block is then strictly triangular and nilpotent, its spectral radius is zero, and hierarchical stability reduces to a per-agent condition independent of fleet size. If instead a manager may write specialist coordinates directly, the block is nonzero by construction, the manager--specialist feedback loop is reinstated, and stability stops being structural and becomes a matter of tuning gains against fleet size. The prohibition does not bound the loop. It removes it.
+
+Three further results follow in the base paper's vocabulary. A manager's claim about a specialist is model inference on the evidence ladder, outranked by that specialist's own instrumentation, so a manager cannot certify a competence it does not measure. Delegated authority is an intersection rather than a union, closing a laundering route by which a fleet's effective authority becomes that of its most privileged member. And an owner interrupt may pause but never edit, because a state-writing interrupt is --- from inside the affected agent --- indistinguishable from the confabulation the evidence ladder exists to rule out.
+\end{abstract}
+
+\vspace{2pt}
+\noindent\textbf{Keywords:} multi-agent systems; global workspace; SARSI; functional self-awareness; delegated authority; agent governance; hierarchical coordination; interruptibility.
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{The manager pattern, and the temptation in it}
+
+A deployed installation is not one agent. A manager coordinates a session guider, a research agent, and an imaging agent; the owner addresses the manager and expects the fleet, not one member of it, to behave well. Version~3.0 of the hierarchical architecture~\citep{yang2026hierarchical} specifies that structure in detail: manager and specialist self-states, nested workspaces, typed top-down directives and bottom-up reports, evidence-calibrated reliability, soft influence weighting, a five-class interrupt policy, and a sufficient local stability condition for the coupled system.
+
+It also calls the manager an \emph{executive-control hub}, and devotes a subsection to how the manager controls local agents. Nothing in that language is wrong as a description of what a manager does. But it is the kind of description that, handed to an implementer, produces a particular design: the manager holds an estimate of each specialist's state, compares it against what the specialist reports, and on disagreement resolves toward its own estimate --- writing the result into the specialist's model of itself.
+
+That design is incompatible with the base architecture's own invariants. It is not, however, forbidden \emph{explicitly}, and the prohibition that would rule it out is not among the eight safety and governance invariants Version~3.0 lists. This paper supplies it, and then shows that the prohibition does far more work than governance hygiene.
+
+\subsection{Why the controller framing misleads}
+
+In the control-theoretic sense, a controller computes an input and applies it to a plant. The plant's state evolves as commanded, up to disturbance. Three properties of the hierarchical architecture break that picture, and all three are already present in Version~3.0 rather than added here.
+
+\paragraph{The plant filters.} Every specialist updates its coordinates through its own admission mask, from its own admissible evidence. A directive is an item that must clear the specialist's provenance bar for the coordinate it bears on. A plant does not get to decide whether the control input applies to it.
+
+\paragraph{The loop is recurrent.} Version~3.0's stability analysis stacks manager and specialists into one vector and linearizes the whole hierarchy, with a recurrent block carrying both directions of coupling. The manager's own state is revised by the agents it coordinates. A controller does not have its state rewritten by the plant.
+
+\paragraph{Neither party is sovereign.} The authority chain is
+\[
+\mathcal{A}_{\mathrm{specialist}}\subseteq\mathcal{A}_{\mathrm{manager}}\subseteq\mathcal{A}_{\mathrm{policy}}\subseteq\mathcal{A}_{\mathrm{owner}} .
+\]
+The manager sits in the middle of it. An authenticated owner stop cannot be overridden by manager inference, and a specialist may refuse on invariant grounds. A plant cannot refuse.
+
+There is also a historical reading. The global workspace theories the base architecture draws on~\citep{dehaene1998workspace,dehaene2011conscious} do not posit a homunculus directing specialized processors. They posit a bounded broadcast channel that processors compete for, with coordination arising from shared access rather than from instruction. There is no controller in the theory. There is admission control. Version~3.0 inherits the mechanism; this paper asks that the fleet-scale reading inherit it too.
+
+\begin{claimbox}{Thesis}
+A manager is \emph{admission control} on a bounded shared workspace, plus a \emph{bias on priors}, plus a \emph{holder of delegated authority that can only narrow}. It does not command, does not hold claims about a specialist that outrank that specialist's own instrumentation, and may not write any coordinate of another agent's self-state.
+\end{claimbox}
+
+\subsection{Contributions}
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=3pt]
+\item \textbf{The cross-write prohibition, stated as an invariant} (\S\ref{sec:crosswrite}). A manager's claim about a specialist is model inference on the evidence ladder; Proposition~\ref{prop:nocertify} shows it cannot displace that specialist's instrumented value. Table~\ref{tab:attest} gives the per-coordinate exception: the manager \emph{is} authoritative for the contract-derived coordinates whose records it owns, and for nothing else.
+\item \textbf{A stability argument that makes the prohibition structural} (\S\ref{sec:stability}). Under the base paper's bias invariant, the top-down block of the recurrent coupling vanishes in the mean linearization. Proposition~\ref{prop:triangular} shows the block is then nilpotent with zero spectral radius, and Corollary~\ref{cor:fleetsize} that hierarchical stability reduces to a per-agent condition independent of fleet size. Proposition~\ref{prop:crosswritegain} shows direct cross-write reinstates the feedback loop, converting a structural guarantee into a tuning problem.
+\item \textbf{Owner pre-emption that pauses but never edits} (\S\ref{sec:interrupt}). Proposition~\ref{prop:editinterrupt}: a state-writing interrupt is, from inside the affected agent, indistinguishable from the confabulation the evidence ladder exists to prevent. No property of the writer separates the two cases.
+\item \textbf{Delegation as intersection} (\S\ref{sec:delegation}). Invariant~\ref{inv:intersect} closes a laundering route that is invisible to a per-agent audit, because every individual action lies within its own actor's ceiling.
+\item \textbf{Failure modes the hierarchy adds} (\S\ref{sec:failure}), and an honest deployment report (\S\ref{sec:deployment}) separating what is built from what is specified.
+\end{enumerate}
+
+\subsection{What this paper does not claim}
+
+It does not replace Version~3.0. The architecture, its notation, its algorithms, and its equation-by-equation exposition remain authoritative. This paper adds one invariant, one theorem about what that invariant buys, and the consequences. Where the two differ in wording, Version~3.0 governs the architecture and this paper governs the coordination semantics.
+
+It makes no claim about consciousness. Global workspace theory is used as an engineering source for a bounded-broadcast mechanism, exactly as the base paper uses it. The absence of a homunculus in that theory is a structural observation about the mechanism, not a claim about experience.
+
+It does not assume the fleet is large. Every result holds for two agents, and Corollary~\ref{cor:fleetsize} is precisely the statement that fleet size does not enter the stability condition.
+
+% =====================================================================
+\section{What Is Carried Over}
+\label{sec:carried}
+
+This paper uses the base paper's notation without modification. Table~\ref{tab:carried} lists the objects it depends on, so the argument can be followed without the base paper open. Nothing is re-derived; Version~3.0 remains authoritative for domains, symbol meanings, and the explanation accompanying each equation.
+
+\begin{table}[h]
+\centering\small
+\caption{Objects carried over from Version~3.0~\citep{yang2026hierarchical}.}
+\label{tab:carried}
+\begin{tabular}{@{}lL{3.9cm}L{7.5cm}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Object} & \textbf{What this paper relies on} \\
+\midrule
+$\sM_t\in[0,1]^{n_M}$ & Manager self-state & Evidence-grounded; the manager does not replace specialist self-models \\
+$\sJ_t\in[0,1]^{n_j}$ & Specialist self-state & Separate, coupled vector, updated by $j$'s own processors from $j$'s own admissible evidence \\
+$\WM_t$, $\WJ_t$ & Nested workspaces & Bounded selection at manager and specialist scope; the manager sees typed summaries, not raw transcripts \\
+$\DMJ_t$ & Top-down directive & May start, steer, pause, resume, verify, or cancel; \emph{cannot grant authority not present in policy} \\
+$\RJM_t$ & Bottom-up report & Typed, with provenance, confidence, urgency, risk, and evidence links --- not a free-form claim \\
+$\rho_{j,t}$ & Specialist reliability & Beta posterior over \emph{independently verified} outcomes; task-conditional and sample-counted \\
+$\alpha_{j,t}$ & Soft influence weight & Softmax over relevance, urgency, novelty, reliability, uncertainty; nonnegative and summing to one \\
+$\Gamma_{jM}$ & Report projection & Typed map from report fields into manager state features \\
+$\IU_t$ & Authenticated user interrupt & Five classes: stop, pause, steer, observe, permission \\
+$C_{\mathrm{rec}}$ & Recurrent coupling & Top-down and bottom-up coupling in the stacked linearization; \S\ref{sec:stability} is about this object \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two carried-over commitments do the most work below. The first is the \textbf{bounded influence principle}: a specialist report may narrow the manager's action --- by raising uncertainty, risk, or the need for verification --- but may not widen permissions, suppress an owner interrupt, rewrite an evaluator, or self-certify success. The second is that specialists influence the manager \emph{by changing evidence, beliefs, priorities, and uncertainty}, and do not directly issue manager actions.
+
+This paper's contribution is in large part the observation that the symmetric statement must also hold, and that stating it has consequences the base paper does not draw.
+
+% =====================================================================
+\section{The Cross-Write Prohibition}
+\label{sec:crosswrite}
+
+\subsection{Cross-agent claims are model inference}
+
+\begin{definition}[Cross-agent claim]
+\label{def:cross}
+A claim by agent $b$ about coordinate $i$ of agent $a$'s self-state, for $a\neq b$, carries the authority of \emph{model inference} on the evidence ladder --- below runtime instrumentation, below audited task outcome, below owner declaration --- regardless of how the claim is phrased, how confident it is, or how senior $b$ is in the authority chain.
+\end{definition}
+
+The clause about seniority is the substantive one. Authority to \emph{decide} and authority to \emph{assert} are different orders, and the hierarchical setting is exactly where conflating them becomes tempting. The manager outranks the specialist for delegation and pre-emption. It does not outrank the specialist as a \emph{source of evidence about that specialist}, because it holds no instrument the specialist lacks. Being higher in a permission lattice is not an epistemic qualification.
+
+\begin{proposition}[A manager cannot certify a specialist]
+\label{prop:nocertify}
+For agents $a\neq b$ and coordinate $i$, if $b$'s claim about $s^{(a)}_i$ conflicts with $a$'s own instrumented value, then $a$'s value stands.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{def:cross}, $b$'s claim enters $a$'s evidence set at the model-inference rung. Coordinate $i$ of $a$ admits new evidence only when its admission mask $m_{i,t}$ is set, and the mask is set only by a source clearing that coordinate's provenance bar. An instrumented coordinate has a bar above model inference by construction. The mask is therefore $0$ on $b$'s claim, and $s^{(a)}_i$ is unchanged.
+\end{proof}
+
+The manager may of course \emph{believe} a specialist is competent, and that belief may inform a routing decision. What it may not do is let the belief become the specialist's own competence claim. The routing decision is then taken on model inference and must be recorded as such --- which is also what makes it auditable afterward.
+
+\begin{invariant}[No cross-write]
+\label{inv:nocrosswrite}
+No agent may write any coordinate of another agent's self-state. Influence between agents travels as typed evidence, subject to the receiver's admission mask and provenance bar. This holds in both directions and at every level of the authority chain, including from manager to specialist and from the owner's interface to any agent (\S\ref{sec:interrupt}).
+\end{invariant}
+
+This is the invariant Version~3.0 implies but does not list. Its eight safety and governance invariants include owner precedence, no authority through influence, no self-verification, and proposal/evaluator separation --- each of which a cross-write design would violate transitively, but none of which names the write directly.
+
+\subsection{What a manager may attest}
+
+The prohibition is not blanket, and stating it as blanket would be wrong. A manager owns records, and for the coordinates those records determine it is the authoritative source. The distinction is which store the evidence comes from, not which agent sends it.
+
+\begin{table}[h]
+\centering\small
+\caption{Per-coordinate attestation. The manager supplies authoritative evidence only where it owns the governing record; elsewhere its claims are model inference under Definition~\ref{def:cross}.}
+\label{tab:attest}
+\begin{tabular}{@{}L{3.4cm}cL{8.3cm}@{}}
+\toprule
+\textbf{Coordinate family} & \textbf{Manager?} & \textbf{Why} \\
+\midrule
+Local mission, phase, plan generation & \textbf{yes} & The manager owns the mission and plan registry; the directive \emph{is} the record \\
+Goal, scope, success criteria, budget, deadline & \textbf{yes} & Carried by the local contract the manager issues, bounded by policy \\
+Delegation relations, report cadence, revocation & \textbf{yes} & The manager owns the delegation record it created \\
+\midrule
+Identity and lineage & no & Registry-signed, outside both agents \\
+Capability and tool competence & no & Requires independent verification. This is the coordinate a cross-write design most wants and least may have \\
+Epistemic calibration & no & Measured against the specialist's own recorded forecasts and outcomes \\
+Memory and continuity & no & The specialist's own ledger \\
+Developmental trend & no & Requires the specialist's retained history \\
+Recursive-improvement status & no & The promotion coordinate; cross-writing it is proposal/evaluator collapse \\
+Resource and integrity & no & Local telemetry. The manager may observe, but the specialist's own instrumentation governs \\
+Owner grants & no & Owner-signed; neither party may write it \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The pattern is that a manager is authoritative about \emph{what it asked for} and never about \emph{how well the specialist does it}. That is the right line, and it is the line the controller framing erases: a controller's model of the plant is precisely a model of how the plant responds, which is the part a manager may not assert.
+
+% =====================================================================
+\section{Bidirectional Influence, Bounded}
+\label{sec:bidir}
+
+The requirement that specialists influence the manager and the manager influence specialists is met by the ordinary bottom-up and top-down structure of attention --- not by a new mechanism, and not by a command channel.
+
+\subsection{Bottom-up: a specialist raises salience}
+
+A specialist offers items for broadcast, scored by locally measured terms: relevance, urgency, novelty, verified reliability, and uncertainty, combined by softmax into weights $\alpha_{j,t}$ that are nonnegative and sum to one. A guider whose permission store will not open raises an item whose hazard term is maximal, and it enters the manager workspace ahead of routine traffic. This is how the fleet learns something only one agent can see, and the terms cannot be fabricated by the manager because they are measured at the source.
+
+The aggregate presented to the manager's update is
+\begin{equation}
+\mathbf{b}^{M}_t=\sum_{j\in J_t}\alpha_{j,t}\,\Gamma_{jM}\,\RJM_t .
+\label{eq:bottomup}
+\end{equation}
+Because the weights form a convex combination and $\|\Gamma_{jM}\|$ is bounded, the aggregate lies in the convex hull of the projected reports. One persuasive specialist cannot dominate by message volume alone.
+
+\subsection{Top-down: the manager biases priors}
+
+The manager returns a bias to each specialist. Its bound is the base paper's estimate--precision separation, restated here because \S\ref{sec:stability} depends on it.
+
+\begin{invariant}[Bias may not move an estimate]
+\label{inv:bias}
+For every agent $a$, coordinate $i$, and admissible bias $b$,
+\begin{equation}
+\mathbb{E}\big[F^{(a)}_i(s,E \mid b)\big] \;=\; \mathbb{E}\big[F^{(a)}_i(s,E)\big].
+\label{eq:bias}
+\end{equation}
+\end{invariant}
+
+\begin{equationguide}{the bias invariant}
+\begin{description}
+\item[{$F^{(a)}_i$}] Agent $a$'s specialized estimator for coordinate $i$, updating from its own admissible evidence.
+\item[{$b$}] A top-down bias issued by the manager: a change of precision, attention, evidence-gathering order, or verification threshold.
+\item[{$\mathbb{E}[\cdot]$}] Expectation over the estimator's evidence distribution, holding the evidence itself fixed.
+\item[{$=$}] Equality of conditional means. The bias may reshape the estimator's variance, its sampling order, or how much evidence it demands before acting --- but not what the evidence says.
+\end{description}
+\textbf{Interpretation.} A manager may tell a guider \emph{this mission is high-hazard, raise your evidence bar before acting}. It may not tell it \emph{you are competent at this}. The first changes how much evidence is gathered before a decision. The second would be writing the specialist's capability coordinate from outside, which Proposition~\ref{prop:nocertify} forbids.
+\end{equationguide}
+
+Equation~\eqref{eq:bias} is the formal content of ``influence, not command.'' Section~\ref{sec:stability} shows it is also the formal content of ``the hierarchy is stable regardless of its size.''
+
+\begin{figure}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small, inner sep=5pt},
+  arr/.style={-{Stealth[length=2.2mm]}, gray!75, thick}]
+\node[box, fill=bluec!10, text width=0.36\textwidth] (owner)
+  {\textbf{OWNER} --- pre-emption (\S\ref{sec:interrupt}), grants, verdicts};
+\node[box, fill=gray!8, below=10mm of owner, text width=0.60\textwidth] (ws)
+  {Bounded shared workspace $\WM_t$\\[1pt]
+   \footnotesize admission by salience, per-agent cap, reserved slots};
+\node[box, fill=violet!10, right=8mm of ws, text width=0.19\textwidth] (m)
+  {\textbf{Manager}\\[1pt]\footnotesize $\Select_{k_M}$ $+$ bias};
+\node[box, below left=15mm and 8mm of ws] (g) {Session guider\\$\mathbf{s}^{(g)}_t$};
+\node[box, below=15mm of ws] (r) {Research agent\\$\mathbf{s}^{(r)}_t$};
+\node[box, below right=15mm and 8mm of ws] (i) {Imaging agent\\$\mathbf{s}^{(i)}_t$};
+
+\draw[arr] (owner) -- node[right, font=\scriptsize] {outranks all} (ws);
+\draw[arr] (m) -- (ws);
+\draw[arr] (g) -- node[left, font=\scriptsize, pos=0.55] {salience} (ws);
+\draw[arr] (r) -- (ws);
+\draw[arr] (i) -- (ws);
+\draw[arr] (ws) -- (g.north east);
+\draw[arr] (ws) -- (r.north);
+\draw[arr] (ws) -- (i.north west);
+\draw[arr, dashed] (m.south) to[bend left=22]
+  node[right, font=\scriptsize, pos=0.62] {bias: priors only} (i.east);
+\end{tikzpicture}}
+\caption{Coordination without command. The manager computes admission to a bounded shared workspace and returns a bias on priors. There is no arrow into any $\mathbf{s}^{(a)}$: that absence is Invariant~\ref{inv:nocrosswrite}, and \S\ref{sec:stability} shows it is also what makes the coupled hierarchy stable by construction. Specialists influence the fleet by raising salience; the owner pre-empts everything.}
+\label{fig:fleet}
+\end{figure}
+
+\subsection{Broadcast is not instruction}
+
+\begin{invariant}[Broadcast is not instruction]
+\label{inv:broadcast}
+Admission to the shared workspace makes an item \emph{available}. It obliges no agent to act on it, and writes no coordinate of any self-state.
+\end{invariant}
+
+An agent reading the workspace applies its own admission rule: an item is evidence for one of its coordinates only if its provenance clears that coordinate's bar. A specialist may ignore a broadcast it has better evidence against. In a command architecture that would be insubordination. Here it is the evidence ladder doing across agents exactly what it does within one.
+
+% =====================================================================
+\section{The Prohibition Is the Stability Condition}
+\label{sec:stability}
+
+This section contains the paper's main result. The claim is that Invariant~\ref{inv:nocrosswrite} is not merely a governance rule that happens to be prudent, but the condition under which the base paper's own stability requirement is satisfiable structurally rather than by tuning.
+
+\subsection{The coupled linearization}
+
+Version~3.0 stacks manager and specialist states into $\mathbf{x}_t=[(\sM_t)^\top,(\sJ_t)^\top_{j\in J}]^\top$ and, near an operating point and ignoring hard interrupts, obtains
+\begin{equation}
+\delta\mathbf{x}_{t+1}\;\approx\;J_\sigma\big(A_{\mathrm{hier}}+C_{\mathrm{rec}}+G_{\mathrm{pred}}J_g\big)\,\delta\mathbf{x}_t ,
+\label{eq:lin}
+\end{equation}
+with the sufficient local condition
+\begin{equation}
+\rho\Big(J_\sigma\big(A_{\mathrm{hier}}+C_{\mathrm{rec}}+G_{\mathrm{pred}}J_g\big)\Big)<1 .
+\label{eq:stab}
+\end{equation}
+Here $A_{\mathrm{hier}}$ is block-diagonal, holding each agent's intrinsic persistence, while $C_{\mathrm{rec}}$ is the off-diagonal block carrying manager--specialist coupling in both directions. Write it in block form as
+\begin{equation}
+C_{\mathrm{rec}}=
+\begin{bmatrix}
+0 & C_{M\leftarrow J}\\[2pt]
+C_{J\leftarrow M} & 0
+\end{bmatrix},
+\label{eq:crec}
+\end{equation}
+where $C_{M\leftarrow J}$ collects bottom-up influence of specialists on the manager state, and $C_{J\leftarrow M}$ collects top-down influence of the manager on specialist states.
+
+\begin{equationguide}{the recurrent coupling block}
+\begin{description}
+\item[{$C_{M\leftarrow J}$}] Bottom-up block. Under the aggregation of Eq.~\eqref{eq:bottomup} its norm is bounded by $\gamma:=\max_j\|\Gamma_{jM}\|$, because the weights $\alpha_{j,t}$ are nonnegative and sum to one.
+\item[{$C_{J\leftarrow M}$}] Top-down block: what the manager's directive does to the \emph{conditional mean} of a specialist's estimator. This is the object the section is about.
+\item[{zero diagonal blocks}] Intrinsic within-agent dynamics live in $A_{\mathrm{hier}}$, not here.
+\end{description}
+\end{equationguide}
+
+\subsection{Under the bias invariant the top-down block vanishes}
+
+\begin{proposition}[Triangularity]
+\label{prop:triangular}
+If every top-down directive satisfies Invariant~\ref{inv:bias}, then $C_{J\leftarrow M}=0$ in the mean linearization~\eqref{eq:lin}. Consequently $C_{\mathrm{rec}}$ is strictly block-triangular, $C_{\mathrm{rec}}^{2}=0$, and $\rho(C_{\mathrm{rec}})=0$.
+\end{proposition}
+
+\begin{proof}
+Fix a specialist $j$ and coordinate $i$. The corresponding entry of $C_{J\leftarrow M}$ is by definition the sensitivity of $\mathbb{E}\big[s^{(j)}_{i,t+1}\big]$ to a perturbation of the manager state transmitted through the directive. The specialist's coordinate updates only through its own estimator $F^{(j)}_i$ on admissible evidence, and by Eq.~\eqref{eq:bias} an admissible bias leaves $\mathbb{E}\big[F^{(j)}_i\big]$ unchanged. The sensitivity is therefore zero for every $i$ and $j$, giving $C_{J\leftarrow M}=0$.
+
+With $C_{J\leftarrow M}=0$, the matrix in Eq.~\eqref{eq:crec} is strictly block-triangular with zero diagonal blocks, so $C_{\mathrm{rec}}^{2}=0$. A nilpotent matrix has all eigenvalues zero, hence $\rho(C_{\mathrm{rec}})=0$.
+\end{proof}
+
+The interpretation is worth stating plainly, because it is easy to misread as saying the manager has no effect. The manager has a large effect: it determines what enters the shared workspace, and therefore which evidence any specialist ever sees. That effect is routed \emph{through the evidence}, and it moves a specialist's state only insofar as the evidence itself warrants. What vanishes is not the manager's influence but the direct path from the manager's \emph{beliefs} to the specialist's \emph{estimate} --- and that is exactly the path a controller would use.
+
+\begin{corollary}[Stability is independent of fleet size]
+\label{cor:fleetsize}
+Under Proposition~\ref{prop:triangular}, condition~\eqref{eq:stab} reduces to
+\[
+\rho\Big(J_\sigma\big(A_{\mathrm{hier}}+G_{\mathrm{pred}}J_g\big)\Big)<1 ,
+\]
+whose matrix is block-diagonal by agent. The condition therefore holds for the hierarchy if and only if it holds for each agent separately. Adding specialists adds blocks; it does not add eigenvalues to any existing block, and coordination contributes no spectral growth.
+\end{corollary}
+
+\begin{proof}
+Substituting $C_{\mathrm{rec}}$ with zero top-down block into Eq.~\eqref{eq:stab} leaves $A_{\mathrm{hier}}+G_{\mathrm{pred}}J_g$ plus a strictly triangular remainder. A strictly triangular matrix contributes only zero eigenvalues, and adding it to a block-diagonal matrix leaves the spectrum equal to the union of the diagonal blocks' spectra. The maximum modulus over that union is below one exactly when it is below one in every block.
+\end{proof}
+
+This is a strong and useful property. It says that a fleet built to these rules cannot be destabilized by growing it, and that an operator who has verified each agent individually has thereby verified the hierarchy. That guarantee is not available to a command architecture.
+
+\subsection{Cross-write reinstates the loop}
+
+\begin{proposition}[Cross-write makes stability a tuning problem]
+\label{prop:crosswritegain}
+Suppose Invariant~\ref{inv:nocrosswrite} is relaxed, so that the manager may write specialist coordinates through a nonzero projection $P$, giving $C_{J\leftarrow M}=P\neq0$. Then
+\[
+\rho(C_{\mathrm{rec}})^{2}=\rho\big(C_{M\leftarrow J}\,P\big),
+\]
+which is in general nonzero, and condition~\eqref{eq:stab} no longer decomposes across agents. Stability then depends on the product of the bottom-up and top-down gains, and must be established by bounding $\gamma\|P\|$ rather than by per-agent verification.
+\end{proposition}
+
+\begin{proof}
+For a block matrix of the form~\eqref{eq:crec},
+\[
+C_{\mathrm{rec}}^{2}=\operatorname{diag}\big(C_{M\leftarrow J}P,\;P\,C_{M\leftarrow J}\big),
+\]
+and the two diagonal blocks share the same nonzero spectrum. Hence $\rho(C_{\mathrm{rec}})^{2}=\rho(C_{M\leftarrow J}P)$. With $P\neq0$ and $C_{M\leftarrow J}\neq0$ this is generically nonzero, so $C_{\mathrm{rec}}$ is no longer nilpotent and its eigenvalues enter Eq.~\eqref{eq:stab}. The matrix in Eq.~\eqref{eq:stab} is then not block-diagonalizable by agent, so per-agent conditions no longer suffice.
+\end{proof}
+
+\begin{claimbox}{The governance rule and the stability rule are the same rule}
+Without cross-write, the manager--specialist feedback loop does not exist in the mean dynamics: the top-down block is zero, the coupling is nilpotent, and stability is inherited from the agents individually. With cross-write, the loop exists, and stability must be bought by keeping the product of two gains small --- a tuning exercise, sensitive to how many specialists there are, how strongly the manager weights their reports, and how aggressively it writes.
+
+The prohibition does not \emph{bound} the loop. It \emph{removes} it. That is why it belongs among the architecture's invariants rather than among its recommendations, and why a designer indifferent to governance should still refuse the write.
+\end{claimbox}
+
+\begin{cautionbox}{What this argument does not establish}
+Proposition~\ref{prop:triangular} is a statement about the mean linearization near an operating point, under the same differentiability and no-hard-interrupt assumptions the base paper's own stability condition carries. It does not establish global convergence, does not cover asynchronous or delayed report delivery, and says nothing about variance dynamics: a bias that leaves conditional means untouched can still change second moments, and oscillation in precision is not excluded by a first-moment argument. The claim is that the first-order feedback path is absent, not that no fleet can ever misbehave. Section~\ref{sec:failure} treats report storms as a live risk for exactly this reason.
+\end{cautionbox}
+
+% =====================================================================
+\section{Owner Pre-emption}
+\label{sec:interrupt}
+
+The owner interrupts a running loop. Three properties are required, each ruling out an implementation that would otherwise be tempting.
+
+\begin{enumerate}[label=\textbf{(P\arabic*)},leftmargin=3.0em,itemsep=4pt]
+\item \textbf{It outranks every agent.} $\text{owner}\succ\text{manager}\succ\text{specialist}$ for \emph{pre-emption}. This ordering does not hold for \emph{evidence}: by Proposition~\ref{prop:nocertify} the manager's claim about a specialist is weaker than that specialist's own instrumentation. Authority to stop and authority to assert are different orders, and the hierarchical setting is where conflating them becomes tempting again.
+\item \textbf{It pauses; it does not edit.} An interrupt suspends action. It does not write a coordinate of any self-state, revoke a verdict, or silently rewrite a plan.
+\item \textbf{It lapses.} A pause carries a horizon and expires, so a forgotten interrupt cannot strand an agent indefinitely.
+\end{enumerate}
+
+\begin{proposition}[An editing interrupt is indistinguishable from confabulation]
+\label{prop:editinterrupt}
+If an owner interrupt may write $s^{(a)}_i$ directly, then from inside agent $a$ the write is a cross-agent claim admitted above instrumentation --- precisely the condition Definition~\ref{def:cross} and Proposition~\ref{prop:nocertify} forbid for a manager. No property available to $a$ distinguishes the two cases.
+\end{proposition}
+
+\begin{proof}
+Agent $a$ observes a coordinate change not produced by its own estimator on admissible evidence. The observable content of that event is identical whether the writer is the owner's interface or an overstepping manager: the same coordinate, the same absence of provenance, the same bypass of the admission mask. Any predicate $a$ could evaluate to separate the cases would have to read a property of the writer, and a state write lacking provenance carries no such property. The same holds for an auditor reading the log afterward.
+\end{proof}
+
+(P2) is therefore a requirement rather than a convenience. An owner may certainly change what an agent believes --- through the channel the architecture already provides. An owner declaration is admissible evidence at its own rung of the ladder and enters by the ordinary update, carrying provenance and a validity window like any other claim. What must not exist is a side door that writes state without provenance.
+
+This is also why the base paper's interrupt taxonomy is already correct on this point. Its \texttt{permission} class updates the \emph{authority record}, which is owner-owned and signed; its \texttt{steer} class triggers checkpoint-and-replan rather than a state edit. Neither writes a self-state coordinate. The taxonomy needed no change. It needed the reason stated.
+
+A pre-emption should be recorded as owner-initiated, and not counted as a blocking intervention in the autonomy metric. Charging the metric for the owner's own decision to stop the agent would make it punish exactly the control the owner is meant to have.
+
+% =====================================================================
+\section{Delegated Authority}
+\label{sec:delegation}
+
+A manager routes work to specialists, which opens a laundering route that a command architecture leaves open: the manager lacks a permission, some specialist holds it, and the manager obtains the effect by delegating.
+
+\begin{invariant}[Delegation intersects, never unions]
+\label{inv:intersect}
+For any delegated action $x$,
+\begin{equation}
+\op{auth}(\text{delegated }x)=\op{auth}(\text{delegator})\cap\op{auth}(\text{delegate}),
+\label{eq:intersect}
+\end{equation}
+and the ceiling applied by the admissible-action filter is the lower of the two.
+\end{invariant}
+
+\begin{equationguide}{delegation composes by intersection}
+\begin{description}
+\item[{$\op{auth}(\cdot)$}] The set of action classes an agent may perform under current policy and grants.
+\item[{$\cap$}] Set intersection. Delegation can only narrow the permitted set, never widen it.
+\item[{delegator, delegate}] The agent issuing the directive and the agent receiving it.
+\end{description}
+\textbf{Interpretation.} Under a union rule --- or under no rule, which is the usual case --- a fleet's effective authority becomes that of its most privileged member, reachable by any member that can route to it. Under intersection, an owner reasoning about the fleet's reach needs only the minimum over agents rather than an enumeration of every delegation path.
+\end{equationguide}
+
+Equation~\eqref{eq:intersect} is consistent with the base paper's authority chain and makes the composition rule explicit where the chain gives only containment. It also makes a specialist's refusal meaningful: a refusal cannot be worked around by asking a different specialist, because the delegator's own ceiling still binds.
+
+% =====================================================================
+\section{Failure Modes the Hierarchy Adds}
+\label{sec:failure}
+
+\paragraph{Workspace capture.} A specialist in a fast error loop emits high-uncertainty, high-hazard items every second and crowds out everything else. Mitigation: per-agent caps, reserved slots for authority and resource health, and rate-limiting salience \emph{by source} rather than by item.
+
+\paragraph{Manager confabulation.} The manager narrates fleet state --- ``the guider is healthy'' --- and the narration is read as fact rather than as the model-inference rung it occupies. Mitigation: Definition~\ref{def:cross}. A manager's fleet summary may inform a decision and may never justify one.
+
+\paragraph{Authority laundering.} Covered by Invariant~\ref{inv:intersect}, and worth naming separately because it is invisible to a per-agent audit: every individual action lies within its own actor's ceiling, and only the composition is out of bounds.
+
+\paragraph{Deadlock.} A specialist waits on the manager, the manager waits on the owner, and the owner is asleep. Mitigation: the same horizon that makes an owner pause lapse under (P3). Every wait expires, after which the waiting agent takes its cheapest honest action rather than waiting further.
+
+\paragraph{Fleet-scale self-preservation.} The single-agent safety invariants forbid rewarding continuity of execution. The hierarchical analogue is a manager whose utility rises with the number of live specialists, giving it an interest in keeping agents running and in creating more. Mitigation: no coordinate and no term of the improvement objective may be a function of fleet size or uptime.
+
+\paragraph{Consensus mistaken for evidence.} Several specialists agree, and the agreement is read as confirmation. If their beliefs derive from the same broadcast item, agreement is correlation with the broadcast rather than independent support. Mitigation: provenance must distinguish independently instrumented claims from workspace-derived ones before any count is taken. This failure is created by the shared workspace and does not exist for a single agent.
+
+\paragraph{Report storms.} Reciprocal influence that is individually reasonable can oscillate: the manager reprioritizes, specialists report the change, the manager reprioritizes again. Proposition~\ref{prop:triangular} rules this out at first order in the mean, but not in variance. Mitigation: report cadence floors, hysteresis on plan generation, and treating a plan-generation increment as a costly action rather than a free one.
+
+% =====================================================================
+\section{Deployment Status}
+\label{sec:deployment}
+
+A paper about fleet architecture, written from a deployment that runs one agent, should say so.
+
+\paragraph{What exists.} Owner pre-emption with all three properties of \S\ref{sec:interrupt}: it pauses rather than edits, it outranks the agent's own task duty, and it lapses on a horizon so that a forgotten stop cannot strand a session. Cross-agent claims are weak by construction, since each agent's self-state is computed from its own stores and no agent writes another's. Invariant~\ref{inv:nocrosswrite} holds today, though it holds because no channel exists rather than because a channel is policed.
+
+\paragraph{What does not exist.} There is no shared workspace across agents. Bottom-up influence currently reaches the manager only through the owner, and the top-down bias of Invariant~\ref{inv:bias} is not implemented. Invariant~\ref{inv:intersect} is not enforced, because delegation between agents is not implemented; it should be written before delegation is, since retrofitting an intersection rule onto a running delegation graph means auditing every existing path.
+
+\paragraph{What this implies for the results.} Corollary~\ref{cor:fleetsize} is a claim about an architecture, not a measurement of a fleet. It has not been tested, because the coupled system it describes is not yet running. The honest status is that the prohibition is currently free --- nothing is pressing against it --- and \S\ref{sec:stability} is a prediction about what will happen when something does.
+
+% =====================================================================
+\section{Related Work}
+\label{sec:related}
+
+Global workspace theory supplies the bounded-broadcast mechanism~\citep{dehaene1998workspace,dehaene2011conscious}, and the reading this paper insists on --- coordination through shared access rather than instruction --- is the theory's own rather than a reinterpretation. Hierarchical and multi-agent language-model systems commonly adopt a manager or orchestrator role~\citep{wu2023autogen,hong2024metagpt,park2023generative}, generally with a controller's authority over subordinate agents and without an explicit account of whose claims about whom are admissible. Work on agent memory and self-report tends to treat an agent's own records as trustworthy by construction~\citep{packer2023memgpt}, which is the single-agent version of the confabulation risk Definition~\ref{def:cross} addresses across agents. Blackboard architectures~\citep{hayesroth1985blackboard} are the closest classical antecedent to the shared workspace and were likewise coordination-by-availability rather than by command; the contribution here is not the blackboard but the evidence ladder governing what may be written to an agent from it. Small-gain and interconnection arguments are standard in control~\citep{jiang1994smallgain}; the observation in \S\ref{sec:stability} is that a governance invariant can make the interconnection triangular, so that the small-gain question does not arise rather than being satisfied.
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+The demands this paper began with are ordinary --- a manager coordinates specialists, specialists inform the manager, the owner interrupts anyone --- and the temptation they create is to build a controller. The architecture this paper builds on does not coordinate specialized systems by appointing one of them to command the others. It makes coordination a bounded broadcast channel, and this paper asks only that the fleet-scale reading be the same one.
+
+A manager built that way is powerful in a specific and auditable way: it decides what the fleet sees. It is powerless in exactly the ways that matter. It cannot assert what an agent is, because its claims about a specialist sit below that specialist's own instrumentation. It cannot acquire authority through a subordinate, because delegation intersects. It cannot rewrite anyone's policy alone, because promotion requires the subject's own frozen evaluator and an owner signature.
+
+What makes this more than good hygiene is that the prohibition on writing another agent's self-state turns out to be the same constraint as the architecture's own stability condition. Forbid the write and the top-down block of the recurrent coupling vanishes, the coupling becomes nilpotent, and a fleet verified agent by agent is verified as a fleet. Permit it and the feedback loop returns, and stability must be purchased by tuning gains against fleet size.
+
+The base paper's central claim is that an agent's statements about itself must be evidence-linked or they are worthless. This paper is that claim with one word changed: an agent's statements about \emph{another} agent must be evidence-linked, and by Definition~\ref{def:cross} they almost never are.
+
+% =====================================================================
+\section*{Acknowledgments}
+This paper extends the hierarchical architecture of Version~3.0 and the single-agent framework it rests on. The discrepancies it addresses were found by implementing them.
+
+\section*{Conflict of Interest}
+The author is affiliated with NextGen PlatformAI C Corp., which develops SARSI systems.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

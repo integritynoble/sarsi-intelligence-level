@@ -1,0 +1,74 @@
+\begin{thebibliography}{9}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Dehaene and Changeux(2011)]{dehaene2011conscious}
+Stanislas Dehaene and Jean-Pierre Changeux.
+\newblock Experimental and theoretical approaches to conscious processing.
+\newblock \emph{Neuron}, 70\penalty0 (2):\penalty0 200--227, 2011.
+
+\bibitem[Dehaene et~al.(1998)Dehaene, Kerszberg, and
+  Changeux]{dehaene1998workspace}
+Stanislas Dehaene, Michel Kerszberg, and Jean-Pierre Changeux.
+\newblock A neuronal model of a global workspace in effortful cognitive tasks.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 95\penalty0
+  (24):\penalty0 14529--14534, 1998.
+
+\bibitem[Hayes-Roth(1985)]{hayesroth1985blackboard}
+Barbara Hayes-Roth.
+\newblock A blackboard architecture for control.
+\newblock \emph{Artificial Intelligence}, 26\penalty0 (3):\penalty0 251--321,
+  1985.
+
+\bibitem[Hong et~al.(2024)Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang,
+  Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber]{hong2024metagpt}
+Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Ceyao
+  Zhang, Jinlin Wang, Zili Wang, Steven Ka~Shing Yau, Zijuan Lin, Liyang Zhou,
+  Chenyu Ran, Lingfeng Xiao, Chenglin Wu, and J{\"u}rgen Schmidhuber.
+\newblock {MetaGPT}: Meta programming for a multi-agent collaborative
+  framework.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+
+\bibitem[Jiang et~al.(1994)Jiang, Teel, and Praly]{jiang1994smallgain}
+Zhong-Ping Jiang, Andrew~R. Teel, and Laurent Praly.
+\newblock Small-gain theorem for {ISS} systems and applications.
+\newblock \emph{Mathematics of Control, Signals, and Systems}, 7\penalty0
+  (2):\penalty0 95--120, 1994.
+
+\bibitem[Packer et~al.(2023)Packer, Wooders, Lin, Fang, Patil, Stoica, and
+  Gonzalez]{packer2023memgpt}
+Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir~G. Patil, Ion
+  Stoica, and Joseph~E. Gonzalez.
+\newblock {MemGPT}: Towards {LLMs} as operating systems.
+\newblock \emph{arXiv preprint arXiv:2310.08560}, 2023.
+
+\bibitem[Park et~al.(2023)Park, O'Brien, Cai, Morris, Liang, and
+  Bernstein]{park2023generative}
+Joon~Sung Park, Joseph~C. O'Brien, Carrie~J. Cai, Meredith~Ringel Morris, Percy
+  Liang, and Michael~S. Bernstein.
+\newblock Generative agents: Interactive simulacra of human behavior.
+\newblock In \emph{Proceedings of the 36th Annual ACM Symposium on User
+  Interface Software and Technology}, pages 1--22, 2023.
+
+\bibitem[Wu et~al.(2023)Wu, Bansal, Zhang, Wu, Li, Zhu, Jiang, Zhang, Zhang,
+  Liu, Awadallah, White, Burger, and Wang]{wu2023autogen}
+Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu,
+  Li~Jiang, Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, Ahmed~Hassan Awadallah,
+  Ryen~W. White, Doug Burger, and Chi Wang.
+\newblock {AutoGen}: Enabling next-gen {LLM} applications via multi-agent
+  conversation.
+\newblock In \emph{arXiv preprint arXiv:2308.08155}, 2023.
+
+\bibitem[Yang(2026)]{yang2026hierarchical}
+Chengshuai Yang.
+\newblock Functional self-awareness for hierarchical {SARSI} multi-agent
+  systems: Version 3.0 --- a brain-inspired manager--specialist architecture
+  with bidirectional influence, nested workspaces, and safe user
+  interruptibility.
+\newblock Preprint. Referred to throughout as ``the base paper'', 2026.
+
+\end{thebibliography}
