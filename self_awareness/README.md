@@ -8,7 +8,8 @@ The agent-scale companion to the system-scale framework in [`../arxiv/`](../arxi
 |---|---|
 | `main.tex` | LaTeX source |
 | `references.bib` | Bibliography (42 entries) |
-| `sarsi-selfaware-arxiv.tar.gz` | Submission package — `main.tex` + `main.bbl`, since arXiv does not run BibTeX |
+| `sarsi-selfaware-arxiv.tar.gz` | arXiv upload package — `main.tex` + `main.bbl`, since arXiv does not run BibTeX |
+| `ARXIV.md` | **Submission guide** — categories, metadata abstract, endorsement and moderation notes |
 
 Verified: extracts to an empty directory and compiles with plain `pdflatex` in two passes — no errors, no undefined citations or references, 31 pages.
 
