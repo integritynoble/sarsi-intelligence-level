@@ -25,3 +25,10 @@ fleet/*.out
 fleet/*.toc
 fleet/*.blg
 fleet/main.pdf
+
+singularity_edition/*.aux
+singularity_edition/*.log
+singularity_edition/*.out
+singularity_edition/*.toc
+singularity_edition/*.blg
+singularity_edition/main.pdf

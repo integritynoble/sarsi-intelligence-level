@@ -4,13 +4,15 @@
 
 ## Start here
 
-Three papers, one program — a system scale, an agent scale, and a fleet scale.
+Four papers, one program — a system scale, an agent scale, a fleet scale, and a deployment report.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
 **[`SARSI_Functional_Self_Awareness.pdf`](SARSI_Functional_Self_Awareness.pdf)** — *Functional Self-Awareness for SARSI Agents* (34 pp). The agent-scale companion. Source and submission package in [`self_awareness/`](self_awareness/).
 
 **[`SARSI_Manager_Is_Not_A_Controller.pdf`](SARSI_Manager_Is_Not_A_Controller.pdf)** — *A Manager Is Not a Controller* (14 pp). The fleet scale: what one agent may assert about another. Source and submission package in [`fleet/`](fleet/).
+
+**[`SARSI_Hierarchical_v3.1_Deployment_Edition.pdf`](SARSI_Hierarchical_v3.1_Deployment_Edition.pdf)** — *Version 3.1, Deployment Edition* (12 pp). The hierarchical architecture read back off the running console: a conformance map, seven implementation-derived revisions, and what is not built. Source in [`singularity_edition/`](singularity_edition/).
 
 Together they supersede everything else in this repository.
 
@@ -36,6 +38,8 @@ Principal results:
 | `self_awareness/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI_Manager_Is_Not_A_Controller.pdf` | **Current.** Fleet-scale paper, 14 pp |
 | `fleet/` | LaTeX source, bibliography, upload package, submission guide |
+| `SARSI_Hierarchical_v3.1_Deployment_Edition.pdf` | **Current.** Deployment report, 12 pp |
+| `singularity_edition/` | LaTeX source, bibliography, upload package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
