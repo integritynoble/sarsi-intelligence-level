@@ -32,3 +32,10 @@ singularity_edition/*.out
 singularity_edition/*.toc
 singularity_edition/*.blg
 singularity_edition/main.pdf
+
+console_design/*.aux
+console_design/*.log
+console_design/*.out
+console_design/*.toc
+console_design/*.blg
+console_design/main.pdf

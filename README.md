@@ -4,7 +4,7 @@
 
 ## Start here
 
-Four papers, one program — a system scale, an agent scale, a fleet scale, and a deployment report.
+Five papers, one program — a system scale, an agent scale, a fleet scale, a deployment report, and a console design.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -13,6 +13,8 @@ Four papers, one program — a system scale, an agent scale, a fleet scale, and 
 **[`SARSI_Manager_Is_Not_A_Controller.pdf`](SARSI_Manager_Is_Not_A_Controller.pdf)** — *A Manager Is Not a Controller* (14 pp). The fleet scale: what one agent may assert about another. Source and submission package in [`fleet/`](fleet/).
 
 **[`SARSI_Hierarchical_v3.1_Deployment_Edition.pdf`](SARSI_Hierarchical_v3.1_Deployment_Edition.pdf)** — *Version 3.1, Deployment Edition* (12 pp). The hierarchical architecture read back off the running console: a conformance map, seven implementation-derived revisions, and what is not built. Source in [`singularity_edition/`](singularity_edition/).
+
+**[`SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf)** — *One Chat Box, Five Agents* (14 pp). The console design: what the chat box is architecturally, what agent mode does, and per-agent self-awareness, workspaces, updates, and influence. Source in [`console_design/`](console_design/).
 
 Together they supersede everything else in this repository.
 
@@ -40,6 +42,8 @@ Principal results:
 | `fleet/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI_Hierarchical_v3.1_Deployment_Edition.pdf` | **Current.** Deployment report, 12 pp |
 | `singularity_edition/` | LaTeX source, bibliography, upload package |
+| `SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf` | **Current.** Console design, 14 pp |
+| `console_design/` | LaTeX source, bibliography, upload package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |

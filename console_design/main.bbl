@@ -1,0 +1,29 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026hierarchical}
+Chengshuai Yang.
+\newblock Functional self-awareness for hierarchical {SARSI} multi-agent
+  systems: Version 3.0 --- a brain-inspired manager--specialist architecture
+  with bidirectional influence, nested workspaces, and safe user
+  interruptibility.
+\newblock Preprint. Referred to throughout as ``Version 3.0'',
+  2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026manager}
+Chengshuai Yang.
+\newblock A manager is not a controller: Global-workspace coordination for
+  {SARSI} fleets.
+\newblock Companion paper on coordination semantics, 2026{\natexlab{b}}.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026v31}
+Chengshuai Yang.
+\newblock Functional self-awareness for hierarchical {SARSI} multi-agent
+  systems: Version 3.1 --- deployment edition: What building it changed.
+\newblock Implementation-grounded revision of Version 3.0, 2026{\natexlab{c}}.
+
+\end{thebibliography}

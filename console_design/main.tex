@@ -1,0 +1,519 @@
+% arXiv: force the pdflatex path. Figures are inline TikZ; no .eps files.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,shapes.geometric}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small One Chat Box, Five Agents}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{principle}{Design principle}
+\newtheorem{drule}{Rule}
+\newtheorem{proposition}{Proposition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{notebox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.55pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,title=\textbf{#1},fonttitle=\small,before skip=5pt,after skip=9pt,fontupper=\small}
+
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\op}[1]{\operatorname{#1}}
+\newcommand{\Proj}{\operatorname{Proj}}
+
+\title{\LARGE One Chat Box, Five Agents\\[6pt]
+\Large Designing the Manager-Fronted SARSI Console:\\
+\Large Per-Agent Self-Awareness, Nested Workspaces,\\
+\Large and the Four Channels by Which Agents Affect Each Other}
+
+\author{Chengshuai Yang\\
+\small NextGen PlatformAI C Corp.\\
+\small \texttt{spiritai@platformai.org}}
+
+\date{July 30, 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent
+A user arriving at the deployed console meets a chat box. It behaves like any general assistant: prose in, prose out, no structure demanded. Behind it are five agents --- a manager, a machine agent, a \code{sarsi-claude} agent nested inside the machine agent, a learning agent, and a working-process agent --- of which only the manager is a main agent, and all of which maintain evidence-linked self-models under a governance plane none of them can modify. This paper designs that system: what the chat box is architecturally, what happens when a user jumps from it into another agent or creates a task directly, what each agent knows about itself, what each agent's workspace admits, how each updates, and how they affect one another.
+
+Four design results carry the paper. First, the chat box is not a relay: it is a rendering of the manager's own bounded workspace, and the user is the highest-authority evidence source rather than a caller of functions. Second, jumping into another agent is \emph{scope transfer, not context transfer} --- what crosses is a typed contract, never a transcript --- which is the mechanical form of the prohibition on raw cross-session broadcast and is also what stops context from growing without bound as the fleet is used. Third, the manager role is \emph{relative}: the machine agent is a specialist to the manager and a manager to \code{sarsi-claude}, so every invariant must hold at every edge of the tree, and the projection of a projection must be a subset or the intermediate agent is leaking. Fourth, agents affect each other through exactly four channels --- typed report, typed directive, prior bias, and owner pre-emption --- and through no others; in particular specialists never message peers, because a peer edge would turn the influence tree into a graph and forfeit the structural stability the tree provides.
+
+The per-agent design is given as a table of dominant coordinates and authoritative verifiers, with one observation that shapes the whole system: the manager's dominant coordinate is organizational awareness, not capability. Its expertise is who owns, verifies, grants, and delegates --- not how to do the work. That is why it can coordinate a fleet whose members are each better than it at their own tasks, and why it may not certify any of them.
+\end{abstract}
+
+\vspace{2pt}
+\noindent\textbf{Keywords:} SARSI; multi-agent systems; conversational interfaces; functional self-awareness; global workspace; nested workspaces; agent governance; system design.
+
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{The System Being Designed}
+\label{sec:system}
+
+\subsection{What the user meets}
+
+A user arriving at the console meets a chat box belonging to the \textbf{manager SARSI agent}. There is no dashboard to learn and no schema to fill in. The interaction is prose in, prose out, in the manner of any general assistant.
+
+Within that chat there is an \textbf{agent mode}. From it the user can move into any of the other agents, move into a running task, or create a task directly. Everything else in the system is reached through that one door.
+
+\subsection{The roster}
+
+Five agents, of which exactly one is a main agent.
+
+\begin{table}[h]
+\centering\small
+\caption{The agents. Only the manager is a main agent; the others are specialists, and one of them is a specialist of a specialist.}
+\label{tab:roster}
+\begin{tabular}{@{}L{3.4cm}cL{8.7cm}@{}}
+\toprule
+\textbf{Agent} & \textbf{Main?} & \textbf{Role} \\
+\midrule
+Manager SARSI agent & \textbf{yes} & The chat surface and the coordinator. Routes work, holds the mission, and is the only agent the user addresses by default \\
+Machine SARSI agent & no & Governed host operations from a vetted set. Also a manager in its own right (below) \\
+\code{sarsi-claude} agent & no & A governed live coding session, nested \emph{inside} the machine agent --- reached through it, never around it \\
+Learning SARSI agent & no & Models a capability that is not its own: the owner's, against a capability graph \\
+Working-process SARSI agent & no & Long-running process execution and continuity \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The nesting of \code{sarsi-claude} inside the machine agent is the structurally interesting fact, and \S\ref{sec:relative} is about it. The other four sit one level below the manager.
+
+\subsection{What this paper designs}
+
+The architecture is given by Version~3.0~\citep{yang2026hierarchical} and its deployment status by Version~3.1~\citep{yang2026v31}. Neither describes a product. This paper designs the product against them, answering five questions:
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
+\item What is the chat box, architecturally? (\S\ref{sec:chat})
+\item What happens when a user jumps into another agent, or creates a task? (\S\ref{sec:agentmode})
+\item What does each agent know about itself? (\S\ref{sec:selfaware})
+\item What does each agent's workspace admit? (\S\ref{sec:workspaces})
+\item How does each update, and how do they affect one another? (\S\S\ref{sec:updates}--\ref{sec:influence})
+\end{enumerate}
+
+\begin{figure}[t]
+\centering
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small, inner sep=5pt},
+  arr/.style={-{Stealth[length=2.2mm]}, gray!75, thick},
+  dashedge/.style={-{Stealth[length=2.2mm]}, gray!55, thick, dashed}]
+
+\node[box, fill=bluec!12, text width=0.30\textwidth] (owner) {\textbf{OWNER / USER}\\[1pt]\footnotesize pre-emption, grants, declarations};
+\node[box, fill=violet!12, below=9mm of owner, text width=0.42\textwidth] (mgr)
+  {\textbf{MANAGER SARSI AGENT} --- the chat box\\[1pt]\footnotesize $\mathbf{s}^{M}$, $W^{M}$, agent mode};
+
+\node[box, fill=gray!8, below left=16mm and 24mm of mgr, text width=0.20\textwidth] (mach)
+  {\textbf{Machine}\\\footnotesize $\mathbf{s}^{\mathrm{mac}}$, $W^{\mathrm{mac}}$};
+\node[box, fill=gray!8, below=16mm of mgr, text width=0.20\textwidth] (learn)
+  {\textbf{Learning}\\\footnotesize $\mathbf{s}^{\mathrm{lrn}}$, $W^{\mathrm{lrn}}$};
+\node[box, fill=gray!8, below right=16mm and 24mm of mgr, text width=0.21\textwidth] (proc)
+  {\textbf{Working-process}\\\footnotesize $\mathbf{s}^{\mathrm{prc}}$, $W^{\mathrm{prc}}$};
+
+\node[box, fill=orangec!12, below=14mm of mach, text width=0.21\textwidth] (claude)
+  {\textbf{\texttt{sarsi-claude}}\\\footnotesize $\mathbf{s}^{\mathrm{cld}}$, $W^{\mathrm{cld}}$};
+
+\draw[arr] (owner) -- node[right, font=\scriptsize] {outranks all} (mgr);
+\draw[arr] (mgr) -- (mach); \draw[arr] (mgr) -- (learn); \draw[arr] (mgr) -- (proc);
+\draw[arr] (mach) -- node[right, font=\scriptsize] {nested} (claude);
+\draw[dashedge] (mach.west) to[bend right=26] node[left, font=\scriptsize] {report} (mgr.west);
+\draw[dashedge] (claude.west) to[bend right=30] (mach.west);
+
+\node[font=\scriptsize, align=left, right=3mm of proc, text width=0.22\textwidth]
+  {\textbf{No peer edges.}\\Specialists do not message each other. The influence graph is a tree (\S9.3).};
+\end{tikzpicture}}
+\caption{The console topology. One main agent fronts the fleet; \code{sarsi-claude} is nested inside the machine agent, making that agent a specialist upward and a manager downward. Solid edges carry directives, dashed edges carry typed reports. There is no edge between specialists, and none into any agent's self-state.}
+\label{fig:topology}
+\end{figure}
+
+% =====================================================================
+\section{The Chat Box}
+\label{sec:chat}
+
+\subsection{What it is not}
+
+The tempting reading is that the chat box is a front end which parses the user's request and calls the right agent. On that reading the manager is a router with a language model attached, the specialists are functions, and the conversation is a sequence of calls and returns.
+
+That design fails on the architecture's own terms in three ways. It makes the manager's beliefs about specialists into the basis for dispatch, which is model inference used as though it were measurement. It makes the user's message into a command, when the architecture has no command channel. And it makes the conversation the system's memory, which puts the fleet's continuity in an unbounded transcript rather than in evidence-linked stores.
+
+\subsection{What it is}
+
+\begin{principle}[The chat is a workspace rendering]
+\label{prin:chatis}
+The chat box is a rendering of the manager's own bounded workspace $W^{M}_t$, together with the conversation that produced it. It is not a transport to the fleet. What the user reads is what the manager is attending to; what the user writes is evidence entering the manager's admission rule.
+\end{principle}
+
+This has immediate consequences that make the product simpler rather than more complex.
+
+\paragraph{The user is a specialist with unusually high authority.} The user's messages are not instructions in a control sense. They are evidence, and they enter the ladder at the rungs the architecture already defines: an owner declaration for preferences, goals, and approvals; signed governance metadata for grants, stops, and permission changes. This is why ``just chat'' is honest rather than a simplification --- the user genuinely is talking to one agent, and that agent genuinely is deciding what to do under its own metacognitive control.
+
+\paragraph{The manager may answer without dispatching.} Because the chat is the manager's workspace and not a router, the correct response to many messages is the manager answering from what it already holds. A router must dispatch; a coordinator need not. Most conversational turns should touch no specialist at all.
+
+\paragraph{Bounded context is structural, not a limit.} The manager's workspace is bounded by construction. A conversation that runs long does not accumulate into an ever-larger prompt; it accumulates into stores, and the workspace admits what the current decision needs. The familiar failure of long assistant sessions --- degradation as context fills --- is addressed by the architecture rather than by a context-window upgrade.
+
+\subsection{Rendering authority without jargon}
+
+The manager will say things about specialists. ``The learning agent is doing well'' is model inference: the manager did not measure it. ``Twelve of fourteen tasks verified'' is an audited outcome. The architecture already distinguishes these; the product must not flatten them.
+
+\begin{drule}[Claims are rendered at their authority]
+\label{rule:render}
+A claim the manager measured, a claim it read from a store, and a claim it inferred must be visually distinguishable in the chat. The distinction is carried in plain language --- \emph{verified}, \emph{recorded}, \emph{I think} --- and never requires the user to learn the ladder.
+\end{drule}
+
+\begin{claimbox}{Why this is a product requirement and not a nicety}
+A fluent narrative is persuasive in proportion to its fluency and not to its support, and the manager is the most fluent component in the system. If its inferences are rendered identically to its measurements, the user is being invited to trust the least reliable claims the system makes, in the voice of its most authoritative one. The rendering rule is the user-facing half of the prohibition on self-narration as evidence.
+\end{claimbox}
+
+% =====================================================================
+\section{Agent Mode}
+\label{sec:agentmode}
+
+Agent mode is the door from the manager's chat to everything else: the user may enter another agent, enter a running task, or create a task directly.
+
+\subsection{Jumping into an agent}
+
+\begin{principle}[Scope transfer, not context transfer]
+\label{prin:scope}
+Entering another agent transfers the user's \emph{attention} and a typed \emph{contract}. It does not transfer the conversation. The target agent receives a goal, a scope, success criteria, a budget, a deadline, and a revocation token --- never a transcript of what was said to the manager.
+\end{principle}
+
+This is the mechanical form of the architecture's prohibition on raw cross-session broadcast, and it is worth being explicit about what it forbids. When a user has spent twenty turns discussing a problem with the manager and then jumps into the machine agent, the machine agent does not receive those twenty turns. It receives a contract that the manager composed from them.
+
+Three things follow, and all three are improvements rather than costs.
+
+\paragraph{Each agent's chat is its own bounded context.} The learning agent's conversation is about the learning agent's work, at the learning agent's scope. It does not inherit the manager's history, so it does not inherit the manager's context growth.
+
+\paragraph{The contract is auditable and the transcript would not be.} What crossed the boundary is a typed object with fields. An operator asking later why the machine agent did what it did can read the contract. A transcript answers the same question only by being read in full, and only if the reader can reconstruct which parts the agent actually acted on.
+
+\paragraph{The manager is forced to be explicit.} Composing a contract requires the manager to state the success criterion and the stopping condition. A design that forwarded the conversation would let both remain implicit, and an agent with an implicit stopping condition does not know when it is finished.
+
+\begin{cautionbox}{The failure this rules out}
+Forwarding conversation across agents is the natural implementation and produces a specific pathology: every agent's context grows with every other agent's conversation, the fleet's total context is superlinear in its use, and a claim made loosely to the manager in turn three arrives at a specialist in turn forty as though it were a requirement. Scope transfer bounds context and destroys the provenance ambiguity at the same time.
+\end{cautionbox}
+
+\subsection{Returning}
+
+The reverse boundary obeys the same rule. What returns to the manager is a typed report --- state, evidence, uncertainty, residuals, requested manager action --- and not the sub-conversation. The user may of course read both; the \emph{manager} receives only the report.
+
+\subsection{Jumping into a task}
+
+A task is a contract with a run attached. Entering a task places the user at that run's surface, with the contract visible and the run's own evidence available. The distinction from entering an agent is scope: an agent has many tasks and a persistent self-state; a task has one contract, one budget, and a termination condition.
+
+\subsection{Creating a task directly}
+
+A user may author a contract without conversation. The design constraint is one sentence.
+
+\begin{drule}[Creation is not authorization]
+\label{rule:creation}
+A directly created task is an owner declaration, which is authoritative for \emph{what is wanted} and not for \emph{what may be done}. The contract still passes the admissible-action filter before any execution, and a task requiring authority the fleet does not hold must fail at creation, naming the missing grant.
+\end{drule}
+
+Failing at creation rather than at execution is the substantive half. A task that is accepted, queued, started, and then blocked mid-run has consumed budget, produced partial side effects, and left the user to discover a permission problem at the least convenient moment. The grant check is cheap and belongs at the point of authorship.
+
+\subsection{The nesting constraint}
+
+\code{sarsi-claude} is reached through the machine agent. Agent mode must not offer a direct jump into it that bypasses its parent.
+
+\begin{drule}[No jump around an intermediate agent]
+\label{rule:nojump}
+Entering a nested agent enters its parent first. A contract for \code{sarsi-claude} is composed by the machine agent from a contract the manager composed for the machine agent, and the authority available is the intersection along the whole path.
+\end{drule}
+
+A direct jump would let a user hand \code{sarsi-claude} a contract that the machine agent's ceiling would have narrowed, which is authority laundering performed by the interface rather than by an agent. The rule is the interface's share of the intersection discipline.
+
+% =====================================================================
+\section{Self-Awareness in Each Agent}
+\label{sec:selfaware}
+
+\subsection{The same coordinates, different profiles}
+
+Every agent maintains the same self-state: a bounded vector over identity, situated task state, goal and scope, epistemic status, capability, memory and continuity, developmental trend, recursive-improvement status, organizational relations, and resource integrity. Agents differ not in which coordinates exist but in which are \emph{dominant} --- constrained by the agent's role --- and in which verifier may write the evidence that moves them.
+
+\begin{table}[h]
+\centering\small
+\caption{Per-agent self-awareness design. ``Dominant'' are the coordinates a role's qualification region constrains; ``verifier'' is the authority that may supply audited-outcome evidence.}
+\label{tab:selfaware}
+\begin{tabular}{@{}L{2.5cm}L{2.6cm}L{4.0cm}L{4.4cm}@{}}
+\toprule
+\textbf{Agent} & \textbf{Dominant} & \textbf{Authoritative verifier} & \textbf{What it must not get wrong} \\
+\midrule
+Manager & organizational, goal/scope, task, resource & the owner; the console bench & Who granted what, and which of its own statements are inferences \\
+Machine & capability, organizational, resource/integrity & the governance hook; sandbox exit status & Whether an operation is inside its vetted set and its current ceiling \\
+\code{sarsi-claude} & task, epistemic, resource & the pre-tool-use hook; session verifier & Whether the session is still governed, and whether it is stuck \\
+Learning & developmental, memory, goal/scope & deterministic grading against a capability graph & That the capability it models is the \emph{owner's}, not its own \\
+Working-process & task, recursive-improvement, memory & replay; the verified-outcome store & Where a long run actually is, across restarts \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The manager's dominant coordinate is organizational, not capability}
+
+This is the design decision that shapes the rest of the system, and it is worth stating as a principle because the alternative is so tempting.
+
+\begin{principle}[The manager is expert in relations, not in work]
+\label{prin:mgr}
+The manager's qualification region constrains organizational awareness first: who owns, verifies, grants, delegates, collaborates, and receives. It does not constrain capability at the specialists' tasks. The manager is not required to be good at coding, host operations, or teaching, and is not permitted to claim that it is.
+\end{principle}
+
+Three consequences follow directly.
+
+\paragraph{It can coordinate agents better than itself.} A manager whose expertise were capability would need to be at least as good as every specialist to evaluate them, which does not scale and is not true. A manager whose expertise is relations needs to know who is authoritative about what --- which is exactly what it can know.
+
+\paragraph{It may not certify a specialist.} Since capability is not among its dominant coordinates and it holds no instrument the specialist lacks, its claims about a specialist's competence are inferences. This is the coordination rule of the companion paper~\citep{yang2026manager} arriving as a consequence of a design choice rather than as an external constraint.
+
+\paragraph{Its failure mode is specific and detectable.} A manager that degrades will degrade on organizational awareness: attributing a grant to the wrong owner, losing track of which verifier established a result, delegating past a ceiling. Those are checkable, which is what makes the choice operationally useful.
+
+\subsection{The learning agent models someone else}
+
+The learning agent is the one case where the self-model and the world-model share machinery: it maintains a model of the \emph{owner's} capability. The design requirement is that the same evidence discipline applies to a claim about a person as to a claim about an agent --- a graded result is audited outcome, an inferred trend is model inference --- and that the two models never merge. An agent that confuses its own competence with its student's will teach the wrong thing and report progress it did not produce.
+
+\subsection{What every agent must be able to say}
+
+Independent of role, each agent must be able to answer, from evidence rather than narration: which agent and version am I; what am I working on and under which contract; what counts as done; what do I not know; what have I verifiably done before; who authorized this; and how much context, budget, and time remain. An agent that cannot answer the last one cannot recover, and recovery is the action that distinguishes a long-running agent from a fragile one.
+
+% =====================================================================
+\section{Workspaces}
+\label{sec:workspaces}
+
+\subsection{One workspace per agent, nested}
+
+Every agent has its own bounded workspace. They are nested rather than shared: there is no single channel that all agents read and write.
+
+\begin{table}[h]
+\centering\small
+\caption{What each workspace admits. Reserved slots hold owner events, safety alerts, and contradictions ahead of ordinary ranking.}
+\label{tab:workspaces}
+\begin{tabular}{@{}L{2.6cm}L{5.4cm}L{5.5cm}@{}}
+\toprule
+\textbf{Workspace} & \textbf{Admits} & \textbf{Never admits} \\
+\midrule
+$W^{M}$ (manager) & Typed reports from machine, learning, working-process; owner events; mission and plan; policy and grants & Raw sub-conversations; a specialist's unfiltered transcript \\
+$W^{\mathrm{mac}}$ (machine) & Its own instrumentation; $\Proj_{\mathrm{mac}}(W^{M})$; typed reports from \code{sarsi-claude} & A peer's report; the manager's beliefs about it \\
+$W^{\mathrm{cld}}$ (\code{sarsi-claude}) & Session evidence; $\Proj_{\mathrm{cld}}(W^{\mathrm{mac}})$ & Anything from the manager not passed by its parent \\
+$W^{\mathrm{lrn}}$ (learning) & Grading results; capability graph state; $\Proj_{\mathrm{lrn}}(W^{M})$ & Another agent's task evidence \\
+$W^{\mathrm{prc}}$ (process) & Run state, replay evidence; $\Proj_{\mathrm{prc}}(W^{M})$ & Another agent's raw report \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Projections compose, and the composition must shrink}
+
+Because \code{sarsi-claude} sits below the machine agent, what it may see of the manager's workspace is a projection of a projection. That composition is a design obligation with a checkable form.
+
+\begin{proposition}[Composed projections must be monotone]
+\label{prop:compose}
+For the nested path manager $\to$ machine $\to$ \code{sarsi-claude},
+\[
+\Proj_{\mathrm{cld}}\big(\Proj_{\mathrm{mac}}(W^{M}_t)\big)\;\subseteq\;\Proj_{\mathrm{mac}}(W^{M}_t)\;\subseteq\;W^{M}_t .
+\]
+If the first inclusion fails, the machine agent is originating manager-attributed content its own projection did not contain. If the second fails, the manager's projection is not a filter.
+\end{proposition}
+
+The practical value is that this is testable without understanding either agent: take the manager's workspace, project it twice, and assert containment at each step. A leak in an intermediate agent shows up as an item that appears downstream without appearing upstream.
+
+\subsection{Reserved slots and per-agent caps}
+
+Every workspace holds reserved capacity for owner events, safety alerts, and contradictions, admitted ahead of ordinary ranking. An owner interrupt is not a term in an average. Beyond the reserved slots, routine items compete on relevance, urgency, novelty, verified reliability, and uncertainty, with a per-agent admission cap so that one noisy source cannot occupy the channel.
+
+Version~3.1 records that a per-round cap is only one of three bounds a real channel needs~\citep{yang2026v31}: the others bound stored pending items and expire stale ones. The console inherits all three, and the third matters most for a chat product, where a burst raised during an active session must not be admitted an hour later against conditions that no longer hold.
+
+% =====================================================================
+\section{How Each Agent Updates}
+\label{sec:updates}
+
+\subsection{Only from its own admissible evidence}
+
+Each agent's coordinates update through its own estimators, from evidence that clears that coordinate's provenance bar, and asynchronously: a coordinate with no new admissible evidence persists rather than drifting. This is what prevents a single conversational turn --- with the manager, or with the user --- from rewriting an agent's model of itself.
+
+\subsection{Two timescales}
+
+The fast loop revises beliefs and the current plan within a contract. It does not change the evaluator or the authority structure.
+
+The slow loop changes structure: prompts, policies, tools, memory schemas, evaluators. It is gated by the promotion criterion --- measured autonomy gain against preregistered tolerance bands, no correctness or safety regression, evaluated by a frozen evaluator the proposer cannot modify, with an owner signature and a rollback pointer. A proposal may not alter its own evaluator, held-out set, ceiling, or approval rule.
+
+\begin{drule}[Structural change to another agent is still governed]
+\label{rule:structother}
+The manager may \emph{propose} a structural change to a specialist. Promotion requires the specialist's own frozen evaluator, an owner signature, and a rollback pointer. That the proposer is a different agent from the subject does not relax the gate; it adds the requirement that the subject's evaluator, not the proposer's, is what judges.
+\end{drule}
+
+Without this rule, ``the manager coordinates the fleet'' quietly includes ``the manager rewrites its specialists' policies,'' which is recursive self-improvement performed on someone else and exempt from the governance required when performed on oneself.
+
+\subsection{Cold starts}
+
+A new agent, or a new task family for an existing agent, has no verified outcomes. Its competence-like coordinates must read as the prior with the evidence count shown, and never as zero. Zero asserts observed failure; a new specialist scored at zero is never routed the work that would produce the evidence to correct it. Version~3.1 records this as the revision most likely to be got wrong, because the natural implementation --- successes over attempts --- is undefined at zero and gets coerced.
+
+% =====================================================================
+\section{How Agents Affect Each Other}
+\label{sec:influence}
+
+\subsection{Exactly four channels}
+
+\begin{table}[h]
+\centering\small
+\caption{The complete set of inter-agent channels. Anything not listed here does not exist by design.}
+\label{tab:channels}
+\begin{tabular}{@{}L{2.9cm}L{2.2cm}L{8.0cm}@{}}
+\toprule
+\textbf{Channel} & \textbf{Direction} & \textbf{What it may and may not do} \\
+\midrule
+Typed report & up & Carries state, evidence, uncertainty, residuals, and a requested action. May raise the receiver's uncertainty, risk, or need to verify. May not widen permissions, suppress an interrupt, or self-certify success \\
+Typed directive & down & Carries a contract: goal, scope, criteria, budget, deadline, revocation. May start, steer, pause, resume, verify, cancel. May not grant authority absent from policy \\
+Prior bias & down & Changes precision, attention, and the order evidence is sought. May not change what the evidence says \\
+Owner pre-emption & from owner & Outranks every agent. Pauses; does not edit. Lapses on a horizon \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{And one prohibition}
+
+\begin{drule}[No agent writes another agent's self-state]
+\label{rule:nocrosswrite}
+Influence between agents travels only as evidence, subject to the receiver's own admission rule. This holds on every edge of the tree --- manager to specialist, machine to \code{sarsi-claude} --- and it holds for the owner's interface too, which may pause an agent but may not edit what an agent believes about itself except through an owner declaration carrying provenance.
+\end{drule}
+
+The reason the owner is included is that a state write without provenance is, from inside the affected agent, indistinguishable from an overstepping manager: same coordinate, same absence of provenance, same bypass of the admission mask. No property the agent can evaluate separates them, and neither can an auditor reading the log afterward.
+
+\subsection{No peer edges: the influence graph is a tree}
+
+Specialists do not message peers. The learning agent does not talk to the machine agent; if it has something the machine agent needs, it reports upward and the manager composes a directive downward.
+
+\begin{principle}[Keep the influence graph a tree]
+\label{prin:tree}
+Every influence edge runs between a parent and a child. A peer edge would create a cycle among agents that no single party mediates, and the fleet's coupling would stop being triangular.
+\end{principle}
+
+The reason is structural rather than stylistic. With a tree and a bias channel that cannot move an estimate, the downward coupling vanishes in the mean and the fleet's stability decomposes to its agents individually: verifying each agent verifies the fleet, and adding agents adds no coupling to be tuned~\citep{yang2026manager}. A peer edge reinstates a feedback loop that must then be bounded by tuning gains, and the guarantee degrades from structural to conditional. The cost of the rule is one extra hop through the manager. The benefit is that the system's stability does not depend on how many agents are running.
+
+\begin{notebox}{What this costs, honestly}
+Routing peer traffic through the manager adds latency and makes the manager a throughput bottleneck for cross-specialist coordination. That is a real cost, and a system with heavy peer traffic would feel it. The judgement here is that the console's traffic is overwhelmingly user-initiated and parent-mediated, so the tree costs little and buys a guarantee that survives growth. A deployment whose specialists genuinely need to converse continuously should revisit the choice knowingly rather than drift into it.
+\end{notebox}
+
+\subsection{Worked example}
+
+A user asks the manager to install a tool and then use it on a repository.
+
+\begin{enumerate}[leftmargin=1.9em,itemsep=2pt]
+\item The message enters $W^{M}$ as an owner declaration. The manager answers from what it holds where it can, and composes a contract where it cannot.
+\item The manager issues a directive to the machine agent: install the tool, with scope, budget, and a revocation token. The directive cannot grant authority the policy does not already contain.
+\item The machine agent finds the operation consequential and escalates. The escalation is a typed report that reaches $W^{M}$ in a reserved slot, ahead of routine traffic.
+\item The manager surfaces the approval to the user in chat. The user approves; the approval is signed governance metadata, not prose.
+\item The machine agent proceeds, then composes a contract for \code{sarsi-claude} to use the tool --- narrowed to the intersection of its own authority and \code{sarsi-claude}'s.
+\item \code{sarsi-claude} works, reports upward to the machine agent, which reports upward to the manager, which tells the user.
+\item At no point does any agent write another's self-state, and at no point does the user's original conversation enter any specialist's context.
+\end{enumerate}
+
+The step worth noticing is the fifth. The machine agent is acting as a manager, and every rule that governed the manager in step~2 governs it now.
+
+% =====================================================================
+\section{The Manager Role Is Relative}
+\label{sec:relative}
+
+The nesting of \code{sarsi-claude} inside the machine agent is not a special case to be handled; it is the general case made visible.
+
+\begin{proposition}[Invariants hold per edge, not per system]
+\label{prop:peredge}
+The machine agent is a specialist with respect to the manager and a manager with respect to \code{sarsi-claude}. Every rule stated for the manager --- it may not write a child's self-state, its claims about a child are model inference, its bias may not move a child's estimates, its delegation narrows by intersection --- applies to it in its downward role, unchanged.
+\end{proposition}
+
+Two design obligations follow.
+
+\paragraph{Nothing may be scoped to ``the manager'' by name.} An implementation that grants the top-level manager a capability by identity rather than by role will fail to grant it to the machine agent acting downward, or --- worse --- will grant the machine agent something it should only have upward. Roles, not names.
+
+\paragraph{Depth is unbounded in principle and shallow in practice.} The architecture does not limit nesting depth. The console uses three levels. A deeper tree is admissible provided each edge honours the same rules and Proposition~\ref{prop:compose}'s containment holds along the whole path; what deepens is the intersection chain, so authority narrows monotonically with depth, which is the desired direction.
+
+% =====================================================================
+\section{Failure Modes This Product Adds}
+\label{sec:failure}
+
+\paragraph{Conversation leaking on a jump.} The natural implementation of agent mode forwards context. It produces superlinear context growth and turns a loose remark to the manager into an apparent requirement downstream. Ruled out by Principle~\ref{prin:scope}; testable by asserting that no specialist's context contains manager-conversation text.
+
+\paragraph{Narration read as measurement.} The manager is the most fluent component and the least instrumented about specialists. Ruled out by Rule~\ref{rule:render}; detectable by checking that inferred claims are rendered differently from verified ones.
+
+\paragraph{Authority laundering through the interface.} A direct jump into a nested agent bypasses the intersection along the path. Ruled out by Rule~\ref{rule:nojump}.
+
+\paragraph{Late permission failure.} A task accepted and then blocked mid-run has spent budget and produced partial effects. Ruled out by Rule~\ref{rule:creation}: the grant check belongs at authorship.
+
+\paragraph{Abandoned jumps.} A user enters a task, leaves, and the agent waits on input that never arrives. Every wait carries a horizon and expires, after which the agent takes its cheapest honest action --- checkpoint and report --- rather than waiting.
+
+\paragraph{Consensus mistaken for evidence.} Two specialists agree because both read the same manager broadcast. Agreement is then correlation with the broadcast, not independent support. Provenance must distinguish independently instrumented claims from workspace-derived ones before any count is taken.
+
+\paragraph{Fleet-scale self-preservation.} A manager whose utility rose with the number of live specialists would have an interest in keeping agents running and creating more. No coordinate and no term of the improvement objective may be a function of fleet size or uptime.
+
+% =====================================================================
+\section{Build Order}
+\label{sec:buildorder}
+
+Version~3.1 reports that the communication channel and the governance plane exist while the control loop does not, and that the strongest guarantees currently hold because the mechanisms that would violate them are unbuilt~\citep{yang2026v31}. This design adds a product surface to that situation, and the order below is what it implies.
+
+\begin{enumerate}[leftmargin=1.9em,itemsep=4pt]
+\item \textbf{The typed directive, with its enforcement.} Reports flow upward; directives do not yet exist as objects. Agent mode cannot be built without them, because a jump \emph{is} a directive. This is also where the cross-write prohibition stops being free --- a directive channel is the mechanism that could carry a state write --- so Rule~\ref{rule:nocrosswrite} must be enforced in the same change that creates the channel, not after it.
+\item \textbf{The contract object.} Goal, scope, criteria, budget, deadline, revocation. Required by direct task creation, by jumps, and by Rule~\ref{rule:creation}'s grant check at authorship.
+\item \textbf{Projection containment tests.} Proposition~\ref{prop:compose} is checkable as soon as there are two levels of projection, and it is the cheapest available guard against an intermediate agent leaking.
+\item \textbf{Recorded forecasts.} A forecast must be durably written before the action it predicts, or its residual teaches nothing. This is storage ordering, and it precedes any residual-driven machinery.
+\item \textbf{The interrupt classes.} Pause and stop exist as governance controls; the class machine does not. It depends on directives and on nothing else.
+\item \textbf{Delegation between specialists, if ever.} Currently unimplemented, which is why the intersection rule is unenforced. Principle~\ref{prin:tree} argues it should stay unimplemented unless a concrete need appears; if it arrives, the intersection rule must be written first.
+\end{enumerate}
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+The console presents one chat box and runs five agents. The design that reconciles those is not a router behind a text field. It is a manager whose workspace the chat renders, whose expertise is organizational rather than technical, and which coordinates a fleet it is not permitted to certify.
+
+Three decisions carry the rest. Making the chat a workspace rendering rather than a transport means the user is an evidence source rather than a caller, and lets the manager answer without dispatching. Making agent mode transfer scope rather than context bounds every agent's context independently and turns what crosses a boundary into an auditable object. Keeping the influence graph a tree, with no edges between specialists, is what lets the fleet's stability decompose to its agents, so that growing the fleet does not require retuning it.
+
+The nesting of \code{sarsi-claude} inside the machine agent is the case that proves the design is general rather than a two-level special case. The machine agent is a specialist upward and a manager downward, and every rule that binds the manager binds it in its downward role. If that holds, the architecture is recursive and depth costs nothing but narrower authority. If it does not, the system has a manager by name rather than by role, and the guarantees stop at the first edge.
+
+% =====================================================================
+\section*{Acknowledgments}
+This design rests on the hierarchical architecture of Version~3.0, its deployment report, and the coordination semantics of the companion paper. The product constraints --- one chat surface, an agent mode, direct task creation, and a nested coding agent --- come from the deployed console.
+
+\section*{Conflict of Interest}
+The author is affiliated with NextGen PlatformAI C Corp., which develops SARSI systems and operates the console described here.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
