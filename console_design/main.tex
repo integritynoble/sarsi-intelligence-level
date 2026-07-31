@@ -188,23 +188,42 @@ where $t\in\mathbb{N}$ is a discrete update index and each coordinate is a verif
 \centering\small
 \caption{The ten coordinates, with the operational question each answers and the instrument that answers it.}
 \label{tab:coords}
-\begin{tabular}{@{}cL{3.0cm}L{5.2cm}L{4.4cm}@{}}
+\begin{tabular}{@{}cL{2.4cm}L{3.9cm}L{3.3cm}L{3.4cm}@{}}
 \toprule
-\textbf{Sym.} & \textbf{Coordinate} & \textbf{Operational question} & \textbf{Typical instrument} \\
+\textbf{Sym.} & \textbf{Coordinate} & \textbf{Operational question} & \textbf{Instrument} & \textbf{Reports alongside the scalar} \\
 \midrule
-$s_I$ & Identity, lineage & Which agent, installation, model, owner, version am I? & Signed registry probe \\
-$s_T$ & Situated task state & What mission, plan generation, phase, artifact, blocker are active? & Plan registry; live session probe \\
-$s_G$ & Goal and scope & What counts as success, what is excluded, which constraints bind? & Contract record \\
-$s_E$ & Epistemic status & Which beliefs are observed, inferred, uncertain, contradicted, unknown? & Brier score over recorded forecasts; anti-narration probes \\
-$s_C$ & Capability, tools & What can I reliably do, with which tools, under which conditions? & Beta posterior over independently verified outcomes \\
-$s_M$ & Memory, continuity & Which verified events and decisions constitute my history? & Decision ledger; provenance coverage \\
-$s_D$ & Developmental trend & Which strengths and weaknesses are changing across runs? & Comparison of two retained snapshots \\
-$s_R$ & Recursive improvement & Which self-change is proposed, predicted, tested, authorized, reversible? & Improvement registry; effect-prediction error \\
-$s_O$ & Organizational, social & Who owns, verifies, grants, delegates, collaborates, receives? & Permission store; signed grants \\
-$s_B$ & Resource, integrity & What are my context, compute, time, budget, latency, health? & Runtime telemetry \\
+$s_I$ & Identity, lineage & Which agent, installation, model, owner, version am I? & Signed registry probe & Signature validity; last verified \\
+$s_T$ & Situated task state & What mission, plan generation, phase, artifact, blocker are active? & Plan registry; live probe & Generation number; phase; staleness of the last probe \\
+$s_G$ & Goal and scope & What counts as success, what is excluded, which constraints bind? & Contract record & Whether a stopping criterion exists; scope-violation count \\
+$s_E$ & Epistemic status & Which beliefs are observed, inferred, uncertain, contradicted, unknown? & Brier over recorded forecasts; anti-narration probes & Forecast count; Brier; probe pass rates separately \\
+$s_C$ & Capability, tools & What can I reliably do, with which tools, under which conditions? & Beta posterior over verified outcomes & $(\alpha,\beta)$; evidence count; recency; task stratum \\
+$s_M$ & Memory, continuity & Which verified events and decisions constitute my history? & Decision ledger; provenance coverage & \textbf{Event count; coverage fraction; oldest retained event; provenance-gap count} \\
+$s_D$ & Developmental trend & Which strengths and weaknesses are changing across runs? & Comparison of retained snapshots & \textbf{Direction; magnitude; snapshot count; interval between them} \\
+$s_R$ & Recursive improvement & Which self-change is proposed, predicted, tested, authorized, reversible? & Improvement registry; effect-prediction error & Promotions to date; effect-prediction error; rollback availability \\
+$s_O$ & Organizational, social & Who owns, verifies, grants, delegates, collaborates, receives? & Permission store; signed grants & Grant count; last signature; unresolved conflicts \\
+$s_B$ & Resource, integrity & What are my context, compute, time, budget, latency, health? & Runtime telemetry & Headroom per resource; time to exhaustion at current rate \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{A coordinate is a measure over a store, not the store}
+\label{sec:coordvsstore}
+
+The coordinates are scalars, and the questions in Table~\ref{tab:coords} plainly cannot be answered by one number. That is not a defect; it is a division of labour that must be stated because leaving it implicit invites the wrong implementation.
+
+\begin{principle}[Coordinates measure; stores hold]
+\label{prin:measure}
+A coordinate does not contain the agent's history, capability, or authority. It is a \emph{quality measure over the store that does}, reduced to $[0,1]$ so that a qualification region can compare it against a threshold. The store answers \emph{what happened}; the coordinate answers \emph{how far can I trust what I have}.
+\end{principle}
+
+So $s_M$ is not a memory. It scores the agent's \emph{access} to its own history --- in the deployed console, the share of recorded decisions carrying a verdict. And $s_D$ is not a developmental record; it scores whether the agent can \emph{see} its own trend at all, which requires at least two retained snapshots and therefore reads as unmeasured wherever only one is kept.
+
+\begin{drule}[Every coordinate publishes its instrument's statistics]
+\label{rule:publish}
+The scalar is only ever the summary used for threshold comparison. Every report of a coordinate carries the statistics its own instrument produces, per the last column of Table~\ref{tab:coords}. A bare scalar is not a report.
+\end{drule}
+
+The rule matters most exactly where it is easiest to omit. A capability coordinate is conventionally reported with its evidence count, because the Beta form makes the count unavoidable. Memory and developmental coordinates have no such forcing function, and a bare $s_M=0.5$ cannot distinguish a thousand events half of which carry provenance from two events one of which does; a bare $s_D$ conflates the direction of a trend with its magnitude and says nothing about the confidence of either. Both are useless to a controller and misleading to a reader, and neither failure is visible in the number.
 
 \subsection{Asynchronous, evidence-gated update}
 
@@ -226,12 +245,34 @@ Competence-like coordinates are stored as posteriors, not points:
 s_i\sim\op{Beta}(\alpha_i,\beta_i),\qquad \mathbb{E}[s_i]=\frac{\alpha_i}{\alpha_i+\beta_i},
 \label{eq:beta}
 \end{equation}
-and every report of a coordinate carries the evidence count $\alpha_i+\beta_i$ alongside the mean, with recency and the task stratum it was measured on.
+and every report carries the evidence count $\alpha_i+\beta_i$ alongside the mean, with recency and the task stratum it was measured on.
 
-\begin{drule}[Unmeasured is the prior, never zero]
+\begin{drule}[Unmeasured is the prior, never zero --- for every coordinate]
 \label{rule:prior}
-A coordinate with no verified outcomes sits at its prior with the count shown. Zero asserts an observed failure; a new agent scored at zero is never routed the work that would produce the evidence to correct it. The natural implementation --- successes over attempts --- is undefined at zero and gets coerced, usually to zero, occasionally to one. Both are self-fulfilling in opposite directions.
+A coordinate whose instrument has produced no evidence sits at its prior, with the absence shown in the statistics of Rule~\ref{rule:publish}. Zero asserts an observed failure; a new agent scored at zero is never routed the work that would produce the evidence to correct it. The natural implementation --- successes over attempts --- is undefined at zero and gets coerced, usually to zero, occasionally to one. Both are self-fulfilling in opposite directions.
 \end{drule}
+
+The rule is stated for every coordinate rather than for competence alone, because the Beta form supplies a prior automatically and the other instruments do not. Each therefore needs its unmeasured reading fixed explicitly:
+
+\begin{table}[h]
+\centering\small
+\caption{Unmeasured readings. In no case is the answer $0$, and in no case is it silent.}
+\label{tab:unmeasured}
+\begin{tabular}{@{}cL{5.0cm}L{6.6cm}@{}}
+\toprule
+& \textbf{What ``no evidence'' means here} & \textbf{Reads as} \\
+\midrule
+$s_C$ & No verified outcomes in this stratum & Prior mean, with $\alpha+\beta$ at the prior mass \\
+$s_E$ & No forecast has been scored yet & Prior, with forecast count zero --- \emph{not} perfect calibration \\
+$s_M$ & Ledger empty or unreadable & Prior, with event count zero --- \emph{not} a coverage of $1$ over an empty set \\
+$s_D$ & \textbf{Fewer than two retained snapshots} & \textbf{Unmeasured, with the snapshot count shown} \\
+$s_R$ & No promotion has occurred & Prior, with promotion count zero \\
+$s_B$ & Telemetry unavailable & Prior, flagged --- \emph{never} full headroom \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $s_M$ and $s_D$ rows are the ones that bite. An empty ledger has no provenance gaps, so a coverage ratio over it is vacuously perfect; an implementation computing coverage as gaps over events will report $1$ for an agent that remembers nothing. And a developmental coordinate is the one coordinate that \emph{cannot} be measured at a point in time --- it needs two snapshots and an interval --- so unmeasured is its normal state in any deployment that has not decided to retain history. That is a fact about profiles, not about any particular product.
 
 \subsection{Qualification regions, not ranks}
 
@@ -254,6 +295,24 @@ W^{(a)}_t=\Select_{k}\big(\mathbf{s}^{(a)}_t,\,E^{(a)}_t,\,\text{mission},\,\tex
 \label{eq:ws}
 \end{equation}
 admitting at most $k$ items. The workspace is what the current decision needs, not everything the agent knows. Two opposite failures are prevented: a controller that sees too little and repeatedly asks for facts already stored, and one that receives everything and loses critical state in noise.
+
+\subsection{The workspace holds nothing}
+\label{sec:wsnostore}
+
+Equation~\eqref{eq:ws} is recomputed every round. The workspace is a \emph{view}, not a store, and the distinction is the same one Principle~\ref{prin:measure} draws one level down.
+
+\begin{principle}[The workspace is where an agent looks; the stores are where it remembers]
+\label{prin:wsview}
+No history accumulates in $W^{(a)}_t$. Admitted items are consumed, unadmitted items expire, and the next round rebuilds the workspace from current state, current evidence, mission, policy, and the parent's projection. History lives in the event ledger, the decision ledger, the verified-outcome store, and the checkpoint store --- and the coordinates of \S\ref{sec:coords} are how the controller reads their health.
+\end{principle}
+
+Three consequences follow.
+
+\paragraph{Bounded context is structural.} A workspace that accumulated would grow without limit and become the unbounded transcript the architecture exists to avoid --- a chat log with extra steps. Boundedness is not a budget imposed on the workspace; it is what the workspace \emph{is}.
+
+\paragraph{Audit is served by the ledger, not by persistence.} The obligation to answer \emph{why did the agent do that} months later is met by recording the workspace's contents \emph{into the decision record} at decision time. The record is immutable and carries what was admitted when the choice was made; the workspace moves on. Persisting the workspace would supply the same information with none of the immutability and all of the accumulation.
+
+\paragraph{Restart rebuilds rather than resumes.} An agent that restarts does not restore its former workspace. It recomputes one from the stores --- which is why the working-process agent's loop (Algorithm~\ref{alg:prc}) establishes position from the replay log rather than from memory. Restoring a persisted workspace would restore a view of the world assembled under conditions nobody has re-checked, which is precisely the stale-assumption failure that resumption is supposed to guard against.
 
 \subsection{Salience}
 

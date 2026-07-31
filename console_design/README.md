@@ -2,7 +2,7 @@
 
 **Designing the Manager-Fronted SARSI Console: Per-Agent Self-Awareness, Nested Workspaces, and the Four Channels by Which Agents Affect Each Other**
 
-PDF: [`../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf) (33 pp).
+PDF: [`../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf) (35 pp).
 
 Organised in three parts. **Part I** specifies the substrate every agent shares: the ten self-state coordinates and their admission discipline, the bounded workspace and its salience function, the fast and slow loops as algorithms, the action repertoire with preconditions, the seven-level evidence ladder, and the four inter-agent channels. **Part II** specifies each of the five agents in full — role, ten coordinates instantiated, workspace admission policy with concrete salience weights and caps, fast loop as an algorithm, action repertoire with per-action authority, evidence sources, failure modes, and deployment status. **Part III** covers the chat surface, agent mode, and cross-agent dynamics.
 
@@ -29,6 +29,16 @@ A user meets one chat box — the **manager SARSI agent**, the only main agent. 
 ## Per-agent design
 
 Each agent carries the same coordinates with different dominant ones and different authoritative verifiers — see Table 3. The learning agent is the special case: it models a capability that is **not its own**, and the design requires the two models never merge.
+
+## Coordinates measure, stores hold
+
+A coordinate does not *contain* the agent's history or capability. It is a quality measure over the store that does, reduced to `[0,1]` so a qualification region can threshold it. `s_M` scores the agent's *access* to its history; `s_D` scores whether it can *see* its own trend at all.
+
+Because the scalar is only a summary, **every coordinate publishes its instrument's statistics** — Table 2's last column. `s_C` reports `(α, β)`; `s_M` reports event count, coverage, oldest retained event, and provenance gaps; `s_D` reports direction, magnitude, snapshot count, and interval. A bare scalar is not a report: `s_M = 0.5` cannot distinguish a thousand events half with provenance from two events one with provenance.
+
+The same distinction holds one level up. **The workspace holds nothing** — it is recomputed each round, admitted items are consumed, unadmitted ones expire. Audit is served by recording workspace contents *into the decision record*, not by persisting the workspace; and a restarting agent rebuilds rather than resumes, since a restored workspace encodes conditions nobody re-checked.
+
+Table 3 fixes the unmeasured reading for every coordinate. Two bite: an empty ledger has no provenance gaps, so a naive coverage ratio reports **1** for an agent that remembers nothing; and `s_D` is the one coordinate that cannot be measured at a point in time, so unmeasured is its normal state wherever history is not retained.
 
 ## Rules the product must honour
 
