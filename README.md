@@ -53,7 +53,7 @@ Principal results:
 
 See Appendix D of the paper for the full supersession record.
 
-## How the two papers relate
+## How the system and agent scales relate
 
 SARSI-L identifies the rate-limiting bottleneck on the first loop closure as *trusted autonomy* — an institutional question, not a technical one — and then admits (§10.6) that it has no representation of institutions. The companion paper supplies the evidential half of that representation, and does so in SARSI-L's own machinery rather than by analogy:
 
@@ -65,11 +65,13 @@ The pairing also bounds the companion's claim honestly. `T_δ` is review latency
 
 A manager coordinating specialists is not a controller: specialists filter what it sends through their own admission masks, the coupling is recurrent, and owner pre-emption outranks both. The paper's result is that the governance prohibition — no agent may write another's self-state — is *the same constraint* as the architecture's stability condition. Forbid the write and the top-down block of the recurrent coupling vanishes, the coupling is nilpotent, and a fleet verified agent by agent is verified as a fleet. Permit it and the feedback loop returns, and stability must be tuned against fleet size.
 
-The through-line across all three papers is one rule at three scales: the system-scale paper argues authority closure needs an evidence base, the agent-scale paper supplies it and requires promoter ≠ proposer, and the fleet-scale paper extends that to what one agent may assert about another.
+The through-line across the corpus is one rule at every scale. The system-scale paper argues authority closure needs an evidence base; the agent-scale paper supplies it and requires promoter ≠ proposer; the fleet-scale paper extends that to what one agent may assert about another; the deployment report says which of it is actually built; and the console design carries it into a product surface, where it becomes *memory does not cross agents* — because a shared store would leave the evidence ladder true in principle and unenforceable in practice.
 
 ## arXiv packages
 
-All three papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Both verified by extracting the tarball into an empty directory and compiling with plain `pdflatex`. Submission guides: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), and [`fleet/ARXIV.md`](fleet/ARXIV.md).
+All five papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Each was verified by extracting its tarball into an empty directory and compiling with plain `pdflatex` — no errors, no undefined references, no Type 3 fonts.
+
+Submission guides with per-paper categories and metadata abstracts: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), [`fleet/ARXIV.md`](fleet/ARXIV.md). The deployment report and console design ship upload packages without separate guides; both follow the same setup, and the fleet guide's `cs.MA` notes apply to the console design too.
 
 Submit the system-scale paper first — the companion's comments field cites its arXiv identifier.
 
