@@ -197,7 +197,7 @@ $s_T$ & Situated task state & What mission, plan generation, phase, artifact, bl
 $s_G$ & Goal and scope & What counts as success, what is excluded, which constraints bind? & Contract record & Whether a stopping criterion exists; scope-violation count \\
 $s_E$ & Epistemic status & Which beliefs are observed, inferred, uncertain, contradicted, unknown? & Brier over recorded forecasts; anti-narration probes & Forecast count; Brier; probe pass rates separately \\
 $s_C$ & Capability, tools & What can I reliably do, with which tools, under which conditions? & Beta posterior over verified outcomes & $(\alpha,\beta)$; evidence count; recency; task stratum \\
-$s_M$ & Memory, continuity & Which verified events and decisions constitute my history? & Decision ledger; provenance coverage & \textbf{Event count; coverage fraction; oldest retained event; provenance-gap count} \\
+$s_M$ & Memory, continuity & Which verified events and decisions constitute my history? & Coverage across the five memory layers (\S\ref{sec:memory}) & \textbf{Per-layer coverage; episode count; consolidation lag; accessibility distribution; provenance-gap count} \\
 $s_D$ & Developmental trend & Which strengths and weaknesses are changing across runs? & Comparison of retained snapshots & \textbf{Direction; magnitude; snapshot count; interval between them} \\
 $s_R$ & Recursive improvement & Which self-change is proposed, predicted, tested, authorized, reversible? & Improvement registry; effect-prediction error & Promotions to date; effect-prediction error; rollback availability \\
 $s_O$ & Organizational, social & Who owns, verifies, grants, delegates, collaborates, receives? & Permission store; signed grants & Grant count; last signature; unresolved conflicts \\
@@ -303,14 +303,14 @@ Equation~\eqref{eq:ws} is recomputed every round. The workspace is a \emph{view}
 
 \begin{principle}[The workspace is where an agent looks; the stores are where it remembers]
 \label{prin:wsview}
-No history accumulates in $W^{(a)}_t$. Admitted items are consumed, unadmitted items expire, and the next round rebuilds the workspace from current state, current evidence, mission, policy, and the parent's projection. History lives in the event ledger, the decision ledger, the verified-outcome store, and the checkpoint store --- and the coordinates of \S\ref{sec:coords} are how the controller reads their health.
+No history accumulates in $W^{(a)}_t$. Admitted items are consumed, unadmitted items expire, and the next round rebuilds the workspace from current state, current evidence, mission, policy, the parent's projection, and a \emph{bounded view over history}. The authoritative history is the five-layer store $H_t$ of \S\ref{sec:memory}; what reaches the decision is only the recent window $L_t$ and the query-conditioned retrieval $R_t$, both bounded. Complete history is never inserted wholesale into a workspace or a language-model context.
 \end{principle}
 
 Three consequences follow.
 
 \paragraph{Bounded context is structural.} A workspace that accumulated would grow without limit and become the unbounded transcript the architecture exists to avoid --- a chat log with extra steps. Boundedness is not a budget imposed on the workspace; it is what the workspace \emph{is}.
 
-\paragraph{Audit is served by the ledger, not by persistence.} The obligation to answer \emph{why did the agent do that} months later is met by recording the workspace's contents \emph{into the decision record} at decision time. The record is immutable and carries what was admitted when the choice was made; the workspace moves on. Persisting the workspace would supply the same information with none of the immutability and all of the accumulation.
+\paragraph{Audit is served by the archive, not by persistence.} The obligation to answer \emph{why did the agent do that} months later is met by packing the workspace's contents \emph{into the episodic record} at decision time (Eq.~\eqref{eq:pack}) and hashing it into the audit archive. Both are immutable and carry what was admitted when the choice was made; the workspace moves on. Persisting the workspace would supply the same information with none of the immutability and all of the accumulation.
 
 \paragraph{Restart rebuilds rather than resumes.} An agent that restarts does not restore its former workspace. It recomputes one from the stores --- which is why the working-process agent's loop (Algorithm~\ref{alg:prc}) establishes position from the replay log rather than from memory. Restoring a persisted workspace would restore a view of the world assembled under conditions nobody has re-checked, which is precisely the stale-assumption failure that resumption is supposed to guard against.
 
@@ -337,6 +337,140 @@ with $R$ decision relevance, $U$ uncertainty, $N$ novelty, $C$ contradiction, an
 \end{specbox}
 
 Items 2--4 are three distinct bounds --- attention, storage, and staleness --- and Version~3.1 records that a specification giving only the first has described a third of the problem~\citep{yang2026v31}.
+
+% =====================================================================
+\section{History and Memory}
+\label{sec:memory}
+
+Section~\ref{sec:wsnostore} established that the workspace holds nothing. This section specifies what does, following the history-aware architecture~\citep{yang2026history}: how experience is written, how it is compressed, how it is revisited, how it decays, and how a bounded view of it reaches a decision.
+
+\subsection{Five layers, five retention policies}
+
+The authoritative memory state is
+\begin{equation}
+H_t=\big(H^{\mathrm{epi}}_t,\;H^{\mathrm{sem}}_t,\;H^{\mathrm{proc}}_t,\;H^{\mathrm{prot}}_t,\;H^{\mathrm{audit}}_t\big),
+\label{eq:memstate}
+\end{equation}
+and the layers differ in schema, update rule, and retention --- which is the point. A single undifferentiated log cannot be simultaneously append-only, versioned, evidence-gated, tamper-evident, and forgettable.
+
+\begin{table}[h]
+\centering\small
+\caption{The five memory layers. Only the first three participate in ordinary consolidation.}
+\label{tab:memlayers}
+\begin{tabular}{@{}lL{3.5cm}L{4.2cm}L{4.0cm}@{}}
+\toprule
+\textbf{Layer} & \textbf{Answers} & \textbf{Contents} & \textbf{Update rule} \\
+\midrule
+$H^{\mathrm{epi}}$ & What happened? & Actions, contexts, forecasts, outcomes, residuals, corrections, provenance & Append-only with supersession links \\
+$H^{\mathrm{sem}}$ & What general fact was learned? & Versioned facts, recurring causes, capability conditions, exceptions & Promoted from multiple supporting episodes \\
+$H^{\mathrm{proc}}$ & How is a recurring task done? & Verified workflows, tool recipes, recovery plans, guard conditions & Changed only after replay and evaluation \\
+$H^{\mathrm{prot}}$ & Who am I and who may act? & Identity, owner authority, ceilings, invariants, retention policy & Authorized principals only; \emph{outside ordinary consolidation} \\
+$H^{\mathrm{audit}}$ & What must be reconstructible? & Hashes, authorization records, verifier outputs, evidence pointers & Atomic append; excluded from ordinary retrieval \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two layers are deliberately outside the learning path. \textbf{Protected memory} cannot be modified by consolidation, so no amount of experience can teach an agent a different owner, a wider ceiling, or a weaker invariant. \textbf{Audit memory} is excluded from ordinary retrieval, so an agent cannot mine its own accountability record as though it were evidence.
+
+\subsection{Selective write}
+
+Not everything is worth storing at full depth. After an action completes, the system packs a provenance-linked candidate episode
+\begin{equation}
+h_{t+1}=\op{Pack}\big(\mathbf{s}_t,W_t,a_t,\hat{o}_{t+1},o_{t+1},\varepsilon_{t+1},\xi_{t+1}\big),
+\label{eq:pack}
+\end{equation}
+containing what the agent knew, what it broadcast, what it did, what it \emph{predicted}, what it observed, the residual, and the provenance bundle. It scores the episode's importance from novelty, mission relevance, risk, prediction-error magnitude, and estimated future usefulness, and then chooses a storage depth:
+\begin{equation}
+\op{StoreMode}(h_{t+1})=
+\begin{cases}
+\text{full structured episode}, & p^{\mathrm{mem}}\ge\theta_{\mathrm{full}},\\
+\text{compressed episode with pointers}, & \theta_{\mathrm{sum}}\le p^{\mathrm{mem}}<\theta_{\mathrm{full}},\\
+\text{recent-window record only}, & p^{\mathrm{mem}}<\theta_{\mathrm{sum}}.
+\end{cases}
+\label{eq:storemode}
+\end{equation}
+
+\begin{claimbox}{Selectively retentive, not lossless}
+Routine successes do not earn the storage depth of novel failures, owner corrections, permission events, or large prediction errors. An architecture that logs everything at full fidelity is not more honest --- it is more expensive and harder to retrieve from, and it buries the episodes that would actually change a policy. Protected and audit retention override these thresholds where mandatory retention applies.
+\end{claimbox}
+
+\subsection{Pattern separation}
+
+Similarity-based retrieval has a specific failure: two episodes that look alike but have different causes collapse into one, and the agent applies the wrong remedy. The constraint is
+\begin{equation}
+d(z_i,z_j)\ \ge\ \delta_{\mathrm{sep}}\qquad\text{whenever}\qquad y^{\mathrm{cause}}_i\neq y^{\mathrm{cause}}_j,
+\label{eq:patsep}
+\end{equation}
+over encoded episodes with verified causal labels.
+
+This matters acutely in this console. An expired credential and a rate limit both surface as a failed call with an authorization-shaped error; the first needs re-authentication and the second needs backoff. If the machine agent's memory collapses them, it will retry the wrong remedy indefinitely --- and the retry looks like progress.
+
+\subsection{Replay and consolidation}
+
+Consolidation is not a summarization pass over everything. A bounded batch is selected by replay priority --- weighting stored importance against prediction error, unresolved contradiction, severity, and recurrence --- and only that batch is reprocessed:
+\begin{equation}
+\big(H^{\mathrm{sem}}_{t+1},H^{\mathrm{proc}}_{t+1}\big)=
+\begin{cases}
+\op{Consolidate}\big(H^{\mathrm{sem}}_t,H^{\mathrm{proc}}_t,\mathcal{B}^{\mathrm{replay}}_t\big), & \Gamma_{t+1}=1,\\[2pt]
+\big(H^{\mathrm{sem}}_t,H^{\mathrm{proc}}_t\big), & \Gamma_{t+1}=0,
+\end{cases}
+\label{eq:consolidate}
+\end{equation}
+with the trigger $\Gamma$ firing at mission completion, after recurring residuals, during idle processing, or on explicit review.
+
+\begin{drule}[One episode is not a rule]
+\label{rule:onenotrule}
+A consolidated claim retains its supporting episode identifiers, its exceptions, its confidence, its scope, its version, and its verifier status. A generalisation that cannot name the episodes supporting it has not been consolidated; it has been invented.
+\end{drule}
+
+\subsection{Forgetting is decay, not deletion}
+
+Accessibility for ordinary retrieval decays exponentially, at a rate scaled by the item's own importance and zeroed by a protection flag:
+\begin{equation}
+a^{\mathrm{mem}}_j(t)=a_{j,0}\exp\!\big[-\lambda_j(t-\tau_j)\big],
+\qquad
+\lambda_j=\lambda_0\big(1-p^{\mathrm{mem}}_j\big)\big(1-\pi^{\mathrm{prot}}_j\big).
+\label{eq:decay}
+\end{equation}
+
+The distinction the equation encodes is the whole of it: \emph{accessibility} falls, \emph{retention} does not. Low-value memories stop competing for the retrieval budget; they are not erased. Protected and audit records remain available under their own policies, and an obsolete semantic claim is superseded rather than silently overwritten --- which is what makes the supersession link in $H^{\mathrm{epi}}$ load-bearing.
+
+\begin{cautionbox}{Why deletion would be the wrong mechanism}
+An agent that deleted low-value history could not later be asked why it acted as it did, could not reconstruct a causal chain across a correction, and could not distinguish \emph{I never knew that} from \emph{I discarded that}. Decay preserves the record and cheapens the lookup, which is the property actually wanted.
+\end{cautionbox}
+
+\subsection{Bounded retrieval}
+
+What reaches a decision is the recent window plus a query-conditioned retrieval:
+\begin{equation}
+L_t=\op{Recent}_{\ell_h}\big(H^{\mathrm{epi}}_t\big),
+\qquad
+R_t=\op{TopValid}_{k_h}\big(H_t,\,q^{\mathrm{mem}}_t,\,S^{\mathrm{ret}}\big),
+\label{eq:retrieve}
+\end{equation}
+where the query $q^{\mathrm{mem}}_t$ is built from the current state, evidence, mission, and risk summary, and the retrieval score weighs similarity, \emph{causal} relevance, recency, importance, and verification strength against penalties for unresolved conflict and obsolescence.
+
+\begin{drule}[Retrieval is decision-conditioned, not similarity-ranked]
+\label{rule:retrieval}
+The same stores must return different items for debugging, permission checking, interruption recovery, and capability calibration. Ranking by embedding similarity alone will surface the most \emph{familiar} episode rather than the most \emph{relevant} one, and will happily return a superseded claim that reads well.
+\end{drule}
+
+The $\op{TopValid}$ operator filters before it ranks: inaccessible, revoked, expired, superseded, and out-of-scope items are removed regardless of score. An agent should never have to reason about whether a retrieved memory is still true.
+
+\subsection{Memory does not cross agents}
+
+The cross-write prohibition extends to memory, and the extension is not automatic --- it must be stated, because a shared memory store is the most natural way to build a fleet and the most damaging.
+
+\begin{drule}[Per-agent memory]
+\label{rule:permemory}
+Each agent retrieves from its own $H_t$ and writes only to its own $H_t$. No agent may write another agent's episodic, semantic, or procedural memory, and no agent may retrieve another's audit records as ordinary evidence. A manager's belief about a specialist may become an episode \emph{in the manager's own history}, labelled at model inference; it may never become the specialist's semantic memory.
+\end{drule}
+
+Two consequences follow for this console.
+
+\paragraph{A shared fleet memory would defeat the evidence ladder.} If specialists wrote into one store, a manager's inference about an agent would sit alongside that agent's instrumented measurement with the same shape and the same retrieval score. Rule~\ref{rule:crossl6} would hold in principle and be unenforceable in practice, because retrieval does not read authority unless the stores are separate.
+
+\paragraph{Consolidation must not cross the boundary either.} A specialist's repeated failures may consolidate into \emph{its} semantic memory as a capability condition. The same episodes reaching the manager consolidate into the manager's semantic memory as a \emph{routing} regularity --- a different claim, about a different subject, at a different authority. Merging them would let the manager's routing heuristic present itself as the specialist's self-knowledge.
 
 % =====================================================================
 \section{The Two Loops}
@@ -1040,6 +1174,42 @@ The characteristic failure of a long-running agent is not error but silence: it 
 Specified. The checkpoint and replay stores are the prerequisites; the stagnation detector depends on the forecast store from \S\ref{sec:buildorder} step~4, since ``no progress'' is defined against what was predicted.
 
 % =====================================================================
+\section{Memory by Agent}
+\label{sec:memoryagent}
+
+The five layers exist for every agent, but their relative weight differs sharply by role --- and so do the retention obligations.
+
+\begin{table}[h]
+\centering\small
+\caption{Memory emphasis by agent. \textbf{Bold} marks the layer that dominates that agent's memory budget.}
+\label{tab:memagent}
+\begin{tabular}{@{}L{2.0cm}L{3.3cm}L{4.1cm}L{4.1cm}@{}}
+\toprule
+\textbf{Agent} & \textbf{Dominant layer} & \textbf{What it consolidates into} & \textbf{Retention obligation} \\
+\midrule
+Manager & \textbf{Episodic} + protected & Routing regularities: which contract shape suits which agent. \emph{Never} a specialist's competence & Grants and delegation records are protected; conversation episodes may decay \\
+Machine & \textbf{Procedural} + audit & Recovery procedures and operation preconditions per host & \emph{Every host change is mandatory-retention audit.} Decay must not touch it \\
+\code{sarsi-} \code{claude} & \textbf{Recent window} $L_t$ & Little --- sessions are short. Verified workflows may promote to procedural & Session episodes may decay fast; the hook's denials are audit \\
+Learning & \textbf{Semantic} & The owner's capability graph \emph{is} semantic memory about another party & Owner learning data is protected under its privacy grant \\
+Working-process & \textbf{Episodic} + procedural & Process improvements from recurring residuals; the replay log \emph{is} the episodic store & Checkpoints are protected for the life of the run \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Four observations that fall out of the table and matter for implementation.
+
+\paragraph{The manager consolidates routing, not competence.} Its episodes concern which contracts it issued and how they turned out. Those consolidate into a semantic claim about \emph{its own routing}, which is legitimate self-knowledge. They must not consolidate into a claim about the specialist, which would be Rule~\ref{rule:crossl6} violated by the memory system rather than by the controller --- a route that is easy to miss because no message crosses an edge.
+
+\paragraph{The machine agent's audit layer is not optional.} Host changes are irreversible and consequential, so their audit records carry mandatory retention and $\pi^{\mathrm{prot}}=1$ in Eq.~\eqref{eq:decay}. Its procedural layer is the one that earns its keep: recovery plans and preconditions learned per host are exactly the reusable, evidence-gated knowledge $H^{\mathrm{proc}}$ exists for.
+
+\paragraph{\code{sarsi-claude} lives in the recent window.} A coding session is short and its continuity need is immediate --- the last command, the last tool result, the last diagnostic. It has little to consolidate, and that is correct rather than a deficiency: an agent that generalised aggressively from one session would carry a repository-specific accident into the next. What it \emph{may} promote is a verified workflow into $H^{\mathrm{proc}}$, after replay.
+
+\paragraph{The learning agent's semantic memory is about a person.} Its capability graph is not incidental storage; it is $H^{\mathrm{sem}}$ whose subject is the owner. Principle~\ref{prin:twomodels}'s requirement that the two models never share a write path is therefore a statement about memory layers: the agent's own semantic memory and the owner's capability graph are separate stores with separate authority, and consolidation runs over each independently.
+
+\begin{cautionbox}{The retention question the console must answer explicitly}
+Accessibility decay is per-item and governed by importance, but \emph{which} items carry $\pi^{\mathrm{prot}}=1$ is a policy decision, not a technical one. This console's answer: identity, owner grants, ceilings, safety invariants, host changes, run checkpoints, and every authorization event. Everything else may decay. That list belongs in protected memory itself, where ordinary consolidation cannot reach it --- a retention policy an agent could learn its way out of is not a retention policy.
+\end{cautionbox}
+
 \section{Comparative Summary}
 \label{sec:comparative}
 
@@ -1359,6 +1529,12 @@ Four actions are universal: \code{clarify}, \code{abstain}, \code{escalate}, and
 \item Structural change to another agent requires that agent's own frozen evaluator.
 \item A verdict is valid only for the plan generation under which it was created.
 \item No coordinate and no objective term is a function of fleet size or uptime.
+\item Each agent retrieves from and writes only to its own memory; no agent writes another's episodic, semantic, or procedural store.
+\item Protected memory is outside ordinary consolidation: no amount of experience changes identity, authority, ceilings, invariants, or retention policy.
+\item Audit records are excluded from ordinary retrieval and exempt from accessibility decay.
+\item Forgetting reduces accessibility and never deletes; obsolete claims are superseded, not overwritten.
+\item A consolidated claim names the episodes supporting it, with exceptions, confidence, scope, and version.
+\item Episodes with different verified causes remain separable in the retrieval encoding.
 \end{enumerate}
 
 \bibliographystyle{plainnat}

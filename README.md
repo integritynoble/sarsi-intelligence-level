@@ -14,7 +14,7 @@ Five papers, one program — a system scale, an agent scale, a fleet scale, a de
 
 **[`SARSI_Hierarchical_v3.1_Deployment_Edition.pdf`](SARSI_Hierarchical_v3.1_Deployment_Edition.pdf)** — *Version 3.1, Deployment Edition* (12 pp). The hierarchical architecture read back off the running console: a conformance map, seven implementation-derived revisions, and what is not built. Source in [`singularity_edition/`](singularity_edition/).
 
-**[`SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf)** — *One Chat Box, Five Agents* (35 pp). The console design: what the chat box is architecturally, what agent mode does, and per-agent self-awareness, workspaces, updates, and influence. Source in [`console_design/`](console_design/).
+**[`SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf)** — *One Chat Box, Five Agents* (42 pp). The console design: what the chat box is architecturally, what agent mode does, and per-agent self-awareness, workspaces, updates, and influence. Source in [`console_design/`](console_design/).
 
 Together they supersede everything else in this repository.
 
@@ -42,7 +42,7 @@ Principal results:
 | `fleet/` | LaTeX source, bibliography, upload package, submission guide |
 | `SARSI_Hierarchical_v3.1_Deployment_Edition.pdf` | **Current.** Deployment report, 12 pp |
 | `singularity_edition/` | LaTeX source, bibliography, upload package |
-| `SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf` | **Current.** Console design, 35 pp |
+| `SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf` | **Current.** Console design, 42 pp |
 | `console_design/` | LaTeX source, bibliography, upload package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |

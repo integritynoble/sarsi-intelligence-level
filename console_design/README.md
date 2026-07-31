@@ -2,7 +2,7 @@
 
 **Designing the Manager-Fronted SARSI Console: Per-Agent Self-Awareness, Nested Workspaces, and the Four Channels by Which Agents Affect Each Other**
 
-PDF: [`../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf) (35 pp).
+PDF: [`../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](../SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf) (42 pp).
 
 Organised in three parts. **Part I** specifies the substrate every agent shares: the ten self-state coordinates and their admission discipline, the bounded workspace and its salience function, the fast and slow loops as algorithms, the action repertoire with preconditions, the seven-level evidence ladder, and the four inter-agent channels. **Part II** specifies each of the five agents in full — role, ten coordinates instantiated, workspace admission policy with concrete salience weights and caps, fast loop as an algorithm, action repertoire with per-action authority, evidence sources, failure modes, and deployment status. **Part III** covers the chat surface, agent mode, and cross-agent dynamics.
 
@@ -39,6 +39,27 @@ Because the scalar is only a summary, **every coordinate publishes its instrumen
 The same distinction holds one level up. **The workspace holds nothing** — it is recomputed each round, admitted items are consumed, unadmitted ones expire. Audit is served by recording workspace contents *into the decision record*, not by persisting the workspace; and a restarting agent rebuilds rather than resumes, since a restored workspace encodes conditions nobody re-checked.
 
 Table 3 fixes the unmeasured reading for every coordinate. Two bite: an empty ledger has no provenance gaps, so a naive coverage ratio reports **1** for an agent that remembers nothing; and `s_D` is the one coordinate that cannot be measured at a point in time, so unmeasured is its normal state wherever history is not retained.
+
+## History and memory (§5)
+
+Revised against the History-Aware Revision of v2.0. The workspace holds nothing — but *something* has to, and this is it.
+
+Memory is **five layers with five retention policies**: episodic (append-only, provenance-linked), semantic (versioned generalisations), procedural (verified workflows), protected (identity, authority, invariants), audit (hashes, authorizations). Two are deliberately outside the learning path: **protected memory cannot be modified by consolidation**, so no amount of experience teaches an agent a wider ceiling; **audit memory is excluded from ordinary retrieval**, so an agent cannot mine its own accountability record as evidence.
+
+Four mechanisms the design previously lacked:
+
+- **Selective write.** Episodes are scored on novelty, mission relevance, risk, prediction error, and future usefulness, then stored at full depth, compressed with pointers, or in the recent window only. Logging everything at full fidelity buries the episodes that would change a policy.
+- **Pattern separation.** Episodes with different verified causes must stay separable in the encoding. An expired credential and a rate limit both surface as an auth-shaped failure and need opposite remedies — collapse them and the agent retries the wrong one forever, and the retry looks like progress.
+- **Replay and consolidation.** A bounded batch, prioritised by error, unresolved contradiction, severity, and recurrence. A consolidated claim must name its supporting episodes: a generalisation that can't has been invented, not consolidated.
+- **Forgetting is decay, not deletion.** Accessibility falls; retention doesn't. An agent that deleted low-value history couldn't distinguish *I never knew that* from *I discarded that*.
+
+Retrieval is decision-conditioned, not similarity-ranked — scored on causal relevance, verification strength, and penalties for conflict and obsolescence, with invalid items filtered *before* ranking.
+
+**Memory does not cross agents** (§5.7). Each agent retrieves from and writes only to its own store. A shared fleet memory would defeat the evidence ladder in practice: a manager's inference would sit beside a specialist's measurement with the same shape and the same retrieval score, and retrieval doesn't read authority unless the stores are separate.
+
+## Memory by agent (§13)
+
+Layer emphasis differs sharply by role: the manager consolidates **routing** regularities (never a specialist's competence); the machine agent's **procedural** layer holds per-host recovery plans and its **audit** layer carries mandatory retention; `sarsi-claude` lives in the **recent window** and correctly consolidates almost nothing; the learning agent's capability graph *is* semantic memory about another person; the working-process agent's replay log *is* its episodic store.
 
 ## Rules the product must honour
 
