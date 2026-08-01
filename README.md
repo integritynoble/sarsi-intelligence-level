@@ -67,6 +67,10 @@ A manager coordinating specialists is not a controller: specialists filter what 
 
 The through-line across the corpus is one rule at every scale. The system-scale paper argues authority closure needs an evidence base; the agent-scale paper supplies it and requires promoter ≠ proposer; the fleet-scale paper extends that to what one agent may assert about another; the deployment report says which of it is actually built; and the console design carries it into a product surface, where it becomes *memory does not cross agents* — because a shared store would leave the evidence ladder true in principle and unenforceable in practice.
 
+## Submitting
+
+[`ARXIV_SUBMISSION_CHECKLIST.md`](ARXIV_SUBMISSION_CHECKLIST.md) — per-paper status, blocking items, submission order, and verification evidence in one page.
+
 ## arXiv packages
 
 All five papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Each was verified by extracting its tarball into an empty directory and compiling with plain `pdflatex` — no errors, no undefined references, no Type 3 fonts.
