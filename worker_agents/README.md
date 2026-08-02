@@ -2,7 +2,7 @@
 
 **Designing the SARSI Worker Layer: Server-Side Communicators Without Execution Authority, Five Work Agents, and a Vault That Only Ever Answers Yes or No**
 
-PDF: [`../SARSI_One_User_Several_Machines.pdf`](../SARSI_One_User_Several_Machines.pdf) (12 pp).
+PDF: [`../SARSI_One_User_Several_Machines.pdf`](../SARSI_One_User_Several_Machines.pdf) (15 pp).
 
 Companion engineering page: [`singularity/docs/guide-sarsi-worker-agents.md`](../../singularity/docs/guide-sarsi-worker-agents.md) — the same design as a 21-node loop with one entry per node.
 
@@ -38,7 +38,7 @@ The two rules interlock — even a persuaded agent is proposing an *outward* act
 | `jobs` | CV, and filling in application sites | **submitting** |
 | `abraham` | the personal agent — the user's own life | **everything outward** |
 
-`abraham` has the **loosest scope and the tightest authority**: no standing grants by default, because its outward acts are spending money, contacting family, and making commitments in the user's name. It is *scoped, not specified* — named and bounded, not worked through to the depth of the other four.
+`abraham` has the **loosest scope and the tightest authority**, and §6.5 specifies it to the depth of the other four. Three properties hold for it and no other agent: its acts land on **people who never opted into an agent**; its acts include **irreversible** ones; and its subject matter is largely **other people's personal data**. Five rules follow — the approval states the cost of *undoing*, not only of doing; standing policy is scoped by amount *and* counterparty so that *"abraham may use the card"* is not expressible; third-party personal data never goes server-side (narrowing *share intent, not instruments* for this one agent); all four reserved classes are its ordinary traffic, so it may prepare each and complete none; and it gathers in licensed domains without advising. Its two characteristic failures are **plausible taste** — invisible until it reaches a person who cannot complain in time — and **quiet accumulation**, which makes a recurring obligation its own act class.
 
 ## Rules that fell out of the analysis
 
@@ -51,7 +51,7 @@ The two rules interlock — even a persuaded agent is proposing an *outward* act
 
 ## Status
 
-**Nothing here is built.** §12 lists what the design owes: `abraham`'s specification, a language for writing stage-1 vault policy (the build order's second item depends on it), the fold over `W_name`, a resolution ritual for contradictions, and measured digest weights.
+**Nothing here is built.** §12 lists what the design owes: a policy grammar that can *refuse* the broad form of a payment rule, a source of reversibility data (unknown must render as unknown, never as free), the fold over `W_name`, a resolution ritual for contradictions, and measured digest weights.
 
 ## Building
 
@@ -59,4 +59,4 @@ The two rules interlock — even a persuaded agent is proposing an *outward* act
 pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
 
-Verified: 0 errors, 0 undefined references, 12 pp.
+Verified: 0 errors, 0 undefined references, 15 pp.

@@ -354,18 +354,78 @@ Holds the state that is genuinely hard: which programme, which deadline, which d
 Writes and tailors the CV, then completes application sites over the web. It is asked, routinely, for facts that are the owner's rather than the agent's: salary expectation, availability, a reference's contact details. \textbf{It asks rather than infers.} An invented answer on a submitted form is the failure mode with the longest tail, because it is discovered by someone else, later, and cannot be retracted.
 
 \subsection{\code{abraham} --- the personal agent}
+\label{sec:abraham}
 
-The user's life rather than their job: appointments, travel, purchases, household, family logistics. It is specified last because it has the \emph{loosest scope} and the \emph{tightest authority}, and conflating those would be the error:
+The user's life rather than their job: appointments, travel, purchases, household, family logistics, subscriptions, renewals. It has the \emph{loosest scope} and the \emph{tightest authority}, and conflating those would be the error. Tools: browser, calendar, documents, and --- uniquely --- payment instruments, always through the vault.
 
-\begin{itemize}
-\item scope: almost anything the user does outside their work;
-\item authority: the narrowest of the five. Every outward act stops at the owner, and \textbf{no standing grants are offered by default}, because the outward acts here are spending money, contacting family, and making commitments in the user's name;
-\item it is the heaviest user of the vault, and therefore the agent whose stage-1 policy must be written most narrowly.
-\end{itemize}
+\subsubsection{Three differences in kind}
 
-\begin{cautionbox}{\code{abraham} is scoped, not specified}
-It is named and bounded here. It is not worked through to the depth of the other four, and this paper does not imply otherwise.
-\end{cautionbox}
+It is specified separately rather than as ``another agent with different tasks'' because three properties hold for it and for none of the other four.
+
+\begin{table}[h]
+\centering\small
+\caption{Why \code{abraham} needs its own rules.}
+\label{tab:abraham-diff}
+\begin{tabular}{@{}L{4.4cm}L{8.6cm}@{}}
+\toprule
+\textbf{Property} & \textbf{Why the others do not share it} \\
+\midrule
+Its acts land on people who never opted into an agent & the other four act on artefacts --- figures, drafts, applications, a CV --- that no third party is waiting on. A message to a relative arrives at a person who believes they are corresponding with the owner \\
+Its acts include irreversible ones & a bad draft is embarrassing and retractable; a non-refundable booking is money spent. \code{work} and \code{social} can withdraw nearly anything they get wrong \\
+Its subject matter is largely other people's personal data & the calendar holds other people's whereabouts; family logistics hold a child's schedule. None of those people agreed to anything \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Five rules}
+
+\begin{drule}[The approval states the cost of undoing]
+\label{rule:reversibility}
+An owner approval for an irreversible or costly-to-reverse act shows the reversibility and its expiry --- \emph{``\pounds840, free to cancel until Tuesday 09:00, then \pounds180''} --- not the price alone. An approval showing only the cost of acting has asked the owner about half the decision.
+\end{drule}
+
+The rule generalises: \code{funding} and \code{jobs} also perform irreversible submissions. \code{abraham} is where it stops being optional, because its irreversible acts are frequent, monetary, and routine rather than exceptional.
+
+\begin{drule}[Standing policy is scoped by amount and counterparty, never by agent]
+\label{rule:abrahampolicy}
+The stage-1 policy language must be unable to express \emph{``\code{abraham} may use the card''}, and able to express \emph{``up to \pounds40 at the grocery, twice a week''}. For this agent the broad form is refused by the grammar rather than discouraged by guidance.
+\end{drule}
+
+The rule exists because of who writes the dangerous policy and why: an owner interrupted too often writes the broadest rule that stops the interruptions. A policy language that permits the broad form will be used to write it, and the vault's two-stage design (\S\ref{sec:vault}) will have been defeated by its own friction.
+
+\begin{drule}[Third-party personal data does not go server-side]
+\label{rule:thirdparty}
+$W_{\text{user}}$ and $W_{\text{name}}$ are held on the server. \code{abraham} shares \emph{decisions} upward and not the personal facts those decisions concern: \emph{``booked the Tuesday appointment''} may enter $W_{\text{name}}$; whose appointment it is, and for what, remains in $W_{\text{host}}$.
+\end{drule}
+
+This narrows Principle~\ref{prin:intent} for one agent. \emph{Share intent, not instruments} assumed that intent is safe to share because it is about the owner; for \code{abraham} some intent is about somebody else, and the somebody else is not a party to this system at all. The general form of the rule is therefore: \textbf{a tier may hold facts about the owner and about hosts; it may not hold facts about third parties who have no relationship with the console.}
+
+\begin{drule}[All four reserved classes are ordinary traffic]
+\label{rule:reserved}
+\code{money}, \code{consent}, \code{publishing} and \code{legal} are the decision classes withheld at every ceiling tier. \code{abraham} touches all four in a normal week --- paying, agreeing on someone's behalf, posting a family photograph, signing something. It may \emph{prepare} all four and \emph{complete} none.
+\end{drule}
+
+A consequence worth predicting rather than discovering: \code{abraham} will abstain more often than any other agent, and abstention is the action that costs nobody and leaves the autonomy denominator. Its autonomy rate is therefore not comparable with the other four's, and reporting them on one axis would make the most carefully bounded agent look like the least capable one.
+
+\begin{drule}[It gathers in licensed domains; it does not advise]
+\label{rule:advice}
+Health, legal and financial material may be collected, organised, and put in front of the owner. Recommendations in those domains may not be made. \emph{``Your renewal is on the 14th and here are the three documents''} is in scope; \emph{``take the cheaper policy''} is not.
+\end{drule}
+
+\subsubsection{Two characteristic failures}
+
+\textbf{Plausible taste.} The gift, the phrasing to a relative, the choice of restaurant. Unlike a wrong figure, this failure is invisible until it reaches a person, and that person cannot complain to the owner in time to stop it. Mitigation: for any act with a person on the other end, the owner approval is a \emph{composition} step rather than a rubber stamp --- the owner reads the words and edits them --- which is why Rule~\ref{rule:identical} is load-bearing here specifically.
+
+\textbf{Quiet accumulation.} Subscriptions, renewals and standing bookings continue to cost after everyone has forgotten them.
+
+\begin{drule}[A recurring obligation is its own act class]
+\label{rule:recurring}
+Approving a recurring commitment approves \emph{one schedule}, not an open-ended one. Each is resurfaced on a cadence together with what it has cost to date. An agent that can create recurring charges and never mentions them again has been given a budget nobody agreed to.
+\end{drule}
+
+\subsubsection{Deployment status}
+
+Not built --- as with the other four. The two dependencies this specification adds are recorded in \S\ref{sec:owed}: a policy grammar that can refuse Rule~\ref{rule:abrahampolicy}'s broad form, and a source of reversibility data for Rule~\ref{rule:reversibility}.
 
 % =====================================================================
 \newpage
@@ -488,8 +548,8 @@ Ordered so that each item is enforceable when it lands rather than correct in pr
 \label{sec:owed}
 
 \begin{enumerate}
-\item \code{abraham} is scoped, not specified.
-\item The stage-1 policy language does not exist, and item~2 of the build order depends on it.
+\item The stage-1 policy language does not exist, and item~2 of the build order depends on it. Rule~\ref{rule:abrahampolicy} now constrains it further: the grammar must be \emph{unable} to express the broad form. A language that permits it has failed before it is written.
+\item \textbf{Reversibility has no source.} Rule~\ref{rule:reversibility} requires the approval to state what undoing costs and when that changes. Nothing supplies it: it is not a property of the act, and scraping it from a vendor's page would present an inference as a fact. It is most likely declared per act class and marked \emph{unknown} otherwise --- and \emph{unknown} must render as unknown, never as free.
 \item The fold over $W_{\text{name}}$ is unspecified: how the current view is computed, and how long the log is retained.
 \item Rule~\ref{rule:contradiction} surfaces a contradiction and asks. What the user can \emph{do} about it is undesigned.
 \item The digest weights in Table~\ref{tab:digest} are a first guess. The signals are argued; the weights are not measured.
@@ -525,6 +585,10 @@ Each separation costs something concrete --- a network hop, a local component, a
 \item No worker or session runs on a phone.
 \item No permission, ceiling, verdict or grant depends on which model is running.
 \item Every answer names the machine that produced the result and the authority of the claim.
+\item An approval for an irreversible act states the cost of undoing it and when that cost changes; unknown reversibility renders as unknown, never as free.
+\item No standing policy grants an agent a payment instrument without naming both an amount limit and a counterparty class.
+\item No tier above $W_{\text{host}}$ holds personal data about a third party who has no relationship with the console.
+\item Approving a recurring obligation approves one schedule, and each is resurfaced with its cost to date.
 \end{enumerate}
 
 \bibliographystyle{plainnat}
