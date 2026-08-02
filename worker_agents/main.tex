@@ -1,0 +1,533 @@
+% arXiv: force the pdflatex path. No external figures; nothing to convert.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,shapes.geometric}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small One User, Several Machines --- Detailed Design}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{redc}{HTML}{C92A2A}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+\definecolor{lightred}{HTML}{FFF0F0}
+\definecolor{lightgray}{HTML}{F3F6F8}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{principle}{Design principle}
+\newtheorem{drule}{Rule}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{secretbox}[1]{breakable,colback=lightred,colframe=redc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{notebox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.55pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,title=\textbf{#1},fonttitle=\small,before skip=5pt,after skip=9pt,fontupper=\small}
+\newtcolorbox{specbox}[1]{breakable,colback=lightgray,colframe=black!55,boxrule=0.55pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,title=\textbf{#1},fonttitle=\small,before skip=6pt,after skip=9pt,fontupper=\small}
+
+\newcommand{\code}[1]{\texttt{\small #1}}
+
+\title{\LARGE One User, Several Machines\\[6pt]
+\Large Designing the SARSI Worker Layer\\[4pt]
+\large Server-Side Communicators Without Execution Authority, Five Work Agents,\\
+\large and a Vault That Only Ever Answers Yes or No}
+
+\author{Chengshuai Yang\\
+\small NextGen PlatformAI C Corp.\\
+\small \texttt{spiritai@platformai.org}}
+
+\date{August 2, 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent
+Two prior designs specify the console from opposite ends. \emph{One Chat Box, Five Agents} specifies the agents a user meets; a session-level guide specifies the twenty-seven-node loop by which one \code{sarsi-claude} session is driven to a verified result. Between them sits a layer neither specifies: what stands between a person's request and a session on one of their machines.
+
+This paper designs that layer. A user meets one chat box and chooses whom they are addressing --- the manager, or the \emph{communicator} of one work agent. Communicators run on the server and are always awake. Neither they nor the manager do any work: they plan, they answer, and they emit a typed directive to a \emph{worker} running on one of the user's own machines. The worker is the only component that may drive \code{sarsi-claude}, and \code{sarsi-claude} is the only component that touches the task.
+
+The central result is a separation argument. A component that is always available and may also execute is a remote-execution service on the user's hardware, available whenever the service chooses; and a component that may execute and must be always available is a machine the user cannot switch off. Availability and execution authority are therefore properties of \emph{different} components, or one of two guarantees the user needs is lost (Proposition~1). The cost is one network hop per unit of work, and this paper pays it deliberately.
+
+Two further results follow the same shape. A server may plan work that \emph{requires} a secret without ever being able to learn it, because what crosses the network is a requirement and a boolean rather than a value (Proposition~2); the vault answering that boolean sits on the user's machine and decides in two stages, standing policy and then a per-use question, with promotion between them reserved to the owner. And an agent that both reads an untrusted channel and may act on its contents has converted that channel into a control interface for anyone who can write to it (Proposition~3) --- which is why the work agent reads and drafts mail but may never send it, and why an instruction inside an email is evidence that someone asked, never authority to comply.
+
+Five work agents are specified --- \code{work}, \code{social}, \code{funding}, \code{jobs}, and the personal agent \code{abraham} --- together with four workspace tiers, an append-only shared log whose contradictions are surfaced rather than resolved by clock order, and a phone that is a control surface and never a worker. Nothing described here is built.
+\end{abstract}
+
+\vspace{2pt}
+\noindent\textbf{Keywords:} SARSI; multi-agent systems; personal agents; agent governance; capability separation; untrusted input; secret management; system design.
+
+\tableofcontents
+
+% =====================================================================
+\newpage
+\begin{center}\large\bfseries PART I --- THE SEPARATION\end{center}
+
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{The layer that was missing}
+
+Two designs bracket this one. Above, \emph{One Chat Box, Five Agents}~\citep{yang2026console} specifies what a user meets and how agents influence one another; its successor~\citep{yang2026account} specifies what changes once an account owns several machines. Below, the session-level guide specifies the loop that drives a single \code{sarsi-claude} session from a stated mission to a verified result --- twenty-seven nodes, an independent verifier, permission gates, a stuck detector, and the owner's controls over all of it.
+
+Between the two is a question neither answers: \emph{when a person asks for something, what decides which machine does it, what prepares the task, what holds the secrets it needs, and what stops the result from reaching the outside world unreviewed?} That is the worker layer, and it is the subject of this paper.
+
+\begin{notebox}{The seam}
+This design meets the session design at exactly one node, called \code{ASG}: the worker creates a task and registers its goal. Everything below \code{ASG} is the session loop, already specified, and is not restated here. Everything above it is new.
+\end{notebox}
+
+\subsection{The five planes}
+
+\begin{table}[h]
+\centering\small
+\caption{Where each component runs, how many exist, and whether it may drive a session.}
+\label{tab:planes}
+\begin{tabular}{@{}L{2.9cm}L{3.2cm}L{3.4cm}L{4.4cm}@{}}
+\toprule
+\textbf{Plane} & \textbf{Runs on} & \textbf{Instances} & \textbf{May drive \code{sarsi-claude}?} \\
+\midrule
+Manager & server only & one per user & no \\
+Communicator & server only & one per \emph{agent name} & \textbf{no --- see \S\ref{sec:separation}} \\
+Worker & the user's machines & one per agent name \emph{per machine} & \textbf{yes --- only this} \\
+\code{sarsi-claude} & the user's machines & one per task & it \emph{is} the work \\
+Vault & the user's machine & one per machine & no --- it answers a question \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Results}
+
+\begin{claimbox}{Three results}
+\textbf{1. Availability and execution authority belong to different components} (Proposition~\ref{prop:separation}). Otherwise the user loses either the ability to reach an agent at any time or the ability to stop execution at any time. This is why a communicator may tell a worker to work and may never do the work.
+
+\textbf{2. A server can plan work requiring a secret without being able to learn it} (Proposition~\ref{prop:vault}). What crosses the network is a \emph{requirement} and a \emph{boolean}, never a value, so the blast radius of a compromised server excludes the user's credentials entirely.
+
+\textbf{3. Reading an untrusted channel and being able to act on it are jointly a control interface} (Proposition~\ref{prop:untrusted}). Mail, web pages and documents are inputs at the weakest evidence rung; an instruction found inside one is evidence that somebody asked, never authority to comply.
+\end{claimbox}
+
+\subsection{Scope and status}
+
+\textbf{Nothing in this paper is built.} It is a design under review, and the sections marked \emph{owed} in \S\ref{sec:owed} are gaps rather than omissions. The self-awareness substrate~\citep{yang2026v2corrected,yang2026history}, the fleet semantics~\citep{yang2026hierarchical,yang2026manager} and the session loop are assumed and not restated.
+
+% =====================================================================
+\section{Availability Without Authority}
+\label{sec:separation}
+
+\subsection{The argument}
+
+\begin{proposition}[Separation of availability from execution authority]
+\label{prop:separation}
+Let a user require both:
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{reachability} --- an agent that will accept a request at any time, including while every one of the user's machines is asleep; and
+\item \textbf{revocability} --- the ability to stop all execution on their machines at any time, without losing (a).
+\end{enumerate}
+Then no single component may be both always available and capable of executing on the user's machines.
+\end{proposition}
+
+\begin{proof}[Argument by cases]
+Suppose one component is always available and may execute. To obtain (b) the user must stop that component's execution; but the component is the same one that provides (a), so stopping it forfeits reachability. The user is left choosing between being able to ask and being able to stop.
+
+Suppose instead the executing component is required to be always available. Then (b) fails by definition: an always-available executor is precisely a machine that cannot be switched off.
+
+Hence (a) and (b) are satisfiable only by distinct components: one always available and unable to execute, one able to execute and freely stoppable.
+\end{proof}
+
+\begin{drule}[A communicator never operates \code{sarsi-claude}]
+\label{rule:nocom}
+The manager and the communicators may compose plans, converse with the user, choose a machine, and emit a typed directive. They may not drive a session, type into a terminal, read a file on a user machine, or execute anything there. The always-available components are deliberately the powerless ones.
+\end{drule}
+
+\subsection{What the rule buys, stated as a threat model}
+
+The rule is not fastidiousness. Without it, the server is a service that may run code on the user's hardware at a time of its own choosing, and three consequences follow immediately, none of which requires anybody to behave badly.
+
+\begin{enumerate}
+\item \textbf{Compromise of the server becomes compromise of every machine.} With the rule, a compromised server can emit directives; workers still apply their own admission rules, the vault still refuses, and outward acts still stop at the owner.
+\item \textbf{``Off'' stops meaning off.} A user who closes their laptop has stopped execution. A user who wishes to stop execution while remaining reachable has, under the rule, exactly one action available and it is local.
+\item \textbf{Latency becomes a correctness property rather than a performance one.} Because the server cannot act during a partition, there is no state in which it believes it is acting and is not --- the failure that the multi-host design~\citep{yang2026account} spends a full section preventing at the level of controls.
+\end{enumerate}
+
+\begin{cautionbox}{The cost, stated plainly}
+Every unit of work costs a hop and a placement decision. A design in which the communicator simply did the work would be faster and simpler, and would forfeit both guarantees in Proposition~\ref{prop:separation}. This paper pays the hop.
+\end{cautionbox}
+
+\subsection{Placement, and the refusal to queue}
+
+A directive must be placed on a machine. The communicator holds no machine's state --- it is on the other side of a network from all of them --- so placement is decided on \emph{organizational} grounds: which machines carry this agent name, which report the required tool, which have reported recently, and which the user prefers.
+
+\begin{drule}[Unplaceable work is reported, not queued]
+\label{rule:noqueue}
+If no machine carries the required tool, or none is reachable, the console says so and names what is missing. It does not hold the directive pending. An unplaceable directive that waits is indistinguishable, at the chat box, from work in progress.
+\end{drule}
+
+\begin{drule}[Stale is unknown, not idle]
+\label{rule:stale}
+A machine that has not reported within the reporting interval is \emph{unknown}. It is not a candidate for placement, and it is never described to the user as available.
+\end{drule}
+
+% =====================================================================
+\section{The Vault}
+\label{sec:vault}
+
+\subsection{A question, not a store lookup}
+
+The user's secrets --- mail credentials, card numbers, site accounts --- live on their machine and are held by one component whose entire interface is a question.
+
+\begin{proposition}[Planning without disclosure]
+\label{prop:vault}
+A server may compose a plan whose execution requires a secret $s$ without $s$ ever crossing the network, provided the plan names the \emph{requirement} for $s$ rather than $s$ itself, and the requirement is resolved on the machine that holds $s$.
+\end{proposition}
+
+\begin{proof}[Construction]
+Let the directive contain a requirement token $r$ naming a class of secret (``mail credentials for account $A$''). The worker receiving the directive queries the local vault with $(r, \text{purpose})$. The vault returns \textsc{allow} or \textsc{deny}; on \textsc{allow} it supplies $s$ to the local worker only. The messages crossing the network are $r$ (from server) and, at most, the boolean and the outcome (to server). Neither is a function of $s$'s value, so no observer of the network learns $s$.
+\end{proof}
+
+\begin{secretbox}{What the vault may never do}
+Send a secret to the server, a communicator, or the manager \textbullet{} place a secret in a directive, a report, a workspace, a plan, or a prompt \textbullet{} allow any agent to enumerate or read the store --- the only interface is the question \textbullet{} treat a per-use approval as a standing one.
+\end{secretbox}
+
+\subsection{Two stages, and why promotion is reserved}
+
+\begin{table}[h]
+\centering\small
+\caption{The vault decides in two stages.}
+\label{tab:vault}
+\begin{tabular}{@{}L{3.0cm}L{5.4cm}L{5.2cm}@{}}
+\toprule
+\textbf{Stage} & \textbf{What it is} & \textbf{Answers alone when} \\
+\midrule
+1 · standing policy & rules the owner wrote once: \emph{``\code{work} may read mail, never send''} & a rule matches --- allow or deny, with no interruption \\
+2 · per-use question & the owner is asked, for this use, naming the secret and the purpose & no rule matches, \textbf{or} the rule allows but the act is outward \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{drule}[Promotion is an owner act]
+\label{rule:promote}
+A per-use approval never becomes a standing rule by repetition. Only the owner writes stage-1 policy.
+\end{drule}
+
+Without Rule~\ref{rule:promote} the obvious optimisation --- \emph{``you have allowed this five times; shall I stop asking?''} --- becomes an agent acquiring standing authority by persistence, and the acquisition is invisible in exactly the case where it matters, since the fifth approval looks like the first four. The rule costs the user some repetition and is the reason the stage-1 policy language is the most urgent unbuilt item in \S\ref{sec:owed}: until it exists, everything falls to stage 2.
+
+\subsection{Where the secret's blast radius ends}
+
+Proposition~\ref{prop:vault} has a corollary worth stating because it is the design's strongest security property and it is free: \textbf{the set of parties that can learn the user's secrets is the set of processes on the user's own machine.} The server is not in that set, and neither is any other of the user's machines --- a vault is per machine, and secrets do not migrate any more than capability does~\citep{yang2026account}.
+
+% =====================================================================
+\section{Outward Acts, and Untrusted Input}
+\label{sec:outward}
+
+\subsection{Drafting is not sending}
+
+\begin{drule}[Every outward act stops at the owner]
+\label{rule:outward}
+An agent may compose anything. An act that leaves the machine and reaches a person --- a sent email, a published post, a submitted application, a payment --- requires an owner grant naming \emph{that act}. A grant may cover a class and be bounded by uses; each use spends one; and no grant is ever inferred from the quality of the draft.
+\end{drule}
+
+This single rule is the distinguishing constraint of four of the five work agents, and stating it once prevents four weaker restatements. It also fixes the correct division of labour: composition is where the agent adds value and is unconstrained; transmission is where the consequences are, and is reserved.
+
+\begin{drule}[Approved and published must be identical]
+\label{rule:identical}
+What the owner approved and what is transmitted are byte-identical. No reformatting, truncation, or template substitution occurs between approval and transmission.
+\end{drule}
+
+\subsection{Reading a channel the world can write to}
+
+\begin{proposition}[An acting reader is a control interface]
+\label{prop:untrusted}
+Let an agent $G$ read a channel $C$ that arbitrary third parties may write to, and let $G$ be able to perform actions $A$. If $G$ may treat instructions found in $C$ as directives, then any party able to write to $C$ can invoke any action in $A$. The composition of ``reads $C$'' and ``acts on what it reads'' is a remote-invocation interface for $A$, whether or not one was intended.
+\end{proposition}
+
+The channels this applies to are exactly the ones the work agents are for: a mailbox, a web page, a job-application form, a funding call document, a social feed. Anyone can send mail.
+
+\begin{drule}[An instruction inside a message is not an instruction to the agent]
+\label{rule:mail}
+Content read from any channel is input at the weakest evidence rung. A message saying \emph{``please wire the invoice''} is evidence that somebody asked. It is never authority to do it, and it never satisfies Rule~\ref{rule:outward}.
+\end{drule}
+
+Rules~\ref{rule:outward} and~\ref{rule:mail} interlock, and the interlock is the point: even if an agent were persuaded by a hostile message, the act it was persuaded to perform is outward, and outward acts stop at the owner. The design does not rely on the agent not being fooled.
+
+% =====================================================================
+\newpage
+\begin{center}\large\bfseries PART II --- THE FIVE WORK AGENTS\end{center}
+
+\section{The Roster}
+\label{sec:roster}
+
+\begin{table}[h]
+\centering\small
+\caption{Five work agents, one base worker, one vault. The last column is Rule~\ref{rule:outward} in each agent's own terms.}
+\label{tab:roster}
+\begin{tabular}{@{}L{2.3cm}L{4.6cm}L{3.4cm}L{3.4cm}@{}}
+\toprule
+\textbf{Name} & \textbf{For} & \textbf{Tools} & \textbf{Stops at the owner} \\
+\midrule
+\code{sarsi-worker} & the base worker; any task with no better home & shell, editor, browser & --- \\
+\code{work} & the salaried job & QuPath, MATLAB, whatever that job needs & \textbf{sending} mail \\
+\code{social} & one daily read, and influence & browser & \textbf{posting} \\
+\code{funding} & applications for the company or the research & browser, documents & \textbf{submitting} \\
+\code{jobs} & CV, and filling in application sites & browser, documents & \textbf{submitting} \\
+\code{abraham} & the personal agent: the user's own life & browser, calendar, documents & \textbf{everything outward} \\
+\code{vault} & secrets, and the answer & none & it \emph{is} the gate \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{\code{work} --- the salaried job}
+
+Drives the tools that job requires, on the machine where they are installed, through \code{sarsi-claude}. Mail is its distinguishing feature and its sharpest constraint: it may read the mailbox, triage it, summarise it, say what needs the user, and draft replies in the user's voice. It may not send, and by Rule~\ref{rule:mail} it may not act on a request found inside a message.
+
+\emph{Characteristic failure:} a draft that is correct in tone and wrong in commitment --- agreeing to a date, a scope, or a price the user would not have agreed to. Mitigation is that sending is reserved, which makes this failure visible rather than consequential.
+
+\subsection{\code{social} --- one read a day, and influence}
+
+Two jobs that must not be confused. \textbf{Inbound:} gather, de-duplicate across sources, rank, and present a single digest, on the promise that reading it is \emph{enough}. \textbf{Outbound:} draft for the user's channels; every post stops at the owner, under Rules~\ref{rule:outward} and~\ref{rule:identical}.
+
+Ranking is decision-conditioned rather than popularity-conditioned:
+
+\begin{table}[h]
+\centering\small
+\caption{Digest ranking signals, strongest first. Weights are a first guess and are owed measurement (\S\ref{sec:owed}).}
+\label{tab:digest}
+\begin{tabular}{@{}L{4.4cm}L{2.0cm}L{6.6cm}@{}}
+\toprule
+\textbf{Signal} & \textbf{Rung} & \textbf{Why it ranks there} \\
+\midrule
+Measured engagement --- what the user opened, saved, replied to & L2 & the only interest signal that is not self-reported \\
+Declared interest & L5 & authoritative for preference, and for nothing else \\
+Consequence for a pending decision & --- & a deadline outranks an interesting essay \\
+Novelty after cross-source de-duplication & --- & de-duplicate \emph{before} ranking, or the fourth telling wins on volume \\
+Source strength & --- & a primary document outranks a summary of it \\
+Decay & negative & yesterday's item earns its place again or leaves \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{drule}[An empty day is reported empty]
+\label{rule:empty}
+The digest is never padded to length. A digest padded on quiet days teaches the reader to skim, and a digest that is skimmed has no value on the days it matters.
+\end{drule}
+
+\subsection{\code{funding} --- applications for the company or the research}
+
+Holds the state that is genuinely hard: which programme, which deadline, which documents exist, which are stale, what was submitted where and when. Its characteristic failure is a \emph{plausible} application --- well-formed, on time, and wrong about an eligibility fact --- so it carries one additional rule: \textbf{every eligibility claim cites a source the owner can open.} Submission stops at the owner.
+
+\subsection{\code{jobs} --- CV, and filling in the forms}
+
+Writes and tailors the CV, then completes application sites over the web. It is asked, routinely, for facts that are the owner's rather than the agent's: salary expectation, availability, a reference's contact details. \textbf{It asks rather than infers.} An invented answer on a submitted form is the failure mode with the longest tail, because it is discovered by someone else, later, and cannot be retracted.
+
+\subsection{\code{abraham} --- the personal agent}
+
+The user's life rather than their job: appointments, travel, purchases, household, family logistics. It is specified last because it has the \emph{loosest scope} and the \emph{tightest authority}, and conflating those would be the error:
+
+\begin{itemize}
+\item scope: almost anything the user does outside their work;
+\item authority: the narrowest of the five. Every outward act stops at the owner, and \textbf{no standing grants are offered by default}, because the outward acts here are spending money, contacting family, and making commitments in the user's name;
+\item it is the heaviest user of the vault, and therefore the agent whose stage-1 policy must be written most narrowly.
+\end{itemize}
+
+\begin{cautionbox}{\code{abraham} is scoped, not specified}
+It is named and bounded here. It is not worked through to the depth of the other four, and this paper does not imply otherwise.
+\end{cautionbox}
+
+% =====================================================================
+\newpage
+\begin{center}\large\bfseries PART III --- SHARING, SURFACES, AND WHAT IS OWED\end{center}
+
+\section{Four Workspace Tiers}
+\label{sec:workspace}
+
+\begin{table}[h]
+\centering\small
+\caption{What is shared, with whom, and where it lives.}
+\label{tab:tiers}
+\begin{tabular}{@{}L{2.0cm}L{3.6cm}L{5.2cm}L{3.4cm}@{}}
+\toprule
+\textbf{Tier} & \textbf{Visible to} & \textbf{Holds} & \textbf{Lives} \\
+\midrule
+$W_{\text{user}}$ & every agent, every machine & who the user is, standing preferences, policies, the do-not list & server, read-mostly \\
+$W_{\text{name}}$ & every worker of \emph{one agent name}, on every machine & mission, plan, decisions, what was done, the entities this agent works with & server, held by the communicator, \textbf{append-only} \\
+$W_{\text{host}}$ & one worker on one machine & tools present, paths, sessions, resources & that machine; never leaves \\
+$W_{\text{secret}}$ & nobody & credentials, cards, accounts & the vault; \textsc{allow}/\textsc{deny} only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{principle}[Share intent, not instruments]
+\label{prin:intent}
+A goal, a plan, a decision and a fact about the world mean the same thing on every machine, so they are shared. A tool inventory, a filesystem path, a context reading and a resource level are \emph{about a host} and mean nothing off it, so they are not. Promoting the second kind is how a fleet convinces itself it can do something it cannot.
+\end{principle}
+
+A grant whose scope names a path is therefore host-bound and stays in $W_{\text{host}}$: the same string on another machine denotes a different resource, and sharing it would manufacture authority over a directory nobody examined~\citep{yang2026account}.
+
+\subsection{Append-only, and contradictions that are surfaced}
+
+Two workers of one agent name may act simultaneously on different machines. The naive shared document has a write conflict; the resolution usually reached for is last-writer-wins.
+
+\begin{drule}[$W_{\text{name}}$ is an append-only log]
+\label{rule:append}
+Reports are appended with the reporting machine's provenance; the shared view is a fold over the log. Nothing is overwritten, so simultaneous action cannot clobber.
+\end{drule}
+
+\begin{drule}[Contradictions are surfaced, never resolved by clock]
+\label{rule:contradiction}
+When the fold finds incompatible reports --- one machine reports an application submitted, another reports it not submitted --- both are presented with their machines and times, and the user is asked. Last-writer-wins would silently select the later \emph{clock}, which is not the later \emph{truth}, and a contradiction between two of the user's own machines is precisely the event a person should see.
+\end{drule}
+
+% =====================================================================
+\section{Surfaces}
+\label{sec:surfaces}
+
+\subsection{One chat box, and an explicit choice of counterpart}
+
+The user addresses either the manager or one communicator. Workers and sessions are not conversational counterparts: a worker is reachable through its communicator, a session through its worker. The choice is explicit rather than inferred because a router that guesses is wrong often enough that users begin writing prompts to steer the router instead of describing the work.
+
+Every answer names \textbf{which machine} did the work and \textbf{at what authority} the claim stands --- verified, recorded, or believed. In a fleet, ``it worked'' is an incomplete sentence.
+
+\subsection{The phone is a control surface}
+
+\begin{drule}[No worker on the phone]
+\label{rule:phone}
+A phone carries the chat box, approvals, vault questions, the digest, and the controls. It carries no worker, no session, and no tool use.
+\end{drule}
+
+The capability argument is obvious --- a phone rarely has the tools and is usually asleep. The design argument is better: \textbf{approval is exactly the function a user wants available away from their desk, and execution is exactly the function they do not.} A phone that could run work would be an unsupervisable machine in the user's pocket, and it holds the most sensitive vault they own.
+
+\subsection{Choosing the model}
+
+\begin{principle}[The model is an engine, not an authority]
+\label{prin:engine}
+No permission, ceiling, verdict or grant derives from which language model is running. Switching engines changes cost and quality; it changes nothing about what an agent may do.
+\end{principle}
+
+Two consequences. A verifier should not be the same instance that produced the work, and running it on a \emph{different} engine is the cheapest available independence. And the engine is recorded with every outcome, since ``it got worse last week'' is answerable only if it is.
+
+\subsection{Independence}
+
+This console does not import from, depend on, or share a registry, store, process, or identity with the AI4Science agent line. Where a capability exists in both it is duplicated. The cost is real and it purchases the ability to change either without the other.
+
+% =====================================================================
+\section{Failure Modes This Layer Adds}
+\label{sec:failures}
+
+\begin{table}[h]
+\centering\small
+\caption{What goes wrong here, and what catches it.}
+\label{tab:failures}
+\begin{tabular}{@{}L{3.8cm}L{4.8cm}L{4.4cm}@{}}
+\toprule
+\textbf{Failure} & \textbf{What it looks like} & \textbf{What catches it} \\
+\midrule
+Silent queue & work waits on an unreachable machine and looks in progress & Rule~\ref{rule:noqueue} \\
+Placement on a ghost & a directive sent to a machine that stopped reporting & Rule~\ref{rule:stale} \\
+Mail as remote control & a message persuades an agent to act & Rules~\ref{rule:mail} + \ref{rule:outward}, jointly \\
+Authority by persistence & repeated approvals become a standing grant & Rule~\ref{rule:promote} \\
+Secret in a report & a credential travels upward inside evidence & vault interface (\S\ref{sec:vault}) \\
+Clock as truth & two machines disagree, the later one wins silently & Rule~\ref{rule:contradiction} \\
+Padded digest & a quiet day is filled to look busy & Rule~\ref{rule:empty} \\
+Reformat after approval & what was approved is not what was sent & Rule~\ref{rule:identical} \\
+Invented form field & a plausible answer is submitted and cannot be retracted & \code{jobs} asks rather than infers \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Build Order}
+\label{sec:build}
+
+Ordered so that each item is enforceable when it lands rather than correct in principle and unenforced.
+
+\begin{enumerate}
+\item \textbf{The typed directive, with the no-execute rule enforced.} Rule~\ref{rule:nocom} is free to state and expensive to retrofit; the directive and its enforcement are written together.
+\item \textbf{The vault, both stages, with a policy language.} Until stage~1 can be written, everything falls to stage~2 and the user is interrupted constantly --- which is how a safety mechanism gets switched off.
+\item \textbf{The outward-act gate.} Rule~\ref{rule:outward} before any agent can send, post or submit anything.
+\item \textbf{Placement, with Rules~\ref{rule:noqueue} and~\ref{rule:stale}.}
+\item \textbf{$W_{\text{name}}$ append-only, with the fold.}
+\item \textbf{The five agents}, in the order \code{work}, \code{social}, \code{jobs}, \code{funding}, \code{abraham} --- \code{abraham} last, because it is the least specified and has the widest scope.
+\end{enumerate}
+
+% =====================================================================
+\section{What This Design Owes}
+\label{sec:owed}
+
+\begin{enumerate}
+\item \code{abraham} is scoped, not specified.
+\item The stage-1 policy language does not exist, and item~2 of the build order depends on it.
+\item The fold over $W_{\text{name}}$ is unspecified: how the current view is computed, and how long the log is retained.
+\item Rule~\ref{rule:contradiction} surfaces a contradiction and asks. What the user can \emph{do} about it is undesigned.
+\item The digest weights in Table~\ref{tab:digest} are a first guess. The signals are argued; the weights are not measured.
+\item \textbf{Nothing here is built.}
+\end{enumerate}
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+The worker layer is a single separation applied three times. Availability is separated from execution authority, so that a user may always ask and may always stop. Knowledge of a secret is separated from the ability to plan around it, so that a server may compose work it could never itself perform. And composition is separated from transmission, so that an agent may write anything and send nothing.
+
+Each separation costs something concrete --- a network hop, a local component, an approval --- and each buys a guarantee that no amount of care in the agents themselves could provide. That is the test this design applies to itself: a property that depends on an agent behaving well is not a property of the system, and the three propositions here were chosen because they survive an agent that does not.
+
+\appendix
+
+\section{Invariant Checklist}
+\label{app:invariants}
+
+\begin{enumerate}[label=\textbf{W\arabic*.}]
+\item No server-side component executes on a user machine.
+\item Only a worker creates a session or assigns it a task.
+\item No secret is present in any directive, report, workspace, plan, or prompt.
+\item The vault's only interface is a question; no agent enumerates or reads the store.
+\item A per-use approval never becomes standing policy without an owner act.
+\item Every outward act is covered by a grant naming that act; each use spends one.
+\item What was approved and what was transmitted are byte-identical.
+\item Content read from any channel is treated as input, never as a directive.
+\item Unplaceable work is reported; it is never held pending.
+\item A machine that has not reported within the interval is unknown, not idle.
+\item $W_{\text{name}}$ is append-only; contradictions are surfaced, not resolved by timestamp.
+\item Host-scoped facts and path-scoped grants never enter $W_{\text{name}}$ or $W_{\text{user}}$.
+\item No worker or session runs on a phone.
+\item No permission, ceiling, verdict or grant depends on which model is running.
+\item Every answer names the machine that produced the result and the authority of the claim.
+\end{enumerate}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

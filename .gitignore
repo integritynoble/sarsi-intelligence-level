@@ -40,3 +40,4 @@ console_design/*.out
 console_design/*.toc
 console_design/*.blg
 console_design/main.pdf
+worker_agents/main.pdf
