@@ -1,0 +1,51 @@
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026console}
+Chengshuai Yang.
+\newblock One chat box, five agents: Designing the manager-fronted {SARSI}
+  console --- per-agent self-awareness, nested workspaces, and the four
+  channels by which agents affect each other.
+\newblock Preprint. Referred to throughout as ``the companion design'',
+  2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026hierarchical}
+Chengshuai Yang.
+\newblock Functional self-awareness for hierarchical {SARSI} multi-agent
+  systems: Version 3.0 --- a brain-inspired manager--specialist architecture
+  with bidirectional influence, nested workspaces, and safe user
+  interruptibility.
+\newblock Preprint. Referred to throughout as ``Version 3.0'',
+  2026{\natexlab{b}}.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026history}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: Version 2.0
+  (history-aware revision) --- selective episodic encoding, replay,
+  consolidation, and bounded retrieval.
+\newblock Preprint, 2026{\natexlab{c}}.
+
+\bibitem[Yang(2026{\natexlab{d}})]{yang2026manager}
+Chengshuai Yang.
+\newblock A manager is not a controller: Global-workspace coordination for
+  {SARSI} fleets.
+\newblock Companion paper on coordination semantics, 2026{\natexlab{d}}.
+
+\bibitem[Yang(2026{\natexlab{e}})]{yang2026v2corrected}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: Version 2.0 (corrected
+  and expanded).
+\newblock Preprint. The single-agent architecture Version 3.0 rests on,
+  2026{\natexlab{e}}.
+
+\bibitem[Yang(2026{\natexlab{f}})]{yang2026v31}
+Chengshuai Yang.
+\newblock Functional self-awareness for hierarchical {SARSI} multi-agent
+  systems: Version 3.1 --- deployment edition: What building it changed.
+\newblock Implementation-grounded revision of Version 3.0, 2026{\natexlab{f}}.
+
+\end{thebibliography}

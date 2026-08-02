@@ -4,7 +4,7 @@
 
 ## Start here
 
-Five papers, one program — a system scale, an agent scale, a fleet scale, a deployment report, and a console design.
+Six papers, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, and the console again once it spans machines.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -15,6 +15,8 @@ Five papers, one program — a system scale, an agent scale, a fleet scale, a de
 **[`SARSI_Hierarchical_v3.1_Deployment_Edition.pdf`](SARSI_Hierarchical_v3.1_Deployment_Edition.pdf)** — *Version 3.1, Deployment Edition* (12 pp). The hierarchical architecture read back off the running console: a conformance map, seven implementation-derived revisions, and what is not built. Source in [`singularity_edition/`](singularity_edition/).
 
 **[`SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf`](SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf)** — *One Chat Box, Five Agents* (42 pp). The console design: what the chat box is architecturally, what agent mode does, and per-agent self-awareness, workspaces, updates, and influence. Source in [`console_design/`](console_design/).
+
+**[`SARSI_One_Account_Many_Machines.pdf`](SARSI_One_Account_Many_Machines.pdf)** — *One Account, Many Machines* (21 pp). The console design's successor, written once the fleet spans hosts: host-indexed evidence, channels that can drop, what a machine takes with it when it leaves, and the roster re-partitioned by scope rather than role. Source in [`account_fleet/`](account_fleet/).
 
 Together they supersede everything else in this repository.
 
@@ -44,6 +46,8 @@ Principal results:
 | `singularity_edition/` | LaTeX source, bibliography, upload package |
 | `SARSI_Console_Design_One_Chat_Box_Five_Agents.pdf` | **Current.** Console design, 42 pp |
 | `console_design/` | LaTeX source, bibliography, upload package |
+| `SARSI_One_Account_Many_Machines.pdf` | **Current.** Multi-host console design, 21 pp |
+| `account_fleet/` | LaTeX source, bibliography |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
