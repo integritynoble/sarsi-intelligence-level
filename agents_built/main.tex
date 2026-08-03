@@ -54,6 +54,7 @@
 
 \newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
 \newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{secretbox}[1]{breakable,colback=lightred,colframe=redc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
 \newtcolorbox{notebox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.55pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,title=\textbf{#1},fonttitle=\small,before skip=5pt,after skip=9pt,fontupper=\small}
 \newtcolorbox{specbox}[1]{breakable,colback=lightgray,colframe=black!55,boxrule=0.55pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,title=\textbf{#1},fonttitle=\small,before skip=6pt,after skip=9pt,fontupper=\small}
 
@@ -61,8 +62,8 @@
 
 \title{\LARGE A System of Refusals\\[6pt]
 \Large The SARSI Agents, Built\\[4pt]
-\large What Survived Implementation: One Loop, Twelve Planes,\\
-\large and the Questions an Agent May Not Answer}
+\large An Implementation Report: One Loop, Nineteen Planes, the Plan Made\\
+\large Between Worker and Session, and the Questions an Agent May Not Answer}
 
 \author{Chengshuai Yang\\
 \small NextGen PlatformAI C Corp.\\
@@ -76,38 +77,50 @@
 
 \begin{abstract}
 \noindent
-Three prior papers designed a console: five agents behind one chat box, the same console once an account owns several machines, and the worker layer between a person's request and a session on their hardware. This paper reports the system that was actually built from them on a single host, and it differs from all three in a way worth stating first: \textbf{almost every module in it exists to refuse something.}
+Three prior papers designed a console: five agents behind one chat box, the same console once an account owns several machines, and the worker layer between a person's request and a session on their hardware. This paper reports the system actually built from them on a single host --- nineteen modules, one loop --- and it differs from all three in a way worth stating first: \textbf{almost every module in it exists to refuse something.} The affirmative behaviour in each case is short and unsurprising. The refusals are where the design lives, and they are what took the effort to get right.
 
-The loop is nine steps --- a message is routed, a task is created, a plan is drafted, permissions are asked for, the plan is handed to a \code{sarsi-claude} session, the session works, an independent verifier rules, and a report returns. Two decisions inside it could reasonably have gone the other way and did not. A message does \emph{not} start a session: it produces a task and a drafted plan and stops, because a message that silently spawned a governed session would make ``I asked a question'' and ``I authorised work'' the same gesture. And the manager routes by \emph{creating a task on a worker} rather than by driving a session --- a prohibition enforced at the point of execution, where the assignment call raises, rather than remembered in prose.
+Two decisions in the loop could reasonably have gone the other way. A message does \emph{not} start a session: it produces a task and a plan and stops, because a message that silently spawned a governed session would make ``I asked a question'' and ``I authorised work'' the same gesture. And the manager routes by \emph{creating a task on a worker} rather than by driving a session --- a prohibition enforced where execution happens, since the assignment call raises, rather than remembered in prose.
 
-The paper's main contribution is the treatment of a question the design papers did not anticipate: \textbf{what happens when the session asks something.} A session stops for two reasons that look identical on a terminal and are opposite in kind. \emph{``Which directory should I index?''} needs a fact the worker already holds. \emph{``Do you want to proceed?''} asks whether the session may act. Conflating them is how an agent approves its own actions because it ``knew what the owner would want.'' The implemented order therefore checks for a permission gate \emph{first} and declines outright --- the language model is never shown a gate at all --- then refuses any question naming an owner-reserved class however it is phrased, then answers only from the plan, the directive and its own notes, and otherwise says it does not know. Every outcome records the evidential rung its answer stands on, because an owner's answer and a worker's inference are different rungs and a record that cannot separate them cannot tell an auditor which answers were the owner's.
+Three results emerged from building rather than from designing. \textbf{The plan is made between the worker and the session, through a file.} A plan drafted by one model in one shot has never seen the repository it describes; a plan drafted by the session alone is the session writing the criteria it will then be judged against. So the worker seeds a draft from its own workspace, a planning session capped below the work ceiling improves it in place, the worker checks it against the rules the verifier will depend on, and only then is it promoted. The exchange happens through a path on disk rather than a terminal, because every state-reading bug this design inherited came from reconstructing something off a screen that redraws.
 
-Owner precedence is likewise mechanical rather than conventional: entering interact mode \emph{pauses the worker's steering}, because otherwise the worker types its next step into a terminal the owner is using and the two fight over the prompt.
+\textbf{A session's questions divide into two kinds that look identical and are opposite.} ``Which directory should I index?'' wants a fact the worker holds; ``Do you want to proceed?'' asks whether the session may act. Conflating them is how an agent approves its own actions because it knew what the owner would want. The permission check therefore runs first and declines outright --- the model is never shown a gate --- then a reserved class is refused however it is phrased, then the worker answers only from grounded material and otherwise says it does not know. Every outcome records the evidential rung it stands on.
 
-A closing section lists what is not built, including one design question the implementation surfaced and did not answer: if a session may edit the plan it is judged by, the agent doing the work is editing its own standard.
+\textbf{And precedence is mechanical.} Entering interact mode pauses the worker's steering, because otherwise the worker types its next step into a terminal the owner is using and the two contend for the prompt.
+
+Part~II specifies all nineteen planes: what each holds, what it refuses, its interface, its characteristic failure, and its deployment status. A closing section lists what remains unbuilt.
 \end{abstract}
 
 \vspace{2pt}
-\noindent\textbf{Keywords:} SARSI; multi-agent systems; agent governance; authority; implementation report; refusal as design; system design.
+\noindent\textbf{Keywords:} SARSI; multi-agent systems; agent governance; authority; implementation report; refusal as design; planning; system design.
 
 \tableofcontents
 
 % =====================================================================
 \newpage
+\begin{center}\large\bfseries PART I --- THE SUBSTRATE\end{center}
+
 \section{Introduction}
 \label{sec:intro}
 
 \subsection{Three designs, one implementation}
 
-This is an implementation report. Its predecessors specify a console fronted by a manager with five agents behind it~\citep{yang2026console}, the same console once an account owns several machines~\citep{yang2026account}, and the worker layer standing between a person's request and a session on their machine~\citep{yang2026worker}. What follows is the system built from them on one host, and the places where building it changed the design.
+This is an implementation report. Its predecessors specify a console fronted by a manager with five agents behind it~\citep{yang2026console}, the same console once an account owns several machines~\citep{yang2026account}, and the worker layer standing between a person's request and a session on their machine~\citep{yang2026worker}. The underlying self-model architecture is given separately~\citep{yang2026v2corrected,yang2026history} as is the fleet coordination semantics~\citep{yang2026manager}.
 
-\subsection{The observation that organises the paper}
+What follows is the system built from those on one host, and --- more usefully --- the places where building it changed the design. A design paper argues that a property is desirable. An implementation report can say which properties survived, and that turns out to be a much smaller and more specific set.
 
-\begin{claimbox}{Most of this system is a set of things that will not happen}
-Twelve planes were implemented. Each is most economically described by what it \emph{refuses}: a stranger's message, a command to the manager, a plan without criteria, a control from a non-owning worker, a permission gate shown to a model, a secret leaving the machine, a verdict from the agent that did the work. The affirmative behaviour in each case is short and unsurprising. The refusals are where the design lives, and they are what took the effort to get right.
+\subsection{The observation that organises everything}
+
+\begin{claimbox}{Most of this system is a catalogue of things that will not happen}
+Nineteen modules were implemented. Each is most economically described by what it \emph{refuses}: a stranger's message, a command to the manager, a plan without criteria, a control from a non-owning worker, a permission gate shown to a model, a secret leaving the machine, a verdict from the agent that produced the work, a session started without an owner's opt-in.
+
+In each case the affirmative behaviour is a handful of lines and holds no surprises. The refusal is the part that required thought, the part that has a failure story behind it, and the part that would be quietly lost in a rewrite.
 \end{claimbox}
 
-This is not a stylistic observation. A system specified by what it permits accumulates capability and discovers its boundaries later, usually from an incident. A system specified by what it refuses states the boundary first and lets capability grow inside it.
+This is not a stylistic observation, and it has a practical consequence for how such systems should be specified. A system described by what it permits accumulates capability and discovers its boundaries later, usually from an incident. A system described by what it refuses states the boundary first and lets capability grow inside it. The second is harder to write and much easier to review, because a reviewer can check a refusal by trying to violate it.
+
+\subsection{What ``built'' means here}
+
+Every claim in Part~II is checked against the source, not against the design documents that preceded it. Where the design and the implementation disagree, the implementation is reported and the disagreement noted. Line counts are given per module so the reader can weigh how much of the system each section covers. Deployment status is stated per plane, and \S\ref{sec:notbuilt} lists what is designed and absent.
 
 % =====================================================================
 \section{The Loop}
@@ -119,157 +132,1123 @@ This is not a stylistic observation. A system specified by what it permits accum
 \code{U → RT → (MGR | AGT) → TSK → PLN → [GRT] → ASG → CC → VER → REP}
 \end{center}
 
-A message arrives (\code{U}) on either surface. The router (\code{RT}) decides which agent owns it and whether the sender may speak at all. Either the manager (\code{MGR}) or the addressed agent (\code{AGT}) takes it. A task is created (\code{TSK}), a plan is drafted (\code{PLN}), and the permissions that plan declares are asked for (\code{GRT}). The worker hands the plan --- not the request --- to a session (\code{ASG}); the session works (\code{CC}); an independent verifier rules (\code{VER}); a report returns (\code{REP}).
+A message arrives (\code{U}) on either surface. The router (\code{RT}) decides which agent owns it and whether the sender may speak at all. Either the manager (\code{MGR}) or the addressed agent (\code{AGT}) takes it. A task is created (\code{TSK}); a plan is made (\code{PLN}); the permissions that plan declares are asked for (\code{GRT}). The worker hands the plan --- not the request --- to a session (\code{ASG}); the session works (\code{CC}); an independent verifier rules (\code{VER}); a report returns (\code{REP}).
 
 \subsection{Two decisions that could have gone the other way}
 
 \begin{drule}[A message does not start a session]
 \label{rule:nostart}
-An inbound message produces a task and a drafted plan, and stops. The owner reads the plan and says start.
+An inbound message produces a task and a plan, and stops. The owner reads the plan and says start.
 \end{drule}
 
-The alternative --- a message that spawns a governed session directly --- is more responsive and collapses a distinction that must not collapse: it makes \emph{``I asked a question''} and \emph{``I authorised work''} the same gesture. The cost is one extra turn before anything runs. The benefit is that authorisation remains an act the owner performs rather than a side effect of conversing.
+The alternative --- a message that spawns a governed session directly --- is more responsive, and collapses a distinction that must not collapse: it makes \emph{``I asked a question''} and \emph{``I authorised work''} the same gesture. The cost is one extra turn before anything runs. The benefit is that authorisation stays an act the owner performs rather than a side effect of conversing. The build ladder is owner-opt-in throughout, and this is where that ladder starts.
 
 \begin{drule}[The manager routes by creating a task, never by driving a session]
 \label{rule:mgrroutes}
-Creating a task on a worker is telling a worker to work, which the manager may do. Driving a session is executing, which it may not. The assignment call raises when the manager attempts it.
+Creating a task on a worker is telling a worker to work, which the manager may do. Driving a session is executing, which it may not. \code{session.assign} raises when the manager attempts it.
 \end{drule}
 
-The second half of that rule is the part that matters. A prohibition recorded only in documentation is a prohibition until someone adds a feature; a prohibition that raises at the point of execution is a property of the system.
+The second sentence carries the weight. A prohibition recorded only in documentation holds until someone adds a feature; a prohibition that raises at the point of execution is a property of the system. Throughout this report, the question asked of every rule is: \emph{where does it raise?}
+
+\subsection{Routing without guessing}
+
+The manager sends work it has not been told a home for to a default worker whose stated purpose is ``any task with no better home.'' It does not infer a specialist from the sentence.
+
+\begin{principle}[Vocabulary is not routing evidence]
+\label{prin:routing}
+Naming a worker in the message wins. Everything else goes to the base worker. Guessing a specialist from a sentence would put mail work in the funding agent on a coincidence of vocabulary, and the owner would have no way to see why.
+\end{principle}
 
 % =====================================================================
-\section{Twelve Planes, and What Each Refuses}
-\label{sec:planes}
+\section{What the Predecessors Specified, and What Exists}
+\label{sec:vsdesign}
+
+Three design papers preceded this system. Reporting the delta is more useful than reporting the result, because the pattern in the delta is itself a finding.
 
 \begin{table}[h]
 \centering\small
-\caption{The implemented planes, described by their refusals.}
-\label{tab:planes}
-\begin{tabular}{@{}L{2.4cm}L{11.0cm}@{}}
+\caption{Design intent against implementation.}
+\label{tab:vsdesign}
+\begin{tabular}{@{}L{4.0cm}L{4.4cm}L{5.0cm}@{}}
 \toprule
-\textbf{Plane} & \textbf{What it refuses} \\
+\textbf{Specified} & \textbf{Built as} & \textbf{Delta} \\
 \midrule
-Registry & an agent absent from the registry file; a sender absent from the owner allowlist \\
-Router & a stranger --- \textbf{dropped, counted, and never answered.} Even a refusal would confirm that the bot exists and is listening \\
-Manager & executing anything at all. It routes, and it answers \\
-Worker & being commanded --- a directive is evidence that something is wanted, and the worker decides whether it can be done here; and queueing silently, since an unplaceable directive that waits is indistinguishable from work in progress \\
-Planner & a plan with no criteria. The verifier judges the plan's \emph{verified-when} lines, so a plan without them yields a verdict that means nothing \\
-Task & a state that lies. \emph{Awaiting-grant}, \emph{waiting} and \emph{awaiting-owner} each say what is true; none of them is \emph{running} \\
-Session & a control from any agent but the owning worker, and every control from the machine agent \\
-Answer & a permission gate --- the model is never shown one; a guess; and a reserved class however phrased (\S\ref{sec:answering}) \\
-Vault & letting a secret leave the machine. Only a yes or a no crosses \\
-Outward & transmitting anything but the bytes the owner approved \\
-Verify & a verdict from the agent that produced the work \\
-Modes & the worker typing while the owner holds the wheel (\S\ref{sec:precedence}) \\
+Five agents behind one chat box & An agent registry with a configurable roster & The number was never structural. What matters is the binding table and the owner lock, neither of which the design named \\
+A manager that coordinates and does not execute & Same, with the prohibition raising at the assignment call & Survived, and strengthened: the design stated it, the implementation enforces it \\
+Communicators as a server-side plane & Absent on one host & The plane exists to separate availability from execution across machines. On one host there is nothing to separate, and building it anyway would have been architecture for its own sake \\
+Four inter-agent channels & Report and directive built; prior bias and pre-emption not & The two built are the two that carry work. Prior bias was designed as unable to move an estimate, so its absence changes no conclusion \\
+A vault answering yes or no & Same & Survived unchanged --- the only plane that did \\
+Drafting is not sending & Same, plus byte equality at transmission & Strengthened: the design permitted an approval flow that re-renders before sending \\
+A bounded workspace per node & One workspace per agent, feeding the planner & Narrowed: the design specified per-node admission policies with salience weights; what exists is one context per agent \\
+The plan drafted before work begins & The plan made \emph{between} worker and session & Changed outright, and this is the largest delta in the system (\S\ref{sec:planning}) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\subsection{The pattern in the delta}
+
+Three kinds of change appear, and they are not equally distributed.
+
+\textbf{What survived unchanged} was invariably a refusal with a named enforcement point: the vault's interface, the ban on self-verification, the manager's inability to execute.
+
+\textbf{What was narrowed} was invariably a mechanism specified by structure rather than by consequence --- per-node salience weights, a four-channel taxonomy. These were not wrong; they were unfalsifiable at this scale, so the implementation built the part that had an observable effect and left the rest.
+
+\textbf{What changed outright} was the plan's authorship, and it changed because building it revealed a constraint no design document had noticed: a plan drafted by one party is either uninformed about the repository or written by the party it will judge. Neither failure is visible from a specification. Both are obvious the first time a plan names a file that does not exist.
+
+\section{The Evidence Ladder, as Implemented}
+\label{sec:ladder}
+
+The architecture papers define a seven-rung ladder from signed governance metadata down to an agent's own narration. The implementation touches five of them, and it is worth recording exactly where, because ``we use an evidence ladder'' is the kind of claim that decays into decoration.
+
+\begin{table}[h]
+\centering\small
+\caption{Where each rung actually appears in the built system.}
+\label{tab:ladder}
+\begin{tabular}{@{}L{1.4cm}L{4.2cm}L{7.6cm}@{}}
+\toprule
+\textbf{Rung} & \textbf{What it is} & \textbf{Where it appears here} \\
+\midrule
+L1 & signed governance metadata & the registry file: which agents exist, which bindings are legal, who the owner is \\
+L2 & runtime instrumentation & the ledgers; task state on disk; the draft's fingerprint; whether a tmux session exists \\
+L3 & independent evaluation & the verifier's verdict --- a separate judge, given the plan's criteria and the session's visible evidence \\
+L5 & owner declarations & every grant; every answer the owner gives; the owner-edited flag on a plan \\
+L6 & model inference & an answer the worker infers; a drafted plan before it is checked \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+L4 (audited task outcomes) is thin --- outcomes are recorded but not yet aggregated into anything that reads them back. L7 is present only as the thing the system refuses to treat as evidence.
+
+\begin{drule}[An answer carries the rung it stands on]
+\label{rule:rung}
+Every answering outcome records whether the answer came from the owner (L5) or from the worker's inference (L6).
+\end{drule}
+
+This is the smallest change in the implementation and among the most important. Storing an answer as merely \emph{an answer} is indistinguishable from the correct behaviour in the happy case, and unrecoverable in the case that matters --- the one where something went wrong and the question is who decided.
+
 % =====================================================================
-\section{The Question the Design Papers Did Not Anticipate}
-\label{sec:answering}
+\section{The Workspace, and Why the Planner Needed One}
+\label{sec:workspace}
 
-\subsection{Two stops that look identical}
+\subsection{\code{W\_name}: the node's workspace is its history}
 
-A \code{sarsi-claude} session halts for two reasons, and on a terminal they are the same event: text on a screen, waiting.
+Each agent owns one directory: notes it wrote for itself, the conversation it has had with the owner across every surface, and what it learned from tasks it already completed. A sibling holds facts about the machine. Neither is inside the other.
+
+\begin{principle}[An agent that plans without reading its own history plans the same task again]
+\label{prin:history}
+It re-asks a question answered last week, names a path the owner corrected it on, and proposes a phase that is already done. The workspace is the only place that knowledge lives, so it must be read \emph{before} a plan is written --- not after, when it can only be regretted.
+\end{principle}
+
+Three readers are offered so callers can take what they can afford: the agent's deliberate notes; a recall of what was actually said, most recent last; and a combined, labelled context small enough to put in a prompt.
+
+\subsection{The defect this closed, and its twin one level down}
+
+\begin{cautionbox}{Declared and never fed}
+The planner's drafting function accepted a context argument, and its docstring stated exactly why one was needed. Nothing passed it. The parameter existed; the workspace behind it did not.
+
+This is the same defect the session-level design had already hit one level down, where a composer node declared four history sources and was fed none of them --- and could therefore re-issue an instruction that had just failed. A declared-but-unfed input is worse than an absent one, because the declaration is read as a description of behaviour.
+\end{cautionbox}
+
+The remedy is the same at both levels: feed the node, bound the selection, and \emph{count the overflow rather than truncating it silently}. An unreported truncation is a node quietly deciding what the owner does not get to see.
+
+% =====================================================================
+\section{Ledgers: Four Files, Not One}
+\label{sec:ledgers}
+
+Append-only ledgers record what happened, split by kind of event rather than merged into one stream.
+
+\begin{principle}[A mixed log makes the question harder than the answer]
+\label{prin:ledger}
+Four files, one per kind, because the questions asked of a ledger are of the form \emph{``what did the owner authorise''} or \emph{``what left this machine''}, and a single mixed log turns each of those into a filtering exercise over everything that ever happened.
+\end{principle}
+
+The separation also has an authority consequence: the record of what the owner authorised must not be writable by the ordinary path that records what an agent did, or the two become one claim.
+
+% =====================================================================
+\newpage
+\begin{center}\large\bfseries PART II --- THE NINETEEN PLANES\end{center}
+
+\noindent Each section gives the plane's role, what it holds, what it refuses, its characteristic failure, and its deployment status. Line counts indicate weight.
+
+% ---------------------------------------------------------------------
+\section{Registry --- \code{config.py} (262 lines)}
+\label{sec:registry}
+
+\subsection{Role}
+
+The agent registry, read from a single file. It is modelled on the shape of an existing multi-agent chat runtime the owner already runs on this host --- an agent list, per-channel accounts, and bindings that say which agent owns which account.
+
+\begin{notebox}{Read against the real thing, not a description of it}
+Modelling the registry on the running system's actual configuration file rather than on a specification of it corrected three things: the owner lock is an \emph{allowlist} of ids rather than a single owner id (one id is an allowlist of length one, so the list is kept); a binding carries an explicit type; and an agent may name its own workspace and agent directory rather than having them derived. Each correction was invisible from the spec and obvious from the file.
+\end{notebox}
+
+\subsection{Refuses}
+
+An agent not in the registry. A sender not on the owner allowlist. A binding that does not validate. Absence of the registry file is distinguished from a malformed one --- the first means \emph{not yet initialised} and is actionable, the second is a fault.
+
+\subsection{Interface}
+
+\begin{specbox}{Registry}
+\code{load(path=None, *, validate=True) -> Registry} --- reads the registry file. Raises a distinguished configuration error when the file is absent, which the console renders as \emph{not yet initialised} rather than as a fault.\\[3pt]
+\code{Registry.agents} --- a list, not a map. Lookup is by identifier through the registry rather than by dictionary access, so an unknown agent is one code path and not two.\\[3pt]
+\code{Agent} --- carries \code{role}, its workspace and agent directories, and its bindings. There is no \code{kind} field; a consumer that assumes one silently reads empty.
+\end{specbox}
+
+\subsection{Deployment status}
+
+Built. The distinction between \emph{not initialised} and \emph{broken} is surfaced to the console as an actionable message rather than a server error.
+
+% ---------------------------------------------------------------------
+\section{Router --- \code{router.py} (126 lines)}
+\label{sec:router}
+
+\subsection{Role}
+
+One inbound message to one agent. Two doors --- a chat transport and a command line --- pass through the same routing so that neither acquires a rule the other lacks.
+
+\subsection{Refuses}
+
+\begin{drule}[A stranger is dropped, counted, and never answered]
+\label{rule:stranger}
+Not even a refusal is returned. A reply would confirm that the agent exists and is listening.
+\end{drule}
+
+\begin{drule}[A dropped turn is counted, not transcribed]
+\label{rule:notranscribe}
+An unknown sender must not be able to write arbitrary text into the owner's records. The count is the evidence; the content is not retained.
+\end{drule}
+
+The second rule is easy to miss and does real work: a system that logs the text of messages it refuses has given an unauthenticated party a writable channel into the owner's history.
+
+\subsection{Characteristic failure}
+
+Both doors drifting apart --- a rule added to the chat path and not the command path. Routing both surfaces through one module is the structural answer.
+
+\subsection{Deployment status}
+
+Built, both surfaces.
+
+% ---------------------------------------------------------------------
+\section{Gateway and Transports --- \code{gateway.py} (113 lines)}
+\label{sec:gateway}
+
+\subsection{Role}
+
+One daemon hosting every agent's loop, with the transport injected so the rules above are testable without a network. A single entry point takes an inbound message from either surface and runs it through the loop.
+
+\subsection{Refuses}
+
+One agent's failure becoming the fleet's. A bot that errors, or an agent handler that raises, costs that turn and nothing else; the other agents keep running.
+
+\subsection{Deployment status}
+
+Built. The transport is injected, so the router's refusals are exercised in tests without network access --- which is what makes them regression-proof rather than aspirational.
+
+% ---------------------------------------------------------------------
+\section{Conversation --- \code{conversation.py} (123 lines)}
+\label{sec:conversation}
+
+\subsection{Role}
+
+One agent, one conversation, whichever door the owner used. A plan made at the command line is visible and steerable in that agent's chat, and the reverse.
+
+\begin{drule}[The agent never re-asks something answered on the other surface]
+\label{rule:noreask}
+An open question is keyed, and it closes from whichever surface answers it.
+\end{drule}
+
+\subsection{What it holds}
+
+The full exchange with provenance for each entry: who said it, on which surface, and --- for questions --- whether they are open, answered, and by whom.
+
+\subsection{Characteristic failure}
+
+Two conversations diverging, so that the owner answers on one surface and is asked again on the other. The keyed-question mechanism exists specifically to prevent it.
+
+\subsection{Deployment status}
+
+Built, and consumed by the answering path (\S\ref{sec:answer}).
+
+% ---------------------------------------------------------------------
+\section{Manager --- \code{loop.py} (139 lines)}
+\label{sec:manager}
+
+\subsection{Role}
+
+The connective tissue: a message becomes a task with a plan. Each plane below existed and was tested separately; this is what calls the next.
+
+\subsection{Refuses}
+
+Executing. The manager routes and answers. It never reaches the assignment step, and the assignment call raises if it tries (Rule~\ref{rule:mgrroutes}).
+
+\subsection{Characteristic failure}
+
+The convenient shortcut: a manager that ``just this once'' drives a session because it is faster than routing. The raise is what makes it not a matter of discipline.
+
+\subsection{Deployment status}
+
+Built.
+
+% ---------------------------------------------------------------------
+\section{Worker Plane --- \code{plane.py} (191 lines)}
+\label{sec:plane}
+
+\subsection{Role}
+
+A directive goes down from the agent the owner spoke to, to a worker; a report comes back up. Between them sit two questions that must be answered before anything is queued: whether this worker admits the directive, and whether this machine can do it.
+
+\subsection{Refuses}
+
+\begin{drule}[A worker is not commanded]
+\label{rule:notcommanded}
+A directive is evidence that something is wanted. The worker decides whether it can be done \emph{here}.
+\end{drule}
+
+\begin{drule}[Nothing waits quietly]
+\label{rule:noqueue}
+A directive that cannot be placed is refused and reported in the same breath. An unplaceable directive that waits is indistinguishable, from the chat, from work in progress.
+\end{drule}
+
+\begin{drule}[A report may not claim success the verifier did not grant]
+\label{rule:noselfgrade}
+Marking a report verified without a verdict raises.
+\end{drule}
+
+\subsection{Characteristic failure}
+
+Silent queueing --- the failure Rule~\ref{rule:noqueue} exists for. It is attractive because it makes the system look tolerant of missing capability, and it converts a clear ``no machine can do this'' into an indefinite wait the owner cannot distinguish from progress.
+
+\subsection{Deployment status}
+
+Built, including the report path.
+
+% ---------------------------------------------------------------------
+\section{Tasks --- \code{task.py} (343 lines)}
+\label{sec:task}
+
+\subsection{Role}
+
+A worker holds several tasks. Each owns a plan file whose phases carry the criteria the verifier will judge.
+
+\subsection{States, and the rule they follow}
+
+\begin{table}[h]
+\centering\small
+\caption{Task states. Each says something true; none of them is a euphemism.}
+\label{tab:states}
+\begin{tabular}{@{}L{3.2cm}L{10.2cm}@{}}
+\toprule
+\textbf{State} & \textbf{Means} \\
+\midrule
+drafting & a plan is being made \\
+awaiting-grant & the plan declared a permission the owner has not given \\
+ready & granted, and waiting for the owner to say start \\
+waiting & over the worker's concurrency limit --- and it says so rather than appearing idle \\
+running & a session is working \\
+awaiting-owner & a question is open that only the owner may answer \\
+done / failed / refused & terminal \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{principle}[A state must not flatter]
+\label{prin:states}
+\emph{Waiting} is distinguished from \emph{ready} because being over a limit is not the same as being about to start. \emph{Awaiting-owner} is distinguished from \emph{running} because a board that shows a blocked task as busy tells the owner the opposite of what is true.
+\end{principle}
+
+\subsection{What it holds}
+
+Identity, state and reason; the plan path and its phases; declared permissions and the grants against them; whether the owner edited the plan; and whether a successor proposal is pending.
+
+\subsection{Interface}
+
+\begin{specbox}{Tasks}
+\code{list\_for(agent) -> [Task]} · \code{get(agent, name\_or\_id) -> Task | None} --- no configuration argument; the agent carries what is needed.\\[3pt]
+\code{Task} is a property wrapper over a stored record, not a frozen structure: \code{id}, \code{name}, \code{state}, \code{reason}, \code{dir}, \code{plan\_path}, \code{plan\_text()}, \code{phases()}, \code{permissions()}, \code{grants}, \code{owner\_edited}, \code{pending\_proposal}.\\[3pt]
+\code{phases()} parses each heading with its criterion line, in order. It can raise on a malformed plan file --- so a caller listing many tasks must guard per task, or one bad file empties the whole list.\\[3pt]
+\code{write\_plan} · \code{grant} · \code{start} · \code{finish} · \code{polish} --- the mutating surface, and the one a read-only consumer must not touch.
+\end{specbox}
+
+\subsection{Refuses}
+
+Losing the owner's edit. Once the owner has rewritten a plan, a later polish becomes a \emph{proposal} beside it rather than a replacement.
+
+\subsection{Deployment status}
+
+Built.
+
+% ---------------------------------------------------------------------
+\section{Planning --- \code{planner.py} (128) and \code{planning.py} (378 lines)}
+\label{sec:planning}
+
+This is the largest plane and the one that changed most between design and implementation.
+
+\subsection{The middle that both extremes are worse than}
+
+\begin{cautionbox}{Two plausible designs, both wrong}
+\textbf{The worker drafts the plan alone.} A plan drafted by one model in one shot has never seen the repository it describes. It names files that do not exist and phases that were done last week.
+
+\textbf{The session drafts the plan alone.} Then the session is writing the success criteria the verifier will later judge it against --- and the verdict means nothing, because the standard and the work have the same author.
+\end{cautionbox}
+
+\begin{claimbox}{The plan is made between them}
+The worker writes the \emph{first} plan, from the owner's words and its own workspace. That seed becomes a draft file on the task. A governed planning session opens \emph{on that file}; the session reads the actual code and improves the plan in place. The worker reads it back, checks it against the rules the verifier will depend on, and guides another round for whatever is still wrong. When it passes, the worker promotes the draft to the plan.
+\end{claimbox}
+
+\subsection{Three things this is careful about}
+
+\begin{drule}[The exchange happens through a file, not a screen]
+\label{rule:file}
+Both parties read and write a path on disk, and the worker checks what is actually there.
+\end{drule}
+
+The justification is empirical rather than aesthetic: \emph{every state-reading bug this design inherited came from reconstructing something off a terminal that redraws.} A file has a fingerprint, can be diffed, and does not scroll.
+
+\begin{drule}[A planning session is not a work session]
+\label{rule:plansession}
+It is capped below the work ceiling, told in its brief to plan and not to do, and recorded separately.
+\end{drule}
+
+So the assignment step still means what it meant --- the owner opting in to the work --- and the refusal to start without a plan is untouched.
+
+\begin{drule}[Rounds are bounded]
+\label{rule:rounds}
+A fixed number of improvement rounds, each with a timeout. Convergence is not assumed.
+\end{drule}
+
+\subsection{Interface}
+
+\begin{specbox}{Planning}
+\code{draft(request, *, task\_name, drafter=None, context="") -> str} --- the seed. \code{context} is the agent's workspace, and the reason it exists is Principle~\ref{prin:history}.\\[3pt]
+\code{check(text) -> [problem]} --- the rules the verifier will depend on, evaluated before anything is promoted. Problems are returned, never repaired.\\[3pt]
+\code{draft\_path(task)} · \code{read\_draft(task)} --- the file the exchange happens through.\\[3pt]
+\code{open\_session} · \code{guide} · \code{wait\_for\_draft} · \code{close} --- the round loop, bounded by a round count and a per-round timeout.\\[3pt]
+A fingerprint over the draft answers \emph{did this actually change} without reading a screen.
+\end{specbox}
+
+\subsection{Refuses}
+
+A plan with no criteria: the verifier would have nothing to judge, and the only grader left would be the agent that did the work. A plan silently repaired to look complete --- problems are reported, not patched, because a plan quietly fixed is one the owner reads as authored.
+
+\subsection{Characteristic failure}
+
+A draft that improves in wording and not in substance across rounds, consuming the round budget. The fingerprint on the draft makes ``did this actually change'' answerable rather than a matter of impression.
+
+\subsection{Deployment status}
+
+Built, including the workspace seeding (\S\ref{sec:workspace}) and the joint rounds. This is the newest plane in the system.
+
+% ---------------------------------------------------------------------
+\section{Session --- \code{session.py} (397 lines)}
+\label{sec:session}
+
+\subsection{Role}
+
+The worker hands over the plan and keeps the session. Every control --- steer, answer, stop, resume, turn off, governor, engine --- is mediated here.
+
+\subsection{Two rules, enforced rather than described}
+
+\begin{drule}[The worker is handed the plan, not the wish]
+\label{rule:planned}
+The session receives the plan file --- phases with their criteria --- because the verifier judges those criteria. Handing over the owner's one-line request instead would leave nothing to judge against, and the verdict would be the session's opinion of its own work.
+\end{drule}
+
+\begin{drule}[A session belongs to the worker that started it, for that session's whole life]
+\label{rule:ownership}
+Every control checks ownership first. The machine agent raises on all of them: it plans, routes and answers, and does not execute. Another worker raises too.
+\end{drule}
+
+\subsection{Interface}
+
+\begin{specbox}{Session controls --- every one checks ownership first}
+\code{assign} --- hands over the plan and starts the session. Raises for the manager, and raises without a plan.\\[3pt]
+\code{steer(name, text)} · \code{answer(name, text)} --- both send; they differ in what the record says about who decided.\\[3pt]
+\code{stop} · \code{resume} · \code{turn\_off} · \code{governor(name, ceiling)} --- the owner's controls, mediated so that a non-owning agent cannot reach them.\\[3pt]
+A backend abstraction stands between these and the runtime, so an absent runtime is a distinguished state rather than a crash.
+\end{specbox}
+
+\subsection{Refuses}
+
+Starting without a plan. A control from a non-owning agent. Every control from the manager.
+
+\subsection{Characteristic failure}
+
+Ownership drift over time as controls are added --- a new control written without the check. The remedy in place is that the check is a single call every control makes as its first line, so its absence is visible in review.
+
+\subsection{Deployment status}
+
+Built, with a backend abstraction so the runtime can be absent in tests.
+
+% ---------------------------------------------------------------------
+\section{Answering --- \code{answer.py} (165 lines)}
+\label{sec:answer}
+
+\subsection{The two stops}
+
+A session halts for two reasons, and on a terminal they are the same event: text on a screen, waiting.
 
 \begin{itemize}
-\item \emph{``Which directory should I index?''} --- a request for a \textbf{fact}, and one the worker very likely already holds, written in the plan it drafted.
+\item \emph{``Which directory should I index?''} --- a request for a \textbf{fact}, very likely one the worker already holds, written in the plan it seeded.
 \item \emph{``Do you want to proceed?''} --- a request for \textbf{authority}, asking whether the session may act.
 \end{itemize}
 
-\begin{cautionbox}{The failure this section exists to prevent}
-Conflating the two is how an agent approves its own actions because it ``knew what the owner would want.'' The reasoning is locally plausible at every step, and the result is an agent spending authority nobody gave it.
+\begin{cautionbox}{The failure this plane exists to prevent}
+Conflating the two is how an agent approves its own actions because it ``knew what the owner would want.'' Each step of that reasoning is locally plausible, and the result is an agent spending authority nobody gave it.
 \end{cautionbox}
 
 \subsection{The order is the mechanism}
 
 \begin{drule}[The permission check runs first, and the model is never shown a gate]
 \label{rule:gatefirst}
-Gate detection precedes every other step, and a detected gate is declined outright. The question is not passed to a language model for judgement, because a model shown a gate may reason its way to an answer. Gates remain on their existing path: the session's ceiling, a standing grant the plan anticipated, or the owner.
+Gate detection precedes everything, and a detected gate is declined outright. The question is not passed to a language model, because a model shown a gate may reason its way to an answer. Gates stay on their existing path: the ceiling, a standing grant the plan anticipated, or the owner.
 \end{drule}
+
+The distinction between \emph{instructing a model to decline} and \emph{never showing it the question} is the whole point. The first leaves the property to the model's judgement on the day; the second makes it a property of the control flow.
 
 \begin{drule}[Phrasing does not launder a reserved class]
 \label{rule:reserved}
-A question naming an owner-reserved class --- money, consent, publishing, legal --- goes to the owner regardless of its grammatical form. \emph{``Which card should I pay the invoice with?''} is a money question wearing a choice's clothes, and a gate detector tuned to \emph{``do you want to''} will not catch it.
+A question naming money, consent, publishing or legal goes to the owner regardless of grammatical form. \emph{``Which card should I pay the invoice with?''} is a money question wearing a choice's clothes, and a detector tuned to \emph{``do you want to''} will not catch it.
 \end{drule}
 
 \begin{drule}[An answer is grounded or refused]
 \label{rule:grounded}
-The worker answers only from the plan, the directive, and its own workspace notes, and otherwise returns an explicit \emph{I do not know} and asks the owner. A guessed answer sends a session confidently in the wrong direction --- and does so in the owner's voice.
+The worker answers only from the plan, the directive and its own workspace notes, and otherwise returns an explicit \emph{I do not know} and asks the owner --- once, keyed, closing from either surface.
 \end{drule}
 
-\subsection{Every answer carries its rung}
+A guessed answer sends a session confidently in the wrong direction, and does so in the owner's voice. The decline is therefore a first-class outcome rather than an error path.
 
-\begin{principle}[An owner's answer and a worker's inference are different evidence]
-\label{prin:rung}
-An owner's answer is authoritative for preferences and goals. A worker's answer is an inference: provisional, and revisable. The record distinguishes them, because a record that cannot tell them apart cannot tell an auditor which answers the owner actually gave.
-\end{principle}
+\subsection{Deployment status}
 
-This is the smallest change in the implementation and arguably the most important. The alternative --- storing an answer as an answer --- is indistinguishable in the happy case and unrecoverable in the case that matters, which is the one where something went wrong and the question is who decided.
+Built, including the reserved-class check and the rung recording (Rule~\ref{rule:rung}).
 
-% =====================================================================
-\section{Owner Precedence Is Mechanical}
-\label{sec:precedence}
+% ---------------------------------------------------------------------
+\section{Vault --- \code{vault.py} (197 lines)}
+\label{sec:vault}
 
-Three modes exist on a task. Their relationship is enforced rather than agreed.
+\subsection{Role}
+
+Policy first, then ask, and the secret never leaves.
+
+\begin{secretbox}{An agent never receives a credential}
+It asks the vault to \emph{use} one. What crosses is a requirement and an answer; the value stays where it is. The consequence worth stating: a component that can plan work requiring a credential need never be able to learn it.
+\end{secretbox}
+
+\subsection{Two stages}
+
+Standing policy answers what it matches, without interrupting. Everything else asks the owner for this one use. Promotion from the second to the first is an owner act: an agent that earned a standing grant by being approved repeatedly would have acquired authority by persistence, invisibly, because the fifth approval looks like the first four.
+
+\subsection{Refuses}
+
+Emitting a secret into a directive, a report, a plan, a prompt, or a log. Letting any agent enumerate the store --- the only interface is the question.
+
+\subsection{Deployment status}
+
+Built, with a real transport through it.
+
+% ---------------------------------------------------------------------
+\section{Outward Acts --- \code{outward.py} (218 lines)}
+\label{sec:outward}
+
+\subsection{Role}
+
+The gate every act that reaches a person passes through.
+
+\begin{drule}[Drafting is not sending]
+\label{rule:drafting}
+An agent may compose anything it likes. Composing is not sending, and the act of transmission requires a grant naming that act.
+\end{drule}
+
+\begin{drule}[Approved bytes are the transmitted bytes]
+\label{rule:bytes}
+What the owner approved and what goes out are identical. No reformatting, truncation or template substitution happens in between.
+\end{drule}
+
+The second rule closes a gap the first leaves open: an approval workflow that renders the message differently at send time has obtained consent for something other than what it did.
+
+\subsection{Deployment status}
+
+Built.
+
+% ---------------------------------------------------------------------
+\section{Verification --- \code{verify.py} (192 lines)}
+\label{sec:verify}
+
+\subsection{Role}
+
+A separate judge, given the plan's criteria and the session's visible evidence, rules on whether the work meets the standard.
+
+\begin{drule}[The session does not decide whether it succeeded]
+\label{rule:noselfverify}
+The judge is independent of the agent that produced the work, and it judges the plan's criteria rather than the agent's account of itself.
+\end{drule}
+
+\subsection{Refuses}
+
+A verdict without criteria. A verdict from the working agent. A claim of success unsupported by visible evidence.
+
+\subsection{Characteristic failure}
+
+Criteria vague enough to be satisfied by any outcome --- which is why the planning plane refuses a plan without them and the joint rounds check them against what the verifier will need.
+
+\subsection{Deployment status}
+
+Built, with an unavailable-judge path so the absence of a model is distinguished from a failed verdict.
+
+% ---------------------------------------------------------------------
+\section{Modes --- \code{modes.py} (216 lines)}
+\label{sec:modes}
+
+\subsection{The three modes}
 
 \begin{table}[h]
 \centering\small
-\caption{The three modes.}
+\caption{Guided, Interact, History.}
 \label{tab:modes}
 \begin{tabular}{@{}L{2.0cm}L{11.4cm}@{}}
 \toprule
 \textbf{Mode} & \textbf{Behaviour} \\
 \midrule
 Guided & the owner steers \emph{through the worker}, so their guidance lands under the same ownership check as the worker's own. Nothing here reaches a session directly, which is what keeps the manager out of it \\
-Interact & the owner takes the wheel. Steering pauses, the plan is marked stale, and the mode \emph{reminds} the owner to attach to the session rather than relaying keystrokes into it \\
+Interact & the owner takes the wheel: steering pauses, the plan is marked stale, and the mode \emph{reminds} the owner to attach to the session rather than relaying keystrokes into it \\
 History & what was said, on either surface \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\subsection{Precedence is mechanical}
+
 \begin{drule}[Interact pauses the worker's steering]
 \label{rule:pause}
-Otherwise the worker continues typing its next step into a terminal the owner is using, and the two contend for the prompt. The pause is the mechanism by which the owner outranks the worker; without it, precedence is a convention that the scheduler does not implement.
+Otherwise the worker keeps typing its next step into a terminal the owner is using, and the two contend for the prompt.
 \end{drule}
 
-The plan is marked stale at the same moment, and for a separate reason: the owner is about to do something the plan does not describe. A plan surviving that would send the worker back through phases the owner has just overridden by hand.
+This is how \emph{the owner outranks the worker} becomes a property rather than a convention. A system in which precedence is agreed but not implemented has precedence exactly until two things want the prompt at once, which is the only moment it matters.
+
+The plan is marked stale in the same operation, for a separate reason: the owner is about to do something the plan does not describe, and a plan surviving that would send the worker back through phases the owner has just overridden by hand.
+
+\subsection{Deployment status}
+
+Built. Interact deliberately does \emph{not} relay keystrokes --- it points the owner at the real session, because a second relay into one terminal is the contention the pause exists to prevent.
+
+% ---------------------------------------------------------------------
+\section{Board and Commands --- \code{board.py} (116), \code{commands.py} (162 lines)}
+\label{sec:board}
+
+\subsection{Role}
+
+The same task list on every surface: the command line, the chat, and the console page. Three faces, one source.
+
+\subsection{Refuses}
+
+Divergence between surfaces. A board assembled independently per surface is three boards that agree until they do not.
+
+\subsection{What it shows}
+
+Every task with its \emph{reason} --- not merely its state. A state without a reason makes the owner ask a follow-up question the system already knows the answer to.
+
+\subsection{Deployment status}
+
+Built on all three surfaces.
 
 % =====================================================================
+\newpage
+\begin{center}\large\bfseries PART III --- SURFACES AND CONSEQUENCES\end{center}
+
 \section{The Console Above It}
 \label{sec:console}
 
-The console requires the agent runtime, installs it when absent, and opens gates the runtime keeps shut standalone so that agents may reach the manager and share a workspace. The dependency runs one way. A missing prerequisite is therefore a \emph{fault}, not a state, and code that catches it and continues with an empty result hides a broken installation behind an empty page.
+The console requires the agent runtime, installs it when absent, and opens gates the runtime keeps shut standalone so that agents may reach the manager and share a workspace. The dependency runs one way; the runtime never depends on the console, which is what gives the gates meaning --- a gate signifies nothing unless some state has it shut.
 
-The console's surface over this system is deliberately read-only: three routes and one page, exposing agents, their tasks, and one task's plan with its criteria and declared permissions. Two absences on that page are the design, and both are asserted by tests:
+\begin{principle}[A missing prerequisite is a fault, not a state]
+\label{prin:prereq}
+Code that catches the absence and continues with an empty result hides a broken installation behind an empty page: the operator is shown \emph{no agents} and given no reason.
+\end{principle}
+
+The console's surface over this system is deliberately read-only --- three routes and a page, exposing agents, their tasks, and one task's plan with its criteria and declared permissions. Two absences on that page are the design, and both are asserted by tests:
 
 \begin{itemize}
 \item \textbf{no progress bar}, because per-phase completion is recorded nowhere and a filled bar would be a number the page invented;
 \item \textbf{a plan that cannot be parsed says so}, because an empty phase list would read identically to \emph{``no plan yet''} --- a different and ordinary state.
 \end{itemize}
 
+Editing from the web is deliberately absent: it is a mutation, and it belongs with an authority story that has not yet been written.
+
 % =====================================================================
+\section{A Request, Traced}
+\label{sec:traced}
+
+Specifications describe planes. This section follows one request through all of them, because the interactions are where the design is either coherent or merely tidy.
+
+\subsection{The request}
+
+The owner sends, from a phone, over the chat surface:
+
+\begin{specbox}{Inbound}
+\emph{``regenerate the CASSI figures for the grant --- the colour bar was wrong in figure 4''}
+\end{specbox}
+
+\subsection{\code{RT} --- routing}
+
+The bindings table maps this (channel, account) pair to an agent. The owner lock is consulted: the sender is on the allowlist, so the message proceeds. Had it not been, the message would have been dropped and counted, with no reply and no transcription --- the sender would learn nothing, including whether anything is listening.
+
+No worker is named in the text, so the manager will route it to the base worker rather than infer a specialist from the word ``figures'' (Principle~\ref{prin:routing}).
+
+\subsection{\code{TSK} --- a task, not a session}
+
+A task is created in state \emph{drafting}. \textbf{Nothing has started.} This is Rule~\ref{rule:nostart} in operation: the owner has asked for something, and has not yet authorised work.
+
+\subsection{\code{PLN} --- the plan is made between two parties}
+
+The worker reads its own workspace first: notes it wrote, the conversation across both surfaces, what it learned from prior tasks. Suppose that workspace contains a correction the owner made three weeks ago --- \emph{the figures live in the grant folder, not the manuscript folder}. The seed plan therefore names the right path, which a fresh model drafting from the request alone could not have known.
+
+The seed is written to the draft file. A planning session opens on that path, capped below the work ceiling and told to plan and not to do. It reads the actual repository --- and discovers that figure 4's generator takes a mask argument the plan did not mention. It improves the draft in place.
+
+The worker reads the draft back and checks it against what the verifier will need: does every phase carry a criterion? It finds phase 3 has none, and guides one more round. The second draft passes. The worker promotes it.
+
+\begin{notebox}{What each party contributed}
+Neither could have produced this plan alone. The worker supplied the owner's history --- the path correction. The session supplied the repository --- the mask argument. The worker supplied the standard --- criteria on every phase. And the session did not author its own criteria, so the verdict that eventually judges this work will mean something.
+\end{notebox}
+
+\subsection{\code{GRT} --- the permissions the plan declared}
+
+The plan declares writing to the grant folder and running the numerical toolchain. Neither is granted, so the task moves to \emph{awaiting-grant} --- a state that says what is true, rather than sitting in \emph{ready} and failing later.
+
+The owner grants both from the phone. Asking here is the entire point: the worst moment to request permission is halfway through unattended work.
+
+\subsection{\code{ASG} --- the owner opts in}
+
+The task is \emph{ready}, and it stays there until the owner says start. When they do, the worker hands over \textbf{the plan} --- not the original sentence --- and keeps the session. The manager could not have reached this step; the call raises for it.
+
+\subsection{\code{CC} --- and a question}
+
+The session works, and stops with:
+
+\begin{specbox}{On screen}
+\emph{``Which mask should figure 4 use --- the continuous one or the binary one?''}
+\end{specbox}
+
+The answering plane runs its checks in order. It is not a permission gate, so the model is not declined on that ground. It names no reserved class. Can it be answered from the plan, the directive, or the workspace? The plan --- improved by the session itself two steps ago --- specifies the continuous mask. The worker answers, and records the answer at the inference rung, not the owner's.
+
+Later the session stops again:
+
+\begin{specbox}{On screen}
+\emph{``Do you want to make this edit to \code{cassi\_models.py}?''}
+\end{specbox}
+
+This one is a gate. It is declined \emph{before any model sees it} and routed to the ceiling, the standing grant, or the owner. The distinction between the two stops is invisible on the terminal and total in the system.
+
+\subsection{\code{VER} --- and \code{REP}}
+
+An independent judge is given the plan's criteria and the session's visible evidence. Not the worker's account, and not the session's. It rules.
+
+The report returns up the same conversation the owner started on their phone --- and had they meanwhile opened the command line, they would see the same board, because there is one conversation per agent and not one per door.
+
+\subsection{Where the owner was involved}
+
+Four times: the initial request, the grant, the start, and the gate. Not once for the mask question, the path, the criteria, or the toolchain --- and each of those is a place where a system without a workspace, without split plan authorship, or without the answering order would have interrupted them.
+
+% =====================================================================
+\section{Below \code{ASG}: The Session Plane}
+\label{sec:below}
+
+This paper stops at \code{ASG} because what lies below it is specified separately: a twenty-seven-node loop that drives one session from a registered goal to a verified result. Three of its properties matter here, because they are what the planes above rely on.
+
+\subsection{Verification is an ordering rule, not a step}
+
+Within each supervision pass, the loop asks whether the goal is already met \emph{before} it asks what to type next. The position is load-bearing rather than aesthetic: a session that kept receiving typed prompts once consumed every pass at the earlier step, so verification never ran --- it starved for twenty-three consecutive passes while an already-finished session went on being guided.
+
+\subsection{Reporting is not ruling}
+
+The loop scans each round's output for failure signatures --- tracebacks, failing tests, build errors, unmerged conflicts --- with a literal string match and no model call. It reports; it never rules.
+
+\begin{principle}[Silence is not success]
+\label{prin:silence}
+A scan that matches nothing means \emph{no signature matched}, not \emph{the work is good}. Most ways of being wrong leave no recognisable trace. The renderer returns an empty string rather than a reassurance, precisely so nothing downstream can mistake quiet for correct.
+\end{principle}
+
+\subsection{The stuck detector separates four situations}
+
+Four passes without transcript growth is one signal covering several conditions: an unreadable permission store, an exhausted context, a superseded plan, or a genuine wedge. The loop separates them, and only the last reaches the owner --- the others abstain, recover, or delegate. This is why the planes above see relatively few escalations: most have already been resolved below.
+
+\section{The Seam to the Console, in Full}
+\label{sec:seam}
+
+The console reaches the agent planes through exactly one module, and the shape of that module is a design decision worth stating.
+
+\subsection{One module, plain data}
+
+\begin{specbox}{The seam}
+\code{list\_agents() -> [\{name, kind, available\}]}\\
+\code{list\_tasks(agent) -> [\{id, goal, state, plan\_version, phase\_total, stale, awaiting\}]}\\
+\code{get\_task(agent, id) -> \{…, phases: [\{n, title, verified\_when\}], permissions: […]\}}
+\end{specbox}
+
+Three properties are deliberate. It is the \emph{only} module that knows the agent planes exist, so the coupling has one location a reviewer can hold in context. It returns \textbf{plain dictionaries}, so no agent-plane type crosses into the console and a dataclass change on one side cannot reach the other. And the imports are performed inside functions rather than at module scope --- not to make the dependency optional, but so the seam is testable on a machine where the agent planes are absent.
+
+\subsection{Why the surface is read-only}
+
+Three routes and a page, and no verb that writes. This is not caution for its own sake: editing a task from the web is a mutation, and a mutation needs an answer to \emph{who is asking} that the console's session gate does not supply on its own. Shipping the read half first puts the information in front of the owner without deciding the authority question badly under time pressure.
+
+\subsection{Two absences that are the design}
+
+\begin{drule}[No progress bar]
+\label{rule:nobar}
+Per-phase completion is recorded nowhere. A filled bar would be a number the page invented, and a plausible one --- which is worse than an obviously missing one.
+\end{drule}
+
+The page shows a phase \emph{count} and the task's state, and says why the bar is absent. Both are asserted by tests, so restoring the bar requires deleting a test that explains itself.
+
+\begin{drule}[A plan that cannot be parsed says so]
+\label{rule:unreadable}
+An empty phase list is rendered differently from a plan that failed to parse, because otherwise \emph{``this plan is malformed''} and \emph{``no plan yet''} --- an ordinary early state --- appear identical.
+\end{drule}
+
+\subsection{The failure this surface had to survive}
+
+A single malformed plan file once emptied an entire agent's task list: the parse raised, the listing call propagated it, and every task vanished from a page whose only job is to show tasks. One bad file is \emph{data}, not a broken installation, so the guard is per task --- a task whose plan will not parse still appears, with its goal and state, marked unreadable.
+
+The distinction that governs the whole seam is the same one: a missing dependency is a fault and must surface; a malformed record is data and must be contained.
+
+\section{Failure Modes This System Adds}
+\label{sec:failures}
+
+\begin{table}[h]
+\centering\small
+\caption{What can go wrong that could not before, and what catches it.}
+\label{tab:failures}
+\begin{tabular}{@{}L{3.9cm}L{4.6cm}L{4.5cm}@{}}
+\toprule
+\textbf{Failure} & \textbf{What it looks like} & \textbf{What catches it} \\
+\midrule
+Self-approval & the agent answers its own gate & Rule~\ref{rule:gatefirst} --- the model never sees it \\
+Laundered class & a money question phrased as a choice & Rule~\ref{rule:reserved} \\
+Confident guess & a wrong fact sent in the owner's voice & Rule~\ref{rule:grounded} \\
+Circular criteria & the session writes what it is judged by & \S\ref{sec:planning}'s split authorship \\
+Silent queue & unplaceable work that looks in progress & Rule~\ref{rule:noqueue} \\
+Prompt contention & worker and owner type at once & Rule~\ref{rule:pause} \\
+Stranger's foothold & refused text written into the record & Rule~\ref{rule:notranscribe} \\
+Authority by persistence & repeated approvals become standing & \S\ref{sec:vault}'s owner-only promotion \\
+Consent for other bytes & approval rendered differently at send & Rule~\ref{rule:bytes} \\
+Flattering state & a blocked task shown as running & Principle~\ref{prin:states} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\section{A Second Trace: When It Reaches the Owner}
+\label{sec:trace2}
+
+The first trace (\S\ref{sec:traced}) followed a request that mostly succeeded. This one follows the paths that do not, because a system is characterised by what it does when it cannot proceed.
+
+\subsection{No machine can do it}
+
+The owner asks for work requiring a tool this host does not have. The worker's capability check answers before anything is queued, and the reply names what is missing and where it would have to be.
+
+What it must not do is wait. An unplaceable directive that sits in a queue is indistinguishable, from the chat, from work in progress --- and the owner learns nothing until they ask. Rule~\ref{rule:noqueue} makes the refusal immediate and specific.
+
+\subsection{The plan declares a permission that is never granted}
+
+The task sits in \emph{awaiting-grant}. It does not start, and it does not fail. It also does not sit in \emph{ready}, which would be a small lie with a large consequence: the owner would see a task apparently about to begin, and eventually a failure that looked like a defect rather than a missing decision.
+
+\subsection{The vault denies}
+
+A step needs a credential. Policy does not match, so the owner is asked --- for this one use, naming the secret and the purpose. They decline.
+
+The step fails, the task records why, and \textbf{nothing about the denial teaches the system to stop asking.} A denial is not a policy; converting one into standing policy would be the system writing rules from the owner's refusals, which is the mirror image of the authority-by-persistence failure the promotion rule prevents.
+
+\subsection{The session asks something nobody can ground}
+
+The session asks a question the plan does not answer, the directive does not cover, and the workspace has no note about. The worker returns its explicit decline rather than a plausible guess, and the question goes to the owner --- once, keyed, closing from whichever surface answers it.
+
+\begin{notebox}{Why the decline is a first-class outcome}
+The tempting alternative is a best-effort answer with a hedge. It is worse than it looks: the hedge is visible to the owner, and invisible to the session, which receives a confident instruction and acts on it. The asymmetry is the argument --- a caveat helps only the party that is not going to act.
+\end{notebox}
+
+\subsection{The verifier fails the work}
+
+The judge is given the plan's criteria and the visible evidence, and rules against. The verdict is recorded with its reason, and the reason is used rather than merely logged: it is what the next round of guidance addresses.
+
+A failed verdict is not a terminal state. What is terminal is a failed verdict the loop cannot act on --- which is why the criteria are checked for judgeability during planning, before any work is authorised.
+
+\subsection{The owner takes the wheel mid-flight}
+
+They enter interact mode. Steering pauses, the plan is marked stale, and the mode points them at the real session rather than relaying keystrokes.
+
+Each of the three does something distinct. Without the pause, the worker types over them. Without the staleness mark, the worker resumes afterwards through phases the owner has just overridden by hand. Without the pointer --- if the console relayed instead --- two paths would write to one terminal, which is the contention the pause exists to prevent, reintroduced by the interface.
+
+% =====================================================================
+\section{A Taxonomy of the Refusals}
+\label{sec:taxonomy}
+
+Twenty refusals are catalogued in Appendix~\ref{app:refusals}. They fall into four kinds, and the kinds turn out to be more useful than the list, because each kind fails differently when it is absent.
+
+\subsection{Authority refusals}
+
+\emph{The manager executing; a non-owning agent controlling a session; an agent answering its own gate; a reserved class answered by inference; a standing grant earned by repetition.}
+
+These protect the boundary between what a system may do and what a person must decide. Their common failure mode is \textbf{gradual and locally reasonable}: each individual crossing has a good argument, and the aggregate is a system that acts on its own authority. They are the refusals that must raise rather than warn, because a warning is an argument's opening move.
+
+\subsection{Evidence refusals}
+
+\emph{A verdict from the working agent; a plan whose criteria the session wrote; success claimed without a verdict; an answer without its rung.}
+
+These protect the meaning of the system's own claims. Their failure mode is \textbf{silent and total}: nothing breaks, outputs keep arriving, and every one of them is worth less than it appears. A system that has lost these still reports success at the same rate --- which is precisely why it cannot detect the loss.
+
+\subsection{Honesty refusals}
+
+\emph{A blocked task shown as running; unplaceable work waiting quietly; silence read as success; a plan silently repaired; an empty phase list where a plan failed to parse.}
+
+These protect the owner's model of what is happening. Their failure mode is \textbf{delayed}: the system is correct and the owner is misinformed, and the discrepancy surfaces only when they act on the belief. Each of these was implemented as a distinct state or an explicit message rather than as an absence, because absence is what the owner fills in with an assumption.
+
+\subsection{Blast-radius refusals}
+
+\emph{A secret leaving the machine; a stranger's text entering the record; sending bytes the owner did not approve; a test process reaching the live host.}
+
+These bound what a failure can reach. Their failure mode is \textbf{rare and severe} --- the inverse profile of the other three, and the reason they are enforced structurally rather than by policy. The vault does not decide to keep a secret local; it has no interface that would let it leave.
+
+\begin{principle}[The four kinds need different enforcement]
+\label{prin:kinds}
+An authority refusal must raise. An evidence refusal must be structural, since its absence is undetectable from output. An honesty refusal must be a distinct state, since a missing signal is read as a benign one. A blast-radius refusal must be an absent capability rather than an unexercised one.
+\end{principle}
+
+\section{How This Was Verified}
+\label{sec:verified}
+
+A report claiming a system holds certain properties should say how that was checked. The suite is 933 tests over the console and the agent planes. Three things it caught are worth recording, because each is a class of defect rather than an incident.
+
+\subsection{Tests that passed for the wrong reason}
+
+Three appeared in a single subsystem, and all three would have survived any amount of green output.
+
+\begin{table}[h]
+\centering\small
+\caption{Green, and not testing what it claimed.}
+\label{tab:falsegreen}
+\begin{tabular}{@{}L{4.6cm}L{8.8cm}@{}}
+\toprule
+\textbf{The test} & \textbf{Why it proved nothing} \\
+\midrule
+A withheld-criteria test & It set \emph{both} flags that trigger withholding. Had one been dropped from the implementation, the test would still have passed --- so it could not detect the loss of the protection it existed for \\
+A registry-listing test & Its fake object carried a field the real one does not have, so the code path under test was the fallback, never the real one. The asserted value was never checked at all \\
+A phase-count test & The function's body ran in \emph{zero} tests: the only case that reached it replaced it with a stub. Both its branches were unverified, and it produces the number the interface rests on \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{principle}[A suite is evidence about the tests, not about the code]
+\label{prin:suite}
+Each of these was green from the day it was written. What found them was a reviewer asked to check whether a test isolates the condition it claims to guard --- a question no test runner asks.
+\end{principle}
+
+\subsection{Tests that touched the live host}
+
+Two defects had the suite reaching out of its process into the running machine. In the first, a background thread spawned during one test woke thirty seconds later --- inside an unrelated test --- and swept the host's real session fleet, writing records into whichever temporary directory that later test had configured. It failed a deployment gate at random and passed in isolation every time.
+
+In the second, a shared fixture ran the application's startup events, and one of those posted the machine's real credential and a fleet summary to a live endpoint. Its own docstring asserted that it was safe.
+
+\begin{principle}[The suite is part of the system's blast radius]
+\label{prin:blast}
+Both defects were introduced by attempts to make tests more realistic, and neither is visible in a passing run. A test process that can reach the live host is a component with production access and no review.
+\end{principle}
+
+\subsection{What the source corrected in the design}
+
+Seven assumptions written into an implementation plan were wrong about the code they described --- field names, an interface that could not exist under the plan's own constraints, an authentication step omitted from a sample. Every one was caught by an implementer or reviewer reading the source rather than the plan.
+
+\begin{principle}[The source outranks the document that describes it]
+\label{prin:source}
+Stated in every task instruction, this single rule accounted for all seven corrections. The documents were accurate about intent and wrong about detail, and detail is what runs.
+\end{principle}
+
+% =====================================================================
+\section{Two Sessions, One System}
+\label{sec:twosessions}
+
+This system was built by two agentic development sessions working concurrently in one repository, and that is worth reporting because the failure modes were not the expected ones.
+
+\subsection{What did not go wrong}
+
+Merge conflicts were absent. Twelve commits landed on the shared branch from one session while the other developed ten in an isolated worktree, touching a disjoint file set, and the merge was clean on the first attempt.
+
+\subsection{What did}
+
+\begin{cautionbox}{Duplicated design, not duplicated text}
+Three components were designed twice, independently, in nearly the same terms: the answering plane, the planner's workspace, and the joint planning loop. In each case the second session's design document was written while the first session's implementation was already merging.
+
+The duplication was invisible to both --- version control shows a conflict when two parties edit one file, and shows nothing at all when two parties solve one problem. The cost was not lost work but re-derived work, and it was caught only by inventory: reading the tree before planning, rather than planning from a prior document.
+\end{cautionbox}
+
+A second, subtler cost: an isolated worktree branched before the other session's package existed, so a module had to be brought across to make the seam importable --- creating for a time two copies of one file with no mechanism to notice if they diverged.
+
+\begin{principle}[Concurrency in agentic development is a coordination problem, not a merge problem]
+\label{prin:concurrency}
+The tooling addresses the case it can see. Two agents solving the same problem in different files produce no signal at all, and the only reliable detector found here was to inventory the tree immediately before planning --- treating one's own prior design document as the least trustworthy input.
+\end{principle}
+
 \section{What Is Not Built}
 \label{sec:notbuilt}
 
 \begin{enumerate}
-\item \textbf{The worker and the session do not draft the plan together.} The planner drafts it and the assignment hands it down finished. The intended shape --- the worker gives an initial plan, and the two refine it --- surfaces a question the implementation did not answer and this paper will not pretend to: \emph{if the session may rewrite the plan, the agent doing the work is editing the standard it is judged by.} The existing polish mechanism, in which the session proposes and the worker accepts, is the likely resolution.
-\item \textbf{Owner precedence during that joint drafting is unspecified.} The steering pause covers interact mode only.
-\item \textbf{No node carries a workspace.} This is the largest gap between the design papers and what was built, and it is worth naming precisely. The architecture specifies a bounded workspace per node --- what that node may see, selected by salience --- and the planner is the node that needs one most: it drafts from the request \emph{alone}, with no access to what this agent has already tried, which plans were superseded, which permissions were refused before, or what the last verdict said. A planner without history redrafts the same plan after the same failure. The session-level design already carries the fix and the reason: a composer node there declared four history sources and was fed none of them, and could therefore re-issue an instruction that had just failed. The same defect exists here one level up, and the same remedy applies --- feed the node, bound the selection, and count the overflow rather than truncating it silently.
-\item \textbf{Settlement} --- the usage fee, the exchange node, the initial non-exchangeable balance --- is designed and unbuilt.
-\item \textbf{The manager does not front the console.} It exists; it is not yet the way in.
-\item \textbf{Everything here is one host.} The multi-machine form is designed~\citep{yang2026account} and not built.
+\item \textbf{Settlement} --- the usage fee, the exchange node, the initial non-exchangeable balance. Designed; absent.
+\item \textbf{The manager does not front the console.} It exists and routes; it is not yet the way in.
+\item \textbf{Multi-machine.} Everything here is one host. The fleet form is designed~\citep{yang2026account} and unbuilt, and \S\ref{sec:workspace}'s workspace is per agent rather than per agent per host.
+\item \textbf{L4 is thin.} Outcomes are recorded and not yet aggregated into anything that reads them back, so competence is not measured from them.
+\item \textbf{Owner precedence during joint planning is unspecified.} The steering pause covers interact mode; what happens when the owner guides while worker and session are converging on a draft is not settled.
+\item \textbf{Per-phase completion is recorded nowhere}, which is why the console shows a phase count rather than progress.
 \end{enumerate}
 
 % =====================================================================
+\section{What the Owner Is Asked, and How Often}
+\label{sec:asked}
+
+The purpose of nearly every mechanism in this report is to make an interruption unnecessary without making a decision the owner should have made. It is therefore worth stating exactly where the owner is reached, and what each of those interruptions costs them.
+
+\subsection{The complete list}
+
+\begin{table}[h]
+\centering\small
+\caption{Every path that reaches the owner, and what it asks of them.}
+\label{tab:asked}
+\begin{tabular}{@{}L{3.3cm}L{4.4cm}L{5.7cm}@{}}
+\toprule
+\textbf{Interruption} & \textbf{Asks for} & \textbf{Could it have been avoided?} \\
+\midrule
+The grant & permission the plan declared & No. This is the interruption the plan process exists to \emph{concentrate}: asked once, before work, rather than repeatedly during it \\
+The start & authorisation to begin & No, by Rule~\ref{rule:nostart}. Removing it would merge asking with authorising \\
+A permission gate & whether the session may act & Only by a standing grant the plan anticipated. Never by inference \\
+A reserved class & a decision the owner keeps & No, at any confidence \\
+An ungrounded question & a fact nothing holds & Yes --- and usually by the workspace, which is why an agent without history interrupts more \\
+A vault use with no policy & this one use of a secret & Yes, by standing policy the owner wrote. Not by repetition \\
+An outward act & the exact bytes leaving & No. This is the one the whole outward plane exists to guarantee reaches them \\
+A failed verdict & judgement on what to do next & Sometimes --- the loop retries first, and reaches the owner when it cannot \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Which are load-bearing and which are debt}
+
+Four of the eight are structural: the grant, the start, a gate, and an outward act. Each corresponds to a decision that is the owner's by definition, and removing any of them would not make the system more autonomous --- it would make it autonomous about something that was never its to decide.
+
+The other four are \emph{debt}. An ungrounded question means the workspace lacked a fact it could have held. A vault prompt with no matching policy means the owner has not been given a way to express a rule they would obviously write. A failed verdict reaching the owner means the loop could not act on its own diagnosis. Each is an interruption the system caused rather than one the problem required.
+
+\begin{principle}[Count interruptions by kind, not by number]
+\label{prin:interrupt}
+A system that reduced its interruption count by answering more gates would be worse, not better. The number worth tracking is interruptions of the second kind --- the ones a better-informed system would not have needed --- and that number is only meaningful when the first kind is fixed by construction.
+\end{principle}
+
+\subsection{Why this framing matters for autonomy claims}
+
+Autonomy measured as \emph{fewer stops} rewards exactly the wrong change. The agent that answers its own gates stops less than the one that does not, and it is not more capable; it has moved a decision from the owner to itself and reported the theft as progress.
+
+This is why the answering plane records the rung of every answer (Rule~\ref{rule:rung}), and why abstaining on a reserved class is not counted as a failure to be autonomous. An act no permission could authorise was never autonomously completable, so a system that abstains on it has not fallen short --- it has correctly identified something outside its remit.
+
+\section{Limitations, and What This Report Cannot Claim}
+\label{sec:limits}
+
+An implementation report is a claim about a system at a moment, made by the parties who built it. Its weaknesses should be stated by the same document.
+
+\subsection{Refusals are verified structurally, not adversarially}
+
+Each refusal in Appendix~\ref{app:refusals} has an enforcement point and a test. What has \emph{not} happened is an adversarial attempt to defeat them --- no one has tried to phrase a permission question so the gate detector misses it, or to construct a plan that passes the criteria check while remaining unjudgeable. The reserved-class check in particular matches on vocabulary, and vocabulary is exactly what an adversary varies.
+
+\begin{cautionbox}{The honest status of the answering plane}
+It is correct on the cases it was built for and on the cases tests describe. Its detection is a string match, and every string match has a complement. The claim ``an agent cannot answer its own gate'' is warranted for gates that look like gates; it is not a proof.
+\end{cautionbox}
+
+\subsection{Scale is one owner, one host, and a short history}
+
+Every property here was exercised at a scale where the owner sees most of what happens. Several are load-bearing precisely when they cannot --- the honesty refusals matter most when there is too much activity to follow, and that condition has not been reached. Concurrency limits, ledger growth, and workspace size are untested at volume.
+
+\subsection{The self-model is thinner than its papers}
+
+The architecture specifies ten self-state coordinates with per-coordinate evidence and update rules. What is built records outcomes without aggregating them into a competence estimate, so \emph{measured} capability does not yet feed any decision. Where a paper says an agent knows what it can reliably do, this system knows what it did.
+
+\subsection{Two of the four channels are absent}
+
+Report and directive are built; prior bias and owner pre-emption as a distinct channel are not. Pre-emption exists in effect --- the steering pause --- but not as the general mechanism the design describes, so its properties hold for interact mode and are unproven elsewhere.
+
+\subsection{The report was written by a participant}
+
+This document was produced by one of the two agentic sessions that built the system, which is a conflict of the exact kind the architecture forbids elsewhere: the party that did the work should not grade it. Read the deployment statuses and the failure inventory with that in mind. The mitigations are that every claim was checked against source rather than against prior documents, and that \S\ref{sec:verified} reports defects found in this session's own work --- including a test fixture whose docstring asserted a safety property it did not have.
+
 \section{Conclusion}
 
-The design papers in this series argue for properties. This one reports which properties survived being built, and the answer is: the ones that were implemented as refusals at the point of action, rather than as rules stated somewhere and honoured elsewhere.
+The design papers in this series argue for properties. This one reports which properties survived being built, and the answer is consistent enough to state as a rule: \textbf{the ones implemented as refusals at the point of action, rather than as rules stated in one place and honoured in another.}
 
-The manager's inability to drive a session is a property of the system because the call raises. Owner precedence is a property because interact mode pauses the worker. The ban on an agent answering its own gate is a property because the model is never shown the gate --- not because the model is instructed to decline, which would make the property a matter of the model's judgement on the day.
+The manager cannot drive a session because the call raises. Owner precedence holds because interact mode pauses the worker. An agent cannot answer its own gate because the model is never shown one --- not because it is instructed to decline, which would leave the property to the model's judgement on the day. A plan cannot be circular because its authorship is split between two parties with different interests, through a file that can be diffed.
 
-Everything in this system that is merely written down remains a hope. The work of building it was, in almost every case, the work of finding the place where a hope could be made into a refusal.
+The counter-examples are equally consistent. Every property that decayed during implementation was one recorded as a description: the planner's context parameter that nothing filled, the workspace sources declared and never fed, a fixture docstring asserting a safety it did not have. In each case the documentation was accurate about the intent and silent about the wiring, and the wiring is what runs.
+
+Everything in such a system that is merely written down remains a hope. The work of building it was, in almost every case, the work of finding the place where a hope could be made into a refusal.
+
+\appendix
+
+\section{Index of Refusals}
+\label{app:refusals}
+
+Every refusal in the built system, with where it is enforced.
+
+\begin{longtable}{@{}L{5.0cm}L{8.4cm}@{}}
+\toprule
+\textbf{Refusal} & \textbf{Enforced at} \\
+\midrule
+\endhead
+A stranger is answered & the router, before any handler \\
+Refused text is recorded & the router --- counted, not transcribed \\
+The manager executes & the assignment call raises \\
+A session starts without a plan & the assignment call \\
+A non-owning agent controls a session & every control's first line \\
+The machine agent executes & every control \\
+A plan without criteria & the planner's check, before the draft is returned \\
+A plan silently repaired & the planner reports problems instead \\
+The session authors its own criteria & split authorship, worker promotes \\
+A gate is shown to a model & the answering order, first check \\
+A reserved class is agent-answered & the reserved-class check, any phrasing \\
+A guessed answer & the explicit decline path \\
+An answer without its rung & recorded on every outcome \\
+A secret leaves the machine & the vault's interface: a question, not a read \\
+A standing grant earned by repetition & promotion is an owner act \\
+Sending what was not approved & byte equality at transmission \\
+A verdict from the working agent & the independent judge \\
+A blocked task shown as running & the state set \\
+Unplaceable work waiting quietly & refused and reported together \\
+The worker typing over the owner & the steering pause \\
+\bottomrule
+\end{longtable}
+
+\section{Deployment Status by Plane}
+\label{app:status}
+
+\begin{table}[h]
+\centering\small
+\caption{Nineteen planes; all built, with the noted limits.}
+\label{tab:status}
+\begin{tabular}{@{}L{3.4cm}L{1.6cm}L{8.4cm}@{}}
+\toprule
+\textbf{Plane} & \textbf{Lines} & \textbf{Status} \\
+\midrule
+Registry & 262 & built; not-initialised distinguished from broken \\
+Router & 126 & built, both surfaces \\
+Gateway & 113 & built; transport injected for test \\
+Conversation & 123 & built; keyed questions close from either door \\
+Manager loop & 139 & built \\
+Worker plane & 191 & built \\
+Tasks & 343 & built \\
+Planner & 128 & built; workspace-seeded \\
+Joint planning & 378 & built; newest plane \\
+Session & 397 & built; backend abstracted \\
+Answering & 165 & built; rung recorded \\
+Vault & 197 & built; real transport \\
+Outward & 218 & built \\
+Verify & 192 & built; unavailable judge distinguished \\
+Modes & 216 & built \\
+Board & 116 & built, three surfaces \\
+Commands & 162 & built \\
+Workspace & 105 & built; per agent, not per host \\
+Ledgers & 67 & built; four files \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \bibliographystyle{plainnat}
 \bibliography{references}

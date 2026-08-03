@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{6}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -20,11 +20,30 @@ Chengshuai Yang.
   channels by which agents affect each other.
 \newblock Preprint, 2026{\natexlab{b}}.
 
-\bibitem[Yang(2026{\natexlab{c}})]{yang2026worker}
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026history}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: Version 2.0
+  (history-aware revision) --- selective episodic encoding, replay,
+  consolidation, and bounded retrieval.
+\newblock Preprint, 2026{\natexlab{c}}.
+
+\bibitem[Yang(2026{\natexlab{d}})]{yang2026manager}
+Chengshuai Yang.
+\newblock A manager is not a controller: Global-workspace coordination for
+  {SARSI} fleets.
+\newblock Companion paper on coordination semantics, 2026{\natexlab{d}}.
+
+\bibitem[Yang(2026{\natexlab{e}})]{yang2026v2corrected}
+Chengshuai Yang.
+\newblock Functional self-awareness for {SARSI} agents: Version 2.0 (corrected
+  and expanded).
+\newblock Preprint. The single-agent architecture, 2026{\natexlab{e}}.
+
+\bibitem[Yang(2026{\natexlab{f}})]{yang2026worker}
 Chengshuai Yang.
 \newblock One user, several machines: Designing the {SARSI} worker layer ---
   server-side communicators without execution authority, five work agents, and
   a vault that only ever answers yes or no.
-\newblock Preprint, 2026{\natexlab{c}}.
+\newblock Preprint, 2026{\natexlab{f}}.
 
 \end{thebibliography}
