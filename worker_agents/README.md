@@ -2,7 +2,7 @@
 
 **Designing the SARSI Worker Layer: Server-Side Communicators Without Execution Authority, Five Work Agents, and a Vault That Only Ever Answers Yes or No**
 
-PDF: [`../SARSI_One_User_Several_Machines.pdf`](../SARSI_One_User_Several_Machines.pdf) (15 pp).
+PDF: [`../SARSI_One_User_Several_Machines.pdf`](../SARSI_One_User_Several_Machines.pdf) (16 pp).
 
 Companion engineering page: [`singularity/docs/guide-sarsi-worker-agents.md`](../../singularity/docs/guide-sarsi-worker-agents.md) — the same design as a 21-node loop with one entry per node.
 
@@ -59,4 +59,4 @@ The two rules interlock — even a persuaded agent is proposing an *outward* act
 pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
 
-Verified: 0 errors, 0 undefined references, 15 pp.
+Verified: 0 errors, 0 undefined references, 16 pp.

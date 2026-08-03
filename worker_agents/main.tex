@@ -499,9 +499,33 @@ No permission, ceiling, verdict or grant derives from which language model is ru
 
 Two consequences. A verifier should not be the same instance that produced the work, and running it on a \emph{different} engine is the cheapest available independence. And the engine is recorded with every outcome, since ``it got worse last week'' is answerable only if it is.
 
-\subsection{Independence}
+\subsection{A one-way dependency, and what it unlocks}
+\label{sec:dependency}
 
-This console does not import from, depend on, or share a registry, store, process, or identity with the AI4Science agent line. Where a capability exists in both it is duplicated. The cost is real and it purchases the ability to change either without the other.
+The console and the AI4Science agent line are not peers, and the direction of the dependency between them decides what a missing installation \emph{means}.
+
+\begin{table}[h]
+\centering\small
+\caption{The dependency runs one way, and only one way.}
+\label{tab:dependency}
+\begin{tabular}{@{}L{3.0cm}L{10.4cm}@{}}
+\toprule
+\textbf{Component} & \textbf{Depends on} \\
+\midrule
+AI4Science & nothing here. It installs and runs standalone, and must remain useful with no console present at all \\
+The console & \textbf{AI4Science, as a hard prerequisite.} Installing the console installs AI4Science first when it is absent \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The console is therefore neither a peer nor a fork: it is a \textbf{privilege layer}. AI4Science runs its agents with certain gates shut; installing the console \emph{opens} them, so that agents may reach the console's manager and may communicate with one another for the shared workspace.
+
+\begin{principle}[A missing prerequisite is a fault, not a state]
+\label{prin:prereq}
+Because the dependency is real, an absent or unloadable AI4Science is a broken installation rather than an ordinary condition. Code that catches the failure and continues with an empty result hides a broken install behind an empty page: the operator is shown \emph{no agents} and given no reason. The failure surfaces.
+\end{principle}
+
+What the rule does \emph{not} license is the reverse import. AI4Science must stay installable and useful with no console at all --- which is precisely what gives the gates meaning, since a gate signifies nothing unless some state has it shut.
 
 % =====================================================================
 \section{Failure Modes This Layer Adds}

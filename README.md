@@ -18,7 +18,7 @@ Seven papers, one program — a system scale, an agent scale, a fleet scale, a d
 
 **[`SARSI_One_Account_Many_Machines.pdf`](SARSI_One_Account_Many_Machines.pdf)** — *One Account, Many Machines* (21 pp). The console design's successor, written once the fleet spans hosts: host-indexed evidence, channels that can drop, what a machine takes with it when it leaves, and the roster re-partitioned by scope rather than role. Source in [`account_fleet/`](account_fleet/).
 
-**[`SARSI_One_User_Several_Machines.pdf`](SARSI_One_User_Several_Machines.pdf)** — *One User, Several Machines* (15 pp). The worker layer: server-side communicators that may never execute, five work agents, a vault whose only interface is a question, and why an instruction inside an email is not an instruction to the agent. Source in [`worker_agents/`](worker_agents/).
+**[`SARSI_One_User_Several_Machines.pdf`](SARSI_One_User_Several_Machines.pdf)** — *One User, Several Machines* (16 pp). The worker layer: server-side communicators that may never execute, five work agents, a vault whose only interface is a question, and why an instruction inside an email is not an instruction to the agent. Source in [`worker_agents/`](worker_agents/).
 
 Together they supersede everything else in this repository.
 
@@ -50,7 +50,7 @@ Principal results:
 | `console_design/` | LaTeX source, bibliography, upload package |
 | `SARSI_One_Account_Many_Machines.pdf` | **Current.** Multi-host console design, 21 pp |
 | `account_fleet/` | LaTeX source, bibliography |
-| `SARSI_One_User_Several_Machines.pdf` | **Current.** Worker layer design, 15 pp |
+| `SARSI_One_User_Several_Machines.pdf` | **Current.** Worker layer design, 16 pp |
 | `worker_agents/` | LaTeX source, bibliography |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
