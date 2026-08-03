@@ -1,0 +1,30 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026account}
+Chengshuai Yang.
+\newblock One account, many machines: Designing the multi-host {SARSI} console
+  --- per-host agents, host-indexed evidence, channels that can drop, and what
+  a machine takes with it when it leaves.
+\newblock Preprint. The immediate predecessor of this paper,
+  2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026console}
+Chengshuai Yang.
+\newblock One chat box, five agents: Designing the manager-fronted {SARSI}
+  console --- per-agent self-awareness, nested workspaces, and the four
+  channels by which agents affect each other.
+\newblock Preprint, 2026{\natexlab{b}}.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026worker}
+Chengshuai Yang.
+\newblock One user, several machines: Designing the {SARSI} worker layer ---
+  server-side communicators without execution authority, five work agents, and
+  a vault that only ever answers yes or no.
+\newblock Preprint, 2026{\natexlab{c}}.
+
+\end{thebibliography}

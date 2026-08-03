@@ -4,7 +4,7 @@
 
 ## Start here
 
-Seven papers, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, and the worker layer between a person's request and a session on their machine.
+Eight papers, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, and the worker layer between a person's request and a session on their machine.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -19,6 +19,8 @@ Seven papers, one program — a system scale, an agent scale, a fleet scale, a d
 **[`SARSI_One_Account_Many_Machines.pdf`](SARSI_One_Account_Many_Machines.pdf)** — *One Account, Many Machines* (21 pp). The console design's successor, written once the fleet spans hosts: host-indexed evidence, channels that can drop, what a machine takes with it when it leaves, and the roster re-partitioned by scope rather than role. Source in [`account_fleet/`](account_fleet/).
 
 **[`SARSI_One_User_Several_Machines.pdf`](SARSI_One_User_Several_Machines.pdf)** — *One User, Several Machines* (16 pp). The worker layer: server-side communicators that may never execute, five work agents, a vault whose only interface is a question, and why an instruction inside an email is not an instruction to the agent. Source in [`worker_agents/`](worker_agents/).
+
+**[`SARSI_A_System_of_Refusals.pdf`](SARSI_A_System_of_Refusals.pdf)** — *A System of Refusals: The SARSI Agents, Built* (7 pp). The implementation report: one loop, twelve planes, and the finding that almost every module exists to refuse something. Includes what a worker may not answer, and why the model is never shown a permission gate. Source in [`agents_built/`](agents_built/).
 
 Together they supersede everything else in this repository.
 
@@ -52,6 +54,8 @@ Principal results:
 | `account_fleet/` | LaTeX source, bibliography |
 | `SARSI_One_User_Several_Machines.pdf` | **Current.** Worker layer design, 16 pp |
 | `worker_agents/` | LaTeX source, bibliography |
+| `SARSI_A_System_of_Refusals.pdf` | **Current.** Implementation report, 7 pp |
+| `agents_built/` | LaTeX source, bibliography |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
