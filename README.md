@@ -4,7 +4,7 @@
 
 ## Start here
 
-Eight papers and two framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the two scales the papers left open: what an agent may change about *itself*, and where the whole trajectory ends.
+Eight papers and three framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, and where the whole trajectory ends.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -22,9 +22,11 @@ Eight papers and two framework documents, one program — a system scale, an age
 
 **[`SARSI_A_System_of_Refusals.pdf`](SARSI_A_System_of_Refusals.pdf)** — *A System of Refusals: The SARSI Agents, Built* (33 pp). The implementation report: one loop, twelve planes, and the finding that almost every module exists to refuse something. Includes what a worker may not answer, and why the model is never shown a permission gate. Source in [`agents_built/`](agents_built/).
 
-The two most recent are Markdown working documents rather than papers — no LaTeX source, no submission package, and neither has been through the audit the eight above have had:
+The three most recent are Markdown working documents rather than papers — no LaTeX source, no submission package, and none has been through the audit the eight above have had:
 
 **[`SARSI-B_Brain_Improvement_Levels.md`](SARSI-B_Brain_Improvement_Levels.md)** — *What an LLM Brain May Change About Itself*. The brain scale, indexed by write set rather than by substrate. Improvement is undefined when the evaluator sits inside the write set; memory growth is evidence of operation, not of capability; and the trust ordering runs opposite to the ability ordering, so the agent that improves nothing about itself is the one that may hold authority over another's promotion.
+
+**[`SARSI-I_Terminal_Individual.md`](SARSI-I_Terminal_Individual.md)** — *The Terminal Individual*. What bounds one mind as distinct from a society of them. An individual is a single global workspace, so coherence trades radius against cycle time at *c* and there is a largest possible individual for every speed; the binding limit is the width of the moment rather than storage or computation; no self-model is complete; identity is the provenance chain and not the content; and no individual can referee itself, which is why the organizational scale exists at all.
 
 **[`SARSI-Omega_Terminal_Intelligence.md`](SARSI-Omega_Terminal_Intelligence.md)** — *The Terminal Level of Intelligence*. Eight axioms for the discovery loop — reach, discovery, transduction, reorganization — and a terminus defined by the world's floors rather than by the framework's own loops. Repairs the attractor circularity of §10.2.
 
@@ -63,6 +65,7 @@ Principal results:
 | `SARSI_A_System_of_Refusals.pdf` | **Current.** Implementation report, 33 pp |
 | `agents_built/` | LaTeX source, bibliography |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
+| `SARSI-I_Terminal_Individual.md` | **Current.** Individual-scale bounds. Markdown only — no LaTeX or submission package |
 | `SARSI-Omega_Terminal_Intelligence.md` | **Current.** Terminal-level axioms. Markdown only — no LaTeX or submission package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
@@ -94,6 +97,16 @@ The two framework documents run the same rule out to its ends. At the brain scal
 SARSI-L asks how far recursive self-improvement has propagated; the self-awareness paper asks what an agent knows about itself. `SARSI-B` asks what it may *change* about itself, and shows that the usual three-level reading of LLM brains — doesn't improve, improves in one direction, evolves open-endedly — conflates three independent questions: whether the objective is writable, how deep the write goes, and whose brain the loop reaches. A level is a triple, not a rung.
 
 Four results. Improvement is undefined when the evaluator is inside the write set, which is why open-ended evolution "has no definition" — and the repair is the frozen referee the corpus already pays for twice, in the autonomous-goal-revision criterion and in the §8.3 pre-registration protocol. Memory growth is evidence of operation, not of capability. The trust ordering inverts the ability ordering. And gate strength should be monotone in write depth, because loop period and per-iteration gain rise together with it — which is the only form in which the comparison to a biological brain is load-bearing rather than decorative.
+
+## The individual scale
+
+`SARSI-I` supplies what the terminal document asserted without locating. Its Proposition Ω6 concedes that light-speed forbids a unified stellar-scale mind, so what is at the end is plural — but it never says where the individual runs out, and the scales before it all take the individual for granted.
+
+An individual is defined by simultaneity: one global workspace, of bounded width, from which all its actions are selected. Coherence then requires that every contributing part reach that workspace within one decision cycle, so radius and cycle time trade at exactly *c* — a mind that thinks in nanoseconds is at most hand-sized, and one that thinks in picoseconds at most millimetres across. Scaling past the bound does not produce a greater mind but a society, so **civilization begins where the individual ends, and the boundary is physical rather than historical.**
+
+Four further limits, none removable. The aperture rather than the store is the constraint: what bounds a decision is how much can be brought to bear at once. No self-model is complete, because a model is part of what it models — so the deployed self-model's compressed coordinates and explicit limits line are the terminal condition, not a stage toward something better. Identity is the provenance chain, since every other candidate is in the write set. And no individual can referee itself, which makes the outside constitutive rather than additional.
+
+Biology sits six to eight orders of magnitude below the physical bound, held there by a signal velocity of metres per second rather than *c*. Closing that gap moves every magnitude in the document and none of its limits.
 
 ## The terminal level
 
