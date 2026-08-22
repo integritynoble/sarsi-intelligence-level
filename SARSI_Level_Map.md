@@ -2,15 +2,16 @@
 
 ## Every definition of "level of intelligence" in this corpus, consolidated
 
-*Document version: 1.0 — 2026-08-22*
-*Index to: `SARSI-L_Paper_v3.md`, `self_awareness/`, `fleet/`, `SARSI-B_Brain_Improvement_Levels.md`, `SARSI-I_Terminal_Individual.md`, `SARSI-Omega_Terminal_Intelligence.md`*
+*Document version: 1.1 — 2026-08-22*
+*Index to: `SARSI-L_Paper_v3.md`, `self_awareness/`, `fleet/`, `SARSI-B_Brain_Improvement_Levels.md`, `SARSI-I_Terminal_Individual.md`, `SARSI-O_Organizational_Intelligence.md`, `SARSI-Omega_Terminal_Intelligence.md`*
 
 ---
 
 ## § 1 — The headline
 
-The corpus now defines levels of intelligence on **nine axes**. None of them is the level, no
-combination of them reduces to a scalar, and the single most consistent finding across six documents
+The corpus now defines levels of intelligence on **fourteen axes across two different objects** —
+nine that describe an intelligence, five that describe an organization of them. None of them is the
+level, no combination of them reduces to a scalar, and the single most consistent finding across six documents
 written at five scales is that **every attempt to produce one number was wrong and was withdrawn.**
 
 That has happened five times, independently, for five different reasons:
@@ -28,7 +29,7 @@ itself. **The level of an intelligence is a profile.** This document is the map 
 
 ---
 
-## § 2 — The nine axes
+## § 2 — The nine axes of an intelligence
 
 | # | Axis | Values | Measures | Defined in |
 |---|---|---|---|---|
@@ -41,6 +42,29 @@ itself. **The level of an intelligence is a profile.** This document is the map 
 | 7 | **Individual bounds** Λ<sub>ind</sub> | 5 binding constraints | Whether one mind is at its own limit | SARSI-I §10 |
 | 8 | **Floor saturation** φ<sub>d</sub> | [0,1] per domain | Whether what's left is the world's rate or ours | SARSI-Ω §6, §11 |
 | 9 | **Energy** | Watts; Kardashev | Indicator only — never constitutive | SARSI-Ω §8 |
+
+### And five for an organization
+
+An organization is not a larger intelligence, so it is not measured on the axes above. It is measured
+on properties of its coordination structure, **none of which is a capability of any member**.
+
+| # | Axis | Values | Measures | Defined in |
+|---|---|---|---|---|
+| 10 | **Coverage** | roles filled / vacant | Whether every role the loop needs exists | SARSI-O §4 |
+| 11 | **Separation** | proposer / promoter / referee distinct? | The independence rule, at organizational scale | SARSI-O §4 |
+| 12 | **Throughput** *T*<sub>δ</sub> | seconds | Authorization latency — bounds ρ<sub>max</sub> | SARSI-O §4 |
+| 13 | **Referee externality** | external / self / absent | Whether the progress measure is self-authored | SARSI-O §4 |
+| 14 | **World coupling** | instrument / opinion | Whether the referee chain terminates outside the members | SARSI-O §4 |
+
+Plus the **level census**: the distribution of member levels across roles. The critical entry is
+⟨D3⟩, the instrument-maker — by Ω1 transduction is the discovery loop's sole coupling, so **it is the
+only role whose work compounds**, and an organization without one produces output without moving its
+frontier.
+
+Two results follow that no individual axis can express. Organizational intelligence is **not monotone
+in member capability** — an organization scoring zero on separation has no well-posed improvement loop
+regardless of its members' levels. And **levels necessarily coexist**: uniformity is not an
+unreachable ideal but a degenerate configuration, forced by four independent arguments (SARSI-O §7).
 
 ---
 
@@ -180,6 +204,8 @@ single consequence of the corpus.
 
 To state the level of any system, give:
 
+For an intelligence:
+
 ```
 λ  = (λ_I … λ_V+)          loop completion per substrate
 A  = A0…A4                 authority ceiling
@@ -188,6 +214,13 @@ s  = (s_I … s_B) ± counts  self-state, ten coordinates with evidence
 Λ_ind : which of the five binds, or "not at bound"
 φ  = (φ_d)                 floor saturation per domain
 E  = watts
+```
+
+For an organization:
+
+```
+O  = ⟨coverage, separation, T_δ, referee, world-coupling⟩
+census = distribution of member levels across roles; is ⟨D3⟩ present?
 ```
 
 Anything less is an impression. Anything reduced to one number is one of the five withdrawn mistakes
@@ -299,13 +332,18 @@ forward in time:
 1. **`self_awareness/`** — what one agent knows about itself. The vocabulary everything else uses.
 2. **`SARSI-I_Terminal_Individual.md`** — what one mind is, and where it ends.
 3. **`fleet/`** — what one agent may assert about another.
-4. **`SARSI-B_Brain_Improvement_Levels.md`** — what an agent may change about itself.
-5. **`SARSI-L_Paper_v3.md`** — how far self-improvement has propagated across substrates.
-6. **`SARSI-Omega_Terminal_Intelligence.md`** — where the whole trajectory ends.
+4. **`SARSI-O_Organizational_Intelligence.md`** — what a mind made of minds must contain.
+5. **`SARSI-B_Brain_Improvement_Levels.md`** — what an agent may change about itself.
+6. **`SARSI-L_Paper_v3.md`** — how far self-improvement has propagated across substrates.
+7. **`SARSI-Omega_Terminal_Intelligence.md`** — where the whole trajectory ends.
 
 The deployment report and console design sit alongside 3–5 as the record of which of it is built.
 
 ## Version history
+
+**1.1 — 2026-08-22.** Adds the five organizational axes and the level census, following
+`SARSI-O_Organizational_Intelligence.md`. The map now covers two objects: an intelligence and an
+organization of them. Nine axes became fourteen; no axis changed.
 
 **1.0 — 2026-08-22.** Initial. Consolidates the level definitions from six documents written at five
 scales, in response to a request for all of them in one place.

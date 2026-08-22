@@ -4,7 +4,7 @@
 
 ## Start here
 
-Eight papers and four framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, and where the whole trajectory ends — plus one map of all of it.
+Eight papers and five framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -24,11 +24,13 @@ Eight papers and four framework documents, one program — a system scale, an ag
 
 **[`SARSI_Level_Map.md`](SARSI_Level_Map.md)** — *The SARSI Level Map*. **Start here if you want the levels.** Every definition of "level of intelligence" in this corpus on one page: nine axes, their values, what each measures, and where each is defined — with worked profiles for the deployed console, a frontier LLM, a human, a terminal individual, and a terminal civilization. Its headline is that no scalar exists, and that the corpus has now withdrawn the one-number mistake five times independently.
 
-The four most recent are Markdown working documents rather than papers — no LaTeX source, no submission package, and none has been through the audit the eight above have had:
+The five most recent are Markdown working documents rather than papers — no LaTeX source, no submission package, and none has been through the audit the eight above have had:
 
 **[`SARSI-B_Brain_Improvement_Levels.md`](SARSI-B_Brain_Improvement_Levels.md)** — *What an LLM Brain May Change About Itself*. The brain scale, indexed by write set rather than by substrate. Improvement is undefined when the evaluator sits inside the write set; memory growth is evidence of operation, not of capability; and the trust ordering runs opposite to the ability ordering, so the agent that improves nothing about itself is the one that may hold authority over another's promotion.
 
 **[`SARSI-I_Terminal_Individual.md`](SARSI-I_Terminal_Individual.md)** — *The Terminal Individual*. What bounds one mind as distinct from a society of them. An individual is a single global workspace, so coherence trades radius against cycle time at *c* and there is a largest possible individual for every speed; the binding limit is the width of the moment rather than storage or computation; no self-model is complete; identity is the provenance chain and not the content; and no individual can referee itself, which is why the organizational scale exists at all.
+
+**[`SARSI-O_Organizational_Intelligence.md`](SARSI-O_Organizational_Intelligence.md)** — *Organizational Intelligence*. The anatomy of a mind made of minds: five axes that are properties of the coordination structure rather than of any member, a map of which individual level may fill which role, and the result that levels necessarily coexist — uniformity being not an unreachable ideal but a degenerate configuration.
 
 **[`SARSI-Omega_Terminal_Intelligence.md`](SARSI-Omega_Terminal_Intelligence.md)** — *The Terminal Level of Intelligence*. Eight axioms for the discovery loop — reach, discovery, transduction, reorganization — and a terminus defined by the world's floors rather than by the framework's own loops. Repairs the attractor circularity of §10.2.
 
@@ -69,6 +71,7 @@ Principal results:
 | `SARSI_Level_Map.md` | **Current.** Index to every level definition, nine axes. Markdown only |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
 | `SARSI-I_Terminal_Individual.md` | **Current.** Individual-scale bounds. Markdown only — no LaTeX or submission package |
+| `SARSI-O_Organizational_Intelligence.md` | **Current.** Organizational anatomy and the coexistence result. Markdown only |
 | `SARSI-Omega_Terminal_Intelligence.md` | **Current.** Terminal-level axioms. Markdown only — no LaTeX or submission package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
@@ -110,6 +113,16 @@ An individual is defined by simultaneity: one global workspace, of bounded width
 Four further limits, none removable. The aperture rather than the store is the constraint: what bounds a decision is how much can be brought to bear at once. No self-model is complete, because a model is part of what it models — so the deployed self-model's compressed coordinates and explicit limits line are the terminal condition, not a stage toward something better. Identity is the provenance chain, since every other candidate is in the write set. And no individual can referee itself, which makes the outside constitutive rather than additional.
 
 Biology sits six to eight orders of magnitude below the physical bound, held there by a signal velocity of metres per second rather than *c*. Closing that gap moves every magnitude in the document and none of its limits.
+
+## The organizational scale
+
+`SARSI-O` develops what the individual document asserted and did not pursue: an individual cannot referee itself or extend its own reach, so the outside is constitutive of it. That makes the organizational scale a precondition rather than an aggregate, and **two of an individual's level axes — referee and reach — turn out to be properties of the organization it sits in, not of it.** You cannot raise an intelligence's level by working only on the intelligence.
+
+An organization is a set of individuals plus a coordination structure, measured on five axes none of which is a capability of any member: coverage, separation of proposer from promoter from referee, authorization latency, referee externality, and whether the referee chain terminates in an instrument or in more opinion. Organizational intelligence is therefore **not monotone in member capability** — a structure scoring zero on separation has no well-posed improvement loop however capable its members, because self-certification is not weak evidence but none.
+
+Section 6 maps each individual level to the role only it may fill. The empty self-write set is what admits authority over another's promotion; A4 carries no deploy authority and is structurally a proposer; the objective-open role is the only one that may revise what the organization is for, and in every deployed configuration it is a human. The instrument-maker at ⟨D3⟩ is singled out, because by Ω1 transduction is the discovery loop's sole coupling and **it is the only role whose work compounds.**
+
+Section 7 answers whether all levels coexist: necessarily, forced four times over — separation is level differentiation enacted, the individual bound is a frontier rather than a peak, the write depths run at different clock speeds, and authority is earned over time in an organization that keeps admitting newcomers. The corollary is the one worth carrying: an organization of identical maximal minds all holding all roles scores zero on separation and is **weaker than a structured laboratory of ordinary ones.**
 
 ## The terminal level
 
