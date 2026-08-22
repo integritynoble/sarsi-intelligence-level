@@ -5,6 +5,13 @@
 *Document version: 1.0 — 2026-08-22*
 *Applies: `SARSI_Level_Map.md`. Framework documents define the axes; this places systems on them.*
 
+> **Superseded in part.** The Grok and OpenClaw rows below are corrected by the two-axis paper's
+> Table 1, which is better evidenced on exactly the rows §1 flags as low confidence: Grok chat and
+> Grok Bot are distinct products at I1 and **I2**, and OpenClaw is I1 basic / I1–I2 with active memory.
+> This document placed Grok Bot *lowest* of the four and it belongs *highest*. See
+> `Two_Axis_Concordance.md` §6. Marking a guess as low-confidence did not make it a finding, and it
+> should probably not have been tabulated.
+
 > **This document dates.** The frameworks state constraints that do not move; this states where
 > particular products sat on 2026-08-22. Placements are **orderings by inspection**, not
 > measurements — every axis in the corpus is ordinal (`SARSI_Level_Map.md` §9).

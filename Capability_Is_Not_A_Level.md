@@ -39,6 +39,15 @@ them is a held-out evaluation of their own configuration, which none ships.
 We are explicit that the map does not predict performance. It is a semantics for improvement claims,
 not a benchmark, and §8 states what it therefore cannot do.
 
+**This paper is a companion to a two-axis (I, O) taxonomy developed independently and in parallel**
+(*A Two-Axis Intelligence Level Framework for AI Agents*, 2026), which we take as the primary scale.
+That framework indexes an individual by the deepest layer it changes through experience and a
+collective by what it changes about its own coordination. We adopt its coordinates and supply four
+things it does not carry: a derivation of why an external evaluator is required rather than advisable,
+physical bounds that give its individual axis a ceiling, an identity criterion for the lineage its
+higher levels presuppose, and a measurement of the quantity that bounds every compensated loop's rate.
+`Two_Axis_Concordance.md` maps the two in full, including two substantive disagreements.
+
 ---
 
 ## 1. Introduction
@@ -88,6 +97,8 @@ whenever the system is embedded in an organization that evaluates it, which is e
 5. **An empirical placement** (§6) of five agent systems and one platform, with a provenance table
    stating what was inspected for each, and the finding that four heavily-compared systems occupy one
    cell.
+6. **A first measurement** (§6.6) of authorization latency on a deployed system, which finds the
+   quantity has never been observed and that its system of record cannot represent it.
 
 ### 1.4 What this paper does not claim
 
@@ -122,6 +133,18 @@ human–AI interaction mode, whereas ours is indexed by the write set and the lo
 The difference is consequential. Interaction mode is observable from the interface; write set and
 evaluator location are observable only from the architecture, and it is those that determine whether
 an improvement claim is well-posed.
+
+**Two-axis level taxonomies.** The framework closest to this one is a two-axis (I, O) scale
+developed in parallel with it, which classifies an individual by the deepest layer it can change
+through experience — reactive, persistent, adaptive-learning, self-improving, recursively
+self-improving, autonomous-discovery, open-ended — and a collective by what it changes about its own
+coordination and discovery. We treat it as primary and this paper as its companion. Its
+persistent/adaptive-learning boundary is finer than the write-set depth used in §3.2, and its
+transition test for that boundary — *does matched future performance improve because the agent
+learned, rather than merely replaying stored instructions* — is the ablation §3.4 identifies as
+missing, stated as a level boundary rather than as a complaint. We adopt it. Its *improvement
+competence* metric, validated downstream gain per unit of proposal and evaluation cost, is the
+operational measure §3.2 lacks for whether a deeper loop earns its cost.
 
 **Formal definitions of intelligence.** Legg and Hutter (2007) define universal intelligence as
 expected performance across a weighted class of environments — an explicitly scalar quantity. Chollet
@@ -191,7 +214,12 @@ implement, validate, deploy⟩, and its **write set** *W* ⊆ *B* is what it may
 > **Definition 2 (depth).** The **depth** *D* of a loop is the deepest element of *B* in its write
 > set: **D0** nothing persists · **D1** memory · **D2** policy · **D3** skills · **D4** weights.
 
-Depth is not a ranking of sophistication. It is a statement about which substrate a change reaches,
+Depth is **coarse at D1**, and the two-axis scale's persistent/adaptive-learning split is the better
+construction there: writing memory and behaving measurably differently because of it are separate
+states, and only the second is learning. D1 as defined here covers both, and where the distinction
+matters we use the finer boundary.
+
+Otherwise depth is not a ranking of sophistication. It is a statement about which substrate a change reaches,
 and it has a direct consequence for gating: loop period and per-iteration gain both rise with depth,
 from memory in seconds through policy in days to weights in months. A well-formed system therefore
 runs **all depths concurrently**, at different clock speeds, with gate strength monotone in depth. A
