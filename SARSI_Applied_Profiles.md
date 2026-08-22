@@ -118,7 +118,7 @@ supported across all of them — they do know their own resource state.
 |---|---|---|
 | **O-A1 Coverage** | Strong | Operators (session agents), specialists (imaging, learning, process-learning), guide/promoter (machine agent, manager), referee (control plane), director (owner). All roles filled |
 | **O-A2 Separation** | **Strong** | Verdicts computed control-plane-side; promotion needs an owner Ed25519 signature the proposer cannot produce; held-out ground truth never staged into a sandbox |
-| **O-A3 Throughput** *T*<sub>δ</sub> | **Unmeasured** | Human review latency. Never timestamped |
+| **O-A3 Throughput** *T*<sub>δ</sub> | **Unmeasurable** | Measured 2026-08-22: the `promotions` table has no timestamp column, and the D2 loop emits no candidate-available event. See `T_delta_Measurement_2026-08-22.md` |
 | **O-A4 Referee externality** | Strong | Held-out scene stores and registry benchmarks the agent did not author |
 | **O-A5 World coupling** | Partial | Real for imaging — actual reconstructions against real ground truth. Software-only elsewhere |
 
