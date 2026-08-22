@@ -4,7 +4,7 @@
 
 ## Start here
 
-Eight papers, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, and the worker layer between a person's request and a session on their machine.
+Eight papers and two framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the two scales the papers left open: what an agent may change about *itself*, and where the whole trajectory ends.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -21,6 +21,12 @@ Eight papers, one program — a system scale, an agent scale, a fleet scale, a d
 **[`SARSI_One_User_Several_Machines.pdf`](SARSI_One_User_Several_Machines.pdf)** — *One User, Several Machines* (16 pp). The worker layer: server-side communicators that may never execute, five work agents, a vault whose only interface is a question, and why an instruction inside an email is not an instruction to the agent. Source in [`worker_agents/`](worker_agents/).
 
 **[`SARSI_A_System_of_Refusals.pdf`](SARSI_A_System_of_Refusals.pdf)** — *A System of Refusals: The SARSI Agents, Built* (33 pp). The implementation report: one loop, twelve planes, and the finding that almost every module exists to refuse something. Includes what a worker may not answer, and why the model is never shown a permission gate. Source in [`agents_built/`](agents_built/).
+
+The two most recent are Markdown working documents rather than papers — no LaTeX source, no submission package, and neither has been through the audit the eight above have had:
+
+**[`SARSI-B_Brain_Improvement_Levels.md`](SARSI-B_Brain_Improvement_Levels.md)** — *What an LLM Brain May Change About Itself*. The brain scale, indexed by write set rather than by substrate. Improvement is undefined when the evaluator sits inside the write set; memory growth is evidence of operation, not of capability; and the trust ordering runs opposite to the ability ordering, so the agent that improves nothing about itself is the one that may hold authority over another's promotion.
+
+**[`SARSI-Omega_Terminal_Intelligence.md`](SARSI-Omega_Terminal_Intelligence.md)** — *The Terminal Level of Intelligence*. Eight axioms for the discovery loop — reach, discovery, transduction, reorganization — and a terminus defined by the world's floors rather than by the framework's own loops. Repairs the attractor circularity of §10.2.
 
 Together they supersede everything else in this repository.
 
@@ -56,6 +62,8 @@ Principal results:
 | `worker_agents/` | LaTeX source, bibliography |
 | `SARSI_A_System_of_Refusals.pdf` | **Current.** Implementation report, 33 pp |
 | `agents_built/` | LaTeX source, bibliography |
+| `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
+| `SARSI-Omega_Terminal_Intelligence.md` | **Current.** Terminal-level axioms. Markdown only — no LaTeX or submission package |
 | `SARSI-L_Framework_v2.1.md` | Incorporated into v3.0. Critical revision of v2.0 |
 | `SARSI-L_Critical_Revision.md` | Audit workpaper — five circular assumptions, examined |
 | `SARSI-L_Framework_v2.md` | Superseded. Metrics withdrawn |
@@ -78,6 +86,22 @@ The pairing also bounds the companion's claim honestly. `T_δ` is review latency
 A manager coordinating specialists is not a controller: specialists filter what it sends through their own admission masks, the coupling is recurrent, and owner pre-emption outranks both. The paper's result is that the governance prohibition — no agent may write another's self-state — is *the same constraint* as the architecture's stability condition. Forbid the write and the top-down block of the recurrent coupling vanishes, the coupling is nilpotent, and a fleet verified agent by agent is verified as a fleet. Permit it and the feedback loop returns, and stability must be tuned against fleet size.
 
 The through-line across the corpus is one rule at every scale. The system-scale paper argues authority closure needs an evidence base; the agent-scale paper supplies it and requires promoter ≠ proposer; the fleet-scale paper extends that to what one agent may assert about another; the deployment report says which of it is actually built; and the console design carries it into a product surface, where it becomes *memory does not cross agents* — because a shared store would leave the evidence ladder true in principle and unenforceable in practice.
+
+The two framework documents run the same rule out to its ends. At the brain scale it becomes *the evaluator lies outside the write set*, which is what makes an improvement claim mean anything at all; the fleet's self-state prohibition turns out to be that rule with the write set belonging to someone else. At the terminal scale it becomes the reason the endpoint cannot be defined by the system's own capability — a framework that measures progress toward a state it defines as the measurement's endpoint is judging its own promotion, which is the one thing the corpus forbids everywhere else.
+
+## The brain scale
+
+SARSI-L asks how far recursive self-improvement has propagated; the self-awareness paper asks what an agent knows about itself. `SARSI-B` asks what it may *change* about itself, and shows that the usual three-level reading of LLM brains — doesn't improve, improves in one direction, evolves open-endedly — conflates three independent questions: whether the objective is writable, how deep the write goes, and whose brain the loop reaches. A level is a triple, not a rung.
+
+Four results. Improvement is undefined when the evaluator is inside the write set, which is why open-ended evolution "has no definition" — and the repair is the frozen referee the corpus already pays for twice, in the autonomous-goal-revision criterion and in the §8.3 pre-registration protocol. Memory growth is evidence of operation, not of capability. The trust ordering inverts the ability ordering. And gate strength should be monotone in write depth, because loop period and per-iteration gain rise together with it — which is the only form in which the comparison to a biological brain is load-bearing rather than decorative.
+
+## The terminal level
+
+`SARSI-Ω` answers the open problem in §10.2. The framework currently measures progress as distance to a Type II civilization while defining that state as the condition reached when all loops close, so it measures progress toward an endpoint it constructs; the withdrawn transcendence paper made the same move in different words.
+
+The repair takes as primitive a loop the corpus does not represent — not the improvement of a substrate, but the conversion of the unknown into the known and of the known into the instruments that reach further unknown. Reach is instrument-bounded, and transduction is the only operator producing instruments, so it is the sole coupling from the loop's output back to its own input: an intelligence with perfect reasoning and no transduction is not a slower recursive discoverer but a non-recursive one, and its frontier never moves.
+
+Completeness is excluded three times over — undecidability, the Landauer and Bekenstein bounds, and a particle horizon that accelerated expansion is *shrinking* — so the terminus is defined on bottlenecks instead: every binding constraint is a physical floor rather than a throughput one. That criterion names the speed of light, organism response times, and materials kinetics, none of which this framework defines, so Principle 06's attractor invariance becomes derived rather than asserted. Kardashev indicates and does not define, since terminal implies high energy capture while high energy capture implies nothing. And the singularity is the knee — the crossing where throughput floors stop binding, which is the entry to §5.5's matter-bottleneck plateau, not the exit.
 
 ## Submitting
 
