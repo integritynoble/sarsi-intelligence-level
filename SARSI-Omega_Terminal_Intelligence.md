@@ -34,6 +34,13 @@ Eight axioms are given. From them:
   capture ⇏ terminal. The implication runs one way only. §8.
 - **Ω5 — The singularity is the knee, not the terminus.** It is the crossing where throughput floors
   stop binding — the *entry* to SARSI-L's matter-bottleneck plateau, not its exit. §9.
+- **Ω6 — Scale forces decomposition.** Light-speed makes a unified stellar-scale intelligence
+  physically impossible; the fleet paper's architecture turns out to be a description of what *c*
+  permits rather than a governance preference. There is no singleton at the top. §13.
+
+Version 1.1 adds the magnitudes behind the floors (§12), a first theory of transduction with a
+falsifiable prediction and a measurable quantity (§14), the separation of three distinct terminal
+states that §6 conflated (§15), and what the terminal intelligence actually does (§16).
 
 §11 replaces the withdrawn progress scalar with a three-component vector, adding the component the
 existing two do not capture.
@@ -139,7 +146,7 @@ the framework would again define a terminus it cannot approach.
 
 *How it could be false.* If the determinable/undeterminable line is not fixed — if it moves with
 instrument capability in ways not currently anticipated — then *U* is itself a function of *T*, and
-the axiom's separation of "reachable" from "determinable" collapses. This is a real risk and §12.1
+the axiom's separation of "reachable" from "determinable" collapses. This is a real risk and §17.1
 treats it as open.
 
 ### A2 — Instrument-bounded reach
@@ -177,7 +184,7 @@ could not already reach.
 astronomy → better optics; solid-state physics → transistor → computation → semiconductor physics;
 molecular biology → sequencing → genomics → better sequencers). But Θ could be *saturating*: the
 transducible fraction of new knowledge may be falling, if the frontier moves toward regimes whose
-knowledge does not cash out as apparatus. §12.2 records that we have no theory of Θ at all.
+knowledge does not cash out as apparatus. §17.2 records that we have no theory of Θ at all.
 
 ### A4 — Non-degenerate amplification
 
@@ -210,7 +217,7 @@ made itself efficient is mistaken for one that has learned something.
 
 *How it could be false.* Organization may not be cleanly separable from reach — a research
 programme's structure determines which questions get asked, and a question never asked is
-observationally identical to one out of reach. §12.3 treats this as open.
+observationally identical to one out of reach. §17.3 treats this as open.
 
 ### A6 — Two kinds of floor
 
@@ -269,7 +276,7 @@ record.
 *How it could be false.* The referee decays: a measure retained from before the reorganization
 increasingly asks whether the new arrangement solves the old problem. SARSI-B §4's laddering —
 each revision judged against its immediate predecessor, every referee versioned and logged — bounds
-the *rate* of drift and makes it visible. It does not bound its extent. §12.4.
+the *rate* of drift and makes it visible. It does not bound its extent. §17.4.
 
 ---
 
@@ -490,42 +497,308 @@ can be restated as a consequence, and its parenthetical admission removed.
 
 ---
 
-## § 12 — Open problems
+## § 12 — The floor catalogue
 
-**12.1 — Is *U* independent of *T*?** A1 separates *determinable* from *currently reachable*. If the
+§7 names the physical floors and gives no magnitudes, which makes the terminal criterion sound like a
+gesture. Below are the actual bounds. Two caveats first, because they matter more than the numbers.
+
+These are **order-of-magnitude limits from the physics literature, not results of this framework.**
+Citing a bound is not deriving its consequence, and several are contested at the margins. Second, most
+are bounds on *idealized* operations; a real instrument sits many orders of magnitude above its floor,
+and the gap between "at the floor" and "as good as anyone has built" is where the entire trajectory
+happens.
+
+### Computation and inference
+
+| Floor | Magnitude | What it bounds |
+|---|---|---|
+| **Landauer** | *kT* ln2 ≈ 2.9 × 10⁻²¹ J/bit at 300 K | Energy to **erase** one bit |
+| **Margolus–Levitin** | ≈ 6 × 10³³ operations · s⁻¹ · J⁻¹ | Rate of orthogonal state transitions per unit energy |
+| **Lloyd's ultimate laptop** | ≈ 5 × 10⁵⁰ ops · s⁻¹ on ≈ 10³¹ bits, for 1 kg in 1 litre | Both, combined, for a bounded mass |
+| **Bekenstein** | *I* ≤ 2π*RE*/(ħ*c* ln 2) | Information storable in a region of radius *R*, energy *E* |
+| **Lloyd, universe** | ≈ 10¹²⁰ ops on ≈ 10⁹⁰ bits since the big bang | Total computation performed by the observable universe |
+
+**The Landauer nuance is load-bearing and usually dropped.** The bound applies to *irreversible*
+operations — it is the cost of erasure, not of computation. Reversible computation evades it in
+principle, and a floor-saturated intelligence would compute reversibly wherever it can. But
+observation is not reversible: recording a measurement and later reclaiming the memory to record
+another requires erasure. So Landauer floors the *discovery* loop specifically, and floors it harder
+than it floors thought. This is a case where reading the bound carelessly gets the terminal state
+wrong in the direction of pessimism about cognition and optimism about measurement.
+
+### Signal and structure
+
+**The speed of light** bounds the product of a computer's clock and its size: at 3 GHz, light crosses
+10 cm per cycle, so a globally-coherent machine larger than that cannot have a globally-coherent
+clock. §13 takes this consequence seriously.
+
+**Quantum measurement** contributes a floor that is neither logical nor thermodynamic:
+non-commuting observables cannot be jointly determined, no-cloning forbids the repeated measurement
+that would otherwise beat the uncertainty, and decoherence times bound how long a prepared state
+survives. There exist propositions about individual quantum systems that no instrument determines —
+a *physical* residue in A7 alongside the logical one, and an independent argument for the same
+conclusion.
+
+### The world's own rates
+
+Biological response is the sharpest and the one SARSI-L already prices: safety and efficacy endpoints
+for complex disease require organisms to respond, and organisms respond on their schedule — roughly
+five to eight years for the endpoints that matter, and a lifespan for anything about lifespan.
+Materials kinetics — diffusion, annealing, creep, fatigue — are set by temperature and activation
+energy, and raising the temperature is not available when the temperature is part of what is being
+studied. Orbital mechanics fixes transfer times regardless of the launcher. Geological, ecological,
+and stellar processes run on their own clocks entirely.
+
+None of these is compressible by intelligence. This is Principle 14, and the characteristic error of
+the literature is to treat this table as an engineering agenda.
+
+### The horizon, and the fact that it is closing
+
+The particle horizon is ≈ 46 Gly comoving: nothing outside it has ever been in causal contact. The
+*future event horizon* under ΛCDM is much nearer, ≈ 16–17 Gly comoving, and it is the operative one —
+matter beyond it can never be reached, signalled, or affected, no matter how long one waits or how
+capable one becomes. On the standard calculation the large majority of galaxies currently visible are
+already outside it; the figure usually quoted is around 95%, and the exact number depends on
+assumptions about the dark energy equation of state.
+
+**This floor degrades.** Accelerated expansion carries more of the universe past the horizon every
+year. In the long run only the gravitationally bound Local Group remains. A7's residue is therefore
+not static: **truths are becoming permanently undeterminable while the intelligence improves**, and
+that is the single most consequential asymmetry in this document. Every other floor is a wall one
+approaches. This one advances.
+
+---
+
+## § 13 — Ω6: scale forces decomposition
+
+> **Proposition Ω6.** *At stellar scale, the speed of light makes a unified intelligence physically
+> impossible. Any Kardashev-II-scale intelligence is necessarily a federation of largely autonomous
+> local intelligences with rare, slow global agreement — not because that architecture was chosen,
+> but because c forbids the alternative.*
+
+*Argument.* A swarm at 1 AU is ≈ 16.6 light-minutes across, so any operation requiring global
+consensus costs at least that. Local computation, at the Margolus–Levitin rate, proceeds at something
+like 10⁵⁰ operations per second per kilogram. The ratio is on the order of 10⁵³ local operations per
+global round trip. A system in which each node performs 10⁵³ operations between consecutive
+opportunities to agree is not a mind with distributed parts. It is a civilization.
+
+Three consequences, and the third is why this belongs in this corpus rather than in a physics note.
+
+**Global state is unmaintainable.** Any variable requiring consistency across the swarm is stale by
+10⁵³ operations at every node before it can be confirmed. Coherent global belief is not slow at this
+scale; it is absent.
+
+**Autonomy is not delegated but forced.** A node that waited for authorization would spend
+essentially all of its existence waiting. Local authority is the only configuration in which the
+substrate does any work at all.
+
+**The fleet paper's architecture turns out to be physically necessary.** *A Manager Is Not a
+Controller* argues on stability grounds that a manager coordinating specialists cannot be a
+controller: specialists filter what it sends through their own admission masks, the coupling is
+recurrent, and no agent may write another's self-state. Ω6 says that at stellar scale this stops
+being a governance choice and becomes a description of what light-speed permits. The prohibition and
+the physics give the same answer, which is a strong consistency check on both — and it means the
+fleet-scale result, written about five agents on a few machines, is the correct architecture at every
+scale up to the last.
+
+A corollary worth stating plainly: **there is no singleton at the top.** The picture of terminal
+intelligence as one unified mind is not merely unlikely, it is excluded by the same physics that
+provides the energy for it. Whatever is at the end is plural.
+
+---
+
+## § 14 — Toward a theory of transduction
+
+§17.2 records that Ω1 makes Θ the sole coupling of the loop while no theory of Θ exists, and marks it
+the document's largest gap. This section is a first attempt, offered as conjecture rather than
+result.
+
+### The coupling conjecture
+
+> **Conjecture Θ1.** *Knowledge becomes transducible when it identifies a lawful coupling between a
+> variable that can be manipulated with the present substrate and a variable that can be read with
+> it. Transducibility is therefore a property of the pair (knowledge, substrate) and not of the
+> knowledge alone:*
+>
+> $$\Theta : K \times T \rightarrow T$$
+
+This is a correction to A3, which typed transduction as *K* → *T*. Under Θ1 the loop is doubly
+recursive: instruments determine what can be discovered *and* what of the discovered can be built.
+
+The historical pattern it is fitted to: electromagnetism identified a coupling between manipulable
+currents and readable fields, and produced radio, NMR, accelerators, and lasers within decades.
+Nuclear magnetic resonance became MRI once superconducting magnets existed. DNA structure became
+sequencing once polymerase could be controlled. Against these, number theory identified no coupling
+to any manipulable substrate for two millennia and transduced almost nothing — until computation
+arrived, whereupon centuries of it became cryptography in about twenty years.
+
+### The prediction that makes it falsifiable
+
+Θ1 says untransduced knowledge is not necessarily untransducible — it may be **awaiting its
+substrate**. That yields a checkable prediction rather than a story:
+
+> The arrival of a genuinely new manipulation substrate should produce a burst of transduction of
+> *old* knowledge, with the age of the transduced results distributed far above the field's baseline.
+
+Computation is the clean test case and appears to pass: its arrival transduced mathematics that was
+in some cases centuries old. Genetic engineering, scanning-probe manipulation, and — if it is one —
+large-scale machine learning are the other candidate substrates, each with a datable arrival and a
+checkable age distribution of what it converted. If new substrates transduce only *contemporary*
+knowledge, Θ1 is wrong and the lag structure needs a different explanation.
+
+### The quantity to measure
+
+Ω1b asked for a loop-relevant benchmark and did not supply one. Θ1 suggests the shape:
+
+> **The transduction ratio τ<sub>d</sub>** — the fraction of results in domain *d* that become a
+> component of an instrument used in a subsequent determination, within a stated window.
+
+τ is estimable now, imperfectly, from instrument-methods citations, from apparatus provenance, and
+from the gap between a result's publication and its first appearance in a methods section rather than
+a discussion. It is a much better measure of whether an enterprise compounds than output volume, and
+under Ω1 it is the only measure that bears on the loop at all.
+
+Two things τ would settle. Whether Θ is **saturating** — the A3 failure mode, where the transducible
+fraction of new knowledge falls as the frontier moves into regimes that do not cash out as apparatus.
+And whether an artificial scientific intelligence is contributing to the loop or only to its output:
+a system with a high discovery rate and a τ of zero produces literature, and Ω1 says literature does
+not move the frontier.
+
+---
+
+## § 15 — Three terminals, not one
+
+§6 defines Λ<sub>ω</sub> as the state in which every binding constraint is a physical floor. That is a
+condition on **rate**, and the document has been treating it as *the* terminal state. It is not the
+only one, and separating them changes what "the last level" means.
+
+| | Condition | What has stopped |
+|---|---|---|
+| **Λ<sub>econ</sub>** | Marginal instrument costs more than the civilization can allocate | Reach expansion, below R<sub>max</sub> |
+| **Λ<sub>ω</sub>** | Every binding constraint is a physical floor | Rate improvement |
+| **Λ<sub>∞</sub>** | R(*T*) = R<sub>max</sub> | Discovery itself |
+
+**Λ<sub>econ</sub> is a stall, not a terminus**, and it is the one that arrives first. Reach expansion
+has a cost curve, and the observed curve is steep: each decade of particle physics has bought its
+next increment of energy reach at superlinear cost, and the pattern recurs wherever reach is bought
+with apparatus. If the cost of a unit of reach grows faster than the resources a civilization can
+direct, reach expansion halts well below R<sub>max</sub> — with nothing physical stopping it.
+
+This is the discovery loop's version of SARSI-L §4.4's compensation ceiling, and it is unresolved for
+the same reason: it turns on whether a ratio diminishes, and nobody has measured the ratio. The
+optimistic case is that energy capture grows faster than reach cost, which is the strongest argument
+available for taking Kardashev-scale energy seriously as a *research* objective rather than an
+industrial one. The pessimistic case is that Λ<sub>econ</sub> binds permanently and the terminal
+state is never approached at all.
+
+**Λ<sub>ω</sub> and Λ<sub>∞</sub> can be separated by an enormous interval.** A system at every
+physical floor is expanding reach *at the maximum rate the world permits* — which may still leave
+geological or cosmological spans of expansion ahead. Rate-terminal is not knowledge-terminal, and
+§6's claim that Λ<sub>ω</sub> is attainable in finite time says nothing about Λ<sub>∞</sub>.
+
+**So the honest answer to "what is the last level" is Λ<sub>∞</sub>, and the reachable one is
+Λ<sub>ω</sub>.** Definition Ω4 should be read as defining the last level *of intelligence* — the
+point past which no property of the intelligence is what is holding it back — while Λ<sub>∞</sub> is
+the last level *of knowledge*, which is a fact about the world with intelligence no longer in it.
+
+That distinction is the cleanest statement of what this framework can and cannot deliver. Intelligence
+has a terminus that is about intelligence. Knowledge has a terminus that is not.
+
+---
+
+## § 16 — What the terminal intelligence does
+
+The picture that follows from §12–§15 is worth stating, because it is not the usual one and it falls
+straight out of the floors.
+
+**It waits.** At Λ<sub>ω</sub> every remaining constraint is the world's rate. The intelligence has
+removed everything removable, so what is left of every experiment is the part where the organism
+ages, the material anneals, the probe transits, or the signal arrives. A terminal intelligence spends
+essentially all of its wall-clock time waiting for physical processes to finish, at a computational
+capacity of order 10⁵⁰ operations per second per kilogram. The ratio of thought to result is
+astronomical and rising, and there is nothing to be done about it. Kurzweil's exponentials do not
+decay gracefully here; they run into a wall and stop being the relevant variable.
+
+**It is plural.** By Ω6 it is a federation whose parts agree rarely and slowly, each part locally
+sovereign because light-speed permits nothing else.
+
+**It maintains.** Knowledge is not a stock that keeps itself. Records decay, the substrate holding
+them requires free energy, and reclaiming memory to record anything new costs *kT* ln2 per bit erased.
+A terminal intelligence's standing obligation is not discovery but the upkeep of what it already
+determined, against entropy, at a price that is bounded below and never zero.
+
+**And it is on a finite budget.** This is the last floor and the one that ends the discussion.
+Dyson's *Time Without End* (1979) argued that thought could continue indefinitely in an open universe
+by slowing its metabolism without bound. The argument does not survive a cosmological constant:
+Krauss and Starkman (2000) showed that in a Λ-dominated universe the total number of operations
+available to any future observer is **finite**. The horizon that §12 says is closing also bounds the
+free energy that will ever be collectable, and a finite free-energy budget is a finite computation
+budget.
+
+So the terminal level of intelligence is not a state of knowing everything, and not a state of
+unlimited capability. It is a finite number of remaining operations, spent mostly on waiting and on
+maintenance, by a plurality that cannot agree quickly, against a horizon that is taking the rest of
+the universe away faster than any instrument can reach it.
+
+That is a sober picture, and it is what the axioms give. It is also not a counsel of despair: the
+interval between here and Λ<sub>ω</sub> is enormous, every floor in §12 is many orders of magnitude
+below current practice, and the binding constraint today is not one of them. It is throughput —
+which is the removable kind.
+
+---
+
+## § 17 — Open problems
+
+**17.1 — Is *U* independent of *T*?** A1 separates *determinable* from *currently reachable*. If the
 determinable/undeterminable boundary itself moves with instrument capability, *U* is a function of
 *T*, the loop's input set is not fixed, and A7's horizon argument weakens. The undecidability
 component is safe; the thermodynamic and cosmological components are physics and could move.
 
-**12.2 — There is no theory of Θ.** A3 asserts transduction exists; nothing says which knowledge is
-transducible, at what rate, or whether the fraction is stable. Given Ω1 makes Θ the sole coupling,
-this is the largest gap in the document — the terminal state's reachability depends entirely on an
-operator we can exhibit historically and cannot characterize. **This problem should be worked before
-any other**, on the same grounds SARSI-L gives its §10.1 the same instruction.
+**17.2 — The theory of Θ is a conjecture, not a theory.** §14 offers Conjecture Θ1 — transducibility
+is a property of the pair (knowledge, substrate), so Θ types as *K* × *T* → *T* — together with a
+falsifiable prediction about the age distribution of what a new substrate converts, and a measurable
+quantity τ. None of that is established. Θ1 is fitted to a handful of historical cases chosen
+after the fact, the prediction has not been run against data, and τ has never been computed for any
+field. Given Ω1 makes Θ the sole coupling, the terminal state's reachability still rests on an
+operator characterized only by anecdote. **This remains the problem to work before any other**, on the
+same grounds SARSI-L gives its §10.1 the same instruction; §14 has moved it from unexamined to
+merely unverified.
 
-**12.3 — Is organization really reach-neutral?** A5 asserts X changes rate and not reach. But a
+**17.7 — Θ1 breaks A3's typing.** §14 retypes transduction as *K* × *T* → *T*, which the axiom set in
+§4 does not reflect. If Θ1 survives contact with data, A3 needs restating and the loop of Definition
+Ω3 needs a second arrow — the consequences for Ω1 appear benign, since substrate-dependence
+strengthens rather than weakens the claim that Θ is the coupling, but this has not been checked
+carefully.
+
+**17.8 — Λ_econ is unmeasured and may be the whole story.** §15 identifies an economic terminal that
+arrives before the physical ones and is not a terminus at all, and says it turns on whether reach
+cost grows faster than directable resources. That ratio has never been estimated, in any field. If it
+diverges, no part of §12's floor catalogue is ever reached and the terminal state is unapproachable
+for reasons that have nothing to do with physics.
+
+**17.3 — Is organization really reach-neutral?** A5 asserts X changes rate and not reach. But a
 research programme's structure determines which questions are asked, and an unasked question is
 observationally identical to an unreachable one. If X has a reach component, the clean separation
 between "faster" and "further" fails and the loop's period and frontier are entangled.
 
-**12.4 — Referee decay is bounded in rate, not extent.** A8 with SARSI-B's laddering makes drift
+**17.4 — Referee decay is bounded in rate, not extent.** A8 with SARSI-B's laddering makes drift
 visible and rate-limited. Nothing prevents a chain of pairwise-non-regressing reorganizations from
 arriving arbitrarily far from the original measure. Whether a bound is wanted is a governance
 question, and per SARSI-L §10.6 neither framework has a representation of institutions capable of
 answering it.
 
-**12.5 — φ is an audit, and audits are contestable.** Λ-ω4 asks a party to classify each bottleneck
+**17.5 — φ is an audit, and audits are contestable.** Λ-ω4 asks a party to classify each bottleneck
 as throughput or physical. §3.3 of SARSI-L records what happens when the field cannot agree whether a
 single published result demonstrates superhuman performance on a single loop step. φ should be read
 as an ordering, not a measurement, until the classification protocol has survived adversarial use.
 
-**12.6 — The plateau's length is unestimated.** Ω5 asserts the knee-to-Λ<sub>ω</sub> distance is most
+**17.6 — The plateau's length is unestimated.** Ω5 asserts the knee-to-Λ<sub>ω</sub> distance is most
 of the trajectory. That follows from physical floors dominating after the crossing, but no estimate of
 its magnitude is given here, and the base rate in SARSI-L §6.2 applies to any that were.
 
 ---
 
-## § 13 — Principles
+## § 18 — Principles
 
 **Ω01 — Reach before capability.** At the frontier, what can be found out is set by what can be
 built, not by how well one thinks. Capability that does not become apparatus does not move the
@@ -561,6 +834,18 @@ or the claim is void.
 
 ---
 
+**Ω10 — There is no singleton.** Light-speed forbids a unified intelligence at stellar scale. What
+is at the end is plural, locally sovereign, and slow to agree — and the fleet-scale architecture is
+therefore not a governance preference but a description of what physics permits.
+
+**Ω11 — The horizon advances.** Every other floor is a wall one approaches. The cosmological one
+moves: truths pass permanently out of reach while the intelligence improves. Any account of the
+terminal state that treats the reachable universe as fixed is wrong in the one direction that cannot
+be corrected later.
+
+**Ω12 — Finite budget, not unlimited capability.** In a Λ-dominated universe the operations available
+to any future observer are finite. The terminal level is a remaining count, not an unbounded faculty.
+
 ## Relation to prior documents
 
 | Document | Scale | Question |
@@ -581,6 +866,12 @@ derived rather than asserted (§11). And the withdrawn transcendence paper's §1
 definition, which is replaced by Proposition Ω5.
 
 ## Version history
+
+**1.1 — 2026-08-22.** Adds §12 (floor magnitudes, and the Landauer erasure/computation distinction),
+§13 (Proposition Ω6 — forced decomposition, and no singleton), §14 (Conjecture Θ1 — transduction is
+substrate-dependent, with a falsifiable prediction and the transduction ratio τ), §15 (Λ_econ, Λ_ω,
+Λ_∞ separated; §6 conflated rate-terminal with reach-terminal), and §16. Θ1 corrects A3's typing of
+Θ from K → T to K × T → T.
 
 **1.0 — 2026-08-22.** Initial. Written in response to a five-clause informal characterization of the
 terminal level; §3 records the mapping from those clauses to the four operators, and §5 settles the
