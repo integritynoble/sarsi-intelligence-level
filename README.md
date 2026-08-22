@@ -4,7 +4,7 @@
 
 ## Start here
 
-Eight papers and five framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it.
+Eight papers and seven framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one placement of real systems on that map, and a paper drawing the individual and organizational scales together.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -24,7 +24,9 @@ Eight papers and five framework documents, one program — a system scale, an ag
 
 **[`SARSI_Level_Map.md`](SARSI_Level_Map.md)** — *The SARSI Level Map*. **Start here if you want the levels.** Every definition of "level of intelligence" in this corpus on one page: nine axes, their values, what each measures, and where each is defined — with worked profiles for the deployed console, a frontier LLM, a human, a terminal individual, and a terminal civilization. Its headline is that no scalar exists, and that the corpus has now withdrawn the one-number mistake five times independently.
 
-The five most recent are Markdown working documents rather than papers — no LaTeX source, no submission package, and none has been through the audit the eight above have had:
+**[`Capability_Is_Not_A_Level.md`](Capability_Is_Not_A_Level.md)** — *Capability Is Not a Level* (draft). The synthesis written as a paper: a structural taxonomy of individual and organizational intelligence, with placements for current AI agents. Its thesis is that two of the three things determining a level are not inside the system being levelled, so the ladder is the wrong shape — and its empirical finding is that four heavily-compared coding agents occupy one cell, because none of them writes itself. Markdown draft; **no LaTeX source or arXiv package is built.**
+
+The others below are Markdown working documents rather than papers — no LaTeX source, no submission package, and none has been through the audit the eight above have had:
 
 **[`SARSI-B_Brain_Improvement_Levels.md`](SARSI-B_Brain_Improvement_Levels.md)** — *What an LLM Brain May Change About Itself*. The brain scale, indexed by write set rather than by substrate. Improvement is undefined when the evaluator sits inside the write set; memory growth is evidence of operation, not of capability; and the trust ordering runs opposite to the ability ordering, so the agent that improves nothing about itself is the one that may hold authority over another's promotion.
 
@@ -68,7 +70,9 @@ Principal results:
 | `worker_agents/` | LaTeX source, bibliography |
 | `SARSI_A_System_of_Refusals.pdf` | **Current.** Implementation report, 33 pp |
 | `agents_built/` | LaTeX source, bibliography |
-| `SARSI_Level_Map.md` | **Current.** Index to every level definition, nine axes. Markdown only |
+| `Capability_Is_Not_A_Level.md` | **Draft.** Paper synthesis, individual + organizational + placements. Markdown only — no LaTeX or submission package |
+| `SARSI_Level_Map.md` | **Current.** Index to every level definition, fourteen axes. Markdown only |
+| `SARSI_Applied_Profiles.md` | **Dated snapshot.** Placements for named systems, 2026-08-22. Markdown only |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
 | `SARSI-I_Terminal_Individual.md` | **Current.** Individual-scale bounds. Markdown only — no LaTeX or submission package |
 | `SARSI-O_Organizational_Intelligence.md` | **Current.** Organizational anatomy and the coexistence result. Markdown only |
