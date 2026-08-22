@@ -4,7 +4,7 @@
 
 ## Start here
 
-Eight papers and seven framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one placement of real systems on that map, and a paper drawing the individual and organizational scales together.
+Eight papers and nine framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one placement of real systems on that map, and a paper drawing the individual and organizational scales together.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -23,6 +23,8 @@ Eight papers and seven framework documents, one program — a system scale, an a
 **[`SARSI_A_System_of_Refusals.pdf`](SARSI_A_System_of_Refusals.pdf)** — *A System of Refusals: The SARSI Agents, Built* (33 pp). The implementation report: one loop, twelve planes, and the finding that almost every module exists to refuse something. Includes what a worker may not answer, and why the model is never shown a permission gate. Source in [`agents_built/`](agents_built/).
 
 **[`SARSI_Level_Map.md`](SARSI_Level_Map.md)** — *The SARSI Level Map*. **Start here if you want the levels.** Every definition of "level of intelligence" in this corpus on one page: nine axes, their values, what each measures, and where each is defined — with worked profiles for the deployed console, a frontier LLM, a human, a terminal individual, and a terminal civilization. Its headline is that no scalar exists, and that the corpus has now withdrawn the one-number mistake five times independently.
+
+**[`Two_Axis_Intelligence_Level_Framework_v2.md`](Two_Axis_Intelligence_Level_Framework_v2.md)** — *A Two-Axis Intelligence Level Framework for AI Agents, Version 2*. **The current statement of the level framework.** Version 1's two scales, transition tests, evidence rules and classifications are retained entire; Version 2 repairs three things internal to them — IΩ required a predeclared evaluation of a system that revises what the evaluation encodes, the O-scale ranked behaviour without requiring the behaviour to produce valid claims, and two terms the upper levels depend on had no referent — adds a physical ceiling to the individual axis, and reports a first measurement. Supersedes [`Two_Axis_Intelligence_Level_Framework_AI_Agents.pdf`](Two_Axis_Intelligence_Level_Framework_AI_Agents.pdf) (Version 1).
 
 **[`Capability_Is_Not_A_Level.md`](Capability_Is_Not_A_Level.md)** — *Capability Is Not a Level* (draft). The synthesis written as a paper: a structural taxonomy of individual and organizational intelligence, with placements for current AI agents. Its thesis is that two of the three things determining a level are not inside the system being levelled, so the ladder is the wrong shape — and its empirical finding is that four heavily-compared coding agents occupy one cell, because none of them writes itself. Markdown draft; **no LaTeX source or arXiv package is built.**
 
@@ -70,7 +72,10 @@ Principal results:
 | `worker_agents/` | LaTeX source, bibliography |
 | `SARSI_A_System_of_Refusals.pdf` | **Current.** Implementation report, 33 pp |
 | `agents_built/` | LaTeX source, bibliography |
-| `Capability_Is_Not_A_Level.md` | **Draft.** Paper synthesis, individual + organizational + placements. Markdown only — no LaTeX or submission package |
+| `Two_Axis_Intelligence_Level_Framework_v2.md` | **Current.** The level framework. Markdown only — no LaTeX or submission package |
+| `Two_Axis_Intelligence_Level_Framework_AI_Agents.pdf` | Superseded by v2. Version 1, retained as the record |
+| `Two_Axis_Concordance.md` | Working paper — how the SARSI documents map onto the two-axis scales |
+| `Capability_Is_Not_A_Level.md` | **Draft.** Companion paper, individual + organizational + placements. Markdown only |
 | `SARSI_Level_Map.md` | **Current.** Index to every level definition, fourteen axes. Markdown only |
 | `SARSI_Applied_Profiles.md` | **Dated snapshot.** Placements for named systems, 2026-08-22. Markdown only |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
