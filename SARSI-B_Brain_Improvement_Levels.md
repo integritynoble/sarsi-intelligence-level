@@ -2,9 +2,9 @@
 
 ## Brain-scale improvement levels — the write-set axis
 
-*Document version: 1.0 — 2026-08-22*
+*Document version: 1.0.1 — 2026-08-22*
 *Companion to: `SARSI-L_Paper_v3.md` (system scale), `self_awareness/` (agent scale), `fleet/` (fleet scale)*
-*Grounded in: `singularity-docs/docs/specs/2026-07-12-safety-kernel-3c-rsi-slow-loop-design.md`, `…-3d-iterative-rsi-learning-design.md`, `…-2026-07-13-work-agent-rsi-loop-design.md`, `singularity-docs/prototype/rsi/`*
+*Grounded in: the internal design specifications and runnable prototype for the deployed RSI loops — the single-round held-out slow loop, its iterative search successor, and the work-agent adaptation. Cited throughout as the **slow loop**, the **iterative loop**, and the **work loop**.*
 
 ---
 
@@ -201,9 +201,9 @@ rewriting the entire self-model. The same paper replaces the scalar with a Beta 
 carrying its evidence count α+β beside the mean, precisely so that "one verified outcome" and "a
 thousand" are not reported identically.
 
-**The train/validation split** (Plan 3d). The search optimizes on `cassi_search`; the winner is
-scored on the disjoint `cassi_val`; promotion is gated on the validation score, and full per-domain
-coverage is structurally required, so the gate cannot be cleared by a partial run. The pinned
+**The train/validation split** (the iterative loop). The search optimizes on one held-out domain;
+the winner is scored on a disjoint second one; promotion is gated on the validation score, and full
+per-domain coverage is structurally required, so the gate cannot be cleared by a partial run. The pinned
 RSI-integrity test constructs a landscape where a config wins on the search set and loses on the
 validation set, and asserts that the loop declines to recommend it. That test is Proposition B2 made
 executable.
@@ -341,7 +341,7 @@ Reported honestly, on the qualitative scale of the system-scale paper's Appendix
 |---|---|---|---|
 | SARSI agent playbook loop | D2, closed, self | owner signature (`yes`) | Live |
 | Scaffold RSI loop (`web/rsi.py`) | D3, closed, self | signing policy keyed to ceiling | Live |
-| Imaging RSI (3c/3d) | D2, closed, self | Gate B, Ed25519, eval_ref-bound | Live |
+| Imaging RSI (slow + iterative) | D2, closed, self | Gate B, Ed25519, eval_ref-bound | Live |
 | Work-agent RSI | D2, closed, self | Gate B | Built, deterministic-planner v1 |
 | Machine agent / `MachineGuide` | D0, non-empty other-reach | n/a — proposes only | Live |
 | A4 ceiling | D4, closed, self | *no deploy authority by definition* | Ceiling defined, loop not built |
@@ -452,6 +452,11 @@ and the shipped A0–A4 ceilings and Gate-B promotion path. Its contribution is 
 the four results that follow from taking it seriously.
 
 ## Version history
+
+**1.0.1 — 2026-08-22.** Editorial. The provenance header cited internal specification filenames;
+since this repository is public, they are replaced by a description of what the specifications cover,
+and the in-text plan numbers by the loop names introduced there. No claim, criterion, or result
+changed.
 
 **1.0 — 2026-08-22.** Initial. Written in response to a three-level informal taxonomy of LLM brains;
 §1 records the conflation it resolves.
