@@ -1,0 +1,401 @@
+% arXiv: force the pdflatex path. All figures are inline TikZ and there are no
+% .eps files; this must stay within the first few lines to take effect.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small A Two-Axis Intelligence Level Framework, Version 2}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+% Level shorthands.
+\newcommand{\Ilev}[1]{\ensuremath{\mathrm{I}#1}}
+\newcommand{\Olev}[1]{\ensuremath{\mathrm{O}#1}}
+\newcommand{\IOm}{\ensuremath{\mathrm{I}\Omega}}
+\newcommand{\OOm}{\ensuremath{\mathrm{O}\Omega}}
+\newcommand{\Td}{\ensuremath{T_\delta}}
+
+\title{\LARGE A Two-Axis Intelligence Level Framework for AI Agents\\[6pt]
+\large Version 2: Gated Organization Levels, a Bounded Individual Axis,\\
+and First Measurements}
+
+\author{Chengshuai Yang\\
+\small\texttt{platformaigpt@gmail.com}}
+
+\date{August 22, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Version~1 of this framework proposed a two-axis taxonomy for agentic AI: an \emph{Individual Intelligence Evolution Scale} (\Ilev{0} reactive, \Ilev{1} persistent, \Ilev{2} adaptive-learning, \Ilev{3} self-improving, \Ilev{4} recursively self-improving, \Ilev{5} autonomous-discovery, \IOm{} open-ended) and an \emph{Organizational Intelligence Evolution Scale} (\Olev{0} through \OOm{}), together with transition tests, anti-inflation evidence rules, and classifications of contemporary systems. That structure is retained in full. This version corrects one internal inconsistency, adds a bound the individual axis lacked, supplies referents for two terms the higher levels presuppose, and reports a first measurement.
+
+\IOm{} was undefined as stated. The framework requires improvement to be measured under an independent, \emph{predeclared} evaluation, while \IOm{} by construction revises the objective that evaluation encodes; a predeclared criterion and a revisable objective cannot both hold. We resolve this with a \emph{frozen referee}: versioned criteria, each revision judged against its immediate predecessor. Without it, open-ended evolution and undirected drift are observationally identical.
+
+Organizational levels are gated rather than merely ordered. An organization can satisfy every behavioural description of \Olev{3} or \Olev{4} while proposing, evaluating, and adopting through a single locus, in which case its improvement claims are self-certified and its level is void. Separation of proposer, evaluator, and promoter becomes a precondition on the scale rather than a design recommendation.
+
+The individual axis has a physical ceiling. Coherence of a single decision locus requires $R \le c\tau/2$, so there is a largest possible individual at any decision speed; past it the available direction of development is not a higher \Ilev{} but a higher \Olev{}. With the result that an individual cannot verify itself, this makes organization the more fundamental of the two coordinates.
+
+We report a first measurement of authorization latency \Td{}, which bounds any governed loop's iteration rate. On a deployed governed system it has never been observed: two of three available data points are promotions authorized within seconds of proposal --- intervals in which no review occurred --- and the system of record has no timestamp field for the event. The framework's upper levels are presently unreachable for reasons of evidence rather than capability.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}
+
+Version~1's diagnosis stands and is restated without change. Several distinct phenomena are collapsed into the single word \emph{intelligence}: responding intelligently, remembering across time, learning persistently from experience, improving the mechanisms that generate cognition, improving the mechanisms that generate future improvements, and autonomously discovering validated new knowledge. A parallel ambiguity holds for groups, where running ten agents in parallel is routinely described as collective intelligence.
+
+The two-axis remedy also stands. What this version addresses is that a taxonomy meant to resist inflation must first be internally consistent, must bound its own top, and must supply referents for the terms its upper levels depend on. Three of the five changes below are of that kind---repairs rather than extensions---and the framework is stronger for their being stated as repairs.
+
+\subsection{Retained from Version 1}
+
+Both scales and their definitions; the four terms that should not be conflated; all six evidence rules; the coexistence argument and cognitive compression; bidirectional upward and downward flows; improvement competence as the operational metric for \Ilev{4}; the transition-test tables; and the system classifications, which this version does not revise except to add coordinates.
+
+\subsection{New in Version 2}
+
+Sections~\ref{sec:iomega} (frozen referee), \ref{sec:ceiling} (coherence bound and axis hand-off), \ref{sec:gate} (separation gate), \ref{sec:terms} (lineage and reach), \ref{sec:onecell} (the one-cell finding), and~\ref{sec:measurement} (measurement), together with Proposition~\ref{prop:monotone}. Everything else is Version~1's.
+
+\section{Scope and Core Concepts}
+
+Version~1's scope section is retained. One of its definitions carries more weight here and is restated with its consequences made explicit.
+
+\begin{quote}
+\emph{Improvement} means that a changed system performs better under an independent, predeclared evaluation. Merely changing is not improving.
+\end{quote}
+
+Version~1 states this as a definition. It is derivable, and the derivation determines where the framework's upper levels break.
+
+\begin{proposition}[Well-posedness]\label{prop:wellposed}
+Let a system have a set of persistent state it may modify---its write set $W$---a proposal process, and an evaluator $V$. The predicate ``this change was an improvement'' is well-defined only if $V \notin W$ and $V$ is not a function of the proposal process. If $V \in W$, the system can satisfy any improvement criterion by editing the criterion, and no observation distinguishes improvement from redefinition.
+\end{proposition}
+
+The proof is immediate. Its force is in the corollaries.
+
+\begin{corollary}\label{cor:selfcert}
+Self-certification is not weak evidence of improvement. It is none. A system that proposes, evaluates, and adopts through one locus has reported a tautology, \emph{regardless of its capability}.
+\end{corollary}
+
+\begin{corollary}\label{cor:external}
+An individual cannot have a well-posed improvement loop over itself alone. Anything inside its boundary is available to it and therefore inside its write set. An external evaluator is a condition of an improvement claim being defined, not a safeguard added to it.
+\end{corollary}
+
+Corollary~\ref{cor:external} is the formal content of Version~1's principle that individual belief is not organizational truth, and explains why that principle is not merely prudent.
+
+\begin{corollary}\label{cor:iomega}
+Since \IOm{} has its objective in its write set, Proposition~\ref{prop:wellposed} entails that \IOm{} as defined in Version~1 has no well-formed notion of improvement.
+\end{corollary}
+
+\section{Individual Intelligence Evolution Scale}
+
+\Ilev{0} through \Ilev{5} are Version~1's, unchanged, and are summarised here only to keep the paper self-contained.
+
+\begin{description}[leftmargin=1.6em,style=unboxed]
+\item[\Ilev{0} --- Reactive.] Intelligent output from current input; no persistent evolving cognitive state, $I_{t+1} \approx I_t$. Says nothing about one-shot quality. \emph{Transition to \Ilev{1}: durable state from earlier interactions is recovered and correctly used.}
+\item[\Ilev{1} --- Persistent.] Durable identity, memory, goals, or task state across interactions. \emph{Transition to \Ilev{2}: matched future performance improves because the agent learned, not because it replayed stored instructions.}
+\item[\Ilev{2} --- Adaptive learning.] Experience persistently updates knowledge, calibration, strategies, or skills; the learning machinery $\Theta$ is fixed. \emph{Transition to \Ilev{3}: the agent improves a cognitive mechanism itself and validates it independently.}
+\item[\Ilev{3} --- Self-improving.] $\Theta_{t+1} \neq \Theta_t$: the machinery that interprets future experience changes, survives into later operation, and passes independent evaluation. \emph{Transition to \Ilev{4}: the mechanism that generates and evaluates those improvements itself improves.}
+\item[\Ilev{4} --- Recursively self-improving.] The improvement process $A_t \to A_{t+1}$ produces higher-quality validated improvements. Evidence requires rising \emph{improvement competence},
+\[
+\mathrm{IC} \;=\; \frac{\text{validated downstream gain}}{\text{proposal and evaluation cost}},
+\]
+not rising task score. \emph{Transition to \Ilev{5}: the individual autonomously expands validated knowledge.} Related in spirit to the G\"odel machine \citep{schmidhuber2006godel} and its recent empirical descendants \citep{zhang2025darwin,zhang2026hyperagents}.
+\item[\Ilev{5} --- Autonomous discovery.] Identifies significant unknowns, formulates questions and hypotheses, designs discriminating evidence, and produces externally validated knowledge not contained in its prior state. Requires representing structured ignorance, not only knowledge. \emph{Transition to \IOm{}: discoveries become cognitive tools that expand the individual's own future discovery space.}
+\end{description}
+
+\subsection{\IOm{}, repaired}\label{sec:iomega}
+
+Version~1 defines \IOm{} by the cycle
+\[
+\begin{aligned}
+\text{Unknown} \to \text{Discovery} \to \text{Knowledge} &\to \text{Reorganization}\\
+\to \text{Cognitive Tool} \to \text{Better Intelligence} &\to \text{Deeper Unknown}
+\end{aligned}
+\]
+and is careful that \IOm{} is \emph{not} ``knows everything''---it is sustained expansion of reachable cognition, and a mature open-ended intelligence may find more structured unknowns as it grows. Both points are correct and retained.
+
+The difficulty is Corollary~\ref{cor:iomega}. \IOm{}, uniquely among the levels, revises the objective. The framework requires improvement to be judged under an evaluation that is \emph{predeclared}; an entity that rewrites what counts as better cannot be judged under a criterion declared before the rewrite, because the rewrite is what is in question. Version~1 therefore requires of \IOm{} something its own definition of improvement forbids.
+
+\begin{definition}[Frozen referee]
+An intelligence whose objective is in its write set retains an immutable snapshot $\langle \Omega_k, V_k \rangle$, taken before each revision and held outside the write set. A revision counts as an improvement iff the revised system, scored on $V_k$, does at least as well as the unrevised system would have.
+\end{definition}
+
+Three properties make this the right form rather than a patch.
+
+\textbf{It is already the shape of the \Ilev{5}\,$\to$\,\IOm{} transition test.} Version~1 asks whether new discoveries enable \emph{previously inaccessible} classes of discovery---a comparison against the prior state. The frozen referee makes that comparison a standing requirement rather than an occasional observation.
+
+\textbf{It must ladder, and the ladder is the cost.} Judging every revision against the original $\Omega_0$ asks forever whether the new system solves the old problem, which ossifies. Judging against nothing drifts. So referees are versioned and each revision is judged against its immediate predecessor. This bounds the \emph{rate} of drift and makes it visible; it does not bound its extent, and whether an extent bound is wanted is a governance question this framework does not answer.
+
+\textbf{Without it the level is not achieved but unmeasurable.} An \IOm{} claim with no retained referee is indistinguishable from undirected drift by any observation whatsoever.
+
+\begin{claimbox}{Added evidence requirement, \Ilev{5} $\to$ \IOm{}}
+A retained, versioned referee record showing each objective revision scored against its immediate predecessor, with the comparison available to a party that did not perform the revision.
+\end{claimbox}
+
+\subsection{The individual axis has a ceiling, and hands off}\label{sec:ceiling}
+
+Version~1 treats the two axes as parallel scales that constrain one another but are not interchangeable. That is right about interchangeability and understates the relation at the top, where the axes are joined by a physical fact.
+
+An individual is a system with a single locus of decision---one state from which its actions are selected. This is the global-workspace construct \citep{baars1988cognitive,dehaene2011experimental} used functionally, with no claim about consciousness. For that state to be \emph{one} state, every part contributing to it must exchange signal with it within one decision cycle; otherwise the parts act on stale information and there are two states, not one.
+
+\begin{proposition}[Coherence bound]\label{prop:coherence}
+With decision cycle $\tau$ and signal velocity $v \le c$, an individual's radius satisfies
+\[
+R \;\le\; \frac{v\tau}{2} \;\le\; \frac{c\tau}{2}.
+\]
+\end{proposition}
+
+A cycle of $1$\,ms permits a radius of $150$\,km; $1$\,ns permits $15$\,cm; $1$\,ps permits $0.15$\,mm. Three consequences bear on the scale.
+
+\textbf{There is a largest possible individual at every decision speed.} Not a practical limit but an identity condition: beyond it the object is a collective.
+
+\textbf{The \Ilev{} axis terminates and hands off to the \Olev{} axis.} Past the coherence radius the available direction of development is not a higher \Ilev{} but a higher \Olev{}. The pair $(\Ilev{i}, \Olev{j})$ is therefore \emph{not} a free product: the upper region of the individual axis is bounded and growth continues only on the other coordinate. Version~1's observation that \IOm{} is not scalar superintelligence can now be stated more strongly---there is no individual level above which an individual continues to grow \emph{as an individual}.
+
+\textbf{The optimum is interior.} Capacity rises with volume while rate falls with radius, so a fast-narrow individual and a slow-wide one can both be maximal and neither dominates. This is a second, independent argument for Version~1's coexistence claim, and it is stronger in that it does not depend on cost: heterogeneity is forced by the shape of the bound, not only made efficient by compression.
+
+Two further bounds follow from the same construction. \emph{Aperture}: what an individual can bring to bear on one decision is bounded by integration completing within $\tau$, so an individual is limited not by what it knows but by how much can be present at once. \emph{Self-opacity}: a self-model is part of the system it models \citep{conant1970every}, so no individual holds a complete model of itself, and the best available self-knowledge is a compression that states its own limits.
+
+Biological cognition sits six to eight orders of magnitude below the coherence bound---held there by neural signal velocities of metres per second rather than $c$---so the headroom for artificial individuals is enormous while every qualitative bound survives. For scale on the other side, physical limits on computation \citep{lloyd2000ultimate,margolus1998maximum} place a kilogram-scale device far above any aperture an integration procedure could exploit within a nanosecond cycle, which is why the binding constraints at the limit are structural rather than computational.
+
+\section{Organizational Intelligence Evolution Scale}
+
+\Olev{0} through \Olev{5} and \OOm{} are Version~1's, unchanged: \Olev{0} coordinated; \Olev{1} persistent shared memory, roles, state, evidence; \Olev{2} adaptive, where collective history persistently changes allocation, specialist selection, knowledge sharing, or procedure under a fixed organizational-learning mechanism; \Olev{3} self-improving, changing and validating its own routing, communication, memory, verification, or role structures; \Olev{4} recursively self-improving; \Olev{5} autonomous discovery, with the organization contributing cognitive structure no single member holds; and \OOm{} open-ended. Transactive memory---knowing who knows what---is the characteristic \Olev{2} asset \citep{woolley2023understanding}.
+
+\subsection{Separation is a gate on the scale}\label{sec:gate}
+
+Version~1 states the governing principle in two places: that individual belief is not organizational truth, the correct transition being \emph{claim $+$ evidence $+$ independent verification $\to$ organizational knowledge}; and that cognitive evolution should be separated from authority evolution. Both are right. Neither constrains the \Olev{} scale, and the scale is where the constraint has to live.
+
+Consider an organization that maintains multiple candidate organizational policies, runs controlled replay and canary evaluations, learns which redesigns generalize, and improves the meta-process that generates future changes. That is the behavioural description of \Olev{4} in full. Now suppose the same locus proposes the redesigns, judges the evaluations, and adopts the winners. By Corollary~\ref{cor:selfcert} every improvement it reports is self-certified, and the \Olev{4} classification describes activity that has produced no validated organizational knowledge at all. The behavioural description is not sufficient, and no amount of further behaviour makes it sufficient.
+
+\begin{definition}[Separation]
+An organization satisfies \emph{separation} iff proposer, evaluator, and promoter are distinct loci, and the evaluator's criteria and evidence lie outside the proposer's write set.
+\end{definition}
+
+\begin{cautionbox}{Gating rule}
+Organizational levels above \Olev{1} are conditional on separation. An organization is reported as a pair---behavioural level, and whether separation holds---and an unseparated organization at any behavioural level $n > 1$ is recorded as \textbf{\Olev{1} $+$ unverified claims at level $n$}, not as \Olev{n}.
+\end{cautionbox}
+
+\Olev{0} and \Olev{1} are exempt because coordination and persistence are observable directly and make no improvement claim. From \Olev{2} upward every level asserts that something got better, and Proposition~\ref{prop:wellposed} applies to every such assertion. This is a strict addition to Version~1 rather than a disagreement with it: the principle is Version~1's own, moved into the scale where it can prevent the inflation the evidence rules exist to prevent.
+
+\subsection{Organizational intelligence is not monotone in member level}
+
+Version~1 observes that many highly capable individuals can form a weak organization if they duplicate work, lose history, or cannot reconcile evidence, consistent with collective-intelligence findings that group performance is not a simple function of maximum member intelligence \citep{woolley2010collective}, and with the subsequent methodological critique of that literature \citep{crede2017structure}. The strong form follows from Section~\ref{sec:gate}.
+
+\begin{proposition}\label{prop:monotone}
+An organization failing separation has no well-posed improvement loop regardless of its members' \Ilev{} levels, while an organization of modest members satisfying separation does. Therefore an organization of \IOm{} individuals without separation of duties is \emph{less} intelligent, in the sense this framework measures, than a mixed organization of \Ilev{1}--\Ilev{3} individuals with it.
+\end{proposition}
+
+Member level enters that argument nowhere, which is the point. Member level determines the quality of proposals; separation determines whether the organization can tell a good proposal from a bad one---and an organization that cannot does not benefit from better ones.
+
+\begin{corollary}
+The recurring expectation that sufficiently capable members make process unnecessary is exactly inverted. Process is what converts capability into a claim anyone can rely on.
+\end{corollary}
+
+\begin{corollary}
+A uniformly maximal organization is degenerate. Since separation requires distinct loci with distinct write sets, a population of identical maximal individuals each holding every role fails it. Version~1 says all levels \emph{can} coexist and usually should; Proposition~\ref{prop:monotone} says something sharper---at any decision the participants must occupy different positions, or the decision certifies itself.
+\end{corollary}
+
+\section{The Two-Axis Model and What the Axes Do Not Carry}
+
+Version~1's treatment is retained: a system is $(\Ilev{i}, \Olev{j})$; ten \Ilev{1} agents in parallel are \Olev{1}, not $\Ilev{10}$; all levels can and should coexist, because expensive discovery becomes a validated procedure that cheap execution runs at scale; information flows upward from observation to principle and downward from principle to routine; and individual belief is not organizational truth. Two amendments follow.
+
+\textbf{The coordinates are not independent at the top.} By Proposition~\ref{prop:coherence} the individual axis terminates, and past the coherence radius development continues only on the organizational one.
+
+\textbf{Coexistence has three grounds, not one.} Version~1 gives cognitive compression, which is economic. Proposition~\ref{prop:coherence} gives the frontier shape, which is physical. Proposition~\ref{prop:monotone} gives separation, which is logical---and the third cannot be traded away, since an organization that abandons it stops making meaningful claims rather than merely becoming inefficient.
+
+\subsection{Two terms the higher levels presuppose}\label{sec:terms}
+
+\textbf{Lineage.} Version~1 requires that an \Ilev{3} change modify the persistent cognitive mechanism \emph{of the same individual lineage}. At \Ilev{3} and above, mechanism, memory, knowledge, and eventually the improvement process are all subject to change, so no content-based criterion identifies the lineage. Continuity of behaviour is worst of all: improvement \emph{is} behavioural change, so a behavioural criterion makes improving and dying indistinguishable.
+
+Version~1 already contains the answer, as a list of questions a self-improving system should be able to answer---what experience motivated the change, which mechanism changed, which version was active before and after, what evaluation demonstrated improvement, what regressions occurred, and whether the old version can be restored. That list is a provenance chain.
+
+\begin{definition}[Lineage]
+Two states belong to the same individual iff connected by an unbroken chain of provenance-linked evidence records, each change attributable to an admitted observation, an authorized promotion, or a recorded action, with no gap.
+\end{definition}
+
+Identity so defined is preserved by every legitimate operation and broken by exactly those the framework already rejects: an unattributed change, an adoption without independent evaluation, a self-declared verdict, a restore with no record of the restore. Version~1's remark that without this lineage self-improvement is indistinguishable from uncontrolled drift is then not a warning but a definition.
+
+\textbf{Reach.} Version~1 requires a distinction its coordinates do not carry: between what a system may change in \emph{itself} and what it may change in \emph{another}. Without it the entity that verifies another's claim cannot be described, and it is precisely the entity the framework depends on.
+
+\begin{definition}[Reach]
+A system's reach is the pair $(W_{\text{self}}, W_{\text{other}})$. Legitimate other-reach is bounded to another system's \emph{inputs}---tasks, candidates, evaluations, verdicts---and never to its persistent cognitive state.
+\end{definition}
+
+An empty self-write set is what \emph{qualifies} a system to hold authority over another's promotion, since such a system cannot be improving itself by the verdicts it issues. The verifier role is therefore occupied by a low-\Ilev{} entity, which is not a deficiency of that entity but its qualification. An authority ceiling---what a system is \emph{permitted} to do---should likewise be reported alongside $(\Ilev{}, \Olev{})$, since the principle that intelligence must not automatically widen authority is unstatable if permission has no coordinate. This separation of capability from permission is the point at which the framework departs from the levels-of-automation tradition \citep{sheridan1978human,sae2021j3016}, where the two advance together by certification; the closest published treatment that keeps them apart is the autonomy dimension of \citet{morris2024levels}, which indexes by interaction mode where this framework indexes by write set and evaluator location.
+
+\section{Evidence Rules}
+
+All six of Version~1's rules are retained without amendment: persistence is not learning; learning is not self-improvement; code editing is not automatically self-improvement; parallel agents are not an adaptive organization; novel hypotheses are not autonomous discovery; and recursive self-improvement requires meta-level improvement evidence. Lifelong-agent research treats continuous adaptation as a capability current agents largely lack \citep{zheng2025lifelong}, which is the gap the first two rules police. Two rules are added.
+
+\textbf{Rule 7 --- An objective-open claim requires a retained referee.} An \IOm{} claim without a versioned record of objective revisions scored against their predecessors is not weakly supported; it is unfalsifiable, because no observation separates open-ended development from drift.
+
+\textbf{Rule 8 --- An organizational level above \Olev{1} requires separation.} Behavioural evidence of adaptation, redesign, or meta-redesign establishes the \emph{activity} of that level. It establishes the \emph{level} only if proposer, evaluator, and promoter were distinct. Absent that, report \Olev{1} plus unverified claims.
+
+\section{Positioning Contemporary Agent Systems}
+
+Version~1's classifications are retained: a stateless model call is \Ilev{0}; Claude Code \Ilev{1}\,/\,\Olev{0}--\Olev{1} \citep{anthropic2026claudecode}; OpenAI Codex \Ilev{1}\,/\,\Olev{1}, whose system card does not place the deployed model at a high threshold for AI self-improvement despite its role in its own development \citep{openai2026codex,openai2026codexcard}; OpenClaw \Ilev{1}\,/\,\Olev{0} basic and \Ilev{1}--\Ilev{2} with active memory and promotion \citep{openclaw2026memory}; Grok chat \Ilev{1} and Grok Bot \Ilev{2}\,/\,\Olev{1}$+$, workflow learning from demonstration being a strong \Ilev{2} signal \citep{xai2026grokbot}; and the SARSI/BrainRSI programme as developmental, with \Ilev{3} and \Ilev{4} as targets \citep{yang2026brainrsi}. Version~2 adds coordinates and one finding.
+
+\subsection{The one-cell finding}\label{sec:onecell}
+
+Version~1 argues that code editing is not automatically self-improvement, and that using an AI to help build its successor is evidence of AI-assisted development rather than of a deployed \Ilev{3} agent. Adding the reach coordinate of Section~\ref{sec:terms} supports the rule more strongly than that section claims.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+System & \Ilev{} & \Olev{} & $W_{\text{self}}$ \\
+\midrule
+Claude Code    & \Ilev{1} & \Olev{0}--\Olev{1} & memory only \\
+OpenAI Codex   & \Ilev{1} & \Olev{1}           & memory only \\
+OpenClaw (basic) & \Ilev{1} & \Olev{0}         & memory only \\
+Grok chat      & \Ilev{1} & \Olev{0}--\Olev{1} & memory only \\
+\bottomrule
+\end{tabular}
+\caption{Coding and assistant agents, with the reach coordinate added.}
+\end{table}
+
+These systems are not merely \emph{unproven} above \Ilev{1}. On every coordinate this framework carries---level, reach, ceiling, separation---they are the same system. The reason is uniform: each modifies external software, which is reach into the world, while its own persistent cognitive state is a memory store it does not evaluate.
+
+\begin{claimbox}{}
+Software an agent writes is not that agent's cognitive mechanism unless the agent subsequently runs on it.
+\end{claimbox}
+
+What distinguishes these products in practice---patch quality, context handling, tool protocols, long-horizon reliability---is \emph{capability}, which the framework correctly excludes from level. The distinction that would move any of them to \Ilev{2} is Version~1's own transition test: matched future performance improving because the agent learned. None of them publishes that measurement, and the framework's answer is that they are \Ilev{1} until one does. A taxonomy that collapses four heavily-differentiated products into one cell, on the ground that the differentiation is on an axis it declines to measure, is doing the work a taxonomy is for.
+
+\section{Measurement}\label{sec:measurement}
+
+Version~1 observes that evolution levels require longitudinal experiments rather than fixed-model benchmarks. Two quantities make that concrete.
+
+\emph{Improvement competence} $\mathrm{IC}$ is the \Ilev{4} measure: validated downstream gain per unit of proposal and evaluation cost. Its denominator matters---an improvement process that doubles gains while quadrupling evaluation cost has got worse---and no current system reports it.
+
+\emph{Authorization latency} \Td{} is the organizational measure. In any governed loop, once the automated steps are cheap the iteration rate is bounded by the steps that are not:
+\[
+\rho_{\max} = 1/\Td{},
+\]
+where \Td{} is the interval between a candidate being available and its promotion being authorized. This is Amdahl's argument \citep{amdahl1967validity} transposed from parallel speedup to loop autonomy. Under Section~\ref{sec:gate} every organization above \Olev{1} has such an interval by construction, since separation requires the promoter to be distinct from the proposer.
+
+\subsection{First measurement}
+
+We measured \Td{} on a deployed governed system with owner-signed promotion, from its hash-chained audit log, pairing candidate registration with promotion. The instrument keeps censored observations---a candidate registered and never promoted is a lower bound, not an absence---and excludes intervals below a plausible review floor from the estimate rather than averaging them in.
+
+\begin{cautionbox}{Result}
+\Td{} has never been observed. Of three available data points, two are promotions authorized $5.5$ and $0.0$ seconds after registration---intervals in which no review occurred, so they measure a script rather than an authorization---and one is a candidate outstanding for $24$ days. If the third is representative, $\rho_{\max}$ is of order fifteen iterations per year.
+\end{cautionbox}
+
+Two structural findings accompany it and generalize beyond the system measured.
+
+\textbf{The system of record cannot represent the quantity.} Its promotions table stores kind, name, version, and metadata, with no timestamp. Every timestamp used came from a side record. A quantity that bounds the loop's rate was not recorded by the table that records the event.
+
+\textbf{Sub-review intervals are a separation failure, not a fast organization.} An interval too short for review indicates the authorization was produced by the process that proposed. Under Section~\ref{sec:gate} this is exactly the condition that voids an organizational level, so \Td{} is simultaneously a rate measurement and a separation test---a near-zero \Td{} is not good news, and a framework that read it as good news would reward the failure it exists to detect.
+
+The general lesson is that the two measurements this framework most needs are both currently unreported, and one is unreportable from the system that should hold it. Anti-inflation rules are necessary but not sufficient; the events have to be recorded. Requisite variety \citep{ashby1956introduction} applies to the record as much as to the regulator.
+
+\section{Falsifiable Transition Benchmarks}
+
+Version~1's transition tables are retained. Two amendments and one addition.
+
+\textbf{Individual table, \Ilev{5} $\to$ \IOm{}.} Add: a retained, versioned referee record showing each objective revision scored against its immediate predecessor, available to a party that did not perform the revision.
+
+\textbf{Organizational table, all transitions above \Olev{1}.} Add to each: proposer, evaluator, and promoter were distinct loci, and the evaluator's criteria lay outside the proposer's write set.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Claim & Refuted by \\
+\midrule
+Proposition~\ref{prop:wellposed} & A system with its evaluator inside its write set producing improvement claims that replicate under external evaluation, at rates comparable to separated systems \\
+Proposition~\ref{prop:monotone} & Unseparated organizations reliably matching separated ones on held-out outcomes, controlling for member level \\
+Gating rule (\S\ref{sec:gate}) & An unseparated organization demonstrating validated organizational improvement --- which by Proposition~\ref{prop:wellposed} should be unobtainable \\
+Hand-off (\S\ref{sec:ceiling}) & A demonstrated single decision locus whose radius exceeds $c\tau/2$ for its actual cycle \\
+One-cell finding (\S\ref{sec:onecell}) & Any of the listed systems publishing an \Ilev{1} $\to$ \Ilev{2} measurement \\
+\bottomrule
+\end{tabularx}
+\caption{Falsification targets for the claims added in Version 2.}
+\end{table}
+
+Proposition~\ref{prop:coherence} is arithmetic given its premises and is not falsifiable as such; what is falsifiable is its premise, that a single decision locus requires signal exchange within one cycle. A system with a genuinely stale-tolerant unified state would refute the framing, and we are not aware of a coherent construction.
+
+\section{Discussion}
+
+Version~1's discussion is retained: \IOm{} is not scalar superintelligence; organizational intelligence may outpace individual intelligence; coexistence is a feature rather than a transitional artifact; and terminology inflation is the field's characteristic failure. Two additions.
+
+\textbf{The framework's two halves are not symmetric.} Version~1 presents the axes as parallel scales. Three results here break the symmetry in the same direction. The individual axis is physically bounded and the organizational axis is not. An individual cannot verify itself, so the organizational axis is a \emph{precondition} for the upper individual axis rather than a parallel to it. And an organization's level is gated on a property no individual possesses. Organization is the more fundamental coordinate, which inverts the intuition that organizations are what you get by adding individuals up.
+
+\textbf{The upper levels are currently unreachable for reasons of record-keeping, not capability.} Section~\ref{sec:measurement} finds that the two quantities gating \Ilev{4} and \Olev{2}$+$ are unmeasured, and one is unrecordable in the system that should hold it. On present evidence no system can be promoted above \Ilev{2} or \Olev{1}---not because none is capable enough, but because none produces the evidence its own architecture would need to. That is a more tractable obstacle than a capability gap, and a more embarrassing one.
+
+\section{Limitations}
+
+Version~1's five limitations are retained in full: the framework is conceptual and unvalidated as a measure; product classifications rely on public documentation and configuration can move a system between levels; the \Ilev{1}/\Ilev{2} boundary is difficult when memory systems auto-promote; \Ilev{5} and \IOm{} demand strong and domain-specific epistemic standards; and organizational intelligence is not necessarily beneficial, since an adaptive organization can coordinate toward poor goals. Four are added.
+
+\textbf{Separation is treated as binary.} Real organizations separate partially: an evaluator reporting to the promoter, a proposer selecting the evidence. The gate admits no degrees, and a graded form is needed and not offered.
+
+\textbf{The referee ladder bounds drift rate, not extent.} A chain of pairwise non-regressing revisions can arrive arbitrarily far from the original objective. The construct makes drift visible and rate-limited; whether an extent bound is wanted is a governance question outside this framework.
+
+\textbf{Aperture's growth rate is unknown.} The aperture bound requires integration cost to grow superlinearly in the number of items integrated and uses no particular rate. A near-linear rate would move the bound far without removing it.
+
+\textbf{The measurement is a single system and a single reading.} Section~\ref{sec:measurement} is one audit log on one host. It establishes that the quantity is unrecorded there; it establishes nothing about the field. And one reading is not a measurement---the questions this framework asks of \Td{} concern whether it \emph{falls}, which requires a series.
+
+\section{Conclusion}
+
+Version~1 proposed that intelligence levels be assigned according to what a system can persistently and validly change, rather than according to labels or raw task performance, and gave two scales, six anti-inflation rules, and falsifiable transition tests. That structure is retained entirely.
+
+This version repairs three things internal to it. \IOm{} required a predeclared evaluation of a system that revises what the evaluation encodes, and is now defined against a versioned frozen referee. The organizational scale ranked behaviour without requiring the behaviour to produce valid claims, and is now gated on separation. And two terms the upper levels depend on---the lineage that makes a changed system the same individual, and the reach that distinguishes writing oneself from writing another---now have referents, the first drawn from Version~1's own design implications.
+
+It adds a ceiling. Coherence bounds an individual at $R \le c\tau/2$, so the individual axis terminates and hands off to the organizational axis, and the two coordinates are not a free product. Together with the requirement that an individual cannot verify itself, this makes organization the more fundamental of the two---the opposite of the natural reading.
+
+And it adds a measurement, whose result is the most useful thing in the paper. The quantity that bounds every governed loop's rate has never been observed on the system we examined, and cannot be: its system of record has no field for it. The framework's upper levels are unreachable today for reasons of evidence rather than capability. Anti-inflation rules tell us what would count. They do not make anyone record it, and until someone does, every claim above \Ilev{2} or \Olev{1} remains a target rather than a level.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

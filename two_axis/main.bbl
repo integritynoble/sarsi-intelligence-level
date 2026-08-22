@@ -1,0 +1,144 @@
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amdahl(1967)]{amdahl1967validity}
+Gene~M. Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In \emph{AFIPS Conference Proceedings}, 1967.
+
+\bibitem[{Anthropic}(2026)]{anthropic2026claudecode}
+{Anthropic}.
+\newblock Claude code documentation: Memory, overview, cli reference, model
+  context protocol.
+\newblock Product documentation, accessed 22 August 2026, 2026.
+
+\bibitem[Ashby(1956)]{ashby1956introduction}
+W.~Ross Ashby.
+\newblock \emph{An Introduction to Cybernetics}.
+\newblock Chapman and Hall, 1956.
+
+\bibitem[Baars(1988)]{baars1988cognitive}
+Bernard~J. Baars.
+\newblock \emph{A Cognitive Theory of Consciousness}.
+\newblock Cambridge University Press, 1988.
+
+\bibitem[Conant and Ashby(1970)]{conant1970every}
+Roger~C. Conant and W.~Ross Ashby.
+\newblock Every good regulator of a system must be a model of that system.
+\newblock \emph{International Journal of Systems Science}, 1\penalty0
+  (2):\penalty0 89--97, 1970.
+
+\bibitem[Cred{\'e} and Howardson(2017)]{crede2017structure}
+Marcus Cred{\'e} and Garett Howardson.
+\newblock The structure of group task performance---a second look at
+  ``collective intelligence'': Comment on woolley et al. (2010).
+\newblock \emph{Journal of Applied Psychology}, 2017.
+
+\bibitem[Dehaene and Changeux(2011)]{dehaene2011experimental}
+Stanislas Dehaene and Jean-Pierre Changeux.
+\newblock Experimental and theoretical approaches to conscious processing.
+\newblock \emph{Neuron}, 70\penalty0 (2):\penalty0 200--227, 2011.
+
+\bibitem[Lloyd(2000)]{lloyd2000ultimate}
+Seth Lloyd.
+\newblock Ultimate physical limits to computation.
+\newblock \emph{Nature}, 406:\penalty0 1047--1054, 2000.
+
+\bibitem[Margolus and Levitin(1998)]{margolus1998maximum}
+Norman Margolus and Lev~B. Levitin.
+\newblock The maximum speed of dynamical evolution.
+\newblock \emph{Physica D}, 120:\penalty0 188--195, 1998.
+
+\bibitem[Morris et~al.(2024)Morris, Sohl-Dickstein, Fiedel, Warkentin, Dafoe,
+  Faust, Farabet, and Legg]{morris2024levels}
+Meredith~Ringel Morris, Jascha Sohl-Dickstein, Noah Fiedel, Tris Warkentin,
+  Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg.
+\newblock Levels of {AGI} for operationalizing progress on the path to {AGI}.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, 2024.
+
+\bibitem[{OpenAI}(2026{\natexlab{a}})]{openai2026codex}
+{OpenAI}.
+\newblock Introducing the codex app; introducing gpt-5.3-codex.
+\newblock Product announcements, 2026{\natexlab{a}}.
+
+\bibitem[{OpenAI}(2026{\natexlab{b}})]{openai2026codexcard}
+{OpenAI}.
+\newblock {GPT-5.3-Codex} system card, 2026{\natexlab{b}}.
+
+\bibitem[{OpenClaw}(2026)]{openclaw2026memory}
+{OpenClaw}.
+\newblock Memory overview, memory architecture, active memory, and multi-agent
+  routing.
+\newblock Product documentation, accessed 22 August 2026, 2026.
+
+\bibitem[{SAE International}(2021)]{sae2021j3016}
+{SAE International}.
+\newblock J3016: Taxonomy and definitions for terms related to driving
+  automation systems for on-road motor vehicles.
+\newblock Technical report, SAE International, 2021.
+
+\bibitem[Schmidhuber(2006)]{schmidhuber2006godel}
+J{\"u}rgen Schmidhuber.
+\newblock G{\"o}del machines: Fully self-referential optimal universal
+  self-improvers.
+\newblock In \emph{Artificial General Intelligence}. Springer, 2006.
+
+\bibitem[Sheridan and Verplank(1978)]{sheridan1978human}
+Thomas~B. Sheridan and William~L. Verplank.
+\newblock Human and computer control of undersea teleoperators.
+\newblock Technical report, MIT Man--Machine Systems Laboratory, 1978.
+
+\bibitem[Woolley et~al.(2010)Woolley, Chabris, Pentland, Hashmi, and
+  Malone]{woolley2010collective}
+Anita~Williams Woolley, Christopher~F. Chabris, Alex Pentland, Nada Hashmi, and
+  Thomas~W. Malone.
+\newblock Evidence for a collective intelligence factor in the performance of
+  human groups.
+\newblock \emph{Science}, 330\penalty0 (6004):\penalty0 686--688, 2010.
+\newblock \doi{10.1126/science.1193147}.
+
+\bibitem[Woolley et~al.(2023)Woolley, Aggarwal, and
+  Malone]{woolley2023understanding}
+Anita~Williams Woolley, Ishani Aggarwal, and Thomas~W. Malone.
+\newblock Understanding collective intelligence: Investigating the role of
+  collective memory, attention, and reasoning processes.
+\newblock \emph{Perspectives on Psychological Science}, 2023.
+\newblock \doi{10.1177/17456916231191534}.
+
+\bibitem[{xAI}(2026)]{xai2026grokbot}
+{xAI}.
+\newblock Grok; introducing grok bot.
+\newblock Product documentation, accessed 22 August 2026, 2026.
+
+\bibitem[Yang(2026)]{yang2026brainrsi}
+Chengshuai Yang.
+\newblock A predictive and recursively self-improving functional brain for
+  language model agents.
+\newblock Technical report, Working paper, 2026.
+
+\bibitem[Zhang et~al.(2025)Zhang, Hu, Lu, Lange, and Clune]{zhang2025darwin}
+Jenny Zhang, Shengran Hu, Cong Lu, Robert Lange, and Jeff Clune.
+\newblock Darwin g{\"o}del machine: Open-ended evolution of self-improving
+  agents.
+\newblock \emph{arXiv preprint arXiv:2505.22954}, 2025.
+
+\bibitem[Zhang et~al.(2026)Zhang, Zhao, Yang, Foerster, Clune, Jiang, Devlin,
+  and Shavrina]{zhang2026hyperagents}
+Jenny Zhang, Bowen Zhao, Wenjun Yang, Jakob Foerster, Jeff Clune, Minqi Jiang,
+  Sam Devlin, and Tatiana Shavrina.
+\newblock Hyperagents.
+\newblock \emph{arXiv preprint arXiv:2603.19461}, 2026.
+
+\bibitem[Zheng et~al.(2025)Zheng, Shi, Cai, Li, Zhang, Li, Yu, and
+  Ma]{zheng2025lifelong}
+Junhao Zheng, Chengming Shi, Xidi Cai, Qiuke Li, Duzhen Zhang, Chenxing Li,
+  Dong Yu, and Qingbin Ma.
+\newblock Lifelong learning of large language model based agents: A roadmap.
+\newblock \emph{arXiv preprint arXiv:2501.07278}, 2025.
+
+\end{thebibliography}
