@@ -4,7 +4,7 @@
 
 ## Start here
 
-Nine papers and eight framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one placement of real systems on that map, and a paper drawing the individual and organizational scales together.
+Ten papers and nine framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one placement of real systems on that map, and a paper drawing the individual and organizational scales together.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -73,6 +73,11 @@ Principal results:
 | `SARSI_A_System_of_Refusals.pdf` | **Current.** Implementation report, 33 pp |
 | `agents_built/` | LaTeX source, bibliography |
 | `Two_Axis_Intelligence_Level_Framework_v2.pdf` | **Current.** The level framework, 13 pp |
+| `Open_Ended_Evolving_Organization_v2.pdf` | **Current.** The organizational scale, 10 pp |
+| `oomega/` | LaTeX source, bibliography, upload package, submission guide |
+| `Open_Ended_Evolving_Organization_v2.md` | **Current.** Same paper, Markdown |
+| `Open_Ended_Evolving_Organization_OOmega.pdf` | Superseded by v2. Version 1, retained as the record |
+| `Open_Ended_Self_Evolving_Individual_Intelligence_IOmega.pdf` | Companion to the OΩ paper: the individual-scale open-ended level |
 | `two_axis/` | LaTeX source, bibliography, upload package, submission guide |
 | `Two_Axis_Intelligence_Level_Framework_v2.md` | **Current.** Same paper, Markdown |
 | `Two_Axis_Intelligence_Level_Framework_AI_Agents.pdf` | Superseded by v2. Version 1, retained as the record |
@@ -149,9 +154,9 @@ Completeness is excluded three times over — undecidability, the Landauer and B
 
 ## arXiv packages
 
-All six packaged papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Each was verified by extracting its tarball into an empty directory and compiling with plain `pdflatex` — no errors, no undefined references, no Type 3 fonts.
+All seven packaged papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Each was verified by extracting its tarball into an empty directory and compiling with plain `pdflatex` — no errors, no undefined references, no Type 3 fonts.
 
-Submission guides with per-paper categories and metadata abstracts: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), [`fleet/ARXIV.md`](fleet/ARXIV.md), [`two_axis/ARXIV.md`](two_axis/ARXIV.md). The deployment report and console design ship upload packages without separate guides; both follow the same setup, and the fleet guide's `cs.MA` notes apply to the console design too.
+Submission guides with per-paper categories and metadata abstracts: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), [`fleet/ARXIV.md`](fleet/ARXIV.md), [`two_axis/ARXIV.md`](two_axis/ARXIV.md), [`oomega/ARXIV.md`](oomega/ARXIV.md). The deployment report and console design ship upload packages without separate guides; both follow the same setup, and the fleet guide's `cs.MA` notes apply to the console design too.
 
 Submit the system-scale paper first — the companion's comments field cites its arXiv identifier.
 

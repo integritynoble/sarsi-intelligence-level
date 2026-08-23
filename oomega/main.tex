@@ -1,0 +1,357 @@
+% arXiv: force the pdflatex path. All content is text and tables; there are no
+% .eps files, and this must stay within the first few lines to take effect.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Open-Ended Evolving Organization, Version 2}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{axiom}{Axiom}
+\renewcommand{\theaxiom}{$\Omega$\arabic{axiom}}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\OOm}{\ensuremath{\mathrm{O}\Omega}}
+\newcommand{\IOm}{\ensuremath{\mathrm{I}\Omega}}
+\newcommand{\Ko}{\ensuremath{K^O}}
+\newcommand{\Fo}{\ensuremath{F^O}}
+\newcommand{\Tp}{\ensuremath{T_p}}
+
+\title{\LARGE Open-Ended Evolving Organization (\OOm{})\\[6pt]
+\large Version 2: Independent Axioms, a Coordination Bound,\\
+and Frontier Expansion Made Measurable}
+
+\author{Chengshuai Yang\\
+\small\texttt{platformaigpt@gmail.com}}
+
+\date{August 23, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Version~1 proposed \emph{Open-Ended Evolving Organization} (\OOm{}) as a distinct class of organizational intelligence: a persistent collective that preserves identity across member turnover, integrates distributed observation into evidence-bearing memory, reallocates roles and topology, modifies its own coordination mechanisms, improves the process that generates those modifications, identifies its own unknowns, and converts discoveries into organizational tools that expand its future frontier. It gave twelve axioms, twelve metrics, a falsifiable experimental program, a reference architecture, and a survey of what current systems lack. That contribution is retained. This version makes six changes, of which two are structural.
+
+The twelve axioms are not independent, and six of them are theorems. An axiom set exists to isolate the commitments that must be assumed from the consequences that follow; where the two are mixed, a reader cannot tell which claims the framework would lose if a commitment failed. We give six independent axioms and derive the remaining six.
+
+There is a coordination bound, and it is why \OOm{} must federate. Promotion of local claims to organizational knowledge requires verification by a locus other than the proposer, verification costs communication that grows with the number of members consulted, and marginal member value is bounded and may be negative. There is therefore a size beyond which adding members lowers organizational intelligence, and growth past it must be structural---nested sub-organizations promoting locally---rather than numeric.
+
+Frontier expansion becomes measurable, negatively. The defining condition $\Fo_{t+1} \supset \Fo_t$ cannot be evaluated because the reachable frontier cannot be enumerated. A retained, append-only registry of problem classes that \emph{failed} under a stated budget makes expansion observable as a transition from recorded failure to reproducible success with an attributable cause.
+
+Three smaller repairs: epistemic promotion requires separation structurally rather than optionally; organizational identity, established in Version~1 by analogy, is given a checkable criterion; and the twelve metrics are ordered as a frontier by measurement cost rather than presented as a scorecard. We report a first measurement of the cheapest of them---promotion latency has never been observed on a deployed governed system, whose system of record has no field for it.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}
+
+Version~1's diagnosis is retained without change: many agents, persistent memory, parallel execution, and even self-modifying members do not constitute an intelligent organization. So is its central thesis---that the highest organizational intelligence belongs not to the organization with the smartest member or the most agents, but to the one that continually converts distributed experience into collective knowledge, collective knowledge into better organizational machinery, and better machinery into access to previously unreachable problems, while preserving evidence, continuity, and governance \citep{yang2026oomega}.
+
+What this version addresses is that a framework proposing to \emph{measure} organizational intelligence must be minimal in what it assumes, bounded in what it permits, and operational in what it claims to detect. Version~1 is strong on the third for eleven of its twelve criteria, and weakest exactly where its defining property lives.
+
+Retained in full: the \OOm{} definition and its recursive loop; the separation of organizational from individual level; heterogeneous cognitive ecology and cognitive compression; upward and downward flows; the organizational self-model and unknown-model; the reference architecture; the experimental program; the twelve failure modes; the staged roadmap; and the survey of prior work.
+
+\section{Preliminaries}
+
+Version~1's state formulation is used unchanged. An organization is
+\[
+O_t = \langle A_t,\, N_t,\, R_t,\, M^O_t,\, \Ko_t,\, P^O_t,\, \Theta^O_t,\, \Gamma_t,\, C_t \rangle,
+\]
+members, topology, roles, memory, knowledge, procedures, organizational cognitive machinery, governance, and commitments; capability is a function of all of them rather than a sum over members \citep{cyert1963behavioral,hutchins1995cognition}. The \OOm{} cycle is Version~1's:
+\[
+\text{Experience}_t \to \text{Evidence}_t \to \Ko_{t+1} \to \{P^O, N, R, \Theta^O\}_{t+1} \to \text{COG}^O_{t+1} \to \Fo_{t+1} \to \text{Experience}_{t+1}.
+\]
+
+\section{Why the axiom set needs reducing}
+
+Version~1 offers twelve axioms. Several imply others, and one is of a different logical type from the rest. This is not a defect of content---each states something true and useful---but of presentation.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}YYY@{}}
+\toprule
+Version 1 axiom & Status & Follows from \\
+\midrule
+A4 evidence-bearing communication & Mechanism for A5 & A5 \\
+A6 dynamic specialization        & Theorem          & A5 $+$ A8 \\
+A10 recursive meta-learning      & Theorem          & A8 $+$ A5 \\
+A11 turnover resilience          & Theorem          & A1 $+$ A3 \\
+A12 frontier expansion           & Restates the definition & A7 $+$ A8 $+$ A9 \\
+A2 heterogeneous ecology         & Different type: a permission & --- \\
+\bottomrule
+\end{tabularx}
+\caption{Dependencies among Version~1's axioms. Six commitments survive as independent.}
+\end{table}
+
+\section{Six axioms}
+
+\begin{axiom}[Persistent lineage]
+The organization is causally continuous across changes of members, models, tools, and machines, and retains memory, provenance, commitments, and a traceable record of its own structural transformations.
+\end{axiom}
+
+\begin{axiom}[Organizational memory]
+Knowledge, decisions and their rationale, evidence and provenance, failed approaches, reliability histories, procedures, unresolved contradictions, and the measured effects of past organizational changes are retained independently of any member \citep{walsh1991organizational,wegner1987transactive}.
+\end{axiom}
+
+\begin{axiom}[Separated epistemic promotion]
+A member's belief becomes organizational knowledge only via \emph{claim $+$ evidence $+$ verification by a locus that did not produce the claim}.
+\end{axiom}
+
+\begin{axiom}[Institutional plasticity]
+The organization can change its own topology, roles, memory rules, aggregation procedures, reviewer separation, allocation, decomposition, escalation, and evaluation procedures, on evidence \citep{argyris1978organizational,ostrom1990governing}.
+\end{axiom}
+
+\begin{axiom}[Knowledge to tool]
+Validated discoveries can become durable shared capability---procedure, tool, role, benchmark, protocol, index, rule, or agent template---so that future members benefit from a discovery without independently rediscovering it \citep{nonaka1994dynamic}.
+\end{axiom}
+
+\begin{axiom}[Protected exploration]
+Exploratory diversity is preserved against exploitation pressure by mechanism rather than intention: protected branches, novelty budgets, maintained alternative hypotheses, delayed selection.
+\end{axiom}
+
+$\Omega$6 is retained as an axiom rather than derived because March's result gives no reason to expect diversity to survive optimization \citep{march1991exploration}: an adaptive organization not \emph{constructed} to protect exploration will converge, and no other axiom prevents it.
+
+\section{What follows}
+
+\begin{proposition}[Promotion requires separation]\label{prop:sep}
+Let a locus propose a claim, evaluate it, and promote it. Then the promotion criterion lies inside the write set of the proposer, and the locus can satisfy any criterion by adjusting it. No observation distinguishes promoted knowledge from asserted belief. Therefore $\Omega$3's verification must be performed by a locus that did not produce the claim, with criteria and evidence outside that producer's write set.
+\end{proposition}
+
+\subsection{Why this is stronger than Version 1's Axiom 5}
+
+Version~1 states the schema \emph{Claim $+$ Evidence $+$ Appropriate Verification $\to$ Candidate $\to$ Promoted}, adding that promotion ``may depend on domain-specific proof, replication, deterministic checks, independent review, or calibrated evidence aggregation.'' Four of those five are compatible with the proposer performing them. Deterministic checks and formal proof are self-executing and therefore safe; replication, review, and aggregation are not, and are the ones that matter in non-formal domains.
+
+Version~1 concedes the risk downstream, listing \emph{evaluator contamination} among governance-integrity signals to track and \emph{authority drift} among failure modes. Proposition~\ref{prop:sep} says these are not risks to monitor but conditions to enforce.
+
+\begin{cautionbox}{The distinction that matters}
+An organization whose evaluator is contaminated has not degraded its knowledge. It has stopped producing knowledge.
+\end{cautionbox}
+
+\begin{corollary}\label{cor:monotone}
+Organizational intelligence is not monotone in member level. An organization failing $\Omega$3 has no well-posed improvement loop regardless of its members' individual levels, while an organization of modest members satisfying $\Omega$3 does.
+\end{corollary}
+
+Member level determines proposal quality; separation determines whether the organization can distinguish a good proposal from a bad one---and one that cannot does not benefit from better ones. Version~1's observation that collective intelligence can be negative \citep{woolley2010collective} is here given a specific structural cause, and it is not coordination overhead.
+
+\begin{corollary}[The verifier's qualification]
+A locus qualified to verify another's claim must not be improving \emph{itself} by the verdicts it issues. The natural verifier is therefore a member with an empty or narrow self-write set---a low individual level---and this is its qualification rather than its deficiency.
+\end{corollary}
+
+This supplies a functional reason for Version~1's heterogeneity axiom beyond cost: heterogeneity is required because verification demands a \emph{different kind} of member, not merely a cheaper one \citep{yang2026twoaxisv2}.
+
+\begin{proposition}[Dynamic specialization]
+From $\Omega$3 and $\Omega$4: reliability histories are organizational knowledge ($\Omega$2), promotion of a competence claim requires separated verification ($\Omega$3), and routing rules are mutable ($\Omega$4). Therefore the organization can route by measured competence rather than title, form roles, and retire them. Version~1's Axiom~6 follows.
+\end{proposition}
+
+\begin{proposition}[Turnover resilience]
+From $\Omega$1 and $\Omega$2: if knowledge, provenance, and commitments are retained independently of members, removal of a member does not remove them. Version~1's Axiom~11 follows.
+\end{proposition}
+
+Its converse is the sharper statement: an organization that loses capability when one member departs has \emph{failed} $\Omega$2, not merely been unlucky. This makes Version~1's hidden-single-member-dependence failure mode a diagnosable violation rather than a hazard.
+
+\begin{proposition}[Recursive organizational meta-learning]
+From $\Omega$4 and $\Omega$3: if organizational mechanisms are mutable and changes to them are evaluated by a separated locus, the record of which changes validated is itself organizational knowledge ($\Omega$2), and the procedure generating changes is an organizational mechanism, therefore mutable. Version~1's Axiom~10 follows.
+\end{proposition}
+
+\begin{proposition}[Frontier expansion]\label{prop:frontier}
+From $\Omega$4, $\Omega$5, $\Omega$6: exploration surfaces problem classes the current organization cannot address; discoveries become durable capability; structure adapts to use it. Version~1's Axiom~12 follows and need not be assumed.
+\end{proposition}
+
+\begin{proposition}[Evidence-bearing communication]
+$\Omega$3 requires verification against evidence the verifier did not produce, which requires messages to carry provenance, uncertainty, scope, and source. Version~1's Axiom~4 is the mechanism $\Omega$3 demands, not an independent commitment.
+\end{proposition}
+
+\section{Organizational identity}
+
+Version~1 establishes by analogy---a university, a laboratory---that an organization persists across turnover, and states the condition as: members may change while $O_{t+1}$ remains a \emph{legitimate successor} of $O_t$. What makes a successor legitimate is not given, and at \OOm{} every candidate answer fails. Members change by assumption. Structure, roles, topology, and procedures are mutable by $\Omega$4. Goals are partly mutable, since an organization that revises what it pursues is the interesting case. Performance continuity is worst of all: improvement \emph{is} change in behaviour, so a behavioural criterion makes improving and dissolving indistinguishable.
+
+What remains is the record.
+
+\begin{definition}[Organizational lineage]
+$O_{t+1}$ is a legitimate successor of $O_t$ iff connected to it by an unbroken chain of provenance-linked records---each promotion attributable to a claim, its evidence, and the verifying locus; each structural change attributable to a proposal, its evaluation, and the promoting authority; with no gap.
+\end{definition}
+
+This is $\Omega$1 and $\Omega$2 working jointly, and it has three properties Version~1's formulation lacks. It is \emph{checkable}: a gap is a specific missing record. It is \emph{broken by exactly the operations the framework already rejects}---an unattributed structural change, a promotion with no evidence, a restore with no record of the restore. And it \emph{survives everything else changing}, which is the requirement.
+
+It also resolves a case Version~1 leaves open. Two organizations that merge have two chains; the merged entity is a legitimate successor of neither unless the merge is itself recorded as a structural change with its own evaluation. Absent that record, a merger is not organizational growth but the termination of two lineages and the start of an unattributed third.
+
+\section{The coordination bound}\label{sec:bound}
+
+Version~1 lists coordination overhead among failure modes and observes that the most advanced organization may look simpler at the execution edge. Both are right; neither is derived. There is a bound here, and it determines \OOm{}'s shape.
+
+Let $m$ be the number of members whose verification a promotion requires. By $\Omega$3 promotion requires a locus other than the proposer; in general it requires evidence to reach, and verdicts to return from, a quorum. Let $\Tp(m)$ be promotion latency and $c(m)$ communication cost per promotion. Both are non-decreasing in $m$, and where verification involves cross-checking among verifiers, $c$ grows superlinearly \citep{brooks1975mythical}.
+
+The organization's rate of converting local claims into organizational knowledge is bounded by $1/\Tp(m)$; this is Amdahl's argument transposed from parallel speedup to epistemic throughput \citep{amdahl1967validity}. Its frontier expansion rate is bounded by that conversion rate, since by Proposition~\ref{prop:frontier} expansion proceeds through validated knowledge becoming capability. An additional member contributes at most its own capability, and may contribute negatively through integrative dilution of a better answer.
+
+\begin{proposition}[Coordination bound]\label{prop:coord}
+Since frontier expansion rate is bounded above by $1/\Tp(m)$ with $\Tp$ non-decreasing, while marginal member contribution is bounded and may be negative, there exists $m^*$ maximizing organizational frontier expansion rate. Growth beyond $m^*$ reduces organizational intelligence in the sense this framework measures.
+\end{proposition}
+
+\begin{claimbox}{Federation is forced, not chosen}
+Growth past $m^*$ must be structural rather than numeric: nested sub-organizations, each promoting locally with its own separated verifier, with only cross-cutting claims escalated.
+\end{claimbox}
+
+This is why \OOm{} is hierarchical, and it is a derivation rather than a design preference. Version~1's observation that the most advanced organization looks \emph{simplest} at the execution edge follows: the edge is where local promotion happens under small $m$.
+
+Cognitive compression gains a structural rationale beyond cost. Version~1 motivates it economically---expensive discovery becomes cheap execution. Proposition~\ref{prop:coord} adds that compression \emph{reduces the number of members who must be consulted}, because a validated procedure needs execution rather than verification. Compression is therefore a mechanism for staying below $m^*$ while growing, and an organization that discovers but does not compress will hit the bound sooner. Requisite variety applies to the verification apparatus as much as to the regulator \citep{ashby1956introduction}.
+
+Finally, $m^*$ is domain-dependent and measurable. It depends on how much verification a domain's claims need---formal domains have self-executing checks and a large $m^*$; empirical domains requiring replication have a small one. Measuring $\Tp$ against $m$ across an organization's sub-units estimates it directly.
+
+\textbf{Limitation.} Proposition~\ref{prop:coord} establishes that a maximizer exists, not where it is, and gives no functional form for $\Tp$ or for marginal contribution. It also assumes verification load scales with promotion volume; an organization that promotes rarely can be large and slow without penalty, which is a real configuration and not obviously a bad one.
+
+\section{Frontier expansion, measured negatively}\label{sec:registry}
+
+Version~1's Axiom~12 and Proposition~\ref{prop:frontier} both state the defining property as $\Fo_{t+1} \supset \Fo_t$, and Version~1's frontier-expansion index asks for the growth of problem classes on which the organization can make reliable progress under a normalized budget. The difficulty is that $\Fo$ cannot be enumerated: an organization does not know which problems it could solve, and a criterion requiring containment of one unknown set in another is not evaluable.
+
+The standard resolution is to measure the boundary rather than the set \citep{popper1959logic}.
+
+\begin{definition}[Failure registry]
+A retained, append-only record of problem classes the organization attempted and failed to make reliable progress on, each with the resource budget under which it failed, the structural configuration at the time, and the reason recorded at the time rather than reconstructed.
+\end{definition}
+
+\begin{definition}[Frontier expansion episode]
+An entry that transitions from recorded failure to reproducible success under a comparable budget, where the organization can attribute the transition to a specific promoted knowledge item, tool, role, or structural change.
+\end{definition}
+
+Three things this buys. Axiom~12 becomes a test---not ``did the frontier grow'' but ``which registry entries flipped, under what budget, attributable to what.'' Attribution is enforced, since an entry that flips with no attributable cause is recorded as an \emph{unexplained} flip, which usually means the budget was not comparable or the original failure was misdiagnosed. And Version~1's own ingredients are already present but unconnected: its memory axiom requires preserving failed approaches, and its frontier axiom requires expansion. The registry is the connection between them.
+
+\textbf{Architectural consequence.} Version~1's reference architecture has ten components. This adds an eleventh, and it belongs beside the organizational unknown-model rather than inside general memory, because it needs budget and configuration fields general memory does not carry, and because it must be append-only for the comparison to mean anything.
+
+\textbf{Limitation.} A registry records only what was attempted. Problem classes never attempted are absent, so measured expansion is a lower bound biased by what the organization thought worth trying---and an organization whose imagination narrows will appear to expand while its real frontier contracts.
+
+\section{Metrics: a frontier, ordered by cost}
+
+Version~1's twelve metrics are retained, with two amendments.
+
+\textbf{They trade against each other and should be reported jointly.} Version~1 notes individual tensions---diffusion latency against false-knowledge propagation, diversity against premature convergence. The tensions are general: collective synergy rises with integration while exploration diversity falls; compression ratio rises as method diversity falls; turnover resilience rises with redundancy while synergy per unit cost falls. A high score on all twelve simultaneously is not an achievable target but a sign of the metric capture Version~1 lists as a failure mode. The metrics define a frontier, and an organization occupies a point on it.
+
+\textbf{They differ enormously in measurement cost.}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Cost & Metric & Why \\
+\midrule
+Cheap now & Governance integrity; knowledge-diffusion latency; promotion latency $\Tp$ & Timestamps and counts on events the system already emits \\
+Cheap now & Turnover resilience & Ablation: remove a member, re-run a held-out task set \\
+Moderate  & Collective synergy; expert-leverage efficiency; exploration diversity & Need a strongest-member baseline and a task distribution \\
+Moderate  & Institutional improvement competence; topology adaptation gain & Need a counterfactual frozen configuration \\
+Expensive & Cognitive compression ratio; false-knowledge propagation & Need correctness-preserving scope tracking and ground truth on promoted claims \\
+Expensive & Organizational frontier expansion & Needs the \S\ref{sec:registry} registry, maintained over long horizons \\
+\bottomrule
+\end{tabularx}
+\caption{Version~1's metrics ordered by what it costs to obtain them.}
+\end{table}
+
+An organization given twelve criteria does not know where to start. It should start with promotion latency: it bounds the frontier expansion rate by Proposition~\ref{prop:coord}, it estimates $m^*$, and it is a separation test.
+
+\subsection{A first measurement}
+
+We measured $\Tp$---the interval between a candidate being available and its promotion being authorized---on a deployed governed multi-agent system with cryptographically signed promotion, from its hash-chained audit log. The instrument pairs candidate registration with promotion, retains censored observations as lower bounds rather than discarding them, and excludes intervals below a plausible review floor from the estimate.
+
+\begin{cautionbox}{Result}
+$\Tp$ has never been observed. Of three available data points, two are promotions authorized $5.5$ and $0.0$ seconds after registration, and one is a candidate outstanding for $24$ days.
+\end{cautionbox}
+
+Two findings generalize beyond the system measured.
+
+\textbf{The system of record could not represent the quantity.} Its promotions table carried kind, name, version, and metadata, with no timestamp. Every timestamp used came from a side record. A quantity that bounds the organization's frontier expansion rate was not recorded by the table that records the event.
+
+\textbf{A sub-review interval is a separation failure, not a fast organization.} An interval too short for review indicates the authorization was produced by the process that proposed. By Proposition~\ref{prop:sep} the resulting promotion is not knowledge, so $\Tp$ is simultaneously a rate measurement and a test of $\Omega$3---and a framework that read a near-zero $\Tp$ as good news would reward the failure it exists to detect. This is the concrete form of Version~1's evaluator-contamination signal, detectable from timestamps alone without inspecting the organization's intentions.
+
+The general lesson is that Version~1's anti-inflation criteria state what would count as evidence but do not cause anyone to record it. On present evidence the binding constraint on demonstrating \OOm{} is record-keeping rather than capability, which is a more tractable obstacle and a more embarrassing one.
+
+\section{Falsification}
+
+Version~1's experimental program is retained. Targets for the claims added here:
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Claim & Refuted by \\
+\midrule
+Proposition~\ref{prop:sep} & An organization whose promoter and proposer coincide producing promoted knowledge that replicates under external verification at rates comparable to separated organizations \\
+Corollary~\ref{cor:monotone} & Unseparated organizations reliably matching separated ones on held-out outcomes, controlling for member level \\
+Proposition~\ref{prop:coord} & Frontier expansion rate rising monotonically with member count across a domain, with no maximizer, at constant promotion policy \\
+Lineage (\S6) & A successor organization universally accepted as legitimate whose provenance chain has a recorded gap \\
+Registry (\S\ref{sec:registry}) & Frontier expansion demonstrated to independent satisfaction with no record of prior failure \\
+Minimality (\S4) & A demonstration that one of $\Omega$1--$\Omega$6 is derivable from the others \\
+\bottomrule
+\end{tabularx}
+\caption{Falsification targets for claims added in Version 2.}
+\end{table}
+
+The last is an invitation rather than a hazard. An axiom set is improved by being cut down, and this version's claim is only that six are independent, not that fewer could not be.
+
+\section{Limitations}
+
+Version~1's limitations are retained. Four are added.
+
+\textbf{Proposition~\ref{prop:coord} has no functional form.} It establishes that $m^*$ exists, not where. Without a model of $\Tp(m)$ for a given verification regime it cannot be used prospectively, only measured retrospectively.
+
+\textbf{The failure registry measures a lower bound.} It records only attempted problem classes, so expansion measured through it is biased by what the organization thought worth trying.
+
+\textbf{Separation is treated as binary.} Real organizations separate partially: a verifier reporting to the promoter, a proposer selecting which evidence the verifier sees. $\Omega$3 admits no degrees, and a graded form is needed and not offered here.
+
+\textbf{The measurement is one system and one reading.} It establishes that the quantity was unrecorded there and nothing about the field. One reading is not a measurement: the questions this framework asks of $\Tp$ concern whether it \emph{falls}, which requires a series.
+
+\section{Conclusion}
+
+Version~1 established \OOm{} as a class and gave it criteria, an architecture, failure modes, and a research program. This version does not dispute it. It reduces twelve axioms to six independent commitments and derives the rest, so that a reader can see which assumptions carry the framework; strengthens epistemic promotion from a schema into a structural requirement, on the ground that a promotion whose verifier is its proposer is not weak knowledge but none; supplies a checkable criterion for the organizational identity Version~1 establishes by analogy; and turns the defining property from a statement about an unenumerable set into a count over a retained record of failures.
+
+It adds one result. Because promotion requires separated verification, and verification costs communication that grows with the number of members consulted, while marginal member value does not, there is a size beyond which adding members lowers organizational intelligence. Growth past it must be federation rather than accumulation. That is why an \OOm{} organization is hierarchical, why it looks simplest where it executes, and why cognitive compression is structurally necessary rather than merely economical.
+
+And it reports that the cheapest of the twelve metrics---the one that bounds the rate of everything else---has never been recorded on the deployed system we examined, because the table that records promotions has no field for when they happened. The criteria tell us what would count. Until the events are recorded, \OOm{} remains a specification rather than an observation.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
