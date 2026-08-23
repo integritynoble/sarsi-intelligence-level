@@ -48,6 +48,30 @@ The deployed imaging loop uses (3) and (4) together: held-out ground truth is st
 side and never staged into a sandbox, and promotion requires an Ed25519 signature. That is the
 reference standard, and anything weaker should be labelled as weaker.
 
+### § 2a — Same model, different processes — yes. Same model, different personas — no.
+
+The first question anyone building this asks is whether one LLM can fill every role. It can, and the
+distinction that makes it legitimate is worth stating because the wrong reading of it is the easiest
+mistake here.
+
+**Separation is defined over loci and write sets, not over weights.** One base model running in nine
+processes — each with its own credential, each with a write set the control plane enforces — separates
+proposer from evaluator from promoter exactly as well as nine different models would. Nothing in the
+definition mentions the parameters.
+
+One base model in one context, told which of nine hats it is currently wearing, does not separate
+anything. The roles are distinct functions of one process, so the evaluator's criteria sit inside the
+proposer's write set and the whole structure certifies itself.
+
+The difference is not fastidiousness. The first arrangement is a property of the system; the second is
+a property left to the model's judgement on the day — and the design principle this corpus enforces
+everywhere is that *the model is never shown a permission gate*. A restriction honoured by a capable
+participant is not a mechanism.
+
+Whether a *mechanically* restricted capable model — write set narrowed by the control plane rather
+than by instruction — is as good as structural differentiation is left open in `SARSI-O` §9.3, and
+nothing here settles it.
+
 **The charter module already encodes the principle**: the three things that define "better" are named
 as never-touched, because *an autonomous agent given a benchmark and a night will find the shortest
 path to a better number, and the shortest path is almost always to change what "better" means — edit
