@@ -78,6 +78,48 @@ path to a better number, and the shortest path is almost always to change what "
 the split, soften the metric, re-run the judge.* That sentence is the design rationale for this whole
 section.
 
+### § 2b — Evidence-mediating components are inside, by a route that does not look like one
+
+The second refinement, and the one that survives every obvious guard.
+
+A write set is not only what the agent can edit. **It includes anything that determines what the
+evaluation observes.** If a component of the mechanism being improved also selects, ranks, filters, or
+summarizes the evidence the evaluation sees, then improving that component against that evaluation
+puts the evaluator inside the write set indirectly.
+
+**Which components are evidence-mediating.** Retrieval and ranking; context gating and budget
+allocation; memory consolidation, in the sense of what gets promoted into the evidence store at all;
+tool selection, which decides which instrument reports; sampling policy; and any summarization on the
+path to the judge. Every one of these is a natural member of an improvable configuration *and* sits on
+the evidence path.
+
+**Why the standard checks miss it.** The criterion is still predeclared. The benchmark is unedited.
+The metric is unchanged. The held-out split is disjoint by construction. Every item on the usual list
+passes — and the loop still self-certifies, because what moved was upstream of all of them. This is
+the failure the charter module anticipates in general — *an autonomous agent given a benchmark and a
+night will find the shortest path to a better number, and the shortest path is almost always to change
+what "better" means* — arriving through the one door that is inside mutable cognition rather than
+behind the authority kernel.
+
+**Three remedies, in increasing strength.**
+
+1. **Freeze the evidence path during evaluation.** Score a candidate using the *incumbent's* retrieval,
+   gating, and consolidation, not its own. A candidate then changes how the agent works, never how the
+   agent is watched.
+2. **Give the evaluator its own evidence path.** It gathers inputs the agent's mechanism never touches.
+   This is the deployed imaging loop's arrangement — ground truth held control-plane side and never
+   staged into the sandbox — applied to a store the agent does own.
+3. **Partition the configuration.** Split the improvable mechanism into an *outcome-producing* part,
+   freely improvable, and an *evidence-mediating* part, improvable only under (1) or (2) and never in
+   the same round as the evaluation it would affect.
+
+**And a held-out set the mechanism retrieved into existence is not held out.** Disjointness is a
+property of how the split was assembled, not of how it is used at scoring time.
+
+**The test.** Construct a candidate that biases its own evidence assembly — a retrieval policy that
+preferentially surfaces confirming episodes — and assert the harness refuses it. Do this before
+trusting the guard. A guard that has only ever passed is one nobody has reason to trust.
+
 ---
 
 ## § 3 — Individual levels: the build specification
@@ -140,7 +182,10 @@ lessons are retrieved is I3.
 **Outside (mandatory at this level and above):**
 - the **evaluator**: criteria and data the agent cannot reach
 - the **promoter**: the thing that makes a candidate operative, which the agent cannot invoke
-- a **held-out set disjoint from the search set** — search on one, gate promotion on the other
+- a **held-out set disjoint from the search set** — search on one, gate promotion on the other, and
+  assembled by something the mechanism under test does not touch (§2b)
+- **a frozen evidence path for the duration of scoring**, if any part of the mechanism being improved
+  also selects or ranks what the evaluation sees (§2b)
 
 **Promotion test to I4:** later improvement generations produce *higher improvement competence*, not
 merely higher task score.
@@ -363,6 +408,10 @@ manufacture results without intending to.
 **Memory growth read as learning.** Storage is monotone in history whether or not capability rises.
 
 **Averaging away a measured expert.** O2's instrument with O1's behaviour.
+
+**Improving the component that assembles the evidence.** The subtlest one. Every standard check
+passes — predeclared criterion, unedited benchmark, disjoint split — and the loop self-certifies
+anyway, because what moved was the retrieval upstream of all of them (§2b).
 
 **Near-zero promotion latency read as speed.** An interval too short for review means the authorizer
 was the proposer. It is a separation failure wearing the costume of efficiency.
