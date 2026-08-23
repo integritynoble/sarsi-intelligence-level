@@ -1,0 +1,101 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amdahl(1967)]{amdahl1967validity}
+Gene~M. Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In \emph{AFIPS Conference Proceedings}, 1967.
+
+\bibitem[Ashby(1956)]{ashby1956introduction}
+W.~Ross Ashby.
+\newblock \emph{An Introduction to Cybernetics}.
+\newblock Chapman and Hall, 1956.
+
+\bibitem[Baars(1988)]{baars1988cognitive}
+Bernard~J. Baars.
+\newblock \emph{A Cognitive Theory of Consciousness}.
+\newblock Cambridge University Press, 1988.
+
+\bibitem[Bostrom(2014)]{bostrom2014superintelligence}
+Nick Bostrom.
+\newblock \emph{Superintelligence: Paths, Dangers, Strategies}.
+\newblock Oxford University Press, 2014.
+
+\bibitem[Conant and Ashby(1970)]{conant1970every}
+Roger~C. Conant and W.~Ross Ashby.
+\newblock Every good regulator of a system must be a model of that system.
+\newblock \emph{International Journal of Systems Science}, 1\penalty0
+  (2):\penalty0 89--97, 1970.
+
+\bibitem[Dehaene and Changeux(2011)]{dehaene2011experimental}
+Stanislas Dehaene and Jean-Pierre Changeux.
+\newblock Experimental and theoretical approaches to conscious processing.
+\newblock \emph{Neuron}, 70\penalty0 (2):\penalty0 200--227, 2011.
+
+\bibitem[Good(1965)]{good1965speculations}
+Irving~John Good.
+\newblock Speculations concerning the first ultraintelligent machine.
+\newblock In \emph{Advances in Computers}, volume~6, pages 31--88. Academic
+  Press, 1965.
+
+\bibitem[Kardashev(1964)]{kardashev1964transmission}
+Nikolai~S. Kardashev.
+\newblock Transmission of information by extraterrestrial civilizations.
+\newblock \emph{Soviet Astronomy}, 8:\penalty0 217--221, 1964.
+
+\bibitem[Lloyd(2000)]{lloyd2000ultimate}
+Seth Lloyd.
+\newblock Ultimate physical limits to computation.
+\newblock \emph{Nature}, 406:\penalty0 1047--1054, 2000.
+
+\bibitem[Morris et~al.(2024)Morris, Sohl-Dickstein, Fiedel, Warkentin, Dafoe,
+  Faust, Farabet, and Legg]{morris2024levels}
+Meredith~Ringel Morris, Jascha Sohl-Dickstein, Noah Fiedel, Tris Warkentin,
+  Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg.
+\newblock Levels of {AGI} for operationalizing progress on the path to {AGI}.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, 2024.
+
+\bibitem[{SAE International}(2021)]{sae2021j3016}
+{SAE International}.
+\newblock J3016: Taxonomy and definitions for terms related to driving
+  automation systems for on-road motor vehicles.
+\newblock Technical report, SAE International, 2021.
+
+\bibitem[Sheridan and Verplank(1978)]{sheridan1978human}
+Thomas~B. Sheridan and William~L. Verplank.
+\newblock Human and computer control of undersea teleoperators.
+\newblock Technical report, MIT Man--Machine Systems Laboratory, 1978.
+
+\bibitem[von Neumann(1966)]{vonneumann1966theory}
+John von Neumann.
+\newblock \emph{Theory of Self-Reproducing Automata}.
+\newblock University of Illinois Press, 1966.
+\newblock Edited and completed by A. W. Burks.
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026circles}
+Chengshuai Yang.
+\newblock Intelligence inside the circles: How individual and organizational
+  intelligence levels function across substrate-indexed recursive
+  self-improvement.
+\newblock Technical report, Working paper, 2026{\natexlab{a}}.
+\newblock 23 August 2026.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026sarsil}
+Chengshuai Yang.
+\newblock Recursive self-improvement is substrate-indexed: A falsifiable
+  framework for intelligence trajectories from language models to stellar
+  engineering.
+\newblock Technical report, Working paper, 2026{\natexlab{b}}.
+\newblock Version 3.0.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026twoaxisv2}
+Chengshuai Yang.
+\newblock A two-axis intelligence level framework for {AI} agents, version 2.
+\newblock Technical report, Working paper, 2026{\natexlab{c}}.
+
+\end{thebibliography}

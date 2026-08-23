@@ -1,0 +1,325 @@
+% arXiv: force the pdflatex path. All content is text and tables; there are no
+% .eps files, and this must stay within the first few lines to take effect.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Substrate Indexing Is an Axis Shift}
+\fancyhead[R]{\small Preprint}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Td}{\ensuremath{T_\delta}}
+\newcommand{\IOm}{\ensuremath{\mathrm{I}\Omega}}
+
+\title{\LARGE Substrate Indexing Is an Axis Shift\\[6pt]
+\large How Individual and Organizational Intelligence Levels Operate\\
+Inside Each Recursive Self-Improvement Loop}
+
+\author{Chengshuai Yang\\
+\small\texttt{platformaigpt@gmail.com}}
+
+\date{August 23, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Two frameworks describe recursive self-improvement from different starting points. One indexes it by \emph{substrate}---software, hardware, matter, biology, stellar energy---and argues that the binding constraint migrates outward from one domain to the next, so that ``the'' recursion rate is not a single parameter \citep{yang2026sarsil}. The other indexes it by \emph{who changes what}---an individual's write depth and an organization's coordination depth---and holds that a level is a pair rather than a rung \citep{yang2026twoaxisv2}. Neither has been crossed with the other, and the crossing supplies something the first asserts without mechanism: \emph{why} substrate is the right index.
+
+The bridge is the improvement loop both frameworks share: identify, implement, validate, deploy. We assign each step to an axis and obtain a result holding in every domain: validate is organizational by necessity and deploy is organizational always, because a system that authorizes its own deployment has self-certified. Two of four steps of every loop, in every domain, are organizational by construction, and no individual level closes any loop alone.
+
+From this follows the central claim. Reading the five substrate closure criteria against the level definitions, the individual requirement saturates while the organizational requirement keeps climbing. Chip specification, machine design, and collector design are ordinary engineering cognition; what is hard about the outer domains is everything after the identify step. Substrate indexing is therefore an axis shift, and the intelligence-explosion argument---a claim about a machine improving its own cognition---is an argument about one domain only.
+
+Two asymmetries appear at the top. Checked against the criteria as stated, no domain's closure criterion requires open-ended individual intelligence; and the outermost domain admits no individual coordinate at all, since a structure spanning an astronomical unit exceeds the coherence bound by eight orders of magnitude. The individual axis has a ceiling below the trajectory's requirements; the organizational axis carries the outer domains alone.
+
+This paper is a companion to a crosswalk developed in parallel \citep{yang2026circles}, which maps what each individual and organizational level \emph{does} inside each substrate domain---per-domain role tables for both scales, both complete matrices, a seven-role heterogeneous loop, and a unified state profile. We take that as the descriptive account and do not duplicate it; this paper supplies what a crosswalk does not, namely propositions about the structure it describes, and one measurement.
+
+The crossing also explains four things the substrate framework observes without accounting for: why its design-to-deploy gap appears in every domain, why its own timeline errors were monotonic in distance from software, what a compensated half-loop is structurally, and how to weight loop completion so that two systems with the same score become distinguishable.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}
+
+\subsection{The question}
+
+The standard argument for an intelligence explosion is about a single mind: a machine that improves its own capacity to improve will outgrow one that does not \citep{good1965speculations}. The argument is sound and its conclusion is probably right. What it does not supply, and what restating it has never supplied, is the rate.
+
+One line of response indexes the rate by substrate \citep{yang2026sarsil}. An improvement loop is always a loop over some substrate a system can modify; loop periods across substrate domains differ by five orders of magnitude; and the binding constraint migrates outward as each domain is mastered. This is correct as far as it goes, and it leaves a question open: \emph{why} does substrate govern, rather than some other partition of improvement capability? The answer given is that substrate domains differ in period, access, and floor type. Those are properties of the domains. They are not a mechanism.
+
+This paper supplies one. The mechanism is that outer domains do not merely take longer---they shift the work from one kind of intelligence to another, and the kind they shift toward is the one the intelligence-explosion argument says nothing about.
+
+\subsection{What is missing from each framework alone}
+
+The substrate framework has no representation of \emph{who} performs a loop step. Its closure criterion is that all four steps execute without human approval, but ``the system'' executing them is unanalysed, and its own observation that the deploy gate is ``institutional rather than technical'' is therefore a remark it cannot cash out.
+
+The level framework has no representation of \emph{what substrate} a loop runs over. Its scales describe depth of self-modification and depth of coordination, and are silent about whether the thing improved is a training run or a fabrication plant.
+
+Crossed, each supplies the other's missing term.
+
+\subsection{Contributions}
+
+\begin{enumerate}[leftmargin=1.5em]
+\item A step-to-axis assignment (\S\ref{sec:assign}) with a proposition: validate and deploy are organizational in every loop, so no individual level closes any loop alone.
+\item The saturation law (\S\ref{sec:law}): across domains the individual requirement is bounded while the organizational requirement is not, which is the mechanism behind substrate indexing.
+\item Two asymmetries at the top (\S\ref{sec:asym}): no stated closure criterion requires open-ended individual intelligence, and the outermost domain admits no individual coordinate.
+\item Four explanations (\S\ref{sec:explains}) of findings the substrate framework reports without accounting for.
+\item A measurement program (\S\ref{sec:measure}), including a first reading of the quantity binding the organizational axis in every domain.
+\end{enumerate}
+
+\subsection{What this paper does not claim}
+
+It is not a timeline: nothing here shortens or lengthens any estimate. It does not predict performance: level is not capability, and a system at a low level may be far more useful than one at a high level. Its level assignments are orderings, both axes being ordinal with no agreed step-weighting. And it builds on two unpublished working frameworks and inherits whatever is wrong with them; where a claim depends on a contested premise of either, we say so.
+
+\section{Related work}
+
+\textbf{The per-domain crosswalk.} The work closest to this one maps every individual and organizational level to its function inside every substrate domain, via a seven-role loop---director, discoverer, instrument-maker, specialist, operator, referee, promoter---and reports both complete matrices with a unified state profile \citep{yang2026circles}. It is the descriptive account of the same crossing, and this paper depends on it: \S6's per-domain discussion compresses material treated there at length. What it does not contain, and what is offered here, are the propositions of \S\ref{sec:assign}, \S\ref{sec:law} and \S\ref{sec:asym}, and the measurement of \S\ref{sec:measure}. The division is deliberate: a crosswalk answers \emph{what happens where}, and the questions in \S1.1 are \emph{why here rather than there}.
+
+\textbf{The intelligence-explosion argument.} Good's formulation concerns an ultraintelligent machine designing better machines. In the vocabulary used here it is a claim about the \emph{individual} axis, and \S\ref{sec:law} argues it therefore applies to exactly one substrate domain. This is a delimitation rather than a refutation, and the substrate framework makes the same delimitation without identifying which axis is delimited.
+
+\textbf{Substrate-indexed recursion.} The framework crossed here gives operational closure criteria per domain, derives an Amdahl-style bound \citep{amdahl1967validity} showing external compensation limits iteration rate rather than per-iteration gain, and distinguishes throughput floors from physical floors. We adopt all of it and add the axis decomposition.
+
+\textbf{Two-axis level taxonomies.} The framework supplying the level scales indexes an individual by the deepest layer it changes through experience and a collective by what it changes about its own coordination. Its coherence bound---that a single decision locus satisfies $R \le c\tau/2$---does the work in \S\ref{sec:asym}.
+
+\textbf{Forms of superintelligence.} Bostrom distinguishes speed, collective, and quality superintelligence \citep{bostrom2014superintelligence}. The result in \S\ref{sec:law} bears directly on it: the path to stellar-scale capability runs through \emph{collective} and not through \emph{quality} superintelligence, because the outer domains' binding steps are organizational. Bostrom treats the three as alternative routes; the crossing suggests they are routes to different places.
+
+\textbf{Levels of automation and of AGI.} The Sheridan--Verplank tradition \citep{sheridan1978human} and its descendants \citep{sae2021j3016} order control allocation on a single ladder, which works where the task is fixed. Recent AGI level taxonomies separate an autonomy dimension from capability \citep{morris2024levels}. Both assign a level to a \emph{system}; the crossing suggests that for improvement loops the assignment must be to a \emph{step}, since different steps of one loop sit on different axes.
+
+\textbf{Cybernetic antecedents.} Requisite variety \citep{ashby1956introduction} underlies the organizational requirement; the regulator theorem \citep{conant1970every} underlies the self-opacity limit invoked in \S\ref{sec:asym}. The single-workspace construct is used functionally \citep{baars1988cognitive,dehaene2011experimental}, with no claim about consciousness.
+
+\section{The two frameworks, in the terms used here}
+
+A loop over domain $d$ is $L_d = \langle \iota, \mu, \nu, \delta \rangle$: identify a candidate modification predicted to improve a specified capability; implement it; validate it against an evaluation not used in generating it; deploy it as the operative baseline. $L_d$ is \emph{closed} iff all four execute without human approval and $\delta$ makes the modification operative. Loop completion $\lambda_d \in [0,1]$ is the weighted fraction of steps executing autonomously.
+
+The five domains are \textbf{I} software, \textbf{II} hardware, \textbf{III} physical \citep{vonneumann1966theory}, \textbf{IV} biological, and \textbf{V+} stellar \citep{kardashev1964transmission}.
+
+An individual's level is the deepest layer it changes through experience: reactive, persistent, adaptive-learning, self-improving, recursively self-improving, autonomous-discovery, open-ended. An organization's level is what it changes about its own coordination, on a parallel scale. An individual is a system with a single global workspace; an organization has none.
+
+\section{The step-to-axis assignment}\label{sec:assign}
+
+\textbf{Identify is individual work.} Generating a candidate modification is cognition: the production of a hypothesis about what would improve the system, which is what an individual level measures.
+
+\textbf{Implement is individual in Circle I and increasingly not, outward.} Writing code is cognition realized; operating a fabrication plant is not.
+
+\textbf{Validate is organizational by necessity.} An improvement claim is well-defined only if its evaluator lies outside the write set of the system evaluated. Everything inside an individual's boundary is by definition available to its single decision process, therefore inside its write set. Validation requires a locus the individual does not control, which is an organizational property.
+
+\textbf{Deploy is organizational always.} This admits no domain exception.
+
+\begin{proposition}\label{prop:deploy}
+Let a system propose a modification, evaluate it, and deploy it as its operative baseline. Then the deployment criterion lies inside the write set of the proposer, and the system can satisfy any criterion by adjusting it. No observation distinguishes a validated deployment from an asserted one. Therefore $\delta$ requires an authorizing locus distinct from the proposer.
+\end{proposition}
+
+\begin{corollary}\label{cor:twosteps}
+In every substrate domain, at least two of the four loop steps are organizational by construction. No individual level, however high, closes any loop alone.
+\end{corollary}
+
+This is why the substrate framework finds the deploy gate ``institutional rather than technical'' in the one domain where it examines the question closely. The finding is not a fact about that domain; it is a fact about $\delta$.
+
+\textbf{A qualification that matters.} The assignment is about where \emph{authority} lies, not where compute runs. A system can execute its own held-out evaluation; what makes $\nu$ organizational is that the criterion and data must be external. This does real work in Circle I, where execution is cheap and only authority is contested, and progressively less outward, where execution is itself distributed.
+
+\section{The saturation law}\label{sec:law}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lllYl@{}}
+\toprule
+Domain & $\iota$ demands & $\mu,\nu,\delta$ demand & Binding axis & Floor \\
+\midrule
+I Software   & I3--I4 & O2--O3 & Organizational & Throughput \\
+II Hardware  & I2--I3 & O3--O4 $+$ physical & Organizational, then physical & Mixed \\
+III Physical & I2--I3 & O4--O5 $+$ physical & Physical, via organizational & Physical \\
+IV Biological& \textbf{I5} & O3--O5 $+$ irreducible & Physical & Physical \\
+V+ Stellar   & I2--I3 & O4$+$ & Organizational; no individual possible & Physical \\
+\bottomrule
+\end{tabularx}
+\caption{Level requirements per domain. Assignments are orderings by inspection (\S\ref{sec:limits}).}
+\end{table}
+
+\begin{proposition}[Saturation]\label{prop:sat}
+Across the five domains the individual requirement is bounded above by the biological domain's identify step and does not increase with domain index; the organizational requirement increases monotonically with domain index and is unbounded within the list.
+\end{proposition}
+
+\begin{claimbox}{Three consequences}
+\textbf{You cannot buy an outer domain with a smarter individual.} The $\iota$ column stops rising after Circle IV and is \emph{lower} in II, III, and V+ than in I.
+
+\textbf{Substrate indexing is an axis shift.} Outer substrates shift the loop's load from the axis on which cognitive self-improvement operates to the axis on which it does not. Period, access, and floor type are consequences of this shift rather than independent justifications for it.
+
+\textbf{The intelligence-explosion argument is a Circle I argument.} Every domain outside software has its binding step on the other axis, where that argument has no purchase.
+\end{claimbox}
+
+\section{Domain by domain}
+
+\subsection{Circle I --- Software}
+
+Reactive members run evaluations and mechanical pipeline steps; persistent members hold state so an experiment survives a restart; adaptive-learning members tune policy against a fixed metric; \emph{self-improving} is the level this domain's criterion names; recursively self-improving is what makes the loop recursive rather than merely closed. Organizationally, a persistent organization retains what was tried and failed, an adaptive one routes candidates to the right evaluator, and a self-improving one changes its own validation procedure on evidence.
+
+$\iota$, $\mu$, and $\nu$ run without approval in mature systems; $\delta$ does not. The framework reports the constraint on deploy as authorization rather than capability. In level terms the software loop has an individual level roughly adequate to its criterion and an organizational level roughly two steps short.
+
+With a mature loop's gated set containing only $\delta$, the compensated iteration rate is $\rho_{\max} = 1/\Td$. Capability improvement drives $\iota,\mu,\nu$ toward zero and cannot touch \Td.
+
+\begin{cautionbox}{The immediately actionable claim}
+Circle I closure is achieved by raising the \emph{organizational} level, not the individual one---which is a strange thing to say about the domain everyone treats as the individual-axis domain.
+\end{cautionbox}
+
+\subsection{Circle II --- Hardware}
+
+Chip \emph{design} is a software problem; chip \emph{manufacture} is physical infrastructure, and conflating them is reported as the single most consequential error in the framework's earlier timelines. That is exactly the axis split: design is $\iota$ and individual, manufacture is $\mu$ and organizational-plus-physical.
+
+This is where the individual axis stops helping. A fabrication plant requires contamination control, process-drift correction at nanometre tolerances, and maintenance---coordination among many actors over months. A more capable designer does not qualify a fab, and no individual level reaches the binding step. Minimum: I2--I3 / O3--O4.
+
+\subsection{Circle III --- Physical}
+
+The criterion is that a machine mine, refine, fabricate its own control electronics, and assemble a working copy. Every step after design is distributed in space and time.
+
+The copy raises a question only the organizational axis answers. Is the copy the same system? Not by content---it shares none of the original's matter. The available criterion is lineage: a successor is legitimate iff connected by an unbroken chain of provenance-linked records. Under that criterion \emph{self-replication is a lineage event}, and a replicator that does not record its own replication has not extended a lineage but started an unattributed one.
+
+The hardware--physical mutual dependency is partial rather than full, so the pair bootstraps rather than deadlocking, advancing at the slower of the two physical periods. In level terms both rungs are organizational work, and no increase in individual level moves the ladder at all. That is why it advances at physical speed.
+
+\subsection{Circle IV --- Biological}
+
+The only domain whose $\iota$ requires autonomous discovery: its criterion opens with generating and testing hypotheses about biological mechanisms. Every other domain's $\iota$ is design, satisfied two levels lower.
+
+Its $\nu$ is externally gated twice over---once because validation always requires a separated evaluator, and once because regulatory structure requires a human principal investigator. Its physical floor of five to eight years is compressible by no level on either axis.
+
+The irony is worth stating. This domain is off the critical path: it requires software, does not require physical self-replication, and the stellar domain does not require it. \textbf{The domain that most demands a high individual level contributes least to the trajectory.} The top of the individual axis is stranded on a branch.
+
+\subsection{Circle V+ --- Stellar}
+
+A collector swarm at one astronomical unit is roughly $16.6$ light-minutes across. A single decision locus of that radius has, by the coherence bound, a decision cycle of at least $16.6$ minutes, while local computation between consecutive opportunities to agree is enormous---of order $10^{50}$ operations per second per kilogram at physical limits \citep{lloyd2000ultimate}. Such a system is not a mind with distributed parts. It is a civilization.
+
+\begin{proposition}\label{prop:nostellar}
+Circle V+ admits no individual coordinate. Its level is organizational alone.
+\end{proposition}
+
+Minimum O4 at least: the net-growth criterion requires an organization that improves how it improves, over decades. Whether it requires the open-ended organizational level is not entailed by the criterion as written and we do not claim it.
+
+\section{Two asymmetries at the top}\label{sec:asym}
+
+\begin{proposition}\label{prop:noiomega}
+No stated substrate closure criterion requires the open-ended individual level.
+\end{proposition}
+
+Circle I requires self-improving or recursively self-improving. Circles II, III, and V+ require design-level cognition for $\iota$. Circle IV requires autonomous discovery. Open-ended individual intelligence---discoveries becoming cognitive tools that expand one's own future discovery space---is required by none of the five.
+
+\IOm{} is therefore not on the path to Kardashev II. This does not make it unimportant; it makes it \emph{non-instrumental}. If open-ended individual intelligence is worth pursuing, it is worth pursuing for what it is, because that path does not pass through it.
+
+\begin{corollary}\label{cor:orgcarries}
+The individual axis has a ceiling lying below the trajectory's requirements. The organizational axis carries the outer domains alone.
+\end{corollary}
+
+The level framework reaches the same conclusion---that organization is the more fundamental coordinate---from evaluator externality and the coherence bound. The crossing reaches it from the substrate criteria, an independent starting point. Two derivations from different premises is the strongest reason available to believe it.
+
+\section{What the crossing explains}\label{sec:explains}
+
+\textbf{The design-to-deploy gap, in every domain.} The framework reports that in every domain the design component far exceeds the manufacture or deploy component, calling the gap ``institutional as often as technical.'' In level terms every row reads \emph{individual high, organizational low}, and one diagnosis covers all five domains.
+
+\textbf{Why its own errors were monotonic in substrate distance.} Its timeline corrections grew with distance from software, attributed to reasoning about physical domains with software intuitions. Sharpened: distance from software is distance from the individual axis, so an analysis calibrated on the axis where cognition operates underestimates in proportion to how much of a domain is organizational and physical work---which is the reported ordering.
+
+\textbf{What a half-loop is, structurally.} A compensated loop is one where some steps are performed by an external agent. In level terms a half-loop is a system whose individual level meets its domain's requirement and whose organizational level does not. This makes the open compensation-ceiling question---whether per-iteration returns to compensation diminish---the question of whether the organizational gap closes as the compensating organization is itself augmented, which is measurable from authorization timestamps.
+
+\textbf{How to weight loop completion.} The framework records that its per-step weights are estimated by inspection and that two loops with identical completion can differ enormously. Weight $\iota$ and $\mu$ by the individual axis and $\nu$ and $\delta$ by the organizational one, and report completion as a pair; two loops with the same scalar and different splits then become distinguishable.
+
+\section{Measurement}\label{sec:measure}
+
+\Td{} is the organizational axis's binding quantity in every domain, capping the compensated iteration rate at $1/\Td$. Circle I's $\delta$ is the only one currently instrumentable end to end; the outer domains' authorization runs through procurement, regulators, and launch authorities, where timestamps exist but are not collected as a series.
+
+We measured \Td{} on a deployed governed software system with cryptographically signed promotion, from its hash-chained audit log, pairing candidate registration with promotion, retaining censored observations as lower bounds, and excluding intervals below a plausible review floor.
+
+\begin{cautionbox}{Result}
+\Td{} has never been observed. Of three available data points, two are promotions authorized $5.5$ and $0.0$ seconds after registration---intervals in which no review occurred---and one is a candidate outstanding for $24$ days.
+\end{cautionbox}
+
+Two findings generalize. The system of record could not represent the quantity: its promotions table carried no timestamp, so every timestamp used came from a side record. And a sub-review interval is not a fast organization but a separation failure---by Proposition~\ref{prop:deploy} the resulting deployment is not validated, so \Td{} is simultaneously a rate measurement and a test of whether $\delta$ is genuinely separated.
+
+\section{Falsification}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+Claim & Refuted by \\
+\midrule
+Proposition~\ref{prop:deploy} & A system proposing, evaluating and deploying through one locus, producing deployments that validate under external evaluation at rates comparable to separated systems \\
+Proposition~\ref{prop:sat} & A domain whose identify step demonstrably requires a higher individual level than the biological domain's \\
+Proposition~\ref{prop:nostellar} & A demonstrated single decision locus whose radius exceeds $c\tau/2$ for its actual cycle \\
+Proposition~\ref{prop:noiomega} & Any stated closure criterion shown to require the open-ended individual level; or a sixth substrate domain that does \\
+Half-loop (\S\ref{sec:explains}) & A compensated loop whose missing steps are individual rather than organizational \\
+Axis shift (\S\ref{sec:law}) & A domain in which raising the individual level demonstrably advances a binding non-$\iota$ step \\
+\bottomrule
+\end{tabularx}
+\caption{Falsification targets.}
+\end{table}
+
+Proposition~\ref{prop:nostellar} is arithmetic given its premise. What is falsifiable is the premise---that a single decision locus requires signal exchange within one cycle---and a system with a genuinely stale-tolerant unified state would refute the framing. We are not aware of a coherent construction.
+
+\section{Limitations}\label{sec:limits}
+
+\textbf{The level assignments are orderings by inspection.} They inherit the substrate framework's measurement problem exactly: no agreed decomposition of each loop into steps, no agreed weighting, ordinal scales on both axes. Two domains assigned the same level may differ substantially.
+
+\textbf{The step-to-axis assignment is cleaner in statement than in practice.} Validation in Circle I is partly individual: a system can run its own held-out evaluation, and what makes $\nu$ organizational is that criterion and data must be external, not that computation must be. The assignment concerns authority rather than execution, and carries less weight in the outer domains where execution is itself distributed.
+
+\textbf{Proposition~\ref{prop:noiomega} is a claim about the criteria as stated.} The domain list is conceded by its own author to be ``neither obviously complete nor obviously minimal.'' If a sixth domain belongs on it, the proposition must be rechecked. The most-discussed candidate, fault-tolerant quantum computation, would not change the answer---but one candidate is not a proof.
+
+\textbf{Circle V+'s organizational requirement is bounded below, not identified.} We argue O4 at least and decline to claim the open-ended level, so the outermost domain's requirement is genuinely open.
+
+\textbf{The measurement is one system and one reading.} It establishes that the quantity was unrecorded there and nothing about the field. One reading is not a measurement: the question asked of \Td{} is whether it \emph{falls}, which requires a series.
+
+\textbf{Both parent frameworks are unpublished working papers.} Every result here is conditional on their premises, and where those are contested---the compensation ceiling most of all---the conditionality transfers.
+
+\section{Conclusion}
+
+The claim that recursive self-improvement is substrate-indexed is right, and the reason usually given for it---that domains differ in period, access, and floor type---describes the phenomenon rather than explaining it. The explanation is that the domains differ in \emph{which kind of intelligence their loop steps require}. Identify is cognition and sits on the individual axis. Validate and deploy sit on the organizational axis in every domain, because a system that evaluates and authorizes its own modification has certified rather than validated it. As the substrate moves outward, more of each loop falls on the axis that individual self-improvement does not reach.
+
+That yields a bounded individual axis and an unbounded organizational one. No stated closure criterion requires open-ended individual intelligence; the outermost domain admits no individual coordinate at all; and the argument that a machine improving its own cognition will run away is an argument about one domain of five, which then meets a wall it does not describe.
+
+The practical reading is narrower and more immediate. The software loop---the domain where the individual axis is supposed to dominate---is gated at deploy, by authorization, on the organizational axis. Its closure is not waiting on a better model. It is waiting on a separated authorizer fast enough to keep up, and on someone recording when authorizations happen, which on the one system we examined nobody had ever done.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

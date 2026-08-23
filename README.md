@@ -4,7 +4,7 @@
 
 ## Start here
 
-Ten papers and ten supporting documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one crossing of that map against the substrate circles, one placement of real systems on it, a reconciliation of the two level frameworks written in parallel, a paper drawing the individual and organizational scales together, and the first measurement of the quantity they all turn on.
+Eleven papers and ten supporting documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one crossing of that map against the substrate circles, one placement of real systems on it, a reconciliation of the two level frameworks written in parallel, a paper drawing the individual and organizational scales together, and the first measurement of the quantity they all turn on.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -23,6 +23,10 @@ Ten papers and ten supporting documents, one program — a system scale, an agen
 **[`SARSI_A_System_of_Refusals.pdf`](SARSI_A_System_of_Refusals.pdf)** — *A System of Refusals: The SARSI Agents, Built* (33 pp). The implementation report: one loop, twelve planes, and the finding that almost every module exists to refuse something. Includes what a worker may not answer, and why the model is never shown a permission gate. Source in [`agents_built/`](agents_built/).
 
 **[`SARSI_Level_Map.md`](SARSI_Level_Map.md)** — *The SARSI Level Map*. **Start here if you want the levels.** Every definition of "level of intelligence" in this corpus on one page: nine axes, their values, what each measures, and where each is defined — with worked profiles for the deployed console, a frontier LLM, a human, a terminal individual, and a terminal civilization. Its headline is that no scalar exists, and that the corpus has now withdrawn the one-number mistake five times independently.
+
+**[`Substrate_Indexing_Is_An_Axis_Shift.pdf`](Substrate_Indexing_Is_An_Axis_Shift.pdf)** — *Substrate Indexing Is an Axis Shift* (10 pp). Source and package in [`axis_shift/`](axis_shift/); Markdown in [`Substrate_Indexing_Is_An_Axis_Shift.md`](Substrate_Indexing_Is_An_Axis_Shift.md). The **companion** to *Intelligence Inside the Circles*, supplying propositions where that paper supplies description: validate and deploy are organizational in every loop, so no individual level closes any loop alone; the individual requirement saturates across domains while the organizational one climbs, which is *why* substrate is the right index; no stated closure criterion requires IΩ; and the outermost domain admits no individual coordinate.
+
+**[`Circle_Indexed_Individual_and_Organizational_Intelligence.pdf`](Circle_Indexed_Individual_and_Organizational_Intelligence.pdf)** — *Intelligence Inside the Circles*. The per-domain crosswalk: how each I-level and each O-level functions inside each substrate circle, a seven-role heterogeneous loop, both complete matrices, and a unified state profile. **Read this before the companion above.**
 
 **[`Circles_and_Levels.md`](Circles_and_Levels.md)** — *Circles and Levels*. The system-scale circles crossed with the level axes, via the ⟨ι, μ, ν, δ⟩ loop that both frameworks share. Validate is organizational by necessity and deploy is organizational always, so two of four steps in every circle are organizational by construction and no individual level closes any circle alone. From which: the individual requirement saturates while the organizational one keeps climbing; the intelligence-explosion argument is a Circle I argument; §3.3's design-vs-deploy gap is the I/O gap; **no circle's closure criterion requires IΩ**; and Circle V+ admits no individual coordinate at all.
 
@@ -91,7 +95,11 @@ Principal results:
 | `Capability_Is_Not_A_Level.md` | **Draft.** Companion paper, individual + organizational + placements. Markdown only |
 | `SARSI_Level_Map.md` | **Current.** Index to every level definition, fourteen axes. Markdown only |
 | `SARSI_Applied_Profiles.md` | **Dated snapshot.** Placements for named systems, 2026-08-22. Markdown only |
-| `Circles_and_Levels.md` | **Current.** The circles crossed with the level axes. Markdown only |
+| `Circle_Indexed_Individual_and_Organizational_Intelligence.pdf` | **Current.** The per-domain crosswalk |
+| `Substrate_Indexing_Is_An_Axis_Shift.pdf` | **Current.** Companion paper to the crosswalk, 10 pp |
+| `axis_shift/` | LaTeX source, bibliography, upload package, submission guide |
+| `Substrate_Indexing_Is_An_Axis_Shift.md` | **Current.** Same paper, Markdown |
+| `Circles_and_Levels.md` | **Working note.** Superseded by the two papers above; retained as the record |
 | `T_delta_Measurement_2026-08-22.md` | **Dated reading.** First measurement of authorization latency. Markdown only |
 | `tools/tdelta.py` | Instrument for the above: pairs candidate registration with promotion in a hash-chained audit log |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
@@ -163,9 +171,9 @@ Completeness is excluded three times over — undecidability, the Landauer and B
 
 ## arXiv packages
 
-All seven packaged papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Each was verified by extracting its tarball into an empty directory and compiling with plain `pdflatex` — no errors, no undefined references, no Type 3 fonts.
+All eight packaged papers ship an identical submission setup: `main.tex` + `main.bbl` in the tarball (arXiv does not run BibTeX), `\pdfoutput=1` to force the pdflatex path, and the URW Type 1 font trio so no bitmap or Type 3 fonts are embedded. Each was verified by extracting its tarball into an empty directory and compiling with plain `pdflatex` — no errors, no undefined references, no Type 3 fonts.
 
-Submission guides with per-paper categories and metadata abstracts: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), [`fleet/ARXIV.md`](fleet/ARXIV.md), [`two_axis/ARXIV.md`](two_axis/ARXIV.md), [`oomega/ARXIV.md`](oomega/ARXIV.md). The deployment report and console design ship upload packages without separate guides; both follow the same setup, and the fleet guide's `cs.MA` notes apply to the console design too.
+Submission guides with per-paper categories and metadata abstracts: [`arxiv/README.md`](arxiv/README.md), [`self_awareness/ARXIV.md`](self_awareness/ARXIV.md), [`fleet/ARXIV.md`](fleet/ARXIV.md), [`two_axis/ARXIV.md`](two_axis/ARXIV.md), [`oomega/ARXIV.md`](oomega/ARXIV.md), [`axis_shift/ARXIV.md`](axis_shift/ARXIV.md). The deployment report and console design ship upload packages without separate guides; both follow the same setup, and the fleet guide's `cs.MA` notes apply to the console design too.
 
 Submit the system-scale paper first — the companion's comments field cites its arXiv identifier.
 
