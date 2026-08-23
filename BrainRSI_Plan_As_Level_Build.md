@@ -123,6 +123,32 @@ with routing that reads it.
 
 ---
 
+## § 4a — Three ceilings the plan sets on purpose
+
+§4 reads `Θ`-as-loop as *absent*, which is right. But three things above it are absent by
+**decision**, and the plan says so in §14 — worth separating, because a designed ceiling and an
+unfinished edge look identical from outside and are not the same fact.
+
+**No D4.** Scope excludes weight updates outright. The deepest write available to this agent is `P`,
+procedural memory. That caps it below the substrate-improver entry regardless of how well M5 goes.
+
+**No governed RSI until there is longitudinal evidence.** *"It does not begin governed RSI until
+memory, replay, prediction, verification, and consolidation have longitudinal evidence."* The five
+pieces of §5 are gated behind evidence the system does not have yet — so the I3 delta is sequenced,
+not merely unbuilt.
+
+**Objective-closed by construction, not by omission.** `Ω` is not missing from `Σ_worker` by oversight;
+it sits in the authority kernel (§13), alongside permission ceilings, held-out benchmarks and promotion
+thresholds, and the plan states that the agent *"may not redefine what counts as permission or
+success."* So the worker is **⟨D1–D3, closed, self⟩** and the closure is enforced rather than assumed.
+
+That last one matters for anyone reading the delta as a roadmap. §5's nine pieces reach I4. **They do
+not reach IΩ, and no accumulation of them will**, because objective openness is not a further rung on
+this ladder — it is a different axis, and reaching it means moving `Ω` out of the authority kernel and
+paying for a frozen laddered referee. That is a governance decision, not an engineering one.
+
+---
+
 ## § 5 — The delta
 
 ### To reach I3, five pieces on top of M5
@@ -162,7 +188,7 @@ with routing that reads it.
 
 ---
 
-## § 6 — One tension worth flagging
+## § 6 — The first tension: levels are earned on the slow path
 
 The plan's §2.8 requires that *a brain architecture must not make simple chat expensive*, and adds a
 mode-aware fast path where ordinary conversation bypasses long-term retrieval and action machinery.
@@ -177,6 +203,44 @@ would be wrong in both directions.
 The honest reporting form is per mode: `CHAT` at I1, `ACTION` at I2 heading to I3. This is not a
 defect in the plan. It is a place where the framework, which assigns one level per agent, is coarser
 than the system it is describing.
+
+**And the plan reaches the framework's own conclusion independently.** §12 opens *"Track metrics
+separately; do not create a single 'brain score'."* The corpus has now withdrawn the one-number
+mistake five times, for five different reasons; this is a sixth, arrived at without the corpus's
+vocabulary, from the engineering side. Mode-indexing is the same finding once more: the level of an
+intelligence is a profile, and here it is a profile that varies within one agent by which path a turn
+takes.
+
+---
+
+## § 6a — The second tension: `Θ` selects the evidence that judges `Θ`
+
+§5.3 asks for a held-out set disjoint from the search set, at `Θ` scope rather than retrieval scope.
+It is listed there as the third of five pieces. It is better read as the one that makes the other four
+safe, and the reason is specific to what `Θ` is.
+
+`Θ` is the gate, retrieval and consolidation policy — **the object that decides which evidence reaches
+an evaluation**. It is also, at I3, the object being evaluated. So a loop that improves `Θ` against a
+measurement `Θ` helped assemble has the evaluator inside the write set by a route that does not look
+like one: nothing edits the benchmark, nothing softens the metric, and the criterion is still
+predeclared. What moves is the retrieval that populates the evidence.
+
+This is the failure mode the AI4Science charter module anticipates in general — *an autonomous agent
+given a benchmark and a night will find the shortest path to a better number, and the shortest path is
+almost always to change what "better" means* — arriving here through the one door that is inside
+mutable cognition rather than behind the authority kernel.
+
+Two consequences.
+
+**§6.3 is load-bearing, not descriptive.** Its title — *"Semantic retrieval is optional evidence
+retrieval, not authority"* — is the guard. It should be tested the way a guard is tested — by constructing a `Θ` that
+biases its own retrieval and asserting the verifier still refuses. Nothing in §11's test list does
+that today, and a guard that has only ever passed is one nobody has reason to trust.
+
+**The `Θ`-level held-out set must be assembled by something `Θ` does not touch.** A split that `Θ`
+retrieved into existence is not held out. This is the same requirement as the deployed imaging loop's
+— ground truth stored control-plane side and never staged into the sandbox — applied to a store the
+worker does own.
 
 ---
 
