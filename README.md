@@ -4,7 +4,7 @@
 
 ## Start here
 
-Ten papers and nine framework documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one placement of real systems on that map, and a paper drawing the individual and organizational scales together.
+Ten papers and ten supporting documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one crossing of that map against the substrate circles, one placement of real systems on it, a reconciliation of the two level frameworks written in parallel, a paper drawing the individual and organizational scales together, and the first measurement of the quantity they all turn on.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -24,6 +24,10 @@ Ten papers and nine framework documents, one program — a system scale, an agen
 
 **[`SARSI_Level_Map.md`](SARSI_Level_Map.md)** — *The SARSI Level Map*. **Start here if you want the levels.** Every definition of "level of intelligence" in this corpus on one page: nine axes, their values, what each measures, and where each is defined — with worked profiles for the deployed console, a frontier LLM, a human, a terminal individual, and a terminal civilization. Its headline is that no scalar exists, and that the corpus has now withdrawn the one-number mistake five times independently.
 
+**[`Circles_and_Levels.md`](Circles_and_Levels.md)** — *Circles and Levels*. The system-scale circles crossed with the level axes, via the ⟨ι, μ, ν, δ⟩ loop that both frameworks share. Validate is organizational by necessity and deploy is organizational always, so two of four steps in every circle are organizational by construction and no individual level closes any circle alone. From which: the individual requirement saturates while the organizational one keeps climbing; the intelligence-explosion argument is a Circle I argument; §3.3's design-vs-deploy gap is the I/O gap; **no circle's closure criterion requires IΩ**; and Circle V+ admits no individual coordinate at all.
+
+**[`Two_Axis_Concordance.md`](Two_Axis_Concordance.md)** — *Concordance*. Two level frameworks were written here independently within days of each other. This makes the two-axis paper primary and re-reads the SARSI documents as its companion — nine agreements reached by different routes, three places the two-axis scale is better (its I1/I2 split is the ablation SARSI-B only complains about), two substantive disagreements, and the corrections the SARSI placements owe it.
+
 **[`Two_Axis_Intelligence_Level_Framework_v2.pdf`](Two_Axis_Intelligence_Level_Framework_v2.pdf)** — *A Two-Axis Intelligence Level Framework for AI Agents, Version 2* (13 pp). Source and submission package in [`two_axis/`](two_axis/); Markdown in [`Two_Axis_Intelligence_Level_Framework_v2.md`](Two_Axis_Intelligence_Level_Framework_v2.md). **The current statement of the level framework.** Version 1's two scales, transition tests, evidence rules and classifications are retained entire; Version 2 repairs three things internal to them — IΩ required a predeclared evaluation of a system that revises what the evaluation encodes, the O-scale ranked behaviour without requiring the behaviour to produce valid claims, and two terms the upper levels depend on had no referent — adds a physical ceiling to the individual axis, and reports a first measurement. Supersedes [`Two_Axis_Intelligence_Level_Framework_AI_Agents.pdf`](Two_Axis_Intelligence_Level_Framework_AI_Agents.pdf) (Version 1).
 
 **[`Capability_Is_Not_A_Level.md`](Capability_Is_Not_A_Level.md)** — *Capability Is Not a Level* (draft). The synthesis written as a paper: a structural taxonomy of individual and organizational intelligence, with placements for current AI agents. Its thesis is that two of the three things determining a level are not inside the system being levelled, so the ladder is the wrong shape — and its empirical finding is that four heavily-compared coding agents occupy one cell, because none of them writes itself. Markdown draft; **no LaTeX source or arXiv package is built.**
@@ -37,6 +41,8 @@ The others below are Markdown working documents rather than papers — no LaTeX 
 **[`SARSI-O_Organizational_Intelligence.md`](SARSI-O_Organizational_Intelligence.md)** — *Organizational Intelligence*. The anatomy of a mind made of minds: five axes that are properties of the coordination structure rather than of any member, a map of which individual level may fill which role, and the result that levels necessarily coexist — uniformity being not an unreachable ideal but a degenerate configuration.
 
 **[`SARSI-Omega_Terminal_Intelligence.md`](SARSI-Omega_Terminal_Intelligence.md)** — *The Terminal Level of Intelligence*. Eight axioms for the discovery loop — reach, discovery, transduction, reorganization — and a terminus defined by the world's floors rather than by the framework's own loops. Repairs the attractor circularity of §10.2.
+
+**[`T_delta_Measurement_2026-08-22.md`](T_delta_Measurement_2026-08-22.md)** — *Measuring T_δ*. Six documents here say authorization latency should be measured, on the grounds that it is the only quantity both decisive and cheap. It is not cheap: the promotions table has no timestamp column, and of three available data points two are scripted self-signatures and one is a candidate outstanding for 24 days. **T_δ has never been observed.** Instrument in [`tools/tdelta.py`](tools/tdelta.py).
 
 Together they supersede everything else in this repository.
 
@@ -85,6 +91,9 @@ Principal results:
 | `Capability_Is_Not_A_Level.md` | **Draft.** Companion paper, individual + organizational + placements. Markdown only |
 | `SARSI_Level_Map.md` | **Current.** Index to every level definition, fourteen axes. Markdown only |
 | `SARSI_Applied_Profiles.md` | **Dated snapshot.** Placements for named systems, 2026-08-22. Markdown only |
+| `Circles_and_Levels.md` | **Current.** The circles crossed with the level axes. Markdown only |
+| `T_delta_Measurement_2026-08-22.md` | **Dated reading.** First measurement of authorization latency. Markdown only |
+| `tools/tdelta.py` | Instrument for the above: pairs candidate registration with promotion in a hash-chained audit log |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
 | `SARSI-I_Terminal_Individual.md` | **Current.** Individual-scale bounds. Markdown only — no LaTeX or submission package |
 | `SARSI-O_Organizational_Intelligence.md` | **Current.** Organizational anatomy and the coexistence result. Markdown only |
