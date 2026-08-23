@@ -4,7 +4,7 @@
 
 ## Start here
 
-Eleven papers and ten supporting documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one crossing of that map against the substrate circles, one placement of real systems on it, a reconciliation of the two level frameworks written in parallel, a paper drawing the individual and organizational scales together, and the first measurement of the quantity they all turn on.
+Eleven papers and eleven supporting documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one crossing of that map against the substrate circles, one placement of real systems on it, a reconciliation of the two level frameworks written in parallel, a paper drawing the individual and organizational scales together, and the first measurement of the quantity they all turn on.
 
 **[`SARSI-L_Paper_v3.pdf`](SARSI-L_Paper_v3.pdf)** — *Recursive Self-Improvement Is Substrate-Indexed* (25 pp). The system-scale framework. Source and submission package in [`arxiv/`](arxiv/); Markdown in [`SARSI-L_Paper_v3.md`](SARSI-L_Paper_v3.md).
 
@@ -45,6 +45,8 @@ The others below are Markdown working documents rather than papers — no LaTeX 
 **[`SARSI-O_Organizational_Intelligence.md`](SARSI-O_Organizational_Intelligence.md)** — *Organizational Intelligence*. The anatomy of a mind made of minds: five axes that are properties of the coordination structure rather than of any member, a map of which individual level may fill which role, and the result that levels necessarily coexist — uniformity being not an unreachable ideal but a degenerate configuration.
 
 **[`SARSI-Omega_Terminal_Intelligence.md`](SARSI-Omega_Terminal_Intelligence.md)** — *The Terminal Level of Intelligence*. Eight axioms for the discovery loop — reach, discovery, transduction, reorganization — and a terminus defined by the world's floors rather than by the framework's own loops. Repairs the attractor circularity of §10.2.
+
+**[`Designing_Level_Agents.md`](Designing_Level_Agents.md)** — *Designing Agents at Each Level*. A build specification: for every level on both axes, what the agent contains, what must live outside its write set, and the test that promotes it. An LLM can design the mechanism for every level and cannot design three things — the evidence a level was reached, its own referee, or its own separation — so each level is given as those three columns. Includes what the existing research-agent modules already implement, and the five pieces missing for the next level.
 
 **[`T_delta_Measurement_2026-08-22.md`](T_delta_Measurement_2026-08-22.md)** — *Measuring T_δ*. Six documents here say authorization latency should be measured, on the grounds that it is the only quantity both decisive and cheap. It is not cheap: the promotions table has no timestamp column, and of three available data points two are scripted self-signatures and one is a candidate outstanding for 24 days. **T_δ has never been observed.** Instrument in [`tools/tdelta.py`](tools/tdelta.py).
 
@@ -99,6 +101,7 @@ Principal results:
 | `Substrate_Indexing_Is_An_Axis_Shift.pdf` | **Current.** Companion paper to the crosswalk, 10 pp |
 | `axis_shift/` | LaTeX source, bibliography, upload package, submission guide |
 | `Substrate_Indexing_Is_An_Axis_Shift.md` | **Current.** Same paper, Markdown |
+| `Designing_Level_Agents.md` | **Current.** Build specification per level, both axes. Markdown only |
 | `Circles_and_Levels.md` | **Working note.** Superseded by the two papers above; retained as the record |
 | `T_delta_Measurement_2026-08-22.md` | **Dated reading.** First measurement of authorization latency. Markdown only |
 | `tools/tdelta.py` | Instrument for the above: pairs candidate registration with promotion in a hash-chained audit log |
