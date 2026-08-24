@@ -5,6 +5,13 @@
 *2026-08-24*
 *New axis. Relates to: `SARSI_Level_Map.md` (A0–A4 ceilings, λ loop completion), `Designing_Level_Agents.md` §2*
 
+> **Superseded in part.** The material this note shares with
+> [`Delegation_Is_A_Property_Of_The_Task.md`](Delegation_Is_A_Property_Of_The_Task.md) — the G0–G4
+> grades, the four task coordinates, the acceptance proposition and the §4 illustration table — has
+> its home in that paper, which states it with the related work, the cost identity and the
+> falsification conditions. This note is retained as the record of how the axis was arrived at. **Edit
+> the paper, not this file**; where the two differ, the paper is right.
+
 ---
 
 ## § 1 — Why this is a separate axis
