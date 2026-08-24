@@ -45,3 +45,10 @@ agents_built/main.pdf
 two_axis/main.pdf
 oomega/main.pdf
 axis_shift/main.pdf
+
+delegation_frontier/*.aux
+delegation_frontier/*.log
+delegation_frontier/*.out
+delegation_frontier/*.toc
+delegation_frontier/*.blg
+delegation_frontier/main.pdf

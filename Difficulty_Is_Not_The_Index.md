@@ -5,6 +5,7 @@
 *Working paper — 24 August 2026*
 *Takes as primary: `Delegation_Intelligence_Framework.pdf` — the Delegation Intelligence framework, T0–T6, H0–H5, DL0–DLΩ, F_A(h,p)*
 *Reads alongside: `Delegation_Is_A_Property_Of_The_Task.md`, `LLM_Driven_Individual_and_Organizational_Agent_Design.pdf`, `Two_Axis_Intelligence_Level_Framework_v2.md`*
+*LaTeX source and arXiv package: `delegation_frontier/`. Compiled: `Difficulty_Is_Not_The_Index.pdf`, 14 pp*
 
 ---
 
@@ -131,6 +132,15 @@ Self-reported completion is not completion. Governance approval is not the same 
 assistance, and conflating them makes a well-governed system look stupid. Interventions differ in kind,
 and a rate that averages a rescue with a clarifying question is misleading in the direction of comfort.
 Levels are established over families with intervals, not over demonstrations.
+
+**Prior art both accounts share.** Autonomy indexed by the conditions it holds under is J3016's
+operational design domain, and the observation that the same system occupies different autonomy levels
+in different contexts is the adjustable-autonomy literature's. Morris et al. separate capability from
+autonomy explicitly, which is the published taxonomy closest to both accounts — and the one §3.2
+disagrees with, since its autonomy column is read off the system while the same system occupies several
+of its rows at once. Reliance as calibrated by experience of failure is Lee and See's; the
+exception-driven interaction the H1 budget names, including when to interrupt, is Horvitz's; and the
+interaction guidelines governing how such an interruption should be presented are Amershi et al.'s.
 
 **Where the framework is better**, and adopted here without modification:
 
@@ -529,8 +539,12 @@ marked:
 }
 ```
 
-Every added field is a timestamp, a count, or a figure the person delegating already knows. None
-requires estimating a counterfactual, which was the objection to the metric it replaces.
+The additions are five. $\kappa$ carries the two coordinates the band aggregates away. The timestamp
+pair yields $T_\delta$ by subtraction. The acceptance block carries $\alpha$, $\sigma$, the verifier's
+identity and its false-pass rate — here `null`, which is the honest value and the common one. The loss
+block carries the terms $p^{\star}$ needs. Every one is a timestamp, a count, or a figure the person
+delegating already knows, and none requires estimating a counterfactual, which was the objection to the
+metric it replaces.
 
 The framework's ten anti-inflation rules survive, with one added and one demoted:
 

@@ -1,0 +1,123 @@
+\begin{thebibliography}{17}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amdahl(1967)]{amdahl1967}
+Gene~M. Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In \emph{AFIPS Conference Proceedings}, volume~30, 1967.
+
+\bibitem[Amershi et~al.(2019)Amershi, Weld, Vorvoreanu, Fourney, Nushi,
+  Collisson, Suh, Iqbal, Bennett, Inkpen, Teevan, Kikin-Gil, and
+  Horvitz]{amershi2019}
+Saleema Amershi, Dan Weld, Mihaela Vorvoreanu, Adam Fourney, Besmira Nushi,
+  Penny Collisson, Jina Suh, Shamsi Iqbal, Paul~N. Bennett, Kori Inkpen, Jaime
+  Teevan, Ruth Kikin-Gil, and Eric Horvitz.
+\newblock Guidelines for human-{AI} interaction.
+\newblock In \emph{Proceedings of CHI 2019}, 2019.
+
+\bibitem[Endsley and Kaber(1999)]{endsley1999}
+Mica~R. Endsley and David~B. Kaber.
+\newblock Level of automation effects on performance, situation awareness and
+  workload in a dynamic control task.
+\newblock \emph{Ergonomics}, 42\penalty0 (3):\penalty0 462--492, 1999.
+\newblock \doi{10.1080/001401399185595}.
+
+\bibitem[Horvitz(1999)]{horvitz1999}
+Eric Horvitz.
+\newblock Principles of mixed-initiative user interfaces.
+\newblock In \emph{Proceedings of CHI 1999}, pages 159--166, 1999.
+
+\bibitem[Klein et~al.(2004)Klein, Woods, Bradshaw, Hoffman, and
+  Feltovich]{klein2004}
+Gary Klein, David~D. Woods, Jeffrey~M. Bradshaw, Robert~R. Hoffman, and Paul~J.
+  Feltovich.
+\newblock Ten challenges for making automation a team player in joint
+  human-agent activity.
+\newblock \emph{IEEE Intelligent Systems}, 19\penalty0 (6):\penalty0 91--95,
+  2004.
+\newblock \doi{10.1109/MIS.2004.74}.
+
+\bibitem[Lee and See(2004)]{lee2004}
+John~D. Lee and Katrina~A. See.
+\newblock Trust in automation: Designing for appropriate reliance.
+\newblock \emph{Human Factors}, 46\penalty0 (1):\penalty0 50--80, 2004.
+\newblock \doi{10.1518/hfes.46.1.50.30392}.
+
+\bibitem[Morris et~al.(2023)Morris, Sohl-Dickstein, Fiedel, Warkentin, Dafoe,
+  Faust, Farabet, and Legg]{morris2023levels}
+Meredith~Ringel Morris, Jascha Sohl-Dickstein, Noah Fiedel, Tris Warkentin,
+  Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg.
+\newblock Levels of {AGI} for operationalizing progress on the path to {AGI}.
+\newblock \emph{arXiv:2311.02462}, 2023.
+
+\bibitem[Parasuraman et~al.(2000)Parasuraman, Sheridan, and
+  Wickens]{parasuraman2000}
+Raja Parasuraman, Thomas~B. Sheridan, and Christopher~D. Wickens.
+\newblock A model for types and levels of human interaction with automation.
+\newblock \emph{IEEE Transactions on Systems, Man, and Cybernetics --- Part A:
+  Systems and Humans}, 30\penalty0 (3):\penalty0 286--297, 2000.
+\newblock \doi{10.1109/3468.844354}.
+
+\bibitem[Perrow(1984)]{perrow1984}
+Charles Perrow.
+\newblock \emph{Normal Accidents: Living with High-Risk Technologies}.
+\newblock Basic Books, 1984.
+
+\bibitem[{SAE International}(2021)]{sae2021j3016}
+{SAE International}.
+\newblock {J3016}: Taxonomy and definitions for terms related to driving
+  automation systems for on-road motor vehicles.
+\newblock Technical report, SAE International, 2021.
+
+\bibitem[Scerri et~al.(2002)Scerri, Pynadath, and Tambe]{scerri2002}
+Paul Scerri, David~V. Pynadath, and Milind Tambe.
+\newblock Towards adjustable autonomy for the real world.
+\newblock \emph{Journal of Artificial Intelligence Research}, 17:\penalty0
+  171--228, 2002.
+
+\bibitem[Sheridan and Verplank(1978)]{sheridan1978}
+Thomas~B. Sheridan and William~L. Verplank.
+\newblock Human and computer control of undersea teleoperators.
+\newblock Technical report, MIT Man-Machine Systems Laboratory, 1978.
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026agentdesign}
+Chengshuai Yang.
+\newblock Designing {LLM}-driven agents across individual and organizational
+  intelligence levels.
+\newblock Technical report, Working paper, August 2026{\natexlab{a}}.
+\newblock Write-set depths D0--D4, the agent manifest, and the
+  evaluator-not-in-write-set rule.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026delegation}
+Chengshuai Yang.
+\newblock Delegation intelligence: A task-difficulty, human-intervention, and
+  reliability framework for autonomous {AI} agents and organizations.
+\newblock Technical report, Working paper, August 2026{\natexlab{b}}.
+\newblock The framework this paper repairs: T0--T6, H0--H5, DL0--DL$\Omega$,
+  CID, ten anti-inflation rules, and the delegation frontier.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026taskproperty}
+Chengshuai Yang.
+\newblock Delegation is a property of the task: Grades of unattended
+  completion, the acceptance ceiling, and why capability is the wrong lever.
+\newblock Technical report, Working paper, August 2026{\natexlab{c}}.
+
+\bibitem[Yang(2026{\natexlab{d}})]{yang2026tdelta}
+Chengshuai Yang.
+\newblock Measuring $t_\delta$: Authorization latency in a deployed governed
+  loop.
+\newblock Technical report, Working paper, August 2026{\natexlab{d}}.
+\newblock The quantity had never been recorded; the promotions table has no
+  timestamp column.
+
+\bibitem[Yang(2026{\natexlab{e}})]{yang2026twoaxisv2}
+Chengshuai Yang.
+\newblock A two-axis intelligence level framework for {AI} agents, version 2.
+\newblock Technical report, Working paper, 2026{\natexlab{e}}.
+
+\end{thebibliography}
