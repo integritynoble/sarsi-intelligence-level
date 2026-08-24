@@ -42,6 +42,8 @@ Eleven papers and fourteen supporting documents, one program — a system scale,
 
 **[`Capability_Is_Not_A_Level.md`](Capability_Is_Not_A_Level.md)** — *Capability Is Not a Level* (draft). The synthesis written as a paper: a structural taxonomy of individual and organizational intelligence, with placements for current AI agents. Its thesis is that two of the three things determining a level are not inside the system being levelled, so the ladder is the wrong shape — and its empirical finding is that four heavily-compared coding agents occupy one cell, because none of them writes itself. Markdown draft; **no LaTeX source or arXiv package is built.**
 
+**[`Delegation_Is_A_Property_Of_The_Task.md`](Delegation_Is_A_Property_Of_The_Task.md)** — *Delegation Is a Property of the Task* (draft). A third axis, written as a paper: how much of a stated task comes back done, and how often the person had to intervene. Five grades G0–G4 whose significant boundary is G2, where the human's cost changes from per-action to per-surprise; a task class in four coordinates of which verifiability and reversibility do the work and ordinary difficulty does least; and two results. **Delegation is bounded by the task, not by the agent** — the same agent, unchanged, sits two or three grades apart across classes, so the effective lever is tests and rollback rather than capability. And **acceptance cannot be delegated to the doer**: execution scales without limit, acceptance only transfers, so the honest top of the scale is not the absence of a human but the presence of a separate acceptor. Markdown draft; **no LaTeX source or arXiv package is built.**
+
 The others below are Markdown working documents rather than papers — no LaTeX source, no submission package, and none has been through the audit the eight above have had:
 
 **[`SARSI-B_Brain_Improvement_Levels.md`](SARSI-B_Brain_Improvement_Levels.md)** — *What an LLM Brain May Change About Itself*. The brain scale, indexed by write set rather than by substrate. Improvement is undefined when the evaluator sits inside the write set; memory growth is evidence of operation, not of capability; and the trust ordering runs opposite to the ability ordering, so the agent that improves nothing about itself is the one that may hold authority over another's promotion.
@@ -55,6 +57,12 @@ The others below are Markdown working documents rather than papers — no LaTeX 
 **[`Designing_Level_Agents.md`](Designing_Level_Agents.md)** — *Designing Agents at Each Level*. A build specification: for every level on both axes, what the agent contains, what must live outside its write set, and the test that promotes it. An LLM can design the mechanism for every level and cannot design three things — the evidence a level was reached, its own referee, or its own separation — so each level is given as those three columns. Includes what the existing research-agent modules already implement, and the five pieces missing for the next level.
 
 **[`T_delta_Measurement_2026-08-22.md`](T_delta_Measurement_2026-08-22.md)** — *Measuring T_δ*. Six documents here say authorization latency should be measured, on the grounds that it is the only quantity both decisive and cheap. It is not cheap: the promotions table has no timestamp column, and of three available data points two are scripted self-signatures and one is a candidate outstanding for 24 days. **T_δ has never been observed.** Instrument in [`tools/tdelta.py`](tools/tdelta.py).
+
+**[`Delegation_Levels.md`](Delegation_Levels.md)** — *Delegation Levels*. The working note the paper above was written from: why delegation is neither the A0–A4 ceiling nor loop completion λ, and therefore earns its own axis. Retained as the record of how the axis was arrived at; the shared material now has its home in the paper.
+
+**[`Sarsi_Claude_Level_And_Testing.md`](Sarsi_Claude_Level_And_Testing.md)** — *What Level `sarsi-claude` Needs*. The name covers three roles, and they do not need the same level. Reads the layer against the build specification, and separates the case where a test it supplies is legitimate evidence from the case where it is self-certification — the distinguishing rule being that a test must be declared before the thing it judges is written.
+
+**[`Verification_In_The_Sarsi_Claude_Layer.md`](Verification_In_The_Sarsi_Claude_Layer.md)** — *Verification in the `sarsi-claude` Layer*. Against the same layer: verification is already there, in named nodes, so the open questions are not whether but at what cadence it runs and where its evidence lands. Argues for one evidence surface rather than per-node reporting.
 
 Together they supersede everything else in this repository.
 
@@ -104,6 +112,10 @@ Principal results:
 | `Federation_Plan_As_Organizational_Build.md` | **Current.** The federation plan crossed with O2–OΩ. Markdown only |
 | `Level_Problem_Queues.md` | **Current.** The levels and circles as rungs with `solved when`. Markdown only |
 | `Capability_Is_Not_A_Level.md` | **Draft.** Companion paper, individual + organizational + placements. Markdown only |
+| `Delegation_Is_A_Property_Of_The_Task.md` | **Draft.** The delegation axis, written as a paper. Markdown only |
+| `Delegation_Levels.md` | **Working note.** Superseded in part by the paper above; retained as the record |
+| `Sarsi_Claude_Level_And_Testing.md` | **Current.** What level the layer needs, and when its tests count. Markdown only |
+| `Verification_In_The_Sarsi_Claude_Layer.md` | **Current.** Verification cadence and one evidence surface. Markdown only |
 | `SARSI_Level_Map.md` | **Current.** Index to every level definition, fourteen axes. Markdown only |
 | `SARSI_Applied_Profiles.md` | **Dated snapshot.** Placements for named systems, 2026-08-22. Markdown only |
 | `Circle_Indexed_Individual_and_Organizational_Intelligence.pdf` | **Current.** The per-domain crosswalk |
@@ -114,6 +126,7 @@ Principal results:
 | `Circles_and_Levels.md` | **Working note.** Superseded by the two papers above; retained as the record |
 | `T_delta_Measurement_2026-08-22.md` | **Dated reading.** First measurement of authorization latency. Markdown only |
 | `tools/tdelta.py` | Instrument for the above: pairs candidate registration with promotion in a hash-chained audit log |
+| `tools/check_public.py` | Repository check: refuses private specification filenames and cross-repo links in a public corpus. `--self-test` proves it fires |
 | `SARSI-B_Brain_Improvement_Levels.md` | **Current.** Brain-scale framework. Markdown only — no LaTeX or submission package |
 | `SARSI-I_Terminal_Individual.md` | **Current.** Individual-scale bounds. Markdown only — no LaTeX or submission package |
 | `SARSI-O_Organizational_Intelligence.md` | **Current.** Organizational anatomy and the coexistence result. Markdown only |
