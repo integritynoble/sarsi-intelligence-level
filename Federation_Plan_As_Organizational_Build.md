@@ -3,7 +3,8 @@
 ## Where the OpenClaw federation lands on O2–OΩ, and the one axiom it has no mechanism for
 
 *2026-08-23*
-*Plan: `singularity/docs/plans/2026-08-09-openclaw-brainrsi-federation.md` (472 lines)*
+*Plan: the internal federation plan for the OpenClaw multi-account build, 472 lines. Cited
+throughout as **the plan**.*
 *Companion to: `BrainRSI_Plan_As_Level_Build.md`, which does the individual axis*
 *Against: `SARSI-O_Organizational_Intelligence.md`, `Open_Ended_Evolving_Organization_v2.md`*
 

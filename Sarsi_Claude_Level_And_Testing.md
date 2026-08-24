@@ -3,7 +3,8 @@
 ## And where a test it supplies is legitimate, where it is self-certification
 
 *2026-08-24*
-*Reads: `singularity/docs/guide-sarsi-claude-overview.md`, `singularity/docs/plans/2026-08-20-sarsi-worker-sarsi-claude-brainrsi-plan.md`*
+*Reads: the internal engineering overview of the `sarsi-claude` layer, and the v3 implementation
+plan behind it — cited as **the overview** and **the plan***
 *Against: `Designing_Level_Agents.md` §2b, `Two_Axis_Intelligence_Level_Framework_v2.md`*
 
 ---

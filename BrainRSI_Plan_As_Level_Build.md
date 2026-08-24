@@ -3,7 +3,8 @@
 ## Where `sarsi-worker` v3 lands on the individual and organizational axes, and what the remaining delta is
 
 *2026-08-23*
-*Plan: `singularity/docs/plans/2026-08-20-sarsi-worker-sarsi-claude-brainrsi-plan.md` (v3, 1367 lines)*
+*Plan: the internal v3 implementation plan for the worker's brain-RSI build, 1367 lines. Cited
+throughout as **the plan**.*
 *Against: `Designing_Level_Agents.md`, `Two_Axis_Intelligence_Level_Framework_v2.md`*
 
 ---

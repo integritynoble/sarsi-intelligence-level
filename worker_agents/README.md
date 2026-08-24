@@ -4,7 +4,7 @@
 
 PDF: [`../SARSI_One_User_Several_Machines.pdf`](../SARSI_One_User_Several_Machines.pdf) (16 pp).
 
-Companion engineering page: [`singularity/docs/guide-sarsi-worker-agents.md`](../../singularity/docs/guide-sarsi-worker-agents.md) — the same design as a 21-node loop with one entry per node.
+Companion engineering page: the internal implementation guide to the worker agents, which is not public — the same design as a 21-node loop with one entry per node.
 
 ## The layer this fills in
 

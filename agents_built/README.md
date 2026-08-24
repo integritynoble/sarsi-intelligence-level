@@ -4,7 +4,7 @@
 
 PDF: [`../SARSI_A_System_of_Refusals.pdf`](../SARSI_A_System_of_Refusals.pdf) (33 pp).
 
-Companion engineering page: [`singularity/docs/guide-sarsi-agents.md`](../../singularity/docs/guide-sarsi-agents.md).
+Companion engineering page: the internal implementation guide to the SARSI agents, which is not public.
 
 ## What this is
 

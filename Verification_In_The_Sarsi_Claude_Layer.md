@@ -3,7 +3,8 @@
 ## It already is there; the open questions are granularity and one evidence surface
 
 *2026-08-24*
-*Reads: `singularity/docs/guide-sarsi-claude-overview.md` (nodes V, EC; §1 three tools)*
+*Reads: the internal engineering overview of the `sarsi-claude` layer — its node graph, of which V
+and EC are the verification nodes, and the three tools its §1 defines*
 *Against: `Designing_Level_Agents.md` §2, §2a, §2b*
 
 ---
