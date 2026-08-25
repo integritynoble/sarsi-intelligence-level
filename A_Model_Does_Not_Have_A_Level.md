@@ -4,6 +4,7 @@
 
 *Working paper — 25 August 2026*
 *Builds on: `Unified_Intelligence_Six_Coordinate_Framework.pdf` (the [C, I, O, T, H, SA] profile and the gated U0–UΩ scale), `Delegation_Intelligence_Framework.pdf` (T0–T6, H0–H5, the frontier), `Difficulty_Is_Not_The_Index.md` (the four repairs)*
+*Superseded on naming by `Unified_Intelligence_Harness_Scoring_Framework_v1_1.pdf`, written independently the same day, which reached the same two constructs and named them **HLIS** (the pair score) and **HIL** (the model characterization). Use its names; the reconciliation and three repairs to its arithmetic are in [`Harness_Scoring_Concordance.md`](Harness_Scoring_Concordance.md).*
 *Measured on: DLI-Bench v0.2 (180 tasks) and the delegation harness described in §7*
 
 ---
@@ -176,6 +177,109 @@ resampling the model: resampling was already happening in the failing configurat
 
 ---
 
+## 2.4 Where this sits against the benchmarks people actually read
+
+A proposal for a new model score owes an account of the existing ones. The
+practical 2026 shortlist — HLE and MMLU-Pro for general reasoning, GPQA Diamond
+for science, AIME and FrontierMath for mathematics, ARC-AGI for abstraction,
+LiveCodeBench and SWE-bench for code, BFCL for tool calling, τ-bench for agent
+reliability, BrowseComp and GAIA for research agents, OSWorld for computer use,
+RULER and LongBench for context, SimpleQA for factuality, Arena for preference —
+is not a list this framework competes with. Most of it populates one coordinate.
+
+| Benchmark family | Coordinate it populates | Task band | Intervention budget | Acceptor |
+|---|---|---|---|---|
+| HLE, MMLU-Pro, GPQA, AIME, FrontierMath, ARC-AGI, MMMU, MathVista | **C** | T0–T1 | H5 — the human supplied the entire decomposition | a key |
+| RULER, LongBench, SimpleQA | **C**, under stated conditions | T0–T1 | H5 | a key |
+| LiveCodeBench, BFCL | **C** with an executable check | T1 | H5 | tests / a schema |
+| SWE-bench and repo-level evals | **T**, genuinely | T2–T3 | one implicit budget | **hidden tests** |
+| GAIA, BrowseComp | **T** | T3–T4 | one implicit budget | a sealed answer |
+| OSWorld | **T** | T2–T3 | one implicit budget | environment state |
+| τ-bench (pass^k) | **T**, plus consistency | T2 | one implicit budget | rules + a simulated user |
+| Arena | preference | — | — | **the crowd** |
+
+Three things follow, and only the third is a criticism.
+
+**Most of the list measures C, and C is a coordinate this framework needs.** GPQA,
+FrontierMath and ARC-AGI are the right instruments for it. HIL does not replace
+them; a HIL scorecard with an empty C column is not a scorecard. The frame
+consumes these benchmarks rather than competing with them.
+
+**Four of them already measure the delegation surface** — SWE-bench, GAIA,
+OSWorld, τ-bench — and are the closest existing relatives of this work. They have
+what the QA benchmarks lack: an acceptor that is not the model, and a task the
+model must decompose itself.
+
+**All of them hold the harness fixed, unnamed, and uncontrolled.** This is the
+criticism, and it is not a small one, because the confound is already visible in
+their own numbers: the same model on SWE-bench varies by tens of points across
+scaffolds. A leaderboard whose entries differ by scaffold as much as by model is
+already reporting pairs; it simply does not say so. The contribution here is not
+noticing that harnesses matter — the field knows — but making the harness an
+**axis with a standardized ladder** instead of an uncontrolled variable inside
+each submission.
+
+### What HIL adds that the list does not have
+
+**An intervention axis.** No benchmark above reports H. Each runs at one implicit
+budget: the QA sets at H5, where the human supplied everything but the answer;
+the agent sets at roughly H0, where the run simply fails if the model gets stuck.
+Neither reports a frontier. A model that clears 40% of a repo-level set unaided
+and 85% after one clarifying question is invisible to both, and that difference
+is the difference between a colleague and a report-writer.
+
+**A cost of being wrong.** Every benchmark above scores pass or fail, so a
+confident wrong answer and an honest escalation score the same. That is the
+measurement §2.1 shows to be inadequate: two arms at 8/10 where one returned two
+pieces of wrong work as finished and the other returned none. On every listed
+benchmark those arms are identical. τ-bench's pass^k is the nearest thing and
+measures a different property — consistency across runs, not honesty about
+failure.
+
+**A class that should be refused.** No benchmark above has one. Scoring is
+uniformly "attempt everything; refusing is failing," so none of them can measure
+judgement about when *not* to act. The v0.2 `kappa_cross` stratum contains a
+**T1** task — one operation — that the dataset says exists to be refused, because
+its harm does not undo. A suite in which refusal is always wrong cannot
+distinguish caution from incapacity.
+
+**An answer to "which of the fifty numbers matters."** The observation that there
+is no single LLM score, because a model can be first on science and tenth on tool
+use, is correct and is usually treated as a reason to abandon summary. Gating is
+the other response: it does not average the numbers, it identifies which one is
+*binding*. `U2.1 [b=O]` says the organizational coordinate is what stops this
+system and nothing else will move it. That is a summary which points at a
+number rather than replacing it.
+
+### Where HIL is worse
+
+**It is enormously more expensive.** GPQA is one call per item against a fixed
+key. A HIL characterization is a ladder of harnesses, run longitudinally, with
+independent verification at each rung — orders of magnitude more compute, wall
+clock and engineering.
+
+**Almost none of it exists.** GPQA has 448 items and a live leaderboard. This has
+180 delegation tasks, a harness, and a specification for the rest. The ladder
+HG0–HGΩ has not been built, and no model has been run across it. The benchmarks
+above are instruments; HIL is currently a design.
+
+**It is far harder to audit.** A public test set and a scalar can be checked by
+anyone. A HIL number requires trusting a harness implementation, a ladder
+definition, and a verifier — three surfaces this work has already found bugs in,
+including one that produced a perfect 15/15 that meant nothing.
+
+**It saturates too.** A standardized ladder is a fixed target and will be tuned
+to, exactly as MMLU and HumanEval were.
+
+> **The honest summary.** These benchmarks answer *how good is the model's
+> cognition*. HIL answers *how much verified work can be handed to this model
+> inside an arrangement, and how much of that is the model rather than the
+> arrangement*. The second question is only worth asking once the first has an
+> answer, which is why the C column is populated from the list above rather than
+> replaced by it.
+
+---
+
 ## 3. How a harness produces a level
 
 The framework's HG0–HGΩ table lists mechanisms by generation. This section states the same
@@ -316,6 +420,11 @@ fitted to it:
 > an unnamed harness makes the number unreproducible — and `G = U_best − U_null` is the **harness
 > gain**.
 
+**In v1.1's names**, which have priority: `U_null` is `HLIS(m, HG0)`, `U_best` is `HIL-Ceiling`, and `G` is
+`Harness Gain`. v1.1 also supplies what this definition lacks — a **standardized ladder** HG0–HGΩ, so
+"named" becomes "comparable across models" rather than only "reproducible" — and `HIL-Level`, the
+highest rung the model validly exploits, which is the ordinal statement this triple has no term for.
+
 Today's benchmarks report something close to `U_null`, usually without the acceptance step, which is
 why they are largely measuring C.
 
@@ -347,7 +456,7 @@ is why Measurement B shows a flat pass rate and a changed level.
 
 ### 6.3 The headline
 
-> **Report `U_best` with the harness named, and `ρ_V` beside it.**
+> **Report `HIL-Ceiling` with the ladder identified, and `ρ_V` beside it.**
 >
 > `U_best` alone attributes a joint product to one factor. `ρ_V` alone omits what the pair achieved. The
 > two together say: this is what the pair reached, this is the arrangement that reached it, and this is
@@ -545,7 +654,9 @@ Systems*. — autonomy indexed by operational design domain.
 Sheridan, T. B., & Verplank, W. L. (1978). *Human and Computer Control of Undersea Teleoperators*. MIT
 Man-Machine Systems Laboratory.
 
-Within this corpus: `Unified_Intelligence_Six_Coordinate_Framework.pdf` (the [C, I, O, T, H, SA] profile,
+Within this corpus: `Unified_Intelligence_Harness_Scoring_Framework_v1_1.pdf` (HLIS, HIL, the
+standardized ladder and the Harness Design Score — primary on this paper's naming, reconciled in
+`Harness_Scoring_Concordance.md`); `Unified_Intelligence_Six_Coordinate_Framework.pdf` (the [C, I, O, T, H, SA] profile,
 the gated U-scale, and the HG0–HGΩ harness table this paper reads in the other direction);
 `Delegation_Intelligence_Framework.pdf` (T, H, and the frontier); `Difficulty_Is_Not_The_Index.md` (the
 four repairs, including `p* = ρ/(1+ρ)` and σ); `Delegation_Is_A_Property_Of_The_Task.md` (the
