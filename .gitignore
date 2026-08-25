@@ -52,3 +52,10 @@ delegation_frontier/*.out
 delegation_frontier/*.toc
 delegation_frontier/*.blg
 delegation_frontier/main.pdf
+
+unified_v14/*.aux
+unified_v14/*.log
+unified_v14/*.out
+unified_v14/*.toc
+unified_v14/*.blg
+unified_v14/main.pdf

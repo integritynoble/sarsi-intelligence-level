@@ -1,0 +1,22 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Hendrycks et~al.(2025)]{hendrycks2025agi}
+Dan Hendrycks et~al.
+\newblock A definition of {AGI}.
+\newblock \emph{arXiv preprint}, 2025.
+\newblock versatility and proficiency across psychometrically grounded
+  cognitive domains.
+
+\bibitem[Morris et~al.(2023)Morris, Sohl-Dickstein, Fiedel, Warkentin, Dafoe,
+  Faust, Farabet, and Legg]{morris2024levels}
+Meredith~Ringel Morris, Jascha Sohl-Dickstein, Noah Fiedel, Tris Warkentin,
+  Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg.
+\newblock Levels of {AGI} for operationalizing progress on the path to {AGI}.
+\newblock \emph{arXiv:2311.02462}, 2023.
+
+\end{thebibliography}

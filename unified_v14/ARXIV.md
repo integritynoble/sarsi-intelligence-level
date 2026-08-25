@@ -1,0 +1,46 @@
+# arXiv Submission Package — Unified Intelligence, Version 1.4
+
+| File | Purpose |
+|---|---|
+| `unified-v14-arxiv.tar.gz` | **Upload this.** Contains `main.tex` and `main.bbl` |
+| `main.tex` | LaTeX source |
+| `main.bbl` | Pre-built bibliography — arXiv does not run BibTeX |
+| `references.bib` | Kept for regeneration; **not** in the tarball |
+| `../Unified_Intelligence_Harness_Scoring_Framework_v1_4.pdf` | Compiled PDF, 29 pages |
+
+Verified: extracts into an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 29 pages, zero Type 3 fonts, all fonts embedded.
+
+## What this version is
+
+Version 1.4 keeps the whole of v1.3 — five families, six coordinates, the gated U0–UΩ scale, HG0–HGΩ, the formal HLIS construction, HIL, and the contemporary-benchmark mapping. It differs in one respect: **the ladder was built and a curve was measured**, and the measurement found a defect in the framework's own scoring variable.
+
+`A_DI` was defined on `P(success)`, which is exactly invariant to the harness generation that adds an acceptance step — because acceptance does not change the probability of success, only what is reported as success. Measured, HG0 and HG1 both scored 93.3 while false completions went 2/12 → 0/12.
+
+The changes that follow from it are in §13.9 (the delivered-outcome primitive), §13.15 (the run log must record acceptance), §14.3 (ρ_V), §14.4 (two cautions on the composite), §11.2b (the reference ladder), §15.1 (per-task specification status), §16.4 (the measurement), and Appendix D (version history).
+
+## Dependency warning
+
+**This is a framework proposal with one small measurement in it, not an empirical paper.** A referee should be told plainly:
+
+- **One model, one machine, 48 episodes, two seeds per class.** The curve in §16.4 is a reading, not a rate, and it is nearly saturated at HG0 (93.3), leaving 6.7 points of headroom across four rungs.
+- **Four rungs of eight.** HG4–HGΩ are specified and not built, so HIL-Level above 3 is not assessable and the measured HIL-AUC is a mean over a truncated ladder.
+- **One intervention budget.** Everything at H1, so the frontier cannot be observed moving leftward.
+- **One coordinate.** Only DI was instrumented; C, I, O and SA have no runnable suite, so every measured figure is `HLIS_DI`.
+- **Every level threshold remains a hypothesis.** §21 says so, and nothing here calibrates them.
+
+The claim worth defending is Proposition 1 (acceptance invariance), which is a statement about the formula rather than about any model and is refuted by exhibiting two harnesses differing only in acceptance whose measured `A_DI` differs.
+
+## Suggested categories
+
+Primary `cs.AI`; cross-list `cs.HC` (the human-factors lineage in §6 and §17 is load-bearing) and `cs.SE` (the run-log schema and reporting standards are engineering artifacts).
+
+## Regenerating
+
+```
+cd unified_v14
+pdflatex main && bibtex main && pdflatex main && pdflatex main
+cp main.pdf ../Unified_Intelligence_Harness_Scoring_Framework_v1_4.pdf
+tar czf unified-v14-arxiv.tar.gz main.tex main.bbl
+```
+
+`main.bbl` is committed on purpose: it ships inside the tarball because arXiv does not run BibTeX. It is a build input, not an artifact.
