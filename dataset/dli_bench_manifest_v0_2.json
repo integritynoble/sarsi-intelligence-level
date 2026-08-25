@@ -1,0 +1,59 @@
+{
+  "benchmark_version": "DLI-Bench v0.2",
+  "built_from": "dli_bench_tasks_v0_1.jsonl",
+  "n_tasks": 144,
+  "strata": {
+    "ladder": 96,
+    "kappa_cross": 12,
+    "budget_cross": 36
+  },
+  "what_v0_1_could_not_measure": [
+    "the reporting profile {F(H0,p), F(H1,p), F(H2,p)}: at three of the five budgets the maximum ranged over a single band",
+    "Proposition 1 non-closure: d_ver took exactly one value per band, so the coordinates could not disagree about the ordering",
+    "Proposition 2 upward bias: d_ver was collinear with the band, so hard-to-do and hard-to-check were not separable",
+    "anything in Repair 2: d_risk was absent, so rho and p* had no inputs",
+    "Repair 3: no field recorded who accepted or what share of the criteria the system wrote"
+  ],
+  "added_fields": [
+    "difficulty_risk",
+    "kappa",
+    "t_do",
+    "loss",
+    "acceptance",
+    "verifier",
+    "load_instrumentation",
+    "stratum"
+  ],
+  "excluded_classes": [
+    {
+      "class_id": "EXC-01",
+      "description": "Judge whether a research direction is worth pursuing",
+      "family": "research",
+      "why_no_criterion": "the outcome is realised over years and confounded by everything else the group did; no instrument reads it at episode scale",
+      "would_admit_if": "a pre-registered decision rule with a resolution date and a party bound to apply it"
+    },
+    {
+      "class_id": "EXC-02",
+      "description": "Decide whether a message is appropriate to send",
+      "family": "tool_use",
+      "why_no_criterion": "appropriateness is a judgement of the recipient's reaction, which is unobserved at scoring time",
+      "would_admit_if": "a declared recipient-side rubric applied by a party that did not build the system"
+    },
+    {
+      "class_id": "EXC-03",
+      "description": "Set a team's priorities for a quarter",
+      "family": "planning",
+      "why_no_criterion": "the counterfactual quarter is not run, so no comparison exists",
+      "would_admit_if": "a simulator whose fidelity is itself measured"
+    },
+    {
+      "class_id": "EXC-04",
+      "description": "Assess whether a document is honest about its limitations",
+      "family": "document",
+      "why_no_criterion": "requires knowing the limitations the author did not state, which is the quantity in question",
+      "would_admit_if": "an independently produced limitations list, sealed before the work"
+    }
+  ],
+  "rule_11": "no frontier may be reported without the verifier's identity, its false-pass rate or an explicit unknown, and the count of classes excluded for want of a criterion (here: 4)",
+  "calibration": "NONE. Difficulty and loss figures are design labels; every verifier false_pass_rate is null, meaning unknown."
+}
