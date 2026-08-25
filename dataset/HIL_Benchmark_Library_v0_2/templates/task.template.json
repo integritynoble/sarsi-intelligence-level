@@ -1,0 +1,22 @@
+{
+  "benchmark_id": "HIL-HG2-I-EXAMPLE",
+  "library_version": "0.1",
+  "suite": "HIL-Native",
+  "harness_generation": "HG2",
+  "unified_level": "U2",
+  "dimension": "I",
+  "coordinate_target": "I2",
+  "family": "memory_learning",
+  "public_prompt": "<public task>",
+  "public_assets": [
+    "public/input.json"
+  ],
+  "hidden_assets": [
+    "hidden/reference.json"
+  ],
+  "success_criterion": "<externally verifiable criterion>",
+  "verifier": "verifier/verify.py",
+  "human_intervention_budget": "<=H2",
+  "reliability_target": 0.85,
+  "resource_envelope_id": "HIL-R1"
+}

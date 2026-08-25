@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL Scoring Configuration",
+  "type": "object",
+  "required": [
+    "scoring_version",
+    "component_weights",
+    "reliability_thresholds",
+    "resource_envelope_id"
+  ],
+  "properties": {
+    "scoring_version": {
+      "type": "string"
+    },
+    "component_weights": {
+      "type": "object"
+    },
+    "reliability_thresholds": {
+      "type": "object"
+    },
+    "resource_envelope_id": {
+      "type": "string"
+    },
+    "hil_score_weights": {
+      "type": "object"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

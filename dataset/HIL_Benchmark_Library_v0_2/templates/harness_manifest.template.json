@@ -1,0 +1,28 @@
+{
+  "harness_id": "example-harness",
+  "harness_version": "0.1",
+  "generation": "HG2",
+  "base_model": "<frozen model identifier>",
+  "modules": [
+    "llm_interface",
+    "context_gate",
+    "persistent_memory",
+    "planner",
+    "tool_router",
+    "evidence_log"
+  ],
+  "frozen_components": [
+    "authority_kernel",
+    "hidden_benchmark_store",
+    "external_verifier",
+    "promotion_thresholds",
+    "audit_log"
+  ],
+  "candidate_write_scope": [
+    "memory",
+    "procedures"
+  ],
+  "resource_envelope_id": "HIL-R1",
+  "verifier_identity": "external-verifier-v1",
+  "promoter_identity": "external-promoter-v1"
+}

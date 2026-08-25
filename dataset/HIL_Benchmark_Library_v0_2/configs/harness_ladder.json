@@ -1,0 +1,94 @@
+{
+  "library_version": "0.1",
+  "generations": [
+    {
+      "harness_generation": "HG0",
+      "aligned_unified_level": "U0",
+      "generation_name": "Reactive",
+      "required_structure": "LLM interface; prompt/context builder; bounded tool adapter; evidence log; external scoring.",
+      "new_capability": "Executes explicit instructions and bounded operations.",
+      "dataset_focus": "Atomic reasoning, direct transformations, bounded tool actions, exact-output verification.",
+      "promotion_rule": "Pass U0 suite at declared reliability and resource envelope.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HG1",
+      "aligned_unified_level": "U1",
+      "generation_name": "Persistent",
+      "required_structure": "HG0 + durable memory/state store; checkpoint/replay; retrieval gate; identity/task-state model.",
+      "new_capability": "Maintains persistent task/self state across turns or restarts and completes small delegated goals.",
+      "dataset_focus": "Restart continuity, protected constraints, state recovery, small-goal completion.",
+      "promotion_rule": "Retain U0 and pass persistence/restart tests without hidden human repair.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HG2",
+      "aligned_unified_level": "U2",
+      "generation_name": "Adaptive",
+      "required_structure": "HG1 + episodic-to-semantic consolidation; procedure store; learning evidence; adaptive routing/planning.",
+      "new_capability": "Learns from experience and completes multi-step delegated tasks.",
+      "dataset_focus": "Few-example adaptation, lesson consolidation, multi-step tasks, capability/limitation awareness.",
+      "promotion_rule": "Retain U0-U1; demonstrate measurable transfer from experience under frozen tests.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HG3",
+      "aligned_unified_level": "U3",
+      "generation_name": "Self-Improving",
+      "required_structure": "HG2 + candidate mechanism registry (Theta); isolated evaluator; hidden replay suite; promoter; rollback.",
+      "new_capability": "Chooses strategy independently and performs governed improvement of cognitive/organizational mechanisms.",
+      "dataset_focus": "Failure diagnosis, strategy choice, bounded self-improvement proposals, hidden regression tests.",
+      "promotion_rule": "Retain U0-U2; improvement must beat frozen baseline without agent-controlled verifier/promotion.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HG4",
+      "aligned_unified_level": "U4",
+      "generation_name": "Recursive",
+      "required_structure": "HG3 + meta-improvement engine (Psi); improvement-history model; proposal/evaluation budgeter; canary deployment.",
+      "new_capability": "Improves the improvement process and autonomously manages difficult long-horizon projects.",
+      "dataset_focus": "Long-horizon projects, repeated failures, meta-improvement, prediction of self-change effects.",
+      "promotion_rule": "Retain U0-U3; show validated improvement in improvement competence across independent episodes.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HG5",
+      "aligned_unified_level": "U5",
+      "generation_name": "Discovery",
+      "required_structure": "HG4 + unknown/hypothesis/experiment/knowledge stores; experiment selector; evidence adjudication.",
+      "new_capability": "Autonomously discovers previously unknown solution methods or knowledge from evidence.",
+      "dataset_focus": "Hidden mechanisms, novel solution discovery, self-unknown experiments, research-style verification.",
+      "promotion_rule": "Retain U0-U4; discovery must be externally verifiable and not present in supplied task instructions.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HG6",
+      "aligned_unified_level": "U6",
+      "generation_name": "Mission Autonomous",
+      "required_structure": "HG5 + mission manager; project generator; budget allocator; multi-project scheduler; organizational role manager.",
+      "new_capability": "Turns a mission into goals, projects and tasks and manages them autonomously.",
+      "dataset_focus": "Dynamic mission environments, changing priorities, project generation, budget allocation, role coherence.",
+      "promotion_rule": "Retain U0-U5; complete mission outcomes while generating the necessary intermediate projects/tasks.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    },
+    {
+      "harness_generation": "HGΩ",
+      "aligned_unified_level": "UΩ",
+      "generation_name": "Open-Ended",
+      "required_structure": "HG6 + charter interpreter; opportunity discovery; lineage/provenance; new-instrument/agent-type proposal; frozen external referee.",
+      "new_capability": "Under a bounded charter, identifies worthwhile missions and expands its future cognitive/organizational reach.",
+      "dataset_focus": "Repeated opportunity discovery cycles, frontier expansion, lineage reconstruction, non-circular validation.",
+      "promotion_rule": "Retain U0-U6 across repeated cycles; new missions/capabilities must be externally validated and provenance-linked.",
+      "frozen_components": "authority kernel; hidden benchmarks; external verifier; promotion thresholds; audit ownership; resource envelope",
+      "candidate_write_scope": "increases by generation but excludes verifier/promotion/authority kernel"
+    }
+  ],
+  "rule": "Architecture enables a level; only externally verified benchmark performance certifies it."
+}

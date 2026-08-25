@@ -1,0 +1,17 @@
+{
+  "resource_envelope_id": "HIL-R1",
+  "purpose": "Starter standardized reporting envelope; benchmark owners should set numeric ceilings per suite.",
+  "required_logged_fields": [
+    "tokens_in",
+    "tokens_out",
+    "model_calls",
+    "tool_calls",
+    "subagent_calls",
+    "wall_time_seconds",
+    "cost_usd",
+    "compute_type",
+    "network_access",
+    "context_limit"
+  ],
+  "comparison_rule": "Do not compare HLIS/HIL results as equivalent unless resource envelopes and benchmark versions are declared."
+}

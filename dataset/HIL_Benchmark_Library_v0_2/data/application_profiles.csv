@@ -1,0 +1,6 @@
+profile,entity_type,dimensions,weights,priority_benchmarks,notes
+General HIL,singleton/organization as declared,"C,I,DI,SA (+O for organizations)",equal by default,HLE/GPQA/ARC-AGI + HIL-native I/DI/SA (+O),Headline scientific profile; fixed weights and fixed benchmark versions.
+AI4Science Research Agent,persistent research agent,"C,I,DI,SA",C=2; I=2; DI=2; SA=1,"GPQA, HLE, FrontierMath where relevant, BrowseComp/GAIA + HIL-native I/DI/SA","Emphasizes scientific reasoning, durable learning, research delegation, and evidence-grounded self-state."
+Software Engineering Agent,persistent coding agent,"C,I,DI,SA",C=1.5; I=1; DI=2.5; SA=1,"LiveCodeBench, SWE-bench, Terminal-Bench, BFCL + HIL-native persistence/recovery",Emphasizes verified repository task completion and low human intervention.
+Multi-Agent Research Organization,organization,"C,I,O,DI,SA",C=1.5; I=1; O=2; DI=2; SA=1,HIL-native O/DI plus domain benchmarks,Requires real role/authority boundaries and independent evaluator/promoter separation.
+Computer-Use Agent,singleton,"C,I,DI,SA",C=1; I=0.5; DI=3; SA=1,"OSWorld, WebArena, BFCL, τ-bench + HIL-native intervention logging",Delegation frontier should be the primary operational report.

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL Harness Manifest",
+  "type": "object",
+  "required": [
+    "harness_id",
+    "harness_version",
+    "generation",
+    "base_model",
+    "modules",
+    "frozen_components",
+    "resource_envelope_id"
+  ],
+  "properties": {
+    "harness_id": {
+      "type": "string"
+    },
+    "harness_version": {
+      "type": "string"
+    },
+    "generation": {
+      "enum": [
+        "HG0",
+        "HG1",
+        "HG2",
+        "HG3",
+        "HG4",
+        "HG5",
+        "HG6",
+        "HGΩ"
+      ]
+    },
+    "base_model": {
+      "type": "string"
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "frozen_components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "candidate_write_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resource_envelope_id": {
+      "type": "string"
+    },
+    "verifier_identity": {
+      "type": "string"
+    },
+    "promoter_identity": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

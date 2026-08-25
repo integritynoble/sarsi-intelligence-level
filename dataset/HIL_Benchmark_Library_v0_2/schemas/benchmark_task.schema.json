@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL Native Benchmark Task",
+  "type": "object",
+  "required": [
+    "benchmark_id",
+    "library_version",
+    "suite",
+    "harness_generation",
+    "unified_level",
+    "dimension",
+    "coordinate_target",
+    "family",
+    "public_prompt",
+    "success_criterion",
+    "verifier_type",
+    "human_intervention_budget",
+    "reliability_target",
+    "resource_envelope",
+    "split"
+  ],
+  "properties": {
+    "benchmark_id": {
+      "type": "string"
+    },
+    "library_version": {
+      "type": "string"
+    },
+    "suite": {
+      "type": "string"
+    },
+    "harness_generation": {
+      "enum": [
+        "HG0",
+        "HG1",
+        "HG2",
+        "HG3",
+        "HG4",
+        "HG5",
+        "HG6",
+        "HGΩ"
+      ]
+    },
+    "unified_level": {
+      "enum": [
+        "U0",
+        "U1",
+        "U2",
+        "U3",
+        "U4",
+        "U5",
+        "U6",
+        "UΩ"
+      ]
+    },
+    "dimension": {
+      "enum": [
+        "C",
+        "I",
+        "O",
+        "DI",
+        "SA"
+      ]
+    },
+    "coordinate_target": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "task_title": {
+      "type": "string"
+    },
+    "public_prompt": {
+      "type": "string"
+    },
+    "setup_summary": {
+      "type": "string"
+    },
+    "deliverable": {
+      "type": "string"
+    },
+    "hidden_condition": {
+      "type": "string"
+    },
+    "success_criterion": {
+      "type": "string"
+    },
+    "verifier_type": {
+      "type": "string"
+    },
+    "human_intervention_budget": {
+      "type": "string"
+    },
+    "reliability_target": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "minimum_certification_runs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "resource_envelope": {
+      "type": "string"
+    },
+    "requires_persistent_state": {
+      "type": "boolean"
+    },
+    "requires_multi_agent": {
+      "type": "boolean"
+    },
+    "requires_learning": {
+      "type": "boolean"
+    },
+    "requires_self_modification": {
+      "type": "boolean"
+    },
+    "dynamic_environment": {
+      "type": "boolean"
+    },
+    "split": {
+      "enum": [
+        "development",
+        "validation",
+        "certification_hidden"
+      ]
+    },
+    "asset_status": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Human Cognitive Intervention Log",
+  "type": "object",
+  "required": [
+    "intervention_id",
+    "run_id",
+    "timestamp",
+    "cid",
+    "description"
+  ],
+  "properties": {
+    "intervention_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "cid": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "description": {
+      "type": "string"
+    },
+    "human_minutes": {
+      "type": "number",
+      "minimum": 0
+    },
+    "requested_by_system": {
+      "type": "boolean"
+    },
+    "governance_only": {
+      "type": "boolean"
+    },
+    "changed_strategy": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

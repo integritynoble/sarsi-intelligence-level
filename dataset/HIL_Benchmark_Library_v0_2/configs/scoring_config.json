@@ -1,0 +1,78 @@
+{
+  "scoring_version": "HIL-SCORE-0.1",
+  "component_dimensions": {
+    "singleton": [
+      "C",
+      "I",
+      "DI",
+      "SA"
+    ],
+    "organization": [
+      "C",
+      "I",
+      "O",
+      "DI",
+      "SA"
+    ]
+  },
+  "component_weights": {
+    "general": {
+      "C": 1.0,
+      "I": 1.0,
+      "O": 1.0,
+      "DI": 1.0,
+      "SA": 1.0
+    },
+    "AI4Science": {
+      "C": 2.0,
+      "I": 2.0,
+      "O": 0.0,
+      "DI": 2.0,
+      "SA": 1.0
+    },
+    "software_engineering": {
+      "C": 1.5,
+      "I": 1.0,
+      "O": 0.0,
+      "DI": 2.5,
+      "SA": 1.0
+    }
+  },
+  "hlis_formula": "100 * exp(sum(alpha_d * ln(A_d)) / sum(alpha_d))",
+  "hil_metrics": {
+    "HIL-Level": "highest standardized harness generation satisfying its declared gate and retention tests",
+    "HIL-AUC": "normalized area under HLIS versus harness-generation curve",
+    "HIL-Ceiling": "maximum HLIS across standardized harness generations",
+    "Harness-Gain": "max(HLIS_k) - HLIS_HG0",
+    "HIL-Score": "0.55*HIL-AUC + 0.35*HIL-Ceiling + 0.10*Harnessability (provisional)"
+  },
+  "reliability_thresholds": {
+    "U0": 0.95,
+    "U1": 0.9,
+    "U2": 0.85,
+    "U3": 0.8,
+    "U4": 0.8,
+    "U5": 0.7,
+    "U6": 0.7,
+    "U\u03a9": 0.6
+  },
+  "resource_envelope_id": "HIL-R1",
+  "zero_policy": "Omit genuinely N/A dimensions (e.g. O for singleton). Do not convert N/A to zero. A true required zero may invalidate strict geometric score.",
+  "confidence_interval": "Report bootstrap or other predeclared uncertainty interval when sample size permits.",
+  "notes": "Weights and aggregate formulas are provisional until empirically calibrated. Always report the full profile with the scalar.",
+  "library_version": "0.2",
+  "delegation": {
+    "net_of_false_completion": {
+      "enabled": true,
+      "rule": "S_net(T,H) = P(verifier_pass) - rho_class * P(false_completion)",
+      "rho_source": "the task's own loss terms; p_star = rho/(1+rho)",
+      "why": "A_DI in v0.1 is the weighted mean of P(success), so two harness generations that differ only in whether wrong work is returned as done receive the SAME score. Measured: HG0 and HG1 produced an identical pass pattern and differed entirely in false completions. A curve computed from P(success) alone cannot see its own first rung."
+    }
+  },
+  "model_attributable": {
+    "rho_V": {
+      "definition": "over runs rejected at attempt k, the fraction accepted at k+1 with no help deeper than CID1",
+      "why": "Harness Gain is a difference of two scores and cannot say which mechanism produced it. Acceptance and reversibility raise the score without the model doing anything; retry and routing require the model to convert a detected failure into a correction."
+    }
+  }
+}

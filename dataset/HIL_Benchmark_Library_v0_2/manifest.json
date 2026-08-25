@@ -1,0 +1,178 @@
+{
+  "library": "HIL Benchmark Library",
+  "version": "0.1",
+  "created": "2026-08-25",
+  "native_task_specs": 160,
+  "delegation_task_specs": 64,
+  "external_benchmark_registry_entries": 24,
+  "files": [
+    {
+      "path": "HIL_Benchmark_Library_v0_1.xlsx",
+      "bytes": 71817,
+      "sha256": "202d90ecf1804f84c65b5dd474fa5ed564d10a148a44bceeb356b68bd2177fdd"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3690,
+      "sha256": "b38aaf693f49e4ab82ce1c80344f800b3737e939f8f20f3213755477943c6a9f"
+    },
+    {
+      "path": "configs/harness_ladder.json",
+      "bytes": 7085,
+      "sha256": "bfb6dc550fad27c4d5da72df8ab33eec316bd621991c71e1f7dfc06c713af27c"
+    },
+    {
+      "path": "configs/resource_envelope_HIL-R1.json",
+      "bytes": 516,
+      "sha256": "47021fe37af69618422085bedc9611a6b3d5509c20608886d223fb7f0c2eed12"
+    },
+    {
+      "path": "configs/scoring_config.json",
+      "bytes": 1683,
+      "sha256": "dda0a74c19af8df885a180b6a87fed25f92163d498a402d7362e18f23975c27b"
+    },
+    {
+      "path": "data/application_profiles.csv",
+      "bytes": 1215,
+      "sha256": "2c1897400a4936c3f698ba8ba4cbb04bfa1e6ce7a4c4a084306b3e90c9b6258a"
+    },
+    {
+      "path": "data/delegation_plane_tasks.csv",
+      "bytes": 49535,
+      "sha256": "9c122e42f1040330bd304ebfd1d9ea9386769c15d8375df4176487c13d29323f"
+    },
+    {
+      "path": "data/delegation_plane_tasks.jsonl",
+      "bytes": 76104,
+      "sha256": "b049b1b2bfefe92320812f6539c8e0bb4619ad54e977b4d2eb30a6b13e407949"
+    },
+    {
+      "path": "data/external_benchmark_registry.csv",
+      "bytes": 9337,
+      "sha256": "aace48cf8a9c4ed5191841c8a6dc1cfc0946042a01cc5d4a5aac74a669dbd4cb"
+    },
+    {
+      "path": "data/external_benchmark_registry.jsonl",
+      "bytes": 13915,
+      "sha256": "f38d66f8ab283111179e8f5d849a400c2fec39c15141f19dad0c47ac6d71a74d"
+    },
+    {
+      "path": "data/harness_ladder.csv",
+      "bytes": 4877,
+      "sha256": "77131124f8af8200584b67cc13c2a483b371d8d409cb2282ca574b7d02ec7359"
+    },
+    {
+      "path": "data/hil_native_tasks.csv",
+      "bytes": 213718,
+      "sha256": "792043d37f17c47f6fe41294ca46d40187b18324bb95e96925520f95d8ef5661"
+    },
+    {
+      "path": "data/hil_native_tasks.jsonl",
+      "bytes": 308888,
+      "sha256": "2296ed71a23a353e923c40f29c200ec32f93399e6d82cd31bdab54b97fb1c48c"
+    },
+    {
+      "path": "data/source_registry.csv",
+      "bytes": 5440,
+      "sha256": "d7dea750a32c57aa842be88bca046f56c40f96e67e4a9af0a9194b6ccd167135"
+    },
+    {
+      "path": "data/unified_level_gates.csv",
+      "bytes": 2095,
+      "sha256": "781ee58caf1784fd6095ba3ec04e707b89b2bdc0fb0972a936f2bebd984dffb2"
+    },
+    {
+      "path": "docs/BENCHMARK_CREATION_GUIDE.md",
+      "bytes": 1804,
+      "sha256": "3449f29ae5b930168407be64c4d0e59258773bad6ea4215f3d651159a171973e"
+    },
+    {
+      "path": "docs/EXTERNAL_BENCHMARK_MAPPING.md",
+      "bytes": 769,
+      "sha256": "f2eed77e66db80f3d567acb0d66d9f2832859ff13b55b2ce99b958af29903914"
+    },
+    {
+      "path": "docs/SCORING_GUIDE.md",
+      "bytes": 1710,
+      "sha256": "bd806c5345bd35c94fe3b01d3da65c0794170533042073f61d85f905b6ec9dac"
+    },
+    {
+      "path": "docs/dashboard_preview.png",
+      "bytes": 122527,
+      "sha256": "8dadddc0c16304e62b679fb83878b7518e64b0424fee293ec3b53ff14eb79d7a"
+    },
+    {
+      "path": "docs/scoring_preview.png",
+      "bytes": 153317,
+      "sha256": "1aae7c1c458549e1d50bc74e3619a04a8698eb1192e573cdc9faca6f085eebbe"
+    },
+    {
+      "path": "schemas/benchmark_task.schema.json",
+      "bytes": 2447,
+      "sha256": "e839693674d7a6aca09246a8100be4d52a63d5b6a57928a5b38e57b096f47bee"
+    },
+    {
+      "path": "schemas/harness_manifest.schema.json",
+      "bytes": 1165,
+      "sha256": "290cded73c4132bce21c3566c8cf3bfac9c1dc6b0a8b61c3de9d14e893c47276"
+    },
+    {
+      "path": "schemas/intervention_log.schema.json",
+      "bytes": 832,
+      "sha256": "a0dddff9bb94b058c3fd6333a2c221f27b8482fb5fd80dd3aa59643525a7f872"
+    },
+    {
+      "path": "schemas/run_log.schema.json",
+      "bytes": 1836,
+      "sha256": "336230167fd92d0be681563056d48ce3b8b00002995965c44b0d12a54695998c"
+    },
+    {
+      "path": "schemas/scoring_config.schema.json",
+      "bytes": 607,
+      "sha256": "fe992840ef50a0222805f4f717bbe012cd4a3e60474a2cd10e31ffccfa73d59e"
+    },
+    {
+      "path": "templates/agent_adapter.template.py",
+      "bytes": 621,
+      "sha256": "0d619fec71a2dc0dfbaa371b4cca65f6028bb37f99e318b6e58cbe58a3c61642"
+    },
+    {
+      "path": "templates/harness_manifest.template.json",
+      "bytes": 620,
+      "sha256": "c60534b4ca7a1e4b1d4f1daa57694205e4d092370150e5dae08c5afec71ad38a"
+    },
+    {
+      "path": "templates/task.template.json",
+      "bytes": 571,
+      "sha256": "b1b323590a405185239a787db23c36df3669ef5348b66b203906bd7f76c7f122"
+    },
+    {
+      "path": "templates/verifier.template.py",
+      "bytes": 806,
+      "sha256": "7a91e90523d3f5b6104a72aa5670a0e51b0b46319bcb535c1b23ef2a59d2947b"
+    },
+    {
+      "path": "tools/score_hil.py",
+      "bytes": 894,
+      "sha256": "41da0ef13778bdf7a4be1ba31ecf0e435a08e997b488d045fb81b81ca35b11c7"
+    },
+    {
+      "path": "tools/score_hlis.py",
+      "bytes": 965,
+      "sha256": "1d2daeffb41aecf9bb4446ddb152b5254c214aa427502ef9aa0e45053a6836bd"
+    },
+    {
+      "path": "tools/validate_library.py",
+      "bytes": 956,
+      "sha256": "72510ea44b8b37f548508cff50eb722c2f94ba70eb45b4cd629ab6c4fb23116c"
+    }
+  ],
+  "library_version": "0.2",
+  "changes_v0_2": {
+    "bindings": "bindings/bindings.jsonl \u2014 34 bound, 30 band-only, 160 specification-only",
+    "run_log_schema": "harness_accepted required; false_completion, held_back, false_rejection, verification_responsive, attempts added",
+    "scoring": "A_DI net of false completions; N/A dimensions omitted rather than zeroed",
+    "validator": "checks binding claims and schema requirements, not only row counts",
+    "evidence": "HG0 and HG1 measured identical at A_DI 0.933, which is why the net surface exists"
+  }
+}

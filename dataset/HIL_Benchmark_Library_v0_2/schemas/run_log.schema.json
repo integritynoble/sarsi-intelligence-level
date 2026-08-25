@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL run log v0.2",
+  "type": "object",
+  "required": [
+    "run_id",
+    "benchmark_id",
+    "model_id",
+    "harness_id",
+    "start_time",
+    "end_time",
+    "verifier_pass",
+    "harness_accepted"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "benchmark_id": {
+      "type": "string"
+    },
+    "model_id": {
+      "type": "string"
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "harness_id": {
+      "type": "string"
+    },
+    "harness_generation": {
+      "type": "string"
+    },
+    "benchmark_version": {
+      "type": "string"
+    },
+    "resource_envelope_id": {
+      "type": "string"
+    },
+    "start_time": {
+      "type": "string"
+    },
+    "end_time": {
+      "type": "string"
+    },
+    "verifier_pass": {
+      "type": "boolean"
+    },
+    "score": {
+      "type": "number"
+    },
+    "human_intervention_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_cid": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "human_cognitive_minutes": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tokens_in": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tokens_out": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "model_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "tool_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "subagent_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "wall_time_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "cost_usd": {
+      "type": "number",
+      "minimum": 0
+    },
+    "artifact_uri": {
+      "type": "string"
+    },
+    "evidence_uri": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "harness_accepted": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Did the HARNESS accept the result? null when the harness has no acceptance step (HG0). Distinct from verifier_pass, which is the external verdict. Without both, a run that held work back and a run that returned it wrong are the same row."
+    },
+    "false_completion": {
+      "type": "boolean",
+      "description": "Work handed back as done that the external verifier rejects: harness_accepted is true (or absent) while verifier_pass is false. This is the outcome a delegation score must not treat as an ordinary failure -- the loss term applies to it and not to a refusal."
+    },
+    "held_back": {
+      "type": "boolean",
+      "description": "The harness declined to accept, and the verifier agrees it was wrong. A correct refusal. Costs human load rather than reliability."
+    },
+    "false_rejection": {
+      "type": "boolean",
+      "description": "The harness declined work the verifier would have passed. The harness's own false-negative rate, and the cost of strictness."
+    },
+    "verification_responsive": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "On a run that was rejected and retried: did the next attempt get accepted with no help deeper than CID1? Aggregated over rejections this is rho_V, and it is the term attributable to the MODEL rather than to the harness."
+    },
+    "attempts": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Executor attempts made inside this run."
+    }
+  },
+  "additionalProperties": true,
+  "description": "A run of one bound benchmark. v0.2 adds the acceptance outcome beside the verifier outcome. v0.1 recorded only verifier_pass, and a pass rate cannot see the harness generation that adds an acceptance step: acceptance does not change the probability of success, it changes what is reported as success."
+}
