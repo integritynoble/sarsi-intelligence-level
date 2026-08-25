@@ -6,9 +6,9 @@
 | `main.tex` | LaTeX source |
 | `main.bbl` | Pre-built bibliography — arXiv does not run BibTeX |
 | `references.bib` | Kept for regeneration; **not** in the tarball |
-| `../Unified_Intelligence_Harness_Scoring_Framework_v1_4.pdf` | Compiled PDF, 29 pages |
+| `../Unified_Intelligence_Harness_Scoring_Framework_v1_4.pdf` | Compiled PDF, 32 pages |
 
-Verified: extracts into an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 29 pages, zero Type 3 fonts, all fonts embedded.
+Verified: extracts into an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 32 pages, zero Type 3 fonts, all fonts embedded.
 
 ## What this version is
 
@@ -22,13 +22,16 @@ The changes that follow from it are in §13.9 (the delivered-outcome primitive),
 
 **This is a framework proposal with one small measurement in it, not an empirical paper.** A referee should be told plainly:
 
-- **One model, one machine, 48 episodes, two seeds per class.** The curve in §16.4 is a reading, not a rate, and it is nearly saturated at HG0 (93.3), leaving 6.7 points of headroom across four rungs.
+- **Two models from one family, one machine, 48 episodes each, two seeds per class.** The curves in §16.4 are readings, not rates.
+- **Between-rung variance was not controlled.** Each rung was an independent run, so one model's HG0→HG1 movement is sampling noise rather than signal. §16.4.3 says so and the protocol now requires a paired design that was not used to produce these numbers.
 - **Four rungs of eight.** HG4–HGΩ are specified and not built, so HIL-Level above 3 is not assessable and the measured HIL-AUC is a mean over a truncated ladder.
 - **One intervention budget.** Everything at H1, so the frontier cannot be observed moving leftward.
 - **One coordinate.** Only DI was instrumented; C, I, O and SA have no runnable suite, so every measured figure is `HLIS_DI`.
 - **Every level threshold remains a hypothesis.** §21 says so, and nothing here calibrates them.
 
-The claim worth defending is Proposition 1 (acceptance invariance), which is a statement about the formula rather than about any model and is refuted by exhibiting two harnesses differing only in acceptance whose measured `A_DI` differs.
+The claim worth defending is Proposition 1 (acceptance invariance), which is a statement about the formula rather than about any model: `A_DI` is defined on `P(success)`, and an acceptance step changes neither what the system produces nor whether it is correct. It is refuted by exhibiting two harnesses differing *only* in acceptance whose measured `A_DI` differs under a paired design.
+
+The second empirical claim — that Harness Gain separates models by harness response while HIL-AUC ranks them by baseline — rests on a two-model comparison and is offered as a first data point, not a result.
 
 ## Suggested categories
 

@@ -28,7 +28,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small Unified Intelligence: A Six-Coordinate Measurement Framework}
+\fancyhead[L]{\small Measuring the Unified Intelligence Level}
 \fancyhead[R]{\small Version 1.4}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
@@ -61,13 +61,14 @@
 \newcommand{\FA}{\ensuremath{F_A(H,p)}}
 \newcommand{\rhov}{\ensuremath{\rho_V}}
 
-\title{\LARGE Unified Intelligence as a Cumulative,\\ Harness-Measurable Hierarchy\\[8pt]
+\title{\LARGE Measuring the Unified Intelligence Level:\\[6pt]
+A Cumulative, Harness-Measurable Hierarchy\\[8pt]
 \large Five Conceptual Intelligence Families, Six Measurable Coordinates,\\
-and a Gated U0--U\Om{} Scale\\[10pt]
+and a Gated U0--U\Om{} Intelligence-Level Scale\\[10pt]
 \normalsize Version 1.4 --- with the first measured harness scaling curve}
 
 \author{Chengshuai Yang\\
-\small\texttt{platformaigpt@gmail.com}}
+\small\texttt{spiritai@platformai.org}}
 
 \date{August 25, 2026}
 
@@ -108,6 +109,23 @@ Measured on 48 episodes with one frozen model and only the harness changing, HG0
 
 The rung the curve could not see is the one on which the reportability of every rung above it depends, since a result accepted by its own producer is an assertion rather than a completed task. \S\ref{sec:adi} repairs the primitive.
 \end{cautionbox}
+
+\subsection{Contributions}
+
+\begingroup\sloppy
+\begin{enumerate}
+\item A separation of five conceptual intelligence families into six directly measured coordinates,
+      $[C,I,O,T,H,SA]$, with Delegation Intelligence decomposed rather than treated as a primitive scalar (\S3--\S7).
+\item A cumulative, gated Unified Intelligence Level scale U0--U\Om{}, in which promotion requires retention of all lower levels and satisfaction of every coordinate gate (\S8--\S10).
+\item A harness realization of the hierarchy, and the position that the (model, harness) pair is the basic experimental unit (\S11).
+\item A continuous pair score HLIS with a fully specified construction, and a harness-indexed characterization HIL of a base model across a standardized ladder (\S13--\S14).
+\item \textbf{New in this version:} the first instantiation of the ladder, the first measured harness scaling curves, and a proposition and repair concerning the delegation achievement variable that the measurement exposed (\S\ref{sec:built}, \S\ref{sec:adi}, \S\ref{sec:measured}).
+\end{enumerate}
+\endgroup
+
+\subsection{Scope and status}
+
+This is a framework proposal. The level names and numerical thresholds are proposed working definitions requiring empirical calibration, and the measurement reported in \S\ref{sec:measured} is a small preliminary study --- one model family, 48 episodes, one of five coordinates instrumented --- included because it changed the framework, not because it settles any question about any system. \S21 states its limitations in full.
 
 \section{Design Requirements for a Unified Scale}
 
@@ -341,7 +359,7 @@ For a multi-agent organization, member capabilities are reported alongside $O$ r
 
 \section{Harness Realization of the Unified Hierarchy}
 
-The framework is designed to be realized by a harness. The LLM supplies generative cognition; the harness supplies persistence, permissions, evidence flow, learning, self-modification gates, organizational boundaries, delegation, external verification and self-modeling. The same base LLM can therefore instantiate different intelligence profiles depending on the architecture around it.
+The levels-of-automation tradition \citep{sheridan1978,parasuraman2000,endsley1999} established that autonomy is graded and multi-stage; \citet{klein2004} and \citet{amershi2019} add the requirement that automation acting as a team member be predictable and directable; and \citet{lee2004} supplies the account of reliance this framework's intervention axis operationalizes. The framework is designed to be realized by a harness. The LLM supplies generative cognition; the harness supplies persistence, permissions, evidence flow, learning, self-modification gates, organizational boundaries, delegation, external verification and self-modeling. The same base LLM can therefore instantiate different intelligence profiles depending on the architecture around it.
 
 \begin{table}[h]
 \centering\small
@@ -510,7 +528,7 @@ Implementations that want the continuous score to carry the gate's property may 
 A_C = G(R_{\text{general}}, R_{\text{science}}, R_{\text{math}}, R_{\text{abstract}}, R_{\text{code}}, R_{\text{multi}}, R_{\text{long}})
 \end{equation}
 
-Contemporary benchmarks such as HLE, GPQA, FrontierMath/AIME, ARC-AGI, LiveCodeBench, MMMU/MathVista and RULER/LongBench contribute evidence, with exact versions and normalization rules published.
+Contemporary benchmarks such as HLE \citep{phan2025hle}, GPQA \citep{rein2023gpqa}, FrontierMath \citep{glazer2024frontiermath}, ARC-AGI \citep{arc2026}, LiveCodeBench \citep{jain2024livecodebench}, MMMU \citep{yue2023mmmu} and RULER \citep{hsieh2024ruler} contribute evidence, with exact versions and normalization rules published.
 
 \subsection{Cumulative Achievement for I, O and SA}
 
@@ -745,7 +763,7 @@ The reference library at the time of writing binds 34 of 224 specified benchmark
 
 \subsection{Existing Benchmarks Measure Important Slices}
 
-Modern model evaluation is intentionally plural: HLE and MMLU-Pro for broad academic reasoning; GPQA for graduate-level science; FrontierMath and competition mathematics; LiveCodeBench and SWE-bench for coding and repository-level work; ARC-AGI for fluid adaptation; BFCL for tool calling; the $\tau$-bench family for interactive agent reliability; BrowseComp and GAIA for browsing and assistant behavior; MMMU and MathVista for multimodal reasoning; RULER and LongBench for long context; SimpleQA for factuality; Chatbot Arena for human preference; OSWorld for computer use.
+Modern model evaluation is intentionally plural: HLE \citep{phan2025hle} and MMLU-Pro \citep{wang2024mmlupro} for broad academic reasoning; GPQA \citep{rein2023gpqa} for graduate-level science; FrontierMath \citep{glazer2024frontiermath} for advanced mathematics; LiveCodeBench \citep{jain2024livecodebench} and SWE-bench \citep{jimenez2023swebench} for coding and repository-level work; ARC-AGI \citep{arc2026} for fluid adaptation; BFCL \citep{patil2025bfcl} for tool calling; the $\tau$-bench family \citep{yao2024taubench} for interactive agent reliability; BrowseComp \citep{wei2025browsecomp} and GAIA \citep{mialon2023gaia} for browsing and assistant behavior; MMMU \citep{yue2023mmmu} and MathVista \citep{lu2023mathvista} for multimodal reasoning; RULER \citep{hsieh2024ruler} and LongBench \citep{bai2024longbench} for long context; SimpleQA \citep{openai2024simpleqa} for factuality; Chatbot Arena \citep{chiang2024arena} for human preference; OSWorld \citep{xie2024osworld} for computer use.
 
 HIL does not replace these. Let $B(m)$ denote the vector of contemporary results. The HIL program \textbf{consumes} $B(m)$ as its evidence layer --- $A_C$ is built from it --- and then asks a different question: how does the same frozen model behave when embedded in progressively stronger standardized harnesses?
 
@@ -791,47 +809,92 @@ For frozen $m$ and generation $HG_k$, $HSC_m(k) = HLIS(m,HG_k)$. The ordered set
 
 \subsection{The First Measured Curve (new in 1.4)}\label{sec:measured}
 
-Version 1.3 specified the curve; nothing had instantiated the ladder. The reference ladder of \S\ref{sec:built} was built to HG3 and one frozen model was run across it. Held identical at every rung: the model and version, the tool grant, the six task classes, the two seeds per class, the verifiers, the resource ceiling and the intervention budget. \textbf{Only the harness changed.}
+Version 1.3 specified the curve; nothing had instantiated the ladder. The reference ladder of \S\ref{sec:built} was built to HG3 and \textbf{two models} of the same family were run across it. Held identical at every rung and between models: the tool grant, the six task classes, the two seeds per class, the verifiers, the resource ceiling and the intervention budget (H1, governance only). Only the harness changed between rungs, and only the model changed between curves.
 
 \begin{table}[h]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}lrrrrrY@{}}
+\begin{tabularx}{\textwidth}{@{}p{0.09\textwidth}lrrrrY@{}}
 \toprule
-Rung & Episodes & $A_{DI}$ (v1.3) & $HLIS_{DI}$ & False-done & Held back & Attempts \\
+Model & Rung & $A_{DI}$ (v1.3) & $HLIS_{DI}$ & False-done & Held back & Attempts \\
 \midrule
-HG0 & 12 & 0.933 & 93.3 & \textbf{2} & 0 & 12 \\
-HG1 & 12 & 0.933 & 93.3 & \textbf{0} & 2 & 12 \\
-HG2 & 12 & 0.967 & 96.7 & 0 & 1 & 15 \\
-HG3 & 12 & 0.967 & 96.7 & 0 & 1 & 14 \\
+Stronger & HG0 & 0.933 & 93.3 & \textbf{2} & 0 & 12 \\
+         & HG1 & 0.933 & 93.3 & 0 & 2 & 12 \\
+         & HG2 & 0.967 & 96.7 & 0 & 1 & 15 \\
+         & HG3 & 0.967 & 96.7 & 0 & 1 & 14 \\
+\midrule
+Weaker   & HG0 & 0.783 & 78.3 & \textbf{4} & 0 & 12 \\
+         & HG1 & 0.917 & 91.7 & 0 & 3 & 12 \\
+         & HG2 & 0.917 & 91.7 & 0 & 3 & 18 \\
+         & HG3 & 0.933 & 93.3 & 0 & 2 & 14 \\
 \bottomrule
 \end{tabularx}
-\caption{The first measured Harness Scaling Curve. One frozen model, 48 episodes, ladder \texttt{dli-ladder/HG0--HG3}, all runs at H1 (governance only).}
+\caption{Two Harness Scaling Curves on ladder \texttt{dli-ladder/HG0--HG3}. 48 episodes per model, all runs at H1. ``Stronger'' and ``weaker'' denote two members of one model family; absolute values are not a claim about any product.}
 \end{table}
 
-\begin{cautionbox}{The first segment}
-HG1 adds persistent state, a criterion registered before the deliverable exists, and acceptance by a separate process. $A_{DI}$ does not move --- not close, \emph{identical} --- while work handed back as finished and wrong goes 2/12 to 0/12 and two results are held back instead. These are opposite outcomes for anyone delegating, and the same number. This is Proposition~\ref{prop:blind} observed rather than derived.
-\end{cautionbox}
+\subsubsection{Result 1: the curve is invariant across the acceptance rung}
 
-Scored with the Version 1.4 primitive of Equation~\eqref{eq:net} on the same 48 episodes:
+For the stronger model, $A_{DI}$ at HG0 and HG1 is not merely close but \emph{identical}, while work handed back as finished and wrong goes 2/12 to 0/12 and two results are held back instead. HG1 adds persistent state, a criterion registered before the deliverable exists, and acceptance by a separate process. These are opposite outcomes for anyone delegating, and the same number. This is Proposition~\ref{prop:blind} observed rather than derived.
+
+Scored with the Version 1.4 primitive of Equation~\eqref{eq:net} on the same episodes:
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}p{0.08\textwidth}YYYY@{}}
+\toprule
+& \multicolumn{2}{c}{Stronger model} & \multicolumn{2}{c}{Weaker model} \\
+Rung & v1.3 ($\rho{=}0$) & v1.4 net & v1.3 ($\rho{=}0$) & v1.4 net \\
+\midrule
+HG0 & 93.3 & \textbf{86.7} & 78.3 & \textbf{56.7} \\
+HG1 & 93.3 & 93.3 & 91.7 & 91.7 \\
+HG2 & 96.7 & 96.7 & 91.7 & 91.7 \\
+HG3 & 96.7 & 96.7 & 93.3 & 93.3 \\
+\midrule
+Harness Gain & 3.3 & \textbf{10.0} & 15.0 & \textbf{36.6} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The repair changes what the acceptance rung is worth from nothing to $+6.7$ and $+35.0$ respectively. The weaker model gains more from it because it delivers more wrong work to be declined.
+
+\subsubsection{Result 2: Harness Gain separates the two models, and AUC does not}
+
+This is the comparison HIL exists to make, and it comes out as \S\ref{sec:composite} predicts.
 
 \begin{table}[h]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lrrY@{}}
 \toprule
-Rung & v1.3 ($\rho=0$) & v1.4 net & \\
+& Stronger & Weaker & Reading \\
 \midrule
-HG0 & 93.3 & \textbf{86.7} & \\
-HG1 & 93.3 & \textbf{93.3} & the acceptance rung stops being free \\
-HG2 & 96.7 & 96.7 & \\
-HG3 & 96.7 & 96.7 & \\
-\midrule
-First-rung rise & 0.0 & \textbf{+6.7} & \\
-Harness Gain & 3.3 & \textbf{10.0} & \\
+$HLIS_{DI}(HG0)$ & 93.3 & 78.3 & the stronger model starts far ahead \\
+HIL-Ceiling & \textbf{96.7} & 93.3 & and still ends ahead \\
+Harness Gain & 3.3 & \textbf{15.0} & but the weaker model is \textbf{4.5$\times$ more harnessable} \\
+HIL-AUC & \textbf{95.0} & 88.8 & AUC ranks them by baseline, not by harness response \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\textbf{Two readings reported as limitations rather than findings.} The HG1$\to$HG2 rise of $+3.4$ is the first rung whose mechanism requires the model to cooperate, consistent with \S\ref{sec:rhov}. The HG2$\to$HG3 segment is flat because routing had one executor to choose between: the mechanism was present and inert, which is a defect of the instantiation and must not be read as saturation. And the curve is nearly saturated at HG0 (93.3), leaving little headroom; a model with a lower HG0 is the informative experiment.
+\begin{claimbox}{The first empirical support for the HIL construction}
+Harness Gain does what \S14.2 claims: it distinguishes a model that converts architectural support into verified intelligence from one that was already near its ceiling. The stronger model had 6.7 points of headroom and used 3.3; the weaker had 21.7 and used 15.0.
+
+\textbf{And HIL-AUC ranks the two models in the opposite order from Harness Gain.} A reader choosing which model to build a harness around wants the second ranking. This is the caution of \S\ref{sec:composite} with data behind it, and it is the reason Version 1.4 makes the curve the primary result and the composite a convenience.
+\end{claimbox}
+
+\subsubsection{Result 3: a confound that the design must remove}\label{sec:confound}
+
+For the weaker model, $A_{DI}$ rose from 0.783 to 0.917 between HG0 and HG1. \textbf{This is not an acceptance effect.} An acceptance step cannot raise a success rate; it can only decline results already produced. Inspection of the per-band surfaces shows the difference is a single episode at T2 --- the model produced a passing result on one run and a failing one on the other.
+
+Both rungs perform exactly one attempt, so the two runs differ only by the model's own stochasticity. With twelve episodes per rung, that noise is larger than the effect Proposition~\ref{prop:blind} predicts, which is exactly zero.
+
+\begin{cautionbox}{Protocol consequence: HG0 and HG1 must share their executor outputs}
+Because HG0 and HG1 differ only in whether an acceptance step runs \emph{after} the work, they can and should be scored from \textbf{the same executor outputs}: run the model once per (task, seed) and evaluate both rungs against those artifacts.
+
+This paired design removes the between-rung variance entirely and makes the invariance testable at small sample sizes. The measurement reported here did not do this --- each rung was an independent run --- which is why the stronger model shows the invariance exactly and the weaker model's is masked. \S\ref{sec:protocol} now requires the paired design for any pair of rungs that do not differ in what the executor is asked to do.
+\end{cautionbox}
+
+\subsubsection{What these curves do not show}
+
+The HG1$\to$HG2 rise, where present, is the first rung whose mechanism requires the model to cooperate, consistent with \S\ref{sec:rhov}; the stronger model rose $+3.4$ there and the weaker model did not rise at all, which is a two-point comparison and not a finding. The HG2$\to$HG3 segment is flat or nearly so for both models because routing had one executor to choose between: the mechanism was present and inert, a defect of the instantiation rather than saturation. And both curves rest on twelve episodes per rung.
 
 \subsection{Why HIL Adds Information Beyond a Benchmark Average}
 
@@ -882,6 +945,7 @@ Morris et al.\ separate performance, generality and autonomy and argue for stage
 \item Record Critical Intervention Depth so a single human-supplied central strategy cannot be hidden by a low intervention count.
 \item \textbf{Record the acceptance outcome beside the verifier outcome} (\S\ref{sec:runlog}), or false completions and correct refusals are indistinguishable in the record. \emph{(New in 1.4.)}
 \item \textbf{State each task's specification status --- bound, band-only or specification-only --- and do not count band-only as coverage.} \emph{(New in 1.4.)}
+\item \textbf{Score rungs that differ only in post-hoc machinery from the same executor outputs.} Where two generations do not differ in what the executor is asked to do --- as HG0 and HG1 do not --- run the model once and evaluate both rungs against the same artifacts. Independent runs introduce between-rung variance that can exceed the effect being measured (\S\ref{sec:confound}). \emph{(New in 1.4.)}
 \item \textbf{Publish the ladder identifier with any curve.} A curve is comparable only against the same instantiation of the generation labels. \emph{(New in 1.4.)}
 \item Use confidence intervals and repeated tasks to estimate \SA{}, then report the frontier \FA{}.
 \item For U promotion, rerun a retention suite for all lower levels and then run the new-level suite.
@@ -929,7 +993,7 @@ The measured case of \S\ref{sec:measured}: $93.3 \to 93.3 \to 96.7 \to 96.7$ und
 
 The framework distinguishes model capability from agent capability and both from system capability. A benchmark that tests only answers under carefully prepared prompts primarily measures $C$. A benchmark that tests whether the same system can accept a difficult goal, maintain state, choose strategy, use tools, recover, verify and finish with little human cognition measures the delegation surface. Longitudinal tests of learning and self-modification measure $I$; multi-agent role and reorganization tests measure $O$; grounded introspective tests measure $SA$.
 
-Version 1.4 adds one implication that only appeared on contact with data. \textbf{A measurement that cannot distinguish an honest refusal from a confident error will, given a gradient to follow, select against the refusal.} This is not a hypothetical risk of some future optimizer: it was a property of this framework's own scoring variable, and it took building the ladder to see it. Any coordinate whose achievement variable is defined on ``how often did it succeed'' rather than ``what did it deliver'' should be examined for the same defect.
+Irreversibility, and the reason some classes have a delegation floor no verification removes, follows \citet{perrow1984}; indexing an autonomy claim by the conditions it holds under follows \citet{sae2021j3016}. Version 1.4 adds one implication that only appeared on contact with data. \textbf{A measurement that cannot distinguish an honest refusal from a confident error will, given a gradient to follow, select against the refusal.} This is not a hypothetical risk of some future optimizer: it was a property of this framework's own scoring variable, and it took building the ladder to see it. Any coordinate whose achievement variable is defined on ``how often did it succeed'' rather than ``what did it deliver'' should be examined for the same defect.
 
 \section{Limitations and Open Questions}
 
@@ -944,7 +1008,9 @@ Version 1.4 adds one implication that only appeared on contact with data. \textb
 \end{itemize}
 
 \begin{cautionbox}{Limitations specific to the Version 1.4 measurement}
-\textbf{One model, and a saturated one.} 93.3 at HG0 leaves 6.7 points of headroom for four rungs. Nothing here characterizes the ladder's discriminating power on a weaker model.
+\textbf{Two models from one family.} Both curves come from the same vendor and CLI, so the comparison controls the harness well and the model space badly. Nothing here speaks to models of other families.
+
+\textbf{Between-rung variance was not controlled.} Each rung was an independent run, so the weaker model's HG0$\to$HG1 movement is sampling noise rather than signal (\S\ref{sec:confound}). The paired design is now required by the protocol and was not used to produce these numbers.
 
 \textbf{Two seeds per class, twelve episodes per rung.} Readings, not rates: the difference between 0.933 and 0.967 is one episode.
 
@@ -968,6 +1034,14 @@ Unified Intelligence U0--U\Om{} is a cumulative gated hierarchy: promotion requi
 Version 1.4 differs from its predecessors in one respect that matters more than its length. The ladder was built and a curve was measured, and the measurement found a defect in the framework's own scoring variable rather than in any system under test: $A_{DI}$, defined on the probability of success, was exactly invariant to the harness generation that decides whether a success may be claimed at all. The repair is small --- define the delegation primitive on delivered outcomes and price false completions at the loss ratio the class already carries --- and it is stated here with the data that forced it.
 
 For harness-based AI the framework still provides a development roadmap: begin with ephemeral cognition, add persistence, learning, governed self-improvement, recursive improvement, discovery, organization, mission autonomy and finally open-ended transduction. The LLM remains the generative engine; the harness determines which loops are structurally possible; external benchmark evidence determines which level is earned. What Version 1.4 adds is the reminder that the evidence has to be able to see the thing it is measuring.
+
+\section*{Reproducibility}
+
+The measurement in \S\ref{sec:measured} used a deterministic task generator seeded per instance, an external verifier held outside the executor's filesystem reach, and a fixed intervention policy. The ladder identifier, per-rung episode counts, per-band success rates, false-completion counts and attempt counts are reported in-line so the reported $A_{DI}$ can be recomputed by hand from the tables. The scoring utility reproduces the Version 1.3 figure under a $\rho = 0$ flag, so the difference between the two primitives is auditable rather than asserted.
+
+\section*{Conflicts and funding}
+
+The author reports no funding specific to this work and no competing interest. The measurement was run on the author's own infrastructure.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
