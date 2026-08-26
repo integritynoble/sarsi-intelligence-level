@@ -6,9 +6,9 @@
 | `main.tex` | LaTeX source |
 | `main.bbl` | Pre-built bibliography — arXiv does not run BibTeX |
 | `references.bib` | Kept for regeneration; **not** in the tarball |
-| `../Unified_Intelligence_Harness_Scoring_Framework_v1_4.pdf` | Compiled PDF, 32 pages |
+| `../Unified_Intelligence_Harness_Scoring_Framework_v1_4.pdf` | Compiled PDF, 33 pages |
 
-Verified: extracts into an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 32 pages, zero Type 3 fonts, all fonts embedded.
+Verified: extracts into an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 33 pages, zero Type 3 fonts, all fonts embedded.
 
 ## What this version is
 
@@ -22,7 +22,9 @@ The changes that follow from it are in §13.9 (the delivered-outcome primitive),
 
 **This is a framework proposal with one small measurement in it, not an empirical paper.** A referee should be told plainly:
 
-- **Two models from one family, one machine, 48 episodes each, two seeds per class.** The curves in §16.4 are readings, not rates.
+- **Three executors from two vendor families, one machine, 48 episodes each, two seeds per class.** The curves in §16.4 are readings, not rates.
+- **The task suite is saturated for the two frontier executors**, whose curves are identical to three significant figures. The suite discriminates only the weaker executor, and §16.4.3 says so.
+- **Tool authority was equalised by disabling one vendor's own sandbox**, with isolation supplied by the harness adapter instead. Recorded in §16.4 rather than hidden.
 - **Between-rung variance was not controlled.** Each rung was an independent run, so one model's HG0→HG1 movement is sampling noise rather than signal. §16.4.3 says so and the protocol now requires a paired design that was not used to produce these numbers.
 - **Four rungs of eight.** HG4–HGΩ are specified and not built, so HIL-Level above 3 is not assessable and the measured HIL-AUC is a mean over a truncated ladder.
 - **One intervention budget.** Everything at H1, so the frontier cannot be observed moving leftward.
