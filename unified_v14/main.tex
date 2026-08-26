@@ -601,6 +601,19 @@ where $\rho(\tau) = (C_{\text{detect}} + C_{\text{undo}} + C_{\text{residual}})/
 \textbf{It requires no new coordinate.} Only the primitive changes.
 \end{claimbox}
 
+\begin{cautionbox}{One property to know about: the net surface floors at zero}
+$S^{\text{net}}$ is clamped at zero, so a band whose pass rate is at or below
+$\rho$ times its false-completion rate scores zero under both primitives and
+cannot distinguish them. At $\rho = 1$ that is any band where every failure was
+delivered.
+
+This is the correct reading --- a class on which everything wrong was handed
+back as finished has delivered nothing of value --- but it means the measure
+saturates at the bottom, and a comparison between two harnesses is uninformative
+on bands where both are already floored. Report the per-band surface alongside
+the aggregate so a floored band is visible as such rather than as agreement.
+\end{cautionbox}
+
 \sloppy The task weights $w_t$ increase with difficulty and the intervention weights $v_h$ increase as required human cognitive intervention decreases. One illustrative monotone schedule is $H0{=}6$, $H1{=}5$, $H2{=}4$, $H3{=}3$, $H4{=}2$, $H5{=}1$, with $w_t$ doubling per $T$ band. The exact schedule is a calibration choice and must be predeclared.
 
 \textbf{The scalar $A_{DI}$ must never replace the frontier.} At minimum report $F_A(H0,p)$, $F_A(H1,p)$ and $F_A(H2,p)$, because two agents can have similar surface averages while one reaches harder tasks only with frequent human help and the other is weaker but much more autonomous.
