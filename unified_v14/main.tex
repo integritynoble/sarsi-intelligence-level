@@ -915,6 +915,52 @@ Because HG0 and HG1 differ only in whether an acceptance step runs \emph{after} 
 This paired design removes between-rung variance entirely and makes the invariance testable at small sample sizes. The measurement reported here did not do this --- each rung was an independent run --- which is why two curves show the invariance exactly and one does not. \S\ref{sec:protocol} now requires the paired design for any pair of rungs that do not differ in what the executor is asked to do.
 \end{cautionbox}
 
+\subsubsection{Result 6: the paired design, and Proposition 1 under control}\label{sec:paired}
+
+The confound of \S\ref{sec:confound} was removed by re-running HG0 and HG1 as a
+\textbf{paired} measurement: the criteria are registered, the executor runs
+\emph{once} per (task, seed), and both rungs are evaluated against the identical
+artifacts. HG0 takes the verifier's verdict with no acceptance step, so anything
+wrong is delivered; HG1 runs the registered criteria against a copy, so anything
+rejected is held back instead. Twelve episodes per executor, one execution each.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lrrrrY@{}}
+\toprule
+Executor & Gross HG0 & Gross HG1 & Difference & Net HG0 $\to$ HG1 & False rejections \\
+\midrule
+A, stronger & 0.933 & 0.933 & \textbf{0.000000} & 0.867 $\to$ 0.933 $(+0.067)$ & \textbf{0} \\
+A, weaker & 0.917 & 0.917 & \textbf{0.000000} & 0.833 $\to$ 0.917 $(+0.083)$ & \textbf{0} \\
+\bottomrule
+\end{tabularx}
+\caption{Paired HG0/HG1 measurement. The gross figures are identical by construction; the entire contribution of the acceptance rung appears in the net figures.}
+\end{table}
+
+\begin{claimbox}{What the pairing establishes}
+\textbf{The gross difference is exactly zero because it cannot be anything else.}
+Under pairing the two rungs share one set of artifacts and one verifier verdict,
+so a non-zero gross difference would indicate a defect in the measuring harness
+rather than a property of acceptance. Proposition~\ref{prop:blind} moves from an
+observation that came out zero twice to a controlled result.
+
+\textbf{The weaker executor's earlier $+13.4$ rise was noise, and is now zero.}
+That is the confound of \S\ref{sec:confound} identified, removed, and confirmed
+to have been what it was diagnosed as.
+
+\textbf{Zero false rejections across all 24 episodes.} The acceptance step
+declined exactly the work the external verifier rejected and nothing else. This
+is a measured property of the harness's precision rather than of either model,
+and it is the number that makes the net primitive safe to adopt: if strictness
+were routinely declining correct work, subtracting false completions would trade
+one bias for another.
+\end{claimbox}
+
+The paired design is cheaper as well as cleaner --- one execution serves both
+rungs, so twelve executions replace twenty-four --- and it applies to any pair of
+generations that do not differ in what the executor is asked to do. It is
+required by \S\ref{sec:protocol} for exactly that class of comparison.
+
 \subsubsection{What these curves do not show}
 
 The HG1$\to$HG2 rise, where present, is the first rung whose mechanism requires the executor to cooperate, consistent with \S\ref{sec:rhov}; two executors rose $+3.4$ there and one did not rise at all, which is a three-point comparison and not a finding. The HG2$\to$HG3 segment is flat or nearly so for all three because routing had one executor to choose between: the mechanism was present and inert, a defect of the instantiation rather than saturation. All three curves rest on twelve episodes per rung.
