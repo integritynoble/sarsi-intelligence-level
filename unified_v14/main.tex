@@ -912,6 +912,38 @@ Two independent systems agreeing to three significant figures, while differing i
 A ladder measurement is only as informative as the headroom the task suite leaves. Any HIL program should check that its suite is not saturated for the executors under test before drawing conclusions from a flat curve, and should report the per-instance failure pattern alongside the aggregate --- because identical aggregates over different instances is the signature of saturation rather than of equivalence.
 \end{cautionbox}
 
+\paragraph{An attempt to desaturate it, and what failed.} Three T3 classes were
+added whose obvious implementation is defensible and wrong: replaying updates in
+causal order when clock skew puts the timestamps in a different one; totalling by
+civil day across a daylight-saving change, where one local day has 25 hours; and
+treating identifiers as equal when they differ only by Unicode normal form or an
+invisible code point. Each states the hazard in its own task text.
+
+Against scripted solvers the classes separate cleanly --- a correct
+implementation passes ten instances out of ten and the naive one passes none.
+Building them also exposed a generator defect worth repeating as a rule:
+increment is commutative, so a timestamp-ordered replay differs from a causal one
+only when the skew reorders an assignment against an increment on the same field,
+and roughly one instance in eight contained no trap at all. \textbf{A generator
+whose trap is probabilistic must verify that the trap fired}, or the suite fills
+silently with instances that discriminate nothing.
+
+\textbf{No LLM executor fell into any of them.} Both the frontier and the weaker
+executor passed every probe. The classes therefore measure the difference between
+a careful and a careless \emph{implementation}, which is a real distinction and
+not one that separates these models: given a specification that names the hazard,
+all of them read it.
+
+The negative result is worth more than the classes. Traps of this kind
+discriminate only if the hazard is \emph{unsignposted}, and an unsignposted trap
+measures whether a system second-guesses its specification --- a different
+construct, and arguably the wrong one for a delegation benchmark, since a system
+that distrusts clear instructions is not thereby more delegable. \textbf{The
+lever for desaturating a delegation suite is difficulty, not trickiness}: longer
+horizons, more state to keep coherent, more places for a plan to go wrong. That
+is more expensive to build and to run, and it is what the upper bands claim to
+measure.
+
 \subsubsection{Result 4: equal scores, unequal costs}
 
 The two frontier executors scored identically and did not cost the same: Family B took roughly two to three times the wall-clock per episode. This is \S\ref{sec:resources}'s requirement in miniature --- intelligence scores and resource envelopes are separate reports, and a pair leaderboard that omits the second is not decision-relevant.
