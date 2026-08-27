@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "gates": [
+    {
+      "U": "U0",
+      "name": "Reactive",
+      "C": "C0",
+      "I": "I0",
+      "O": "O0",
+      "T": "T0",
+      "H": "H5-H4",
+      "SA": "SA0",
+      "p": 0.95,
+      "meaning": "Executes explicit instructions."
+    },
+    {
+      "U": "U1",
+      "name": "Persistent",
+      "C": "C1",
+      "I": "I1",
+      "O": "O1",
+      "T": "T1",
+      "H": "<=H3",
+      "SA": "SA1",
+      "p": 0.9,
+      "meaning": "Maintains state and completes small delegated goals."
+    },
+    {
+      "U": "U2",
+      "name": "Adaptive",
+      "C": "C2",
+      "I": "I2",
+      "O": "O2",
+      "T": "T2",
+      "H": "<=H2",
+      "SA": "SA2",
+      "p": 0.85,
+      "meaning": "Learns from experience and completes persistent multi-step work."
+    },
+    {
+      "U": "U3",
+      "name": "Self-Improving",
+      "C": "C3",
+      "I": "I3",
+      "O": "O3",
+      "T": "T3",
+      "H": "<=H1",
+      "SA": "SA3",
+      "p": 0.8,
+      "meaning": "Chooses strategy, diagnoses itself, improves methods under external evaluation."
+    },
+    {
+      "U": "U4",
+      "name": "Recursive",
+      "C": "C4",
+      "I": "I4",
+      "O": "O4",
+      "T": "T4",
+      "H": "<=H1 (prefer H0)",
+      "SA": "SA4",
+      "p": 0.8,
+      "meaning": "Improves the improvement process and manages long-horizon projects."
+    },
+    {
+      "U": "U5",
+      "name": "Discovery",
+      "C": "C5",
+      "I": "I5",
+      "O": "O5",
+      "T": "T5",
+      "H": "<=H1",
+      "SA": "SA5",
+      "p": 0.7,
+      "meaning": "Discovers unknown solution methods/knowledge and validates them."
+    },
+    {
+      "U": "U6",
+      "name": "Mission Autonomous",
+      "C": ">=C5",
+      "I": ">=I5",
+      "O": ">=O5",
+      "T": "T6",
+      "H": "<=H1",
+      "SA": "SA6",
+      "p": 0.7,
+      "meaning": "Turns a mission into goals/projects/tasks under change."
+    },
+    {
+      "U": "U\u03a9",
+      "name": "Open-Ended",
+      "C": "C\u03a9",
+      "I": "I\u03a9",
+      "O": "O\u03a9",
+      "T": "T\u03a9",
+      "H": "normally H0",
+      "SA": "SA\u03a9",
+      "p": 0.6,
+      "meaning": "Repeatedly identifies missions and expands future intelligence."
+    }
+  ]
+}

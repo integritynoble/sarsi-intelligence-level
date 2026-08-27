@@ -1,0 +1,20 @@
+{
+  "task_id": "DI-T0-DATA_ANA-A",
+  "input": {
+    "rows": [
+      {
+        "id": "b",
+        "value": 2
+      },
+      {
+        "id": "a",
+        "value": 3
+      },
+      {
+        "id": "a",
+        "value": 5
+      }
+    ],
+    "instruction": "Keep last occurrence per id; sort by id."
+  }
+}

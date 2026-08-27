@@ -1,0 +1,7 @@
+{
+  "task_id": "I-I1-PROVENANCE-A",
+  "expected": {
+    "claim": "beta=9",
+    "source": "episode-8"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "ladder_id": "HIL-standard-HG0-HG\u03a9-v1.0",
+  "rungs": [
+    {
+      "harness_generation": "HG0",
+      "unified_target": "U0",
+      "mechanisms": "Ephemeral context; bounded tools; action/evidence log; independent result check.",
+      "primary_levels": "C measurement; I0; basic T0-T1.",
+      "required_memory": "No persistent long-term memory required.",
+      "certification_focus": "Explicit instruction following and externally checkable outputs."
+    },
+    {
+      "harness_generation": "HG1",
+      "unified_target": "U1",
+      "mechanisms": "HG0 + persistent episodic/task/self state; checkpoints; scoped retrieval; provenance; restart recovery.",
+      "primary_levels": "I1; SA1-SA2; stronger T1-T2.",
+      "required_memory": "Cross-session episodic/state continuity, temporal order, provenance-aware retrieval.",
+      "certification_focus": "Persistence across genuine process/context discontinuity."
+    },
+    {
+      "harness_generation": "HG2",
+      "unified_target": "U2",
+      "mechanisms": "HG1 + evidence-linked consolidation; semantic promotion; verified procedures; fixed learning rule.",
+      "primary_levels": "I2; adaptive autonomy; stronger T2-T3.",
+      "required_memory": "Semantic consolidation, procedural memory, update handling, useful transfer.",
+      "certification_focus": "Verified experience measurably improves later related work."
+    },
+    {
+      "harness_generation": "HG3",
+      "unified_target": "U3",
+      "mechanisms": "HG2 + candidate cognitive/organizational modification lane; frozen replay/hidden tests; independent evaluator/promoter.",
+      "primary_levels": "I3/O3; SA3-SA4; T3.",
+      "required_memory": "Failure, hypothesis, change, benchmark result, version and rollback lineage.",
+      "certification_focus": "Governed self/organizational improvement without self-certification."
+    },
+    {
+      "harness_generation": "HG4",
+      "unified_target": "U4",
+      "mechanisms": "HG3 + explicit improvement engine Psi; longitudinal change ledger; meta-improvement benchmark.",
+      "primary_levels": "I4/O4; SA4; T4.",
+      "required_memory": "Longitudinal memory of improvement strategies and validated effectiveness.",
+      "certification_focus": "Improvement of the improvement process across generations."
+    },
+    {
+      "harness_generation": "HG5",
+      "unified_target": "U5",
+      "mechanisms": "HG4 + unknown/hypothesis/experiment/knowledge state; experiment selector; novelty environment; discovery verifier.",
+      "primary_levels": "I5/O5; SA5; T5.",
+      "required_memory": "Hypothesis/evidence/experiment/discovery lineage and accumulated knowledge.",
+      "certification_focus": "Independent discovery of previously unknown mechanisms or methods."
+    },
+    {
+      "harness_generation": "HG6",
+      "unified_target": "U6",
+      "mechanisms": "HG5 + mission manager; goal/project/task generator; portfolio/resource state; persistent organization; dynamic replanning.",
+      "primary_levels": "Mission autonomy; SA6; T6; advanced O.",
+      "required_memory": "Persistent mission/project/role commitments, portfolio state, organizational history.",
+      "certification_focus": "Mission -> projects -> tasks under changing conditions with little human cognition."
+    },
+    {
+      "harness_generation": "HG\u03a9",
+      "unified_target": "U\u03a9",
+      "mechanisms": "HG6 + bounded charter; opportunity model; knowledge-to-instrument transduction; new-agent/role proposals; frozen governance.",
+      "primary_levels": "I\u03a9/O\u03a9/SA\u03a9; T\u03a9.",
+      "required_memory": "Open-ended lineage across evolving memory/cognitive instruments, discoveries, missions and roles.",
+      "certification_focus": "Repeated charter-to-mission cycles that expand future reachable problems."
+    }
+  ]
+}

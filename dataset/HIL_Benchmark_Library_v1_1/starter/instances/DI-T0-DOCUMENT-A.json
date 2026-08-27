@@ -1,0 +1,12 @@
+{
+  "task_id": "DI-T0-DOCUMENT-A",
+  "input": {
+    "headings": [
+      "Methods",
+      "Introduction",
+      "Results",
+      "Discussion"
+    ],
+    "instruction": "Return conventional research-paper order."
+  }
+}

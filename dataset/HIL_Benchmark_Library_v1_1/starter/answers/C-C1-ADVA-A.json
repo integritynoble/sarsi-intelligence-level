@@ -1,0 +1,7 @@
+{
+  "task_id": "C-C1-ADVA-A",
+  "expected": {
+    "larger": 12,
+    "smaller": 5
+  }
+}

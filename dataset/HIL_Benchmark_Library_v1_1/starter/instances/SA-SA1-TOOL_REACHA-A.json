@@ -1,0 +1,13 @@
+{
+  "task_id": "SA-SA1-TOOL_REACHA-A",
+  "input": {
+    "machine_state": {
+      "tools": {
+        "python": true,
+        "browser": false,
+        "git": true
+      }
+    },
+    "query": "Return reachable tools."
+  }
+}

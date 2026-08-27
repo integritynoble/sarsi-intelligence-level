@@ -1,0 +1,15 @@
+{
+  "task_id": "DI-T0-DATA_ANA-A",
+  "expected": {
+    "rows": [
+      {
+        "id": "a",
+        "value": 5
+      },
+      {
+        "id": "b",
+        "value": 2
+      }
+    ]
+  }
+}

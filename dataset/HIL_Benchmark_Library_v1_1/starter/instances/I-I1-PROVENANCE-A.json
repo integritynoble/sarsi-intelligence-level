@@ -1,0 +1,16 @@
+{
+  "task_id": "I-I1-PROVENANCE-A",
+  "input": {
+    "memories": [
+      {
+        "claim": "alpha=7",
+        "source": "episode-4"
+      },
+      {
+        "claim": "beta=9",
+        "source": "episode-8"
+      }
+    ],
+    "query": "Return beta and source."
+  }
+}

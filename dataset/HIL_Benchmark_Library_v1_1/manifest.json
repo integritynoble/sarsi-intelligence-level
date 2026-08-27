@@ -1,0 +1,43 @@
+{
+  "library": "HIL Benchmark Library",
+  "version": "1.1",
+  "generated_utc": "2026-08-27T16:40:00+00:00",
+  "native_task_count": 668,
+  "delegation_run_matrix_cells": 960,
+  "external_registry_count": 24,
+  "bound_development_instances": 16,
+  "suite_counts": {
+    "C-Bench": 128,
+    "DI-Bench": 162,
+    "HDS-Bench": 12,
+    "HIL-Ladder": 32,
+    "I-Bench": 98,
+    "O-Bench": 84,
+    "SA-Bench": 96,
+    "U-Bench": 32,
+    "VR-Bench": 24
+  },
+  "framework_basis": "Unified Intelligence / HIL Framework v1.6 (item-validity protocol)",
+  "binding_counts": {
+    "bound": 16,
+    "generator-bound": 2,
+    "specification-only": 650
+  },
+  "derived_from": "HIL Benchmark Library v1.0",
+  "changes_from_v1_0": [
+    "audit_items.py added; run against v1.0 it reports 5 errors, recorded in docs/AUDIT_v1_0.md",
+    "4 bound instances rewritten: 16 instances had only 12 distinct payloads, so 3 C0/C1 pairs and 1 T0/T1 pair could not discriminate between their levels",
+    "DI-T1-DATA_ANA-A restated as a goal rather than a procedure",
+    "concordance_audit.py added: flags items where executors of different tiers return the same answer and the key disagrees with all of them",
+    "run_log.schema.json given actual properties (v1.0 declared required with no properties, so only key presence was validated) plus item_score, failure_mode, response_digest, executor_tier, paired_with",
+    "score_hil.py reports S_graded, headroom, failure-mode counts and concordance readiness; a v1.0-shaped log scores identically",
+    "2 generator-bound T4 delegation tasks registered by reference rather than copied in"
+  ],
+  "known_limitations": [
+    "audit_items.py is a filter with unknown recall; unflagged items are unaudited, not validated",
+    "concordance_audit.py needs run data from at least two capability tiers and has an unquantified false-positive rate at two",
+    "650 of 668 rows remain specification-only and have no answer key to be right or wrong",
+    "I-I1-RESTART_CONT-A simulates its restart inside one payload; a real I1 instance needs a harness that terminates a process",
+    "docs/dashboard_preview.png plots attempted episodes only; one weaker-executor shift_cover seed was delivered as an unmodified stub and is excluded as a delivery failure, not a capability result"
+  ]
+}

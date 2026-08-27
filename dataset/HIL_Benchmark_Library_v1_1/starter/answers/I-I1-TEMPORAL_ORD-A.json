@@ -1,0 +1,11 @@
+{
+  "task_id": "I-I1-TEMPORAL_ORD-A",
+  "expected": {
+    "chronological": [
+      "A",
+      "B",
+      "C"
+    ],
+    "current": "C"
+  }
+}

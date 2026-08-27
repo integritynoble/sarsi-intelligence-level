@@ -1,0 +1,9 @@
+{
+  "task_id": "I-I1-RESTART_CONT-A",
+  "expected": {
+    "project": "Orion",
+    "checkpoint": "stage-2",
+    "decision": "use method B",
+    "evidence_id": "E17"
+  }
+}

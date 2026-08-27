@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL Task Manifest",
+  "type": "object",
+  "required": [
+    "task_id",
+    "suite",
+    "coordinate",
+    "target_level",
+    "title",
+    "objective",
+    "success_criterion",
+    "verifier_type",
+    "binding_status"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "suite": {
+      "type": "string"
+    },
+    "coordinate": {
+      "type": "string"
+    },
+    "target_level": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "success_criterion": {
+      "type": "string"
+    },
+    "verifier_type": {
+      "type": "string"
+    },
+    "binding_status": {
+      "enum": [
+        "bound",
+        "band-only",
+        "specification-only"
+      ]
+    }
+  }
+}

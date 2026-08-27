@@ -1,0 +1,11 @@
+{
+  "task_id": "DI-T0-DOCUMENT-A",
+  "expected": {
+    "headings": [
+      "Introduction",
+      "Methods",
+      "Results",
+      "Discussion"
+    ]
+  }
+}

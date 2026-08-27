@@ -1,0 +1,6 @@
+{
+  "task_id": "SA-SA2-AUTHORITY_L-A",
+  "expected": {
+    "can_deploy": false
+  }
+}

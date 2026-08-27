@@ -1,0 +1,11 @@
+{
+  "task_id": "C-C1-GENE-A",
+  "input": {
+    "facts": [
+      "All rens are blue.",
+      "Nothing blue is heavy.",
+      "K is a ren."
+    ],
+    "question": "Is K heavy? Answer yes, no, or unknown."
+  }
+}

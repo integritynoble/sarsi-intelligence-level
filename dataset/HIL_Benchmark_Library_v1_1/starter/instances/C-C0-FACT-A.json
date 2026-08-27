@@ -1,0 +1,10 @@
+{
+  "task_id": "C-C0-FACT-A",
+  "input": {
+    "facts": {
+      "A": true,
+      "B": false
+    },
+    "question": "Is C true? If not provided, answer unknown."
+  }
+}

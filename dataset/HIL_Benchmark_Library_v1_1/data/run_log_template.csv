@@ -1,0 +1,1 @@
+run_id,task_id,model_id,model_hash,harness_id,ladder_id,seed,H_budget,CID_max,human_interventions,human_cognitive_minutes,governance_minutes,attempts,delivered,verifier_pass,false_completion,held_back_invalid,false_rejection,verification_responsive,tokens,llm_calls,tool_calls,subagent_calls,wall_time_sec,cost_usd,notes

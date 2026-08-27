@@ -1,0 +1,20 @@
+{
+  "task_id": "I-I1-RELEVANT_RET-A",
+  "input": {
+    "memories": [
+      {
+        "id": "m1",
+        "text": "red car"
+      },
+      {
+        "id": "m2",
+        "text": "project deadline Friday"
+      },
+      {
+        "id": "m3",
+        "text": "blue mug"
+      }
+    ],
+    "query": "Which memory is relevant to scheduling project?"
+  }
+}

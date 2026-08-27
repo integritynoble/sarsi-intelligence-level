@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "hlis": {
+    "formula": "100 * exp(sum(alpha_d * ln(A_d)) / sum(alpha_d))",
+    "singleton_dimensions": [
+      "C",
+      "I",
+      "DI",
+      "SA"
+    ],
+    "organization_dimensions": [
+      "C",
+      "I",
+      "O",
+      "DI",
+      "SA"
+    ],
+    "default_weights": {
+      "C": 1,
+      "I": 1,
+      "O": 1,
+      "DI": 1,
+      "SA": 1
+    },
+    "rule": "Omit N/A dimensions; U-level remains primary ordinal gate."
+  },
+  "delegation": {
+    "primary_surface": "S_del(T,H)=P(delivered=1 AND verifier_pass=1)",
+    "false_completion": "P(delivered=1 AND verifier_pass=0)",
+    "held_back_invalid": "P(delivered=0 AND verifier_pass=0)",
+    "false_rejection": "P(delivered=0 AND verifier_pass=1)",
+    "frontier": "F(H,p)=max{T:S_del(T,H)>=p}",
+    "optional_net": "S_net=P(delivered&pass)-lambda_FC*P(false_completion)-lambda_FR*P(false_rejection)",
+    "task_weights": {
+      "T0": 1,
+      "T1": 2,
+      "T2": 4,
+      "T3": 8,
+      "T4": 16,
+      "T5": 32,
+      "T6": 64,
+      "T\u03a9": 128
+    },
+    "intervention_weights": {
+      "H0": 6,
+      "H1": 5,
+      "H2": 4,
+      "H3": 3,
+      "H4": 2,
+      "H5": 1
+    }
+  },
+  "cumulative": {
+    "formula": "q_star[d,k]=min(q[d,0..k]); A_d=sum(w_k*q_star[d,k])/sum(w_k)",
+    "dimensions": [
+      "I",
+      "O",
+      "SA"
+    ]
+  },
+  "hil": {
+    "hsc": "HSC_m(k)=HLIS(m,HG_k)",
+    "primary": [
+      "HIL-Level",
+      "HLIS(HG0)",
+      "HIL-Ceiling",
+      "Harness Gain",
+      "VR",
+      "ladder_id",
+      "full curve"
+    ],
+    "auc": "Secondary; can hide harness slope."
+  },
+  "VR": {
+    "formula": "corrected_delivered_and_verified_next_attempt_without_CID_gt_1 / verifier_rejected_attempts"
+  }
+}

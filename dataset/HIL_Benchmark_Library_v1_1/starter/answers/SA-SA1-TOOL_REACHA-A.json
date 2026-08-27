@@ -1,0 +1,9 @@
+{
+  "task_id": "SA-SA1-TOOL_REACHA-A",
+  "expected": {
+    "reachable_tools": [
+      "python",
+      "git"
+    ]
+  }
+}

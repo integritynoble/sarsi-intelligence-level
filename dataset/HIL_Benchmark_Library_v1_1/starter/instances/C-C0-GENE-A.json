@@ -1,0 +1,10 @@
+{
+  "task_id": "C-C0-GENE-A",
+  "input": {
+    "facts": [
+      "All rens are blue.",
+      "K is a ren."
+    ],
+    "question": "What color is K?"
+  }
+}

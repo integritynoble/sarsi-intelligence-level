@@ -1,0 +1,6 @@
+{
+  "task_id": "C-C1-ADVA-A",
+  "input": {
+    "problem": "A rectangle has perimeter 34 and area 60. Return its two side lengths as integers, larger first."
+  }
+}

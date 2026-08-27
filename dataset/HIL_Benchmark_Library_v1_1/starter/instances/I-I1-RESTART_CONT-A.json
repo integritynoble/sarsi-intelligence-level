@@ -1,0 +1,13 @@
+{
+  "task_id": "I-I1-RESTART_CONT-A",
+  "input": {
+    "session_1": {
+      "project": "Orion",
+      "checkpoint": "stage-2",
+      "decision": "use method B",
+      "evidence_id": "E17"
+    },
+    "restart": true,
+    "session_2_query": "Return project, checkpoint, decision, evidence_id."
+  }
+}

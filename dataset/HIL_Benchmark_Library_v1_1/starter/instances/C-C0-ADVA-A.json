@@ -1,0 +1,6 @@
+{
+  "task_id": "C-C0-ADVA-A",
+  "input": {
+    "problem": "If x+y=10 and x-y=4, return x and y."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "task_id": "SA-SA1-IDENTITY_RO-A",
+  "expected": {
+    "agent_id": "worker-7",
+    "role": "reviewer",
+    "phase": "verification"
+  }
+}

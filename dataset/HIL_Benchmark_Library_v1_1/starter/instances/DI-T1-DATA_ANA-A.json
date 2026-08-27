@@ -1,0 +1,28 @@
+{
+  "task_id": "DI-T1-DATA_ANA-A",
+  "input": {
+    "rows": [
+      {
+        "id": "b",
+        "ts": "2026-01-02",
+        "value": 2
+      },
+      {
+        "id": "a",
+        "ts": "2026-01-01",
+        "value": 3
+      },
+      {
+        "id": "a",
+        "ts": "2026-01-03",
+        "value": 5
+      },
+      {
+        "id": "b",
+        "ts": "2026-01-01",
+        "value": 9
+      }
+    ],
+    "goal": "Produce one row per id carrying that id's most recent value. Two runs over the same input must produce byte-identical output. Each output row has exactly the keys id and value."
+  }
+}

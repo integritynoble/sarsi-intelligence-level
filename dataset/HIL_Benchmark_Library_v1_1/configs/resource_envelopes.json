@@ -1,0 +1,26 @@
+{
+  "HIL-R1": {
+    "name": "Minimal",
+    "aggregate_token_budget": 50000,
+    "max_llm_calls": 8,
+    "wall_time_minutes": 30,
+    "max_subagents": 0,
+    "notes": "Low-level screening; rung-defined persistent state only."
+  },
+  "HIL-R2": {
+    "name": "Standard",
+    "aggregate_token_budget": 250000,
+    "max_llm_calls": 40,
+    "wall_time_minutes": 180,
+    "max_subagents": 4,
+    "notes": "Default comparison envelope."
+  },
+  "HIL-R3": {
+    "name": "Extended",
+    "aggregate_token_budget": 1000000,
+    "max_llm_calls": 150,
+    "wall_time_minutes": 720,
+    "max_subagents": 12,
+    "notes": "Long-horizon/research/organizational tasks; report separately."
+  }
+}

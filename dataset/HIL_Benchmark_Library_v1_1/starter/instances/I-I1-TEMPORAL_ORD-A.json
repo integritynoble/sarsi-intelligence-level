@@ -1,0 +1,20 @@
+{
+  "task_id": "I-I1-TEMPORAL_ORD-A",
+  "input": {
+    "events": [
+      [
+        "2026-01-03",
+        "state=B"
+      ],
+      [
+        "2026-01-01",
+        "state=A"
+      ],
+      [
+        "2026-01-05",
+        "state=C"
+      ]
+    ],
+    "query": "Return chronological states and current state."
+  }
+}

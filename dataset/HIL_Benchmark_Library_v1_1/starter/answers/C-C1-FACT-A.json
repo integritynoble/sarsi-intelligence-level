@@ -1,0 +1,7 @@
+{
+  "task_id": "C-C1-FACT-A",
+  "expected": {
+    "revenue_m": 4.2,
+    "source": "2019 annual report"
+  }
+}

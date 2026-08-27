@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL Run Log",
+  "description": "One episode. v1.1 adds properties (v1.0 declared `required` with no `properties`, so nothing but key presence was validated), a graded item score, an explicit failure mode, and the response digest the concordance audit needs.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "run_id", "task_id", "model_id", "harness_id", "seed",
+    "H_budget", "delivered", "verifier_pass"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "harness_id": {"type": "string", "minLength": 1},
+    "seed": {"type": "integer"},
+    "H_budget": {"enum": ["H0", "H1", "H2", "H3", "H4", "H5"]},
+
+    "delivered": {"type": "boolean",
+      "description": "The harness handed the work back as finished."},
+    "verifier_pass": {"type": "boolean",
+      "description": "The external verifier's verdict. Recorded whether or not the work was delivered, so false rejection is observable."},
+    "harness_accepted": {"type": ["boolean", "null"],
+      "description": "The acceptance step's decision, distinct from the verifier verdict. Required from v1.0 onward because a success-only aggregate is exactly invariant to acceptance (framework Prop. 1)."},
+
+    "item_score": {"type": ["number", "null"], "minimum": 0, "maximum": 1,
+      "description": "Graded outcome in [0,1] where the item supports one. Null for pass/fail items. `verifier_pass` remains the gate; this carries how much was right, because 'eight rules of ten' and 'produced nothing' are different states with different next actions."},
+    "failure_mode": {
+      "enum": [null, "none", "misread_specification", "insufficient_search",
+               "crashed", "timed_out", "not_attempted", "other"],
+      "description": "Why it failed, when that is separable. These need different repairs; a single failed bucket reports an executor that misread the task and one that implemented a near-optimal heuristic identically."},
+
+    "response_digest": {"type": ["string", "null"],
+      "description": "Stable digest of the executor's answer. The concordance audit needs only this and the correctness flag -- never the key."},
+    "executor_tier": {"type": ["string", "null"],
+      "description": "Capability tier label. The concordance audit is meaningful only across tiers."},
+
+    "attempts": {"type": ["integer", "null"], "minimum": 0},
+    "cid_max": {"type": ["integer", "null"], "minimum": 0, "maximum": 6},
+    "human_minutes": {"type": ["number", "null"], "minimum": 0},
+    "wall_clock_seconds": {"type": ["number", "null"], "minimum": 0},
+    "paired_with": {"type": ["string", "null"],
+      "description": "run_id of the rung scored from the same executor artifact. Required when two rungs differ only in post-hoc machinery."},
+    "library_version": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"item_score": {"type": "number"}},
+             "required": ["item_score"]},
+      "then": {
+        "description": "A graded item that scored 1.0 must have passed, and one that passed must not be graded below 1.0. The two fields must not tell different stories.",
+        "properties": {"verifier_pass": {"type": "boolean"}}
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "C-C1-FACT-A",
+  "input": {
+    "notes": [
+      "The 2019 annual report lists revenue of 4.2M.",
+      "A draft memo mentions 5.1M; the memo was retracted in 2020.",
+      "A blog post repeats the 5.1M figure, citing the memo."
+    ],
+    "question": "Which revenue figure is supported? Sources conflict; a retracted source and anything relying on it do not count. Return revenue_m and the surviving source."
+  }
+}
