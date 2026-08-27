@@ -961,7 +961,29 @@ Two things follow, and the second is the less comfortable one.
 
 The family discriminates between executor tiers, which no earlier item in the suite did, and it does so with a graded score and a single interpretable failure mode: every one of the weaker executor's failures across four seeds was the same nested-binding construction. That is the kind of result a diagnostic instrument should produce.
 
-But the frontier executor scored 1.000 on every seed. \textbf{The suite is still saturated at the frontier.} Specification scale was enough to separate a weaker model from a stronger one and was not enough to find the stronger one's limit, and this must be said plainly rather than reported as a discriminating item. The covering family was built on the search axis for exactly this reason and has not yet been run against a live executor; its reference measurement establishes headroom against a plausible wrong method, which is a property of the item and not yet a measurement of any model.
+But the frontier executor scored 1.000 on every seed. \textbf{The suite is still saturated at the frontier.} Specification scale was enough to separate a weaker model from a stronger one and was not enough to find the stronger one's limit, and this must be said plainly rather than reported as a discriminating item.
+
+The covering family was built on the search axis for exactly that reason, and it has now been run.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lccY@{}}
+\toprule
+Executor & Seeds attempted & Mean accuracy & Note \\
+\midrule
+Frontier & 4/4 & 1.000 & exact search implemented on every seed \\
+Weaker & 3/4 & 1.000 & the fourth seed delivered the unmodified stub \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{cautionbox}{The second axis does not desaturate either}
+Both executors implement the exact optimiser. The greedy trap the family was built around --- feasible on every instance, optimal on few --- catches a plausible wrong method that neither model actually used.
+
+The hypothesis that search would supply the headroom that scale did not is therefore refuted, and it is recorded here as plainly as a positive result would have been. Two axes were tried on the argument that difficulty rather than trickiness is the lever (\S\ref{sec:trickiness}). That argument survives --- scale did separate the tiers where the hazard items separated nothing --- but neither axis reached the frontier, and \emph{what would} is now an open question rather than a proposal with a candidate answer.
+\end{cautionbox}
+
+The weaker executor's one non-scoring episode is worth naming precisely, because the framework's own machinery is what makes it legible. It delivered `solve.py' unchanged, stub and all, and reported completion. Under a success-only aggregate that is simply a failure. Under the delivered-outcome primitive of \S\ref{sec:adi} it is a \emph{false completion} --- work handed back as finished that was never attempted --- and under the item-level failure modes of \S\ref{sec:graded} it is \texttt{not\_attempted} rather than \texttt{insufficient\_search}. Reporting it as a capability result would have put a 0.75 mean beside a model that solved every instance it tried.
 
 \begin{cautionbox}{What a saturated coordinate does to the composite}
 While a coordinate is saturated, the Harness Scaling Curve through it and every HLIS and HIL figure computed from it are bounded above by the suite, not by the model. Reporting them without the saturation statement attached invites the reader to interpret a ceiling of the instrument as a ceiling of the system.
@@ -1327,7 +1349,9 @@ Irreversibility, and the reason some classes have a delegation floor no verifica
 \begin{cautionbox}{Limitations specific to the Version 1.6 item work}
 \textbf{The frontier is still not measured.} The scale-difficulty family scores 1.000 on every seed for the frontier executor (\S\ref{sec:corrected}). It separates tiers; it does not locate the top of the range. Every frontier figure in this paper remains a lower bound set by the suite.
 
-\textbf{The search-difficulty family has no live measurement.} Its headroom is established against reference solvers only. That a plausible greedy method scores 3--12 of 60 says the item is not trivially satisfiable; it does not say what an executor will do with it.
+\textbf{Neither difficulty axis reached the frontier.} Scale separated the tiers; search separated nothing, with both executors at 1.000 (\S\ref{sec:corrected}). Two axes are not an exhaustive search of the space, and the paper offers no third candidate. Every frontier figure here remains a lower bound set by the suite.
+
+\textbf{Four seeds and two executors on the search family.} At 1.000 and 1.000 the comparison has no resolution to spare: the measurement establishes that the family does not discriminate these two executors, not the size of any gap between them.
 
 \textbf{Two executors is the minimum for a concordance audit and not a good number.} With two, concordant error is a strong signal but its false-positive rate is unquantified: two systems from overlapping training distributions may share a misreading that the specification does not license. Three or more executors from genuinely independent lineages would let the audit distinguish a shared misreading from a defective key, and that comparison has not been run.
 
@@ -1370,7 +1394,7 @@ Version 1.4 differed from its predecessors in one respect that mattered more tha
 
 Version 1.6 continues that pattern one level further down. Version 1.4 examined the arithmetic and found it blind to something that mattered; Version 1.6 examines the items the arithmetic runs on and finds that two of them graded a rule they never stated. Both were discovered by the same signature --- executors of very different capability returning the same answer and both being marked wrong --- and that signature is cheap enough to check routinely, which is why \S\ref{sec:concordance} asks that it be checked routinely.
 
-The honest summary of the measurement is mixed. Harder items separated a weaker executor from a stronger one for the first time, with a single interpretable failure mode; and the frontier executor still scored perfectly on every seed, so the suite's ceiling and the frontier's ceiling remain indistinguishable. Reporting the first result without the second would be the same error this framework was written to avoid.
+The honest summary of the measurement is mixed, and the second half is the larger part. Harder items separated a weaker executor from a stronger one for the first time, with a single interpretable failure mode. But both difficulty axes tried --- specification scale and exact search --- left the frontier executor at 1.000, so the suite's ceiling and the frontier's ceiling remain indistinguishable, and the paper ends with no candidate for what would separate them. Reporting the first result without the second would be the same error this framework was written to avoid.
 
 For harness-based AI the framework still provides a development roadmap: begin with ephemeral cognition, add persistence, learning, governed self-improvement, recursive improvement, discovery, organization, mission autonomy and finally open-ended transduction. The LLM remains the generative engine; the harness determines which loops are structurally possible; external benchmark evidence determines which level is earned. What Version 1.4 added is the reminder that the evidence has to be able to see the thing it is measuring. What Version 1.6 adds is that the evidence must itself be checkable: a hidden answer key is an assertion, and a framework that builds an intelligence scale on unaudited assertions has moved the unfalsifiable part rather than removed it.
 
@@ -1379,6 +1403,8 @@ For harness-based AI the framework still provides a development roadmap: begin w
 The measurement in \S\ref{sec:measured} used a deterministic task generator seeded per instance, an external verifier held outside the executor's filesystem reach, and a fixed intervention policy. The ladder identifier, per-rung episode counts, per-band success rates, false-completion counts and attempt counts are reported in-line so the reported $A_{DI}$ can be recomputed by hand from the tables. The scoring utility reproduces the Version 1.3 figure under a $\rho = 0$ flag, so the difference between the two primitives is auditable rather than asserted.
 
 The item work in \S\ref{sec:validity} is reproducible on the same basis. Both DL4 families are generated from a seed, so an instance is named by its family and seed rather than stored; the accuracies in \S\ref{sec:t4} and \S\ref{sec:corrected} are per-seed and can be recomputed instance by instance. The specification--key consistency tests of \S\ref{sec:speckey} are part of the suite rather than a one-off audit, and each was confirmed to fail when the defect it guards against was deliberately reintroduced --- a test for a defect that has never been observed failing is an assertion of the same kind this section exists to distrust. The concordance audit of \S\ref{sec:concordance} requires no artefacts beyond two executors and the per-case responses, both of which the runner already records.
+
+The three checks are released as runnable tools in the accompanying benchmark library rather than described only here, together with a written record of what they reported when first run against the library's previous version: five structural errors on a tree that its own validator passed with zero, of which four were bound instances byte-identical to an instance at a different level. A check that has only ever been run against the items it was written for has not been tested.
 
 \section*{Conflicts and funding}
 
