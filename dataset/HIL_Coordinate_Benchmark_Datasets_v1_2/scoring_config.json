@@ -1,0 +1,60 @@
+{
+  "C": {
+    "aggregate": "hierarchical normalized mean by family; report GP separately inside C",
+    "retention": "C level certification is cumulative"
+  },
+  "I": {
+    "aggregate": "q*_k=min_{j<=k} q_j, then weighted mean",
+    "retention": "required",
+    "note": "I score excludes M-Bench performance; I certification consumes M as a prerequisite gate."
+  },
+  "O": {
+    "aggregate": "q*_k=min_{j<=k} q_j, then weighted mean",
+    "retention": "required"
+  },
+  "T": {
+    "aggregate": "not an agent score; calibrated task band + difficulty vector"
+  },
+  "H": {
+    "aggregate": "not an agent score; run-condition/intervention label + minutes/CID"
+  },
+  "SA": {
+    "aggregate": "q*_k=min_{j<=k} q_j, then weighted mean",
+    "retention": "required"
+  },
+  "DI": {
+    "surface": "S_del(T,H)",
+    "frontier": "F(H,p)=max{T:S_del(T,H)>=p}"
+  },
+  "HLIS": {
+    "dimensions_singleton": [
+      "C",
+      "I",
+      "DI",
+      "SA"
+    ],
+    "dimensions_org": [
+      "C",
+      "I",
+      "O",
+      "DI",
+      "SA"
+    ],
+    "formula": "100*exp(sum(alpha_d*ln(A_d))/sum(alpha_d))"
+  },
+  "M": {
+    "status": "supporting independent coordinate",
+    "aggregate": "q*_k=min_{j<=k} q_j, then optional weighted A_M",
+    "HLIS_inclusion": "excluded from default HLIS",
+    "relationship_to_I": "I_n requires M>=mu_n; converse false",
+    "minimum_M_prerequisites": {
+      "I0": "M0",
+      "I1": "M1",
+      "I2": "M3",
+      "I3": "M4",
+      "I4": "M4",
+      "I5": "M5",
+      "IΩ": "M5 (MΩ only if memory-architecture evolution is claimed)"
+    }
+  }
+}

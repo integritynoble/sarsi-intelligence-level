@@ -1,0 +1,1 @@
+run_id,coordinate,item_id,model_id,model_hash,harness_id,harness_hash,seed,T_band,H_budget,max_CID,human_interventions,human_cognitive_minutes,governance_minutes,attempts,delivered,verifier_pass,graded_score,failure_mode,tokens,llm_calls,tool_calls,subagent_calls,wall_time_sec,cost_usd,notes

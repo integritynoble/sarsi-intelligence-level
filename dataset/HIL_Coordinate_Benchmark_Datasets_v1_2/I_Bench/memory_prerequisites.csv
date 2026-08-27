@@ -1,0 +1,8 @@
+I_level,minimum_M_prerequisite,rationale
+I0,M0,Transient/reactive operation.
+I1,>=M1,Persistent individual continuity / resumption.
+I2,>=M3,Adaptive learning requires consolidation/procedural memory.
+I3,>=M4,Governed self-improvement requires robust/self-managing memory support.
+I4,>=M4,Recursive improvement requires durable meta-improvement support.
+I5,>=M5,Autonomous discovery requires longitudinal hypothesis/evidence knowledge.
+IΩ,>=M5,MΩ only when memory-architecture evolution itself is part of the claim.

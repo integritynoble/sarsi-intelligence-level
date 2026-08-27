@@ -1,0 +1,44 @@
+{
+  "name": "HIL Coordinate Benchmark Datasets",
+  "version": "1.2",
+  "framework_basis": "Unified Intelligence / HIL v1.9; core [C,I,O,T,H,SA], DI from T×H×p, M supporting",
+  "generated_utc": "2026-08-28T00:10:00+00:00",
+  "counts": {
+    "C": 320,
+    "I": 168,
+    "O": 126,
+    "T": 256,
+    "H": 180,
+    "SA": 192,
+    "GP_subset": 32,
+    "DI_cells": 1536,
+    "M_supporting": 168
+  },
+  "principles": [
+    "Memory Capability M is independently measured as a supporting coordinate, not a sixth conceptual intelligence family.",
+    "I_n certification requires M>=mu_n, but the converse does not hold; memory may exceed Individual Intelligence.",
+    "M is excluded from the default HLIS dimension set to avoid double counting with I.",
+    "GUI perception GP remains a C subscale; P_vis remains a T descriptor; end-to-end computer use remains DI.",
+    "Higher I/O/M open-ended levels require longitudinal sealed external evaluation.",
+    "A level whose definition denies a pre-written answer cannot be certified by a static exact-match item."
+  ],
+  "derived_from": "HIL Coordinate Benchmark Datasets v1.1",
+  "binding_counts": {
+    "bound": 808,
+    "protocol-bound": 486,
+    "specification-only": 116
+  },
+  "changes_from_v1_1": [
+    "audit_items.py added; against v1.1 unchanged it reports 45 errors, recorded in docs/AUDIT_v1_1.md",
+    "causal_reasoning shipped 32 items with ONE distinct payload, filed at all eight levels C0-COmega; three more C families collapsed nearly as far",
+    "four C families regenerated from tools/c_ladder.py, which COMPUTES every key; all 80 cells distinct and each level asks a different question",
+    "68 static exact-match items at discovery and open-ended levels downgraded to specification-only/protocol",
+    "audit recomputes every key it can and fails the build on disagreement"
+  ],
+  "known_limitations": [
+    "no runnable evidence for C5 and above remains in this library; those levels need sealed longitudinal protocols",
+    "key recomputation covers only the four families that ship a reference; ~1150 items still have asserted keys that nothing has checked",
+    "the audit is a filter with unknown recall; unflagged items are unaudited, not validated",
+    "payload comparison is exact-identity, so two items differing only in a variable name are not flagged"
+  ]
+}

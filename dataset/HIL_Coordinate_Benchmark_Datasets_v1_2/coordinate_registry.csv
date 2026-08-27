@@ -1,0 +1,8 @@
+coordinate,status,csv,jsonl,levels,items,core_rule
+C,core,C_Bench/c_bench.csv,C_Bench/c_bench.jsonl,C0-CΩ,320,Cognitive capability; GP subset inside C.
+I,core,I_Bench/i_bench.csv,I_Bench/i_bench.jsonl,I0-IΩ,168,Individual evolution; each level has minimum M prerequisite.
+O,core,O_Bench/o_bench.csv,O_Bench/o_bench.jsonl,O0-OΩ,126,Real organizational capability.
+T,core,T_Bench/t_bench.csv,T_Bench/t_bench.jsonl,T0-TΩ,256,Task property; includes P_vis.
+H,core,H_Bench/h_bench.csv,H_Bench/h_bench.jsonl,H0-H5,180,Human cognitive intervention condition.
+SA,core,SA_Bench/sa_bench.csv,SA_Bench/sa_bench.jsonl,SA0-SAΩ,192,Grounded self-awareness.
+M,supporting,M_Bench/m_bench.csv,M_Bench/m_bench.jsonl,M0-MΩ,168,Independent supporting memory capability; excluded from default HLIS.
