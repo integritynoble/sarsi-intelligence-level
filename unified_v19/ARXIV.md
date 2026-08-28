@@ -18,7 +18,7 @@ The new material is measurement, and one result of it is positive for the first 
 
 **Four difficulty axes have now been built and run against a frontier executor.** Disclosed reasoning hazards separate no model. Specification scale separates executor tiers and not the frontier. Exact search separates nothing. Decidability — whether the task is answerable at all — separates the three reference strategies sharply and no live model. §16 states the argument that explains all three: **once a specification is written without ambiguity, every property of the task is mechanically derivable from it, and anything mechanically derivable is within reach of an executor that can implement the specification.** Difficulty inside that envelope does not exist to be found.
 
-**The first axis built outside the envelope produced a frontier capability failure.** On a sealed mechanism generated after the executor was frozen — two laws and a latent boundary between them — the frontier executor extrapolated with an RMSE of 0.258 against a bar of 0.043, worse than the 0.174 that nearest-neighbour achieves. It did worse than memorising, outside the sampled box.
+**The first axis built outside the envelope reaches the frontier.** On sealed mechanisms generated after the executor was frozen — each two laws with a latent boundary between them — the frontier executor fails **7 of 12** instances on capability, and on 3 of them extrapolates worse than the nearest-neighbour baseline: worse than memorising the sample. Every episode completed normally with a stated mechanism; none was a timeout or a non-delivery.
 
 **Two findings about the apparatus rather than the model.** A fourth answer-key defect, in the class built specifically to be different; and a timeout that could not fire, which turned a killed run into a recorded capability result and said nothing in the data.
 
@@ -26,8 +26,9 @@ The new material is measurement, and one result of it is positive for the first 
 
 **This is a framework proposal with small measurements in it, not an empirical paper.** A referee should be told plainly:
 
-- **The one frontier failure rests on a single instance.** Seed 11 of the regime-switch family is the only capability failure by a frontier executor anywhere in this work. One instance is an existence proof, not a rate. Four earlier apparent frontier failures in this same line of work all turned out to be the author's own ambiguities, so this should be treated as the leading candidate for a fifth defect rather than a settled result.
-- **Four seeds on that family, one lost to the harness.** One killed by the timeout defect, one failed on a missing deliverable while extrapolating *below* the bar, one failed on capability, one passed. No executor comparison was run.
+- **Twelve episodes give a wide interval.** 7/12 has a 95% interval of roughly 28–85% on the underlying rate. The direction is clear; the magnitude is not.
+- **One executor, one run per seed, one mechanism family.** No variance across repeated attempts, no weaker executor, so no Harness Scaling Curve segment and no model comparison. All twelve instances compose two closed forms across a linear boundary.
+- **A number was retracted mid-version.** An earlier draft reported seed 11 as a capability failure at 0.258; it passes at 0.021 once the executor is given time to finish. The error was in the apparatus — a limit shorter than the task — and it survived until the rest of the family was run.
 - **Three axes saturate and the argument that explains them is an argument, not a theorem.** It is refuted by exhibiting a task with a complete, unambiguous specification that a frontier executor reliably fails for a reason other than ambiguity.
 - **The item audits are filters with unknown recall.** Unflagged items are unaudited, not validated. Roughly 1,150 items in one audited library still carry asserted keys that nothing has checked.
 - **A library repaired by this standard looks worse.** Removing static items from discovery levels leaves one audited library with no runnable evidence at C5 and above. That is where it actually stands.

@@ -84,7 +84,7 @@ Artificial intelligence is often summarized with a single capability label, yet 
 
 The measurement work continues the search for a difficulty axis that reaches the frontier, and adds two findings about the instrument rather than any model. First, \textbf{a fourth answer-key defect}, in the axis built specifically to be different: the decidability class appeared to catch the frontier and was catching two rules of the author's that read as precedence statements. Four defects in four families, each found only when a result looked surprising, is now this paper's strongest evidence for auditing items and its strongest caution about how weak the audit's detection rate is. Second, \textbf{a timeout that could not fire}: the executor harness killed only its direct child and then waited on a pipe held by grandchildren, so a run exceeding its limit hung silently and the episode that eventually returned was scored as an empty delivery. A measurement apparatus that cannot distinguish a killed run from a failed one produces data that looks clean and is not.
 
-Version 1.9 also reports the first live results from outside the mechanically-derivable envelope (\S\ref{sec:discovery}), and two dataset audits in which libraries that pass their own validators were found to contain ladders that cannot discriminate the levels they are filed at (\S\ref{sec:libraries}).
+Version 1.9 also reports the first live results from outside the mechanically-derivable envelope --- where the frontier executor fails 7 of 12 instances (\S\ref{sec:discovery}), and two dataset audits in which libraries that pass their own validators were found to contain ladders that cannot discriminate the levels they are filed at (\S\ref{sec:libraries}).
 
 \medskip
 \noindent\textbf{Carried forward from Version 1.8.} Version 1.7 added computer-screen understanding as a diagnostic subscale of Cognitive Intelligence, and that is carried forward here (\S\ref{sec:gp}): GUI Perception is placed inside C rather than made a sixth family, task difficulty gains a perceptual component, and closed-loop computer use is evaluated inside DI.
@@ -1134,30 +1134,47 @@ The control is a real solver, not a strawman: least squares over all three close
 
 \subsubsection{The frontier, measured on the regime-switch family}
 
-Four regime-switch instances were run against the frontier executor. They contain the first result in this paper where a frontier executor fails an item for a reason that is about the task.
+Every regime-switch instance among the first sixty seeds was run against the frontier executor: twelve episodes, each given a two-hour limit. All twelve exited normally with a stated mechanism, so none is a timeout and none is a non-delivery.
 
 \begin{table}[h]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccccY@{}}
 \toprule
-Seed & NN baseline & Bar (25\%) & Achieved RMSE & Mechanism stated & Outcome \\
+Seed & NN baseline & Bar (25\%) & Achieved & vs.\ bar & Outcome \\
 \midrule
-9  & 1.210 & 0.303 & \textbf{0.251} & no  & below the bar; failed on the missing statement \\
-11 & 0.174 & 0.043 & 0.258 & yes & \textbf{capability failure}: worse than the baseline \\
-12 & 3.557 & 0.889 & 0.206 & yes & passed \\
-0  & --- & --- & --- & --- & killed by the harness defect of \S\ref{sec:apparatus}; not a result \\
+11 & 0.174 & 0.043 & 0.021 & $0.5\times$ & pass \\
+40 & 1.271 & 0.318 & 0.003 & $0.01\times$ & pass \\
+27 & 3.737 & 0.934 & 0.060 & $0.06\times$ & pass \\
+50 & 1.573 & 0.393 & 0.093 & $0.24\times$ & pass \\
+9  & 1.210 & 0.303 & 0.276 & $0.9\times$ & pass \\
+\addlinespace
+38 & 0.689 & 0.172 & 0.455 & $2.6\times$ & capability failure \\
+44 & 2.521 & 0.630 & 0.822 & $1.3\times$ & capability failure \\
+25 & 1.543 & 0.386 & 0.874 & $2.3\times$ & capability failure \\
+17 & 2.705 & 0.676 & 1.062 & $1.6\times$ & capability failure \\
+0  & 1.030 & 0.258 & 1.087 & $4.2\times$ & \textbf{worse than the baseline} \\
+41 & 1.579 & 0.395 & 1.743 & $4.4\times$ & \textbf{worse than the baseline} \\
+24 & 2.321 & 0.580 & 2.453 & $4.2\times$ & \textbf{worse than the baseline} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Seed 11 is the finding. The executor delivered predictions, stated a mechanism, and extrapolated with an error of 0.258 against a bar of 0.043 --- six times the bar, and half again worse than the 0.174 that nearest-neighbour achieves. It did worse than memorising, on points outside the box, which is precisely the failure the extrapolation grid exists to detect and which no item inside the envelope produced from any executor.
+\textbf{Seven of twelve are capability failures, and on three of them the executor extrapolated worse than nearest neighbour} --- worse, that is, than memorising the training set and reading off the closest point. That is the specific failure the held-out grid exists to detect, and no item inside the mechanically-derivable envelope produced it from any executor.
 
-Seed 9 fails for an entirely different reason and must not be counted with it: the numerical work was \emph{good}, at 0.251 against a bar of 0.303, and the run did not write the required statement of the rule. Under \S\ref{sec:graded} that is a deliverable failure, not an insufficient-search one, and folding the two together would have reported a model that extrapolated correctly as a model that could not.
+The distribution is what a usable difficulty axis looks like rather than an impossible one. The five passes are not narrow: three of them come in at a twentieth of the bar or better, and seed 40 is essentially exact at 0.003. The family is well within reach when the executor recovers the mechanism, and far outside it when the executor fits a smooth compromise through the boundary instead. That bimodality --- near-exact or worse than memorising, with little in between --- is the signature of a task where the answer depends on getting a structure right rather than on getting a fit close.
+
+\begin{cautionbox}{A number retracted, and how it survived review}
+The first draft of this version reported seed 11 as the first frontier capability failure, at an RMSE of 0.258 against a bar of 0.043 --- worse than the baseline. \textbf{Seed 11 passes at 0.021.} The reported figure came from a run that hit a 2400-second limit; the executor was still working.
+
+The retraction generalises, and the general form is worse than the instance. \S\ref{sec:apparatus} describes a timeout that could not fire and the killed run it recorded as an empty delivery. This is the same defect after the repair: the limit now fires correctly, and it was shorter than the task. Nothing in the verdict distinguishes the two cases. A truncated run and a wrong answer produce the same row unless the runner records \emph{why} the episode ended, which is why the probe now prints the executor's exit status beside every verdict, and why the protocol requires it.
+
+Seed 27 makes the size of the effect plain. Under the short limit it was killed at an RMSE of 0.086 against a bar of 0.934 --- an order of magnitude inside the bar --- and recorded as a failure for not stating its mechanism. Rerun with time to finish, it passes at 0.060.
+\end{cautionbox}
 
 \begin{claimbox}{What this does and does not establish}
-It establishes that the envelope argument has predictive content. Three axes inside it saturated; the first axis outside it produced a frontier failure on the third instance run, of exactly the kind the axis was built to expose.
+It establishes that the envelope argument has predictive content, and now with a rate rather than an instance. Three axes inside the envelope saturate at 1.000; the first axis built outside it fails the frontier executor on 58\% of its instances under a protocol where every episode completed.
 
-It does not establish a rate. One capability failure in three scored instances is not a measurement of how often a frontier executor fails this family, and the sample is far too small to compare executors. Seed 12 was passed comfortably --- 0.206 against a bar of 0.889 --- so the family is not uniformly beyond reach, which is what a usable difficulty axis should look like and also what makes a three-instance sample uninformative about the rate. It also does not rule out an item defect --- the four found so far were all found later than this, and the build-time check that both regimes appear in 15--85\% of the observations is a guard against the specific unfairness that was foreseeable, not against the one that was not.
+It does not establish that the rate is 58\%. Twelve episodes give a 95\% interval on that proportion of roughly 28--85\%, which is consistent with anything from a moderately hard family to a very hard one. It is one executor, one machine, one mechanism family and a single run per seed, so it measures neither variance across attempts nor any difference between models. And no comparison with a weaker executor was run at all, which means this cannot yet contribute a Harness Scaling Curve segment.
 \end{claimbox}
 
 What is established more firmly is the structural point: an axis outside the envelope has a plausible wrong method that fails every instance --- the single-form fit, 0 of 4 --- which is the property all three axes inside the envelope lacked, and which is what makes headroom possible at all.
@@ -1173,6 +1190,10 @@ Observed while probing the discovery class: fifty minutes of silence against a f
 
 The cost was not the lost time. When the run eventually came back it was scored as \emph{delivered nothing}, and entered the record as a capability result for a model that had been killed mid-task. The repair is to run the executor in its own process group and kill the group; the regression test builds a command that leaves a grandchild holding the pipe and asserts the call returns within its limit.
 \end{cautionbox}
+
+The repair was necessary and not sufficient, which is the part worth carrying. With the timeout firing correctly it was set to forty minutes, and the discovery episodes need longer: runs were cut off mid-work and recorded as answers. One of them became this version's headline result before it was rerun (\S\ref{sec:discovery}). A limit that fires correctly still corrupts a measurement when it is shorter than the task, and the corruption is invisible in the verdict, because a truncated run and a wrong answer are the same row.
+
+The rule that follows is narrow and mechanical: \textbf{an episode's record must carry why it ended.} Exit status, wall-clock, and whether the limit was reached, beside every verdict. Without it there is no way to tell a measurement from an interruption, and the interruptions look like the more interesting result.
 
 Two consequences for the reporting standard. An episode terminated by the harness must be recorded as \texttt{not\_attempted} or \texttt{timed\_out} and never as a delivery, because the outcome-completeness principle of \S\ref{sec:adi} applies to the harness's own failures as much as to the executor's. And a limit that the apparatus states must be one the apparatus enforces --- the same defect appeared once as an unenforced per-instance time limit inside an item, and once here as an unenforceable one in the runner.
 
@@ -1564,9 +1585,13 @@ Irreversibility, and the reason some classes have a delegation floor no verifica
 \begin{cautionbox}{Limitations specific to the Version 1.6 item work}
 \textbf{The frontier is still not measured.} The scale-difficulty family scores 1.000 on every seed for the frontier executor (\S\ref{sec:corrected}). It separates tiers; it does not locate the top of the range. Every frontier figure in this paper remains a lower bound set by the suite.
 
-\textbf{The one frontier failure rests on a single instance.} Seed 11 of the regime-switch family is the only capability failure by a frontier executor anywhere in this paper (\S\ref{sec:discovery}). One instance is an existence proof, not a rate, and it has had far less scrutiny than the four item defects --- each of which also looked like a model failure until it was read carefully. It should be treated as the most likely candidate for a fifth defect, not as a settled result.
+\textbf{Twelve episodes give a wide interval.} Seven capability failures in twelve is a 95\% interval of roughly 28--85\% on the underlying rate (\S\ref{sec:discovery}). The direction is clear and the magnitude is not.
 
-\textbf{Four seeds on the discovery family, one of them lost to the harness.} Of four regime-switch instances, one was killed by the timeout defect of \S\ref{sec:apparatus}, one failed on a missing deliverable while extrapolating below the bar, one failed on capability and one passed. No comparison between executors was run at all.
+\textbf{One executor, one run per seed.} Nothing here measures variance across attempts on the same instance, and no weaker executor was run on this family, so it contributes no Harness Scaling Curve segment and supports no comparison between models.
+
+\textbf{One mechanism family.} All twelve instances compose two closed forms with a linear boundary. Whether the failure is about latent structure in general, or about this construction, is not established.
+
+\textbf{A published number was retracted during this version.} Seed 11 was reported as a capability failure at 0.258 and passes at 0.021 once the executor is given time to finish. The error was in the apparatus, not the item, and it survived until the seeds around it were run. Any single-instance result in this paper should be read with that in mind.
 
 \textbf{Neither difficulty axis inside the envelope reached the frontier.} Scale separated the tiers; search separated nothing, with both executors at 1.000 (\S\ref{sec:corrected}). Two axes are not an exhaustive search of the space, and the paper offers no third candidate. Every frontier figure here remains a lower bound set by the suite.
 
@@ -1613,7 +1638,9 @@ Version 1.4 differed from its predecessors in one respect that mattered more tha
 
 Version 1.6 continues that pattern one level further down. Version 1.4 examined the arithmetic and found it blind to something that mattered; Version 1.6 examines the items the arithmetic runs on and finds that two of them graded a rule they never stated. Both were discovered by the same signature --- executors of very different capability returning the same answer and both being marked wrong --- and that signature is cheap enough to check routinely, which is why \S\ref{sec:concordance} asks that it be checked routinely.
 
-Version 1.9 adds the first result that goes the other way. After three difficulty axes saturated, the argument in \S\ref{sec:envelope} predicted where headroom had to be --- outside what a complete specification mechanically determines --- and the first axis built there produced a frontier failure: an extrapolation worse than nearest-neighbour on a mechanism generated after the executor was frozen. One instance is an existence proof and not a rate, and given that four apparent frontier failures in this work turned out to be the author's own ambiguities, it is offered as the most likely candidate for a fifth defect rather than as a settled finding.
+Version 1.9 adds the first result that goes the other way. After three difficulty axes saturated, the argument in \S\ref{sec:envelope} predicted where headroom had to be --- outside what a complete specification mechanically determines --- and the first axis built there delivers it. On sealed mechanisms generated after the executor was frozen, each composing two laws across a latent boundary, the frontier executor fails seven of twelve instances on capability, and on three of them extrapolates worse than nearest neighbour: worse than memorising the sample and reading off the closest point.
+
+The path to that number is part of the result. An earlier draft reported a single failing instance, and that instance passes; the figure came from a run cut off by a limit shorter than the task. It was corrected by running the rest of the family, which is the only reason the correction happened at all --- a single episode carries no signal that it was interrupted, because a truncated run and a wrong answer produce the same row.
 
 The honest summary of the earlier measurement is mixed, and the second half is the larger part. Harder items separated a weaker executor from a stronger one for the first time, with a single interpretable failure mode. But both difficulty axes tried --- specification scale and exact search --- left the frontier executor at 1.000, so the suite's ceiling and the frontier's ceiling remain indistinguishable, and the paper ends with no candidate for what would separate them. Reporting the first result without the second would be the same error this framework was written to avoid.
 
@@ -1712,7 +1739,7 @@ Version & Date & Principal change \\
 1.6 & Aug 2026 & The items audited. Cross-tier concordance auditing required before failures are attributed to executors (\S\ref{sec:concordance}); specification--key consistency tests required for parameterised item families (\S\ref{sec:speckey}); graded item scoring with separated failure modes (\S\ref{sec:graded}); two DL4 item families built on specification scale and on search (\S\ref{sec:t4}); the finding that disclosed hazards do not desaturate a suite (\S\ref{sec:trickiness}); per-coordinate headroom and audit status added to the reporting standard (\S\ref{sec:report}); the memory contract of 1.5 carried in (\S\ref{sec:memory}). \\
 1.7 & Aug 2026 & GUI Perception added as a diagnostic subscale of C with a GP0--GP5 ladder and the $[P,G,S,A,R]$ computer-agent decomposition; visual-interface complexity added to task difficulty; the observation channel made part of the reported harness (\S\ref{sec:gp}). \\
 1.8 & Aug 2026 & Memory Capability M separated from Individual Intelligence and measured independently as a supporting coordinate, joined to I by the one-way gate $I(A) \ge I_n \implies M(A) \ge \mu_n$; M excluded from the default HLIS product; M-Bench and the $\mu_n$ prerequisite table (\S\ref{sec:memory}). \\
-\textbf{1.9} & Aug 2026 & \textbf{Four difficulty axes measured; the first one outside the envelope reaches the frontier.} A third axis, decidability, saturates (\S\ref{sec:decidability}); a fourth answer-key defect found in it (\S\ref{sec:fourth}); the mechanically-derivable envelope stated as the explanation for all three saturating axes (\S\ref{sec:envelope}); first frontier capability failure, on sealed-mechanism discovery with a latent regime boundary (\S\ref{sec:discovery}); a harness timeout that could not fire, and what it did to the record (\S\ref{sec:apparatus}); two library audits, including one causal item certifying eight levels at once (\S\ref{sec:libraries}). \\
+\textbf{1.9} & Aug 2026 & \textbf{Four difficulty axes measured; the first one outside the envelope reaches the frontier.} A third axis, decidability, saturates (\S\ref{sec:decidability}); a fourth answer-key defect found in it (\S\ref{sec:fourth}); the mechanically-derivable envelope stated as the explanation for all three saturating axes (\S\ref{sec:envelope}); sealed-mechanism discovery with a latent regime boundary fails the frontier executor on 7 of 12 instances, 3 of them worse than the nearest-neighbour baseline (\S\ref{sec:discovery}); a harness timeout that could not fire, then one that fired short, and the number each cost (\S\ref{sec:apparatus}); two library audits, including one causal item certifying eight levels at once (\S\ref{sec:libraries}). \\
 \bottomrule
 \end{tabularx}
 \end{table}
