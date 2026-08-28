@@ -1,0 +1,13 @@
+seed,result,extrapolation_rmse,bar,nn_baseline_rmse,target_spread,mechanism_stated,exit_code,seconds
+0,capability_failure,1.045,0.2576,1.030,0.855,1,0,330
+9,capability_failure,2.586,0.3026,1.210,1.009,1,0,203
+11,capability_failure,5.240,0.0434,0.174,0.082,1,0,337
+17,capability_failure,5.698,0.6762,2.705,2.225,1,0,376
+24,capability_failure,4.983,0.5804,2.321,2.104,1,0,225
+25,capability_failure,10.600,0.3858,1.543,4.171,1,0,110
+27,pass,0.758,0.9342,3.737,3.372,1,0,293
+38,capability_failure,1.234,0.1723,0.689,0.644,1,0,224
+40,capability_failure,1187.885,0.3177,1.271,1.165,1,0,106
+41,capability_failure,6.287,0.3947,1.579,1.126,1,0,186
+44,capability_failure,4.109,0.6303,2.521,2.076,1,0,177
+50,capability_failure,6.192,0.3934,1.573,4.121,1,0,90

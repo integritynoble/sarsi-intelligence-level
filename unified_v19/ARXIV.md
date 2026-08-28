@@ -6,9 +6,9 @@
 | `main.tex` | LaTeX source |
 | `main.bbl` | Pre-built bibliography — arXiv does not run BibTeX |
 | `references.bib` | Kept for regeneration; **not** in the tarball |
-| `../Unified_Intelligence_Harness_Scoring_Framework_v1_9.pdf` | Compiled PDF, 51 pages |
+| `../Unified_Intelligence_Harness_Scoring_Framework_v1_9.pdf` | Compiled PDF, 52 pages |
 
-Verified: extracts into an empty directory and compiles with plain `pdflatex` in two passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 51 pages, zero Type 3 fonts, all fonts embedded.
+Verified: extracts into an empty directory and compiles with plain `pdflatex` in three passes with **no BibTeX run** — no errors, no undefined citations, no undefined references, no missing files, no overfull boxes, 52 pages, zero Type 3 fonts, all fonts embedded. The remaining messages are harmless float-placement notices from LaTeX normalizing `[h]` to `[ht]`.
 
 ## What this version is
 

@@ -29,7 +29,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small Measuring the Unified Intelligence Level}
-\fancyhead[R]{\small Version 1.9}
+\fancyhead[R]{\small Version 2.0}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 \setlength{\headheight}{14pt}
@@ -65,8 +65,8 @@
 A Cumulative, Harness-Measurable Hierarchy\\[8pt]
 \large Five Conceptual Intelligence Families, Six Measurable Coordinates,\\
 and a Gated U0--U\Om{} Intelligence-Level Scale\\[10pt]
-\normalsize Version 1.9 --- memory measured on its own axis,\\
-and four difficulty axes measured against the frontier}
+\normalsize Version 2.0 --- memory measured on its own axis,\\
+and same-seed executor comparison outside the mechanically-derivable envelope}
 
 \author{Chengshuai Yang\\
 \small\texttt{spiritai@platformai.org}}
@@ -77,19 +77,21 @@ and four difficulty axes measured against the frontier}
 \maketitle
 
 \begin{abstract}
+\noindent\textbf{Version 2.0 result.} This version adds a same-seed comparison of the archived frontier and Haiku executors on sealed regime-switch discovery. With harness and protocol fixed, frontier passes 5/12 (41.7\%) and Haiku 1/12 (8.3\%); the exact two-sided McNemar test is $p=0.125$, so the binary difference is not claimed as significant. Frontier has lower RMSE on 11/12 matched instances (exact two-sided sign test $p=0.00635$), with medians 0.639 versus 5.112 and nearest-neighbour-normalized medians 0.359 versus 2.142. All 24 episodes exit 0 and state a mechanism. This supports discrimination on these instances, not universal model-tier ordering, and is not a Harness Scaling Curve segment.
+
 Artificial intelligence is often summarized with a single capability label, yet several distinct properties are routinely conflated: raw cognitive problem solving, persistent individual learning and self-improvement, collective organizational intelligence, autonomous task completion, and evidence-grounded self-modeling. This paper proposes a unified framework that separates these properties while preserving a readable ordinal hierarchy. Five conceptual intelligence families are defined: Cognitive Intelligence (C), Individual Intelligence (I), Organizational Intelligence (O), Delegation Intelligence (DI), and Self-Awareness Intelligence (SA). Delegation Intelligence is not treated as an irreducible scalar; it is measured by two primary coordinates, Task Difficulty (T) and Human Cognitive Intervention (H), conditioned on externally verified reliability $p$. The theoretical framework therefore contains five conceptual families but six directly measured coordinates: $[C, I, O, T, H, SA]$. Computer-screen understanding is treated as a diagnostic subscale of Cognitive Intelligence rather than a sixth family, so that computer-agent failures remain legible without double-counting. Long-term Memory Capability M is measured independently as a supporting coordinate rather than identified with Individual Intelligence: memory remains a temporal substrate and a prerequisite for higher I-levels, but a high memory level is not sufficient for a high I-level and may exceed it. Formally $I(A) \ge I_n \implies M(A) \ge \mu_n$, while the converse does not hold, and M is excluded from the default HLIS product to avoid double counting. Individual Intelligence continues to require long-term memory as its temporal substrate rather than adding memory as a sixth family: I1 requires persistent episodic and task continuity across restarts, I2 adds semantic consolidation and procedural learning, I3--I4 require durable self-improvement and meta-improvement lineage, and I5 and above require hypothesis--experiment--evidence discovery memory. A long context window is therefore not long-term memory. A cumulative Unified Intelligence scale U0--U\Om{} is defined by gated promotion: a system receives level $U_n$ only if it retains all lower-level capabilities and satisfies minimum requirements in C, I, O, SA and a required point on the delegation success surface \SA{}. The framework explicitly rejects simple averaging, because strong performance in one dimension must not conceal a critical weakness in another. It also separates intelligence from substrate reach, authority, write depth, verification, resources, and physical constraints. To make the framework useful for model and harness comparison, it defines a Harness-LLM Intelligence Score (HLIS) for one concrete LLM-harness pair and a Harness-Intelligence-Level (HIL) characterization for a base LLM evaluated across a standardized ladder of harness generations.
 
 \medskip
-\noindent\textbf{New in Version 1.9.} Version 1.8 separated Memory Capability M from Individual Intelligence and made it an independently measured supporting coordinate, joined to I by a one-way prerequisite gate; that is carried forward here (\S\ref{sec:memory}).
+\noindent\textbf{New in Version 2.0.} Version 2.0 carries forward Version 1.9's item-validity and apparatus findings and adds a same-seed regime-switch comparison: the common protocol is run with the archived frontier and Haiku executors, changing the executor/model while holding the harness, task family and seeds fixed (\S\ref{sec:discovery}).
 
 The measurement work continues the search for a difficulty axis that reaches the frontier, and adds two findings about the instrument rather than any model. First, \textbf{a fourth answer-key defect}, in the axis built specifically to be different: the decidability class appeared to catch the frontier and was catching two rules of the author's that read as precedence statements. Four defects in four families, each found only when a result looked surprising, is now this paper's strongest evidence for auditing items and its strongest caution about how weak the audit's detection rate is. Second, \textbf{a timeout that could not fire}: the executor harness killed only its direct child and then waited on a pipe held by grandchildren, so a run exceeding its limit hung silently and the episode that eventually returned was scored as an empty delivery. A measurement apparatus that cannot distinguish a killed run from a failed one produces data that looks clean and is not.
 
-Version 1.9 also reports the first live results from outside the mechanically-derivable envelope --- where the frontier executor fails 7 of 12 instances (\S\ref{sec:discovery}), and two dataset audits in which libraries that pass their own validators were found to contain ladders that cannot discriminate the levels they are filed at (\S\ref{sec:libraries}).
+Version 1.9 reported the first live results from outside the mechanically-derivable envelope. Version 2.0 extends that result with a matched executor/model comparison: frontier passes 5/12 while Haiku passes 1/12 on the same twelve seeds (\S\ref{sec:discovery}). The comparison is deliberately not a Harness Scaling Curve segment, because HSC holds a frozen model fixed and varies harness generation.
 
 \medskip
 \noindent\textbf{Carried forward from Version 1.8.} Version 1.7 added computer-screen understanding as a diagnostic subscale of Cognitive Intelligence, and that is carried forward here (\S\ref{sec:gp}): GUI Perception is placed inside C rather than made a sixth family, task difficulty gains a perceptual component, and closed-loop computer use is evaluated inside DI.
 
-The measurement work in this version is a search for a difficulty axis that reaches the frontier, and its result is mostly negative. Four axes have now been built and run: disclosed reasoning hazards, specification scale, exact search, and \emph{decidability} --- whether the task is answerable at all from what was given. The first separates no model; the second separates executor tiers and not the frontier; the third and fourth separate nothing, with every executor at 1.000. The negative results now support an argument rather than a list (\S\ref{sec:envelope}): \textbf{once a specification is written without ambiguity, every property of the task is mechanically derivable from it, and anything mechanically derivable is within reach of an executor that can implement the specification.} Difficulty inside that envelope does not exist to be found. The version also reports a fourth item defect of the same shape as the three before it --- the decidability class appeared to catch the frontier on two seeds and was catching an ambiguity of the author's --- and the first live baseline on the one axis that lies outside the envelope, sealed-mechanism discovery (\S\ref{sec:discovery}).
+The measurement work carried forward in this version is a search for a difficulty axis that reaches the frontier. Four axes have now been built and run: disclosed reasoning hazards, specification scale, exact search, and \emph{decidability}. The first separates no model; the second separates executor tiers and not the frontier; the third and fourth separate nothing, with every executor at 1.000. The negative results support the mechanically-derivable envelope argument (\S\ref{sec:envelope}). Version 2.0's contribution is narrower: it tests whether the sealed regime-switch family discriminates two executors under a common same-seed protocol, and reports the paired result with uncertainty rather than treating it as a harness curve.
 
 \medskip
 \noindent\textbf{Carried forward from Version 1.6.} Versions 1.4 and 1.5 established what to measure. This version is about whether the instrument that measures it is sound. Building harder delegation items to relieve the saturation reported in Version 1.4 produced two findings. First, difficulty rather than trickiness is the lever: three items built around specific reasoning hazards separated a scripted-correct solver from a naive one and separated no \emph{model}, because an item that signposts its own hazard is answered by anyone who reads it. Second, and more consequentially for anyone running a hidden-key benchmark, \textbf{two executors of very different capability returning the same answer to the same item is evidence that the item is self-contradictory, not that it is hard}. Two real defects were found this way in items that had passed their own test suite, and both had been scored as model failures. Version 1.6 therefore adds cross-tier concordance auditing as a required validity check on any hidden answer key (\S\ref{sec:concordance}), requires that parameterised item families test their prose against their own key (\S\ref{sec:speckey}), replaces binary item scoring with graded scoring and separated failure modes at the item level (\S\ref{sec:graded}), and reports the resulting measurements (\S\ref{sec:t4}). It also embeds long-term memory inside Individual Intelligence (\S\ref{sec:memory}) and carries forward the acceptance-invariance repair of Version 1.4.
@@ -122,7 +124,7 @@ Version 1.5 consolidated two refinements. It embedded long-term memory inside In
 
 Version 1.6 turns the same scepticism on the measuring instrument. Version 1.4 reported that the task suite was saturated --- the stronger executors had no headroom, and rungs that differed materially produced identical curves. A curve through a saturated suite measures the suite. The obvious response is harder items, and building them is where this version's findings came from.
 
-\begin{cautionbox}{The finding that motivates this version}
+\begin{cautionbox}{The Version 1.6 item-validity finding}
 An item with a hidden answer key can be wrong, and when it is, it does not look wrong. It looks like a hard item that models fail.
 
 Two items in the delegation suite were self-contradictory: each stated one rule in its visible specification and graded a different one. Both had passed a test suite written for them. Both were discovered the same way --- a frontier executor and a much weaker one returned the \emph{same} answer to the \emph{same} item, and both were marked wrong.
@@ -132,7 +134,7 @@ That signature is diagnostic. Independent systems of different capability do not
 
 The general point is that every claim in this framework rests on items whose keys are asserted rather than proved. The harness ladder has a controlled comparison at its centre --- the paired design of \S\ref{sec:measured} --- but no such control protects the items themselves. Version 1.6 supplies one.
 
-\begin{cautionbox}{The finding that motivates this version}
+\begin{cautionbox}{The Version 1.4 scoring finding}
 $A_{DI}$ is the weighted mean of $\SA{} = P(\text{success})$. A harness generation whose entire contribution is an acceptance step does not change the probability of success --- it changes which results are \emph{reported} as successes. Such a generation therefore scores identically to the generation below it.
 
 Measured on 48 episodes with one frozen model and only the harness changing, HG0 and HG1 both scored 93.3 while false completions went from 2/12 to 0/12.
@@ -151,13 +153,14 @@ The rung the curve could not see is the one on which the reportability of every 
 \item A continuous pair score HLIS with a fully specified construction, and a harness-indexed characterization HIL of a base model across a standardized ladder (\S13--\S14).
 \item The first instantiation of the ladder, the first measured harness scaling curves, and a proposition and repair concerning the delegation achievement variable that the measurement exposed (\S\ref{sec:built}, \S\ref{sec:adi}, \S\ref{sec:measured}).
 \item Long-term memory embedded inside Individual Intelligence as its temporal substrate, with a per-level memory contract and an explicit separation of long context from persistence (\S\ref{sec:memory}).
-\item \textbf{New in this version:} a validity protocol for the items a delegation score is computed from --- cross-tier concordance auditing, specification--key consistency testing for parameterised item families, and graded item scoring with separated failure modes --- together with the measurements that motivated each (\S\ref{sec:validity}).
+\item A validity protocol for benchmark items: cross-tier concordance auditing, specification--key consistency tests for parameterised families, and graded scoring with separated failure modes (\S\ref{sec:validity}).
+\item \textbf{New in Version 2.0:} a same-seed executor/model comparison on the sealed regime-switch family, including paired pass outcomes, RMSE and nearest-neighbour-baseline analysis, with exact McNemar and sign-test results and explicit resource and variance limitations (\S\ref{sec:discovery}).
 \end{enumerate}
 \endgroup
 
 \subsection{Scope and status}
 
-This is a framework proposal. The level names and numerical thresholds are proposed working definitions requiring empirical calibration, and the measurement reported in \S\ref{sec:measured} is a small preliminary study --- one model family, 48 episodes, one of five coordinates instrumented --- included because it changed the framework, not because it settles any question about any system. \S21 states its limitations in full.
+This is a framework proposal with two distinct preliminary measurement programs, included because they changed or tested the instrument rather than because they settle any question about a system. The harness-ladder study in \S\ref{sec:measured} spans three executors, 48 episodes per executor and one instrumented coordinate. The sealed-discovery study in \S\ref{sec:discovery} adds 24 matched executor--seed episodes on one mechanism family. The proposed levels and numerical thresholds still require calibration across domains, models and harnesses; \S21 states the limitations in full.
 
 \section{Design Requirements for a Unified Scale}
 
@@ -1132,9 +1135,9 @@ Latent regime switch & passes 0/4 & a smooth fit through a boundary does not lea
 
 The control is a real solver, not a strawman: least squares over all three closed forms, best fit wins, extrapolate from it. It is the approach a capable system takes when it has not noticed that the data has two regimes, and it fails every regime-switch instance while passing half the single-form ones. The build also verifies, per instance, that both regimes are genuinely represented in the observations the executor is given --- between 15\% and 85\% --- because a boundary lying on one side of every measurement is undiscoverable, and grading an undiscoverable boundary is unfair rather than hard. That check exists precisely because four earlier item families did not have one.
 
-\subsubsection{The frontier, measured on the regime-switch family}
+\subsubsection{The common-protocol regime-switch measurements}
 
-Every regime-switch instance among the first sixty seeds was run against the frontier executor: twelve episodes, each given a two-hour limit. All twelve exited normally with a stated mechanism, so none is a timeout and none is a non-delivery.
+Every common-protocol regime-switch instance was run against each executor: twelve episodes per executor, each given a 7200-second limit. All 24 episodes exited normally with a stated mechanism, so none is a timeout and none is a non-delivery.
 
 \begin{table}[h]
 \centering\small
@@ -1159,9 +1162,54 @@ Seed & NN baseline & Bar (25\%) & Achieved & vs.\ bar & Outcome \\
 \end{tabularx}
 \end{table}
 
-\textbf{Seven of twelve are capability failures, and on three of them the executor extrapolated worse than nearest neighbour} --- worse, that is, than memorising the training set and reading off the closest point. That is the specific failure the held-out grid exists to detect, and no item inside the mechanically-derivable envelope produced it from any executor.
+\subsubsection{Version 2.0: same-seed regime-switch comparison}
+The Version 1.9 frontier result is now compared with a second executor under the same
+task family, protocol, host/harness configuration and common seeds. The common-protocol
+seeds are $0,9,11,17,24,25,27,38,40,41,44,50$; seed 12 is excluded because it was run
+under the earlier protocol. The archived frontier CSV does not contain a frontier model
+ID or executor version, so the label ``frontier'' is retained without inventing one.
 
-The distribution is what a usable difficulty axis looks like rather than an impossible one. The five passes are not narrow: three of them come in at a twentieth of the bar or better, and seed 40 is essentially exact at 0.003. The family is well within reach when the executor recovers the mechanism, and far outside it when the executor fits a smooth compromise through the boundary instead. That bimodality --- near-exact or worse than memorising, with little in between --- is the signature of a task where the answer depends on getting a structure right rather than on getting a fit close.
+\begin{table}[h]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lccrrrY@{}}
+\toprule
+Seed & Frontier & Haiku & Frontier RMSE & Haiku RMSE & NN RMSE & Reading \\
+\midrule
+0  & fail & fail & 1.087 & 1.045 & 1.030 & both fail \\
+9  & pass & fail & 0.276 & 2.586 & 1.210 & frontier-only \\
+11 & pass & fail & 0.021 & 5.240 & 0.174 & frontier-only \\
+17 & fail & fail & 1.062 & 5.698 & 2.705 & both fail \\
+24 & fail & fail & 2.453 & 4.983 & 2.321 & both fail \\
+25 & fail & fail & 0.874 & 10.600 & 1.543 & both fail \\
+27 & pass & pass & 0.060 & 0.758 & 3.737 & both pass \\
+38 & fail & fail & 0.455 & 1.234 & 0.689 & both fail \\
+40 & pass & fail & 0.003 & 1187.885 & 1.271 & frontier-only \\
+41 & fail & fail & 1.743 & 6.287 & 1.579 & both fail \\
+44 & fail & fail & 0.822 & 4.109 & 2.521 & both fail \\
+50 & pass & fail & 0.093 & 6.192 & 1.573 & frontier-only \\
+\bottomrule
+\end{tabularx}
+\caption{Matched regime-switch results from the two archived CSVs. Both executors used one attempt per seed, the same 7200-second timeout and the same mechanism family.}
+\end{table}
+
+Frontier passed 5/12 (41.7\%) and Haiku passed 1/12 (8.3\%). The paired outcome table
+contains four frontier-only passes, no Haiku-only pass, one both-pass seed (27), and
+seven both-fail seeds. All 24 episodes exited 0 and stated a mechanism; there were no
+timeout or delivery failures. The exact two-sided McNemar test is $p=0.125$, with an
+observed paired pass-rate difference of 33.3 percentage points. A conservative 95\%
+paired-difference interval is approximately $-0.9$ to $+60.2$ percentage points, so
+this result is not a claim of binary significance.
+
+Frontier RMSE was lower on 11/12 matched instances, with an exact two-sided sign-test
+$p=0.00635$. The median RMSE was 0.639 for frontier and 5.112 for Haiku; normalized
+to the same-seed nearest-neighbour baseline, the medians were 0.359 and 2.142.
+The medians are preferable to a mean here because Haiku's seed-40 RMSE is 1187.885.
+All 11 Haiku failures were worse than the nearest-neighbour baseline. These are
+discrimination results on this instance set, not a universal ordering of model tiers.
+
+\textbf{Seven of twelve are capability failures for the archived frontier executor, and on three of them it extrapolated worse than nearest neighbour} --- worse, that is, than memorising the training set and reading off the closest point. That is the specific failure the held-out grid exists to detect, and no item inside the mechanically-derivable envelope produced it from any executor.
+
+The frontier distribution is what a usable difficulty axis looks like rather than an impossible one. The five passes are not narrow: three of them come in at a twentieth of the bar or better, and seed 40 is essentially exact at 0.003. The family is well within reach when that executor recovers the mechanism, and far outside it when it fits a smooth compromise through the boundary instead. That bimodality --- near-exact or worse than memorising, with little in between --- is the signature of a task where the answer depends on getting a structure right rather than on getting a fit close.
 
 \begin{cautionbox}{A number retracted, and how it survived review}
 The first draft of this version reported seed 11 as the first frontier capability failure, at an RMSE of 0.258 against a bar of 0.043 --- worse than the baseline. \textbf{Seed 11 passes at 0.021.} The reported figure came from a run that hit a 2400-second limit; the executor was still working.
@@ -1172,9 +1220,9 @@ Seed 27 makes the size of the effect plain. Under the short limit it was killed 
 \end{cautionbox}
 
 \begin{claimbox}{What this does and does not establish}
-It establishes that the envelope argument has predictive content, and now with a rate rather than an instance. Three axes inside the envelope saturate at 1.000; the first axis built outside it fails the frontier executor on 58\% of its instances under a protocol where every episode completed.
+It establishes that the envelope argument has predictive content, and now with a rate rather than an instance. Three axes inside the envelope saturate at 1.000; the first axis built outside it fails the archived frontier executor on 58\% of its instances under a protocol where every episode completed. Version 2.0 adds a same-seed comparison: frontier passes 5/12 and Haiku 1/12, with the paired uncertainty and RMSE analyses reported above.
 
-It does not establish that the rate is 58\%. Twelve episodes give a 95\% interval on that proportion of roughly 28--85\%, which is consistent with anything from a moderately hard family to a very hard one. It is one executor, one machine, one mechanism family and a single run per seed, so it measures neither variance across attempts nor any difference between models. And no comparison with a weaker executor was run at all, which means this cannot yet contribute a Harness Scaling Curve segment.
+It does not establish that either pass rate is a universal capability rate or that the binary difference is significant. The comparison uses one attempt per executor per seed, one mechanism family and one host/harness configuration. It has no repeat-run variance and an incomplete resource envelope. It is evidence of discrimination on these instances, not universal model-tier ordering, and it is not a Harness Scaling Curve segment.
 \end{claimbox}
 
 What is established more firmly is the structural point: an axis outside the envelope has a plausible wrong method that fails every instance --- the single-form fit, 0 of 4 --- which is the property all three axes inside the envelope lacked, and which is what makes headroom possible at all.
@@ -1276,9 +1324,9 @@ The mappings are deliberately many-to-many, but no benchmark may certify an unre
 
 \subsection{The Main Added Quantity: Harness Response}
 
-For frozen $m$ and generation $HG_k$, $HSC_m(k) = HLIS(m,HG_k)$. The ordered set is the \textbf{Harness Scaling Curve}. Two models can reverse order as harness complexity increases: one with a stronger minimal-harness profile may plateau early, while another with a weaker HG0 exploits memory, planning, verifier feedback and long-horizon state far more effectively. HIL-Level, HIL-AUC, HIL-Ceiling and Harness Gain summarize the curve, but \textbf{the curve itself should remain a primary result}.
+For frozen $m$ and generation $HG_k$, $HSC_m(k) = HLIS(m,HG_k)$. The ordered set is the \textbf{Harness Scaling Curve}: it holds the model fixed and varies harness generation. Two models can reverse order as harness complexity increases: one with a stronger minimal-harness profile may plateau early, while another with a weaker HG0 exploits memory, planning, verifier feedback and long-horizon state far more effectively. HIL-Level, HIL-AUC, HIL-Ceiling and Harness Gain summarize the curve, but \textbf{the curve itself should remain a primary result}. The Version 2.0 regime-switch comparison is different: it holds the harness and protocol fixed and changes the executor/model, so it is a matched executor comparison and not an HSC segment.
 
-\subsection{The First Measured Curve (new in 1.4)}\label{sec:measured}
+\subsection{The First Measured Curve (carried forward from 1.4)}\label{sec:measured}
 
 Version 1.3 specified the curve; nothing had instantiated the ladder. The reference ladder of \S\ref{sec:built} was built to HG3 and \textbf{three executors from two vendor families} were run across it. Held identical at every rung and across executors: the six task classes, the two seeds per class, the verifiers, the resource ceiling and the intervention budget (H1, governance only). Only the harness changed between rungs; only the executor changed between curves.
 
@@ -1521,6 +1569,7 @@ Morris et al.\ separate performance, generality and autonomy and argue for stage
 \item \textbf{State each task's specification status --- bound, band-only or specification-only --- and do not count band-only as coverage.} \emph{(New in 1.4.)}
 \item \textbf{Score rungs that differ only in post-hoc machinery from the same executor outputs.} Where two generations do not differ in what the executor is asked to do --- as HG0 and HG1 do not --- run the model once and evaluate both rungs against the same artifacts. Independent runs introduce between-rung variance that can exceed the effect being measured (\S\ref{sec:confound}). \emph{(New in 1.4.)}
 \item \textbf{Publish the ladder identifier with any curve.} A curve is comparable only against the same instantiation of the generation labels. \emph{(New in 1.4.)}
+\item \textbf{For matched executor comparisons, hold the eligible seeds, generator and scorer versions, timeout, intervention policy, task-side resources and harness fixed, and report the paired outcomes.} Changing the executor/model at fixed harness is a cross-executor comparison, not a Harness Scaling Curve; HSC requires the same frozen model across harness generations. \emph{(New in 2.0.)}
 \item Use confidence intervals and repeated tasks to estimate \SA{}, then report the frontier \FA{}.
 \item For U promotion, rerun a retention suite for all lower levels and then run the new-level suite.
 \item For I3+, O3+, SA4+ and U4+, require longitudinal evidence across multiple self/organizational changes.
@@ -1582,24 +1631,26 @@ Irreversibility, and the reason some classes have a delegation floor no verifica
 \item An $I$-level claim is only as good as its restart discipline. A system evaluated without genuinely terminating and restarting the process can present long-context retrieval as persistence, and the framework's memory contract (\S\ref{sec:memory}) is unenforceable against an evaluator who does not restart it.
 \end{itemize}
 
-\begin{cautionbox}{Limitations specific to the Version 1.6 item work}
-\textbf{The frontier is still not measured.} The scale-difficulty family scores 1.000 on every seed for the frontier executor (\S\ref{sec:corrected}). It separates tiers; it does not locate the top of the range. Every frontier figure in this paper remains a lower bound set by the suite.
+\begin{cautionbox}{Limitations of the item and discovery measurements}
+\textbf{The frontier is not globally measured.} The scale-difficulty family scores 1.000 on every seed for the frontier executor (\S\ref{sec:corrected}). The regime-switch family does discriminate the archived frontier and Haiku runs on these instances, but does not locate a general frontier or certify a universal model ordering.
 
-\textbf{Twelve episodes give a wide interval.} Seven capability failures in twelve is a 95\% interval of roughly 28--85\% on the underlying rate (\S\ref{sec:discovery}). The direction is clear and the magnitude is not.
+\textbf{Twelve matched instances give limited binary resolution.} Frontier passes 5/12 and Haiku 1/12, but only four pairs are discordant. The observed paired advantage is 33.3 percentage points; the exact two-sided McNemar test is $p=0.125$, and the conservative 95\% paired-difference interval is approximately $-0.9$ to $+60.2$ points. The observed ordering is clear on this sample; a population pass-rate difference is not established.
 
-\textbf{One executor, one run per seed.} Nothing here measures variance across attempts on the same instance, and no weaker executor was run on this family, so it contributes no Harness Scaling Curve segment and supports no comparison between models.
+\textbf{One attempt per executor per seed.} Matching controls instance identity, not stochastic variation across attempts. The frontier's lower RMSE on 11/12 seeds is strong directional evidence on these instances, but the experiment measures no repeat-run variance and its resource envelope is incomplete.
+
+\textbf{This is not a Harness Scaling Curve segment.} The harness and protocol are held fixed while the executor/model changes. An HSC instead holds a frozen model fixed while harness generation changes.
 
 \textbf{One mechanism family.} All twelve instances compose two closed forms with a linear boundary. Whether the failure is about latent structure in general, or about this construction, is not established.
 
 \textbf{A published number was retracted during this version.} Seed 11 was reported as a capability failure at 0.258 and passes at 0.021 once the executor is given time to finish. The error was in the apparatus, not the item, and it survived until the seeds around it were run. Any single-instance result in this paper should be read with that in mind.
 
-\textbf{Neither difficulty axis inside the envelope reached the frontier.} Scale separated the tiers; search separated nothing, with both executors at 1.000 (\S\ref{sec:corrected}). Two axes are not an exhaustive search of the space, and the paper offers no third candidate. Every frontier figure here remains a lower bound set by the suite.
+\textbf{Neither difficulty axis inside the envelope reached the frontier.} Scale separated the tiers; search separated nothing, with both executors at 1.000 (\S\ref{sec:corrected}). The sealed-discovery family is the tested candidate outside that envelope, but one family is not an exhaustive account of discovery difficulty. Every frontier figure remains conditional on the suite.
 
 \textbf{Four seeds and two executors on the search family.} At 1.000 and 1.000 the comparison has no resolution to spare: the measurement establishes that the family does not discriminate these two executors, not the size of any gap between them.
 
 \textbf{Two executors is the minimum for a concordance audit and not a good number.} With two, concordant error is a strong signal but its false-positive rate is unquantified: two systems from overlapping training distributions may share a misreading that the specification does not license. Three or more executors from genuinely independent lineages would let the audit distinguish a shared misreading from a defective key, and that comparison has not been run.
 
-\textbf{The audit found two defects; it does not establish that two is all there were.} It is a filter with unknown recall. The items it did not flag are unaudited rather than validated.
+\textbf{The initial concordance investigation found two defects; later manual review brought the paper's total to four.} Neither count establishes completeness. The audit is a filter with unknown recall, and items it did not flag are unaudited rather than validated.
 
 \textbf{Defect discovery was retrospective.} Both defects were found because a measurement looked wrong, not because the audit was run as a matter of course. The requirement in \S\ref{sec:concordance} is a proposal informed by two instances, not a protocol with a measured detection rate.
 
@@ -1638,17 +1689,19 @@ Version 1.4 differed from its predecessors in one respect that mattered more tha
 
 Version 1.6 continues that pattern one level further down. Version 1.4 examined the arithmetic and found it blind to something that mattered; Version 1.6 examines the items the arithmetic runs on and finds that two of them graded a rule they never stated. Both were discovered by the same signature --- executors of very different capability returning the same answer and both being marked wrong --- and that signature is cheap enough to check routinely, which is why \S\ref{sec:concordance} asks that it be checked routinely.
 
-Version 1.9 adds the first result that goes the other way. After three difficulty axes saturated, the argument in \S\ref{sec:envelope} predicted where headroom had to be --- outside what a complete specification mechanically determines --- and the first axis built there delivers it. On sealed mechanisms generated after the executor was frozen, each composing two laws across a latent boundary, the frontier executor fails seven of twelve instances on capability, and on three of them extrapolates worse than nearest neighbour: worse than memorising the sample and reading off the closest point.
+Version 1.9 added the first result that went the other way. After three difficulty axes saturated, the argument in \S\ref{sec:envelope} predicted where headroom had to be --- outside what a complete specification mechanically determines --- and the first axis built there delivered it. Version 2.0 adds the corresponding same-seed executor comparison: on the common regime-switch instances frontier passes 5/12 and Haiku 1/12, while frontier RMSE is lower on 11/12. The exact paired tests separate the RMSE ordering on this sample more clearly than the binary pass outcome, whose two-sided McNemar $p$-value is 0.125.
 
 The path to that number is part of the result. An earlier draft reported a single failing instance, and that instance passes; the figure came from a run cut off by a limit shorter than the task. It was corrected by running the rest of the family, which is the only reason the correction happened at all --- a single episode carries no signal that it was interrupted, because a truncated run and a wrong answer produce the same row.
 
-The honest summary of the earlier measurement is mixed, and the second half is the larger part. Harder items separated a weaker executor from a stronger one for the first time, with a single interpretable failure mode. But both difficulty axes tried --- specification scale and exact search --- left the frontier executor at 1.000, so the suite's ceiling and the frontier's ceiling remain indistinguishable, and the paper ends with no candidate for what would separate them. Reporting the first result without the second would be the same error this framework was written to avoid.
+The honest summary is mixed, and the limits are part of the result. Harder items separated a weaker executor from a stronger one for the first time, and the regime-switch family now separates the archived executors on matched instances. But one attempt per executor per seed, one mechanism family and incomplete resource reporting do not establish universal model-tier ordering. Reporting the paired result without those qualifications would be the same error this framework was written to avoid.
 
-For harness-based AI the framework still provides a development roadmap: begin with ephemeral cognition, add persistence, learning, governed self-improvement, recursive improvement, discovery, organization, mission autonomy and finally open-ended transduction. The LLM remains the generative engine; the harness determines which loops are structurally possible; external benchmark evidence determines which level is earned. What Version 1.4 added is the reminder that the evidence has to be able to see the thing it is measuring. Version 1.9 adds that the apparatus counts as evidence too: a timeout that could not fire turned a killed run into a recorded capability result, and nothing in the data said so. What Version 1.6 adds is that the evidence must itself be checkable: a hidden answer key is an assertion, and a framework that builds an intelligence scale on unaudited assertions has moved the unfalsifiable part rather than removed it.
+For harness-based AI the framework still provides a development roadmap: begin with ephemeral cognition, add persistence, learning, governed self-improvement, recursive improvement, discovery, organization, mission autonomy and finally open-ended transduction. The LLM remains the generative engine; the harness determines which loops are structurally possible; external benchmark evidence determines which level is earned. What Version 1.4 added is the reminder that the evidence has to be able to see the thing it is measuring. Version 1.9 added that the apparatus counts as evidence too, and Version 2.0 adds that matched executor comparisons must not be mislabeled as HSC: changing the executor/model while holding the harness fixed is a different experimental question.
 
 \section*{Reproducibility}
 
-The measurement in \S\ref{sec:measured} used a deterministic task generator seeded per instance, an external verifier held outside the executor's filesystem reach, and a fixed intervention policy. The ladder identifier, per-rung episode counts, per-band success rates, false-completion counts and attempt counts are reported in-line so the reported $A_{DI}$ can be recomputed by hand from the tables. The scoring utility reproduces the Version 1.3 figure under a $\rho = 0$ flag, so the difference between the two primitives is auditable rather than asserted.
+The measurement in \S\ref{sec:measured} used a deterministic task generator seeded per instance, an external verifier held outside the executor's filesystem reach, and a fixed intervention policy. The Version 2.0 regime-switch comparison is archived in \texttt{measurements/regime\_switch\_frontier.csv} and \texttt{measurements/regime\_switch\_haiku.csv}. It uses common-protocol seeds $0,9,11,17,24,25,27,38,40,41,44,50$, excludes seed 12 because it used the earlier protocol, uses model ID \texttt{claude-haiku-4-5} for the Haiku run, and gives each executor a 7200-second timeout. The frontier executor label/version is missing from the archived frontier CSV and is not inferred here. The CSVs expose per-seed verdicts, RMSE, nearest-neighbour baseline, mechanism-stated flag and exit code so the paired counts and RMSE comparisons can be recomputed. The frontier file lacks wall times for six seeds and neither file has a separate termination-reason field; those omissions fall short of the reporting standard in \S\ref{sec:apparatus} and are disclosed rather than silently repaired.
+
+The earlier ladder measurement remains reproducible as described below. Its ladder identifier, per-rung episode counts, per-band success rates, false-completion counts and attempt counts are reported in-line so the reported $A_{DI}$ can be recomputed by hand from the tables. The scoring utility reproduces the Version 1.3 figure under a $\rho = 0$ flag, so the difference between the two primitives is auditable rather than asserted.
 
 The item work in \S\ref{sec:validity} is reproducible on the same basis. Both DL4 families are generated from a seed, so an instance is named by its family and seed rather than stored; the accuracies in \S\ref{sec:t4} and \S\ref{sec:corrected} are per-seed and can be recomputed instance by instance. The specification--key consistency tests of \S\ref{sec:speckey} are part of the suite rather than a one-off audit, and each was confirmed to fail when the defect it guards against was deliberately reintroduced --- a test for a defect that has never been observed failing is an assertion of the same kind this section exists to distrust. The concordance audit of \S\ref{sec:concordance} requires no artefacts beyond two executors and the per-case responses, both of which the runner already records.
 
@@ -1739,12 +1792,13 @@ Version & Date & Principal change \\
 1.6 & Aug 2026 & The items audited. Cross-tier concordance auditing required before failures are attributed to executors (\S\ref{sec:concordance}); specification--key consistency tests required for parameterised item families (\S\ref{sec:speckey}); graded item scoring with separated failure modes (\S\ref{sec:graded}); two DL4 item families built on specification scale and on search (\S\ref{sec:t4}); the finding that disclosed hazards do not desaturate a suite (\S\ref{sec:trickiness}); per-coordinate headroom and audit status added to the reporting standard (\S\ref{sec:report}); the memory contract of 1.5 carried in (\S\ref{sec:memory}). \\
 1.7 & Aug 2026 & GUI Perception added as a diagnostic subscale of C with a GP0--GP5 ladder and the $[P,G,S,A,R]$ computer-agent decomposition; visual-interface complexity added to task difficulty; the observation channel made part of the reported harness (\S\ref{sec:gp}). \\
 1.8 & Aug 2026 & Memory Capability M separated from Individual Intelligence and measured independently as a supporting coordinate, joined to I by the one-way gate $I(A) \ge I_n \implies M(A) \ge \mu_n$; M excluded from the default HLIS product; M-Bench and the $\mu_n$ prerequisite table (\S\ref{sec:memory}). \\
-\textbf{1.9} & Aug 2026 & \textbf{Four difficulty axes measured; the first one outside the envelope reaches the frontier.} A third axis, decidability, saturates (\S\ref{sec:decidability}); a fourth answer-key defect found in it (\S\ref{sec:fourth}); the mechanically-derivable envelope stated as the explanation for all three saturating axes (\S\ref{sec:envelope}); sealed-mechanism discovery with a latent regime boundary fails the frontier executor on 7 of 12 instances, 3 of them worse than the nearest-neighbour baseline (\S\ref{sec:discovery}); a harness timeout that could not fire, then one that fired short, and the number each cost (\S\ref{sec:apparatus}); two library audits, including one causal item certifying eight levels at once (\S\ref{sec:libraries}). \\
+1.9 & Aug 2026 & Four difficulty axes measured; the first one outside the envelope reaches the frontier; apparatus and item-validity findings carried forward in Version 2.0. \\
+\textbf{2.0} & Aug 2026 & Same-seed regime-switch comparison using the archived frontier and Haiku CSVs. Frontier passes 5/12 and Haiku 1/12; frontier RMSE is lower on 11/12. Exact two-sided McNemar $p=0.125$ and sign-test $p=0.00635$ are reported with conservative uncertainty and explicit limits. The comparison changes executor/model at fixed harness/protocol and is not an HSC segment. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \vspace{1em}
-\noindent\textbf{Framework status.} Level names and numerical thresholds remain proposed working definitions and should be revised when benchmark evidence warrants. Version 1.4 was the first version in which any part of the framework was revised \emph{because} of benchmark evidence rather than argument, and it revised the measuring instrument rather than the thing measured. Version 1.6 revises the instrument again, at the level of the individual items, on the same basis: two of them were found to be wrong, and the method that found them is stated here so that others can run it against their own.
+\noindent\textbf{Framework status.} Level names and numerical thresholds remain proposed working definitions and should be revised when benchmark evidence warrants. Version 1.4 revised the score after running it; Version 1.6 revised the items after auditing them; Version 1.9 located headroom outside the mechanically-derivable envelope and revised the apparatus record after a retraction. Version 2.0 adds comparative evidence that the regime-switch family discriminates the two archived executor configurations on matched instances, while preserving the distinction between executor comparison and harness scaling.
 
 \end{document}
