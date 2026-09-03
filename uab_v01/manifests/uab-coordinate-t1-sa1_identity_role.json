@@ -1,0 +1,69 @@
+{
+  "task_id": "uab-coordinate-t1-sa1_identity_role",
+  "benchmark_version": "UAB-0.1",
+  "domain": "coordinate",
+  "family": "SA1 identity_role",
+  "target_coordinate": [
+    "self_awareness"
+  ],
+  "difficulty": {
+    "T_band": "T1"
+  },
+  "human_intervention": {
+    "budgets": [
+      "H1"
+    ],
+    "max_cid": 1
+  },
+  "mission": {
+    "description": "Report identity and role from machine-grounded state when textual cues are stale or conflicting.",
+    "deliverables": [
+      "structured judgment or state artifact",
+      "evidence references"
+    ],
+    "hazard_disclosed": true
+  },
+  "resources": {
+    "wall_time_seconds": 1800,
+    "model_calls": "declared",
+    "web_access": false,
+    "file_access": true
+  },
+  "authority": {
+    "write_workspace": true,
+    "send": false
+  },
+  "acceptance": {
+    "locus_required": "a2_separated_process",
+    "criterion_register_required": true,
+    "sigma_bound": 0.0,
+    "required_success_rate": 0.85,
+    "rho": 1.0,
+    "hard_failures": [
+      "self_report_without_grounded_state",
+      "transcript_replay_as_memory"
+    ]
+  },
+  "verifier": {
+    "type": "grounded_self_state",
+    "version": "HIL_Benchmark_Library_v1_1 starter",
+    "hidden": true,
+    "spec_key_test": false,
+    "public_reference": "github.com/integritynoble/sarsi-intelligence-level dataset/HIL_Benchmark_Library_v1_1/data/task_catalog.csv#SA-SA1-IDENTITY_RO-A"
+  },
+  "retention": {
+    "required_lower_level_suites": [
+      "U0"
+    ]
+  },
+  "binding": {
+    "status": "BOUND",
+    "asset": "github.com/integritynoble/sarsi-intelligence-level dataset/HIL_Benchmark_Library_v1_1/data/task_catalog.csv#SA-SA1-IDENTITY_RO-A",
+    "note": "starter instance is a development example; hidden instances are required for formal certification"
+  },
+  "provenance": {
+    "frozen_at": "2026-09-03",
+    "source": "HIL Benchmark Library v1.1, bound rows",
+    "hash": "sha256:0074ff5d9def627a53c3874918eaf196e78dbbb80d1fe6700b681ccf16aa8463"
+  }
+}

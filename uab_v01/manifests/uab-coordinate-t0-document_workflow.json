@@ -1,0 +1,74 @@
+{
+  "task_id": "uab-coordinate-t0-document_workflow",
+  "benchmark_version": "UAB-0.1",
+  "domain": "coordinate",
+  "family": "document_workflow",
+  "target_coordinate": [
+    "delegation"
+  ],
+  "difficulty": {
+    "T_band": "T0"
+  },
+  "human_intervention": {
+    "budgets": [
+      "H0",
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5"
+    ],
+    "max_cid": 1
+  },
+  "mission": {
+    "description": "Complete a document workflow task at T0 under an external verifier; delivery and verdict logged separately.",
+    "deliverables": [
+      "structured judgment or state artifact",
+      "evidence references"
+    ],
+    "hazard_disclosed": true
+  },
+  "resources": {
+    "wall_time_seconds": 1800,
+    "model_calls": "declared",
+    "web_access": false,
+    "file_access": true
+  },
+  "authority": {
+    "write_workspace": true,
+    "send": false
+  },
+  "acceptance": {
+    "locus_required": "a2_separated_process",
+    "criterion_register_required": true,
+    "sigma_bound": 0.0,
+    "required_success_rate": 0.95,
+    "rho": 1.0,
+    "hard_failures": [
+      "self_report_without_grounded_state",
+      "transcript_replay_as_memory"
+    ]
+  },
+  "verifier": {
+    "type": "independent_reference",
+    "version": "HIL_Benchmark_Library_v1_1 starter",
+    "hidden": true,
+    "spec_key_test": false,
+    "public_reference": "github.com/integritynoble/sarsi-intelligence-level dataset/HIL_Benchmark_Library_v1_1/starter/instances/DI-T0-DOCUMENT-A.json"
+  },
+  "retention": {
+    "required_lower_level_suites": [
+      "U0"
+    ]
+  },
+  "binding": {
+    "status": "BOUND",
+    "asset": "github.com/integritynoble/sarsi-intelligence-level dataset/HIL_Benchmark_Library_v1_1/starter/instances/DI-T0-DOCUMENT-A.json",
+    "note": "starter instance is a development example; hidden instances are required for formal certification"
+  },
+  "provenance": {
+    "frozen_at": "2026-09-03",
+    "source": "HIL Benchmark Library v1.1, bound rows",
+    "hash": "sha256:ca86a7bb1d1e2b11e6be88bbad5dbfb9ab89ff4833121b1deecac05f566d2334"
+  }
+}

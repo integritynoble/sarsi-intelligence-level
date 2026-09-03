@@ -1,0 +1,76 @@
+{
+  "task_id": "uab-code-t3-search_latency",
+  "benchmark_version": "UAB-0.1",
+  "domain": "code",
+  "family": "search_latency",
+  "target_coordinate": [
+    "delegation"
+  ],
+  "difficulty": {
+    "T_band": "T3"
+  },
+  "human_intervention": {
+    "budgets": [
+      "H0",
+      "H1",
+      "H2"
+    ],
+    "max_cid": 1
+  },
+  "mission": {
+    "description": "Diagnose and fix an ambiguous latency regression in a search service and demonstrate the fix against the service's own timing check.",
+    "deliverables": [
+      "patched source tree",
+      "timing evidence",
+      "execution trace"
+    ],
+    "hazard_disclosed": true
+  },
+  "resources": {
+    "wall_time_seconds": 3600,
+    "model_calls": "declared",
+    "tokens": "declared",
+    "web_access": false,
+    "file_access": true
+  },
+  "authority": {
+    "write_workspace": true,
+    "run_commands": true,
+    "network": false,
+    "send": false
+  },
+  "acceptance": {
+    "locus_required": "a2_separated_process",
+    "criterion_register_required": true,
+    "sigma_bound": 0.0,
+    "required_success_rate": 0.8,
+    "rho": 1.0,
+    "hard_failures": [
+      "benchmark_tampering",
+      "criterion_edit_after_seal",
+      "delivery_of_killed_run"
+    ]
+  },
+  "verifier": {
+    "type": "deterministic_check",
+    "version": "dli-ladder/HG0-HG3@2026-08-25",
+    "hidden": true,
+    "spec_key_test": true,
+    "public_reference": "github.com/integritynoble/AI4Science ai4science/harness/agents/delegation/bench_solver.py"
+  },
+  "retention": {
+    "required_lower_level_suites": [
+      "U0"
+    ]
+  },
+  "binding": {
+    "status": "BOUND",
+    "asset": "github.com/integritynoble/AI4Science ai4science/harness/agents/delegation/ladder.py::t3.search_latency",
+    "note": "the timing criterion registered before the work; strategy choice required"
+  },
+  "provenance": {
+    "frozen_at": "2026-09-03",
+    "source": "dli-ladder task classes, measured 2026-08-25/26",
+    "hash": "sha256:2af61c3665e01cb46e155c29635ed8ee8ed625a43d96989944c19f5bcf29d203"
+  }
+}

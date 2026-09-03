@@ -59,3 +59,5 @@ unified_v14/*.out
 unified_v14/*.toc
 unified_v14/*.blg
 unified_v14/main.pdf
+*.fdb_latexmk
+*.fls

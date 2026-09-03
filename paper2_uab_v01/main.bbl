@@ -1,0 +1,35 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026agents}
+Chengshuai Yang.
+\newblock Agents that earn a level: Harness design across motors, with a
+  downloadable fleet.
+\newblock Draft v0.1,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026dlibench}
+Chengshuai Yang.
+\newblock {DLI}-bench cannot draw its own frontier.
+\newblock \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{b}}.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026plan}
+Chengshuai Yang.
+\newblock Unified agent intelligence development plan: Benchmark-first
+  development of general agents before {AI4Science} integration.
+\newblock Planning document, September 2026, 2026{\natexlab{c}}.
+
+\bibitem[Yang and Xue(2026)]{yang2026unified}
+Chengshuai Yang and Ting Xue.
+\newblock Measuring the unified intelligence level: A cumulative,
+  harness-measurable hierarchy.
+\newblock \emph{Version 2.3,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}}, 2026.
+
+\end{thebibliography}

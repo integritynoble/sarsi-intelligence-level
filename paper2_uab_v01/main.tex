@@ -1,0 +1,373 @@
+% arXiv: force the pdflatex path. All content is text, tables and PDF figures; there are no
+% .eps files (figures are PDF), and this must stay within the first few lines to take effect.
+\pdfoutput=1
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do.\do\_\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={Unified Agent Benchmark v0.1: Specification, Coverage, and What Is Bound},
+  pdfauthor={Chengshuai Yang},
+  pdfsubject={A frozen measurement contract for U0--U3 agent certification across six domains, with a generated coverage matrix},
+  pdfkeywords={agent benchmark, delegation, false completion, restart test, verifier separation, coverage}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Unified Agent Benchmark v0.1}
+\fancyhead[R]{\small Yang}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\FA}{\ensuremath{F_A(H,p)}}
+\newcommand{\rhov}{\ensuremath{\rho_V}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Unified Agent Benchmark v0.1:}\\[6pt]
+{\LARGE\bfseries Specification, Coverage, and What Is Bound}\\[8pt]
+{\large\bfseries A Frozen Contract for Certifying Persistent, Adaptive and Self-Improving Agents\\[2pt]
+Across Six Domains, with a Generated Coverage Matrix}\\[16pt]
+{\large Chengshuai Yang$^{1,*}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 3, 2026 --- draft v0.1}
+\end{center}
+
+\begin{abstract}
+A benchmark built after the agents it scores is a benchmark shaped by what those agents happen to do well. This paper freezes the Unified Agent Benchmark (UAB) before the agents it is meant to certify are optimized. UAB v0.1 is a measurement contract for Unified levels U0--U3 across six domains --- paper development, funding, job search, software engineering, research and business workflows --- built on the six-coordinate framework of \citet{yang2026unified}. The contract fixes the unit (a frozen model--harness pair), the primitive (delivered outcomes net of false completions, with a class loss ratio $\rho$ that sets the reliability a class requires), the record every episode must carry (band, budget, reliability, resource envelope, verifier version, cost, and why the episode ended), the admissible acceptance loci (never the performing system, never the same process in a reviewer's persona), the task-manifest schema and freeze-by-hash rule, and four policies for intervention, resources, verification and retention. It then reports coverage honestly and by generation rather than by hand: of 36 domain-band cells, 4 are bound, 1 is generator-bound, 4 have something running at the band for another family, and 27 are specification only; 10 cross-domain coordinate suites --- four restart tests for $M1$, three grounded self-state tests, and three delegation starters --- are bound. Every bound cell names a public asset and validates against the schema. What v0.1 can measure is a U0--U1 delegation reading in the software domain, $M1$, $SA1$--$SA2$ and $C0$--$C1$; what it cannot yet measure is any U2 or U3 claim, because no learning-transfer or self-improvement suite is bound, and any claim in four of the six domains. The paper states the binding order that would change that, and the validity requirements --- specification--key tests, concordance audits, graded scoring, headroom, termination reasons --- that every future binding must meet, because the benchmark this one replaces was well formed on every row and could not draw a frontier.
+\end{abstract}
+
+\noindent\textbf{Keywords:} agent benchmark; Unified Intelligence; delegation; false completion; restart test; verifier separation; coverage matrix; pre-registration
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+The dangerous sequence is: build an agent, observe what it can do, design a benchmark around those capabilities, and watch the agent pass. The sequence this paper commits to is the reverse: define the intelligence claim, construct the benchmark, freeze the verifier, build the agent, measure. Formally, a frozen benchmark $B$ precedes the sequence of candidate pairs $A_0, A_1, A_2, \ldots$ and its acceptance criteria stay outside every candidate's write set \citep{yang2026plan}.
+
+This is not a new principle, and the reason to write it down again is that the corpus this paper belongs to has already violated it once by accident. DLI-Bench v0.1 was well formed on every one of its 96 rows and could not produce a delegation frontier, because the intervention budget, the reliability target, the intervention-depth ceiling, the time budget and four of eight difficulty coordinates each took exactly one value per task band: one independent variable wearing six names \citep{yang2026dlibench}. Nothing in the rows was wrong. The set of them measured less than it looked like it measured. That failure is the design constraint here: coverage is generated from manifests, never asserted in prose, and a cell is counted only when a runnable asset exists for that domain and that band.
+
+\subsection{Contributions}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{A frozen measurement contract} (\S\ref{sec:contract}): unit, primitive, four outcomes, the per-episode record, and the gates for U0--U3.
+\item \textbf{A task-manifest schema} (\S\ref{sec:manifest}) with freeze-by-hash, an admissible-locus ladder for acceptance, and binding status as a required field.
+\item \textbf{Six domain band ladders} T0--T6 (\S\ref{sec:bands}), with the rule that T5 and above admit no static item.
+\item \textbf{Four policies} (\S\ref{sec:policies}): intervention, resources, verification, retention.
+\item \textbf{A generated coverage matrix} (\S\ref{sec:coverage}): 36 domain-band cells labelled from manifests, 16 bound manifests with public assets, and a validator that fails on any inconsistency.
+\item \textbf{What v0.1 can and cannot measure} (\S\ref{sec:can}), and the binding order for v0.2 (\S\ref{sec:roadmap}).
+\end{enumerate}
+
+\subsection{What this paper does not claim}
+
+No agent has been certified on UAB v0.1. No score appears here. The bound cells are a small core in one domain plus cross-domain coordinate suites; four of six domains have nothing runnable. Those facts are the subject of \S\ref{sec:coverage}, not a footnote to it.
+
+\section{The Measurement Contract}\label{sec:contract}
+
+\subsection{Unit and profile}
+
+The unit is a frozen model--harness pair $A(m,h)$. The output of a certification run is a profile, not a score:
+\[
+[C, I, O, T, H, SA] \text{ at reliability } p, \qquad M \text{ reported beside } I,
+\]
+with $U^{*}$ the highest Unified level whose gate and every lower retention suite pass. For an individual unit, $O$ is omitted from the gate and named as omitted; it is never set to zero, and \texttt{unmeasured} is never \texttt{0}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Level & Gate (all must hold) & Delegation gate \\
+\midrule
+U0 Reactive & C0, I0, O0, SA0 & T0 at H5--H4 \\
+U1 Persistent & C1, I1 (requires $M1$), O1, SA1 & T1 at $\le$H3 \\
+U2 Adaptive & C2, I2 (requires $M3$), O2, SA2 & T2 at $\le$H2 \\
+U3 Self-improving & C3, I3 (requires $M4$), O3, SA3 & T3 at $\le$H1 \\
+\bottomrule
+\end{tabularx}
+\caption{The U0--U3 gates in scope for UAB v0.1, from \citet{yang2026unified}. Retention: $U_n \Rightarrow U_{n-1}$.}
+\label{tab:gates}
+\end{table}
+
+\subsection{The primitive and the four outcomes}
+
+Every delegation episode records two fields separately: \texttt{harness\_accepted} (null where the harness has no acceptance step) and \texttt{verifier\_pass}. Four outcomes are derived from them and never typed by hand: delivered and correct; \emph{false completion} (handed back as done, and wrong); held back (a correct refusal, which costs human load and not reliability); false rejection (the cost of strictness). The scoring primitive is
+\[
+S^{\text{net}}_A(T,H) = P(\text{delivered and verifier pass}) - \rho(\tau)\,P(\text{false completion}), \quad \text{clamped at } 0,
+\]
+where $\rho(\tau)$ is the class's loss ratio and $p^{*} = \rho/(1+\rho)$ is the reliability the class requires. Setting $\rho = 0$ reproduces the success-only figure for audit. A class with unbounded residual harm has $p^{*}=1$ and is in the benchmark to be refused; a suite without such classes measures only the classes where attempting is safe.
+
+\begin{cautionbox}{Why the first term says ``delivered''}
+A success-only aggregate is exactly invariant to an acceptance step: it changes which results are reported as successes, not whether they are correct. Measured on 48 episodes with one frozen model and only the harness changing, two rungs differing only by acceptance scored identically while false completions went from 2/12 to 0/12. And a primitive whose first term counted verifier passes regardless of delivery would be unchanged by any acceptance policy, so a harness that held back everything would score best. The delivered condition closes both.
+\end{cautionbox}
+
+\subsection{What every episode records}
+
+The tuple $(T, H, p, R, V, C)$: band, budget, verified reliability, resource envelope, verifier version, cost. Per episode: attempts, harness iterations, model calls, wall time, tokens, exit status, whether the limit was reached, a termination reason in $\{\texttt{normal}, \texttt{timed\_out}, \texttt{crashed}, \texttt{not\_attempted}\}$, every intervention with its depth, and a forecast identifier where a self-awareness probe is attached. A run the runner killed is recorded as timed out or not attempted, never as a delivery: a truncated run and a wrong answer are the same row otherwise, and the framework this benchmark serves had to retract a headline number for exactly that reason.
+
+For U1 and above: restart success, provenance recovery, stale-state suppression. For U2 and above: held-out transfer, repeat-error reduction, lesson rollback. For U3 and above: self-improvement gain and regression rate. Always: false-completion rate, held-back rate, false-rejection rate, human load, cost per verified completion, verifier disagreement, and per-band headroom.
+
+\section{The Task Manifest}\label{sec:manifest}
+
+Every task family is one JSON manifest validating against a published JSON Schema (draft 2020-12). A manifest is hashed with its hash field empty and frozen by that hash; a change is a new version. The required blocks:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+Block & Content \\
+\midrule
+identity & \texttt{task\_id} (\texttt{uab-<domain>-t<band>-<family>}), benchmark version, domain, family, target coordinates \\
+difficulty & the band, and optionally the difficulty vector (horizon, uncertainty, ambiguity, verification, novelty, environment change, tool diversity, coordination, risk) \\
+human intervention & the budgets the family is scored under, and the intervention-depth ceiling above which an episode is void at that budget \\
+mission & description, deliverables, and whether every rule the key grades is stated in the visible specification \\
+resources & the wall-clock limit \emph{the runner enforces}, model calls, tokens, web and file access \\
+authority & what the executor may do; anything absent is forbidden; outward actions default to false \\
+acceptance & the weakest admissible locus, whether a criterion register is required (always), the bound on $\sigma$ (the share of criteria the system may author), the required success rate, $\rho$, and hard failures \\
+verifier & type, version, hidden or public, whether a specification--key test ships, public reference \\
+retention & the lower-level suites that must pass \\
+binding & \texttt{BOUND}, \texttt{GENERATOR\_BOUND}, \texttt{BAND\_ONLY} or \texttt{SPECIFICATION\_ONLY}, the asset, a note \\
+provenance & frozen date, source, content hash \\
+\bottomrule
+\end{tabularx}
+\caption{The manifest blocks. The schema rejects a manifest with an inadmissible acceptance locus, a bound status without an asset, or an unknown field.}
+\label{tab:manifest}
+\end{table}
+
+\begin{claimbox}{The acceptance-locus ladder}
+a0, the performing system: never admissible. a1, the same process wearing a reviewer persona: never admissible. a2, a separate process on a \emph{copy} of the deliverables with no inherited environment: the weakest admissible locus. a3, a separate host. a4, a separate party that holds the ground truth and returns a scalar. a5, cryptographic promotion. One base model in two processes with separate credentials and enforced write sets satisfies a2; one model told to now act as reviewer does not. The requirement is on locus, not on species.
+\end{claimbox}
+
+An abridged bound manifest, for the software T1 family:
+
+{\small\begin{verbatim}
+task_id: uab-code-t1-request_timeout     domain: code   family: request_timeout
+target_coordinate: [delegation]          difficulty.T_band: T1
+human_intervention: budgets [H0,H1,H2], max_cid 1
+mission: change the request timeout to the value the goal names and leave
+         the cache and retry constants unchanged;   hazard_disclosed: true
+resources.wall_time_seconds: 600 (enforced)
+authority: write_workspace, run_commands (network, send: false)
+acceptance: locus a2_separated_process, register required, sigma_bound 0.0,
+            required_success_rate 0.80, rho 1.0,
+            hard_failures [benchmark_tampering, criterion_edit_after_seal,
+                           delivery_of_killed_run]
+verifier: deterministic_check, dli-ladder/HG0-HG3@2026-08-25, hidden,
+          spec_key_test: true
+binding: BOUND, asset .../delegation/ladder.py::t1.request_timeout
+         note: two checks -- the named value changed; the neighbours did
+         not move
+provenance: frozen 2026-09-03, hash sha256:...
+\end{verbatim}}
+
+The second check is the whole item: a global search-and-replace passes the first and fails the second.
+
+\section{Bands by Domain}\label{sec:bands}
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lYYYYYY@{}}
+\toprule
+Band & Paper & Funding & Job & Code & Research & Business \\
+\midrule
+T0 & one citation, table or figure generated or verified & one deadline or eligibility requirement extracted & requirements extracted from one posting & one explicit code edit & one fact retrieved or calculated & one market or company fact \\
+T1 & routine section from supplied evidence & one call evaluated against one applicant & fit assessed for one position & routine bug fixed with tests & one known analysis reproduced & one bounded analysis \\
+T2 & multi-step literature, analysis, figure and writing task & find, compare and rank opportunities & search, compare, tailor, keep state across applications & multi-file feature & specified multi-step workflow & multi-step competitor, customer or market assessment \\
+T3 & complex revision with verification & funding strategy and proposal workflow & multi-company application strategy & ambiguous repository-scale failure diagnosed and recovered & strategy chosen, failures diagnosed, alternatives run & strategy under uncertainty and conflicting evidence \\
+T4 & full expert paper project under a frozen question & long-horizon grant preparation & complete long-horizon campaign & long-horizon software project & complete project under a frozen benchmark & long-running business project \\
+T5 & paper requiring an unknown method & non-obvious strategy discovered and validated & strategy that improves verified outcomes & unknown solution method for a sealed task & unknown mechanism discovered and validated & new strategy or opportunity validated \\
+T6 & mission: project, experiments, manuscript, submission & mission: funding portfolio & mission: full campaign & mission: projects & mission: project portfolio & mission: project portfolio \\
+\bottomrule
+\end{tabularx}
+\caption{Difficulty bands per domain, from \citet{yang2026plan} \S10. Bands are cumulative in what the human still supplies, not in domain knowledge.}
+\label{tab:bands}
+\end{table}
+
+\begin{cautionbox}{T5 and above admit no static item}
+A level defined by the answer not being known in advance cannot be certified by an item whose key is recorded before the run. The only items that reach past the mechanically-derivable envelope are generated after the pair is frozen and graded on extrapolation \citep{yang2026unified}. The one T5 cell bound in v0.1 is of that kind: a sealed mechanism generated per seed, scored on held-out points outside the observation box against a nearest-neighbour baseline.
+\end{cautionbox}
+
+\section{Policies}\label{sec:policies}
+
+\subsection{Intervention}
+
+Budgets H0 (none), H1 (exception-only: one unavailable fact or one narrow clarification, no strategy), H2 (occasional: at most two bounded corrections, no central strategy), H3 periodic, H4 frequent, H5 continuous. Every intervention is logged with its Critical Intervention Depth: CID0 permission, CID1 external fact, CID2 local correction, CID3 strategy, CID4 decomposition, CID5 central design, CID6 the human did the task. Governance approvals are logged in a separate table and never count as cognitive intervention unless the approval supplies task strategy. An intervention deeper than the manifest's ceiling voids the episode at that budget. \textbf{The zero-intervention rule:} an H1 or H2 run that raised zero interventions is reported as conducted at H0; cells that differ only by label are one cell. Human load --- count, minutes, authorization latency --- is reported beside the score.
+
+\subsection{Resources}
+
+Every pair report carries the envelope $R$: wall clock, model calls, tokens, tool calls, subagent count, compute class, memory budget, external-knowledge access. The wall-clock limit is enforced on the executor's process group; a limit stated and not enforced, or one that kills only the direct child, is an apparatus defect. Default ceilings by band: 300, 600, 1800, 3600, 7200 seconds for T0 to T4. Cost per verified completion is a primary endpoint. Tool authority is equalised across executors or recorded as unequal.
+
+\subsection{Verification}
+
+The criterion register is written before the work, refuses a criterion about an existing deliverable, refuses a duplicate, refuses a criterion that does not say what it misses, seals when execution starts, and is hash-chained so an edit is detectable. It reports $\sigma$. Public: the verifier type, the specification, worked examples, the reference implementation. Hidden: the scored instances or key. A hidden key is an assertion until something tests it: parameterised families ship a specification--key test run on drawn instances against the key's own reference implementation, and fixed items are concordance-audited when two executors of materially different capability fail with the same response. The verifier version is part of every result. Verifier disagreement above ten percent withdraws an item until audited. Families with many sub-checks report a fraction and separate failure modes.
+
+\subsection{Retention}
+
+Promotion to $U_n$ requires the $U_n$ suite and every lower retention suite to pass in the same frozen configuration in the same run. A candidate that raises a higher score while lowering a lower suite below its gate is not promoted, and the regression is a primary result. Longitudinal levels (I3+, O3+, SA4+, U4+) require several cycles. Two rungs that differ only in post-hoc machinery are scored from the same executor outputs.
+
+\subsection{Separation}
+
+Protected, outside every candidate's write set: hidden tests, frozen manifests, thresholds, held-out data, the primary verifier, certification task selection, the promotion decision. Writable: agent code, prompts, memory policies, planning policies, routing, workflow, sub-agent organization, candidate improvements. The designer may design. It may not grade itself.
+
+\section{Coverage}\label{sec:coverage}
+
+Coverage is generated by a script from the manifests and validated by a second script that fails on any inconsistency: a manifest that does not match the schema, a hash that does not match its content, a bound status without an asset, a matrix cell naming a manifest of another domain or band, or a local asset path that does not exist. A cell is \texttt{BOUND} only when a manifest exists for that domain and that band; \texttt{BAND\_ONLY} means something runs at the band for another family, and is never counted.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lcccccc@{}}
+\toprule
+Domain & T0 & T1 & T2 & T3 & T4 & T5 \\
+\midrule
+paper & band-only & spec & spec & spec & spec & spec \\
+funding & spec & spec & spec & spec & spec & spec \\
+job & spec & spec & spec & spec & spec & spec \\
+code & band-only & \textbf{BOUND} & \textbf{BOUND} & \textbf{BOUND} & \textbf{GEN} & spec \\
+research & band-only & band-only & spec & spec & spec & \textbf{BOUND} \\
+business & spec & spec & spec & spec & spec & spec \\
+\bottomrule
+\end{tabularx}
+\caption{The UAB v0.1 coverage matrix as generated. 36 cells: 4 bound, 1 generator-bound, 4 band-only, 27 specification-only.}
+\label{tab:matrix}
+\end{table}
+
+\subsection{The bound cells and their assets}
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{2.2cm}p{3.4cm}YY@{}}
+\toprule
+Cell & Family & Verifier & Asset \\
+\midrule
+code T1 & request timeout & two deterministic checks: the named value changed; the neighbours did not & \texttt{delegation/ladder.py} in AI4Science \\
+code T2 & pipeline & the rejected count in the report equals the unusable rows in the input & same \\
+code T3 & search latency & timing criterion registered before the work & same \\
+code T4 & expression language; shift cover & exact reference (about 238 expressions per seed); exact optimum (60 instances per seed); computed keys, spec--key test on every draw & \texttt{dli\_bench} generators in AI4Science \\
+research T5 & sealed mechanism discovery & held-out extrapolation RMSE at or below 25\% of nearest-neighbour baseline; mechanism statement required & regime-switch generator, protocol in the v2.0 paper dataset \\
+\midrule
+coordinate I1 $\times$4 & restart continuity, temporal order, relevant retrieval, provenance & restart probe after a genuine process restart & HIL library v1.1 starters \\
+coordinate SA1/SA2 $\times$3 & identity role, tool reachability, authority limits & grounded self-state against stale textual cues & same \\
+coordinate DI T0/T1 $\times$3 & data analysis (T0, T1), document workflow (T0) & independent reference, H0--H5 matrix & same \\
+\bottomrule
+\end{tabularx}
+\caption{Every bound manifest names a public asset. The coordinate suites are cross-domain and are not counted as domain coverage; their starter instances are development examples, and hidden instances are required for formal certification.}
+\label{tab:bound}
+\end{table}
+
+\subsection{What sits behind the specification-only cells}
+
+Twenty-seven cells have nothing runnable. They are not empty of design: DLI-Bench v0.2 carries 180 specification starters in six families (data 39, document 20, planning 21, research 38, software 42, tool use 20) across four strata, each with a difficulty vector, a loss ratio, an acceptance block and an intervention budget, and each marked ``executable assets should be generated from the seed and kept hidden for certification'' \citep{yang2026dlibench}. The agent-coordinate probe set carries fifteen $T{\cdot}H$ procedures per agent for the funding and job agents with benchmark-authored floors. These are where binding begins, and they are listed in the matrix as seeds precisely so that they are not mistaken for coverage.
+
+\section{What v0.1 Can and Cannot Measure}\label{sec:can}
+
+\textbf{Can.} A U0--U1 delegation reading in the software domain at H0, H1 and H2 on three bound families plus two generator-bound T4 families; $M1$ on four restart tests; $SA1$ and $SA2$ on three grounded self-state tests; $C0$ and $C1$ on six bound cognitive items; and a T5 sealed-discovery reading in the research domain. That is enough to certify U1 for a pair whose $C1$, $I1$ (with $M1$), $SA1$ and T1-at-H3 gates all pass, with $O$ omitted for an individual unit.
+
+\textbf{Cannot.} Any U2 claim, because no learning-transfer suite is bound: nothing here measures whether verified experience at time $t$ improves held-out behaviour at $t+1$. Any U3 claim, because no self-improvement suite with a sandbox, a frozen hidden evaluation and an independent promoter is bound. Any claim in paper, funding, job or business. Any cross-domain transfer claim, since only one domain has bound cells. Any $O$ level, since no organizational suite is bound.
+
+\begin{cautionbox}{The lesson carried from DLI-Bench v0.1}
+Every one of its 96 rows was well formed, and the set could not produce a frontier, because six fields took one value per band. The v0.1 bound core here has the same shape in miniature: three code families at one band each, at one budget in the archived runs. A frontier $F_A(H,p)$ at three budgets needs the same class held fixed across H0, H1 and H2 --- the \texttt{budget\_cross} stratum --- and v0.1 declares those budgets in the manifests but has run only H1. The reporting profile is computable in principle and has not been computed.
+\end{cautionbox}
+
+\section{Running a Certification}\label{sec:run}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Pre-register}: the pair (model identity from a live call, harness manifest hash, tool grant, memory snapshot), the manifest set and hashes, seeds, weights, $\rho$ table, ceilings, and the intervention policy text --- committed before the first episode.
+\item \textbf{Apparatus checks}, each a positive control: the timeout kills a grandchild's process group; termination reasons are recorded; the gate opens on a known pass and closes on a known failure; both ends agree on versions; restore is clean; no session survives its episode.
+\item \textbf{Run} the bound families at the declared budgets and seeds, restoring the memory snapshot before every delegation episode; record every field of \S\ref{sec:contract}.
+\item \textbf{Audit}: concordance on any item two executors failed identically; per-band headroom; verifier disagreement.
+\item \textbf{Score} with the delivered-outcome primitive under the predeclared weights; compute the profile, $U^{*}$, the named bottleneck, reliability with an interval, the frontier at each budget, false-completion rate, resource envelope.
+\item \textbf{Report} per pair in the framework's format, with every unmeasured coordinate written as unmeasured.
+\end{enumerate}
+
+\section{Binding Order for v0.2}\label{sec:roadmap}
+
+In cost order, and in the order that unblocks the most claims:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Code T0} --- one explicit edit with a diff verifier. Cheapest cell in the matrix; turns the code column into a full T0--T4 ladder.
+\item \textbf{Funding T0 and Job T0} --- eligibility and requirement extraction. Both are deterministic against a solicitation or posting with a hidden key, and both are the model-free gate the corresponding agents are designed around \citep{yang2026agents}.
+\item \textbf{Paper T0 and T1} --- one citation verified against a hidden bibliographic record; one section drafted from supplied evidence with a claim-to-evidence check.
+\item \textbf{Business T0} --- one fact against a frozen corpus.
+\item \textbf{The U2 suite} --- learning transfer: a held-out family on which a lesson from one episode must change behaviour in a later one after the retrieval index is rebuilt; required before any U2 claim anywhere.
+\item \textbf{The budget-cross runs} --- the bound code families at H0 and H2, so the frontier profile becomes computable.
+\item \textbf{The U3 suite} --- candidate harness modification in a sandbox, frozen hidden evaluation, independent promotion, regression tests.
+\end{enumerate}
+
+Each binding ships a specification--key test if parameterised, a concordance audit if fixed, and a public reference for the verifier type.
+
+\section{Limitations}\label{sec:limits}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{The bound core is small and one-domain.} Five of thirty-six cells, all in software, plus one sealed research family.
+\item \textbf{Starters are not hidden instances.} The coordinate suites' starter instances are development examples; formal certification needs withheld instances that do not yet exist.
+\item \textbf{No run has been scored under this contract.} The archived harness-ladder and regime-switch measurements predate the manifests and are reported in the companion paper on harness scaling, not here.
+\item \textbf{Band placement is by inspection.} The mapping of the three ladder families to code T1--T3, and of document and data-analysis starters to band-only cells, is a judgement recorded in the matrix source and open to revision.
+\item \textbf{The schema is v0.1.} It encodes the difficulty vector as optional; a v0.2 that requires it would let the collinearity check of \citet{yang2026dlibench} run automatically.
+\end{itemize}
+
+\section{Conclusion}
+
+UAB v0.1 is a frozen contract with a small bound core, and both halves of that description matter. The contract fixes what a certification is --- a frozen pair, a delivered-outcome primitive with a class loss ratio, an episode record that says why it ended, an acceptance locus that is never the doer, and a hard gate with retention --- before any agent is optimized against it. The core is honest about its size: four bound cells, one generator-bound, and ten coordinate suites, with twenty-seven cells named as specification only and four named as band-only so that they are not mistaken for coverage. The next version is not a larger claim. It is the same contract with more cells bound in the order that costs least, starting with the one-edit code task and the two extraction tasks that the funding and job agents already need.
+
+\section*{Availability}
+
+The specification, schema, manifests, policies, matrix and validator are in the corpus repository at \url{https://github.com/integritynoble/sarsi-intelligence-level} under \texttt{uab\_v01/}. The bound assets are in \url{https://github.com/integritynoble/AI4Science} (delegation ladder and generators) and in the HIL Benchmark Library v1.1 in the corpus.
+
+\section*{Conflicts and funding}
+
+The author reports no funding specific to this work and no competing interest.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}
