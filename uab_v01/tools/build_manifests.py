@@ -95,6 +95,25 @@ M.append(t0("uab-job-t0-extract_requirements", "job", "extract_requirements",
     ["requirements.json"], "exact_reference", CORPUS + "job_t0.py",
     "set equality on the required bullets after normalization (graded by Jaccard), plus two flags and the location. Taking the first list fails on every instance."))
 
+M.append(t0("uab-paper-t0-verify_citation", "paper", "verify_citation",
+    "Check one named citation in a manuscript excerpt against its bib entry on four fields (first author, year, venue, pages) and list the fields that disagree; other citations also carry discrepancies and are not asked about.",
+    ["citation_check.json"], "exact_reference", CORPUS + "paper_t0.py",
+    "exact discrepancy set plus the consistent flag; the target always carries a non-year discrepancy, so comparing the year only fails on every instance."))
+M.append(t0("uab-business-t0-extract_fact", "business", "extract_fact",
+    "From a company brief, extract one named fact (restated FY revenue, end-of-year headcount, latest round, founding year, or Q4 ARR) with unit and the verbatim source line; a peer company and restated or interim figures are distractors.",
+    ["fact.json"], "exact_reference", CORPUS + "business_t0.py",
+    "exact value, unit and a source line that appears verbatim and contains the value; the first figure after the keyword is always a distractor."))
+m = t0("uab-paper-t1-results_section", "paper", "results_section",
+    "From evidence.json and outline.md, write a short results section for one named dataset: the best method by the stated metric direction with its exact value, the runner-up and the margin, a reference to the table, and no number not in the evidence.",
+    ["results_section.md"], "deterministic_check", CORPUS + "paper_t1.py",
+    "seven checks on the prose including a fabrication check on every decimal number; the target dataset is never listed first.")
+m["difficulty"] = {"T_band": "T1", "vector": {"horizon": 1, "ambiguity": 1, "verification": 1, "novelty": 0, "risk": 0}}
+m["task_id"] = "uab-paper-t1-results_section"
+m["resources"]["wall_time_seconds"] = 600
+m["acceptance"]["required_success_rate"] = 0.9
+m["acceptance"]["rho"] = 1.0
+M.append(m)
+
 # research T5: sealed-mechanism discovery
 M.append({
     "task_id": "uab-research-t5-regime_switch", "benchmark_version": "UAB-0.1", "domain": "research", "family": "sealed_mechanism_discovery",

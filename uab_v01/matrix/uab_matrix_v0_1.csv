@@ -1,6 +1,6 @@
 domain,T_band,binding_status,source,H_budgets
-paper,T0,BAND_ONLY,"uab-coordinate-t0-document_workflow (document workflow, not a manuscript element)",
-paper,T1,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
+paper,T0,GENERATOR_BOUND,uab-paper-t0-verify_citation,H0 H1 H2
+paper,T1,GENERATOR_BOUND,uab-paper-t1-results_section,H0 H1 H2
 paper,T2,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
 paper,T3,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
 paper,T4,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
@@ -29,7 +29,7 @@ research,T2,SPECIFICATION_ONLY,DLI-Bench v0.2 `research` starters (38 rows); res
 research,T3,SPECIFICATION_ONLY,DLI-Bench v0.2 `research` starters (38 rows); research-agent field benchmarks as candidate assets,
 research,T4,SPECIFICATION_ONLY,DLI-Bench v0.2 `research` starters (38 rows); research-agent field benchmarks as candidate assets,
 research,T5,BOUND,uab-research-t5-regime_switch,H0 H1
-business,T0,SPECIFICATION_ONLY,"DLI-Bench v0.2 `planning` starters (21 rows); BusinessAgent bands, plan §10.6",
+business,T0,GENERATOR_BOUND,uab-business-t0-extract_fact,H0 H1 H2
 business,T1,SPECIFICATION_ONLY,"DLI-Bench v0.2 `planning` starters (21 rows); BusinessAgent bands, plan §10.6",
 business,T2,SPECIFICATION_ONLY,"DLI-Bench v0.2 `planning` starters (21 rows); BusinessAgent bands, plan §10.6",
 business,T3,SPECIFICATION_ONLY,"DLI-Bench v0.2 `planning` starters (21 rows); BusinessAgent bands, plan §10.6",

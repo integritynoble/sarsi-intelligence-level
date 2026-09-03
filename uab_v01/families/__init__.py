@@ -11,10 +11,13 @@ Each family module exposes the same five functions:
 The key is written outside the workspace. A verifier that reads the workspace and the key is the
 acceptance locus; it is never the solver.
 """
-from . import code_t0, funding_t0, job_t0
+from . import code_t0, funding_t0, job_t0, paper_t0, paper_t1, business_t0
 
 FAMILIES = {
     "code_t0": code_t0,
     "funding_t0": funding_t0,
     "job_t0": job_t0,
+    "paper_t0": paper_t0,
+    "paper_t1": paper_t1,
+    "business_t0": business_t0,
 }

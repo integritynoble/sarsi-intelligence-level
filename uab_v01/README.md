@@ -1,11 +1,12 @@
 # UAB v0.1 — Unified Agent Benchmark, specification package
 
 Frozen 2026-09-03. Read `UAB_SPEC.md` first. Coverage is in `matrix/uab_matrix_v0_1.md` and is
-generated: 36 domain-band cells, of which 4 BOUND, 4 GENERATOR_BOUND, 3 BAND_ONLY, 25
+generated: 36 domain-band cells, of which 4 BOUND, 7 GENERATOR_BOUND, 2 BAND_ONLY, 23
 SPECIFICATION_ONLY; plus 10 cross-domain coordinate manifests (I1 ×4, SA1/SA2 ×3, DI T0/T1 ×3).
 
-Three T0 families live in this package (`families/`): code one-edit, funding extract-requirement,
-job extract-requirements. Each ships a seeded generator with a hidden key, a verifier, a reference
+Six families live in this package (`families/`): code T0 one-edit, funding T0 extract-requirement,
+job T0 extract-requirements, paper T0 verify-citation, paper T1 results-section, business T0
+extract-fact. Each ships a seeded generator with a hidden key, a verifier, a reference
 solver, the plausible wrong method, and a specification–key test; `python3 -m families selftest`
 must show the reference passing and the naive method failing on every seed.
 
