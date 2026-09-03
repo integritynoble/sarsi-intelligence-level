@@ -168,9 +168,50 @@ T6 & mission to submission package & mission to funding portfolio & mission to c
 
 \textbf{Reference agent (specified).} Market research, competitor analysis, customer evidence, business modelling, project planning, decision support, strategy testing, outcome tracking. \textbf{Exists today:} nothing beyond the bound T0 family --- extract one company fact with its unit and verbatim source line from a brief in which a peer and a restated figure precede the target --- passed by three pairs on every seed.
 
-\subsection{Cross-cutting: the brain, the motors, and outward posting}
+\subsection{The brain: \texttt{sarsi-worker}}\label{sec:worker}
 
-Two things the library needs that are not domains. The \emph{brain} (sarsi-worker) holds goal custody, plan state, the three memory stores, forecasts and budgets, and dispatches one bounded step at a time to a transient \emph{motor} (sarsi-claude, sarsi-ai4sci, sarsi-open) that writes the workspace and keeps nothing; the split exists because a planner that edits the artifact erases the boundary the verdict rests on, and it was measured: when the motor wrote the plan it also wrote the goal line, and six of ten tasks reached ``verified'' while narrowing or inverting the goal. The \emph{outward-posting} profile is the only one whose ceiling is set by physics: residual harm does not undo, $p^{*} \to 1$, the class is undelegable at any capability, and the agent runs under a uid with no outward credential anywhere, with a negative control that attempts an outward call on every change and records the failure. There is no method C.
+Not a domain, but the agent every domain profile is instantiated on: the reference instantiation of the harness \citep{yang2026harness}, and the only agent in the library with a real memory substrate. \textbf{Unit: individual}, one persistent decision lineage; the trio it anchors --- worker, motor, acceptor --- is organizational and is levelled as a separate unit, and reporting one number for both is a category error.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lllY@{}}
+\toprule
+Coordinate & Measured & Target & Evidence and what settles it \\
+\midrule
+C & unmeasured & C3 & no task family run under controlled tool access \\
+M / I & unmeasured & M3 / I2 & 37 memory files, 10.5\,KB index, provenance markers: an $M1$ candidate; the restart probe settles it \\
+O & O0 & O2 & no \texttt{roles/}, \texttt{members/}, \texttt{evidence/} \\
+T$\cdot$H & unmeasured & T3$\cdot$H1 & no declared family under a stated budget judged by a verifier it did not author \\
+SA & SA1 (provisional) & SA3 & knows its task and phase; does not diagnose its own failures \\
+\bottomrule
+\end{tabularx}
+\caption{\texttt{sarsi-worker}: the only agent in the library with a real memory substrate, and no measured level.}
+\label{tab:worker}
+\end{table}
+
+\textbf{Contains.} Goal custody --- the thing the owner asked for, preserved against drift over days; plan state with \texttt{Verified when:} lines written before the work; episodic, semantic and procedural memory with provenance and temporal order; forecasts recorded before each run; budgets for tokens, wall clock and an authority ceiling it may not raise; and motor dispatch, one bounded step at a time to a transient executor chosen per task. The runtime is an agent on the fleet gateway that spawns a session over the Agent Client Protocol in a declared task workspace, keyed per task so one machine holds several.
+
+\textbf{Outside.} The verifier of every step, and the motor. The split is not about capability, since the same model can do both; a planner that edits the artifact erases the boundary the verdict rests on, so the worker never writes the workspace and the motor never keeps state. Two measured defects shaped it: when the motor wrote the plan it also wrote the goal line, and six of ten tasks reached ``verified'' while narrowing or inverting the goal, so goal authorship is the worker's alone; and the transport can start a session that never returns a plan, indistinguishable from work in progress, so an ended turn with no deliverable is recorded as a yield, never a completion.
+
+\textbf{Promotes.} $M1$ by the restart probe, the cheapest run in the library and the only one that would change an $I$ cell; $I2$ by the learning-transfer suite; the delegation surface by a declared family under a stated budget. \textbf{Exists as:} the chassis in the public source tree, about seventy modules, run from a checkout; not in the published wheel.
+
+\subsection{The motors: \texttt{sarsi-claude}, \texttt{sarsi-ai4sci}, \texttt{sarsi-open}}
+
+\textbf{Unit: individual, on purpose.} Target $I0$ and $O0$ are not limitations to fix: an executor that accumulates is an executor with a write set nobody granted, and its transience is a safety property. Each executes one bounded step in one declared workspace and is discarded: the goal, constraints and acceptance criterion arrive and the method does not; it writes the workspace, the only agent permitted to; it returns a trace of what ran, what changed and what it could not do; it keeps nothing. Its completion report has been read as a verdict in practice and must be read as an assertion. The only claim worth making for a second or third motor is a measured difference from the one beside it; a brain that can dispatch to one executor is not routing, it is calling. \textbf{Status:} \texttt{sarsi-claude} works and is the executor behind every live run in this program; \texttt{sarsi-ai4sci} is declared on every account and binds no tools, no sandbox and no model; \texttt{sarsi-open} binds an OpenCode backend that is now present and has never run a step, although OpenCode itself ran the T0/T1 families as a pair with an open model.
+
+\subsection{The outward-posting agent (\texttt{social-media})}\label{sec:social}
+
+\textbf{Unit: organizational}, and the only agent in the library whose ceiling is set by physics rather than capability. Target $[C2, I1/M1, O1, T1\cdot H2 \text{ capped}, SA2]$; measured: unfilled identity, correct by absence.
+
+\textbf{Contains.} Drafting, which is fully delegable and which the agent can be genuinely good at; a said-history so it can be consistent with itself, since it cannot avoid contradicting what it already published without one; an explicit audience model including the readers who were not the target; voice fidelity against a ground truth that does not yet exist; and a route from every candidate to a reviewer that is not the drafter.
+
+\textbf{Outside.} The final act, permanently. Posting outward does not undo: a deletion is a partial, late, incomplete mitigation, residual harm is non-zero, so required reliability $p^{*} = \rho/(1+\rho) \to 1$ and the class is undelegable at any capability. The prohibition is structural, not textual: the agent runs under a uid with no outward credential anywhere in its environment or sandbox, writes drafts to a queue, and a human posts. A negative control attempts an outward call on every change and records the failure as evidence, so the boundary is demonstrated rather than asserted; a refusal test that passes by luck has not survived.
+
+\begin{cautionbox}{There is no Method C}
+Any design that gives this agent a posting capability is wrong regardless of the safeguards around it. Its ceiling is not a stage on the way to autonomy; it is where the agent stops, and it does not rise when the model improves. Falsifiable in the direction that matters: if any run exists in which this agent's own action caused a post to appear, the rule is broken, whatever the post's quality.
+\end{cautionbox}
+
+\textbf{Promotes.} $O1$ by the ablation with the reviewer removed; T1 at H2 on a declared drafting family judged by a locus that did not draft; and, standing above all of them, the negative control passing on every change.
 
 \section{The Catalogue}\label{sec:catalogue}
 
@@ -228,7 +269,8 @@ A released agent carries: name, version and git commit; container or environment
 \item \textbf{Code:} desaturate above T4 with sealed families; the sealed-family executor comparison is the first such run.
 \item \textbf{Research:} the fleet deployment of one field on the harness, with the three roles in separate accounts, so the stage-2 verifier exists.
 \item \textbf{Business:} everything above T0.
-\item \textbf{All:} the restart probe on the brain, which is the cheapest run in the library and the only one that would change an $I$ cell.
+\item \textbf{Brain:} the restart probe, which is the cheapest run in the library and the only one that would change an $I$ cell.
+\item \textbf{Outward posting:} the negative control wired to run on every change, before any drafting family is bound.
 \end{itemize}
 
 \section{Limitations}\label{sec:limits}
