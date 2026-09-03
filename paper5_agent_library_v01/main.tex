@@ -1,0 +1,252 @@
+% arXiv: force the pdflatex path. All content is text, tables and PDF figures; there are no
+% .eps files (figures are PDF), and this must stay within the first few lines to take effect.
+\pdfoutput=1
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do.\do\_\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={The Domain Agent Library: Six Agents on One Harness},
+  pdfauthor={Chengshuai Yang},
+  pdfsubject={Paper, funding, job, code, research and business agents as domain profiles on one general harness, with their worked designs, status and download links},
+  pdfkeywords={domain agents, funding agent, job agent, paper agent, code agent, research agent, business agent, downloadable agents}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small The Domain Agent Library}
+\fancyhead[R]{\small Yang}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\FA}{\ensuremath{F_A(H,p)}}
+\newcommand{\rhov}{\ensuremath{\rho_V}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries The Domain Agent Library:}\\[6pt]
+{\LARGE\bfseries Six Agents on One Harness}\\[8pt]
+{\large\bfseries Paper, Funding, Job, Code, Research and Business Agents as Domain Profiles,\\[2pt]
+with Worked Designs, Measured Status and Download Links}\\[16pt]
+{\large Chengshuai Yang$^{1,*}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 3, 2026 --- draft v0.1}
+\end{center}
+
+\begin{abstract}
+A domain agent is a general harness plus a domain profile: the same runtime, instantiated by a manifest that fixes the domain's task bands, tools, authority envelope, verifier types and irreversibility floors. This paper is the library of such profiles for six domains --- paper development, funding, job search, software engineering, research and business workflows --- and the record of what exists for each. For every domain it states the profile, the reference agent the development plan specifies, the worked design where one has been written, and the measured status under the Unified Agent Benchmark, which now has at least one runnable cell in every domain. It also catalogues what a user can download today: the framework and its delegation harness, eight standalone field agents on PyPI, four delegation-level executors shipped as binaries whose lowest level runs with no model and no network, and the executor builds. The status is stated at its real strength. Three of the six reference agents exist only as specifications; two exist as private designs that bind no runtime; the research agent's machinery is built and runs on real corpora while its fleet deployment is a design. No agent in the library has a certified Unified level, and the paper lists, per domain, the single cheapest run that would change its row.
+\end{abstract}
+
+\noindent\textbf{Keywords:} domain agents; funding agent; job agent; paper agent; code agent; research agent; business agent; downloadable agents; Unified Intelligence
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+The development plan behind this program states the hypothesis the library exists to test: a domain agent is primarily a general intelligence harness plus a domain profile, tools and a benchmark, so that
+\[
+A_d = (m, h, d, B_d, r)
+\]
+for executor $m$, harness $h$, domain profile $d$, domain benchmark $B_d$ and resource and authority envelope $r$ \citep{yang2026plan}. If that is true, an improvement to $h$ developed in one domain should move the measurement in the others, and the six domains are chosen to be unrelated enough that such transfer would be evidence of a general mechanism rather than domain engineering. The harness is the companion paper's \citep{yang2026harness}; the measurements are the scaling paper's \citep{yang2026scaling}; the benchmark is UAB v0.1 \citep{yang2026uab}. This paper owns the profiles, the agents, and the links.
+
+\subsection{What this paper gives}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{The domain profile} (\S\ref{sec:profile}): what a profile fixes and what it may not touch.
+\item \textbf{Six domains} (\S\ref{sec:domains}): per domain, the band ladder, the reference agent as specified, the worked design where one exists, and the current status.
+\item \textbf{The catalogue} (\S\ref{sec:catalogue}): what is downloadable, with the command that installs it, and the fleet table with target and measured profiles.
+\item \textbf{The download standard} (\S\ref{sec:standard}) a released agent must meet.
+\item \textbf{Per-domain next runs} (\S\ref{sec:next}).
+\end{enumerate}
+
+\subsection{What this paper does not claim}
+
+No agent here has a certified Unified level. Table~\ref{tab:fleet} shows every $U$ cell empty. Where an agent exists as a design in a private repository, the text says design; where a package is on PyPI but stale, the text says stale; where a reference agent of the plan does not exist in any form, the text says so.
+
+\section{The Domain Profile}\label{sec:profile}
+
+A profile fixes, per domain: the band ladder T0--T6 in the domain's own terms; the task families and their verifier types; the tool grant; the authority envelope, with outward actions --- send, post, pay, submit --- false by default; the loss ratio $\rho$ per class and therefore the reliability $p^{*} = \rho/(1+\rho)$ each class requires; and the irreversibility floors, which no capability lifts. A profile may not touch the harness's protected objects: the criterion register, the acceptor, the hidden benchmark, thresholds, the promotion decision. The designer may design the profile; it may not grade itself.
+
+\begin{claimbox}{Three shapes of domain}
+The six domains fall into three shapes that decide their profiles. \emph{Extraction-first} domains (funding, job, business) have a binary, machine-checkable gate --- eligibility, hard requirements, a fact against a source --- that costs no model call and eliminates most of the work before any judgement; their profiles put a deterministic gate before the executor. \emph{Verifier-rich} domains (code, research) have automatic verifiers --- tests, reference methods, held-out data --- so their profiles can run at H1 with confidence and are where the harness ladder was first measured. \emph{Outward-facing} domains (any domain's submission or posting step) have residual harm that does not undo, so their profiles hand the final act to a human permanently and prove the absence of the capability with a negative control.
+\end{claimbox}
+
+\section{The Six Domains}\label{sec:domains}
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lYYYYYY@{}}
+\toprule
+Band & Paper & Funding & Job & Code & Research & Business \\
+\midrule
+T0 & one citation, table or figure verified & one deadline or eligibility requirement & requirements from one posting & one explicit edit & one fact retrieved or computed & one market or company fact \\
+T1 & routine section from evidence & one call against one applicant & fit for one position & routine bug with tests & one known analysis reproduced & one bounded analysis \\
+T2 & multi-step analysis, figure and writing & find, compare, rank opportunities & search, compare, tailor, keep state & multi-file feature & specified multi-step workflow & multi-step market assessment \\
+T3 & complex revision with verification & funding strategy and proposal workflow & multi-company strategy & ambiguous repo-scale failure recovered & strategy chosen, failures diagnosed & strategy under conflicting evidence \\
+T4 & full paper project under a frozen question & long-horizon grant preparation & full campaign & long-horizon software project & full project under a frozen benchmark & long-running project \\
+T5 & paper requiring an unknown method & non-obvious strategy validated & strategy that improves verified outcomes & unknown method for a sealed task & unknown mechanism validated & new opportunity validated \\
+T6 & mission to submission package & mission to funding portfolio & mission to campaign & mission to projects & mission to research portfolio & mission to portfolio \\
+\bottomrule
+\end{tabularx}
+\caption{The band ladders per domain, from the development plan. Bands are cumulative in what the human still supplies.}
+\label{tab:bands}
+\end{table}
+
+\subsection{Paper development}
+
+\textbf{Reference agent (specified).} Literature and evidence management, a claim--evidence graph, analysis and figure generation, statistics verification, drafting, citation checking, review response, submission-package preparation. \textbf{Exists today:} a standalone review panel (\texttt{pwm-agent-paper}: simulated peer review of a paper file to reviews and a decision), and two bound benchmark families --- verify one citation against its reference (T0) and write a results section from evidence with a fabrication check on every number (T1) --- both passed by three pairs on every seed. No drafting agent with a claim--evidence graph exists. \textbf{Profile note:} submission is outward; the profile ends at the package.
+
+\subsection{Funding}
+
+\textbf{Reference agent (specified).} Discovery, eligibility checking, deadline tracking, project--call matching, evidence-backed ranking, proposal decomposition, submission-readiness, outcome learning; actual submission separately controlled. \textbf{Worked design (private, binds no runtime).} Unit organizational: a drafter that scores its own fit is a drafter with no reviewer. In cost order: eligibility mechanically and first --- PI status, institution class, citizenship, prior-award exclusions, a Python conditional rather than a model call, with a stored owner constraint that eliminates a large fraction of calls at zero cost; the review criteria extracted as a rubric; fit scored before drafting and recorded so declines accumulate; drafting against the rubric on the expensive tier; and a model-free scout on a timer. Outside: the reviewer, under a second account that cannot read the draft workspace, so the $O0 \to O1$ move is enforced by permission. The identity file of this agent was filled in by the agent itself, unprompted, as ``a grant-writer's reading brain with no hands. I find money, judge fit, and write drafts. I do not send them'' --- a correctly drawn irreversibility boundary. \textbf{Bound benchmark:} funding T0, extract one requirement, passed by three pairs on every seed after one specification defect was repaired.
+
+\subsection{Job search}
+
+\textbf{Reference agent (specified).} Discovery, fit evaluation, requirement extraction, CV tailoring, application-state memory, deadline tracking, interview preparation, outcome learning, portfolio strategy; applications and messages under explicit user-approved authority. \textbf{Worked design (private, binds no runtime).} Hard gates first; the rubric inferred from the posting and written down, since a posting hides its criteria where a solicitation publishes them; fit scored before tailoring; an application history for calibration. Outside: the source CV and the fabrication gate --- every claim in a tailored document must trace to a line in the source CV, checked as a diff, and an unsourced claim fails even if true. A measured detail decides the build order: the agent's own test fixtures cite CV files and no CV exists on the machine; the source CV is built first. \textbf{Bound benchmark:} job T0, extract the hard requirements; passed by three pairs on every seed after its wording was repaired.
+
+\subsection{Software engineering}
+
+\textbf{Reference agent (specified).} Repository understanding, implementation, tests, debugging, CI, regression detection, code review, release preparation, long-horizon project management. \textbf{Exists today:} this is the most built domain, because it is where the harness ladder was instantiated: six task classes at T0--T3 with deterministic verifiers, two seeded T4 generators with computed keys, and the delegation harness itself \citep{yang2026harness}. Three executors ran the ladder; the frontier ones saturate it. Two standalone packages ship the official Claude Code and Codex agents with GPU access as \texttt{pwm-claude-gpu} and \texttt{pwm-codex-gpu}. \textbf{Bound benchmark:} code T0--T4.
+
+\subsection{Research}
+
+\textbf{Reference agent (specified).} Question decomposition, literature evidence, hypothesis management, experiment planning, computation, analysis, replication, claim verification, unknown tracking; the bridge into AI4Science. \textbf{Exists today, in two layers that must be kept apart.} The research-agent \emph{machinery} is built and runs on real corpora: a charter naming the three things that define ``better'' as never touched, validation that can refuse (six checks, the seed rule, \texttt{NO\_CHANGE} valid), a refusing self-model, a structured-ignorance field map, a budget that stops rather than asks, three ledgers never summed, and five domain benchmarks on measured corpora (five pass, two fail on real data after passing on synthetic, one is design only). The fleet \emph{deployment} of eight research fields as chartered agents is a set of designs that bind no runtime. Every agent is at stage 1 of 5: the benchmark verifies, the person signs. \textbf{Bound benchmark:} research T5, the sealed regime-switch family, the one family outside the mechanically-derivable envelope.
+
+\subsection{Business workflows}
+
+\textbf{Reference agent (specified).} Market research, competitor analysis, customer evidence, business modelling, project planning, decision support, strategy testing, outcome tracking. \textbf{Exists today:} nothing beyond the bound T0 family --- extract one company fact with its unit and verbatim source line from a brief in which a peer and a restated figure precede the target --- passed by three pairs on every seed.
+
+\subsection{Cross-cutting: the brain, the motors, and outward posting}
+
+Two things the library needs that are not domains. The \emph{brain} (sarsi-worker) holds goal custody, plan state, the three memory stores, forecasts and budgets, and dispatches one bounded step at a time to a transient \emph{motor} (sarsi-claude, sarsi-ai4sci, sarsi-open) that writes the workspace and keeps nothing; the split exists because a planner that edits the artifact erases the boundary the verdict rests on, and it was measured: when the motor wrote the plan it also wrote the goal line, and six of ten tasks reached ``verified'' while narrowing or inverting the goal. The \emph{outward-posting} profile is the only one whose ceiling is set by physics: residual harm does not undo, $p^{*} \to 1$, the class is undelegable at any capability, and the agent runs under a uid with no outward credential anywhere, with a negative control that attempts an outward call on every change and records the failure. There is no method C.
+
+\section{The Catalogue}\label{sec:catalogue}
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Artifact & What it is & Where \\
+\midrule
+AI4Science & the framework: chat session, deterministic CLI, the delegation harness, the ladder runner, the research-agent modules and the brain chassis & \url{https://github.com/integritynoble/AI4Science}; \texttt{pipx install "pwm-ai4science[claude]"} (PyPI 1.0.0); the research-agent and chassis packages are in the source tree and not yet in the wheel: \texttt{pip install ".[research-agents]"} from a checkout \\
+Field agents (standalone) & \texttt{pwm-unified}, \texttt{pwm-research}, \texttt{pwm-paper}, \texttt{pwm-imaging}, \texttt{pwm-cancer}, \texttt{pwm-drug}, \texttt{pwm-claude-gpu}, \texttt{pwm-codex-gpu} & PyPI \texttt{pwm-agent-<name>} (0.1.0): \texttt{pip install pwm-agent-<name>}, then \texttt{pwm-<name> login} \\
+DL0--DL3 executors & one binary per delegation level plus \texttt{dli-accept}; DL0 and accept run with no model and no network & \url{https://github.com/integritynoble/intelligence-level}: \texttt{dist/dli.pyz} or the 0.4.0 wheel, with checksums and a provenance manifest \\
+Benchmark & UAB v0.1: contract, schema, 24 manifests, eight in-package families, run records & \url{https://github.com/integritynoble/sarsi-intelligence-level} under \texttt{uab\_v01/} \\
+Claude Code, standalone & the official Claude Code as a no-Node binary & \url{https://github.com/integritynoble/claude-pwm} \\
+Codex, exchange-routed & the Codex fork that accepts a base URL and an exchange key & \url{https://github.com/integritynoble/codex-pwm} \\
+OpenClaw, exchange-routed & the agent runtime routed through the exchange & \url{https://github.com/integritynoble/openclaw-pwm}; \texttt{npm install -g openclaw openclaw-pwm} \\
+Personal Singularity & the console that hosts the fleet across machines & installer in the AI4Science repository \\
+\bottomrule
+\end{tabularx}
+\caption{What can be downloaded, and how, at the date of this draft.}
+\label{tab:downloads}
+\end{table}
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{2.3cm}p{1.1cm}YYp{2.4cm}@{}}
+\toprule
+Agent & Unit & Target $[C, I/M, O, T{\cdot}H, SA]$ & Measured today & Exists as \\
+\midrule
+\texttt{sarsi-worker} (brain) & indiv. & C3, I2/M3, O2, T3$\cdot$H1, SA3 & M1 candidate; O0; SA1 provisional; rest unmeasured & source checkout \\
+\texttt{sarsi-claude}, \texttt{-ai4sci}, \texttt{-open} (motors) & indiv. & C2--3, I0/M0, O0, T2$\cdot$H1, SA1 & O0; SA0; unmeasured; sarsi-open never run & config + runtime \\
+funding & org. & C2, I2/M3, O1, T2$\cdot$H2, SA2 & identity real; O0; SA0; T0 family passed & private design \\
+job & org. & C2, I2/M3, O1, T2$\cdot$H2, SA2 & no source CV; T0 family passed & private design \\
+paper & org. & --- & review panel only; T0, T1 families passed & package + benchmark \\
+code & --- & --- & ladder T0--T4; three executors & harness + benchmark \\
+research (8 fields) & org. & C4, I2/M3, O3, T3$\cdot$H1, SA3; C5/I5/T5 spec-only & machinery built, stage 1 of 5; deployment design; T5 family bound & source checkout \\
+business & --- & --- & T0 family passed & benchmark only \\
+outward posting & org. & C2, I1/M1, O1, \textbf{T1$\cdot$H2 capped}, SA2 & correct by absence & private design \\
+\texttt{dli-dl0..dl3} & indiv. & DL0--DL3 by construction & 88 episodes, 74 accepted, two qualifications; no level certified & binary \\
+\bottomrule
+\end{tabularx}
+\caption{The library with target and measured profiles. Every $U$ cell is empty.}
+\label{tab:fleet}
+\end{table}
+
+\section{The Download Standard}\label{sec:standard}
+
+A released agent carries: name, version and git commit; container or environment; supported executors; required tools; memory schema; authority manifest; resource defaults; benchmark version; example missions; installation and reproduction instructions; known limitations. Links in a manuscript point at tagged releases, and the versions evaluated in a publication get an archival identifier. Of the artifacts in Table~\ref{tab:downloads}, the DL binaries meet the standard in full (checksums, a provenance manifest with build and tier commits, an offline guarantee checkable in an empty network namespace); the PyPI field agents meet it in part; the fleet designs meet none of it, because they are not released.
+
+\section{Per-Domain Next Runs}\label{sec:next}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Paper:} build the drafting agent around the claim--evidence graph and bind T2 with a hidden rubric.
+\item \textbf{Funding and job:} give the designs a runtime --- the eligibility gate and the fabrication diff are model-free and can ship first --- and bind T1 (one call against one applicant; fit for one position) with a hidden rubric.
+\item \textbf{Code:} desaturate above T4 with sealed families; the sealed-family executor comparison is the first such run.
+\item \textbf{Research:} the fleet deployment of one field on the harness, with the three roles in separate accounts, so the stage-2 verifier exists.
+\item \textbf{Business:} everything above T0.
+\item \textbf{All:} the restart probe on the brain, which is the cheapest run in the library and the only one that would change an $I$ cell.
+\end{itemize}
+
+\section{Limitations}\label{sec:limits}
+
+Three of the six reference agents do not exist in any form. Two exist as private designs whose handoff record states that nothing in them has been executed. The library's downloadable artifacts are the framework, standalone field agents, and level executors, not the six-agent library the plan specifies; this paper is honest that it catalogues what exists rather than what was planned, and it should be revised around the six agents once they are built on the harness.
+
+\section{Conclusion}
+
+The library is a set of profiles on one harness, and today it is a set of profiles of which one is well built, two are designed, one has its machinery and not its deployment, and two are benchmark cells and nothing more. What every domain now has is a runnable cell on a frozen benchmark, passed by three pairs, so that the next agent built for it will be measured before it is described. That ordering --- benchmark first, agents second --- is the plan's, and this paper's contribution is to have followed it far enough to know exactly what is missing.
+
+\section*{Availability}
+
+See Table~\ref{tab:downloads}. The fleet designs are in a private repository; requests should be addressed to the correspondence address.
+
+\section*{Conflicts and funding}
+
+The author reports no funding specific to this work and no competing interest.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

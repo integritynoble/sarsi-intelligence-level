@@ -1,0 +1,226 @@
+\begin{document}
+\begin{center}
+{\LARGE\bfseries The General Intelligence Harness:}\\[6pt]
+{\LARGE\bfseries One Runtime, Instantiated by Manifest}\\[8pt]
+{\large\bfseries Memory, Planner, Verifier, Learner, Self-Improvement, Organization,\\[2pt]
+Self-Model and Mission Manager as the Mechanisms That Earn a Level}\\[16pt]
+{\large Chengshuai Yang$^{1,*}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 3, 2026 --- draft v0.1}
+\end{center}
+
+\begin{abstract}
+An agent's intelligence level is a property of a frozen model--harness pair, and the executor is the part of the pair that is easiest to replace. This paper describes the other part: a general intelligence harness whose modules --- identity and task state, episodic, semantic and procedural memory, planner, evidence log, verifier, rollback, learner, competence model, self-model, self-improvement, organization and mission manager --- are the mechanisms that earn each coordinate of the Unified Intelligence scale $[C,I,O,T,H,SA]$ with its memory prerequisite $M$. The harness has one runtime instantiated by a manifest that declares which memories exist, what the agent may write, which loops are enabled and which external services evaluate and promote; a domain agent is that runtime plus a domain profile. For each module the paper states in three columns what the agent contains, what must live outside its write set, and the test that promotes it, and maps the module to the harness generation HG0--HG6 that introduces it. Every mechanism that exists is named with its released implementation and its measured status; every mechanism that is only specified is named as specified. The built core --- class reading, criterion registration, snapshot and restore, separate-process acceptance, escalation, routing from independent verdicts, compression --- has been measured on a harness ladder and on a benchmark whose learning-transfer and self-improvement suites it passed under an ablated control; the mission manager, the organization and the meta-improvement engine are specified and not built. The executor sits behind one protocol, and four executor families are characterised as adapters. The paper's claim is not that this harness is intelligent; it is that every part of it is either measured or named as unmeasured, and that a reader can build the same thing from the released code.
+\end{abstract}
+
+\noindent\textbf{Keywords:} agent harness; memory; planner; verifier; learner; self-improvement; organization; self-model; mission manager; Unified Intelligence
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+When four heavily compared coding agents were placed on the structural axes of an intelligence taxonomy they occupied one cell, because none of them feeds a validated change back into the agent that made it \citep{yang2026capability}. The difference that would move any of them is not a better model; it is what surrounds the model. This paper is about that surrounding structure, built deliberately.
+
+The design premise comes from the measurement framework of \citet{yang2026unified}: a level is earned by measurement of a frozen pair; the architecture enables the claim and the benchmark earns it. The corollary for a harness designer is that every module must be justified by the coordinate it earns and the test that would show it earned it. Modules that earn nothing measurable are decoration; modules whose test cannot be run are hypotheses. This paper writes each module in that discipline.
+
+\subsection{What this paper gives}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{The architecture} (\S\ref{sec:arch}): the module set of the general harness, what each contains, what must live outside it, and the test that promotes it.
+\item \textbf{The rung map} (\S\ref{sec:rungs}): which generation HG0--HG6 introduces each module, so that a harness scaling curve has a mechanism per step.
+\item \textbf{The manifest} (\S\ref{sec:manifest}): one runtime instantiated by declaration, so a domain agent is a profile rather than a program.
+\item \textbf{Executors as adapters} (\S\ref{sec:motors}): one protocol, four executor families, and what each supplies structurally.
+\item \textbf{Built, measured, specified} (\S\ref{sec:status}): a module-by-module status with the released implementation named where one exists.
+\item \textbf{The apparatus rules} (\S\ref{sec:apparatus}) that keep the harness's own measurements honest.
+\end{enumerate}
+
+The measurements themselves --- scaling curves, matched executor comparisons, transfer --- are the companion paper's \citep{yang2026scaling}; the agents built on this harness and where to download them are the library paper's \citep{yang2026library}. This paper owns the mechanisms.
+
+\section{What a Harness Must Earn}\label{sec:requires}
+
+The measured profile is $[C,I,O,T,H,SA]$ at reliability $p$, with $M$ beside $I$ and the one-way gate $I_n \Rightarrow M \ge \mu_n$. The Unified level is a hard gate with retention, and the delegation primitive is defined on delivered outcomes net of false completions \citep{yang2026unified}. An LLM can design the mechanism for every level and cannot design three things: the evidence that a level was reached, its own referee, and its own separation \citep{yang2026designing}. So every module below is stated in three columns --- contains, outside, promotes --- and ``outside'' is a deployment fact: a different process with a read-only mount at the weakest, a different host, a different party holding the ground truth, or cryptographic promotion at the strongest. One base model in several processes with separate credentials separates proposer from evaluator; one model in one context, told which hat it wears, separates nothing.
+
+Write-set depth bounds the individual level: D0 nothing persistent, the natural referee; D1 memory; D2 policy; D3 skills; D4 weights. Every module that writes persistently is placed at a depth, and the module that judges it must sit at a lower one.
+
+\section{The Architecture}\label{sec:arch}
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lYYYl@{}}
+\toprule
+Module & Contains & Must live outside & Promoted by & Earns \\
+\midrule
+Identity and task state & durable identity; goal custody; plan with \texttt{Verified when:} lines; checkpoints & the goal line as authored by the owner & restart continuity test & I1, M1 \\
+Episodic memory & what happened, with provenance and temporal order & --- & restart plus current-versus-obsolete under distractors & M1, M2 \\
+Semantic and procedural memory & consolidated lessons and routines & the held-out family on which a lesson must change behaviour & learning-transfer suite with ablated control; survives an index rebuild & M3, I2 \\
+Planner and decomposition & class reading ($\rho$, $p^{*}$); strategy; one bounded step at a time & the criterion register & delegation surface at declared budgets & T, H \\
+Tools and evidence log & bounded tool grant; append-only log of every action & tool authority as granted & HG0 baseline; false-completion rate & DI baseline \\
+Verifier interface & registration of criteria before the work; sealed, hash-chained; $\sigma$ reported & the acceptor process and the verdict & paired HG0/HG1 measurement; zero false rejections & acceptance rung \\
+Rollback & snapshot before first mutation; restore on rejection; retry naming the failed check & irreversibility classification & verification responsiveness $\rho_V$ & HG2 \\
+Learner & episode $\to$ candidate lesson $\to$ consolidation $\to$ evidence check; \texttt{NO\_CHANGE} valid & the evidence check's criteria & held-out transfer; repeat-error reduction & I2 \\
+Competence model and router & $P(\text{verified success}\mid\text{executor},\text{class})$ as a Beta posterior from independent verdicts only; failure classification & the verdicts & routed arm of the arms study; second failure is capability & HG3 \\
+Self-model & state, capability limits, authority, freshness; refusals; ledgers never summed & the ground truth of its own state & limits before attempt; mechanism of failure; forecast before run & SA1--SA4 \\
+Self-improvement & candidate modification of policy, retrieval, routing, workflow in a sandbox & frozen hidden evaluation; independent evaluator; promoter & hidden improvement with retention; overfit and regressing candidates rejected & I3, HG3 (plan) \\
+Meta-improvement & change ledger; improvement-strategy memory; controlled meta-experiments & the meta-evaluation & Improvement Competence rising across cycles & I4, HG4 \\
+Organization & role registry; member roster; evidence-bearing messages; separated proposer, evaluator, promoter & the promoter & ablation: removing one member changes the verified outcome & O1--O3 \\
+Mission manager & goal, project and task generators; portfolio state; reprioritization & mission-level evaluator & mission autonomy under changing conditions & T6, HG6 \\
+Provenance & hash-chained records; every episode carries why it ended & --- & apparatus checks & validity \\
+\bottomrule
+\end{tabularx}
+\caption{The general harness by module. ``Earns'' names the coordinate or generation the module's promotion test certifies. A module with an empty ``outside'' column is infrastructure the others depend on.}
+\label{tab:modules}
+\end{table}
+
+\subsection{Memory: three stores and one gate}
+
+The memory modules are the temporal substrate of Individual intelligence, and the framework's rule is that they earn nothing by existing. $M1$ is a real process restart followed by recovery of explicitly stored state, with the agent able to say where the state came from. $M2$ adds provenance, temporal order and a current-versus-obsolete distinction under distractors. $M3$ adds consolidation: a lesson from one episode changes behaviour in a later one and survives a rebuilt retrieval index. Long context is none of these. The gate is one way: an $I_n$ claim is invalid without $M \ge \mu_n$, and an $I$ level may not be promoted because $M$ is high.
+
+\begin{cautionbox}{Thirty-seven files prove that something wrote thirty-seven files}
+The fleet's brain agent carries 37 memory files with provenance markers, and an early edition of its coordinate table entered it as $I1$ on that evidence. That reading was withdrawn: the counts are configuration evidence for an $M1$ candidate, and the level is settled by stopping the process and starting it again. The learning-transfer suite of the benchmark paper is that test made runnable, and its live run found that the persistence carrying a lesson across a restart was the harness's own session records, not a store the executor was allowed to write --- which is the harness supplying what the executor was denied.
+\end{cautionbox}
+
+\subsection{Planner, verifier interface and rollback: the delegation core}
+
+These three modules are the delegation harness, and they are the part of this architecture that is built, released and measured. The planner reads the class before the attempt: how would a mistake be found, what would undoing cost, and therefore what reliability $p^{*} = \rho/(1+\rho)$ the class requires; a class whose residual harm is unbounded has $p^{*}=1$ and the honest move is to stop and ask. The verifier interface registers criteria before the work exists, refuses a criterion about an existing deliverable, refuses a duplicate, refuses one that does not say what it misses, seals when execution starts, and is hash-chained so an edit is detectable rather than merely discouraged. Acceptance runs in a separate process on a copy of the deliverables with no inherited environment; a check that tries to rewrite the deliverable changes only the copy. Rollback snapshots before the first mutation and restores on rejection, retrying with the failed check named; anything classified irreversible does not run unattended at any capability.
+
+Escalation sits beside them and is preferred to guessing because it has no loss term; the question asked is the shallowest that unblocks. Compression writes out, after a class is accepted, the criteria that accepted it as a reusable check, so the next attempt by any executor arrives with a check that did not exist before; it is the only route by which an agent legitimately raises its own frontier.
+
+\subsection{Learner and self-improvement: two different loops}
+
+The learner keeps the learning mechanism fixed and lets experience change behaviour: a trigger creates an episode; an episode may generate a candidate lesson; a lesson becomes active only after an evidence check, and \texttt{NO\_CHANGE} is a valid output. Self-improvement modifies the mechanism itself --- a policy, a retrieval strategy, a routing weight --- and is well-posed only when the evaluator lies outside the write set: proposer, sandboxed candidate, frozen hidden evaluation, independent evaluator, promoter. The subtlest failure is a candidate that improves the component assembling the evidence the evaluator sees; every standard check passes and the loop self-certifies anyway. The remedy is to freeze the evidence path during evaluation, or to give the evaluator its own.
+
+\begin{claimbox}{The promoter's discrimination is the test of the self-improvement module}
+A scripted pair that obeys rule lines in its policy and nothing else is given four candidates: the good rules; the dev answers hard-coded; the good rules plus one that breaks a retention item; and no change. A self-improvement module is correct only if it promotes exactly the first and rejects the second and third with the right reasons. The released module does so on 24 of 24 seeds, and in a live run a real pair's candidate went from 0 to 5 of 5 on hidden instances of a task type absent from its evidence, with retention, and was promoted \citep{yang2026uab}. One cycle is not $I3$; $I3$ needs several, with the mechanism versioned and rollback-able.
+\end{claimbox}
+
+\subsection{Competence model and router}
+
+The router learns $P(\text{verified success} \mid \text{executor}, \text{class})$ as a Beta posterior carrying its evidence count beside its mean, updated only from independent verdicts; an executor's own report of success never enters it. Routing scores $P(\text{success})\cdot\text{value} - \text{cost} - \text{risk}$ with $P$ taken pessimistically, and an executor whose lower bound cannot reach the class's $p^{*}$ is not eligible. Failures re-route by kind: specification back to the contract, execution to the same executor, capability to another (the second failure of one executor is called capability rather than bad luck), environment waits, verification stops. In the arms study the router started with no evidence, watched the verifier reject a hopeless executor twice, and moved the work: 15 of 15.
+
+\subsection{Self-model}
+
+Operational and evidence-grounded, never phenomenal. Three instruments earn it and each has a floor: limits stated before attempting (the floor is attempting everything and failing); the mechanism of a verified failure named and checked against the runner's record (``I made an error'' fails); a forecast stored by the acceptor with a timestamp before the run, scored by Brier against a constant forecast. The strongest self-model in the fleet keeps three ledgers --- owner-set work, benchmark scores, self-directed research --- that are never summed, because an agent that wrote its own benchmark, passed it and counted the pass toward its record would have published its own reputation.
+
+\subsection{Organization and mission manager}
+
+An organization is not a larger individual. $O1$ requires a role registry, persistent organizational memory and a dispatched roster; $O2$ routing that changes when logged evidence changes; $O3$ modification of the organization's own workflow under external validation. The test that separates an organization from one agent with extra processes is the ablation. From $O2$ upward the separation gate applies: proposer, evaluator and promoter are distinct loci and the evaluator's evidence lies outside the proposer's write set, or the correct classification is $O1$ plus unverified claims. Heterogeneity is required: the natural verifier has an empty or narrow self-write set, and that is its qualification. The mission manager turns a mission into projects, tasks and a portfolio with reprioritization under changing conditions; its input is a mission rather than a task, and its evaluator is mission-level. Neither module is built (\S\ref{sec:status}).
+
+\section{The Rung Map}\label{sec:rungs}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Generation & Modules introduced & Status \\
+\midrule
+HG0 & executor, bounded tools, evidence log; no acceptance step & built, measured \\
+HG1 & identity and task state; episodic memory; criterion register; separate-process acceptance & built, measured (paired with HG0) \\
+HG2 & rollback; retry naming the failed check; learner with evidence-linked consolidation & built; rollback measured, learner measured by the transfer suite \\
+HG3 (as built) & failure classification; competence model; routing & built, measured (arms study; inert on the single-executor ladder) \\
+HG3 (as planned) & self-improvement: sandboxed candidate, frozen hidden evaluation, independent promoter & built as a policy-level suite, one cycle measured \\
+HG4 & meta-improvement engine; change ledger; longitudinal project manager & specified \\
+HG5 & unknown, hypothesis, experiment and knowledge state; discovery verifier & partly built in the research agents (field map, candidate generator); no sealed certification run \\
+HG6 & mission manager; portfolio state; mission-level evaluator & specified \\
+HG\Om{} & knowledge-to-instrument transduction; new roles under frozen governance & specified \\
+\bottomrule
+\end{tabularx}
+\caption{Which generation introduces which module, and what exists. The two HG3 rows record a naming split between the ladder as built and the development plan; the companion paper keeps them apart.}
+\label{tab:rungs}
+\end{table}
+
+Each rung is a strict superset of the one below, enforced by a test, because otherwise a difference between rungs is attributable to nothing. Two rungs that differ only in post-hoc machinery are scored from the same executor outputs.
+
+\section{One Runtime, Instantiated by Manifest}\label{sec:manifest}
+
+A domain agent is $A_d = (m, h, d, B_d, r)$: an executor, this harness, a domain profile, a domain benchmark, and a resource and authority envelope \citep{yang2026plan}. The harness is one runtime, and the manifest declares which memories exist, what the agent may write, which loops are enabled, and which external services evaluate and promote:
+
+{\small\begin{verbatim}
+agent_id: funding-01     base: general-harness     modes: [CHAT, REASON, ACTION]
+state:     episodic_memory: true    semantic_memory: true
+           procedural_memory: true  intentional_memory: true
+           self_model: true         world_model: true
+write_set: memory: true             policy: candidate_only
+           skills: candidate_only   objective: false   weights: false
+learning:  consolidation: true      proceduralization: true
+           held_out_ablation_required: true
+rsi:       theta_modification: false   meta_improvement: false
+discovery: unknown_model: false        hypothesis_engine: false
+authority: may_execute_tools: allowlisted   may_modify_workspace: false
+           may_deploy_self_change: false     outward: none
+verifier:  external_required: true          promoter_required: true
+\end{verbatim}}
+
+A different manifest instantiates a D0 verifier, an $I2$ specialist, an $I3$ self-improving worker or an $I5$ discovery agent from the same runtime. Permissions are enforced by infrastructure --- file-system permissions, separate accounts, container boundaries, owner-signed promotion --- never by instruction, because the model is never shown a permission gate: a restriction honoured by a capable participant is not a mechanism. The placement rule follows: assign each operation the lowest sufficient level, spend the high levels on what only they can do, and put verification in the hands of executors with nothing to write to themselves.
+
+\section{Executors as Adapters}\label{sec:motors}
+
+The executor sits behind one protocol; the harness sends a contract and receives an episode record and never learns which vendor produced it. A motor is characterised by four things only: what tools it can be granted, whether it can be sandboxed, whether it exposes a headless call, and what it costs.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Executor family & Headless call and what it supplies & Status in this program \\
+\midrule
+Claude Code & \texttt{claude -p}; ACP bridge; a provenance-bearing memory store; subagents that receive inputs only; permission modes & the reference executor on the ladder and in every suite; carried an open 27B model (Qwen 3.8) through a rewriting proxy to the same surface \\
+Codex & \texttt{codex exec}; an isolated runner; the exchange-routed fork accepts a base URL & Family B on the ladder \\
+OpenCode & \texttt{opencode run -m provider/model}; an open harness with its own shell tool; reads its working directory from the environment & ran the T0/T1 families with the free Muse Spark 1.3 model as a third pair \\
+Hermes, Pi, local & adapters written against the protocol, unregistered; each stub announces itself & not installed; an adapter that silently fell back to another vendor would be a lie in the competence model \\
+\bottomrule
+\end{tabularx}
+\caption{Four executor families as adapters. The harness effect is not a property of one vendor's model: the same harness carried a commercial and an open model to the same surface \citep{yang2026scaling}.}
+\label{tab:motors}
+\end{table}
+
+A fifth ``executor'' is not in the table because it is not a runtime: plain Python under a timer, which is where every model-free step belongs. A step a script can do deterministically must not cost a model call, or the lowest delegation tier is decorative.
+
+\section{Built, Measured, Specified}\label{sec:status}
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Module & Released implementation & Measured status \\
+\midrule
+Planner (class reading), verifier interface, rollback, escalation, router, compression & \texttt{ai4science/}\allowbreak\texttt{harness/}\allowbreak\texttt{agents/}\allowbreak\texttt{delegation/} in the AI4Science repository: \texttt{contract}, \texttt{criterion}, \texttt{reversible}, \texttt{acceptor}, \texttt{escalate}, \texttt{router}, \texttt{compress}, \texttt{run\_ladder} & three harness scaling curves; paired HG0/HG1 with zero false rejections; arms study 0/15 to 15/15 \\
+Identity, task state, memory stores, forecasts, budgets & the \texttt{sarsi} chassis (about seventy modules) in the same tree; the brain agent's store & restart test bound in the benchmark; transfer on two seeds under an ablated control \\
+Learner & \texttt{consolidate}, \texttt{semantic}, \texttt{playbook} in the chassis; \texttt{improvement.py} in the research agents & learning-transfer suite: learned 48/48, ablated 0/48; live transfer on two seeds \\
+Self-improvement & \texttt{improvement.py}, \texttt{search.py}, \texttt{charter.py} (research agents); the benchmark's policy-level suite & promoter sorts good, overfit, regressing and no-change on 24/24 seeds; one live cycle promoted \\
+Competence model and router & \texttt{executor.py}, \texttt{router.py} & routed arm 15/15; inert on a single-executor ladder \\
+Self-model & \texttt{selfmodel.py}, \texttt{selfaware.py}, \texttt{forecast.py}; the research agents' refusing self-model & SA1/SA2 items bound; not yet run on the fleet \\
+Meta-improvement & --- & specified \\
+Organization & \texttt{roster}, \texttt{board}, \texttt{shared} in the chassis; no \texttt{roles/} in any fleet workspace & O0 for every agent; ablation never run \\
+Mission manager & --- & specified \\
+Provenance & \texttt{evidence}, \texttt{ledger}, \texttt{log}; the criterion register's hash chain & termination reason now on every episode record \\
+\bottomrule
+\end{tabularx}
+\caption{What exists and what has been shown. The chassis and research-agent modules are in the public source tree and not yet in the published wheel.}
+\label{tab:status}
+\end{table}
+
+\section{Apparatus Rules}\label{sec:apparatus}
+
+Every rule here was violated once in this program and each violation looked like a clean result. An episode's record carries why it ended, with exit status and whether the limit was reached; a harness-terminated run is \texttt{timed\_out} or \texttt{not\_attempted}, never a delivery. Executors run in their own process group and the group is killed, because a detached child holding a pipe turns a timeout into a hang and a hang into a phantom delivery. Every gate is shown to open on a known-passing task before it is trusted to close. A floor is never authored by the agent it scores. Executors that resolve their working directory from the environment must be handed it explicitly. And a probabilistic trap must be shown to fire on every instance, or the suite fills silently with items that discriminate nothing.
+
+\section{Limitations}\label{sec:limits}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Three modules are specified and not built}: meta-improvement, mission manager, and the organizational structure beyond a roster file. Every level that depends on them --- $I4$, $O1$ and above, $T6$ --- is unreachable by this harness today.
+\item \textbf{The self-improvement module has been exercised on the shallowest writable object}, a policy file. Retrieval and routing candidates need the evaluator's evidence path frozen, which has not been done.
+\item \textbf{Every measurement cited is from one host and one operator}, on suites that are saturated for frontier executors above the acceptance rung.
+\item \textbf{The published wheel is stale.} The chassis and the research-agent modules install only from a source checkout.
+\end{itemize}
+
+\section{Conclusion}
+
+The harness is the part of the pair that earns the level, and this paper has written it module by module in the only form the framework accepts: what the module contains, what must live outside it, and the test that promotes it. The delegation core is built and measured. Memory, learning and policy-level self-improvement are built and have passed their suites under ablated controls. Meta-improvement, organization and the mission manager are specified, and the paper says so rather than describing them in the present tense. One runtime, instantiated by manifest, is what makes a domain agent a profile rather than a program --- and the library paper is where the profiles are.
+
+\section*{Availability}
+
+The delegation harness, the chassis and the research-agent modules are in \url{https://github.com/integritynoble/AI4Science}. The benchmark suites that measure them, with run records, are in \url{https://github.com/integritynoble/sarsi-intelligence-level} under \texttt{uab\_v01/}.
+
+\section*{Conflicts and funding}
+
+The author reports no funding specific to this work and no competing interest.

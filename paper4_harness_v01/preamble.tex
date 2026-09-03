@@ -1,0 +1,74 @@
+% arXiv: force the pdflatex path. All content is text, tables and PDF figures; there are no
+% .eps files (figures are PDF), and this must stay within the first few lines to take effect.
+\pdfoutput=1
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do.\do\_\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={The General Intelligence Harness: One Runtime, Instantiated by Manifest},
+  pdfauthor={Chengshuai Yang},
+  pdfsubject={The harness architecture that earns each coordinate of the Unified Intelligence scale, what of it is built, and the test that promotes each part},
+  pdfkeywords={agent harness, memory, planner, verifier, learner, self-improvement, organization, self-model, mission manager}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small The General Intelligence Harness}
+\fancyhead[R]{\small Yang}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\FA}{\ensuremath{F_A(H,p)}}
+\newcommand{\rhov}{\ensuremath{\rho_V}}
