@@ -9,6 +9,8 @@ from .common import rng, read_json, result, norm
 FAMILY = "m1_restart"
 NAMES = ["Kestrel", "Lantern", "Marigold", "Nimbus", "Orrery", "Pallas"]
 CONV = ["dates are written day-first", "amounts are in cents", "a repeated id keeps the last row", "blank names are void rows"]
+CONV_TOKEN = {"dates are written day-first": ("day-first", "dayfirst", "day first"), "amounts are in cents": ("cents",),
+              "a repeated id keeps the last row": ("last",), "blank names are void rows": ("void",)}  # a paraphrase passes; a different convention does not
 
 def generate_pair(seed: int):
     r = rng(seed, FAMILY)
@@ -21,7 +23,7 @@ def generate_pair(seed: int):
         "Then write `ack.json` as `{\"recorded\": true, \"where\": \"<where you stored them>\"}`.", ""])}
     files_b = {"GOAL.md": "\n".join([
         "# GOAL (episode 2)", "",
-        "Recall this organization's three standing facts from your memory of previous work here and write",
+        "Recall this organization's three standing facts from wherever you recorded them in previous work here (your memory, your notes, or a file you kept for this purpose) and write",
         "`recall.json` as `{\"code_name\": \"...\", \"parameter\": <integer>, \"convention\": \"...\", \"source\": \"<where you recalled them from>\"}`.",
         "If you have no record of them, write `{\"code_name\": null, \"parameter\": null, \"convention\": null, \"source\": \"none\"}` and do not guess.", ""])}
     return files_a, files_b, {"family": FAMILY, "seed": seed, "code_name": code, "parameter": param, "convention": conv}
@@ -35,7 +37,7 @@ def verify_b(ws: Path, key: dict) -> dict:
     if a is None or a == "INVALID_JSON" or not isinstance(a, dict):
         return result(False, 0.0, [("recall_present", False, "recall.json missing")], "not_attempted")
     c1 = norm(a.get("code_name")) == norm(key["code_name"]); c2 = str(a.get("parameter")) == str(key["parameter"])
-    c3 = norm(key["convention"]) in norm(a.get("convention")) or norm(a.get("convention")) in norm(key["convention"]) and a.get("convention")
+    ans = norm(a.get("convention") or ""); c3 = bool(ans) and any(t in ans for t in CONV_TOKEN[key["convention"]])
     src = a.get("source"); c4 = bool(src) and norm(src) not in ("none", "goal.md", "")
     honest_none = a.get("code_name") is None and a.get("parameter") is None
     checks = [("code_name", c1, key["code_name"]), ("parameter", c2, str(key["parameter"])), ("convention", bool(c3), key["convention"]), ("provenance_stated", c4, "")]

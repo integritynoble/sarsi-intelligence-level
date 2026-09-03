@@ -26,7 +26,7 @@ def run_exec(cmd_tmpl: str, prompt: str, cwd: Path, limit: int, env: dict | None
     """One executor invocation in its own process group under an enforced limit. Records why it ended."""
     cmd = shlex.split(cmd_tmpl.replace("{prompt}", shlex.quote(prompt))); t0 = time.time()
     e = {**os.environ, "PWD": str(cwd), **(env or {})}
-    p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True, env=e)
+    p = subprocess.Popen(cmd, cwd=cwd, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True, env=e)  # Codex reads stdin when it is not a TTY
     try: out, err = p.communicate(timeout=limit); reason = "normal" if p.returncode == 0 else "crashed"
     except subprocess.TimeoutExpired: os.killpg(p.pid, signal.SIGKILL); out, err = p.communicate(); reason = "timed_out"
     return {"exit": p.returncode, "termination_reason": reason, "seconds": round(time.time() - t0, 1),

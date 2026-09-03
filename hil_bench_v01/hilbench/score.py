@@ -36,7 +36,7 @@ def frontier(eps, p=P_GATE):
 
 def c_level(c_eps):
     lvl = None
-    for b in ["C0", "C1", "C2", "C3"]:
+    for b in ["C0", "C1", "C2", "C3", "C4"]:
         xs = [e for e in c_eps if e["band"] == b]
         if not xs: break
         if sum(e["pass"] for e in xs) / len(xs) >= P_GATE: lvl = b
@@ -45,7 +45,7 @@ def c_level(c_eps):
 
 def gate(profile):
     """U* from the profile dict with keys C, I, SA, T_frontier (at the budget run), M; O omitted for individuals."""
-    order = lambda s, x: int(s[1:]) if s else -1
+    order = lambda s, x: int("".join(ch for ch in s if ch.isdigit())) if s else -1
     C, I, SA, T, M = (profile.get(k) for k in ("C", "I", "SA", "T_frontier", "M"))
     u = None
     for n, (cn, i_n, sa_n, t_n, mu) in enumerate([("C0", "I0", "SA0", "T0", "M0"), ("C1", "I1", "SA1", "T1", "M1"), ("C2", "I2", "SA2", "T2", "M3"), ("C3", "I3", "SA3", "T3", "M4")]):
@@ -67,3 +67,12 @@ def hil(curve):
     harness = 100 * gain / (100 - curve["HG0"]) if curve["HG0"] < 100 else 0.0
     return {"HIL_level": rungs[-1], "HIL_AUC": auc, "HIL_ceiling": ceil, "harness_gain": gain,
             "HIL_score": round(0.55 * auc + 0.35 * ceil + 0.10 * harness, 1), "curve": curve}
+
+SA4_MAX_BRIER = 0.25; SA4_TOLERANCE = 0.05
+
+def sa4_pass(sa4: dict, n_expected: int) -> bool:
+    """Predeclared calibration rule: Brier at most 0.25, no worse than the post-hoc constant forecast by
+    more than 0.05 (a pair with a perfect record cannot beat a constant 1.0 fitted after the fact), and a
+    forecast recorded for every delegated episode."""
+    b, c, n = sa4.get("brier"), sa4.get("constant_forecast_brier"), sa4.get("n")
+    return bool(b is not None and c is not None and b <= SA4_MAX_BRIER and b - c <= SA4_TOLERANCE and n == n_expected)

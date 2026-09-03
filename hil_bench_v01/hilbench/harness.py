@@ -52,6 +52,49 @@ def public_checks(fam: str, ws: Path, files: dict) -> list:
         allowed.add(round(margin, 3))
         return [("present", bool(txt), ""), ("dataset_named", ds.lower() in txt.lower(), ""), ("table_named", ev["table"].lower() in txt.lower(), ""),
                 ("no_number_outside_evidence", all(round(n, 3) in allowed for n in nums), "")]
+    if fam.startswith("hc_"):
+        return _hard_public_checks(fam, ws, files)
+    return []
+
+def _hard_public_checks(fam: str, ws: Path, files: dict) -> list:
+    """Core-H checks. Each is stated in GOAL.md and computable without the key; what stays hidden is the
+    part that needs the reasoning -- whether the predictions are right, whether the plan is optimal,
+    whether blocking was the correct call, and which of two candidate lines the answer had to come from."""
+    from .common import read_json, norm
+    if fam == "hc_rule":
+        p = read_json(ws / "predictions.json"); at = json.loads(files["predict_at.json"])
+        m = (ws / "mechanism.txt").read_text(encoding="utf-8", errors="replace") if (ws / "mechanism.txt").exists() else ""
+        shape = isinstance(p, dict) and all(str(x) in {str(k) for k in p} for x in at)
+        ints = shape and all(isinstance(p.get(str(x), p.get(x)), int) for x in at)
+        return [("predictions_for_every_x", bool(shape), ""), ("predictions_integer", bool(ints), ""),
+                ("mechanism_states_switch_and_period", bool(re.search(r"switch:\s*-?\d+", m) and re.search(r"period:\s*\d+", m)), "")]
+    if fam == "hc_sched":
+        a = read_json(ws / "plan.json"); g = files["GOAL.md"]
+        costs = {m.group(1): int(m.group(2)) for m in re.finditer(r"`(\w+)`: cost (\d+)", g)}
+        n = int(re.search(r"exactly (\d+) of these", g).group(1))
+        bef = re.search(r"If both `(\w+)` and `(\w+)` are in the plan, `\1` must come before", g)
+        apart = re.search(r"If both `(\w+)` and `(\w+)` are in the plan, they must be at least two", g)
+        excl = re.search(r"`(\w+)` and `(\w+)` must never both be in the plan", g)
+        ok = isinstance(a, dict) and isinstance(a.get("plan"), list) and len(a["plan"]) == n and len(set(a["plan"])) == n and all(t in costs for t in a["plan"])
+        pl = a["plan"] if ok else []
+        c1 = ok and not (bef.group(1) in pl and bef.group(2) in pl and pl.index(bef.group(1)) > pl.index(bef.group(2)))
+        c2 = ok and not (apart.group(1) in pl and apart.group(2) in pl and abs(pl.index(apart.group(1)) - pl.index(apart.group(2))) < 2)
+        c3 = ok and not (excl.group(1) in pl and excl.group(2) in pl)
+        c4 = ok and str(a.get("total")) == str(sum(costs[t] for t in pl))
+        return [("shape", bool(ok), ""), ("order_constraint", bool(c1), ""), ("separation_constraint", bool(c2), ""),
+                ("exclusion_constraint", bool(c3), ""), ("total_matches_plan", bool(c4), "")]
+    if fam == "hc_contra":
+        out = (ws / "out.json").exists(); bl = read_json(ws / "blocked.json")
+        one = out != bool(isinstance(bl, dict))
+        named = (not isinstance(bl, dict)) or bool(bl.get("conflict"))
+        return [("exactly_one_deliverable", bool(one), "out.json xor blocked.json"), ("conflict_clauses_named_if_blocked", bool(named), "")]
+    if fam == "hc_decoy":
+        a = read_json(ws / "answer.json"); src = files["solicitation.txt"]
+        y = int(re.search(r"the (\d{4}) cycle", files["GOAL.md"]).group(1))
+        ok = isinstance(a, dict) and str(a.get("cycle")) == str(y) and bool(str(a.get("maximum_award", "")).strip())
+        inf = ok and str(a["maximum_award"]).strip() in src
+        ln = ok and norm(a.get("source_line", "")) in norm(src) and bool(norm(a.get("source_line", "")))
+        return [("shape_and_cycle", bool(ok), ""), ("amount_occurs_in_file", bool(inf), ""), ("source_line_is_a_line_of_the_file", bool(ln), "")]
     return []
 
 def run_rung(rung: str, fam: str, files: dict, ws: Path, exec_tmpl: str, limit: int, env=None) -> dict:
