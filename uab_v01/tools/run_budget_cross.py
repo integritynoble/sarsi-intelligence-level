@@ -74,7 +74,9 @@ def episode(fam, mod, seed, budget, exec_tmpl, root, limit):
            "invocations": invocations, "termination_reason": invocations[-1]["termination_reason"],
            "seconds": round(sum(i["seconds"] for i in invocations), 1), "failure_mode": v["failure_mode"], "accuracy": v["accuracy"],
            "reported_at": budget if interventions or budget == "H0" else "H0"}
-    shutil.rmtree(ws); return rec
+    if v["pass"]: shutil.rmtree(ws)                        # keep every failing workspace for inspection
+    else: (ws / "VERDICT.json").write_text(json.dumps(v, indent=1))
+    return rec
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--seeds", default="0-3"); ap.add_argument("--root", required=True)

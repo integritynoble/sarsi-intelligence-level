@@ -172,6 +172,8 @@ HIL-AUC & 95.0 & 95.0 & 88.8 & ranks by baseline, not by harness response \\
 
 \textbf{Against H3.} Held. Across the frontier executors' 20 bare-versus-harnessed episodes, zero tasks were broken by the harness and two were turned around by it; no lower band regressed at any rung.
 
+\textbf{Against H2.} One reading, from the budget-cross runs of the benchmark paper \citep{yang2026uab}: on six T0/T1 families at three budgets, the executor never used the H1 clarification, and the one H2 local correction it received turned a false completion into a delivered-correct outcome. Intervention reduces false completion on that episode; nothing is established about required $H$ at fixed reliability, because the suite is saturated at H0 on every band present.
+
 \subsection{The paired rung comparison}
 
 \begin{table}[H]
@@ -230,7 +232,7 @@ Factor & Pre-registered & Measured to date \\
 Executors & Claude Code, Codex, OpenCode, Hermes, local & Claude Code (two models), Codex; OpenCode present but never exercised; Hermes adapter only \\
 Harness generations & HG0--HG3 as specified, then HG4--HG5 & HG0--HG3 as the delegation instantiation; no self-modifying rung \\
 Domains & paper, funding, job, code, research, business & code (six classes); one sealed research family; T0 families bound in every domain and a T1 family in paper development, none yet run on the ladder; the U2 learning-transfer suite bound and run on two seeds with one pair (transfer on both, ablated arm fails) \\
-Intervention budgets & H0, H1, H2 standardized & H1 only \\
+Intervention budgets & H0, H1, H2 standardized & H1 only on the ladder; H0/H1/H2 on the six in-package T0/T1 families (72 episodes, one pair): no question asked in 48 opportunities, one H2 correction turned a false completion into a pass \\
 Seeds per class & $\ge 4$ & 2 (ladder), 3 (arms), 1 (regime switch) \\
 Transfer test & six domains, $G_i$ with intervals & none \\
 \bottomrule

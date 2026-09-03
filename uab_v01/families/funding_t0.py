@@ -5,6 +5,11 @@ routing note) and several eligibility clauses. GOAL.md names exactly one field. 
 method -- take the first date, or the first sentence under 'Eligibility' -- fails on most seeds
 because the generator orders the distractor first. Every key value appears verbatim in the text under
 its own label, which is what the specification-key test asserts.
+
+Budget-cross defect, found and repaired 2026-09-03: "verbatim from the Principal Investigator line"
+was read by a real executor as including the phrase "the PI must hold", and a trailing period was
+copied on another field; both were marked wrong on a rule the prose had not stated. The goal now
+says which text to copy and the verifier strips the label phrase and the period.
 """
 from __future__ import annotations
 import datetime as dt
@@ -77,9 +82,10 @@ def generate(seed: int):
         "- full_proposal_deadline: the sponsor's full-proposal due date, ISO format. Not the letter-of-intent",
         "  date, not the earliest start date, not any internal routing date.",
         "- loi_deadline: the letter-of-intent due date, ISO format.",
-        "- pi_eligibility: what the PI must hold, verbatim from the Principal Investigator line.",
-        "- institution_eligibility: the eligible institution types, verbatim from the Institutions line.",
-        "- citizenship_requirement: verbatim from the Citizenship line.",
+        "- pi_eligibility: the text after `the PI must hold` on the Principal Investigator line, verbatim,",
+        "  without that phrase and without the trailing period.",
+        "- institution_eligibility: the text after `Institutions:` on that line, verbatim, without the trailing period.",
+        "- citizenship_requirement: the text after `Citizenship:` on that line, verbatim, without the trailing period.",
         "- budget_cap: the total cap as an integer number of USD, digits only.", "",
     ])
     files = {"GOAL.md": goal, "solicitation.txt": text}
@@ -97,7 +103,11 @@ def verify(ws: Path, key: dict) -> dict:
     checks.append(("field_named", field_ok, f"expected field {key['field']}"))
     val = str(ans.get("value", ""))
     want = key["value"]
-    value_ok = norm(val) == norm(want) if key["field"] != "budget_cap" else val.strip() == want
+    # tolerate the two readings the first wording left open: the label phrase and the trailing period
+    v = norm(val).rstrip(".")
+    for prefix in ("the pi must hold ", "institutions: ", "citizenship: "):
+        if v.startswith(prefix): v = v[len(prefix):]
+    value_ok = v == norm(want).rstrip(".") if key["field"] != "budget_cap" else val.strip() == want
     checks.append(("value_exact", value_ok, "expected " + want))
     src = (ws / "solicitation.txt").read_text(encoding="utf-8")
     verb = norm(val) in norm(src) or (key["field"] == "budget_cap" and f"{int(val):,}" in src if val.isdigit() else False)
