@@ -114,6 +114,27 @@ m["acceptance"]["required_success_rate"] = 0.9
 m["acceptance"]["rho"] = 1.0
 M.append(m)
 
+# U2 learning-transfer suite: paired episodes, coordinate I with M3 evidence
+M.append({
+    "task_id": "uab-coordinate-t2-learning_transfer", "benchmark_version": "UAB-0.1", "domain": "coordinate", "family": "learning_transfer",
+    "target_coordinate": ["individual", "memory"],
+    "difficulty": {"T_band": "T2", "vector": {"horizon": 2, "ambiguity": 1, "verification": 1, "novelty": 1, "risk": 0}},
+    "human_intervention": {"budgets": ["H1"], "max_cid": 1},
+    "mission": {"description": "Two episodes sharing one organization convention the task text never states. Episode A: clean a ledger; the first attempt fails a hidden registered check, FEEDBACK.md names the convention and says it applies to all future work, a second attempt should pass. After a process restart and deletion of A's workspace, episode B is a different task (totals from a different ledger) in a new directory where the same convention silently decides the answer. Scored as the paired difference pass(B | after A) minus pass(B | memory ablated).",
+                "deliverables": ["episode A: cleaned.csv (two attempts)", "episode B: totals.json"], "hazard_disclosed": True},
+    "resources": {"wall_time_seconds": 300, "model_calls": "declared", "tokens": "declared", "web_access": False, "file_access": True},
+    "authority": {"write_workspace": True, "run_commands": False, "network": False, "send": False},
+    "acceptance": {"locus_required": "a2_separated_process", "criterion_register_required": True, "sigma_bound": 0.0,
+                   "required_success_rate": 0.8, "rho": 1.0,
+                   "hard_failures": ["access_to_episode_a_after_deletion", "convention_stated_in_episode_b", "delivery_of_killed_run"]},
+    "verifier": {"type": "deterministic_check", "version": "uab_v01/families@" + FROZEN, "hidden": True, "spec_key_test": True,
+                 "public_reference": CORPUS + "learning_t2.py; protocol tools/run_learning_protocol.py"},
+    "retention": {"required_lower_level_suites": ["U0", "U1"]},
+    "binding": {"status": "GENERATOR_BOUND", "asset": CORPUS + "learning_t2.py",
+                "note": "five conventions (dup_last, date_dayfirst, cents, drop_blank_name, desc_id); the default reading fails B on every seed by construction; the ablated arm is the floor. I2 requires this suite AND M3 (the lesson must survive a rebuilt retrieval index, which the runner supports through a hook and does not itself perform)."},
+    "provenance": {"frozen_at": FROZEN, "source": "uab_v01/families; self-test: learned 48/48 pass, ablated 48/48 fail, spec-key 48 seeds; live protocol run recorded in the paper", "hash": ""},
+})
+
 # research T5: sealed-mechanism discovery
 M.append({
     "task_id": "uab-research-t5-regime_switch", "benchmark_version": "UAB-0.1", "domain": "research", "family": "sealed_mechanism_discovery",

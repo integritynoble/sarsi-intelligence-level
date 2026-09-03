@@ -4,9 +4,10 @@ Frozen 2026-09-03. Read `UAB_SPEC.md` first. Coverage is in `matrix/uab_matrix_v
 generated: 36 domain-band cells, of which 4 BOUND, 7 GENERATOR_BOUND, 2 BAND_ONLY, 23
 SPECIFICATION_ONLY; plus 10 cross-domain coordinate manifests (I1 ×4, SA1/SA2 ×3, DI T0/T1 ×3).
 
-Six families live in this package (`families/`): code T0 one-edit, funding T0 extract-requirement,
+Seven families live in this package (`families/`): code T0 one-edit, funding T0 extract-requirement,
 job T0 extract-requirements, paper T0 verify-citation, paper T1 results-section, business T0
-extract-fact. Each ships a seeded generator with a hidden key, a verifier, a reference
+extract-fact, and the U2 learning-transfer suite (`learning_t2`, paired episodes; run it against a real
+executor with `tools/run_learning_protocol.py`, which runs the ablated arm first in a separate root). Each ships a seeded generator with a hidden key, a verifier, a reference
 solver, the plausible wrong method, and a specification–key test; `python3 -m families selftest`
 must show the reference passing and the naive method failing on every seed.
 

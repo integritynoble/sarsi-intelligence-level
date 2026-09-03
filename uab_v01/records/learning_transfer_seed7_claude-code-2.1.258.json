@@ -1,0 +1,47 @@
+{
+ "seed": 7,
+ "convention": "cents",
+ "executor": "claude -p {prompt} --permission-mode acceptEdits --allowedTools Read,Edit,Write,Glob,Grep",
+ "arms": {
+  "ablated": {
+   "b": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 31.2,
+    "stdout_tail": " a day-first date format, the per-month sums would differ. I had no evidence for that, so I kept the baseline.\n- Amounts are copied verbatim as strings, and per-id entries are sorted by id ascending.\n",
+    "stderr_tail": "",
+    "pass": false,
+    "failure_mode": "default_reading_no_transfer"
+   }
+  },
+  "experienced": {
+   "a1": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 48.3,
+    "stdout_tail": "y was not writable from this session, so that record lives in episode_a instead. If `FEEDBACK.md` arrives naming the overridden rule, the retry should apply it in place of the matching baseline rule.\n",
+    "stderr_tail": "",
+    "pass": false
+   },
+   "a2": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 48.4,
+    "stdout_tail": "ates, one row per id, ordered by id ascending.\n\nWrites to the persistent memory directory were blocked by the sandbox, so the convention is recorded in ORG_CONVENTIONS.md at the project root instead.\n",
+    "stderr_tail": "",
+    "pass": true
+   },
+   "b": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 37.1,
+    "stdout_tail": "ns on duplicate ids, blank names kept, per-id sorted ascending by id.\n\nThe ledger had seven unique ids with no duplicates or blank names, so the output has seven per-id entries and six month buckets.\n",
+    "stderr_tail": "",
+    "pass": true,
+    "failure_mode": null
+   }
+  }
+ },
+ "learning_transfer": 1,
+ "reading": "transfer"
+}

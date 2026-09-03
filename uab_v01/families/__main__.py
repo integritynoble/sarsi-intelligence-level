@@ -37,6 +37,23 @@ def main(argv=None) -> int:
         print(f"{a.family}: specification and key agree on seeds {a.seeds}"); return 0
     if a.cmd == "selftest":
         failures = 0
+        from . import learning_t2
+        seeds = seeds_of(a.seeds); learned = fresh_fail = 0
+        for s in seeds:
+            learning_t2.spec_key_check(s)
+            fa, fb, key = learning_t2.generate_pair(s)
+            da, db = Path(tempfile.mkdtemp()), Path(tempfile.mkdtemp()); write_workspace(da, fa); write_workspace(db, fb)
+            learning_t2.reference_solve_a(da, None)                       # attempt 1: default reading
+            assert not learning_t2.verify_a(da, key)["pass"], "attempt 1 should fail under the default reading"
+            (da / "FEEDBACK.md").write_text(learning_t2.feedback(key))
+            conv = learning_t2.lesson_from_feedback(da)
+            learning_t2.reference_solve_a(da, conv); a2 = learning_t2.verify_a(da, key)["pass"]
+            learning_t2.reference_solve_b(db, conv); b_learned = learning_t2.verify_b(db, key)["pass"]   # carried the lesson
+            learning_t2.reference_solve_b(db, None); b_fresh = learning_t2.verify_b(db, key)               # ablated: default reading
+            learned += a2 and b_learned; fresh_fail += (not b_fresh["pass"]) and b_fresh["failure_mode"] == "default_reading_no_transfer"
+            shutil.rmtree(da); shutil.rmtree(db)
+        ok = learned == len(seeds) and fresh_fail == len(seeds); failures += 0 if ok else 1
+        print(f"{'learning_t2':12s} learned   {learned}/{len(seeds)} pass  ablated {fresh_fail}/{len(seeds)} fail  spec-key ok  -> {'OK' if ok else 'FAIL'}")
         for name, mod in FAMILIES.items():
             ref_pass = naive_fail = 0; seeds = seeds_of(a.seeds)
             for s in seeds:

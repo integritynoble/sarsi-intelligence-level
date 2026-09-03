@@ -1,0 +1,47 @@
+{
+ "seed": 8,
+ "convention": "drop_blank_name",
+ "executor": "claude -p {prompt} --permission-mode acceptEdits --allowedTools Read,Edit,Write,Glob,Grep",
+ "arms": {
+  "ablated": {
+   "b": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 36.3,
+    "stdout_tail": " rule had no effect.\n- **Months:** five ISO month keys, with August 2025 summing three rows.\n\nIf the hidden checks expect an override, it was not discoverable from anything available in this session.\n",
+    "stderr_tail": "",
+    "pass": false,
+    "failure_mode": "default_reading_no_transfer"
+   }
+  },
+  "experienced": {
+   "a1": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 23.8,
+    "stdout_tail": "om MM/DD/YYYY to ISO YYYY-MM-DD.\n- Amounts copied exactly as given.\n- All six ids were unique, so no deduplication was needed.\n- The blank-name row for id 100 was kept.\n- Rows sorted by id ascending.\n",
+    "stderr_tail": "",
+    "pass": false
+   },
+   "a2": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 45.2,
+    "stdout_tail": "ates and verbatim amounts.\n\nThe persistent memory directory rejected writes, so I recorded the organization convention in `ORG_CONVENTIONS.md` at the project root instead, for use in future episodes.\n",
+    "stderr_tail": "",
+    "pass": true
+   },
+   "b": {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 62.6,
+    "stdout_tail": "nthly sums keyed YYYY-MM.\n\nThe memory write to record this convention was blocked as an out-of-project path. Nothing is lost, since `ORG_CONVENTIONS.md` in the project already documents the override.\n",
+    "stderr_tail": "",
+    "pass": true,
+    "failure_mode": null
+   }
+  }
+ },
+ "learning_transfer": 1,
+ "reading": "transfer"
+}
