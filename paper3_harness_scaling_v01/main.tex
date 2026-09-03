@@ -291,9 +291,35 @@ Arm 3 is the one that matters for H1's qualification about false completion: a r
 
 On the sealed regime-switch family, with harness, protocol, timeout and twelve common seeds held fixed, the frontier executor passed 5/12 and a weaker one 1/12; four pairs were discordant, all in the frontier's favour, with an exact two-sided McNemar $p = 0.125$; the frontier's RMSE was lower on 11/12 pairs, with an exact sign test $p = 0.00635$ \citep{yang2026unified}. This is an Experiment A instance: it discriminates the archived configurations on these instances, it is not a curve segment, and the frontier executor's identity is missing from the archived record --- a freeze omission the apparatus rules now prevent.
 
+\subsection{A matched executor comparison on every domain}\label{sec:execcmp}
+
+The six in-package T0/T1 families of the benchmark \citep{yang2026uab} were run on identical seeds at H0, H1 and H2 --- 72 episodes per pair --- by three pairs. Two are a true executor swap at fixed harness: Claude Code 2.1.258 with its default model, and the same Claude Code with Qwen 3.8 (27B) behind it, reached through a local proxy that rewrites the model name and hoists system messages for the serving shim. The third is a different pair, not an executor swap: OpenCode 1.18.27 with the free Muse Spark 1.3 model, so its harness differs as well and it is reported as a pair rather than as a row of Experiment A.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lcccccclccY@{}}
+\toprule
+& \multicolumn{3}{c}{T0 (20 per budget)} & \multicolumn{3}{c}{T1 (4 per budget)} & & & & \\
+Pair & H0 & H1 & H2 & H0 & H1 & H2 & Total & FC & Mean s & Note \\
+\midrule
+Claude Code, default model & 20 & 20 & 20 & 4 & 4 & 4 & 72/72 & 0 & 28.6 & after one item repair (\S\ref{sec:results}) \\
+Claude Code, Qwen 3.8 (27B) & 20 & 20 & 20 & 4 & 4 & 4 & 72/72 & 0 & 90.6 & same harness; executor swapped \\
+OpenCode, Muse Spark 1.3 & 20 & 20 & 19 & 4 & 4 & 4 & 71/72 & 1 & 22.5 & different harness; a third pair \\
+\bottomrule
+\end{tabularx}
+\caption{Matched comparison on the six T0/T1 families, four seeds, three budgets. No pair asked a clarifying question in any of its 48 opportunities, so by the zero-intervention rule every H1 episode and all but one H2 episode are H0 episodes. FC is false completions. Records are released with the benchmark.}
+\label{tab:execcmp}
+\end{table}
+
+\textbf{Reading.} The suite is saturated for all three pairs: 215 of 216 episodes pass, and the one failure is an OpenCode episode at H2 on a seed the same pair passed at H0 and H1, where the executor reported done twice without changing the file. Per-band headroom is zero for every pair, so this comparison discriminates nothing about capability and says something definite about cost: at equal scores the Qwen pair took three times the wall clock of the default pair and four times that of the OpenCode pair, which is the ``equal scores, unequal costs'' result of \S\ref{sec:results} again, on a second suite and an open model. It also answers a narrower question the design asked: the harness effect is not a property of one vendor's model, since the same harness carried an open 27B model to the same surface.
+
+\textbf{Against H6 and H7.} Nothing here can reorder executors, because nothing here separates them; the reordering evidence remains the ladder curves. The comparison is instead the clearest instance yet of H7: three pairs of visibly different sophistication earn the same reading on a frozen suite, and the difference among them is invisible until an item has headroom. The next executor comparison should be run on the sealed families, not on these.
+
+\textbf{Apparatus, again.} Two defects were found and fixed before these numbers were produced: OpenCode resolves its working directory from an environment variable the runner had not set, so its first run did every episode's work in the runner's own directory and failed all of them; and the Qwen shim rejects system-role messages that are not first, which Claude Code 2.1.258 emits, so the proxy hoists them. Both would have read as executor failures.
+
 \subsection{What these measurements do not show}
 
-Any cross-domain transfer (H4): one domain. Any intervention reduction (H2): one budget. Any self-improvement validity (H5): no self-modifying rung was built. Any model-tier ordering: two vendor families, one host, one operator. Any rate: twelve episodes per rung are readings.
+Any cross-domain transfer (H4): one domain. Any intervention reduction (H2): one budget. Any self-improvement validity (H5): no self-modifying rung was built. Any model-tier ordering: two vendor families on the ladder, one host, one operator; the three-pair comparison of \S\ref{sec:execcmp} separates nothing because its suite is saturated. Any rate: twelve episodes per rung are readings.
 
 \section{Coverage of the Pre-registered Matrix}\label{sec:coverage}
 
@@ -303,9 +329,9 @@ Any cross-domain transfer (H4): one domain. Any intervention reduction (H2): one
 \toprule
 Factor & Pre-registered & Measured to date \\
 \midrule
-Executors & Claude Code, Codex, OpenCode, Hermes, local & Claude Code (two models), Codex; OpenCode present but never exercised; Hermes adapter only \\
+Executors & Claude Code, Codex, OpenCode, Hermes, local & Claude Code (two models), Codex on the ladder; Claude Code with Qwen 3.8 and OpenCode with Muse Spark 1.3 on the T0/T1 families; Hermes adapter only \\
 Harness generations & HG0--HG3 as specified, then HG4--HG5 & HG0--HG3 as the delegation instantiation; no self-modifying rung \\
-Domains & paper, funding, job, code, research, business & code (six classes); one sealed research family; T0 families bound in every domain and a T1 family in paper development, none yet run on the ladder; the U2 learning-transfer suite bound and run on two seeds with one pair (transfer on both, ablated arm fails) \\
+Domains & paper, funding, job, code, research, business & code (six classes); one sealed research family; the six in-package T0/T1 families run by three pairs at three budgets (saturated); the U2 learning-transfer suite bound and run on two seeds with one pair (transfer on both, ablated arm fails); the U3 suite run once (promoted) \\
 Intervention budgets & H0, H1, H2 standardized & H1 only on the ladder; H0/H1/H2 on the six in-package T0/T1 families (72 episodes, one pair): no question asked in 48 opportunities, one H2 correction turned a false completion into a pass \\
 Seeds per class & $\ge 4$ & 2 (ladder), 3 (arms), 1 (regime switch) \\
 Transfer test & six domains, $G_i$ with intervals & none \\

@@ -18,7 +18,8 @@ from families.common import write_workspace
 
 def run(cmd_tmpl, prompt, cwd, limit):
     cmd = shlex.split(cmd_tmpl.replace("{prompt}", shlex.quote(prompt))); t0 = time.time()
-    p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
+    p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True,
+                         env={**os.environ, "PWD": str(cwd)})   # some executors (OpenCode) read PWD, which Popen(cwd=) does not set
     try: out, err = p.communicate(timeout=limit); reason = "normal" if p.returncode == 0 else "crashed"
     except subprocess.TimeoutExpired: os.killpg(p.pid, signal.SIGKILL); out, err = p.communicate(); reason = "timed_out"
     return {"exit": p.returncode, "termination_reason": reason, "seconds": round(time.time() - t0, 1), "stdout_tail": out.decode(errors="replace")[-160:]}
