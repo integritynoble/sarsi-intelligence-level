@@ -1,0 +1,5 @@
+{
+ "commitment": "sha256:53e202f477a0ffda23a0a638d2a81890381a69e340f5d14d56073d579faa1f52",
+ "n_private_seeds": 4,
+ "derivation": "HMAC-SHA256(salt, 'hilbench:i')[:4] mod 1e6 + 1000"
+}

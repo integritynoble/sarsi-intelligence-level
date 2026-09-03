@@ -1,0 +1,202 @@
+\begin{thebibliography}{30}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amershi et~al.(2019)Amershi, Weld, Vorvoreanu, et~al.]{amershi2019}
+Saleema Amershi, Dan Weld, Mihaela Vorvoreanu, et~al.
+\newblock Guidelines for human-{AI} interaction.
+\newblock In \emph{Proceedings of CHI 2019}, 2019.
+
+\bibitem[{ARC Prize Foundation}(2026)]{arc2026}
+{ARC Prize Foundation}.
+\newblock {ARC-AGI-3}: A new challenge for frontier agentic intelligence.
+\newblock Technical report, ARC Prize Foundation, April 2026.
+
+\bibitem[Bai et~al.(2024)Bai, Lv, Zhang, et~al.]{bai2024longbench}
+Yushi Bai, Xin Lv, Jiajie Zhang, et~al.
+\newblock {LongBench}: A bilingual, multitask benchmark for long context
+  understanding.
+\newblock In \emph{Proceedings of ACL 2024}, pages 3119--3137, 2024.
+
+\bibitem[Chiang et~al.(2024)Chiang, Zheng, Sheng, et~al.]{chiang2024arena}
+Wei-Lin Chiang, Lianmin Zheng, Ying Sheng, et~al.
+\newblock Chatbot arena: An open platform for evaluating {LLMs} by human
+  preference.
+\newblock In \emph{ICML 2024}, volume 235 of \emph{PMLR}, pages 8359--8388,
+  2024.
+
+\bibitem[Endsley and Kaber(1999)]{endsley1999}
+Mica~R. Endsley and David~B. Kaber.
+\newblock Level of automation effects on performance, situation awareness and
+  workload in a dynamic control task.
+\newblock \emph{Ergonomics}, 42\penalty0 (3):\penalty0 462--492, 1999.
+\newblock \doi{10.1080/001401399185595}.
+
+\bibitem[Glazer et~al.(2024)Glazer, Erdil, Besiroglu,
+  et~al.]{glazer2024frontiermath}
+Elliot Glazer, Ege Erdil, Tamay Besiroglu, et~al.
+\newblock {FrontierMath}: A benchmark for evaluating advanced mathematical
+  reasoning in {AI}.
+\newblock \emph{arXiv:2411.04872}, 2024.
+
+\bibitem[Hendrycks et~al.(2025)Hendrycks, Song, Szegedy,
+  et~al.]{hendrycks2025agi}
+Dan Hendrycks, Dawn Song, Christian Szegedy, et~al.
+\newblock A definition of {AGI}.
+\newblock \emph{arXiv:2510.18212}, 2025.
+
+\bibitem[Hsieh et~al.(2024)Hsieh, Sun, Kriman, et~al.]{hsieh2024ruler}
+Cheng-Ping Hsieh, Simeng Sun, Samuel Kriman, et~al.
+\newblock {RULER}: What's the real context size of your long-context language
+  models?
+\newblock \emph{arXiv:2404.06654}, 2024.
+
+\bibitem[Jain et~al.(2024)Jain, Han, Gu, et~al.]{jain2024livecodebench}
+Naman Jain, King Han, Alex Gu, et~al.
+\newblock {LiveCodeBench}: Holistic and contamination free evaluation of large
+  language models for code.
+\newblock \emph{arXiv:2403.07974}, 2024.
+
+\bibitem[Jimenez et~al.(2023)Jimenez, Yang, Wettig,
+  et~al.]{jimenez2023swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, et~al.
+\newblock {SWE-bench}: Can language models resolve real-world {GitHub} issues?
+\newblock \emph{arXiv:2310.06770}, 2023.
+
+\bibitem[Klein et~al.(2004)Klein, Woods, Bradshaw, Hoffman, and
+  Feltovich]{klein2004}
+Gary Klein, David~D. Woods, Jeffrey~M. Bradshaw, Robert~R. Hoffman, and Paul~J.
+  Feltovich.
+\newblock Ten challenges for making automation a team player in joint
+  human-agent activity.
+\newblock \emph{IEEE Intelligent Systems}, 19\penalty0 (6):\penalty0 91--95,
+  2004.
+\newblock \doi{10.1109/MIS.2004.74}.
+
+\bibitem[Lee and See(2004)]{lee2004}
+John~D. Lee and Katrina~A. See.
+\newblock Trust in automation: Designing for appropriate reliance.
+\newblock \emph{Human Factors}, 46\penalty0 (1):\penalty0 50--80, 2004.
+\newblock \doi{10.1518/hfes.46.1.50.30392}.
+
+\bibitem[Li et~al.(2025)Li, Meng, Lin, Luo, Tian, Ma, Huang, and
+  Chua]{li2025screenspotpro}
+Kaixin Li, Ziyang Meng, Hongzhan Lin, Ziyang Luo, Yuchen Tian, Jing Ma, Zhiyong
+  Huang, and Tat-Seng Chua.
+\newblock {ScreenSpot-Pro}: {GUI} grounding for professional high-resolution
+  computer use.
+\newblock In \emph{Proceedings of the 33rd ACM International Conference on
+  Multimedia}, 2025.
+\newblock arXiv:2504.07981.
+
+\bibitem[Lu et~al.(2023)Lu, Bansal, Xia, et~al.]{lu2023mathvista}
+Pan Lu, Hritik Bansal, Tony Xia, et~al.
+\newblock {MathVista}: Evaluating mathematical reasoning of foundation models
+  in visual contexts.
+\newblock \emph{arXiv:2310.02255}, 2023.
+
+\bibitem[Maharana et~al.(2024)Maharana, Lee, Tulyakov, Bansal, Barbieri, and
+  Fang]{maharana2024locomo}
+Adyasha Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal, Francesco
+  Barbieri, and Yuwei Fang.
+\newblock Evaluating very long-term conversational memory of {LLM} agents.
+\newblock In \emph{Proceedings of ACL 2024}, 2024.
+\newblock arXiv:2402.17753.
+
+\bibitem[Mialon et~al.(2023)Mialon, Fourrier, Swift, Wolf, LeCun, and
+  Scialom]{mialon2023gaia}
+Gr{\'e}goire Mialon, Cl{\'e}mentine Fourrier, Craig Swift, Thomas Wolf, Yann
+  LeCun, and Thomas Scialom.
+\newblock {GAIA}: A benchmark for general {AI} assistants.
+\newblock \emph{arXiv:2311.12983}, 2023.
+
+\bibitem[Morris et~al.(2024)Morris, Sohl-Dickstein, Fiedel, Warkentin, Dafoe,
+  Faust, Farabet, and Legg]{morris2024levels}
+Meredith~Ringel Morris, Jascha Sohl-Dickstein, Noah Fiedel, Tris Warkentin,
+  Allan Dafoe, Aleksandra Faust, Clement Farabet, and Shane Legg.
+\newblock Position: Levels of {AGI} for operationalizing progress on the path
+  to {AGI}.
+\newblock In \emph{Proceedings of the 41st International Conference on Machine
+  Learning}, volume 235 of \emph{PMLR}, pages 36308--36321, 2024.
+
+\bibitem[{OpenAI}(2024)]{openai2024simpleqa}
+{OpenAI}.
+\newblock {SimpleQA}: Measuring short-form factuality in large language models.
+\newblock Technical report, OpenAI, 2024.
+
+\bibitem[Parasuraman et~al.(2000)Parasuraman, Sheridan, and
+  Wickens]{parasuraman2000}
+Raja Parasuraman, Thomas~B. Sheridan, and Christopher~D. Wickens.
+\newblock A model for types and levels of human interaction with automation.
+\newblock \emph{IEEE Transactions on Systems, Man, and Cybernetics --- Part A},
+  30\penalty0 (3):\penalty0 286--297, 2000.
+\newblock \doi{10.1109/3468.844354}.
+
+\bibitem[Patil et~al.(2025)Patil, Mao, Yan, Ji, Suresh, Stoica, and
+  Gonzalez]{patil2025bfcl}
+Shishir~G. Patil, Huanzhi Mao, Fanjia Yan, Charlie Cheng-Jie Ji, Vishnu Suresh,
+  Ion Stoica, and Joseph~E. Gonzalez.
+\newblock The {Berkeley} function calling leaderboard ({BFCL}): From tool use
+  to agentic evaluation of large language models.
+\newblock In \emph{ICML 2025}, volume 267 of \emph{PMLR}, pages 48371--48392,
+  2025.
+
+\bibitem[Perrow(1984)]{perrow1984}
+Charles Perrow.
+\newblock \emph{Normal Accidents: Living with High-Risk Technologies}.
+\newblock Basic Books, 1984.
+
+\bibitem[Phan et~al.(2025)Phan, Gatti, Han, et~al.]{phan2025hle}
+Long Phan, Alice Gatti, Ziwen Han, et~al.
+\newblock Humanity's last exam.
+\newblock \emph{arXiv:2501.14249}, 2025.
+
+\bibitem[Rein et~al.(2023)Rein, Hou, Stickland, et~al.]{rein2023gpqa}
+David Rein, Betty~Li Hou, Asa~Cooper Stickland, et~al.
+\newblock {GPQA}: A graduate-level google-proof {Q\&A} benchmark.
+\newblock \emph{arXiv:2311.12022}, 2023.
+
+\bibitem[{SAE International}(2021)]{sae2021j3016}
+{SAE International}.
+\newblock {J3016}: Taxonomy and definitions for terms related to driving
+  automation systems for on-road motor vehicles.
+\newblock Technical report, SAE International, 2021.
+
+\bibitem[Sheridan and Verplank(1978)]{sheridan1978}
+Thomas~B. Sheridan and William~L. Verplank.
+\newblock Human and computer control of undersea teleoperators.
+\newblock Technical report, MIT Man-Machine Systems Laboratory, 1978.
+
+\bibitem[Wang et~al.(2024)Wang, Ma, Zhang, et~al.]{wang2024mmlupro}
+Yubo Wang, Xueguang Ma, Ge~Zhang, et~al.
+\newblock {MMLU-Pro}: A more robust and challenging multi-task language
+  understanding benchmark.
+\newblock \emph{arXiv:2406.01574}, 2024.
+
+\bibitem[Wei et~al.(2025)Wei, Sun, Papay, et~al.]{wei2025browsecomp}
+Jason Wei, Zhiqing Sun, Spencer Papay, et~al.
+\newblock {BrowseComp}: A simple yet challenging benchmark for browsing agents.
+\newblock \emph{arXiv:2504.12516}, 2025.
+
+\bibitem[Xie et~al.(2024)Xie, Zhang, Chen, et~al.]{xie2024osworld}
+Tianbao Xie, Danyang Zhang, Jixuan Chen, et~al.
+\newblock {OSWorld}: Benchmarking multimodal agents for open-ended tasks in
+  real computer environments.
+\newblock \emph{arXiv:2404.07972}, 2024.
+
+\bibitem[Yao et~al.(2024)Yao, Shinn, Razavi, and Narasimhan]{yao2024taubench}
+Shunyu Yao, Noah Shinn, Pedram Razavi, and Karthik Narasimhan.
+\newblock {$\tau$-bench}: A benchmark for tool-agent-user interaction in
+  real-world domains.
+\newblock \emph{arXiv:2406.12045}, 2024.
+
+\bibitem[Yue et~al.(2023)Yue, Ni, Zhang, et~al.]{yue2023mmmu}
+Xiang Yue, Yuansheng Ni, Kai Zhang, et~al.
+\newblock {MMMU}: A massive multi-discipline multimodal understanding and
+  reasoning benchmark for expert {AGI}.
+\newblock \emph{arXiv:2311.16502}, 2023.
+
+\end{thebibliography}
