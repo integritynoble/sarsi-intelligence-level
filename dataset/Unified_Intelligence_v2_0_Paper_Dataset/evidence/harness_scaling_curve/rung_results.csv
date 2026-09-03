@@ -1,0 +1,5 @@
+rung,episodes,gross_a_di,hlis_di,false_completions,held_back,false_rejections,harness_iterations,model_calls,runner_seconds,evidence_status
+HG0,12,0.9333333333333333,93.33333333333333,2,0,0,12,12,1155,archived_aggregate_and_reconstructed_resources
+HG1,12,0.9333333333333333,93.33333333333333,0,2,0,12,12,1002,archived_aggregate_and_reconstructed_resources
+HG2,12,0.9666666666666667,96.66666666666667,0,1,0,15,14,1383,archived_aggregate_and_reconstructed_resources
+HG3,12,0.9666666666666667,96.66666666666667,0,1,0,14,14,1327,archived_aggregate_and_reconstructed_resources

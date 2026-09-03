@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Version 2.0 regime-switch observation",
+  "type": "object",
+  "required": [
+    "seed", "result", "extrapolation_rmse", "bar", "nn_baseline_rmse",
+    "mechanism_stated", "exit_code"
+  ],
+  "properties": {
+    "seed": {"type": "integer"},
+    "result": {"enum": ["pass", "capability_failure"]},
+    "extrapolation_rmse": {"type": "number", "minimum": 0},
+    "bar": {"type": "number", "minimum": 0},
+    "nn_baseline_rmse": {"type": "number", "exclusiveMinimum": 0},
+    "target_spread": {"type": ["number", "null"], "minimum": 0},
+    "mechanism_stated": {"type": "boolean"},
+    "exit_code": {"type": "integer"},
+    "seconds": {"type": ["number", "null"], "minimum": 0}
+  },
+  "additionalProperties": false
+}

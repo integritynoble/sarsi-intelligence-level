@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Version 2.0 HSC episode",
+  "type": "object",
+  "required": [
+    "episode_id", "rung", "task_class", "T_band", "H_budget", "seed",
+    "verifier_pass", "false_completion", "held_back", "false_rejection",
+    "harness_iterations", "model_calls", "wall_time_seconds", "evidence_status"
+  ],
+  "properties": {
+    "episode_id": {"type": "string"},
+    "rung": {"enum": ["HG0", "HG1", "HG2", "HG3"]},
+    "task_class": {"type": "string"},
+    "T_band": {"enum": ["T0", "T1", "T2", "T3"]},
+    "H_budget": {"const": "H1"},
+    "seed": {"enum": [0, 1]},
+    "verifier_pass": {"type": "boolean"},
+    "harness_accepted": {"type": ["boolean", "null"]},
+    "false_completion": {"type": "boolean"},
+    "held_back": {"type": "boolean"},
+    "false_rejection": {"type": "boolean"},
+    "harness_iterations": {"type": "integer", "minimum": 1},
+    "model_calls": {"type": "integer", "minimum": 0},
+    "wall_time_seconds": {"type": "number", "minimum": 0},
+    "termination_reason": {"type": ["string", "null"]},
+    "evidence_status": {"type": "string"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

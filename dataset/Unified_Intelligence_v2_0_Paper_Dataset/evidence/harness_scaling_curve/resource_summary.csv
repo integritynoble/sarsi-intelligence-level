@@ -1,0 +1,6 @@
+rung,input_tokens,cache_creation_tokens,cache_read_tokens,output_tokens,tool_calls,harness_iterations,model_calls,runner_seconds,evidence_status
+HG0,136,173242,1880422,34292,58,12,12,1155,reconstructed_from_local_transcripts
+HG1,146,178831,2081649,33785,61,12,12,1002,reconstructed_from_local_transcripts
+HG2,194,244626,3068201,75007,83,15,14,1383,reconstructed_from_local_transcripts
+HG3,178,219545,2606152,51208,79,14,14,1327,reconstructed_from_local_transcripts
+TOTAL,654,816244,9636424,194292,281,53,52,4867,reconstructed_from_local_transcripts

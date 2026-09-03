@@ -1,0 +1,41 @@
+{
+  "study_id": "regime-switch-same-seed-v2.0",
+  "study_type": "matched_executor_comparison",
+  "task_id": "t5.hidden_law",
+  "mechanism_family": "regime_switch",
+  "common_seeds": [0, 9, 11, 17, 24, 25, 27, 38, 40, 41, 44, 50],
+  "excluded_seed": {
+    "seed": 12,
+    "reason": "Scored under an earlier protocol"
+  },
+  "attempts_per_executor_seed": 1,
+  "timeout_seconds": 7200,
+  "observed_noise_fraction": 0.02,
+  "held_out_points": 120,
+  "held_out_location": "outside the observation box",
+  "pass_rule": "extrapolation_rmse <= 0.25 * nearest_neighbour_baseline_rmse and mechanism stated",
+  "executors": {
+    "frontier": {
+      "model_id": null,
+      "executor_version": null,
+      "evidence_status": "not_archived"
+    },
+    "haiku": {
+      "model_id": "claude-haiku-4-5",
+      "executor_version": null,
+      "evidence_status": "model_archived_executor_version_not_archived"
+    }
+  },
+  "source_hashes": {
+    "frontier.csv": "97ac14a02b6ac666f527b3dab1a7ab2d6badba965f4e52c8c8156d15c9ab6c54",
+    "haiku.csv": "ca95e0f1008280ef49cefad0930bd51185a7669121c37a214467b3d622c7bde8"
+  },
+  "limitations": [
+    "One attempt per executor and seed",
+    "One mechanism family",
+    "One host and harness configuration",
+    "No repeat-run variance estimate",
+    "Incomplete resource envelope",
+    "No separate termination-reason field"
+  ]
+}

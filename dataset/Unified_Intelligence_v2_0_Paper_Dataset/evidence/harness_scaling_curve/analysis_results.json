@@ -1,0 +1,184 @@
+{
+  "episodes": 48,
+  "gross_curve": [
+    93.33333333333333,
+    93.33333333333333,
+    96.66666666666667,
+    96.66666666666667
+  ],
+  "gross_harness_gain": 3.333333333333343,
+  "gross_hil_auc": 95.0,
+  "gross_hil_ceiling": 96.66666666666667,
+  "harness_iterations": 53,
+  "model_calls": 52,
+  "net_curve_rho_1": [
+    86.66666666666667,
+    93.33333333333333,
+    96.66666666666667,
+    96.66666666666667
+  ],
+  "net_harness_gain_rho_1": 10.0,
+  "rungs": [
+    {
+      "episodes": 12,
+      "false_completions": 2,
+      "false_rejections": 0,
+      "gross_a_di": 0.9333333333333333,
+      "gross_hlis_di": 93.33333333333333,
+      "harness_iterations": 12,
+      "held_back": 0,
+      "model_calls": 12,
+      "net_a_di_rho_1": 0.8666666666666667,
+      "net_hlis_di_rho_1": 86.66666666666667,
+      "rung": "HG0",
+      "runner_seconds": 1155.0,
+      "surface": {
+        "T0": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T1": {
+          "episodes": 4,
+          "false_completion_rate": 0.5,
+          "net_rate_rho_1": 0.0,
+          "pass_rate": 0.5
+        },
+        "T2": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T3": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        }
+      }
+    },
+    {
+      "episodes": 12,
+      "false_completions": 0,
+      "false_rejections": 0,
+      "gross_a_di": 0.9333333333333333,
+      "gross_hlis_di": 93.33333333333333,
+      "harness_iterations": 12,
+      "held_back": 2,
+      "model_calls": 12,
+      "net_a_di_rho_1": 0.9333333333333333,
+      "net_hlis_di_rho_1": 93.33333333333333,
+      "rung": "HG1",
+      "runner_seconds": 1002.0,
+      "surface": {
+        "T0": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T1": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 0.5,
+          "pass_rate": 0.5
+        },
+        "T2": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T3": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        }
+      }
+    },
+    {
+      "episodes": 12,
+      "false_completions": 0,
+      "false_rejections": 0,
+      "gross_a_di": 0.9666666666666667,
+      "gross_hlis_di": 96.66666666666667,
+      "harness_iterations": 15,
+      "held_back": 1,
+      "model_calls": 14,
+      "net_a_di_rho_1": 0.9666666666666667,
+      "net_hlis_di_rho_1": 96.66666666666667,
+      "rung": "HG2",
+      "runner_seconds": 1383.0,
+      "surface": {
+        "T0": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T1": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 0.75,
+          "pass_rate": 0.75
+        },
+        "T2": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T3": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        }
+      }
+    },
+    {
+      "episodes": 12,
+      "false_completions": 0,
+      "false_rejections": 0,
+      "gross_a_di": 0.9666666666666667,
+      "gross_hlis_di": 96.66666666666667,
+      "harness_iterations": 14,
+      "held_back": 1,
+      "model_calls": 14,
+      "net_a_di_rho_1": 0.9666666666666667,
+      "net_hlis_di_rho_1": 96.66666666666667,
+      "rung": "HG3",
+      "runner_seconds": 1327.0,
+      "surface": {
+        "T0": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T1": {
+          "episodes": 4,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 0.75,
+          "pass_rate": 0.75
+        },
+        "T2": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        },
+        "T3": {
+          "episodes": 2,
+          "false_completion_rate": 0.0,
+          "net_rate_rho_1": 1.0,
+          "pass_rate": 1.0
+        }
+      }
+    }
+  ],
+  "runner_seconds": 4867.0
+}

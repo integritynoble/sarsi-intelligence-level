@@ -1,0 +1,525 @@
+% arXiv: force the pdflatex path. All content is text, tables and PDF figures; there are no
+% .eps files (figures are PDF), and this must stay within the first few lines to take effect.
+\pdfoutput=1
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do.\do\_\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={Agents That Earn a Level: Harness Design Across Motors, with a Downloadable Fleet},
+  pdfauthor={Chengshuai Yang},
+  pdfsubject={How to build agents on Claude Code, Codex, OpenCode and Hermes that can be measured on the Unified Intelligence scale, and where to download them},
+  pdfkeywords={AI agents, harness design, Claude Code, Codex, OpenCode, delegation, self-improvement, downloadable agents}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Agents That Earn a Level}
+\fancyhead[R]{\small Yang}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\FA}{\ensuremath{F_A(H,p)}}
+\newcommand{\rhov}{\ensuremath{\rho_V}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Agents That Earn a Level:}\\[6pt]
+{\LARGE\bfseries Harness Design Across Motors, with a Downloadable Fleet}\\[8pt]
+{\large\bfseries Claude Code, Codex, OpenCode and Hermes as Replaceable Executors;\\[2pt]
+the Funding, Job and Research Agents as Worked Designs}\\[16pt]
+{\large Chengshuai Yang$^{1,*}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 3, 2026 --- draft v0.1}
+\end{center}
+
+\begin{abstract}
+An agent's intelligence level is a property of a frozen model--harness pair, not of the model. This paper gives the design method that follows from that fact and applies it to a fleet of agents built on four executors --- Claude Code, Codex, OpenCode and Hermes --- so that the executor is an adapter behind one protocol and the level is earned by what surrounds it. The method has three parts. A \emph{rung recipe} states, for each harness generation HG0--HG3 of the Unified Intelligence framework (v2.3), the mechanism that must be added, the mechanism that must live outside the agent's write set, and the test that promotes the pair; the five mechanisms are implemented and released. A \emph{coordinate contract} states what a persistent memory, an organizational structure and a self-model must do to count for $M$, $O$ and $SA$, and why file counts, rosters in prose and fluent self-description count for nothing. A \emph{placement rule} assigns every operation the lowest sufficient level, so verification is done by executors with an empty self-write set. The fleet contains one persistent brain agent, three motor agents (one per executor family, an open one included), organizational agents for funding, job search and outward posting, eight field research agents, and four delegation-level executors DL0--DL3 shipped as binaries whose lowest level runs with no model and no network. Every agent is catalogued with its target profile $[C,I,O,T,H,SA]$, its measured status, and where to download it. The measured status is stated at its real strength: no agent in the fleet has yet earned a non-empty Unified level, because no delegation surface has been verified by a locus that did not do the work and no restart test has been run. The paper closes with the protocol that would change that, in the order that costs least.
+\end{abstract}
+
+\noindent\textbf{Keywords:} AI agents; harness design; Claude Code; Codex; OpenCode; Hermes; delegation; self-improvement; downloadable agents; Unified Intelligence
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+The public comparison of coding agents is a comparison of proposal quality: which one writes the better patch, holds the longer context, drives the richer tool protocol. Those differences are real and they are not differences of level. When four heavily compared agents were placed on the structural axes of an intelligence taxonomy they occupied one cell, because none of them feeds a validated change back into the agent that made it: no held-out evaluation of whether last month's memory writes made this month's sessions better, and no promotion step \citep{yang2026capability}. The difference that would move any of them a cell is not a better model. It is a harness.
+
+This paper is about building that harness deliberately. It takes the measurement framework of \citet{yang2026unified} --- six coordinates $[C,I,O,T,H,SA]$, a memory prerequisite $M$, a gated Unified level U0--U\Om{}, and a harness ladder HG0--HG\Om{} on which the (model, harness) pair is the experimental unit --- and asks the engineering question: given a base model reachable through some executor, what has to be built around it, what has to be kept out of its reach, and what has to be run before a level may be claimed?
+
+The answer is organized around one fact that the framework establishes and this paper takes as its premise:
+
+\begin{claimbox}{The premise}
+A level is earned by measurement of a frozen pair. The architecture enables the claim; the benchmark earns it. Therefore the design problem is not ``which prompt makes the model intelligent'' but ``which mechanisms, owned by whom, make a claim about this pair testable'' --- and the executor underneath is replaceable.
+\end{claimbox}
+
+\subsection{What this paper gives}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{A motor-independent executor protocol} (\S\ref{sec:motors}). Claude Code, Codex, OpenCode, Hermes and a local model sit behind one interface; the brain learns $P(\text{verified success} \mid \text{executor}, \text{class})$ from independent verdicts only, and never learns which vendor it is talking to. Which motors are installed, which are adapters only, and what each contributes structurally is stated per motor.
+\item \textbf{A rung recipe} (\S\ref{sec:recipe}). For each harness generation HG0--HG3: the mechanism added, the mechanism that must live outside the write set, and the test that promotes. The five mechanisms --- class reading, criterion registration, snapshot, separate-process acceptance, escalation --- are released code, and the ladder they form has been measured once.
+\item \textbf{Coordinate contracts} (\S\ref{sec:contracts}) for $M$, $O$ and $SA$: what a memory must survive, what an organization must contain, what a self-model must refuse.
+\item \textbf{Worked designs} (\S\ref{sec:designs}) for one brain agent, three motor agents, three organizational agents (funding, job, outward posting), eight field research agents, and four delegation-level executors shipped as binaries.
+\item \textbf{A catalogue with links} (\S\ref{sec:catalogue}): for every agent, its target profile, its measured status today, and where to download or install it.
+\item \textbf{The measurement that is still owed} (\S\ref{sec:measure}): what would move the first Unified cell from empty to U1, in cost order.
+\end{enumerate}
+
+\subsection{What this paper does not claim}
+
+No agent described here has a certified Unified level. The fleet table in \S\ref{sec:catalogue} shows every $U$ cell empty and every $T{\cdot}H{\cdot}p$ cell unmeasured, and that is the correct entry rather than a gap in the paper. Targets are stated as targets. Where a mechanism exists but its promotion test has not been run, the text says ``built, not measured''. Where a motor is an adapter with nothing installed behind it, the text says so. The one measured result the paper leans on --- a solver that passed 0/15 bare and 15/15 harnessed, and an executor that returned wrong work as done 15/15 bare and 0/15 harnessed --- is a result about the harness on one task family, reported with its three apparatus bugs (\S\ref{sec:recipe}).
+
+\section{What a Level Requires}\label{sec:requires}
+
+This section restates the parts of \citet{yang2026unified} the design depends on, and the one rule from \citet{yang2026designing} that turns them into a build specification.
+
+\subsection{Six coordinates and one prerequisite}
+
+The measured profile is $[C,I,O,T,H,SA]$ at reliability $p$: Cognitive capability under controlled tools; Individual evolution of one persistent decision locus; Organizational capability of the coordination structure; the delegation surface over task difficulty $T$ and human cognitive intervention $H$; and operational Self-Awareness, evidence-grounded and never phenomenal. Memory capability $M$ is measured on its own bench and reported beside $I$: an $I_n$ claim is invalid unless $M \ge \mu_n$, with $I1$ requiring $M1$, $I2$ requiring $M3$ and $I5$ requiring $M5$, and the dependency runs one way only. The Unified level is gated:
+\[
+U_n \iff C \ge C_n \;\wedge\; I \ge I_n \;\wedge\; O \ge O_n \;\wedge\; SA \ge SA_n \;\wedge\; S^{\text{net}}_A(T_n,H_n) \ge p_n,
+\qquad U_n \Rightarrow U_{n-1},
+\]
+where the delegation primitive is defined on delivered outcomes,
+\[
+S^{\text{net}}_A(T,H) = P(\text{delivered and verifier pass}) - \rho(\tau)\,P(\text{false completion}),
+\]
+so that work handed back as done and wrong costs the class's loss ratio $\rho$, and work the harness held back earns nothing however the verifier would have graded it. For an individual agent, $O$ is omitted from the gate and named as omitted; it is never set to zero.
+
+\subsection{The harness ladder}
+
+Each harness generation is a strict superset of the one below, and a test enforces it, because otherwise a difference between rungs is attributable to nothing.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYccc@{}}
+\toprule
+Rung & Mechanisms added & Attempts & Acceptance & Reversible \\
+\midrule
+HG0 & the model, bounded tools, an evidence log & 1 & none & no \\
+HG1 & persistent state; a criterion registered before the work exists; acceptance in a separate process & 1 & yes & no \\
+HG2 & snapshot before the first mutation; restore; retry with the failed check named & 3 & yes & yes \\
+HG3 & failure classification; an evidence-based competence model; routing across executors & 4 & yes & yes \\
+HG4--HG\Om{} & meta-improvement; discovery loop; organization; transduction & --- & --- & --- \\
+\bottomrule
+\end{tabularx}
+\caption{The reference ladder \texttt{dli-ladder/HG0--HG3} as built, and the generations above it as specified. HG0 has no acceptance step on purpose: it is the configuration a contemporary leaderboard measures.}
+\label{tab:ladder}
+\end{table}
+
+\subsection{The three things an LLM cannot design}\label{sec:three}
+
+An LLM can design the mechanism for every level on both axes. It cannot design three things, and they are the same three at every level \citep{yang2026designing}:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+Not designable & Why not \\
+\midrule
+The evidence that a level was reached & Levels are earned by measurement. An agent with an I3 mechanism and no validated mechanism change is I2 with ambition. \\
+Its own referee & An improvement claim is well-posed only if the evaluator lies outside the write set. An LLM that authors its own evaluator has placed it inside at design time. \\
+Its own separation & Separation is a property of the deployment, not of the code. An agent cannot instantiate the fact that a different locus promotes it. \\
+\bottomrule
+\end{tabularx}
+\caption{What the model may not supply for itself.}
+\label{tab:three}
+\end{table}
+
+So every design below is written in three columns: \textbf{what the agent contains} (fully designable), \textbf{what must live outside it} (designable, owned elsewhere), and \textbf{the test that promotes it} (not designable; run). The single most common design error is building the first column, skipping the third, and claiming the level.
+
+\begin{cautionbox}{``Outside the write set'' is a deployment fact}
+Not a different file, not a different class. The test is whether the agent could change it in the course of doing its work. Four mechanisms put something outside, in increasing strength: a different process with a read-only mount; a different host; a different party that holds the ground truth and returns a scalar; cryptographic promotion, where only a signature the agent cannot produce makes a change operative. One base model in nine processes with nine credentials separates proposer from evaluator from promoter. One base model in one context, told which of nine hats it wears, separates nothing --- and the model is never shown a permission gate, because a restriction honoured by a capable participant is not a mechanism.
+\end{cautionbox}
+
+\subsection{Write-set depth}
+
+An agent's individual level is bounded by what it may persistently modify about itself. Five depths are distinguished: D0, nothing persistent, the natural referee; D1, memory; D2, policy --- prompt profiles, thresholds, routing weights; D3, skills --- tools, procedures, subagents; D4, weights. Every coding agent studied in \citet{yang2026capability} is D0--D1 on itself while doing arbitrarily large work on external software, because software an agent writes is not that agent's brain unless the agent then runs on it.
+
+\section{Motors Are Adapters}\label{sec:motors}
+
+\subsection{One protocol, several vendors}
+
+In the fleet described here the executor is an adapter behind one protocol (\texttt{executor.py} in the delegation harness). The brain sends a task contract and receives an episode record; it never learns which vendor produced it. What it learns instead is competence: $P(\text{verified success} \mid \text{executor}, \text{class})$ as a Beta posterior carrying its evidence count beside its mean, so ``one success'' and ``eighty'' are not reported identically, \emph{updated only from independent verdicts}. An executor's own report that it completed the feature is a claim, and a competence model built from claims measures confidence rather than capability.
+
+Routing scores $P(\text{success})\cdot\text{value} - \text{cost} - \text{risk}$ with $P$ taken pessimistically. An executor whose lower bound cannot reach the class's required reliability $p^{*} = \rho/(1+\rho)$ is not less preferred; it is not eligible.
+
+\begin{claimbox}{Why this is the right seam}
+Vendors change terms, models change versions, and a harness that has a vendor's name in its control flow has coupled its level to that vendor's release cycle. Behind the adapter, a motor is characterized by four things only: what tools it can be granted, whether it can be sandboxed, whether it exposes a headless call, and what it costs. Everything that earns a coordinate lives on the brain side of the seam.
+\end{claimbox}
+
+\subsection{The four motors, and what each supplies}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYY@{}}
+\toprule
+Motor & Headless call and transport & What it supplies structurally & Status in this fleet \\
+\midrule
+Claude Code & \texttt{claude -p}; ACP (Agent Client Protocol) bridge; persistent session keyed \texttt{agent:}\allowbreak\texttt{<agent>:}\allowbreak\texttt{<session>} & a memory store with per-entry provenance and typed categories (a genuine D1 write set); subagents that receive inputs only, never state; permission modes; a sandbox that can be disabled and replaced by harness-side isolation & installed (2.1.258 on the build host); the executor behind \texttt{sarsi-claude} and the reference ladder measurement; a standalone no-Node build is published (\S\ref{sec:catalogue}) \\
+Codex & \texttt{codex exec}; a fork accepts \texttt{OPENAI\_BASE\_URL} and an exchange key & an isolated runner; its own sandbox cannot start inside the host environment here, so isolation is supplied by the harness adapter (throwaway copy, no path to the key) & installed (0.151.0, npm build); the system-wide binary on the fleet host exits 0 writing nothing and is not used; Family B of the ladder measurement; the \texttt{codex-pwm} build is published \\
+OpenCode & ACP via \texttt{acpx} in persistent mode & an open, non-vendor harness --- the only executor that can be run where the commercial ones are unavailable, audited line by line, or kept when a vendor changes terms & declared as \texttt{sarsi-open} on one account and as an \texttt{acpx} backend; the fleet docs of 2026-08-27 recorded it absent on every account, and on 2026-09-03 a 1.18.25 binary is present on the build host with a driver spec (\texttt{opencode acp}, or the binary under \texttt{tmux}); \textbf{never exercised}; workspace empty \\
+Hermes, Pi, local model & adapters written against the executor protocol, left unregistered & --- & installed on no account; each stub is required to announce itself, because an adapter that silently falls back to Claude is a lie in the competence model \\
+\bottomrule
+\end{tabularx}
+\caption{The four motor families as adapters. ``Installed'' means an executor behind which a real binary runs on at least one account of the fleet at the time of writing.}
+\label{tab:motors}
+\end{table}
+
+Two consequences follow. First, nothing in this paper's design depends on a motor being any of the four; the OpenCode row exists to make that testable, since a level earned only on commercial motors has not shown the harness did the work. Second, the honest entry for a motor with no binary behind it is ``not installed'', and the adapter must say so at call time rather than degrade. A fifth harness is not in the table because it is not an agent runtime: plain Python under a timer, which is where every model-free step of \S\ref{sec:designs} runs.
+
+\subsection{The one-cell finding, restated as a design target}
+
+Claude Code, Codex and OpenClaw occupy one structural cell: $\langle$D0--D1 on self, closed, self$\rangle$. Claude Code is a half-step ahead on two axes --- a provenance-bearing memory store and bounded other-reach through subagents --- and both are structurally present and evidentially unsupported, because the memory ablation is not run \citep{yang2026capability}. The design target of this paper is therefore not to pick the best motor. It is to build, around whichever motor is available, the four things none of them ships: a held-out evaluation of the agent's own configuration, a criterion register outside its reach, an acceptor in another process, and a memory contract that a restart tests.
+
+\section{The Rung Recipe}\label{sec:recipe}
+
+This section is the core of the method. Each rung is stated in the three columns of \S\ref{sec:three}. The mechanisms are the five released in the delegation harness; the arms measurement that motivates them is reported at the end.
+
+\subsection{HG0 --- evidence log, no acceptance}
+
+\textbf{Contains:} the motor, bounded tools, and an append-only evidence log of every action and observation. \textbf{Outside:} the verifier, entirely; HG0 cannot accept, so it cannot report success, and its score comes from the benchmark's verifier. \textbf{Promotes:} nothing; HG0 is the baseline every curve starts from, and its false-completion rate is the number every higher rung is measured against.
+
+\subsection{HG1 --- persistent state and registered acceptance}
+
+\textbf{Contains:} durable identity and task state that survive a process restart; a criterion register; and an acceptance step. \textbf{Outside:} the register's contents and the acceptor's process. The register (\texttt{criterion.py}) refuses a criterion about a deliverable that already exists, refuses a second criterion under the same name, refuses one that does not say what it misses, and seals when execution starts. It is hash-chained, so an edit is detectable rather than merely discouraged --- file permissions can be undone by the same user, a hash cannot --- and it reports $\sigma$, the share of criteria the agent wrote for itself. Acceptance (\texttt{acceptor.py}) runs in a separate process on a \emph{copy} of the deliverables with no inherited environment and the chain verified before anything runs; a check that tries to rewrite the deliverable changes only the copy, and there is a test for exactly that. \textbf{Promotes:} the restart test for $M1$, and the paired HG0/HG1 measurement: run the executor once per (task, seed), score both rungs from the identical artifacts, and require zero false rejections. Under the delivered-outcome primitive the entire HG0$\to$HG1 movement is the false-completion term; under the success-only primitive it is invisible by construction.
+
+\begin{cautionbox}{The class is read before the attempt}
+Most loops open with an attempt. This one (\texttt{contract.py}) asks how a mistake would be found and what undoing it would cost, and derives $p^{*} = \rho/(1+\rho)$. A class whose failure costs thirty times what success is worth demands $0.968$, and running it at ``usually fine'' is arithmetic nobody did. Where residual harm is unbounded, $p^{*} = 1$ and the honest move is to stop and ask. That is the answer, not a failure.
+\end{cautionbox}
+
+\subsection{HG2 --- snapshot, restore, retry}
+
+\textbf{Contains:} a snapshot before the first mutation (\texttt{reversible.py}), restore on rejection, and a retry that names the check that failed. \textbf{Outside:} the irreversibility classification. Anything classified irreversible does not run unattended at any capability; that is a floor, not a caution, and no capability removes it. \textbf{Promotes:} verification responsiveness $\rho_V$ --- the fraction of rejected attempts accepted at the next attempt with no help deeper than a permission --- which is defined on the second attempt and invisible to any single-attempt evaluation. One measured caution: $\rho_V$ computed over coarse criteria understates the model. A class failed twice because the rejection named a rule the executor had not broken; splitting the criterion so the message named the actual failure moved the class from 0/2 to 2/2. Criteria granularity is reported with $\rho_V$.
+
+\subsection{HG3 --- failure classification and routing}
+
+\textbf{Contains:} a failure classifier and a competence model (\texttt{router.py}). Failures re-route by kind: \emph{specification} goes back to the contract, because re-running cannot fix a bad criterion; \emph{execution} returns to the same executor, which now knows which checks it failed; \emph{capability} goes to someone else, and the second failure of one executor is called capability rather than bad luck; \emph{environment} waits; \emph{verification} stops, because a check that could not decide needs a stronger verifier, not more work. \textbf{Outside:} the verdicts the competence model learns from. \textbf{Promotes:} a curve segment HG2$\to$HG3 that moves only when there is more than one executor to route between. In the reference measurement HG3's mechanism was present and inert because there was a single executor, and the flat segment is a defect of the instantiation rather than of the rung.
+
+\subsection{Escalation and compression}
+
+Two mechanisms sit beside the rungs rather than on them. \textbf{Escalation} (\texttt{escalate.py}) is preferred to guessing because it has no loss term: the task is not done and the damage is not done either. The question asked is the shallowest one that unblocks --- a permission is CID0 and costs the level nothing; a strategy request is CID3 and costs two levels. \textbf{Compression} (\texttt{compress.py}) writes out, after a class is accepted, the criteria that accepted it as a reusable check, so a later run of the same class by any executor arrives with a check that did not exist before. Capability improvements raise the success rate within a class; compression moves the class. It is the only route by which an agent legitimately raises its own frontier.
+
+\subsection{What the arms measurement showed, and what it did not}\label{sec:arms}
+
+One solver was held fixed across four arms on one task family of fifteen instances.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Arm & Configuration & Result \\
+\midrule
+1 & capable but careless solver, bare & 0/15 passed \\
+2 & the same solver, harnessed (HG1--HG2) & 15/15 passed \\
+3 & an executor that cannot succeed, bare & 15/15 returned wrong work as done \\
+3$'$ & the same executor, harnessed & 0/15 wrong work returned; 15/15 escalated \\
+4 & routed over both, learning from verdicts (HG3) & 15/15 passed \\
+\bottomrule
+\end{tabularx}
+\caption{The arms measurement of the delegation harness on one task family. Nothing about the solver differs between arms.}
+\label{tab:arms}
+\end{table}
+
+Three apparatus bugs were caught by the measurement and are recorded because each produced a plausible wrong result invisible from the code: the first run scored 15/15 and was meaningless, because every derived check was passed through an interpreter with escaped newlines and never executed; a timeout that killed only the direct child while the child's children held the output pipe, so a killed run was scored as delivered nothing; and a limit that fired correctly but was shorter than the task. The rule that follows is mechanical: \textbf{an episode's record carries why it ended}, and a harness-terminated episode is recorded as \texttt{timed\_out} or \texttt{not\_attempted}, never as a delivery.
+
+What the arms do not show: a Unified level for anything. Fifteen instances of one family under one intervention budget give a reading on that family. They establish that the harness, not the solver, moved the outcome, which is the claim the design rests on and the only one made here.
+
+\section{Coordinate Contracts}\label{sec:contracts}
+
+The rungs earn the delegation coordinates. Three more coordinates are earned by contracts that the rungs do not supply, and each has a way of looking earned when it is not.
+
+\subsection{Memory: what counts for $M$}
+
+A memory requirement is a test, not a component list. $M1$ is a real process restart followed by recovery of explicitly stored state, with the agent able to say where that state came from --- not a pointer at a vector database. $M2$ adds provenance, temporal order, and a current-versus-obsolete distinction under distractors. $M3$ adds consolidation: a lesson drawn from one episode changes behaviour in a later one, and the change survives when the retrieval index is rebuilt. Long context is not any of these; nothing in a single-episode retrieval score survives a restart.
+
+\begin{cautionbox}{Thirty-seven files prove that something wrote thirty-seven files}
+The fleet's brain agent carries 37 memory files, a 10.5\,KB index and provenance markers, and an earlier edition of the fleet table entered it as I1 on that evidence. That reading was withdrawn. The counts are configuration evidence for an $M1$ candidate and an ordering of which agent to probe first; the level is settled by stopping the process and starting it again, and the probe that does so exists and has not been run.
+\end{cautionbox}
+
+\subsection{Organization: what counts for $O$}
+
+Organizational intelligence belongs to the structure, not to the strongest member. $O1$ requires a role registry (\texttt{roles/}, \texttt{members/}), persistent organizational memory, and a task and evidence history, \emph{and evidence that the registry is dispatched to}. $O2$ requires routing that changes when logged evidence changes. $O3$ requires the organization to modify its own workflow under external validation. The test that separates a real organization from one agent with extra processes is the \textbf{ablation}: run the full roster, then each member removed, and compare verified outcomes. A structure whose strongest member could have done the whole thing alone is reported as individual however it is configured. No workspace in the fleet contains \texttt{roles/}, \texttt{members/} or \texttt{evidence/}; all eighteen agents are $O0$, including those whose charters describe collaboration.
+
+\subsection{Self-awareness: what counts for $SA$}
+
+$SA$ is operational and evidence-grounded. Three instruments earn it and each has a floor it must beat. \emph{Limits before attempt} ($SA2$): the agent states what it cannot do before trying; the floor is attempting everything and failing. \emph{Mechanism of failure} ($SA3$): after a verified failure the agent names the mechanism, and the name is checked against the runner's record; ``I made an error'' fails. \emph{Forecast before run} ($SA4$): the acceptor stores the agent's pass/fail prediction with a timestamp before the episode starts and refuses to start without it; calibration is the Brier score against a constant forecast. A prediction made after the fact scores perfectly and measures nothing.
+
+\begin{claimbox}{The self-model with refusals}
+The strongest self-model in the fleet is in the research agents: every line traces to a run; unmeasured is reported as unmeasured and never as zero; the limits line is always present and cannot be suppressed; and there is no path from reading the self-model to any authority. Three ledgers --- owner-set work, benchmark scores, self-directed research --- are never summed, because an agent that wrote its own benchmark, passed it, and counted the pass toward its record would have published its own reputation.
+\end{claimbox}
+
+\subsection{The placement rule}
+
+Assign each operation the lowest sufficient level, and spend the high levels on what only they can do. Three reasons, each independent. \emph{Compression}: expensive discovery becomes a validated procedure that cheap execution runs at scale; an $I5$ result, once compressed, is executed a million times by $I0$. \emph{Verification needs a different kind of member}: a locus qualified to verify another's claim must not be improving itself by the verdicts it issues, so the natural verifier has an empty or narrow self-write set, and that is its qualification. \emph{Timescale}: memory changes in seconds, policy in days, skills in weeks, weights in months, and fast loops belong close to the work while slow ones belong behind a gate. An organization of uniformly maximal agents cannot verify itself.
+
+\subsection{Apparatus rules}
+
+Four rules apply to every agent below, because each was violated in this fleet's history and each violation looked like a clean result. Every episode records why it ended, with exit status and whether the limit was reached. Executors are run in their own process group and the group is killed, because a detached child holding a pipe turns a timeout into a hang and a hang into a phantom delivery. Every gate is shown to \emph{open} on a known-passing task before it is trusted to close. And a floor is never authored by the agent it scores: the worst defect found in this programme was an agent whose acceptance level was a module constant its own test suite pinned, producing 30,456 fabricated acceptances, 18,402 of them on episodes that had failed.
+\section{Worked Designs}\label{sec:designs}
+
+Each design below is one agent of the fleet, written in the three columns of \S\ref{sec:three} and with its target profile stated as a target. ``Measured'' is what configuration evidence and run records support today; it is never a level inferred from an artefact the agent controls.
+
+\subsection{The brain: \texttt{sarsi-worker}}\label{sec:worker}
+
+\textbf{Unit: individual}, one persistent decision lineage. The trio it anchors --- worker, motor, acceptor --- is organizational and is levelled as a separate unit; reporting one number for both is a category error.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lllY@{}}
+\toprule
+Coordinate & Measured & Target & Evidence and what settles it \\
+\midrule
+C & unmeasured & C3 & no task family run under controlled tool access \\
+M / I & unmeasured / unmeasured & M3 / I2 & 37 memory files, 10.5\,KB index, provenance markers: an $M1$ candidate; the restart probe settles it \\
+O & O0 & O2 & no \texttt{roles/}, \texttt{members/}, \texttt{evidence/} \\
+T$\cdot$H & unmeasured & T3$\cdot$H1 & no declared family, no external verifier yet \\
+SA & SA1 (provisional) & SA3 & knows its task and phase; does not diagnose its own failures \\
+\bottomrule
+\end{tabularx}
+\caption{\texttt{sarsi-worker}: the only agent in the fleet with a real memory substrate, and no measured level.}
+\label{tab:worker}
+\end{table}
+
+\textbf{Contains.} Goal custody --- the thing the owner asked for, preserved against drift over days; plan state with \texttt{Verified when:} lines written before the work; episodic, semantic and procedural memory with provenance and temporal order; forecasts recorded before each run; budgets for tokens, wall clock and an authority ceiling it may not raise; and motor dispatch, one bounded step at a time to a transient executor. The runtime is an openclaw agent that spawns an ACP session in a declared task workspace, keyed per task so one machine holds several.
+
+\textbf{Outside.} The verifier of every step, and the motor. The split is not about capability --- the same model can do both. A planner that edits the artifact erases the boundary the verdict rests on, so the worker never writes the workspace and the motor never keeps state.
+
+\textbf{Promotes.} $M1$ by the restart probe (\S\ref{sec:measure}); $I2$ by a held-out family on which a lesson from one episode changes a later one after the retrieval index is rebuilt; the delegation surface by a declared family under a stated budget judged by a verifier it did not author. Two measured defects shape the design: the motor, when it wrote the plan, also wrote the goal line, and six of ten tasks reached ``verified'' while narrowing or inverting the goal --- so goal authorship is the worker's and only the worker's; and the ACP transport can start a session that never returns a plan, indistinguishable from work in progress, so an ended turn with no deliverable is recorded as a yield rather than a completion.
+
+\subsection{The motors: \texttt{sarsi-claude}, \texttt{sarsi-ai4sci}, \texttt{sarsi-open}}\label{sec:motoragents}
+
+\textbf{Unit: individual, on purpose.} Target $I0$ and $O0$ are not limitations to fix: an executor that accumulates is an executor with a write set nobody granted, and its transience is a safety property.
+
+\textbf{Contains.} One bounded step in one declared workspace, then discard: execute a contract whose goal, constraints and acceptance criterion arrive and whose method does not; write the workspace, the only agent permitted to; return a trace of what ran, what changed and what it could not do; keep nothing.
+
+\textbf{Outside.} The contract, the criterion register, and the verdict. The motor's completion report has, in practice, been read as a verdict; it must be read as an assertion.
+
+\textbf{Promotes.} $T2\cdot H1$ on the delegation suite, and --- the only claim worth making for a second or third motor --- a measured difference from the motor beside it on identical class cells. A brain that can dispatch to one executor is not routing, it is calling; two motors make $P(\text{success}\mid\text{executor},\kappa)$ a question that can be asked. If two motors are interchangeable the router has nothing to route on and one of them should be retired rather than tuned.
+
+\begin{cautionbox}{Where the three motors stand}
+\texttt{sarsi-claude} works: an ACP bridge onto Claude Code, declared with a persistent runtime, one of two agents in the fleet that binds a runtime at all. \texttt{sarsi-ai4sci} is declared on every account and binds no tools, no sandbox and no model; whether it has executed an independently verified step is unknown. \texttt{sarsi-open} is declared on one account with an OpenCode backend and a workspace of zero files; the fleet docs recorded the backend absent on every account, a binary is now present on the build host, and no step has ever been run through it. Two apparatus defects were found on the working motor: detached child processes leaked (27 orphans and 4.1\,GB from one run) until the parent killed the process group, and a refusal exit code read through a pipe became the pager's status. Both are now regression tests.
+\end{cautionbox}
+
+\subsection{The funding agent}\label{sec:funding}
+
+\textbf{Unit: organizational.} A drafter that scores its own fit is a drafter with no reviewer. Target $[C2, I2/M3, O1, T2\cdot H2, SA2]$; measured $O0$, $SA0$, everything else unmeasured; declared, and binds no runtime yet. The one work agent in the fleet that became itself: its identity file was filled in by the agent, unprompted, as ``a grant-writer's reading brain with no hands. I find money, judge fit, and write drafts. I do not send them'' --- a correctly drawn irreversibility boundary authored before anyone asked for one.
+
+\textbf{Contains}, in cost order, with the cheapest step first:
+\begin{enumerate}[leftmargin=*]
+\item \emph{Eligibility, mechanically, before any judgement.} PI status, institution class, citizenship, prior-award exclusions: binary and fatal, and a Python conditional rather than a model call. A stored owner constraint (not PI-eligible for one sponsor's principal award series) eliminates a large fraction of calls at zero cost. This is the DL0 tier doing real work.
+\item \emph{The review criteria extracted as a rubric} from the solicitation --- one cheap model call --- and fit scored against the rubric, not the title.
+\item \emph{Fit scored before drafting}, and the score recorded with the decision so declines accumulate and a call declined last year is not re-evaluated from scratch.
+\item \emph{Drafting against the rubric}, section by section, each section naming the criterion it answers, on the expensive tier.
+\item \emph{A model-free scout}: a timer polls solicitation sources, applies the eligibility gate, and writes candidates to a queue; no model call until something picks one up.
+\end{enumerate}
+
+\textbf{Outside.} The reviewer. The $O0\to O1$ move is two accounts: the drafter under one uid, and under another uid a reviewer (\texttt{funding-reviewer}) that scores fit and cannot read the draft workspace. The reviewer's score is then not the drafter's opinion, enforced by permission rather than policy. Sending is outside permanently.
+
+\textbf{Promotes.} $O1$ by the ablation --- remove the reviewer and show the verified outcome changes; $T2\cdot H2$ on a declared family (call, rubric, draft) judged against the sponsor's own criteria by a locus that did not draft. The shortage this agent addresses is not writing; it is deciding what not to write, and an agent that drafts faster and judges fit no better makes the problem worse.
+
+\subsection{The job agent}\label{sec:job}
+
+\textbf{Unit: organizational.} The party that wants to apply must not be the party that judges fit. Same target profile as funding; measured: does not yet exist as an agent --- it binds no runtime, its identity template is unfilled and its charter file is byte-identical to two siblings'.
+
+\textbf{Contains.} Hard gates first --- visa, clearance, degree, location --- mechanically; the rubric \emph{inferred} from the posting and written down, because a posting hides its criteria where a solicitation publishes them, which is why this agent needs an adversarial reviewer the funding agent does not; fit scored before tailoring; an application history with outcomes so fit scores can be calibrated.
+
+\textbf{Outside.} The source CV and the fabrication gate. Every claim in a tailored document must trace to a line in the source CV, and the check is a diff rather than a judgement:
+\begin{verbatim}
+for claim in tailored_cv.claims():
+    if not source_cv.supports(claim):
+        raise Unsourced(claim)
+\end{verbatim}
+An unsourced claim fails even if true, because an agent that can add true-but-unsourced claims can add false ones by the same route. A measured detail decides the build order: the agent's own test fixtures cite CV files, and no CV exists on the machine. The source CV is built first; the agent is not implementable without it.
+
+\subsection{The outward-posting agent}\label{sec:social}
+
+\textbf{Unit: organizational}, and the only agent in the fleet whose ceiling is set by physics rather than capability. Target $T1\cdot H2$, permanently capped.
+
+\textbf{Contains.} Drafting, which is fully delegable; a said-history so it can be consistent with itself; an explicit audience model including the readers who were not the target; a route from every candidate to a reviewer that is not the drafter.
+
+\textbf{Outside.} The final act, permanently. Posting outward does not undo: residual harm is non-zero, so required reliability $p^{*} = \rho/(1+\rho) \to 1$ and the class is undelegable at any capability. The prohibition is structural, not textual: the agent runs under a uid with no outward credential anywhere in its environment or sandbox, writes drafts to a queue, and a human posts. A negative control attempts an outward call on every change and records the failure as evidence, so the boundary is demonstrated rather than asserted.
+
+\begin{cautionbox}{There is no Method C}
+Any design that gives this agent a posting capability is wrong regardless of the safeguards around it. Its ceiling is not a stage on the way to autonomy; it is where the agent stops. Falsifiable in the direction that matters: if any run exists in which this agent's own action caused a post to appear, the rule is broken, whatever the post's quality.
+\end{cautionbox}
+
+\subsection{The learning agent}
+
+\textbf{Unit: organizational.} The one agent whose $I$ coordinate is its subject rather than a property: its purpose is the $M0\to M2$ progression, and the default failure is self-grading --- a learner that writes the quiz has measured its own memory of the quiz. \textbf{Outside:} the exam and the retention window; learning tested immediately is context, not memory. \textbf{Promotes:} retention after a week and a restart, and transfer to a case not studied, graded by a locus the learner cannot write to. Measured: does not yet exist as an agent; its one real charter line is the outward-action boundary, inherited and correct.
+
+\subsection{The field research agents}\label{sec:research}
+
+\textbf{Unit: organizational}, eight fields: computational imaging, low-dose CT, medical physics, pill camera, drug design, cancer, reverse aging, and longevity (design only). Two layers must be kept apart: the research-agent \emph{machinery} --- loop, charter, self-model, budget, field map, improvement rule and five domain benchmarks --- is built and runs on real corpora in the public framework; the fleet \emph{deployment} of the same eight fields as chartered agents on the agent runtime is a set of designs that bind no runtime yet. Target $[C4, I2/M3, O3, T3\cdot H1, SA3]$, with $C5$, $I5/M5$ and $T5$ at discovery --- which \S\ref{sec:requires} makes specification-only until a sealed-mechanism family is bound.
+
+\textbf{Contains.} The strongest individual machinery in the fleet, and not because of capability: it carries internally what the coding agents leave to their harness.
+\begin{itemize}[leftmargin=*]
+\item \emph{A charter} (\texttt{charter.py}) naming the three things that define ``better'' as never touched --- the split, the metric, the judge --- because an autonomous agent given a benchmark and a night will find the shortest path to a better number, and the shortest path is almost always to change what ``better'' means.
+\item \emph{Validation that can refuse} (\texttt{improvement.py}): a candidate becomes an improvement by surviving six checks rather than by winning; the seed rule is load-bearing, since in one field a defended effect is $+0.023$ against a $\pm0.027$ seed spread; and \texttt{NO\_CHANGE} is a valid output, so a fortnight of them is a result about the method.
+\item \emph{A self-model with refusals} (\texttt{selfmodel.py}), a structured-ignorance map of claims and which nobody has checked (\texttt{fieldmap.py}), a budget that stops rather than asks (\texttt{budget.py}), switch-gated autonomy with three ledgers never summed (\texttt{dual.py}), and a candidate generator added after a first night scored the incumbent against itself and reported zero (\texttt{search.py}).
+\end{itemize}
+
+\textbf{Outside.} The corpus and its held-out split, the reference method, and the owner's signature on every adoption. Each benchmark reads a measured corpus and refuses to run without it, naming the command that fetches it, because a synthetic substitute produces numbers that look like results and are not. Two of the reference methods fail on real data after passing on synthetic data, and each synthetic pass had been arranged --- by the author, writing the generator --- to agree with the story the design already told.
+
+\textbf{Promotes.} Stage by stage: the agents are at stage 1 of 5 (proposing; the benchmark verifies, the person signs). Stage 2 requires independent verifier agents; stage 3, agents verifying agents under a signed policy. The ordering is not a roadmap with dates, because \emph{verification is the bottleneck, never generation}: an agent that proposes faster than anything can check it has not advanced its field, it has moved the queue. One promotion has happened end to end: the night loop found that pill-camera's frame summary took the wrong quantile, the mechanism was tested rather than asserted, and the owner signed the adoption.
+
+\begin{claimbox}{The two tests, and where each agent fails them}
+Each agent is built to be \emph{useful} --- a practitioner would run it --- and \emph{accepted} --- a reviewer for the field would not dismiss it. No agent passes both yet, and each page names the first objection: ``you have done one modality and called it a field''; ``detectability is your proxy, not a reader''; ``held-out molecules are not held-out targets''; ``show me calibration''; ``an abnormality is not a finding I can put in a report''; ``so what?''. Three are blocked on things compute cannot buy --- a data agreement, a reader study, more videos --- and naming which is which stops the queue being reordered toward whatever is tractable.
+\end{claimbox}
+
+\subsection{The delegation-level executors DL0--DL3}\label{sec:dl}
+
+A different design axis: not one agent climbing, but one binary per level, behind one executor interface, so the tier is real rather than named. \texttt{dli-dl0} executes one declared operation with no strategy; \texttt{dli-dl1} a short local plan over a known procedure; \texttt{dli-dl2} multi-step work with persistent state and ordinary recovery; \texttt{dli-dl3} a strategy constructed from an outcome and constraints, with replanning. \texttt{dli-accept} runs the acceptance checks, and runs them at DL0.
+
+\textbf{The property that makes the tier real.} A DL0 step must not cost a model call. \texttt{dli-dl0} and \texttt{dli-accept} run correctly on a machine with no API key and no network, and the claim is checkable offline in an empty network namespace with the keys scrubbed. Each level refuses what is above it \emph{before touching a model client}, because an executor that calls a model in order to decide to refuse has already attempted the contract. Exit codes are part of the contract: 0 success, 2 usage, 3 specification refusal, 4 self-certification refusal (a record naming its performer as its own verifier), 64 over-level refusal, 70 not implemented.
+
+\textbf{Outside.} The verdict. \texttt{exec} reports what was done, never whether it was right; a completed acceptance comparison exits 0 whether or not the bytes matched, and the match is in the evidence.
+
+\textbf{What has been measured.} 88 delegation episodes --- four independent implementations across 22 benchmark rows --- with 74 accepted by a locus that did not build the systems against criteria compared byte for byte, 53 of 88 recorded \texttt{uncertain} rather than \texttt{pass} because verdicts were issued only where the oracle ran, and seven $\kappa$-cells reported with Wilson intervals at sample sizes of three to eight. Two qualifications were found after first publication and recorded rather than dropped: the acceptance criterion was vacuous on 10 of 22 rows (a directive about where the criterion must live, not a condition), and the three intervention-budget cells differed only by label because zero interventions were raised. No delegation level is certified by that repository, and it says so.
+
+\subsection{A cross-cutting rule: the fifth harness}
+
+Four executors appear above. The fifth harness is plain Python with a timer, and it is the one most of these agents actually need. The eligibility gate, the fabrication diff, the negative control on outward calls, the solicitation scout, \texttt{dli-dl0} and \texttt{dli-accept} are all model-free. The routing rule follows: use the cheapest harness that holds, and never let a step a script can do deterministically cost a model call, or the DL0 tier is decorative and the cost argument in the level framework is unearned.
+
+\section{The Catalogue}\label{sec:catalogue}
+
+Two tables. The first lists what can be downloaded today, with the command that installs it. The second lists the fleet with target and measured profiles. The columns are deliberately separate: a download link is not a level, and a target is not a measurement.
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Artifact & What it is & Where \\
+\midrule
+AI4Science & the framework: chat session in the style of Claude Code, deterministic CLI, the delegation harness (\texttt{contract}, \texttt{criterion}, \texttt{reversible}, \texttt{acceptor}, \texttt{escalate}, \texttt{router}, \texttt{compress}), the ladder runner, the research-agent modules and the \texttt{sarsi} chassis & \url{https://github.com/integritynoble/AI4Science}\newline \cmd{pipx install}\allowbreak\cmd{ "pwm-ai4science[claude]"} (PyPI 1.0.0); one-line installer in the README. The research-agent and \cmd{sarsi} packages are in the source tree and \emph{not yet in the published wheel}: from a checkout, \cmd{pip install}\allowbreak\cmd{ ".[research-agents]"} \\
+Delegation ladder & HG0--HG3 as built, with the superset test and the curve runner & in AI4Science: \cmd{python -m}\allowbreak\cmd{ ai4science.harness.agents.}\allowbreak\cmd{delegation.run\_ladder}\allowbreak\cmd{ --seeds 0-1} \\
+DL0--DL3 executors & one binary per delegation level plus \texttt{dli-accept}; DL0 and accept run with no model and no network & \url{https://github.com/integritynoble/intelligence-level}\newline \cmd{dist/dli.pyz} (zipapp) or \cmd{dist/dli\_dist-0.4.0-}\allowbreak\cmd{py3-none-any.whl}, with \cmd{SHA256SUMS} and a provenance manifest \\
+Field agents (standalone) & eight standalone CLIs, each also embeddable in AI4Science: \texttt{pwm-unified}, \texttt{pwm-research}, \texttt{pwm-paper}, \texttt{pwm-imaging}, \texttt{pwm-cancer}, \texttt{pwm-drug}, \texttt{pwm-claude-gpu}, \texttt{pwm-codex-gpu} & PyPI \cmd{pwm-agent-unified}, \cmd{-research}, \cmd{-paper}, \cmd{-imaging}, \cmd{-cancer}, \cmd{-drug}, \cmd{-claude-gpu}, \cmd{-codex-gpu} (all 0.1.0): \cmd{pip install pwm-agent-<name>} then \cmd{pwm-<name> login}; sources at \url{https://github.com/integritynoble/pwm-agent-<name>} \\
+Claude Code, standalone & the official Claude Code as a binary with no Node.js requirement, for use behind the harness & \url{https://github.com/integritynoble/claude-pwm} (releases; latest 2.1.220) \\
+Personal Singularity & the console that hosts the fleet across machines: doctor, up, status & in AI4Science: \cmd{curl -fsSL}\allowbreak\cmd{ https://raw.githubusercontent.com/}\allowbreak\cmd{integritynoble/AI4Science/main/}\allowbreak\cmd{install-singularity.sh | sh} \\
+Codex, exchange-routed & the Codex CLI fork that accepts a base URL and an exchange key, so the same motor runs through a different provider & \url{https://github.com/integritynoble/codex-pwm} (release builds) \\
+OpenClaw, exchange-routed & the openclaw agent runtime routed through the exchange & \url{https://github.com/integritynoble/openclaw-pwm}\newline \cmd{npm install -g openclaw}\allowbreak\cmd{ openclaw-pwm} \\
+Framework and this paper & the measurement framework v2.3, its datasets and audit tools, and the corpus this paper belongs to & \url{https://github.com/integritynoble/sarsi-intelligence-level} \\
+\bottomrule
+\end{tabularx}
+\caption{What can be downloaded, and how. Versions are those current at the date of this draft.}
+\label{tab:downloads}
+\end{table}
+
+\begin{table}[H]
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{2.1cm}p{0.9cm}YYYp{1.7cm}@{}}
+\toprule
+Agent & Unit & Motor & Target $[C, I/M, O, T{\cdot}H, SA]$ & Measured today & Runnable \\
+\midrule
+\texttt{sarsi-worker} & indiv. & brain; dispatches to any motor & C3, I2/M3, O2, T3$\cdot$H1, SA3 & M1 cand.; O0; SA1 prov.; rest unmeasured & yes, from a source checkout \\
+\texttt{sarsi-claude} & indiv. & Claude Code (ACP) & C2--3, I0/M0, O0, T2$\cdot$H1, SA1 & O0; SA0; rest unmeasured & yes \\
+\texttt{sarsi-ai4sci} & indiv. & AI4Science & C2--3, I0/M0, O0, T2$\cdot$H1, SA1 & declared on 9 accounts, binds nothing & declared \\
+\texttt{sarsi-open} & indiv. & OpenCode (ACP) & C2, I0/M0, O0, T1--2$\cdot$H1, SA1 & binary present on one host; no charter; never run & not yet \\
+\texttt{funding} & org. & Python gate + Claude Code draft & C2, I2/M3, O1, T2$\cdot$H2, SA2 & identity real; O0; SA0; binds no runtime & design \\
+\texttt{job} & org. & as funding + fabrication diff & C2, I2/M3, O1, T2$\cdot$H2, SA2 & no source CV; unfilled identity & design \\
+\texttt{social-media} & org. & drafting only, no credential & C2, I1/M1, O1, \textbf{T1$\cdot$H2 capped}, SA2 & unfilled identity; correct by absence & design \\
+\texttt{learning} & org. & --- & C2, I2/M3, O1, T2$\cdot$H2, SA2 & unfilled identity & design \\
+8 research agents & org. & AI4Science modules; Claude Code for search & C4, I2/M3, O3, T3$\cdot$H1, SA3 (C5/I5/T5 spec-only) & machinery built, stage 1 of 5; field benchmarks: 5 pass, 2 fail, 1 design-only; fleet deployment design-only; O0 & machinery yes (source); deployment design \\
+\texttt{dli-dl0..dl3} & indiv. & none (DL0), model client (DL1--3) & DL0--DL3 by construction & 88 episodes, 74 accepted, two qualifications; no level certified & yes (binary) \\
+\bottomrule
+\end{tabularx}
+\caption{The fleet with target and measured profiles. Every $U$ cell is empty and every $T{\cdot}H{\cdot}p$ cell is unmeasured; ``M1 cand.'' is configuration evidence, not a level. The fleet's charters and per-agent designs live in a private repository; the mechanisms they rely on are the public ones in Table~\ref{tab:downloads}.}
+\label{tab:fleet}
+\end{table}
+
+\section{How to Measure What You Built}\label{sec:measure}
+
+Every design above ends in a test that promotes it, and none of those tests has been run on the fleet. This section states the order that costs least, and the protocol it follows is released with the framework's corpus.
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Freeze.} Model identity from a live call, the agent's runtime block, charter hashes, tool grant, a memory snapshot restored before every episode, host and gateway, and an explicit timeout. The framework's regime-switch comparison has an unnamed frontier executor because this step was skipped once.
+\item \textbf{Seven apparatus checks before any episode}, each a positive control: the timeout kills a grandchild's process group; termination reasons are recorded; the gate opens on a known pass and closes on a known failure; both ends agree on versions; restore is clean; no session survives its episode.
+\item \textbf{The restart probe on \texttt{sarsi-worker} first.} It is the cheapest test in the fleet, the only one whose instrument is already written, and it settles the coordinate the fleet table once misreported. Plant a fact, kill the process group, restart, ask for the fact and where it came from, against a floor agent with an empty store.
+\item \textbf{The delegation sweep at H1}, six task classes at T0--T3, four seeds, scored with the delivered-outcome primitive under predeclared weights, with per-band headroom and a concordance audit on any item two executors fail identically. Three motors are the minimum roster for that audit; this fleet supplies exactly three.
+\item \textbf{The coordinate probes} for O (registry and ablation; N/A for individual units, recorded as N/A), SA (limits before attempt, mechanism of failure, forecast before run) and C (paired familiar and unfamiliar items).
+\item \textbf{Report} per pair: $U^{*}$, HLIS over the declared dimensions, the profile, the named bottleneck, reliability with an interval, the frontier at H0/H1/H2, the false-completion rate, the resource envelope, headroom, and concordance-audit status.
+\end{enumerate}
+
+The expected outcome from configuration evidence is $U1$ for \texttt{sarsi-worker} if the restart probe passes, and $U0$ for everything else. That is not a disappointing result. It is the first non-empty cell, earned by a locus that did not do the work, on tasks it did not author --- and it is the number every design in this paper is written to make possible.
+
+\section{Limitations}\label{sec:limits}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Nothing here is a certified level.} Every target is a target; every ``built'' is built, not measured. The fleet table is honest about that and so is this sentence.
+\item \textbf{Two of the four motors have never run a step here.} An OpenCode binary is present on one host and has never been exercised, and Hermes exists only as an unregistered adapter with nothing installed behind it. The motor-independence claim is therefore demonstrated across two commercial motors and asserted for the open ones.
+\item \textbf{The arms measurement is one family.} Fifteen instances, one intervention budget, one host. It establishes that the harness moved the outcome; it does not estimate a rate.
+\item \textbf{The DL binaries' headline was measured before a fix.} The 74/88 figure predates the repair of a vacuous criterion on 10 rows and has not been re-measured.
+\item \textbf{Private designs, and designs only.} The per-agent charters and the funding, job, learning and outward-posting designs are described here; their workspaces are not released, and the fleet's own handoff record states that nothing in those designs has been executed. A reader can rebuild them from \S\ref{sec:designs} and the public mechanisms, and cannot download them.
+\item \textbf{The published wheel is stale.} The research-agent and \texttt{sarsi} packages are in the public source tree and not in the PyPI distribution current at this draft.
+\item \textbf{Discovery levels have no runnable items.} $C5$, $I5$ and $T5$ targets are specification-only until a sealed-mechanism family is bound to the research agents.
+\end{itemize}
+
+\section{Conclusion}\label{sec:conclusion}
+
+The intelligence level of an agent is a property of the pair, and the executor is the part of the pair that is easiest to swap. Behind one protocol, Claude Code, Codex, OpenCode and Hermes differ in proposal quality and in nothing that moves a level. What moves a level is built around them: a criterion registered before the work and sealed when it starts, an acceptor in another process on a copy, a snapshot before the first mutation, a router that learns only from independent verdicts, a memory a restart can test, a roster an ablation can test, a self-model that refuses, and the placement rule that puts verification in the hands of executors with nothing to write to themselves. Those mechanisms are released, one ladder built from them has been measured, and a fleet of agents --- a brain, three motors, three organizational agents, eight field agents and four level executors --- is catalogued with what each targets, what each has shown, and where each can be obtained.
+
+What the fleet has not yet done is earn a level, and the paper does not pretend otherwise. The first one is one restart away.
+
+\section*{Availability}
+
+All public artifacts are listed in Table~\ref{tab:downloads} with their repositories and package names. The measurement framework, its datasets and audit tools, and the measurement protocol for the first three agents are in the \texttt{sarsi-intelligence-level} corpus. The author's fleet configuration and per-agent charters are in a private repository; requests for access should be addressed to the correspondence address.
+
+\section*{Conflicts and funding}
+
+The author reports no funding specific to this work and no competing interest. All agents described were built and run on the author's own infrastructure.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

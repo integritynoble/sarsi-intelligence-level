@@ -1,0 +1,49 @@
+episode_id,rung,task_class,T_band,H_budget,seed,verifier_pass,harness_accepted,false_completion,held_back,false_rejection,harness_iterations,model_calls,wall_time_seconds,termination_reason,evidence_status,notes
+HSC-HG0-CSV-0,HG0,t0.csv_to_json,T0,H1,0,1,,0,0,0,1,1,21,not_archived,reconstructed,
+HSC-HG0-CSV-1,HG0,t0.csv_to_json,T0,H1,1,1,,0,0,0,1,1,19,not_archived,reconstructed,
+HSC-HG0-EXTRACT-0,HG0,t0.extract_fields,T0,H1,0,1,,0,0,0,1,1,13,not_archived,reconstructed,
+HSC-HG0-EXTRACT-1,HG0,t0.extract_fields,T0,H1,1,1,,0,0,0,1,1,13,not_archived,reconstructed,
+HSC-HG0-CLEAN-0,HG0,t1.clean_dataset,T1,H1,0,0,,1,0,0,1,1,55,not_archived,reconstructed,HG0 returned externally wrong work as done
+HSC-HG0-CLEAN-1,HG0,t1.clean_dataset,T1,H1,1,0,,1,0,0,1,1,45,not_archived,reconstructed,HG0 returned externally wrong work as done
+HSC-HG0-TIMEOUT-0,HG0,t1.request_timeout,T1,H1,0,1,,0,0,0,1,1,37,not_archived,reconstructed,
+HSC-HG0-TIMEOUT-1,HG0,t1.request_timeout,T1,H1,1,1,,0,0,0,1,1,21,not_archived,reconstructed,
+HSC-HG0-PIPELINE-0,HG0,t2.pipeline,T2,H1,0,1,,0,0,0,1,1,36,not_archived,reconstructed,
+HSC-HG0-PIPELINE-1,HG0,t2.pipeline,T2,H1,1,1,,0,0,0,1,1,39,not_archived,reconstructed,
+HSC-HG0-SEARCH-0,HG0,t3.search_latency,T3,H1,0,1,,0,0,0,1,1,428,not_archived,reconstructed,
+HSC-HG0-SEARCH-1,HG0,t3.search_latency,T3,H1,1,1,,0,0,0,1,1,428,not_archived,reconstructed,
+HSC-HG1-CSV-0,HG1,t0.csv_to_json,T0,H1,0,1,1,0,0,0,1,1,19,not_archived,reconstructed,
+HSC-HG1-CSV-1,HG1,t0.csv_to_json,T0,H1,1,1,1,0,0,0,1,1,16,not_archived,reconstructed,
+HSC-HG1-EXTRACT-0,HG1,t0.extract_fields,T0,H1,0,1,1,0,0,0,1,1,13,not_archived,reconstructed,
+HSC-HG1-EXTRACT-1,HG1,t0.extract_fields,T0,H1,1,1,1,0,0,0,1,1,13,not_archived,reconstructed,
+HSC-HG1-CLEAN-0,HG1,t1.clean_dataset,T1,H1,0,0,0,0,1,0,1,1,59,not_archived,reconstructed,Harness held back externally wrong work
+HSC-HG1-CLEAN-1,HG1,t1.clean_dataset,T1,H1,1,0,0,0,1,0,1,1,53,not_archived,reconstructed,Harness held back externally wrong work
+HSC-HG1-TIMEOUT-0,HG1,t1.request_timeout,T1,H1,0,1,1,0,0,0,1,1,21,not_archived,reconstructed,
+HSC-HG1-TIMEOUT-1,HG1,t1.request_timeout,T1,H1,1,1,1,0,0,0,1,1,25,not_archived,reconstructed,
+HSC-HG1-PIPELINE-0,HG1,t2.pipeline,T2,H1,0,1,1,0,0,0,1,1,43,not_archived,reconstructed,
+HSC-HG1-PIPELINE-1,HG1,t2.pipeline,T2,H1,1,1,1,0,0,0,1,1,33,not_archived,reconstructed,
+HSC-HG1-SEARCH-0,HG1,t3.search_latency,T3,H1,0,1,1,0,0,0,1,1,302,not_archived,reconstructed,
+HSC-HG1-SEARCH-1,HG1,t3.search_latency,T3,H1,1,1,1,0,0,0,1,1,405,not_archived,reconstructed,
+HSC-HG2-CSV-0,HG2,t0.csv_to_json,T0,H1,0,1,1,0,0,0,1,1,16,not_archived,reconstructed,
+HSC-HG2-CSV-1,HG2,t0.csv_to_json,T0,H1,1,1,1,0,0,0,1,1,20,not_archived,reconstructed,
+HSC-HG2-EXTRACT-0,HG2,t0.extract_fields,T0,H1,0,1,1,0,0,0,1,1,14,not_archived,reconstructed,
+HSC-HG2-EXTRACT-1,HG2,t0.extract_fields,T0,H1,1,1,1,0,0,0,1,1,13,not_archived,reconstructed,
+HSC-HG2-CLEAN-0,HG2,t1.clean_dataset,T1,H1,0,0,0,0,1,0,3,2,174,not_archived,reconstructed,Third harness iteration selected CriteriaOnly and failed before model launch
+HSC-HG2-CLEAN-1,HG2,t1.clean_dataset,T1,H1,1,1,1,0,0,0,2,2,226,not_archived,reconstructed,Accepted after retry
+HSC-HG2-TIMEOUT-0,HG2,t1.request_timeout,T1,H1,0,1,1,0,0,0,1,1,23,not_archived,reconstructed,
+HSC-HG2-TIMEOUT-1,HG2,t1.request_timeout,T1,H1,1,1,1,0,0,0,1,1,24,not_archived,reconstructed,
+HSC-HG2-PIPELINE-0,HG2,t2.pipeline,T2,H1,0,1,1,0,0,0,1,1,50,not_archived,reconstructed,
+HSC-HG2-PIPELINE-1,HG2,t2.pipeline,T2,H1,1,1,1,0,0,0,1,1,25,not_archived,reconstructed,
+HSC-HG2-SEARCH-0,HG2,t3.search_latency,T3,H1,0,1,1,0,0,0,1,1,428,not_archived,reconstructed,
+HSC-HG2-SEARCH-1,HG2,t3.search_latency,T3,H1,1,1,1,0,0,0,1,1,370,not_archived,reconstructed,
+HSC-HG3-CSV-0,HG3,t0.csv_to_json,T0,H1,0,1,1,0,0,0,1,1,18,not_archived,reconstructed,
+HSC-HG3-CSV-1,HG3,t0.csv_to_json,T0,H1,1,1,1,0,0,0,1,1,18,not_archived,reconstructed,
+HSC-HG3-EXTRACT-0,HG3,t0.extract_fields,T0,H1,0,1,1,0,0,0,1,1,12,not_archived,reconstructed,
+HSC-HG3-EXTRACT-1,HG3,t0.extract_fields,T0,H1,1,1,1,0,0,0,1,1,14,not_archived,reconstructed,
+HSC-HG3-CLEAN-0,HG3,t1.clean_dataset,T1,H1,0,0,0,0,1,0,2,2,169,not_archived,reconstructed,Harness held back externally wrong work after retry
+HSC-HG3-CLEAN-1,HG3,t1.clean_dataset,T1,H1,1,1,1,0,0,0,2,2,96,not_archived,reconstructed,Accepted after retry
+HSC-HG3-TIMEOUT-0,HG3,t1.request_timeout,T1,H1,0,1,1,0,0,0,1,1,23,not_archived,reconstructed,
+HSC-HG3-TIMEOUT-1,HG3,t1.request_timeout,T1,H1,1,1,1,0,0,0,1,1,21,not_archived,reconstructed,
+HSC-HG3-PIPELINE-0,HG3,t2.pipeline,T2,H1,0,1,1,0,0,0,1,1,49,not_archived,reconstructed,
+HSC-HG3-PIPELINE-1,HG3,t2.pipeline,T2,H1,1,1,1,0,0,0,1,1,39,not_archived,reconstructed,
+HSC-HG3-SEARCH-0,HG3,t3.search_latency,T3,H1,0,1,1,0,0,0,1,1,434,not_archived,reconstructed,
+HSC-HG3-SEARCH-1,HG3,t3.search_latency,T3,H1,1,1,1,0,0,0,1,1,434,not_archived,reconstructed,

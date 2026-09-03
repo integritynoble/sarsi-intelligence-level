@@ -1,0 +1,13 @@
+seed,frontier_result,haiku_result,frontier_rmse,haiku_rmse,nn_baseline_rmse,bar,frontier_normalized_rmse,haiku_normalized_rmse,pass_pair,rmse_winner
+0,capability_failure,capability_failure,1.087,1.045,1.03,0.2576,1.0553398058252426,1.0145631067961165,both_fail,haiku
+9,pass,capability_failure,0.276,2.586,1.21,0.3026,0.22809917355371903,2.137190082644628,frontier_only,frontier
+11,pass,capability_failure,0.021,5.24,0.174,0.0434,0.12068965517241381,30.114942528735636,frontier_only,frontier
+17,capability_failure,capability_failure,1.062,5.698,2.705,0.6762,0.39260628465804065,2.1064695009242147,both_fail,frontier
+24,capability_failure,capability_failure,2.453,4.983,2.321,0.5804,1.0568720379146919,2.1469194312796205,both_fail,frontier
+25,capability_failure,capability_failure,0.874,10.6,1.543,0.3858,0.5664290343486714,6.869734283862606,both_fail,frontier
+27,pass,pass,0.06,0.758,3.737,0.9342,0.016055659620016056,0.20283649986620284,both_pass,frontier
+38,capability_failure,capability_failure,0.455,1.234,0.689,0.1723,0.6603773584905661,1.79100145137881,both_fail,frontier
+40,pass,capability_failure,0.003,1187.885,1.271,0.3177,0.002360346184107003,934.6066089693155,frontier_only,frontier
+41,capability_failure,capability_failure,1.743,6.287,1.579,0.3947,1.1038632045598482,3.981633945535149,both_fail,frontier
+44,capability_failure,capability_failure,0.822,4.109,2.521,0.6303,0.32606108687028956,1.6299087663625547,both_fail,frontier
+50,pass,capability_failure,0.093,6.192,1.573,0.3934,0.05912269548633185,3.9364272091544823,frontier_only,frontier

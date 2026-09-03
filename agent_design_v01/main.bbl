@@ -1,0 +1,31 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026capability}
+Chengshuai Yang.
+\newblock Capability is not a level: A structural taxonomy of individual and
+  organizational intelligence, with placements for current {AI} agents.
+\newblock Draft,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026designing}
+Chengshuai Yang.
+\newblock Designing {LLM}-driven agents across individual and organizational
+  intelligence levels.
+\newblock Working paper and build specification,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{b}}.
+
+\bibitem[Yang and Xue(2026)]{yang2026unified}
+Chengshuai Yang and Ting Xue.
+\newblock Measuring the unified intelligence level: A cumulative,
+  harness-measurable hierarchy.
+\newblock \emph{Version 2.3,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}}, 2026.
+
+\end{thebibliography}

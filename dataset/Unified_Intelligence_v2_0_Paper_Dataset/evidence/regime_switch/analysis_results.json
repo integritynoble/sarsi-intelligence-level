@@ -1,0 +1,43 @@
+{
+  "episodes": 24,
+  "frontier_failures_worse_than_nearest_neighbour": 3,
+  "frontier_passes": 5,
+  "haiku_failures_worse_than_nearest_neighbour": 11,
+  "haiku_passes": 1,
+  "mcnemar_exact_two_sided_p": 0.125,
+  "median_normalized_rmse": {
+    "frontier": 0.35933368576416513,
+    "haiku": 2.142054756962124
+  },
+  "median_rmse": {
+    "frontier": 0.6385,
+    "haiku": 5.1114999999999995
+  },
+  "paired_outcomes": {
+    "both_fail": 7,
+    "both_pass": 1,
+    "frontier_only": 4,
+    "haiku_only": 0
+  },
+  "paired_pass_rate_difference": 0.3333333333333333,
+  "rmse_ordering": {
+    "frontier_lower": 11,
+    "haiku_lower": 1,
+    "ties": 0
+  },
+  "seeds": [
+    0,
+    9,
+    11,
+    17,
+    24,
+    25,
+    27,
+    38,
+    40,
+    41,
+    44,
+    50
+  ],
+  "sign_test_exact_two_sided_p": 0.00634765625
+}

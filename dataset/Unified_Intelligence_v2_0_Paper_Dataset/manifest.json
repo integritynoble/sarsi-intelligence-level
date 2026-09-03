@@ -1,0 +1,63 @@
+{
+  "name": "Unified Intelligence Version 2.0 Paper Dataset",
+  "version": "2.0.0",
+  "release_date": "2026-08-29",
+  "framework_version": "2.0",
+  "paper": {
+    "title": "Measuring the Unified Intelligence Level: A Cumulative, Harness-Measurable Hierarchy",
+    "version": "2.0",
+    "date": "2026-08-28",
+    "repository_commit": "25f00707f88a44ae34a93a98c95f48c1374fcde3"
+  },
+  "coordinate_dataset_dependency": {
+    "name": "HIL Coordinate Benchmark Datasets",
+    "version": "1.2",
+    "archive": "dependencies/HIL_Coordinate_Benchmark_Datasets_v1_2.zip",
+    "sha256": "6b1d1517eea503067ee44eb4406a66678107444212cd0b9c382aa161042b5c18",
+    "framework_basis": "Unified Intelligence / HIL v1.9, carried forward by Version 2.0",
+    "counts": {
+      "C": 320,
+      "I": 168,
+      "O": 126,
+      "T": 256,
+      "H": 180,
+      "SA": 192,
+      "M_supporting": 168,
+      "GP_subset": 32,
+      "DI_cells": 1536,
+      "core_total": 1242,
+      "total_with_supporting_M": 1410
+    }
+  },
+  "studies": {
+    "harness_scaling_curve": {
+      "study_id": "hsc-claude-2026-08-25",
+      "episodes": 48,
+      "rungs": ["HG0", "HG1", "HG2", "HG3"],
+      "task_classes": 6,
+      "seeds": [0, 1],
+      "harness_iterations": 53,
+      "model_calls": 52,
+      "canonical_report_sha256": "a8c285d4ba00b73e44e7d67169e391ac1cd31557464a11fddf9aa03845e11047",
+      "runtime_source_commit": "0be289f3668eb9367bdf952367d44d48f7ac3843"
+    },
+    "regime_switch": {
+      "study_id": "regime-switch-same-seed-v2.0",
+      "episodes": 24,
+      "executors": 2,
+      "seeds": [0, 9, 11, 17, 24, 25, 27, 38, 40, 41, 44, 50],
+      "frontier_csv_sha256": "97ac14a02b6ac666f527b3dab1a7ab2d6badba965f4e52c8c8156d15c9ab6c54",
+      "haiku_csv_sha256": "ca95e0f1008280ef49cefad0930bd51185a7669121c37a214467b3d622c7bde8"
+    }
+  },
+  "evidence_scope": "Paper-supporting benchmark and measurement data; not a universal model ranking or a complete certification record.",
+  "known_limitations": [
+    "The coordinate dependency has no runnable certification evidence for C5 and above.",
+    "The HSC release reconstructs episode telemetry from a canonical aggregate log and local transcripts; complete raw workspaces, acceptance records and termination reasons were not archived.",
+    "The HSC run contains 53 harness-loop iterations but 52 model calls because one HG2 iteration selected a criteria-only provider before model launch.",
+    "The archived frontier regime-switch CSV does not identify the frontier model or executor version.",
+    "Six frontier regime-switch rows lack wall time and target-spread values.",
+    "The regime-switch study has one attempt per executor per seed, one mechanism family, one host/harness configuration and no repeat-run variance estimate.",
+    "Neither original regime-switch CSV contains a separate termination-reason field."
+  ]
+}
