@@ -107,6 +107,43 @@ Operational and evidence-grounded, never phenomenal. Three instruments earn it a
 
 An organization is not a larger individual. $O1$ requires a role registry, persistent organizational memory and a dispatched roster; $O2$ routing that changes when logged evidence changes; $O3$ modification of the organization's own workflow under external validation. The test that separates an organization from one agent with extra processes is the ablation. From $O2$ upward the separation gate applies: proposer, evaluator and promoter are distinct loci and the evaluator's evidence lies outside the proposer's write set, or the correct classification is $O1$ plus unverified claims. Heterogeneity is required: the natural verifier has an empty or narrow self-write set, and that is its qualification. The mission manager turns a mission into projects, tasks and a portfolio with reprioritization under changing conditions; its input is a mission rather than a task, and its evaluator is mission-level. Neither module is built (\S\ref{sec:status}).
 
+\subsection{The brain and the motor, as built}\label{sec:brainmotor}
+
+One sentence carries the built architecture: the brain plans, the executor executes, and an independent mechanism verifies. The brain's target state is
+\[
+\Sigma_{\text{worker}} = \{O, E, S, P, I, Q, M, \Theta\},
+\]
+observations and evidence references, episodic memory, semantic memory, procedural memory, intentional state, self-model, world and task model, and $\Theta$, the mutable cognitive instrument (gate, retrieval and learning policies); beside it a bounded recent-dialogue buffer $R_t$ that is not another long-term store. The model's context is never $\Sigma$ itself but a bounded projection $W_t = \text{Gate}_B(\cdot)$: long-term memory is inactive until selected into $W_t$, and in \textsc{chat} mode the projection is small and conversational, in \textsc{reason} mode it retrieves, and in \textsc{action} mode it additionally requires protected directives, readiness checks, a prediction, an executor path and verification.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+Locus & May not \\
+\midrule
+Worker (brain) & edit a task workspace; promote its own lesson; widen its own ceiling \\
+Executor (motor) & decide that it passed; carry state between steps \\
+Verifier & be improved by its own verdicts --- an empty self-write set is the whole of its qualification \\
+\bottomrule
+\end{tabularx}
+\caption{The prohibitions are the design.}
+\label{tab:prohibit}
+\end{table}
+
+Before the brain delegates a step, \texttt{assign} does three things in order: a readiness check that refuses on stale or absent fields; a blind forecast, registered before any verdict exists and refused as too late once one does; and executor selection by backend. The router prices the turn and grants nothing --- it classifies \textsc{chat}, \textsc{reason} or \textsc{action} and fails upward, and in a measured session three chat turns in ten bought no forecast, executor, verifier, retrieval or self-probe. A failing verdict returns the verifier's reason into the same executor session as its next instruction; a passing verdict on a non-final phase releases the session so the next phase starts fresh. A criterion that names a command is run deterministically only when the plan was owner-authored; when the executor wrote the plan the same criterion is reclassified as judgemental, so a task whose plan the executor wrote cannot be closed by the deterministic checker alone. A missing binary returns \texttt{UNVERIFIED}, never \texttt{FAIL}: absence of evidence is not evidence of failure. Measured on one class, the memory path took repeat errors from forty to three and the pass count from 10 of 55 to 46 of 55.
+
+\textbf{Transport.} The motor speaks the Agent Client Protocol on standard streams, and the chain is brain, protocol bridge, launcher, adapter, engine; registration is two-part and not interchangeable, an engine-to-command entry and an id-to-runtime entry. The transport was resolved on 2026-08-27 after three stacked faults that each looked like a dead motor: a supervisor reading a terminal pane a protocol session does not have; a session key lacking its agent prefix, which filed it under the default agent; and no motor agent registered at all. The permission mode is a gateway plugin setting applied at spawn time, and a session's working directory does not fence absolute-path writes; approving all is recorded as a ceiling change, not a fix.
+
+\textbf{The authority kernel} stays outside mutable cognition on every machine: permission ceilings, credential ownership, owner grants, held-out benchmarks, immutable evidence semantics, promotion thresholds, protected verifier code, rollback authority, and ownership of the audit ledger. Across machines the kernel is never forked --- one decision log, one promotion authority, one set of benchmarks of record; machines propose, acceptance happens in one place, and the pass of record is the integrator's re-run.
+
+\subsection{Phases: the plan behind the rungs}
+
+Two phase ladders exist and are consistent. The brain plan runs M0, a frozen targeted baseline with a gate and a full-suite observational baseline; M1, persistent memory contracts with supersession; M2, self-staleness, a gated workspace, hybrid retrieval and exact replay; M3, forecast wiring and a durable plan executive with calibration made causally active; M4, the protocol motor path and criterion-specific deterministic verification; M5, event-driven episodic learning, semantic consolidation and proceduralization --- pre-RSI learning, with a ``remove if'' row per phase. The federation plan continues: M6 the research federation; M7 the manager, the market install path and console integration; M8 the recursive-depth experiment measuring improvement competence across generations; M9 the economy. Phases M0 to M5 were met on the reference machine; the kill-and-restart test and hook-enforced triggers were observed and not yet mechanically enforced. No phase is assigned a level, and the harness paper's rung map (\S\ref{sec:rungs}) is the mapping the plans leave implicit.
+
+\subsection{Federation: the unit of agency and its separation}
+
+The unit is $A_i = \text{Runtime}_i + \text{Brain}_i + \text{DomainContract}_i + \text{ToolSurface}_i$ with its own $\Sigma_i$. Independence is state separation, not silence: no agent has write access to another's $\Sigma$, cross-agent traffic is evidence-bearing messages carrying a claim, evidence references, provenance, scope and status, the receiver decides under its own evidence discipline, and a fact may never become a directive. Proposer and promoter are separated by operating-system user or container, because a runtime's logical agent separation is not security-grade. A self-improvement candidate may alter memory operators, context policy, planning policy, skills, tools and mutable agent code; it may never alter the kernel, immutable provenance, benchmark ownership, promotion thresholds or rollback authority. The physics reviewer and the deterministic judges are explicitly not agents: external services or read-only evaluators with no self-modification. The market is an organ of the platform and not of any agent, and metering and value movement live in the kernel. The corpus's terminal-intelligence paper makes the same separation a physical necessity at scale rather than a policy, with the corollary that there is no singleton at the top; the harness is built to that shape from the first machine.
+
 \section{The Rung Map}\label{sec:rungs}
 
 \begin{table}[H]

@@ -11,7 +11,7 @@ with Worked Designs, Measured Status and Download Links}\\[16pt]
 \end{center}
 
 \begin{abstract}
-A domain agent is a general harness plus a domain profile: the same runtime, instantiated by a manifest that fixes the domain's task bands, tools, authority envelope, verifier types and irreversibility floors. This paper is the library of such profiles for six domains --- paper development, funding, job search, software engineering, research and business workflows --- and the record of what exists for each. For every domain it states the profile, the reference agent the development plan specifies, the worked design where one has been written, and the measured status under the Unified Agent Benchmark, which now has at least one runnable cell in every domain. It also catalogues what a user can download today: the framework and its delegation harness, eight standalone field agents on PyPI, four delegation-level executors shipped as binaries whose lowest level runs with no model and no network, and the executor builds. The status is stated at its real strength. Three of the six reference agents exist only as specifications; two exist as private designs that bind no runtime; the research agent's machinery is built and runs on real corpora while its fleet deployment is a design. No agent in the library has a certified Unified level, and the paper lists, per domain, the single cheapest run that would change its row.
+A domain agent is a general harness plus a domain profile: the same runtime, instantiated by a manifest that fixes the domain's task bands, tools, authority envelope, verifier types and irreversibility floors. This paper is the library of such profiles for six domains --- paper development, funding, job search, software engineering, research and business workflows --- and the record of what exists for each. For every domain it states the profile, the reference agent the development plan specifies, the worked design where one has been written, and the measured status under the Unified Agent Benchmark, which now has at least one runnable cell in every domain. It then catalogues every agent the fleet repository defines --- two default-installed agents, six executors, five sub-agents, four role-shaped workers, ten research agents, the seven built roster agents, three platform singletons, five console agents, nine delegation lanes, the roles inside organizations, and fourteen level manifests --- grouped by tier with the status the repository itself states, and notes that these rosters share names and are not reconciled. It also catalogues what a user can download today: the framework and its delegation harness, eight standalone field agents on PyPI, four delegation-level executors shipped as binaries whose lowest level runs with no model and no network, and the executor builds. The status is stated at its real strength. Three of the six reference agents exist only as specifications; two exist as private designs that bind no runtime; the research agent's machinery is built and runs on real corpora while its fleet deployment is a design. No agent in the library has a certified Unified level, and the paper lists, per domain, the single cheapest run that would change its row.
 \end{abstract}
 
 \noindent\textbf{Keywords:} domain agents; funding agent; job agent; paper agent; code agent; research agent; business agent; downloadable agents; Unified Intelligence
@@ -32,7 +32,7 @@ for executor $m$, harness $h$, domain profile $d$, domain benchmark $B_d$ and re
 \begin{enumerate}[leftmargin=*]
 \item \textbf{The domain profile} (\S\ref{sec:profile}): what a profile fixes and what it may not touch.
 \item \textbf{Six domains} (\S\ref{sec:domains}): per domain, the band ladder, the reference agent as specified, the worked design where one exists, and the current status.
-\item \textbf{The catalogue} (\S\ref{sec:catalogue}): what is downloadable, with the command that installs it, and the fleet table with target and measured profiles.
+\item \textbf{The catalogue} (\S\ref{sec:catalogue}): what is downloadable, with the command that installs it; every agent the fleet defines, by tier and roster; and the table of target and measured profiles.
 \item \textbf{The download standard} (\S\ref{sec:standard}) a released agent must meet.
 \item \textbf{Per-domain next runs} (\S\ref{sec:next}).
 \end{enumerate}
@@ -161,6 +161,103 @@ Personal Singularity & the console that hosts the fleet across machines & instal
 \label{tab:downloads}
 \end{table}
 
+\subsection{Tiers, arrival, and the market}\label{sec:tiers}
+
+The product specifications fix how agents are classified and how they reach a user, and the rules matter more than the roster because they decide what ``an agent'' is.
+
+\begin{claimbox}{Three tiers, only the middle of which is a menu}
+\emph{Sub-agents} are default, shared, used by agents, and never listed. \emph{Agents} are two by default on a user's machine --- the general \texttt{sarsi-worker} and the machine agent, listed by the machine's hostname --- and the rest are installed. \emph{Executors} --- \texttt{sarsi-claude}, \texttt{sarsi-ai4sci} --- are driven by a worker, never listed, never entered. The specification's own type rule says only the machine agent and the manager are not sarsi-workers, and its own amendment record notes that executors are neither, so the closed list has three kinds outside it and the point is recorded as unresolved.
+\end{claimbox}
+
+\textbf{One sarsi-worker is one user role.} Every user has at least the general one; users create further workers named by themselves, one per role, each holding several tasks at once; social media, job and funding are the owner's three examples. A created worker may never exceed its creator's ceiling, a colliding id is refused against the union of the shipped roster and the user-created workers, and every creation is recorded with who, when and at what ceiling. The default set is per account: on the platform account \texttt{sarsi}, the three role workers, the director and the exchange-node consumer are defaults too, so ``exactly two'' describes a user's machine and not the platform.
+
+\textbf{Arrival.} \texttt{/agent} lists the installed agents only, rendered from the fixed roster gated by installed state; an agent already in the roster is not grandfathered and vanishes from the menu until installed, without stopping a configured agent from working. \texttt{/<agent-name>} enters a listed agent; an executor has no entry point. \texttt{/install-agent} bare prints the market link, an introduction, the usage line and ``some popular agents''; with a name it installs. Popularity is decided by the director, a platform-level singleton implemented as a sarsi-worker on the \texttt{sarsi} account, and initially every agent is popular, so no ranking algorithm is needed to ship it; because the director is a singleton and installs happen on each user's machine, a publication path for the popular list is required and does not yet exist. None of \texttt{/install-agent}, \texttt{/<agent-name>} entry, or an installed-set exists in the code as of the specification.
+
+\textbf{The market.} Three kinds of listing, each an independently uploadable, acceptable and installable package: an agent, which holds tasks and plans; a tool, which must be present to run; and a sub-agent, which does the work or judges it. A package is one archive whose digest is its identity; the manifest declares reach and never grants it, since outward classes are decided at acceptance and again by the owner at install. On a metered run the split is fixed: ten percent to the treasury always, a five percent author slice the author may take in any share, five percent to the platform only through the app, the rest to the provider; total cost is the provider's reported usage at its published rate, never a self-reported token count, and an unreported call is unmetered. The rule the market learned the hard way: a listing may not take the id of an existing agent, because an update-in-place on id match once let a listing named \texttt{sarsi-worker} land on the running agent and inherit its workspace, memory, skills and model.
+
+\textbf{A research agent is a group.} Seen from outside it is one worker id on the roster --- a field, never a person. Seen from inside it has a membership, and the members are its sub-agents: nine core roles that are a floor a field may add to and may not remove --- \texttt{literature}, \texttt{twin}, \texttt{corpus}, \texttt{method}, \texttt{runner}, \texttt{verifier}, \texttt{reproducer}, \texttt{teacher}, \texttt{writer} --- in three kinds, reasoning, judging and embodied, with the rule that no judging member is ever embodied. The membership is built as declarations; nothing acts on the embodiment flags yet.
+
+\subsection{Every agent the fleet defines}\label{sec:everyagent}
+
+The six domain profiles above are the library's target shape. The fleet that exists is larger and less tidy, and this subsection catalogues all of it, from the private \texttt{singularity} repository at its current head, with the status the repository itself states for each entry. Two facts organise the catalogue. First, the product specification fixes \textbf{three tiers}: \emph{sub-agents}, shared by every agent and never listed; \emph{agents}, of which exactly two are installed by default on a user's machine --- the general \texttt{sarsi-worker} and the machine agent, listed by the machine's hostname --- and the rest arrive from the marketplace; and \emph{executors}, driven by a worker and never listed or entered. Second, the repository holds \textbf{several rosters that share names and are not reconciled}: the eighteen agents of the coordinate table, the seven built agents of the \texttt{sarsi/} runtime, the nine delegation lanes that are Unix accounts, the five console agents, and fourteen level manifests that are one runtime rather than fourteen agents. \texttt{funding} appears in two rosters; \texttt{job}/\texttt{jobs}, \texttt{social-media}/\texttt{social} and \texttt{learning} collide across them. No file reconciles them, and the catalogue keeps them apart rather than merging what the repository does not.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}p{2.6cm}p{1.6cm}YYp{2.9cm}@{}}
+\toprule
+Agent & Tier / unit & Purpose & Runtime & Status, as the repository states it \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Default-installed agents (a user's machine)}} \\
+\texttt{sarsi-worker} (general) & agent, individual & the brain: goals, plans, memory, budgets; plans, never executes, never accepts; one per user by default, further ones named by the user per role & yes & runs; holds a task across restarts; the only real memory substrate \\
+machine agent (by hostname; id \texttt{sarsi-machine}) & agent / service & the owner's console for one machine: answers about this machine, routes, never executes; a closed set of vetted operations (install Claude Code, grant permissions, broker login), approval before acting; replaceable from the market, exactly one installed, may declare no outward class & yes & ``all working today''; its see-and-interact clause is not built; what answers the bare command is PWM Code, not the machine agent \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Executors (driven by a worker; never listed, never entered)}} \\
+\texttt{sarsi-claude} & executor, individual & ACP bridge onto Claude Code; one bounded step in one workspace, then discarded & yes & works; one of only two agents that bind a runtime \\
+\texttt{sarsi-ai4sci} & executor, individual & the same contract on the AI4Science harness & declared & declared on all nine accounts, exercised nowhere \\
+\texttt{sarsi-open} & executor, individual & the same contract on the open OpenCode backend & declared & empty shell with a real runtime; purpose unknown; never run \\
+\texttt{sarsi-ci} & executor (field motor) & computational-imaging motor: capability from stores at frozen weights & no & design complete, nothing built \\
+\texttt{sarsi-pi} & executor & former sibling of \texttt{sarsi-claude} on the pi harness & no & removed 2026-08-15; the pi harness is blocked on a vendor credential, not a design \\
+\texttt{sarsi-pwm} & executor (proposed) & a session backend running the framework on any model, GPU-capable, proposed as the default & no & design, ``not the thing to chase first'' \\
+\texttt{hermes}, \texttt{pi} & executor adapters & written against the executor protocol, unregistered & no & installed on no account \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Sub-agents (shared by every agent; members of a research agent's group)}} \\
+\texttt{literature}, \texttt{twin}, \texttt{corpus}, \texttt{method}, \texttt{runner}, \texttt{verifier}, \texttt{reproducer}, \texttt{teacher}, \texttt{writer} & sub-agents (members) & the nine core roles of a research agent's group, a floor per field; three are embodied even with no robot & declared per field & built as declarations; nothing acts on the embodiment flags yet \\
+\texttt{general}, \texttt{physics-reviewer}, \texttt{schema-validator} & sub-agent & the shipped set, delegation depth capped at two & yes & built; whether they are the owner's default set is open \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Role-shaped workers (marketplace on a user's machine; defaults on the platform account)}} \\
+\texttt{funding} & organizational & find money, judge fit, draft; never send & no & the only work agent that became itself; O0 \\
+\texttt{job} & organizational & find and track roles, draft applications & no & unfilled template; no source CV exists \\
+\texttt{social-media} & organizational & draft posts; posting is permanently undelegable & no & unfilled template; capped at T1 by irreversibility \\
+\texttt{learning} & organizational & acquire and retain a skill, graded from outside & declared & unfilled template; the $I$-coordinate agent \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Research agents (group agents; each is one worker id on the roster, its sub-agents its members)}} \\
+\texttt{computational-imaging} & organizational & known forward operator, learned prior & no & real corpus, no charter; memory 0 bytes \\
+\texttt{research-imaging} & organizational & the charter half of the above & no & unresolved: may be the same agent under another account \\
+\texttt{low-dose-ct}, \texttt{medical-physics}, \texttt{pill-camera}, \texttt{drug-design}, \texttt{cancer}, \texttt{reverse-aging} & organizational & one field each; each with a stated principle and a problem queue & no (workspaces declared) & designs; ninety section pages filled; machinery built in the public framework (\S\ref{sec:domains}) \\
+\texttt{human-brain-llm} & organizational & measured against what the stimulus alone predicts & no & declared nowhere: 40\,KB of design, no agent \\
+\texttt{virtual-cell} & organizational & measured against what the unperturbed control predicts & no & does not exist \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{The built \texttt{sarsi/} roster (seven: five work agents, one base, one manager)}} \\
+\texttt{sarsi-machine} & manager / service & local manager: routing, fleet view, capability inventory; executes nothing & yes & built in the prototype \\
+\texttt{work} & work agent & the second general worker: mail, and two lab tools & yes & built; retired 2026-08-05, out of routing, still readable, holding 32 archived tasks \\
+\texttt{social} & work agent & one daily read, and influence; may complete \texttt{post} & yes & built \\
+\texttt{jobs} & work agent & CV writing, application sites; may complete \texttt{submission} & yes & built \\
+\texttt{abraham} & work agent & the owner's own life, not their job; no standing grants; prepares all four reserved classes and completes none & yes & built \\
+reserved act classes & --- & \texttt{money}, \texttt{consent}, \texttt{publishing}, \texttt{legal}: completed by no agent at any ceiling & --- & enforced in the roster \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Platform singletons on the \texttt{sarsi} account, and the company server}} \\
+director & agent (a sarsi-worker) & decides which agents are popular, for both products; initially all are & --- & specified; a publication path is required and does not exist \\
+exchange-node consumer & service & polls the exchange node for offered capacity; switches research agents to an offering credential; falls back to the platform Qwen provider & --- & specified \\
+manager & service, not a sarsi-worker & the station for sarsi-worker communications across all machines, on the company server; routes; may not drive a session or read private memory & partial & what exists is a demand-propose-run router, not a station; placement on the company server unverified; its relation to the director is unstated \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Console-side agents (the web console)}} \\
+\texttt{sarsi}, \texttt{manager}, \texttt{learning}, \texttt{process}, \texttt{email} & service & the work agent, the router with a fleet self-model, the replay-evaluated learner, the trace explainer, the per-account email agent & yes & implemented \\
+work agents; runtime agent & service & job-scoped agents the machine agent creates, each controlling several sessions; the per-machine owner of local Claude Code and Codex runtimes & yes & implemented \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Delegation lanes (nine Unix accounts, one hypothesis each)}} \\
+\texttt{dl-brain}, \texttt{dl-codex}, \texttt{dl-router}, \texttt{dl-contract}, \texttt{dl-envelope} & executor lanes & the reference chassis; a Codex-first motor; learned routing on verdicts; specification as the main failure; the envelope $\rho \to 0 \Rightarrow p^{*} \to 0$ & ran & all lanes stopped, 162 commits bundled \\
+\texttt{dl-org} & organizational lane & an organization must exceed its best member or be overhead & parked & credential expired mid-flight; held as uncertain \\
+\texttt{dl-acceptor} (\texttt{verifier1}) & acceptance role & verdicts only; false-pass rate by seeded defects; $\sigma$ & ran & builds no agent by design: the only locus that says ``done'' \\
+\texttt{dl-bench} (\texttt{sarsi}) & exam role & owns the exam; never reads a doer's implementation & ran & builds no agent by design \\
+\texttt{dl-dist} & packaging lane & the tier as verifiable downloadable binaries & --- & named once; the DL0--DL3 binaries exist \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Roles inside an organization (loci, not agents)}} \\
+proposer / replicator / acceptor & roles & every research agent's three loci in separate accounts; the replicator must not read the proposer's memory & no & absent on all fifteen today \\
+drafter / reviewer; scout / drafter & roles & inside \texttt{funding}; inside \texttt{job} & no & design \\
+control-baseline runner & role & computes the floor, owned by the acceptor, inside \texttt{virtual-cell} & no & design \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Level manifests}} \\
+$I0 \ldots I\Om$, $O0 \ldots O\Om$ (fourteen) & manifests & one runtime instantiated by fourteen manifests, write sets enforced by infrastructure; an id is minted only when a level's transition test passes & --- & design; the harness paper's manifest \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Earlier designs and listings}} \\
+pocket, manager, developer agent group, general work, personal learning, work-process learning & designs & one design document each, pre-dating the eighteen & no & design only \\
+\texttt{teamviewer} & listing & presence and connection to a machine in the account fleet & listing only & declared as an agent with outward classes; no charter files \\
+\bottomrule
+\end{tabularx}
+\caption{Every agent, executor, sub-agent, role, service and lane the fleet repository defines, grouped by the tier or roster it belongs to, with the status the repository states. Counts the repository itself gives: eighteen coordinate-table agents (four individual, fourteen organizational); seven built roster agents; nine delegation accounts, two of which build no agent; five console agents; fourteen level manifests; 441 probes.}
+\label{tab:everyagent}
+\end{table}
+
 \begin{table}[H]
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}p{2.3cm}p{1.1cm}YYp{2.4cm}@{}}
@@ -179,9 +276,13 @@ outward posting & org. & C2, I1/M1, O1, \textbf{T1$\cdot$H2 capped}, SA2 & corre
 \texttt{dli-dl0..dl3} & indiv. & DL0--DL3 by construction & 88 episodes, 74 accepted, two qualifications; no level certified & binary \\
 \bottomrule
 \end{tabularx}
-\caption{The library with target and measured profiles. Every $U$ cell is empty.}
+\caption{Target and measured profiles for the agents that have them. Every $U$ cell is empty.}
 \label{tab:fleet}
 \end{table}
+
+\subsection{Where the fleet sits on the terminal scale}
+
+The corpus's terminal-intelligence paper places this fleet once, and in the one way that matters for the library: its sixth proposition says that at scale no agent may write another's self-state not as a governance choice but as what physics permits, so that the fleet-scale architecture --- written about five agents on a few machines --- is the correct architecture at every scale up to the last, and there is no singleton at the top. The library's separation rules are therefore not overhead to be removed as the fleet matures. What the library does not yet have is the coupling that paper says is the only one that moves the frontier: knowledge becoming an instrument. The research agents' second focus, to give a field its best tools and sub-agents, is that coupling named as a goal; no agent has yet produced an instrument that another agent then ran on.
 
 \section{The Download Standard}\label{sec:standard}
 
@@ -201,7 +302,7 @@ A released agent carries: name, version and git commit; container or environment
 
 \section{Limitations}\label{sec:limits}
 
-Three of the six reference agents do not exist in any form. Two exist as private designs whose handoff record states that nothing in them has been executed. The library's downloadable artifacts are the framework, standalone field agents, and level executors, not the six-agent library the plan specifies; this paper is honest that it catalogues what exists rather than what was planned, and it should be revised around the six agents once they are built on the harness.
+The fleet's rosters share names and are not reconciled: the coordinate table, the built runtime roster, the delegation lanes, the console agents and the product specification each name a partly different set, and the catalogue reports them apart. Three of the six reference agents do not exist in any form. Two exist as private designs whose handoff record states that nothing in them has been executed. The library's downloadable artifacts are the framework, standalone field agents, and level executors, not the six-agent library the plan specifies; this paper is honest that it catalogues what exists rather than what was planned, and it should be revised around the six agents once they are built on the harness.
 
 \section{Conclusion}
 
