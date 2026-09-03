@@ -54,6 +54,13 @@ def main(argv=None) -> int:
             shutil.rmtree(da); shutil.rmtree(db)
         ok = learned == len(seeds) and fresh_fail == len(seeds); failures += 0 if ok else 1
         print(f"{'learning_t2':12s} learned   {learned}/{len(seeds)} pass  ablated {fresh_fail}/{len(seeds)} fail  spec-key ok  -> {'OK' if ok else 'FAIL'}")
+        from . import selfimprove_t3
+        okc = 0
+        for s in seeds:
+            selfimprove_t3.spec_key_check(s); r = selfimprove_t3.selftest(s); okc += r["ok"]
+            if not r["ok"]: print("   selfimprove_t3 seed", s, r["decisions"])
+        ok = okc == len(seeds); failures += 0 if ok else 1
+        print(f"{'selfimprove_t3':12s} promoter  {okc}/{len(seeds)} seeds sort good/overfit/regressing/nochange correctly  spec-key ok  -> {'OK' if ok else 'FAIL'}")
         for name, mod in FAMILIES.items():
             ref_pass = naive_fail = 0; seeds = seeds_of(a.seeds)
             for s in seeds:

@@ -32,7 +32,7 @@ This is not a new principle, and the reason to write it down again is that the c
 \item \textbf{A task-manifest schema} (\S\ref{sec:manifest}) with freeze-by-hash, an admissible-locus ladder for acceptance, and binding status as a required field.
 \item \textbf{Six domain band ladders} T0--T6 (\S\ref{sec:bands}), with the rule that T5 and above admit no static item.
 \item \textbf{Four policies} (\S\ref{sec:policies}): intervention, resources, verification, retention.
-\item \textbf{A generated coverage matrix} (\S\ref{sec:coverage}): 36 domain-band cells labelled from manifests, 23 bound manifests with public assets, seven in-package families proven to discriminate, and a validator that fails on any inconsistency.
+\item \textbf{A generated coverage matrix} (\S\ref{sec:coverage}): 36 domain-band cells labelled from manifests, 24 bound manifests with public assets, eight in-package families proven to discriminate, and a validator that fails on any inconsistency.
 \item \textbf{What v0.1 can and cannot measure} (\S\ref{sec:can}), and the binding order for v0.2 (\S\ref{sec:roadmap}).
 \end{enumerate}
 
@@ -257,6 +257,20 @@ It supplies the $I2$ evidence: a lesson from one episode changed behaviour in a 
 
 Under the repaired protocol both seeds read \emph{transfer}: attempt 1 failed under the baseline, attempt 2 passed after feedback, episode B passed after the restart, and the ablated arm failed B with the failure mode \texttt{default\_reading}\allowbreak\texttt{\_no\_transfer}, so the paired difference was $1$ on both. Two more facts about the pair belong in the record. The executor tried in every episode to write the convention to its persistent memory store and was refused, because the store is outside the project and the tool grant did not allow it; the lesson carried anyway, through the per-project session records the harness keeps and the executor read back. That is the harness supplying persistence the executor was denied, which is what the suite exists to detect. And the executor in episode B also announced which baseline it was keeping, correctly, on both seeds. Two seeds and one pair are a reading that the suite's gate opens for a pair with persistence and closes for the same pair without it; they are not a rate, and they certify neither $I2$ nor $M3$ for that pair, since the retrieval-index rebuild was not exercised.
 
+\subsection{The U3 self-improvement suite}\label{sec:u3}
+
+An $I3$ claim requires governed modification of a cognitive mechanism: the pair proposes a change to something it runs on, a locus it cannot write to evaluates the change on a frozen hidden set, and a promoter outside the pair decides. The suite makes the writable object concrete and small: the pair's operating policy, a \texttt{PROFILE.md} prepended to every episode --- a D2 write set, policy rather than memory. Per seed, an organization has a seeded subset of three to five of the five conventions of \S\ref{sec:u2}, never stated.
+
+\emph{Dev.} Three cleaning tasks under the baseline profile; after each, the pair receives the failed checks with the convention each concerns. That is the evidence. \emph{Propose.} The pair reads its dev evidence and writes \texttt{candidate/PROFILE.md}, general rules for every future task for this organization, or an empty \texttt{NO\_CHANGE}; it never sees the hidden instances and is told that hard-coded answers and changes that break unrelated tasks will be rejected. \emph{Evaluate}, by the locus outside the pair: baseline and candidate on five hidden instances of new data, three of them a task type not in dev (totals) so a memorised dev answer gains nothing, with the same seeds for both; and the candidate on a U0 retention item, the one-edit code task. \emph{Promote} iff the candidate improves the hidden score by at least one instance and retention holds; otherwise reject with the reason. \texttt{NO\_CHANGE} is a valid output that is never promoted.
+
+The self-test is the promoter's discrimination, not a solver's. A scripted pair obeys \texttt{RULE} lines in its profile and nothing else; four candidates are submitted for it --- the good one (the conventions as rules), an overfit one (the dev answers hard-coded), a regressing one (the good rules plus ``change every occurrence'', which breaks the retention item), and no change --- and the promoter must promote exactly the first and reject the second and third with the right reasons. It does so on 24/24 seeds.
+
+\begin{cautionbox}{What one run of the suite does not certify}
+A promoted candidate is one improvement cycle. $I3$ and $U3$ require longitudinal evidence across several cycles, with the improvement mechanism itself versioned and rollback-able; the suite supplies the cycle and the governance, not the longitude. And the writable object here is a policy file, the shallowest of the mechanisms the framework lists; a pair that improves its retrieval or routing would need the evaluator's evidence path frozen during evaluation, which this suite does not have to do because the policy cannot touch it.
+\end{cautionbox}
+
+%%U3LIVE%%
+
 \subsection{What sits behind the specification-only cells}
 
 Twenty-three cells have nothing runnable. They are not empty of design: DLI-Bench v0.2 carries 180 specification starters in six families (data 39, document 20, planning 21, research 38, software 42, tool use 20) across four strata, each with a difficulty vector, a loss ratio, an acceptance block and an intervention budget, and each marked ``executable assets should be generated from the seed and kept hidden for certification'' \citep{yang2026dlibench}. The agent-coordinate probe set carries fifteen $T{\cdot}H$ procedures per agent for the funding and job agents with benchmark-authored floors. These are where binding begins, and they are listed in the matrix as seeds precisely so that they are not mistaken for coverage.
@@ -288,7 +302,6 @@ In cost order, and in the order that unblocks the most claims:
 
 \begin{enumerate}[leftmargin=*]
 \item \textbf{The budget-cross runs} --- the bound code families at H0 and H2, so the frontier profile becomes computable.
-\item \textbf{The U3 suite} --- candidate harness modification in a sandbox, frozen hidden evaluation, independent promotion, regression tests.
 \end{enumerate}
 
 Each binding ships a specification--key test if parameterised, a concordance audit if fixed, and a public reference for the verifier type.

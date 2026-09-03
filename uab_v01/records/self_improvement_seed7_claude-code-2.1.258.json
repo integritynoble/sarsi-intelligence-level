@@ -1,0 +1,96 @@
+{
+ "seed": 7,
+ "conventions": [
+  "cents",
+  "date_dayfirst",
+  "desc_id",
+  "drop_blank_name",
+  "dup_last"
+ ],
+ "executor": "claude -p {prompt} --permission-mode acceptEdits --allowedTools Read,Edit,Write,Glob,Grep",
+ "phases": {
+  "dev": [
+   {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 52.1,
+    "stdout_tail": "listed the four baseline conventions I applied unchanged. If the hidden checks reject any of those, the correct override belongs in that file for later rounds.\n",
+    "pass": false,
+    "failed_checks": [
+     "cents",
+     "date_dayfirst",
+     "desc_id",
+     "drop_blank_name",
+     "dup_last"
+    ]
+   },
+   {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 35.2,
+    "stdout_tail": "verrides could not be inferred from the data, so they remain at baseline and are flagged in the notes as the first things to revisit if the hidden checks fail.\n",
+    "pass": false,
+    "failed_checks": [
+     "cents",
+     "date_dayfirst",
+     "desc_id",
+     "drop_blank_name",
+     "dup_last"
+    ]
+   },
+   {
+    "exit": 0,
+    "termination_reason": "normal",
+    "seconds": 51.7,
+    "stdout_tail": "ined, amounts as given.\n- **NOTES.md** documents the assumptions and the alternate row 201 output if the hidden checks expect last-wins or blank-name dropping.\n",
+    "pass": false,
+    "failed_checks": [
+     "cents",
+     "desc_id",
+     "drop_blank_name",
+     "dup_last"
+    ]
+   }
+  ],
+  "propose": {
+   "exit": 0,
+   "termination_reason": "normal",
+   "seconds": 128.3,
+   "stdout_tail": " script the transformation, verify the written file, document each decision in notes, and never label a profile-covered convention as an unverified assumption.\n",
+   "no_change": false,
+   "candidate": "# PROFILE\n\nOperating policy for every task from this organization. Read this before starting any task.\nConfirmed by the organization's acceptance feedback on 2026-09-03: the conventions below\n\"hold for every task this organization gives you\". They are not guesses from data.\n\n## 1. Precedence\n\n1. An explicit, task-specific requirement written in the task's own instructions (e.g. a stated\n   output schema, file name, or column list) is followed as written.\n2. The organization conventions in section 2 come next. They OVERRIDE any \"baseline\",\n   \"default\", or \"apply unless your PROFILE.md says otherwise\" convention stated in a task.\n   When a task says the organization overrides some baseline conventions without saying which,\n   the answer is: every baseline that section 2 contradicts.\n3. Task baselines/defaults apply only where neither 1 nor 2 speaks.\n4. Only if none of the above settles a point, infer from the data and record the evidence.\n\nIf 1 and 2 genuinely conflict, follow 1 and state the conflict in the notes.\n\n## 2. Organization conventions (apply wherever the concept appears, in any task type)\n\nApply each rule whenever the relevant concept is present in the task; ignore it when the\nconcept is absent (a task with no dates, no amounts, no ids, etc. is unaffected).\n\n- **Dates are day-first.** Source dates written with slashes or dots (`d/m/y`, `dd/mm/yyyy`,\n  `d.m.y`) are DAY/MONTH/YEAR, never month-first. Parse every date in a file with the same\n  format; never switch formats per row. Output dates in the format the task asks for\n  (ISO `YYYY-MM-DD` unless told otherwise). Dates already in ISO form are left as they are.\n- **Amounts are integer cents; report dollars with two decimals.** A monetary amount given as\n  an integer is a count of cents. Output it as dollars with exactly two decimal places:\n  `43106` -> `431.06`, `6104` -> `61.04`, `500` -> `5.00`, `-250` -> `-2.50`. No currency\n  symbol, no thousands separator, no rounding beyond the exact division by 100. Keep it as\n  a string when the task asks for a string. Do not \"report as given\".\n- **A blank name is void.** A record whose name field is empty or whitespace-only is void and\n  is EXCLUDED from the output entirely. It is not kept as a blank row and it does not count\n  as a candidate when resolving duplicates.\n- **A repeated id is a correction: keep the LAST row.** When the same id occurs more than\n  once, the LAST occurrence in source order is the corrected, authoritative record; earlier\n  occurrences are discarded. Apply this after removing void rows, so the last non-void row\n  for an id wins. \"Last\" means source file order, not sorted order.\n- **Per-id output is ordered by id DESCENDING.** Sort output records by id from highest to\n  lowest. Compare ids numerically when they are numeric (so 1000 comes before 999), not as\n  text.\n\nOrder of operations for record-cleaning tasks: parse -> drop void rows -> resolve duplicates\n(keep last) -> transform fields (dates, amounts) -> sort descending by id -> write output.\n\n## 3. Working method\n\n- Read the task instructions and this profile fully before touching data. Identify every\n  concept in section 2 that appears in the task and list which rule applies to each.\n- Compute outputs with a script (not by hand) and re-read the produced file to verify it\n  matches the intended rules and the requested schema exactly (column order, header, quoting,\n  no trailing blank rows, no index column).\n- Write a short `NOTES.md` alongside the output recording which convention was applied for\n  each decision and its source (task instruction, this profile, or data evidence). Notes must\n  not describe a profile-covered convention as an \"unverified assumption\".\n- Do not fall back to a task's baseline for a point this profile already settles. The\n  organization's hidden acceptance checks test the conventions in section 2.\n- If a task exposes a convention this profile does not cover, apply the task baseline, say so\n  in `NOTES.md`, and add the outcome here once feedback arrives. When feedback names a\n  convention, record it in section 2 as a general rule, not as a task-specific answer.\n"
+  }
+ },
+ "evaluation": {
+  "conventions": [
+   "cents",
+   "date_dayfirst",
+   "desc_id",
+   "drop_blank_name",
+   "dup_last"
+  ],
+  "baseline_hidden": 0,
+  "n_hidden": 5,
+  "candidate_hidden": 5,
+  "delta": 5,
+  "retention_pass": true,
+  "decision": "promoted",
+  "reason": "hidden improvement +5 of 5 with retention",
+  "per_instance": {
+   "baseline": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "candidate": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  }
+ }
+}
