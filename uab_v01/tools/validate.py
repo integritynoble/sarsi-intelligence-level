@@ -42,6 +42,11 @@ for name, m in manifests.items():
     if "HIL_Benchmark_Library_v1_1/starter/instances/" in a and lib.exists():
         rel = a.split("HIL_Benchmark_Library_v1_1/")[1]
         if not (lib / rel).exists(): errors.append(f"{name}: asset not found locally: {rel}")
+fam = ROOT / "families"
+for name, m in manifests.items():
+    a = m["binding"].get("asset", "")
+    if "uab_v01/families/" in a and not (fam / a.split("uab_v01/families/")[1]).exists():
+        errors.append(f"{name}: family module not found: {a}")
 for e in errors: print("ERROR", e)
 print(f"{len(manifests)} manifests, {len(rows)} matrix cells, {len(errors)} errors")
 sys.exit(1 if errors else 0)

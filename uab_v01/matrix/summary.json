@@ -1,10 +1,10 @@
 {
  "cells": 36,
  "counts": {
-  "BAND_ONLY": 4,
-  "SPECIFICATION_ONLY": 27,
-  "BOUND": 4,
-  "GENERATOR_BOUND": 1
+  "BAND_ONLY": 3,
+  "SPECIFICATION_ONLY": 25,
+  "GENERATOR_BOUND": 4,
+  "BOUND": 4
  },
  "coordinate_manifests": 10
 }

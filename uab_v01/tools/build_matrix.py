@@ -26,7 +26,6 @@ SEEDS = {
     "business": "DLI-Bench v0.2 `planning` starters (21 rows); BusinessAgent bands, plan §10.6",
 }
 BAND_ONLY = {  # (domain, band) -> what runs at that band for another family
-    ("code", "T0"): "uab-coordinate-t0-data_analysis / document_workflow (data and document, not a code edit)",
     ("paper", "T0"): "uab-coordinate-t0-document_workflow (document workflow, not a manuscript element)",
     ("research", "T0"): "uab-coordinate-t0-data_analysis",
     ("research", "T1"): "uab-coordinate-t1-data_analysis; five research-agent field benchmarks are candidate assets, not UAB manifests",

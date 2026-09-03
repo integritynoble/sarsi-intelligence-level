@@ -5,19 +5,19 @@ paper,T2,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); Paper
 paper,T3,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
 paper,T4,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
 paper,T5,SPECIFICATION_ONLY,"DLI-Bench v0.2 `document` starters (20 rows); PaperAgent bands, plan §10.1",
-funding,T0,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `funding::T{0..4}-H{0..2}` procedures; FundingAgent bands, plan §10.2",
+funding,T0,GENERATOR_BOUND,uab-funding-t0-extract_requirement,H0 H1 H2
 funding,T1,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `funding::T{0..4}-H{0..2}` procedures; FundingAgent bands, plan §10.2",
 funding,T2,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `funding::T{0..4}-H{0..2}` procedures; FundingAgent bands, plan §10.2",
 funding,T3,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `funding::T{0..4}-H{0..2}` procedures; FundingAgent bands, plan §10.2",
 funding,T4,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `funding::T{0..4}-H{0..2}` procedures; FundingAgent bands, plan §10.2",
 funding,T5,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `funding::T{0..4}-H{0..2}` procedures; FundingAgent bands, plan §10.2",
-job,T0,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `job::T{0..4}-H{0..2}` procedures; JobAgent bands, plan §10.3",
+job,T0,GENERATOR_BOUND,uab-job-t0-extract_requirements,H0 H1 H2
 job,T1,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `job::T{0..4}-H{0..2}` procedures; JobAgent bands, plan §10.3",
 job,T2,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `job::T{0..4}-H{0..2}` procedures; JobAgent bands, plan §10.3",
 job,T3,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `job::T{0..4}-H{0..2}` procedures; JobAgent bands, plan §10.3",
 job,T4,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `job::T{0..4}-H{0..2}` procedures; JobAgent bands, plan §10.3",
 job,T5,SPECIFICATION_ONLY,"agent_coordinate_probes_v0_1 `job::T{0..4}-H{0..2}` procedures; JobAgent bands, plan §10.3",
-code,T0,BAND_ONLY,"uab-coordinate-t0-data_analysis / document_workflow (data and document, not a code edit)",
+code,T0,GENERATOR_BOUND,uab-code-t0-one_edit,H0 H1 H2
 code,T1,BOUND,uab-code-t1-request_timeout,H0 H1 H2
 code,T2,BOUND,uab-code-t2-pipeline,H0 H1 H2
 code,T3,BOUND,uab-code-t3-search_latency,H0 H1 H2

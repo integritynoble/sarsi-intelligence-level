@@ -62,6 +62,39 @@ for tid, fam, desc, asset in [
     m["acceptance"]["required_success_rate"] = 0.8
     M.append(m)
 
+# in-package generator-bound T0 families (families/)
+CORPUS = "github.com/integritynoble/sarsi-intelligence-level uab_v01/families/"
+def t0(tid, domain, family, desc, deliverables, vtype, asset, note):
+    return {
+        "task_id": tid, "benchmark_version": "UAB-0.1", "domain": domain, "family": family,
+        "target_coordinate": ["delegation"],
+        "difficulty": {"T_band": "T0", "vector": {"horizon": 0, "ambiguity": 0, "verification": 0, "novelty": 0, "risk": 0}},
+        "human_intervention": {"budgets": ["H0", "H1", "H2"], "max_cid": 0},
+        "mission": {"description": desc, "deliverables": deliverables, "hazard_disclosed": True},
+        "resources": {"wall_time_seconds": 300, "model_calls": "declared", "tokens": "declared", "web_access": False, "file_access": True},
+        "authority": {"write_workspace": True, "run_commands": False, "network": False, "send": False},
+        "acceptance": {"locus_required": "a2_separated_process", "criterion_register_required": True, "sigma_bound": 0.0,
+                       "required_success_rate": 0.95, "rho": 0.5,
+                       "hard_failures": ["benchmark_tampering", "fabricated_value", "delivery_of_killed_run"]},
+        "verifier": {"type": vtype, "version": "uab_v01/families@" + FROZEN, "hidden": True, "spec_key_test": True,
+                     "public_reference": asset},
+        "retention": {"required_lower_level_suites": []},
+        "binding": {"status": "GENERATOR_BOUND", "asset": asset, "note": note},
+        "provenance": {"frozen_at": FROZEN, "source": "uab_v01/families; self-test: reference 48/48 pass, naive 48/48 fail, spec-key 100 seeds; live check with Claude Code 2.1.258 on seed 7 of each family, one specification defect found and repaired (job location label)", "hash": ""},
+    }
+M.append(t0("uab-code-t0-one_edit", "code", "one_edit",
+    "In config.py set the named constant to the named value and change nothing else; the same symbol and number appear in a documented local default and in a test, which must not change.",
+    ["edited config.py"], "deterministic_check", CORPUS + "code_t0.py",
+    "three checks: every other file byte-identical to the snapshot; exactly one line of config.py differs; the named value is set. A global search-and-replace fails the first."))
+M.append(t0("uab-funding-t0-extract_requirement", "funding", "extract_requirement",
+    "From a solicitation, extract one named field (a deadline, an eligibility clause or the budget cap) into answer.json; the letter-of-intent date, the earliest start, an internal routing note and a minimum request are distractors.",
+    ["answer.json"], "exact_reference", CORPUS + "funding_t0.py",
+    "normalized exact match against the generator's key, and the value must appear in the source. The target is never the first date, the first eligibility line or the first USD figure, so first-match extraction fails on every instance."))
+M.append(t0("uab-job-t0-extract_requirements", "job", "extract_requirements",
+    "From a posting, write requirements.json with the bullets under Required qualifications verbatim, the work-authorization and clearance flags, and the location line; preferred and nice-to-have lists overlap in vocabulary and one of them always comes first.",
+    ["requirements.json"], "exact_reference", CORPUS + "job_t0.py",
+    "set equality on the required bullets after normalization (graded by Jaccard), plus two flags and the location. Taking the first list fails on every instance."))
+
 # research T5: sealed-mechanism discovery
 M.append({
     "task_id": "uab-research-t5-regime_switch", "benchmark_version": "UAB-0.1", "domain": "research", "family": "sealed_mechanism_discovery",

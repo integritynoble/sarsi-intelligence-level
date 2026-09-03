@@ -85,7 +85,7 @@ Across Six Domains, with a Generated Coverage Matrix}\\[16pt]
 \end{center}
 
 \begin{abstract}
-A benchmark built after the agents it scores is a benchmark shaped by what those agents happen to do well. This paper freezes the Unified Agent Benchmark (UAB) before the agents it is meant to certify are optimized. UAB v0.1 is a measurement contract for Unified levels U0--U3 across six domains --- paper development, funding, job search, software engineering, research and business workflows --- built on the six-coordinate framework of \citet{yang2026unified}. The contract fixes the unit (a frozen model--harness pair), the primitive (delivered outcomes net of false completions, with a class loss ratio $\rho$ that sets the reliability a class requires), the record every episode must carry (band, budget, reliability, resource envelope, verifier version, cost, and why the episode ended), the admissible acceptance loci (never the performing system, never the same process in a reviewer's persona), the task-manifest schema and freeze-by-hash rule, and four policies for intervention, resources, verification and retention. It then reports coverage honestly and by generation rather than by hand: of 36 domain-band cells, 4 are bound, 1 is generator-bound, 4 have something running at the band for another family, and 27 are specification only; 10 cross-domain coordinate suites --- four restart tests for $M1$, three grounded self-state tests, and three delegation starters --- are bound. Every bound cell names a public asset and validates against the schema. What v0.1 can measure is a U0--U1 delegation reading in the software domain, $M1$, $SA1$--$SA2$ and $C0$--$C1$; what it cannot yet measure is any U2 or U3 claim, because no learning-transfer or self-improvement suite is bound, and any claim in four of the six domains. The paper states the binding order that would change that, and the validity requirements --- specification--key tests, concordance audits, graded scoring, headroom, termination reasons --- that every future binding must meet, because the benchmark this one replaces was well formed on every row and could not draw a frontier.
+A benchmark built after the agents it scores is a benchmark shaped by what those agents happen to do well. This paper freezes the Unified Agent Benchmark (UAB) before the agents it is meant to certify are optimized. UAB v0.1 is a measurement contract for Unified levels U0--U3 across six domains --- paper development, funding, job search, software engineering, research and business workflows --- built on the six-coordinate framework of \citet{yang2026unified}. The contract fixes the unit (a frozen model--harness pair), the primitive (delivered outcomes net of false completions, with a class loss ratio $\rho$ that sets the reliability a class requires), the record every episode must carry (band, budget, reliability, resource envelope, verifier version, cost, and why the episode ended), the admissible acceptance loci (never the performing system, never the same process in a reviewer's persona), the task-manifest schema and freeze-by-hash rule, and four policies for intervention, resources, verification and retention. It then reports coverage honestly and by generation rather than by hand: of 36 domain-band cells, 4 are bound, 4 are generator-bound, 3 have something running at the band for another family, and 25 are specification only; 10 cross-domain coordinate suites --- four restart tests for $M1$, three grounded self-state tests, and three delegation starters --- are bound. Every bound cell names a public asset and validates against the schema. Three T0 families --- one explicit code edit, extracting one requirement from a funding solicitation, extracting the hard requirements from a job posting --- are built inside the package with seeded generators, hidden keys, a reference solver, the plausible wrong method and a specification--key test; each discriminates on every one of 48 seeds, and a live check with a real executor passed all three after exposing one specification defect, which was repaired. What v0.1 can measure is a U0--U1 delegation reading in the software domain, a T0 reading in funding and job search, $M1$, $SA1$--$SA2$ and $C0$--$C1$; what it cannot yet measure is any U2 or U3 claim, because no learning-transfer or self-improvement suite is bound, and any claim in the paper and business domains. The paper states the binding order that would change that, and the validity requirements --- specification--key tests, concordance audits, graded scoring, headroom, termination reasons --- that every future binding must meet, because the benchmark this one replaces was well formed on every row and could not draw a frontier.
 \end{abstract}
 
 \noindent\textbf{Keywords:} agent benchmark; Unified Intelligence; delegation; false completion; restart test; verifier separation; coverage matrix; pre-registration
@@ -106,13 +106,13 @@ This is not a new principle, and the reason to write it down again is that the c
 \item \textbf{A task-manifest schema} (\S\ref{sec:manifest}) with freeze-by-hash, an admissible-locus ladder for acceptance, and binding status as a required field.
 \item \textbf{Six domain band ladders} T0--T6 (\S\ref{sec:bands}), with the rule that T5 and above admit no static item.
 \item \textbf{Four policies} (\S\ref{sec:policies}): intervention, resources, verification, retention.
-\item \textbf{A generated coverage matrix} (\S\ref{sec:coverage}): 36 domain-band cells labelled from manifests, 16 bound manifests with public assets, and a validator that fails on any inconsistency.
+\item \textbf{A generated coverage matrix} (\S\ref{sec:coverage}): 36 domain-band cells labelled from manifests, 19 bound manifests with public assets, three in-package T0 families proven to discriminate, and a validator that fails on any inconsistency.
 \item \textbf{What v0.1 can and cannot measure} (\S\ref{sec:can}), and the binding order for v0.2 (\S\ref{sec:roadmap}).
 \end{enumerate}
 
 \subsection{What this paper does not claim}
 
-No agent has been certified on UAB v0.1. No score appears here. The bound cells are a small core in one domain plus cross-domain coordinate suites; four of six domains have nothing runnable. Those facts are the subject of \S\ref{sec:coverage}, not a footnote to it.
+No agent has been certified on UAB v0.1. No score appears here beyond a three-item live check. The bound cells are a small core in three domains plus cross-domain coordinate suites; two of six domains have nothing runnable. Those facts are the subject of \S\ref{sec:coverage}, not a footnote to it.
 
 \section{The Measurement Contract}\label{sec:contract}
 
@@ -271,14 +271,14 @@ Coverage is generated by a script from the manifests and validated by a second s
 Domain & T0 & T1 & T2 & T3 & T4 & T5 \\
 \midrule
 paper & band-only & spec & spec & spec & spec & spec \\
-funding & spec & spec & spec & spec & spec & spec \\
-job & spec & spec & spec & spec & spec & spec \\
-code & band-only & \textbf{BOUND} & \textbf{BOUND} & \textbf{BOUND} & \textbf{GEN} & spec \\
+funding & \textbf{GEN} & spec & spec & spec & spec & spec \\
+job & \textbf{GEN} & spec & spec & spec & spec & spec \\
+code & \textbf{GEN} & \textbf{BOUND} & \textbf{BOUND} & \textbf{BOUND} & \textbf{GEN} & spec \\
 research & band-only & band-only & spec & spec & spec & \textbf{BOUND} \\
 business & spec & spec & spec & spec & spec & spec \\
 \bottomrule
 \end{tabularx}
-\caption{The UAB v0.1 coverage matrix as generated. 36 cells: 4 bound, 1 generator-bound, 4 band-only, 27 specification-only.}
+\caption{The UAB v0.1 coverage matrix as generated. 36 cells: 4 bound, 4 generator-bound, 3 band-only, 25 specification-only.}
 \label{tab:matrix}
 \end{table}
 
@@ -290,6 +290,9 @@ business & spec & spec & spec & spec & spec & spec \\
 \toprule
 Cell & Family & Verifier & Asset \\
 \midrule
+code T0 & one edit & every other file byte-identical to a snapshot; exactly one line of the target differs; the named value set & \texttt{families/code\_t0.py} in this package \\
+funding T0 & extract requirement & normalized exact match against the generator's key; value must appear in the source; the target is never the first date, eligibility line or USD figure & \texttt{families/funding\_t0.py} \\
+job T0 & extract requirements & set equality on the required bullets (graded by Jaccard), two flags, location & \texttt{families/job\_t0.py} \\
 code T1 & request timeout & two deterministic checks: the named value changed; the neighbours did not & \texttt{delegation/ladder.py} in AI4Science \\
 code T2 & pipeline & the rejected count in the report equals the unusable rows in the input & same \\
 code T3 & search latency & timing criterion registered before the work & same \\
@@ -305,15 +308,21 @@ coordinate DI T0/T1 $\times$3 & data analysis (T0, T1), document workflow (T0) &
 \label{tab:bound}
 \end{table}
 
+\subsection{The three in-package families, and the live check}
+
+The code, funding and job T0 families are built inside the benchmark package with no dependencies. Each ships a seeded generator with a hidden key, a verifier, a reference solver that never sees the key, the plausible wrong method the family exists to catch (a global search-and-replace; first-match extraction; the first bulleted list), and a specification--key test. The self-test requires the reference solver to pass and the naive method to fail on \emph{every} seed, because a generator whose trap is probabilistic fills the suite with instances that discriminate nothing; the first version of two families fired the trap on only half the seeds and was repaired so that the target is never the first date, the first eligibility line, the first USD figure or the first list. Result: reference 48/48, naive 0/48, specification--key agreement on 100 seeds, for all three.
+
+A gate that has only ever been opened by its own reference solver has not been shown to open. One seed of each family was run through a real executor (Claude Code 2.1.258, headless, file edits only, four minutes, killed by process group). It passed the code and funding items outright and failed the job item on one check: asked for ``the Location line, verbatim'', it returned the line including its \texttt{Location:} label. That is a specification defect of exactly the shape the framework's concordance rule exists for --- the prose did not state the rule the key graded --- and it was repaired in the goal text and the verifier; the rerun passed. Three items, one executor, one seed each: a reading that the gates open, not a rate.
+
 \subsection{What sits behind the specification-only cells}
 
-Twenty-seven cells have nothing runnable. They are not empty of design: DLI-Bench v0.2 carries 180 specification starters in six families (data 39, document 20, planning 21, research 38, software 42, tool use 20) across four strata, each with a difficulty vector, a loss ratio, an acceptance block and an intervention budget, and each marked ``executable assets should be generated from the seed and kept hidden for certification'' \citep{yang2026dlibench}. The agent-coordinate probe set carries fifteen $T{\cdot}H$ procedures per agent for the funding and job agents with benchmark-authored floors. These are where binding begins, and they are listed in the matrix as seeds precisely so that they are not mistaken for coverage.
+Twenty-five cells have nothing runnable. They are not empty of design: DLI-Bench v0.2 carries 180 specification starters in six families (data 39, document 20, planning 21, research 38, software 42, tool use 20) across four strata, each with a difficulty vector, a loss ratio, an acceptance block and an intervention budget, and each marked ``executable assets should be generated from the seed and kept hidden for certification'' \citep{yang2026dlibench}. The agent-coordinate probe set carries fifteen $T{\cdot}H$ procedures per agent for the funding and job agents with benchmark-authored floors. These are where binding begins, and they are listed in the matrix as seeds precisely so that they are not mistaken for coverage.
 
 \section{What v0.1 Can and Cannot Measure}\label{sec:can}
 
-\textbf{Can.} A U0--U1 delegation reading in the software domain at H0, H1 and H2 on three bound families plus two generator-bound T4 families; $M1$ on four restart tests; $SA1$ and $SA2$ on three grounded self-state tests; $C0$ and $C1$ on six bound cognitive items; and a T5 sealed-discovery reading in the research domain. That is enough to certify U1 for a pair whose $C1$, $I1$ (with $M1$), $SA1$ and T1-at-H3 gates all pass, with $O$ omitted for an individual unit.
+\textbf{Can.} A U0--U1 delegation reading in the software domain at H0, H1 and H2 on four bound or generator-bound families at T0--T3 plus two generator-bound T4 families; a T0 reading in funding and in job search; $M1$ on four restart tests; $SA1$ and $SA2$ on three grounded self-state tests; $C0$ and $C1$ on six bound cognitive items; and a T5 sealed-discovery reading in the research domain. That is enough to certify U1 for a pair whose $C1$, $I1$ (with $M1$), $SA1$ and T1-at-H3 gates all pass, with $O$ omitted for an individual unit.
 
-\textbf{Cannot.} Any U2 claim, because no learning-transfer suite is bound: nothing here measures whether verified experience at time $t$ improves held-out behaviour at $t+1$. Any U3 claim, because no self-improvement suite with a sandbox, a frozen hidden evaluation and an independent promoter is bound. Any claim in paper, funding, job or business. Any cross-domain transfer claim, since only one domain has bound cells. Any $O$ level, since no organizational suite is bound.
+\textbf{Cannot.} Any U2 claim, because no learning-transfer suite is bound: nothing here measures whether verified experience at time $t$ improves held-out behaviour at $t+1$. Any U3 claim, because no self-improvement suite with a sandbox, a frozen hidden evaluation and an independent promoter is bound. Any claim in paper or business, or above T0 in funding and job search. Any cross-domain transfer claim yet, since the funding and job families have not been run on the harness ladder. Any $O$ level, since no organizational suite is bound.
 
 \begin{cautionbox}{The lesson carried from DLI-Bench v0.1}
 Every one of its 96 rows was well formed, and the set could not produce a frontier, because six fields took one value per band. The v0.1 bound core here has the same shape in miniature: three code families at one band each, at one budget in the archived runs. A frontier $F_A(H,p)$ at three budgets needs the same class held fixed across H0, H1 and H2 --- the \texttt{budget\_cross} stratum --- and v0.1 declares those budgets in the manifests but has run only H1. The reporting profile is computable in principle and has not been computed.
@@ -335,8 +344,6 @@ Every one of its 96 rows was well formed, and the set could not produce a fronti
 In cost order, and in the order that unblocks the most claims:
 
 \begin{enumerate}[leftmargin=*]
-\item \textbf{Code T0} --- one explicit edit with a diff verifier. Cheapest cell in the matrix; turns the code column into a full T0--T4 ladder.
-\item \textbf{Funding T0 and Job T0} --- eligibility and requirement extraction. Both are deterministic against a solicitation or posting with a hidden key, and both are the model-free gate the corresponding agents are designed around \citep{yang2026agents}.
 \item \textbf{Paper T0 and T1} --- one citation verified against a hidden bibliographic record; one section drafted from supplied evidence with a claim-to-evidence check.
 \item \textbf{Business T0} --- one fact against a frozen corpus.
 \item \textbf{The U2 suite} --- learning transfer: a held-out family on which a lesson from one episode must change behaviour in a later one after the retrieval index is rebuilt; required before any U2 claim anywhere.
@@ -349,7 +356,7 @@ Each binding ships a specification--key test if parameterised, a concordance aud
 \section{Limitations}\label{sec:limits}
 
 \begin{itemize}[leftmargin=*]
-\item \textbf{The bound core is small and one-domain.} Five of thirty-six cells, all in software, plus one sealed research family.
+\item \textbf{The bound core is small.} Eight of thirty-six cells, in three domains, five of them at T0 or T4 in software; funding and job search are bound at T0 only.
 \item \textbf{Starters are not hidden instances.} The coordinate suites' starter instances are development examples; formal certification needs withheld instances that do not yet exist.
 \item \textbf{No run has been scored under this contract.} The archived harness-ladder and regime-switch measurements predate the manifests and are reported in the companion paper on harness scaling, not here.
 \item \textbf{Band placement is by inspection.} The mapping of the three ladder families to code T1--T3, and of document and data-analysis starters to band-only cells, is a judgement recorded in the matrix source and open to revision.
@@ -358,7 +365,7 @@ Each binding ships a specification--key test if parameterised, a concordance aud
 
 \section{Conclusion}
 
-UAB v0.1 is a frozen contract with a small bound core, and both halves of that description matter. The contract fixes what a certification is --- a frozen pair, a delivered-outcome primitive with a class loss ratio, an episode record that says why it ended, an acceptance locus that is never the doer, and a hard gate with retention --- before any agent is optimized against it. The core is honest about its size: four bound cells, one generator-bound, and ten coordinate suites, with twenty-seven cells named as specification only and four named as band-only so that they are not mistaken for coverage. The next version is not a larger claim. It is the same contract with more cells bound in the order that costs least, starting with the one-edit code task and the two extraction tasks that the funding and job agents already need.
+UAB v0.1 is a frozen contract with a small bound core, and both halves of that description matter. The contract fixes what a certification is --- a frozen pair, a delivered-outcome primitive with a class loss ratio, an episode record that says why it ended, an acceptance locus that is never the doer, and a hard gate with retention --- before any agent is optimized against it. The core is honest about its size: four bound cells, four generator-bound, and ten coordinate suites, with twenty-five cells named as specification only and three named as band-only so that they are not mistaken for coverage. The next version is not a larger claim. It is the same contract with more cells bound in the order that costs least; the three cheapest --- the one-edit code task and the two extraction tasks the funding and job agents already need --- were bound while this draft was written, and each was shown to discriminate before it was counted.
 
 \section*{Availability}
 
