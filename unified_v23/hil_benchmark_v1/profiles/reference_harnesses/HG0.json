@@ -1,0 +1,28 @@
+{
+  "profile_schema_version": "1.0",
+  "profile_id": "hil-ref-hg0-profile-v1",
+  "display_name": "HIL reference HG0 minimal solver",
+  "subject_kind": "model_under_reference_harness",
+  "track": "individual",
+  "frozen": false,
+  "model": {
+    "id": "USER_SUPPLIED_MODEL_ID",
+    "version": "USER_SUPPLIED_EXACT_VERSION",
+    "hash": "USER_SUPPLIED_OR_UNAVAILABLE"
+  },
+  "harness": {
+    "id": "HIL-REF-HG0-v1",
+    "version": "1.0.0",
+    "manifest_hash": "RECOMPUTE_AFTER_FILLING_MODEL",
+    "generation": "HG0",
+    "target_u": "U0",
+    "semantics": "Minimal stateless direct solver: one candidate attempt, no persistent task state, no independent acceptor, no verifier-driven retry.",
+    "tool_access": "none beyond protocol transport",
+    "external_knowledge_access": "none",
+    "subagent_count": 0,
+    "max_attempts": 1
+  },
+  "credentials": "not_in_manifest",
+  "measured_results": null,
+  "status": "template_only"
+}

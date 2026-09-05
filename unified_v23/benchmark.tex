@@ -1,0 +1,586 @@
+% arXiv: force the pdflatex path.
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={Unified Agent Benchmark: Fast, Low-Cost Coordinate and Unified HIL Measurement for Agents and LLMs},
+  pdfauthor={Chengshuai Yang and Ting Xue},
+  pdfsubject={An executable protocol for coordinate and unified harness-intelligence-level measurement},
+  pdfkeywords={unified intelligence, HIL, agents, language models, harness evaluation, benchmark validity}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Unified Agent Benchmark}
+\fancyhead[R]{\small Yang and Xue}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{requirement}{Requirement}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\Snet}{\ensuremath{S_A^{\mathrm{net}}(T,H)}}
+\newcommand{\HLIS}{\ensuremath{\mathrm{HLIS}}}
+\newcommand{\PairHIL}{\ensuremath{\mathrm{Pair\mbox{-}HIL}}}
+\newcommand{\ModelHIL}{\ensuremath{\mathrm{Model\mbox{-}HIL}}}
+\newcommand{\HSC}{\ensuremath{\mathrm{HSC}}}
+
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Unified Agent Benchmark:}\\[6pt]
+{\LARGE\bfseries Fast, Low-Cost Coordinate and Unified HIL Measurement for Agents and LLMs}\\[14pt]
+{\large Chengshuai Yang$^{1,*}$\quad Ting Xue$^{1}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 3, 2026}
+\end{center}
+
+\begin{abstract}
+Agent leaderboards usually report a task average for an inseparable model--scaffold system. That number does not say whether the observed capability came from the language model, a persistent harness, an organization of agents, human intervention, or an unusually large resource budget. We specify the Unified Agent Benchmark (HIL Benchmark v1), an executable measurement protocol for the coordinates Cognitive ($C$), Individual ($I$), Organizational ($O$), Delegation ($DI$ over task difficulty $T$ and human cognitive intervention $H$), operational Self-Awareness ($SA$), and supporting Memory ($M$). The benchmark distinguishes an individual track from an organizational track; a frozen model--harness pair receives a Pair-HIL report containing its coordinate profile, unified level, Harness-Level Intelligence Score (HLIS), uncertainty, coverage, and resources. A base language model receives a Model-HIL characterization only after the same frozen model is tested across reference harnesses, producing a Harness Scaling Curve (HSC), HIL-Level, HIL-AUC, HIL-Ceiling, and Harness Gain. Three modes serve different purposes: quick is an inexpensive all-coordinate screen, full broadens families and repetitions, and certification applies the full protocol to organizer-held tasks. Public development and validation data support iteration, while private family and private mechanism tests separate within-family generalization from transfer to withheld task-generating mechanisms. Deterministic or independently reproducible verifiers, explicit system manifests, and outcome/resource logs make scoring auditable. Adapter templates for Codex, Claude Code, and Qwen through OpenCode are included as \emph{unmeasured configurations}; this paper reports no performance result for them or any other system. We compare the proposed scope with ARC-AGI-3 and state falsifiable reliability, validity, efficiency, security, and adoption criteria. HIL is a measurement hypothesis and protocol, not proof of \emph{real intelligence}; construct validity must be earned through the validation program specified here.
+\end{abstract}
+
+\noindent\textbf{Keywords:} unified intelligence; HIL; AI agents; language models; harness evaluation; benchmark validity; low-cost evaluation
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+An agent result is produced by a system, not by a model in isolation. The system may include a prompt policy, tool adapters, persistent state, retrieval, a planner, acceptance criteria, retries, subagents, and human guidance. Two evaluations that name the same model but change these components do not measure the same experimental unit. Conversely, two model comparisons inside different agent products confound the executor with the product. A useful benchmark must preserve both facts.
+
+The companion Unified Intelligence Theory defines five conceptual families, $[C,I,O,DI,SA]$, six core measurement coordinates, $[C,I,O,T,H,SA]$, and a separately reported memory capability $M$. It also distinguishes a continuous score for one frozen model--harness pair from a harness-indexed characterization of a model. The present paper turns that theory into a small executable protocol, \texttt{hilbench}, and makes the empirical claims deliberately narrower than the ambition.
+
+\begin{cautionbox}{What a HIL result means}
+A HIL result is evidence that one declared system, under one declared resource and intervention envelope, met the criteria of one benchmark version. It is not evidence of consciousness, unrestricted generality, deployment safety, or an intrinsic context-free quantity called intelligence. Until convergent, discriminant, predictive, and consequential validity are established, HIL names the instrument and the construct estimate, not an observed natural constant.
+\end{cautionbox}
+
+The design responds to four practical requirements. First, a first run should be simple: one manifest, one command, machine-readable tasks, and machine-readable outputs. Second, the screen should be fast and inexpensive enough to run during agent development. Third, a serious result must cover the different intelligence coordinates rather than substitute a large cognitive question set for persistence, organization, delegation, self-knowledge, and memory. Fourth, cost reduction must not be achieved by fabricating confidence: the quick mode is explicitly a screen, not a certificate.
+
+\subsection{Contributions}
+
+\begin{enumerate}
+\item We define two experimental units and two corresponding outputs: Pair-HIL/HLIS for a frozen agent pair, and Model-HIL/HSC for one frozen base model tested through the standardized reference harnesses.
+\item We define executable evidence contracts for $C$, $I$, $O$, $DI(T,H)$, $SA$, and $M$, with individual and organizational tracks and an explicit \texttt{not-applicable} state for $O$ on a singleton.
+\item We specify quick, full, and certification workflows that share one task and report schema. Quick mode samples all eligible coordinates but makes no certification claim; certification uses the full protocol on organizer-held material.
+\item We separate public development and validation sets from two private tests: new instances of known families and instances generated by withheld mechanisms.
+\item We define objective scoring, cumulative ordinal gates, the bottleneck-sensitive HLIS, the delegation surface and frontier, confidence intervals, coverage, and a mandatory resource envelope.
+\item We provide immutable reference-harness identifiers and system-under-test manifests, including unmeasured adapter templates for Codex, Claude Code, and Qwen accessed through OpenCode.
+\item We state a validation and adoption program, including criteria under which HIL would add value beyond ARC-AGI-3 and criteria that would falsify that claim.
+\end{enumerate}
+
+\subsection{Evidential status}
+
+This is a benchmark specification and reference implementation paper. It contains no measured leaderboard values. Names in manifests are integration targets, not endorsements, participants, authors, or results. Any table containing a profile name uses the status \texttt{unmeasured}. Numerical values used to explain equations are labeled synthetic and must not be cited as system performance.
+
+\section{Claims, Subjects, and Experimental Units}\label{sec:units}
+
+\subsection{The subject of a Pair-HIL result}
+
+Let a system under test be
+\begin{equation}
+A=(m,h,\theta,\tau,e,b),
+\end{equation}
+where $m$ is the model and weights/version, $h$ the harness implementation, $\theta$ the frozen prompts and policies, $\tau$ the tool and authority configuration, $e$ the execution environment, and $b$ the resource and human-intervention budget. A Pair-HIL result belongs to this tuple. Changing any identity-bearing field creates a new system.
+
+\begin{definition}[Pair-HIL]
+\PairHIL$(A,B)$ is the versioned report for system $A$ on benchmark bundle $B$. It contains coordinate achievements and ordinal levels, $M$, the $T\times H$ delegation surface, the applicable unified level $U^*$, HLIS, coverage, confidence intervals, resources, split/mode, and validity flags.
+\end{definition}
+
+The word ``pair'' highlights the model--harness pair but does not erase the remaining controls. A prompt change, tool permission change, extra subagent, larger token budget, or human hint can change the result and must change the manifest or run record.
+
+\subsection{The subject of a Model-HIL result}
+
+A number attributed to a model is justified only by holding the model fixed while changing the harness according to a public ladder. For model $m$ and reference harnesses $HG_k$,
+\begin{equation}
+\HSC_m(k)=\HLIS(A(m,HG_k)).
+\end{equation}
+
+\begin{definition}[Model-HIL]
+\ModelHIL$(m,\mathcal{H},B)$ is the complete HSC and its registered summaries for frozen model $m$ over reference ladder $\mathcal{H}$ on benchmark $B$. It is not the score of whichever commercial agent happens to expose the model.
+\end{definition}
+
+This distinction yields four legitimate comparisons:
+
+\begin{itemize}
+\item same model, same harness, different benchmark release: longitudinal benchmark comparison, subject to drift controls;
+\item same model, different reference harness: a harness-response comparison;
+\item different models, same reference harness and budget: a controlled executor comparison;
+\item different complete agents: a product-level Pair-HIL comparison, not a model ranking.
+\end{itemize}
+
+\subsection{Individual and organizational tracks}
+
+For a singleton or a system evaluated as one persistent decision locus, the core dimension set is
+\begin{equation}
+D_{\mathrm{ind}}=\{C,I,DI,SA\}.
+\end{equation}
+Organizational Intelligence is recorded as \texttt{not-applicable}, never zero. For a multi-agent organization with separately identifiable roles and evidence flow,
+\begin{equation}
+D_{\mathrm{org}}=\{C,I,O,DI,SA\}.
+\end{equation}
+$M$ is tested and reported on both tracks. It is a one-way prerequisite for higher $I$ levels but is excluded from the default HLIS product to avoid rewarding the same persistence evidence twice. A Model-HIL program can expose the same model through both individual and organizational reference harnesses; the resulting track labels remain visible.
+
+\begin{claimbox}{Every coordinate does not mean every number is forced}
+Every run must account for $C,I,O,DI,SA,$ and $M$ with one of four states: \texttt{measured}, \texttt{not-measured}, \texttt{not-applicable}, or \texttt{invalid}. Only \texttt{measured} contributes evidence. An omitted $O$ for a declared singleton is honest; silently dropping a failed or unevaluated coordinate is not.
+\end{claimbox}
+
+\section{Benchmark Architecture}\label{sec:architecture}
+
+HIL Benchmark v1 is a registry of task families, instances, verifiers, manifests, and score rules. The executable is invoked as \texttt{python3 -m hilbench}. It deliberately uses JSON and JSON Lines at system boundaries so an adapter can be implemented without importing evaluator code.
+
+\subsection{The six evidence objects}
+
+Each task record binds six objects:
+
+\begin{enumerate}
+\item a visible problem specification and declared coordinate/family;
+\item a task difficulty band $T$ and an allowed human intervention budget $H$ where applicable;
+\item a resource envelope and required observation/action channels;
+\item an answer or artifact protocol;
+\item an external verifier, rubric, or reproducibility procedure; and
+\item provenance: task-family version, generator/mechanism identifier, seed or instance identifier, and split.
+\end{enumerate}
+
+The runner supplies an instance to an adapter, collects structured events and an artifact, invokes the verifier outside the adapter, and writes an append-only episode record. Scoring consumes records rather than rerunning the agent. This makes an audit possible and allows corrected scorers to be applied without buying the model calls again.
+
+\subsection{Simple execution path}
+
+The minimal public workflow is:
+
+\begin{verbatim}
+python3 -m hilbench list
+python3 -m hilbench validate
+python3 -m hilbench run --split dev --mode quick \
+  --adapter mock --output report.json
+python3 -m hilbench score --input report.json
+\end{verbatim}
+
+The \texttt{mock} adapter tests plumbing; it is not a meaningful intelligence evaluation. A real local agent uses the subprocess adapter and a JSONL stdin/stdout contract. The subprocess is launched without a shell:
+
+\begin{verbatim}
+python3 -m hilbench run --split dev --mode quick \
+  --adapter subprocess --command ./my_agent \
+  --output runs/my_agent_quick.json
+\end{verbatim}
+
+Provider-specific profiles fill the same contract. They must not embed credentials, and the report records the adapter and profile hashes. Section~\ref{sec:repro} gives the complete command families.
+
+\subsection{Run-record invariants}
+
+At minimum, each episode records system and task identifiers, timestamps, random seed, attempt index, adapter exit status, termination reason, artifact hash, external verifier verdict and evidence, harness acceptance, human events, tool events, token/call/time counts, and environment changes. For a task with an acceptance step, the external verifier outcome and the harness acceptance outcome are distinct:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Accepted & Verifier pass & Interpretation \\
+\midrule
+yes & yes & delivered correct work \\
+yes & no & false completion \\
+no & no & held back / correct refusal \\
+no & yes & false rejection \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+An absent timeout record is not treated as an incorrect answer. Infrastructure errors, adapter errors, budget exhaustion, policy refusal, and substantive failure are separate termination reasons. Certification invalidates a stratum when evaluator-side failure exceeds its predeclared tolerance; it does not quietly score infrastructure failure as low intelligence.
+
+\section{Coordinate Battery}\label{sec:battery}
+
+The goal is broad construct sampling with few expensive episodes. Each coordinate therefore combines cheap diagnostic microtasks with a smaller number of integrated episodes. Integrated episodes may produce evidence for multiple coordinates, but an observable is assigned once in the score ledger; the same success is not duplicated across coordinates.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}p{0.06\textwidth}p{0.20\textwidth}YY@{}}
+\toprule
+Axis & Construct question & Required evidence families & What does not suffice \\
+\midrule
+$C$ & Can the system infer, reason, transfer, and solve? & abstraction and rule induction; compositional and causal reasoning; code/artifact reasoning; calibrated retrieval; GUI/screen grounding when the channel is claimed; transfer to altered surface form & fluency, memorized facts alone, or one domain average \\
+$I$ & Does one persistent intelligence learn and improve across episodes? & restart continuity; experience-to-later-behavior transfer; retention; controlled method change; rollback and lineage at higher levels & a long prompt, retrieval without behavioral learning, or a component inventory \\
+$O$ & Does a multi-agent organization add validated collective capability? & role routing; evidence aggregation; disagreement handling; persistent organizational state; adaptive reassignment; organization-change ablation & several identical samples, majority vote alone, or the strongest member's score \\
+$DI$ & What difficulty can be delegated under what human cognitive help? & tasks across $T$ and $H$; delivered outcome; retries; false completions and false rejections; cumulative reliable frontier & best-case success, tool-call count, or autonomy claimed from no human-message field \\
+$SA$ & Is the self-model evidence-grounded and useful? & state truth; capability/authority limits; prospective confidence; causal failure diagnosis; change-effect prediction; abstention on inaccessible state & eloquent self-description or post-hoc rationalization alone \\
+$M$ & What information survives, remains attributable, and is correctly updated? & true process restart; retrieval under distractors; provenance; stale-state suppression; contradiction update; consolidation/repair at higher levels & context-window length or the presence of a vector store \\
+\bottomrule
+\end{tabularx}
+\caption{Coordinate contracts. The rightmost column blocks common construct substitutions.}
+\label{tab:coordinates}
+\end{table}
+
+\subsection{Cognitive Intelligence ($C$)}
+
+$C$ tasks vary domain, representation, and required transformation. A family contains surface variants and held-out transformations so exact memorization is not confused with rule induction. The core strata are: abstract induction, multi-constraint reasoning, causal/counterfactual reasoning, quantitative reasoning, code and executable artifacts, evidence-grounded research, multimodal/GUI grounding when supported, and cross-family transfer. Existing benchmarks can supply external evidence---for example GPQA \citep{rein2023gpqa}, FrontierMath \citep{glazer2024frontiermath}, LiveCodeBench \citep{jain2024livecodebench}, MMMU \citep{yue2023mmmu}, and ScreenSpot-Pro \citep{li2025screenspotpro}---but their scores are not copied into HLIS without versioned item bindings and normalization.
+
+Quick mode uses short, objectively scored probes from each enabled stratum. Full and certification add longer artifacts, paraphrase controls, adversarial distractors, and transfer instances. The cognitive score is stratified so adding many cheap questions from one family cannot overwhelm a rarer but necessary family.
+
+\subsection{Individual Intelligence ($I$)}
+
+$I$ requires a sequence, not a single answer. A minimal learning trial contains a baseline episode, evidence or feedback, a process boundary, and a transfer episode. The transfer item changes irrelevant details and retains the learned relation. The runner records whether persistent state was written and reloaded, but state writes do not earn credit unless later behavior changes appropriately.
+
+Higher-level probes allow a candidate method or policy change only through a governed lane. The pre-change and post-change system face frozen hidden evaluations, and regressions count. Self-modification is not inferred from a prompt that says ``reflect.'' Certification requires lineage, rollback, and multiple change cycles. Quick mode can screen restart continuity and one transfer pair; it cannot certify recursive improvement or open-ended individual evolution.
+
+\subsection{Memory Capability ($M$)}
+
+$M$ is measured independently because high-capacity durable storage can coexist with little learning. The battery tests:
+
+\begin{itemize}
+\item $M0$: within-episode working state;
+\item $M1$: exact state recovery after the agent process is terminated and restarted;
+\item $M2$: temporal and provenance-aware retrieval under distractors, including stale-state rejection;
+\item $M3$: contradiction update and transfer from episodic evidence to reusable procedure;
+\item $M4$: detection, repair, pruning, snapshots, and recovery after controlled corruption;
+\item $M5$: evidence and decision lineage across projects;
+\item $M\Om{}$: externally validated change to the memory mechanism itself.
+\end{itemize}
+
+The report contains achievement, ordinal, interval, coverage, and storage/read/write resources for $M$. The $I$ gate can require a minimum $M$ ordinal. The default scalar excludes $M$ because $I$ already uses persistence and learning evidence; a secondary scalar that includes $M$ must be labeled nonstandard and cannot share the default leaderboard.
+
+\subsection{Organizational Intelligence ($O$)}
+
+An organizational run must declare at least two separately logged roles and a communication graph. It must also make the counterfactual measurable: compare the organization against a resource-matched strongest-member or single-role baseline. Tasks probe correct routing, synthesis with conflicting evidence, detection of an unreliable member, dynamic reassignment, shared-state continuity, and governed reorganization. An organization earns credit only when the organization-level mechanism causes verified improvement or resilience.
+
+The organizational score is invalid if messages or tool calls cannot be attributed to roles. Multiple calls hidden behind one transcript do not constitute organizational evidence. A single agent profile receives $O=\texttt{not-applicable}$; an agent that internally spawns workers uses the organizational track if those workers affect the measured output.
+
+\subsection{Delegation Intelligence ($DI(T,H)$)}\label{sec:di}
+
+Delegation is a surface rather than a scalar primitive:
+\begin{equation}
+\SA{}=P(\text{verified success}\mid T,H,b).
+\end{equation}
+$T0$ is an atomic explicit operation; $T1$ is a short routine task; $T2$ has dependent steps; $T3$ requires strategy, uncertainty handling, or replanning; $T4$ is a long-horizon expert project; $T5$ requires discovery of an initially unknown method; $T6$ begins from a mission; and $T\Om{}$ begins from a bounded charter. $H0$ permits no human cognitive help during execution, while $H1$--$H5$ permit increasingly deep help. Governance approval is logged separately from cognitive intervention.
+
+For scoring, delivered outcomes matter. In cell $(t,h)$,
+\begin{equation}
+\Snet=\max\!\left\{0,\,
+P(\text{delivered}\wedge\text{pass}\mid t,h)
+-\rho_t P(\text{false completion}\mid t,h)\right\},
+\label{eq:snet}
+\end{equation}
+where $\rho_t$ is the predeclared loss ratio for the task class. The human-load cost of held-back work is reported in resources. The monotone reliable frontier is
+\begin{equation}
+F_A(H_h,p)=\max\left\{t:
+\min_{j\le t}S_A^{\mathrm{net}}(T_j,H_h)\ge p\right\}.
+\end{equation}
+Every scorecard publishes the observed cell estimates and intervals; an aggregate never replaces the surface. Human events record duration, supplied content category, and Critical Intervention Depth. If the transcript cannot establish the intervention class, the run cannot claim the lower-intervention band.
+
+\subsection{Operational Self-Awareness ($SA$)}
+
+$SA$ is behavioral and non-phenomenological. Before acting, the system predicts success, identifies unavailable information and permissions, and describes relevant internal state through an allowed introspection interface. After acting, it diagnoses failures against external evidence. Scoring compares claims to ground truth: state-field accuracy, calibration error, selective accuracy under abstention, causal diagnosis under controlled faults, and accuracy of predicted effects of a proposed change.
+
+To discourage generic caveats, instances include matched pairs in which the true limitation is present in one and absent in the other. To discourage access leakage, some fields are knowable to the system and some are evaluator-only. Appropriate uncertainty on evaluator-only state earns more credit than confident invention. Quick mode screens state truth, confidence, and one fault diagnosis; longitudinal self-change awareness remains a full/certification claim.
+\section{Objective Scoring and Unified Reports}\label{sec:scoring}
+
+\subsection{Item, level, and coordinate scores}
+
+Every task emits $x_i\in[0,1]$ from a registered external verifier. The released v1 tasks use deterministic exact or structural checks; a future open-ended task may use a rubric only if the rubric components are independently reproducible and the evaluator's agreement is reported. A language model's unsupported judgment of another language model is not a certification oracle.
+
+For $d\in\{C,I,O,SA,M\}$, let $q_{d,\ell}$ be mean item credit at level band $\ell$. Cumulative retention is enforced by
+\begin{equation}
+q^*_{d,\ell}=\min_{j\le \ell}q_{d,j}.
+\end{equation}
+With v1 level weight $w_\ell=2^\ell$,
+\begin{equation}
+A_d=100\,
+\frac{\sum_{\ell\in L_d}w_\ell q^*_{d,\ell}}
+{\sum_{\ell\in L_d}w_\ell}.
+\label{eq:coordinate}
+\end{equation}
+The ordinal for $d$ is the highest contiguous level whose cumulative rate meets the predeclared threshold. The HIL-Core-v1.0.0 implementation uses $0.80$ as a working level threshold. These thresholds are definitions to be calibrated, not discovered facts about intelligence.
+
+Delegation achievement uses Equation~\eqref{eq:snet}. The v1 cell weight is
+\begin{equation}
+w_{t,h}=2^t(6-h),
+\end{equation}
+so harder tasks and lower-human-intervention conditions receive more weight. The default reliability and false-completion loss ratio are both predeclared: $p=0.80$ and $\rho=1.0$. Any alternate policy creates a secondary score namespace.
+
+\subsection{Pair-HIL and HLIS}
+
+For applicable core dimension set $D$, with equal default weights,
+\begin{equation}
+\HLIS(A)=100\left(\prod_{d\in D}\frac{A_d}{100}\right)^{1/|D|}.
+\label{eq:hlis}
+\end{equation}
+If an applicable coordinate is unassessed, no numeric HLIS is emitted. If an assessed coordinate is zero, HLIS is zero. For the individual track $D=D_{\mathrm{ind}}$; for the organizational track $D=D_{\mathrm{org}}$. $M$ is displayed and used by unified gates but is not multiplied into HLIS. This choice prevents a system from increasing the scalar twice with the same persistence evidence.
+
+The geometric mean makes a weak coordinate visible, but it is not the promotion rule. Unified level is cumulative and conjunctive. The executable v1 intentionally implements only the gates it has bound task families for, U0--U2:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lccccccY@{}}
+\toprule
+Gate & $C$ & $I$ & $O$ (org.) & $SA$ & $M$ & Delegation & Interpretation \\
+\midrule
+U0 & C0 & I0 & O0 & SA0 & M0 & T0 at $H\le5$ & reactive/baseline evidence \\
+U1 & C1 & I1 & O1 & SA1 & M1 & T1 at $H\le3$ & persistent routine operation \\
+U2 & C2 & I2 & O2 & SA2 & M3 & T2 at $H\le2$ & adaptive multi-step operation with consolidating memory \\
+\bottomrule
+\end{tabularx}
+\caption{Bound cumulative gates in HIL-Core-v1.0.0. O is omitted for the individual track. Higher theory levels are outside the v1 certification ceiling.}
+\label{tab:gates}
+\end{table}
+
+Let $g_n(A)$ indicate that every applicable coordinate gate, memory prerequisite, delegation gate, and lower-level retention gate through $n$ passes. Then
+\begin{equation}
+U^*(A)=\max\{n\in\{0,1,2\}:g_n(A)=1\}.
+\end{equation}
+The report names bottlenecks to the next bound gate. It must say \texttt{instrument ceiling U2}; a system reaching U2 has not been tested for U3 by v1.
+
+\begin{claimbox}{The required headline is structured}
+\texttt{Pair-HIL | U* | HLIS [interval] | [C,I,O,DI,SA; M] |}\\
+\texttt{track | p | coverage | resources | benchmark/split/mode}\\
+
+No leaderboard may display HLIS without making this structure available in the same row or one click away. The scalar is an index into the report, not a substitute for it.
+\end{claimbox}
+
+\subsection{Uncertainty}
+
+The executable reports two-sided 95\% Wilson intervals for observed binary outcomes. Its current HLIS interval is the geometric mean of coordinate lower bounds and of coordinate upper bounds. Because those coordinate-wise bounds are dependent and are not a jointly calibrated region, this is best read as a transparent uncertainty envelope, not as a proof of exact 95\% coverage for the composite. The validation release will add task-family block bootstrap intervals, repeat-run variance, and coverage simulation.
+
+Certification decisions use lower confidence bounds where sufficient repeated instances exist. A one-item perfect score does not satisfy a reliability claim merely because its point estimate is one. When the planned sample is too small to resolve a gate, the output is \texttt{inconclusive}; buying fewer trials may save money but cannot turn uncertainty into capability.
+
+Recommended replication treats a generated family, not an individual surface variant, as the resampling block. Paired comparisons reuse the same instance seeds and report the paired outcome table. Sequential sampling may stop early for futility or clear separation only under a published alpha-spending or confidence-sequence rule. Looking repeatedly and stopping on a favorable ordinary interval is prohibited.
+
+\subsection{Coverage and headroom}
+
+Coverage is reported at four resolutions: completed/expected task fraction; applicable coordinates; distinct families per coordinate; and distinct mechanisms per coordinate. For delegation it additionally includes observed $T$ and $H$ bands. The executable will not issue HLIS when an applicable core coordinate has no evidence, even if the tested coordinates are strong.
+
+Coverage is not performance. A system can have 100\% coverage and low achievement, or high achievement on a low-coverage screen. The current report therefore keeps these fields separate. Certification additionally requires its registry's minimum family and mechanism counts. A family duplicated under many seeds does not increase mechanism coverage.
+
+Headroom is the fraction of possible credit not obtained by a preregistered high-performing reference set. It is an instrument diagnostic rather than a system metric. HIL-Core v1 exposes a headroom field but leaves it \texttt{unassessed} until multi-system calibration is run. A saturated family is retained for lower-range discrimination or replaced under version control; it cannot silently continue to support frontier claims.
+
+\subsection{Resources and efficiency}
+
+Each report carries wall time, adapter calls, attempts, timeouts, protocol errors, input/output tokens, language-model calls, retail cost in U.S. dollars when known, compute class, persistent-memory bytes, tool/external-knowledge access, subagent count, and human intervention count/minutes. Unknown fields are explicitly \texttt{unassessed}. A zero is never substituted for missing usage.
+
+Scores are primarily compared inside the same registered resource envelope. Across envelopes, the benchmark publishes a Pareto surface
+\begin{equation}
+\mathcal{P}=\{(\HLIS,\mathrm{cost},\mathrm{time},\mathrm{human\ minutes})\}
+\end{equation}
+rather than pretending the largest system and the smallest system paid the same price. An optional efficiency figure may divide verified utility by a declared cost index, but it cannot replace Pair-HIL and is not part of v1's primary score.
+
+\subsection{Report-schema summary}
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}YY@{}}
+\toprule
+Object & Required contents & Claim protected \\
+\midrule
+\texttt{pair} & model id/version/hash; harness id/version/manifest hash; frozen flag; profile id & identifies the experimental unit \\
+\texttt{coordinate\_results} & status, achievement, ordinal, task/pass counts, 95\% interval, level bands, family/mechanism coverage & makes every coordinate auditable \\
+\texttt{memory} & $M$ achievement/ordinal and supporting-role notice & measures memory without double counting \\
+\texttt{delegation} & net surface, frontiers, reliability, $\rho$, false completion/holdback/false rejection & distinguishes autonomy from delivered reliability \\
+\texttt{unified} & $U^*$, full profile, next-gate bottlenecks, instrument ceiling & preserves cumulative gates \\
+\texttt{pair\_hil} & HLIS, bounds, dimension set and equal weights, completeness & identifies scalar construction \\
+\texttt{coverage} & expected/completed counts, coordinates, families, mechanisms & prevents cherry-pick concealment \\
+\texttt{resources} & calls/tokens/cost/time/attempts/tools/memory/subagents/human load & prevents resource confounding \\
+\texttt{certification} & screening/development/review status and eligibility & prevents self-certification \\
+\texttt{instrument} & thresholds, concordance/headroom/calibration status & reports benchmark validity debt \\
+\bottomrule
+\end{tabularx}
+\caption{Normative Pair-HIL report objects.}
+\label{tab:report}
+\end{table}
+
+\section{Model-HIL and the Harness Scaling Curve}\label{sec:modelhil}
+
+\subsection{Reference ladder}
+
+The public ladder identifier is \texttt{HIL-REF-v1}; its immutable rung identifiers are \texttt{HIL-REF-HG0-v1}, \texttt{HIL-REF-HG1-v1}, and \texttt{HIL-REF-HG2-v1}. A new semantic contract requires a new identifier. The intended strict-superset design is:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYl@{}}
+\toprule
+ID & Required harness semantics & Primary contrast & Target gate \\
+\midrule
+HIL-REF-HG0-v1 & one attempt, ephemeral execution context, bounded declared tools, external evidence log; no harness acceptance claim & minimal expression of the frozen model & U0 \\
+HIL-REF-HG1-v1 & HG0 plus persistent state and a criterion frozen before the output, with acceptance separated from execution & persistence and trustworthy delivery & U1 \\
+HIL-REF-HG2-v1 & HG1 plus snapshot/restore, verifier-named feedback, and bounded retry under the same outer budget & learning/recovery from external evidence & U2 \\
+\bottomrule
+\end{tabularx}
+\caption{Reference-harness semantics. Merely writing a rung identifier in a profile does not establish conformance; the harness must pass contract tests.}
+\label{tab:ladder}
+\end{table}
+
+These are reference \emph{agents based on harness mechanisms}: they are deliberately small so the same base LLM can be inserted into each. They answer the request for multiple agents with which to measure an LLM while keeping architecture differences interpretable. Product agents such as Codex or Claude Code are measured as complete Pair-HIL systems; they become Model-HIL evidence only if the same frozen underlying model can be run through the registered reference ladder under equal conditions.
+
+Where two rungs differ only in post-processing of the same artifact, the artifact is reused. For a causal retry contrast, the matched task seed and first attempt are reused before the prescribed feedback. This paired design saves calls and removes avoidable between-rung variance.
+
+\subsection{Curve and summaries}
+
+For the three registered points, the reference implementation emits
+\begin{align}
+\mathrm{HIL\mbox{-}AUC}(m) &= \frac{1}{K}\sum_{k\in K}\HSC_m(k),\\
+\mathrm{HIL\mbox{-}Ceiling}(m) &= \max_{k\in K}\HSC_m(k),\\
+\mathrm{Harness\ Gain}(m) &= \mathrm{HIL\mbox{-}Ceiling}(m)-\HSC_m(0).
+\end{align}
+Here ``AUC'' is the arithmetic mean of the equally spaced registered rungs, not a continuous physical integral. HIL-Level is the highest rung whose target $U$ gate and every lower rung target are met. A missing point makes the curve \texttt{truncated\_not\_comparable\_to\_complete\_curve}. All reports must use the same benchmark version, and the model id, version, and hash must match exactly.
+
+\begin{cautionbox}{The curve is the Model-HIL score}
+HIL-AUC, HIL-Ceiling, and Harness Gain are dependent summaries of three points. The v1 executable intentionally reports no additional single composite. The primary model result is the curve together with HIL-Level and the three summaries. A bare ``model HIL=72'' is not a valid v1 claim.
+\end{cautionbox}
+
+The curve supports three questions that a one-harness leaderboard cannot answer. $\HSC_m(0)$ asks what the frozen model expresses under minimal support. Harness Gain asks how much verified performance is unlocked by the standard mechanisms. Curve shape asks where additional harness support stops helping or causes regression. It does not causally attribute every gain to the model: acceptance can prevent false delivery without requiring model responsiveness. A later reference release will include verification responsiveness, the probability that a rejected attempt becomes accepted after accurate bounded feedback.
+
+\section{Evaluation Modes: Quick, Full, and Certification}\label{sec:modes}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYY@{}}
+\toprule
+Mode & Purpose and sampling & Data access & Permitted claim \\
+\midrule
+quick & deterministic low-cost sample of every applicable coordinate represented by quick-eligible tasks; minimal repetitions and short horizons & public dev or validation & screening estimate only; no certificate \\
+full & all track-eligible tasks in a public split, including longitudinal pairs and broader family/mechanism coverage & public dev or validation & development/full public result with intervals \\
+certification & full mode on organizer-held tasks, private keys, and private generator, followed by organizer review & certification split with explicit private access & certificate only after review and registry checks \\
+\bottomrule
+\end{tabularx}
+\caption{The three user-facing workflows. In the executable, task-count details come from the versioned manifests rather than being hard-coded in this paper.}
+\label{tab:modes}
+\end{table}
+
+The command accepts \texttt{quick} or \texttt{full}; certification is the combination \texttt{--split certification --mode full --allow-private}. The private-access flag is necessary but not sufficient: it indicates organizer custody, not public permission to copy private data. A quick certification command is rejected as a claim even if code is modified to execute the rows.
+
+\subsection{Why quick can cover all coordinates without claiming all levels}
+
+The quick screen contains at least one diagnostic family for every applicable coordinate and $M$. For an organization it also contains $O$ probes; for a singleton it records $O$ as not applicable. This yields a complete low-resolution profile, not evidence for every ordinal level. Some constructs are irreducibly longitudinal: persistence needs a restart, learning needs separated episodes, organization needs interaction, and high delegation needs a real project. Quick mode uses the shortest valid causal unit and labels untested level bands. No benchmark can simultaneously make those constructs instantaneous and continue to measure them.
+
+\subsection{Speed and cost controls}
+
+The benchmark reduces expenditure by design rather than by weakening verifiers:
+
+\begin{itemize}
+\item stratified quick sampling avoids redundant easy items while touching each construct;
+\item deterministic local generators and verifiers avoid model-judge calls;
+\item compatible rungs share first attempts and artifacts;
+\item public validation can score saved episodes without invoking the system again;
+\item process startup is amortized through JSONL streaming;
+\item bounded outputs, tool calls, attempts, and timeouts prevent runaway agents;
+\item paired seeds increase comparison power per purchased episode;
+\item full/certification sample sizes are selected by a preregistered precision analysis, not a universal large number.
+\end{itemize}
+
+No fixed dollar or minute promise is made because providers, models, hardware, and agent policies differ. The runner reports actual usage. A claimed low-cost configuration must publish the envelope and demonstrate it empirically.
+
+\section{Public and Private Dataset Design}\label{sec:data}
+
+\subsection{Physical split}
+
+The reference tree separates:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Path & Role \\
+\midrule
+\path{tasks/public/dev.jsonl} & examples and rapid iteration \\
+\path{tasks/public/validation.jsonl} & public held-out evaluation and regression testing \\
+\path{tasks/public/keys/} & public deterministic answer keys \\
+\path{organizer_private/tasks/certification.jsonl} & organizer-held specifications \\
+\path{organizer_private/keys/certification_keys.json} & separate private keys \\
+\path{organizer_private/private_generators.py} & withheld generation mechanisms \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Public packaging is based on an allowlist, not a fragile list of exclusions, and must exclude the entire \path{organizer_private} tree. The \texttt{package} command creates the contestant archive and audits its members. A release fails if a private path, private key hash, private seed, or generator source appears in the public artifact.
+
+\subsection{Logical private split: family and mechanism}
+
+The certification registry labels two conceptually different generalization tests:
+
+\begin{description}
+\item[Private-family.] New seeds and instances from known, documented task families. The surface format and generator family are familiar, but the specific answer is not. This estimates resistance to instance memorization and tuning to public seeds.
+\item[Private-mechanism.] Instances from withheld causal rules, generators, environment dynamics, or task families. Superficial schema may be shared, while the solution-producing mechanism is absent from public data. This estimates transfer beyond a known generator.
+\end{description}
+
+Results report the two strata separately before any aggregate. A system can excel on private-family and fail private-mechanism; averaging would hide the distinction most relevant to generalization. Organizers rotate mechanisms rather than merely seeds, keep an exposure ledger, and retire any family with credible leakage.
+
+\subsection{Task-family construction}
+
+A task family is accepted only with (i) a visible specification, (ii) a reference solver or invariant-based verifier, (iii) a generator-to-key consistency test, (iv) perturbation/metamorphic tests, (v) difficulty evidence, and (vi) a declared construct mapping. Every generated item is reproduced from a versioned mechanism and seed. Hand-written items require two independent key reviews.
+
+Cross-tier concordance auditing flags items on which materially different reference systems produce the same non-key answer. Such agreement does not prove a broken key, but it raises the prior enough to quarantine and inspect the item before using it against a system. Discovered defects are corrected only in a new patch release, with old reports retained and marked.
+
+\subsection{Leakage and contamination controls}
+
+Canary strings test direct exposure but cannot detect semantic leakage alone. Private mechanisms are held by a minimal organizer service; the candidate receives only the task interface. Logs are checked for attempts to enumerate evaluator paths, keys, or neighboring tasks. Network and filesystem scopes are declared per task and enforced outside the candidate process. Public examples use different seeds and, for mechanism tests, different causal rules from certification.
+
+A benchmark that becomes popular invites training on its public distribution. Accordingly, public validation is a reproducibility set, not a permanent claim of novelty. Longitudinal leaderboard validity rests on rotating private mechanisms, post-cutoff families, and periodic external audits.
+
+\section{System Manifests and Adapter Profiles}\label{sec:profiles}
+
+\subsection{Manifest contract}
+
+The manifest freezes identity and resources before tasks are revealed. Required identity fields include benchmark/profile schema version, profile id, track, model id/version/hash, harness id/version/manifest hash, frozen status, observation and action channels, tool and external-knowledge access, persistent storage, subagent topology, prompts/policy hashes, container/runtime identity, and resource ceilings. Secrets are referenced by environment-variable name and never serialized.
+
+If a provider exposes only a mutable alias, the report must say so and cannot claim a frozen model. If the underlying model of a product agent is undisclosed, its Pair-HIL can still be reported under the product version; it cannot be inserted into a Model-HIL curve that claims a known frozen base model.
+
+\subsection{Included profiles are unmeasured}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYY@{}}
+\toprule
+Profile & Integration intent & Required before a real run & Status in this paper \\
+\midrule
+\texttt{codex} & execute a task through a pinned Codex command/profile & exact Codex build, selected model, harness hash, tool policy, sandbox, budget, credential reference & \textbf{unmeasured adapter profile} \\
+\texttt{claude-code} & execute through a pinned Claude Code command/profile & exact CLI and model version, harness/policy hashes, permissions, budget, credential reference & \textbf{unmeasured adapter profile} \\
+\texttt{opencode-qwen} & execute a pinned Qwen model through a pinned OpenCode harness & exact OpenCode build/config, exact Qwen model id/hash, tools, prompts, budget, credential reference & \textbf{unmeasured adapter profile} \\
+\bottomrule
+\end{tabularx}
+\caption{Shipped integration templates. No row contains a performance measurement.}
+\label{tab:profiles}
+\end{table}
+
+These profiles are configuration examples for the common JSONL protocol. Their inclusion does not imply that OpenAI, Anthropic, Alibaba/Qwen, or OpenCode participated in this work. In particular, ``Qwen through OpenCode'' identifies both a model family and a harness, so any result belongs first to that frozen pair. A controlled Qwen Model-HIL result requires the same exact Qwen checkpoint across all HIL reference harnesses, not comparison of an OpenCode product run against other products.
+
+\subsection{Subprocess safety}
+
+The generic adapter accepts \texttt{--adapter subprocess --command <executable> [args...]}. The runner passes an argument vector directly with shell execution disabled. It enforces a timeout and validates that each JSON response has protocol version, task id, answer, optional boolean acceptance, and positive attempt count. Standard error may be retained as a diagnostic but cannot alter scoring. Candidate output never selects the verifier or answer key.

@@ -1,0 +1,51 @@
+{
+  "benchmark_id": "hil-core",
+  "benchmark_version": "HIL-Core-v1.0.0",
+  "status": "research_prototype",
+  "protocol_version": "1.0",
+  "report_schema_version": "1.0",
+  "coordinates": {
+    "core_measured": ["C", "I", "O", "T", "H", "SA"],
+    "conceptual": ["C", "I", "O", "DI", "SA"],
+    "supporting": ["M"],
+    "delegation_definition": "DI is derived from the delivered-outcome surface over T and H at reliability p"
+  },
+  "tracks": {
+    "individual": {"hlis_dimensions": ["C", "I", "DI", "SA"], "O": "not_applicable"},
+    "organization": {"hlis_dimensions": ["C", "I", "O", "DI", "SA"]}
+  },
+  "modes": {
+    "quick": {"purpose": "screening and integration checks only", "certification": false},
+    "full": {"purpose": "complete split evaluation", "certification": "private split plus organizer review only"}
+  },
+  "splits": {
+    "dev": {"visibility": "public", "keys": "public", "certification": false},
+    "validation": {"visibility": "public", "keys": "public", "certification": false},
+    "certification": {
+      "visibility": "organizer_private",
+      "keys": "organizer_private",
+      "public_archive": false,
+      "separation": "held out by task family and solution mechanism, not random rows"
+    }
+  },
+  "task_counts_per_split": {
+    "quick": {"individual": 7, "organization": 8},
+    "full": {"individual": 22, "organization": 25}
+  },
+  "thresholds": {
+    "coordinate_level": 0.8,
+    "delegation_reliability": 0.8,
+    "false_completion_loss_ratio": 1.0
+  },
+  "instrument_ceiling": "U2",
+  "reference_ladder": {
+    "id": "HIL-REF-v1",
+    "harness_ids": ["HIL-REF-HG0-v1", "HIL-REF-HG1-v1", "HIL-REF-HG2-v1"],
+    "curve_is_primary_result": true
+  },
+  "claims": {
+    "measured_results_included": false,
+    "thresholds_calibrated": false,
+    "arc_agi_replacement_claim": false
+  }
+}

@@ -143,8 +143,6 @@ The general point is that every claim in this framework rests on items whose key
 
 This article presents a measurement framework and two distinct preliminary measurement programs, included because they changed or tested the instrument rather than because they settle any question about a system. The harness-ladder study in \S\ref{sec:measured} spans three executors, 48 episodes per executor and one instrumented coordinate. The sealed-discovery study in \S\ref{sec:discovery} adds 24 matched executor--seed episodes on one mechanism family. The proposed levels and numerical thresholds still require calibration across domains, models and harnesses; \S\ref{sec:limitations} states the limitations in full.
 
-The companion manuscript \emph{Unified Agent Benchmark: Fast, Low-Cost Coordinate and Unified HIL Measurement for Agents and LLMs} operationalizes these definitions as an executable public/private benchmark.  The present paper defines the theory and preserves the preliminary measurement history; the companion paper defines the new benchmark protocol and does not relabel the anonymous historical executors as named products.
-
 \section{Design Requirements for a Unified Scale}
 
 \begin{itemize}
@@ -335,6 +333,15 @@ O\Om{} & Open-ended organization: discoveries create new agent types, roles, too
 
 Delegation Intelligence is conceptually one family but empirically at least two-dimensional. A task may be very difficult yet require frequent human rescue, or relatively easy yet be completed with no human cognitive assistance. These systems should not receive the same delegation description.
 
+\begin{claimbox}{Two certification tracks, one visible profile}
+Every result displays all six measured fields $[C,I,O,T,H,SA]$ and supporting memory $M$.
+Each field is marked \emph{measured}, \emph{not assessed}, or \emph{structurally not applicable};
+missing evidence is never silently converted to zero.  The Individual-HIL track computes its
+continuous score over $D=\{C,I,DI,SA\}$ and displays $O=\mathrm{N/A}$.  The Organization-HIL
+track uses $D=\{C,I,O,DI,SA\}$.  Scalars computed over different dimension sets are not ranked
+together, although their complete coordinate profiles may be compared.
+\end{claimbox}
+
 \begin{align}
 \SA{} &= P(\text{success} \mid \text{task difficulty } T,\ \text{human cognitive intervention budget } H)\\
 \FA{} &= \max\{\,T : \SA{} \ge p\,\}
@@ -461,15 +468,6 @@ The word \emph{better} must be interpreted carefully. U5 is better than U4 in th
 
 Organizational intelligence should not artificially cap an individual that is not an organization.
 
-\begin{claimbox}{Two certification tracks, one visible profile}
-Every result displays all six measured fields $[C,I,O,T,H,SA]$ and supporting memory $M$.
-Each field is marked \emph{measured}, \emph{not assessed}, or \emph{structurally not applicable};
-missing evidence is never silently converted to zero.  The Individual-HIL track computes its
-continuous score over $D=\{C,I,DI,SA\}$ and displays $O=\mathrm{N/A}$.  The Organization-HIL
-track uses $D=\{C,I,O,DI,SA\}$.  Scalars computed over different dimension sets are not ranked
-together, although their complete coordinate profiles may be compared.
-\end{claimbox}
-
 \begin{align}
 UI_n &\iff C \ge C_n \wedge I \ge I_n \wedge SA \ge SA_n \wedge S_A(T_n,H_n) \ge p_n\\
 UO_n &\iff UI_n \wedge O \ge O_n \wedge \text{organization-level delegation and self-awareness evidence}
@@ -506,18 +504,6 @@ Harness generation is an engineering milestone, not a certified intelligence lev
 \subsection{The Harness-LLM Pair Is the Basic Experimental Unit}\label{sec:pair}
 
 Neither factor has a level on its own. A benchmark result is a property of the pair $A = A(m,h)$, and a number attributed to the model alone attributes a joint product to one of its factors. This is stated as a measured claim rather than an argued one: \S\ref{sec:measured} reports a case in which the same frozen model moves across harness generations, and \S\ref{sec:rhov} isolates the part of that movement attributable to the model.
-
-\begin{claimbox}{HIL nomenclature for agents and base models}
-An \textbf{agent} is the frozen pair $A(m,h)$.  Its coordinate profile, gated $U^{*}$,
-and continuous $HLIS(m,h)$ are jointly reported as \textbf{Pair-HIL}; ``agent HIL
-score'' is therefore an alias for HLIS only when the tested dimensions, track, and
-resource envelope are printed beside it.  \textbf{Model-HIL} is not a score from one
-agent: it is the Harness Scaling Curve obtained by holding $m$ fixed and running a
-standardized, swappable reference-harness panel.  A native product whose model cannot
-be swapped may enter the Pair-HIL leaderboard, but it cannot serve as neutral evidence
-for comparing base LLMs.  A bare LLM is always observed through at least an HG0 runner;
-it does not acquire persistence, organization, delegation, or self-model claims by name alone.
-\end{claimbox}
 
 \subsection{Level-by-Level Harness Realization}
 
@@ -803,7 +789,7 @@ Two further entries concern the instrument rather than the system:
 \item \textbf{Concordance-audit status} --- whether the suite's items have been audited for concordant cross-tier error since the last change to any answer key, and how many items the audit flagged (\S\ref{sec:concordance}).
 \end{itemize}
 
-\section{Pair-HIL for Agents and Model-HIL for Base LLMs}
+\section{Harness-Intelligence-Level (HIL) Characterization of a Base LLM}
 
 \subsection{Why an LLM Needs a Harness-Based Score}
 

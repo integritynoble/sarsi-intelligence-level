@@ -1,0 +1,24 @@
+{
+  "profile_schema_version": "1.0",
+  "profile_id": "codex-agent-template-v1",
+  "display_name": "Codex agent (unmeasured template)",
+  "subject_kind": "agent",
+  "track": "individual",
+  "frozen": false,
+  "model": {
+    "id": "USER_SUPPLIED_MODEL_ID",
+    "version": "USER_SUPPLIED_EXACT_VERSION",
+    "hash": "USER_SUPPLIED_OR_UNAVAILABLE"
+  },
+  "harness": {
+    "id": "submitted-codex-agent",
+    "version": "USER_SUPPLIED_EXACT_VERSION",
+    "manifest_hash": "USER_SUPPLIED_SHA256",
+    "tool_access": "declare_before_run",
+    "external_knowledge_access": "declare_before_run",
+    "subagent_count": "declare_before_run"
+  },
+  "credentials": "not_in_manifest",
+  "measured_results": null,
+  "status": "template_only"
+}

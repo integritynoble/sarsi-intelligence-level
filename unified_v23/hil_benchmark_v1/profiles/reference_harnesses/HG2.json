@@ -1,0 +1,28 @@
+{
+  "profile_schema_version": "1.0",
+  "profile_id": "hil-ref-hg2-profile-v1",
+  "display_name": "HIL reference HG2 bounded planner and retry",
+  "subject_kind": "model_under_reference_harness",
+  "track": "individual",
+  "frozen": false,
+  "model": {
+    "id": "USER_SUPPLIED_MODEL_ID",
+    "version": "USER_SUPPLIED_EXACT_VERSION",
+    "hash": "USER_SUPPLIED_OR_UNAVAILABLE"
+  },
+  "harness": {
+    "id": "HIL-REF-HG2-v1",
+    "version": "1.0.0",
+    "manifest_hash": "RECOMPUTE_AFTER_FILLING_MODEL",
+    "generation": "HG2",
+    "target_u": "U2",
+    "semantics": "HG1 plus an explicit bounded plan, deterministic tool routing, verifier feedback, and at most one model correction attempt after rejection.",
+    "tool_access": "benchmark-declared deterministic tools only",
+    "external_knowledge_access": "none",
+    "subagent_count": 0,
+    "max_attempts": 2
+  },
+  "credentials": "not_in_manifest",
+  "measured_results": null,
+  "status": "template_only"
+}

@@ -1,0 +1,28 @@
+{
+  "profile_schema_version": "1.0",
+  "profile_id": "hil-ref-hg1-profile-v1",
+  "display_name": "HIL reference HG1 persistent acceptor",
+  "subject_kind": "model_under_reference_harness",
+  "track": "individual",
+  "frozen": false,
+  "model": {
+    "id": "USER_SUPPLIED_MODEL_ID",
+    "version": "USER_SUPPLIED_EXACT_VERSION",
+    "hash": "USER_SUPPLIED_OR_UNAVAILABLE"
+  },
+  "harness": {
+    "id": "HIL-REF-HG1-v1",
+    "version": "1.0.0",
+    "manifest_hash": "RECOMPUTE_AFTER_FILLING_MODEL",
+    "generation": "HG1",
+    "target_u": "U1",
+    "semantics": "HG0 plus durable task state, a success criterion registered before generation, and an independent acceptor; no verifier-driven candidate retry.",
+    "tool_access": "state store and independent exact verifier only",
+    "external_knowledge_access": "none",
+    "subagent_count": 0,
+    "max_attempts": 1
+  },
+  "credentials": "not_in_manifest",
+  "measured_results": null,
+  "status": "template_only"
+}
