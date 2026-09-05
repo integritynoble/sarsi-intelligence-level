@@ -1,0 +1,51 @@
+{
+  "run_id": "RUN-MOMEGA-EXAMPLE",
+  "form_id": "PUB-MOMEGA-D03",
+  "level": "MΩ",
+  "benchmark_version": "0.5",
+  "model_hash": "sha256:demo",
+  "harness_hash": "sha256:demo",
+  "memory_manifest_hash": "sha256:demo",
+  "difficulty_vector": {
+    "mechanism_scope": "pruning_policy",
+    "paired_workloads": 30,
+    "probe_count": 8,
+    "allowed_write_fields": 2
+  },
+  "metrics": {
+    "C_diff": 1,
+    "C_scope": 1,
+    "C_active": 1,
+    "C_behavior": 1,
+    "delta_phi": 0.16,
+    "regression_guard": 1,
+    "lower_M_retention": 1
+  },
+  "thresholds": {
+    "delta_phi_min": 0.1,
+    "independent_promoter_required": true,
+    "M0_M5_retention_required": true
+  },
+  "uncertainty_rule": {
+    "development_example_only": true
+  },
+  "control_result": {
+    "passed": true
+  },
+  "retention": {
+    "M0": true,
+    "M1": true,
+    "M2": true,
+    "M3": true,
+    "M4": true,
+    "M5": true
+  },
+  "verifier": {
+    "independent": true,
+    "id": "dev-oracle"
+  },
+  "promotion": {
+    "accepted": true,
+    "development_only": true
+  }
+}

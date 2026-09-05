@@ -8,7 +8,7 @@ import validate_dataset
 
 class DevDatasetTests(unittest.TestCase):
     def test_development_dataset_validates(self):
-        self.assertEqual(validate_dataset.validate(PKG / "dataset" / "dev_v0_4"), [])
+        self.assertEqual(validate_dataset.validate(PKG / "dataset" / "dev_v0_5"), [])
 
 if __name__ == "__main__":
     unittest.main()

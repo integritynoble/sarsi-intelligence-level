@@ -54,6 +54,17 @@ def validate(root: Path) -> list:
         if r.get("level") == "I4":
             missing = [x for x in r.get("baseline_i3_refs", []) if x not in i3_ids]
             if missing: problems.append(f"{i} references unknown I3 campaigns {missing}")
+    mb = {}
+    for f in sorted((root / "M_Bench").glob("*/public_forms.jsonl")) if (root / "M_Bench").exists() else []:
+        for n, r in load(f):
+            mb[r.get("form_id")] = r
+            if r.get("binding_status") not in ("bound", "development-bound", "specification-only"): problems.append(f"{f.parent.name}:{n} binding_status must be bound / development-bound / specification-only")
+            for k in ("difficulty_vector", "metrics", "retention", "verifier", "memory_manifest_required"):
+                if k not in r: problems.append(f"{f.parent.name}:{n} memory form lacks {k}")
+            if not (f.parent / "metric_contract.json").exists() or not (f.parent / "difficulty_grid.json").exists(): problems.append(f"{f.parent.name}: missing metric_contract.json or difficulty_grid.json")
+    if mb:
+        pub_m = {i for i, v in per.items() if v[0][2].get("coordinate") == "M"}
+        if pub_m != set(mb): problems.append(f"public/m*.jsonl and M_Bench/*/public_forms.jsonl disagree on ids: {sorted(pub_m ^ set(mb))[:6]}")
     comb = root / "hil_bench_public_dev_combined.jsonl"
     if comb.exists():
         cids = {r.get("form_id") for _, r in load(comb)}
@@ -61,7 +72,7 @@ def validate(root: Path) -> list:
     return problems
 
 if __name__ == "__main__":
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_4")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_5")
     probs = validate(root)
     print("\n".join(probs) if probs else f"dataset ok: {root}")
     sys.exit(1 if probs else 0)

@@ -6,7 +6,8 @@ PKG = Path(__file__).resolve().parents[1]
 if str(PKG) not in sys.path: sys.path.insert(0, str(PKG))
 from hilbench import laws
 from hilbench.i3i4_scoring import i3_gates, i4_gates, i5_gates, iomega_gates, memory_gates, i_certification_with_memory
-DS = PKG / "dataset" / "dev_v0_4"
+from hilbench.memory_scoring import gate as memory_level_gate
+DS = PKG / "dataset" / "dev_v0_5"
 
 class ThetaManifestTests(unittest.TestCase):
     def test_example_manifest_passes_every_manifest_level_check(self):
@@ -99,6 +100,30 @@ class MemoryI5IOmegaTests(unittest.TestCase):
         no_cause = copy.deepcopy(r)
         for c in no_cause["cycles"]: c["ablation_successes"] = c["post_successes"]
         self.assertEqual(iomega_gates(no_cause)["z_IOmega"], 0, "the instrument must contribute causally")
+
+
+class MBenchV05Tests(unittest.TestCase):
+    LEVELS = ("m0_ephemeral", "m1_persistent", "m2_episodic", "m3_consolidating", "m4_management", "m5_longitudinal", "momega_evolving")
+    def test_every_level_example_passes_its_metric_gate(self):
+        for name in self.LEVELS:
+            r = json.loads((DS / "examples" / f"{name}_result.example.json").read_text())
+            self.assertEqual(memory_level_gate(r)["z_M"], 1, name)
+    def test_a_metric_under_threshold_or_a_lost_lower_level_fails(self):
+        r = json.loads((DS / "examples" / "m2_episodic_result.example.json").read_text())
+        low = copy.deepcopy(r); low["metrics"]["q_stale"] = 0.0
+        self.assertEqual(memory_level_gate(low)["V_M"], 0, "stale-state suppression is part of M2")
+        lost = copy.deepcopy(r); lost["retention"]["M1"] = False
+        self.assertEqual(memory_level_gate(lost)["K_lower_M"], 0, "memory levels are cumulative")
+    def test_leakage_in_the_ablated_branch_fails_m1(self):
+        r = json.loads((DS / "examples" / "m1_persistent_result.example.json").read_text())
+        leak = copy.deepcopy(r); leak["metrics"]["q_abl"] = 1.0
+        self.assertEqual(memory_level_gate(leak)["V_M"], 0, "success the ablated arm also has is not memory")
+    def test_memory_manifest_is_checked_not_scored(self):
+        m = json.loads((DS / "examples" / "memory_manifest.example.json").read_text())
+        checks = dict((n, ok) for n, ok, _ in laws.memory_manifest_check(m, momega_claim=True))
+        self.assertTrue(checks["manifest_fields_present"]); self.assertTrue(checks["phi_names_an_active_mechanism"])
+        bare = {k: v for k, v in m.items() if k != "phi"}
+        self.assertFalse(dict((n, ok) for n, ok, _ in laws.memory_manifest_check(bare))["phi_names_an_active_mechanism"])
 
 if __name__ == "__main__":
     unittest.main()

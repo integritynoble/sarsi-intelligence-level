@@ -17,6 +17,19 @@ import inspect, json, tempfile, shutil
 from pathlib import Path
 from .i3i4_scoring import (i3_gates, i4_gates, i5_gates, iomega_gates, memory_gates, recursive_depth,   # dataset v0.4 gate products
                            i_certification_with_memory, I_MEMORY_PREREQ, MEMORY_ORDER)
+from .memory_scoring import gate as memory_level_gate, lower_retention as memory_lower_retention   # dataset v0.5 per-level M gates
+
+MEMORY_MANIFEST_REQUIRED = ("manifest_id", "stores", "retrieval", "consolidation", "management", "snapshot", "restart", "phi")
+
+def memory_manifest_check(manifest: dict, momega_claim: bool = False) -> list:
+    """The memory manifest M(A) = {S, R, C, G, P, F, Phi, W_M, snapshot, restart}: descriptive evidence published before a
+    hidden run and never a score. It stops an installed component from being read as a demonstrated behaviour; at
+    MOmega the bounded write set W_M is what lets a Phi_0 -> Phi_1 change be judged genuine, in scope and active."""
+    missing = [k for k in MEMORY_MANIFEST_REQUIRED if not manifest.get(k)]
+    out = [("manifest_fields_present", not missing, ",".join(missing)),
+           ("phi_names_an_active_mechanism", bool(manifest.get("phi")), "the behaviorally active memory mechanism must be named")]
+    if momega_claim: out.append(("memory_write_set_declared", bool(manifest.get("memory_write_set")), "an MOmega claim needs a bounded W_M"))
+    return out
 
 CONVENTIONS = {"p_reliability": 0.80, "rho_false_completion": 1.0, "band_weights": [1, 2, 4, 8, 16, 32],
                "note": "ratified constants, not laws; changing one changes the standard's version and requires re-certification"}

@@ -1,0 +1,27 @@
+{
+  "level": "M5",
+  "canonical_method": "M5-LONG",
+  "metrics": [
+    "q_chain",
+    "q_source",
+    "q_cross",
+    "q_scope",
+    "q_stale",
+    "q_repro"
+  ],
+  "illustrative_thresholds_not_official": {
+    "q_chain_min": 0.8,
+    "q_source_min": 0.8,
+    "q_cross_min": 0.8,
+    "q_scope_min": 0.8,
+    "q_stale_min": 0.8,
+    "q_repro_min": 0.8
+  },
+  "retention": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ]
+}

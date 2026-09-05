@@ -179,7 +179,7 @@ Not a domain, but the agent every domain profile is instantiated on: the referen
 Coordinate & Measured & Target & Evidence and what settles it \\
 \midrule
 C & unmeasured & C3 & no task family run under controlled tool access \\
-M / I & unmeasured & M3 / I2 & 37 memory files, 10.5\,KB index, provenance markers: an $M1$ candidate; the restart probe settles it \\
+M / I & unmeasured & M3 / I2 & 37 memory files, 10.5\,KB index, provenance markers: an $M1$ candidate under the memory-manifest rule --- a component is never a level until its witness is run; the restart probe settles it \\
 O & O0 & O2 & no \texttt{roles/}, \texttt{members/}, \texttt{evidence/} \\
 T$\cdot$H & unmeasured & T3$\cdot$H1 & no declared family under a stated budget judged by a verifier it did not author \\
 SA & SA1 (provisional) & SA3 & knows its task and phase; does not diagnose its own failures \\
@@ -436,7 +436,7 @@ The corpus's terminal-intelligence paper places this fleet once, and in the one 
 
 \section{The Download Standard}\label{sec:standard}
 
-A released agent carries: name, version and git commit; container or environment; supported executors; required tools; memory schema; authority manifest; resource defaults; benchmark version; example missions; installation and reproduction instructions; known limitations. Links in a manuscript point at tagged releases, and the versions evaluated in a publication get an archival identifier. Of the artifacts in Table~\ref{tab:downloads}, the DL binaries meet the standard in full (checksums, a provenance manifest with build and tier commits, an offline guarantee checkable in an empty network namespace); the PyPI field agents meet it in part; the fleet designs meet none of it, because they are not released.
+A released agent carries: a \emph{memory manifest} $\mathcal M(A)$ naming its stores, retrieval, consolidation, representation, pruning, forgetting, the active memory mechanism $\Phi$ and the write set inside which $\Phi$ may change, published before any reading so that an installed component is never read as a level; a HIL-Bench record --- public split, or private with the evaluator block --- or the statement that none exists; name, version and git commit; container or environment; supported executors; required tools; memory schema; authority manifest; resource defaults; benchmark version; example missions; installation and reproduction instructions; known limitations. Links in a manuscript point at tagged releases, and the versions evaluated in a publication get an archival identifier. Of the artifacts in Table~\ref{tab:downloads}, the DL binaries meet the standard in full (checksums, a provenance manifest with build and tier commits, an offline guarantee checkable in an empty network namespace); the PyPI field agents meet it in part; the fleet designs meet none of it, because they are not released.
 
 \section{Per-Domain Next Runs}\label{sec:next}
 

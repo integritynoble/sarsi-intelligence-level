@@ -1,0 +1,24 @@
+{
+  "level": "M3",
+  "canonical_method": "M3-CONSOL",
+  "metrics": [
+    "q_sem",
+    "q_proc",
+    "q_update",
+    "q_demote",
+    "q_persist",
+    "delta_cons_diagnostic"
+  ],
+  "illustrative_thresholds_not_official": {
+    "q_sem_min": 0.8,
+    "q_proc_min": 0.8,
+    "q_update_min": 0.8,
+    "q_demote_min": 0.8,
+    "q_persist_min": 0.8
+  },
+  "retention": [
+    "M0",
+    "M1",
+    "M2"
+  ]
+}

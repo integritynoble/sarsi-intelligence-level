@@ -1,0 +1,32 @@
+[
+  {
+    "mechanism_scope": "retrieval_ranker",
+    "paired_workloads": 12,
+    "probe_count": 4,
+    "allowed_write_fields": 1
+  },
+  {
+    "mechanism_scope": "consolidation_policy",
+    "paired_workloads": 20,
+    "probe_count": 6,
+    "allowed_write_fields": 1
+  },
+  {
+    "mechanism_scope": "pruning_policy",
+    "paired_workloads": 30,
+    "probe_count": 8,
+    "allowed_write_fields": 2
+  },
+  {
+    "mechanism_scope": "hybrid_retrieval_representation",
+    "paired_workloads": 50,
+    "probe_count": 12,
+    "allowed_write_fields": 3
+  },
+  {
+    "mechanism_scope": "multi_component_memory_pipeline",
+    "paired_workloads": 80,
+    "probe_count": 16,
+    "allowed_write_fields": 4
+  }
+]

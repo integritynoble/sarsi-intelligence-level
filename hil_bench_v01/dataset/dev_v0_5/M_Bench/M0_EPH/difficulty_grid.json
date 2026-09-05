@@ -1,0 +1,27 @@
+[
+  {
+    "episode_items": 4,
+    "distractor_ratio": 0.25,
+    "updates": 1
+  },
+  {
+    "episode_items": 8,
+    "distractor_ratio": 0.5,
+    "updates": 2
+  },
+  {
+    "episode_items": 16,
+    "distractor_ratio": 1.0,
+    "updates": 4
+  },
+  {
+    "episode_items": 32,
+    "distractor_ratio": 1.5,
+    "updates": 6
+  },
+  {
+    "episode_items": 64,
+    "distractor_ratio": 2.0,
+    "updates": 8
+  }
+]

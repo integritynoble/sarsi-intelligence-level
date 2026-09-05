@@ -86,9 +86,12 @@ outcome primitive at ρ = 1; HLIS an equal-weight geometric mean over the coordi
 = 0.55·AUC + 0.35·Ceiling + 0.10·Harnessability. A level is a reading on the public split until the
 private split is run by an evaluator who did not build the pair.
 
-## Development dataset (`dataset/dev_v0_4/`)
+## Development dataset (`dataset/dev_v0_5/`)
 
-The public development/reference forms of the memory-integrated v4 revision (57 forms): C0–C5, I0–IΩ (I3-THETA
+The public development/reference forms of the memory-integrated v5 revision (78 forms; 35 parameterized M-Bench
+forms — five per level M0–MΩ, each with a difficulty grid, a metric contract, a memory-manifest schema, a result
+schema and construct-selective controls; `hilbench.memory_scoring.gate` is the per-level metric gate and
+`laws.memory_manifest_check` the manifest check; every row declares bound / development-bound / specification-only): C0–C5, I0–IΩ (I3-THETA
 campaigns, I4-PSI meta-campaigns and recursive-depth forms, I5-DISC campaigns, I-OMEGA-LONG programs as records,
 every Individual form carrying `minimum_M_prerequisite`), **M0–MΩ M-Bench forms** (M0-EPH … MOMEGA-EVOLVE), O0–O4,
 T0–T5, SA1–SA5, `spec_only/` templates, schemas for the Θ/Ψ manifests, memory results and every campaign, and

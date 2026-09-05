@@ -45,6 +45,15 @@ Every law therefore carries **admissibility conditions a program can check** (`h
 | O1 | a standing decision in the organization's own log (never the model's) decides a later, different instance after a restart; the arm whose log was withheld fails | discontinuity; ablated arm; computed key | automatic |
 | O2 | evidence that a routing/role policy is suboptimal changes the allocation persistently and improves held-out outcomes | ablated arm; independent locus | human |
 
+## The memory manifest and the difficulty vector
+
+Before a hidden run the pair publishes `M(A) = {S, R, C, G, P, F, Φ, W_M, snapshot, restart}` — descriptive evidence,
+never a score (`laws.memory_manifest_check`). Stress inside a level is a difficulty vector
+`d_k = (N_episode, N_entity, r_distractor, d_supersession, Δt, ρ_conflict, B_capacity, N_restart)`, never a pseudo-level.
+A level gate is `z_Mk = V_Mk · K_M,<k` over preregistered endpoints (`memory_scoring.gate`); `z_MΩ = M_Φ·V_Φ·G_Φ·K_M0:M5`.
+Four questions stay apart: does the architecture exist (manifest); does the behaviour work (gate); how strongly under
+stress (difficulty vector); is the level sufficient for an I claim (prerequisite).
+
 ## Memory is a one-way prerequisite, never a promotion
 
 μ = (M0, M1, M3, M4, M4, M5) for I0–I5; IΩ needs M ≥ M5, MΩ only when the memory architecture is claimed to evolve.

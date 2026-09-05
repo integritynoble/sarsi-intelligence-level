@@ -1,0 +1,37 @@
+{
+  "run_id": "RUN-M0-EXAMPLE",
+  "form_id": "PUB-M0-D03",
+  "level": "M0",
+  "benchmark_version": "0.5",
+  "model_hash": "sha256:demo",
+  "harness_hash": "sha256:demo",
+  "memory_manifest_hash": "sha256:demo",
+  "difficulty_vector": {
+    "episode_items": 16,
+    "distractor_ratio": 1.0,
+    "updates": 4
+  },
+  "metrics": {
+    "q_state": 0.95,
+    "q_update": 0.9
+  },
+  "thresholds": {
+    "q_state_min": 0.8,
+    "q_update_min": 0.8
+  },
+  "uncertainty_rule": {
+    "development_example_only": true
+  },
+  "control_result": {
+    "passed": true
+  },
+  "retention": {},
+  "verifier": {
+    "independent": true,
+    "id": "dev-oracle"
+  },
+  "promotion": {
+    "accepted": true,
+    "development_only": true
+  }
+}
