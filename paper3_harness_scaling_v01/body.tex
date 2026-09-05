@@ -243,6 +243,39 @@ OpenCode, Muse Spark 1.3 & 20 & 20 & 19 & 4 & 4 & 4 & 71/72 & 1 & 22.5 & differe
 
 \textbf{Apparatus, again.} Two defects were found and fixed before these numbers were produced: OpenCode resolves its working directory from an environment variable the runner had not set, so its first run did every episode's work in the runner's own directory and failed all of them; and the Qwen shim rejects system-role messages that are not first, which Claude Code 2.1.258 emits, so the proxy hoists them. Both would have read as executor failures.
 
+\subsection{The executor comparison on the sealed families}\label{sec:sealedcmp}
+
+The matched comparison of \S\ref{sec:execcmp} was saturated: three pairs, seventy-two episodes, the same score. The sealed families are where the previous subsection said the comparison should be run, and it was. Three executors, the same three generator-bound families, the same twelve seeds, the same harness, the same enforced limits (1800\,s for the T4 families, 7200\,s for T5), each episode in its own process group and killed at the limit.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llcccY@{}}
+\toprule
+Family & Executor & Delivered-correct & timed out & crashed & median seconds \\
+\midrule
+\texttt{t4.mini\_language} & Claude Code 2.1.258 & 4/4 & 0 & 0 & 70 \\
+ & OpenCode + Muse Spark 1.3 & 4/4 & 0 & 0 & 101 \\
+ & Qwen 3.8 (27B) & 3/4 & 1 & 0 & 975 \\
+\midrule
+\texttt{t4.shift\_schedule} & Claude Code & 4/4 & 0 & 0 & 505 \\
+ & OpenCode + Muse & 4/4 & 0 & 0 & 208 \\
+ & Qwen 3.8 & 1/4 & 3 & 0 & 1800 \\
+\midrule
+\texttt{t5.hidden\_law} & Claude Code & 2/4 & 0 & 0 & 1248 \\
+ & OpenCode + Muse & 1/4 & 2 & 0 & 7203 \\
+ & Qwen 3.8 & 0/4 & 1 & 3 & 4196 \\
+\midrule
+Total & Claude Code & \textbf{10/12} & 0 & 0 & 1.6 h wall \\
+ & OpenCode + Muse & 9/12 & 2 & 0 & 5.3 h wall \\
+ & Qwen 3.8 & 4/12 & 5 & 3 & 8.2 h wall \\
+\bottomrule
+\end{tabularx}
+\caption{Sealed-family comparison, twelve episodes per executor, everything but the executor held fixed. An episode the runner killed at the limit is not a delivery, whatever its files verify to; three Qwen episodes verified against the key after the kill and are counted here as timed out, not as passes.}
+\label{tab:sealedcmp}
+\end{table}
+
+Four readings. First, the suite is no longer saturated: the three pairs score 10, 9 and 4 of 12, where the T0/T1 comparison scored them 72, 71 and 72 of 72. The headroom that makes a comparison informative is a property of the items, not of the design of the comparison. Second, the separation is mostly one family: on the T4 families the two strong pairs are indistinguishable (8/8 each), and everything that separates them is on T5 discovery, where the frontier pair passed two seeds and the free-model pair one. Third, cost is not rank: OpenCode was faster than Claude Code on \texttt{shift\_schedule} and 3.3 times slower overall, and Qwen spent 8.2 hours to deliver four episodes --- the same reading through the delivered-outcome primitive would be very different through a success-only aggregate that ignored the five kills. Fourth, and this is why termination reason is a required field: had the three post-kill Qwen episodes been scored on their files alone, Qwen would read 7/12 rather than 4/12, and the ranking of the two weaker pairs would invert.
+
 \subsection{What these measurements do not show}
 
 Any cross-domain transfer (H4): one domain. Any intervention reduction (H2): one budget. Any self-improvement validity (H5): no self-modifying rung was built. Any model-tier ordering: two vendor families on the ladder, one host, one operator; the three-pair comparison of \S\ref{sec:execcmp} separates nothing because its suite is saturated. Any rate: twelve episodes per rung are readings.

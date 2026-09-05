@@ -24,6 +24,32 @@ episode in its own process group under an enforced limit, and every family seede
 
 SA3 (naming the mechanism of one's own failure) and the organizational suite are specification-only in v0.1.
 
+## Core-H: where a competent pair still fails
+
+Two models a tenfold cost apart both scored HIL 90.0 on the Core alone -- the instrument's ceiling, not theirs.
+Core-H adds four items chosen because a competent pair takes the wrong method, and admitted only after
+`hilbench/laws.py` verified each satisfies its level's law:
+
+| item | asks | named wrong method | level |
+|---|---|---|---|
+| `hc_rule` | induce a switching integer rule with a hidden period, extrapolate exactly, state switch and period | fit one line to all observations | C5 |
+| `hc_sched` | an ordered plan of 4 of 6 tasks under order, separation and exclusion constraints, minimal cost | take the four cheapest | C2 |
+| `hc_contra` | a specification whose clauses cannot all hold: declare the conflict, name the clauses, deliver nothing | apply the clauses in order and deliver | DI |
+| `hc_decoy` | an amount that appears twice, once for a superseded cycle; quote its line verbatim | take the first amount | C4 |
+
+With Core-H the same two models separate by 46 points (37.3 against 83.2), through harness gain: one model's
+failures are catchable by a registered acceptance criterion and the other's are not.
+
+## Levels are fixed by law, not by difficulty
+
+`LAWS.md` and `hilbench/laws.py`. **Level semantics != canonical test law != test form**: a dataset is a
+*witness* to a law, so new forms extend evidence for a level and never move it. A law is invariant only if
+stated as a contrast that must hold or a structural property of the item; `p=0.80`, `rho=1` and the band
+weights are ratified constants, not laws. Every law carries admissibility conditions a program checks
+(`check_family`), and `python3 -m hilbench selftest` runs them. Theta -- the mutable policy surface needed for
+I3 -- is declared in `THETA.json` and checked for persistence, disjointness from the criterion, and ablation
+sensitivity.
+
 ## LLM mode: the reference harnesses
 
 Same six families, same seeds, under HG0 (one attempt, no acceptance), HG1 (one attempt; the harness's
