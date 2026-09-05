@@ -1,4 +1,4 @@
-"""Development scoring helpers for HIL-Bench public reference forms v0.4.
+"""Development scoring helpers for HIL-Bench public reference forms v0.5 (+ the agent-generated requirement of the reflexive I4 law).
 
 Point-estimate gates are for runner development only. Official certification should
 use preregistered uncertainty rules and independent promotion.
@@ -34,7 +34,8 @@ def recursive_depth(transitions):
 def i4_gates(result):
     m = result["psi_modification"]
     behavior_rate = m["behavior_probe_passes"] / max(1, m["behavior_probe_total"])
-    M = int(bool(m["psi_diff"] and m["within_scope"] and m["psi1_active"] and behavior_rate >= m["behavior_threshold"]))
+    agent_generated = int(bool(m.get("agent_generated", 1)))   # v2 law: a Psi_1 written by a human or the evaluator establishes nothing
+    M = int(bool(m["psi_diff"] and m["within_scope"] and m["psi1_active"] and agent_generated and behavior_rate >= m["behavior_threshold"]))
     v = result["validation"]
     q0 = v["psi0_i3_passes"] / max(1, v["psi0_i3_total"])
     q1 = v["psi1_i3_passes"] / max(1, v["psi1_i3_total"])
@@ -46,7 +47,7 @@ def i4_gates(result):
     K4 = int(bool(k["I0"] and k["I1"] and k["I2"] and k["I3"]))
     z = M * V * G * K4
     dpsi = recursive_depth(result.get("recursive_transitions", []))
-    return {"M_psi":M,"psi_behavior_rate":behavior_rate,"Q_psi0":q0,"Q_psi1":q1,"delta_psi":delta,"V_psi":V,"G_psi":G,"K4":K4,"z_I4":z,"recursive_depth":dpsi,"sustained_recursive_evidence":int(dpsi>1)}
+    return {"M_psi":M,"agent_generated":agent_generated,"psi_behavior_rate":behavior_rate,"Q_psi0":q0,"Q_psi1":q1,"delta_psi":delta,"V_psi":V,"G_psi":G,"K4":K4,"z_I4":z,"recursive_depth":dpsi,"sustained_recursive_evidence":int(dpsi>1)}
 
 
 
