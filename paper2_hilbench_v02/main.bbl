@@ -1,0 +1,76 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{ARC Prize Foundation}(2026)]{arc2026}
+{ARC Prize Foundation}.
+\newblock {ARC-AGI-3}: A new challenge for frontier agentic intelligence.
+\newblock Technical report, ARC Prize Foundation, April 2026.
+
+\bibitem[Glazer et~al.(2024)Glazer, Erdil, Besiroglu,
+  et~al.]{glazer2024frontiermath}
+Elliot Glazer, Ege Erdil, Tamay Besiroglu, et~al.
+\newblock {FrontierMath}: A benchmark for evaluating advanced mathematical
+  reasoning in {AI}.
+\newblock \emph{arXiv:2411.04872}, 2024.
+
+\bibitem[Jimenez et~al.(2023)Jimenez, Yang, Wettig,
+  et~al.]{jimenez2023swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, et~al.
+\newblock {SWE-bench}: Can language models resolve real-world {GitHub} issues?
+\newblock \emph{arXiv:2310.06770}, 2023.
+
+\bibitem[Phan et~al.(2025)Phan, Gatti, Han, et~al.]{phan2025hle}
+Long Phan, Alice Gatti, Ziwen Han, et~al.
+\newblock Humanity's last exam.
+\newblock \emph{arXiv:2501.14249}, 2025.
+
+\bibitem[Rein et~al.(2023)Rein, Hou, Stickland, et~al.]{rein2023gpqa}
+David Rein, Betty~Li Hou, Asa~Cooper Stickland, et~al.
+\newblock {GPQA}: A graduate-level google-proof {Q\&A} benchmark.
+\newblock \emph{arXiv:2311.12022}, 2023.
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026dlibench}
+Chengshuai Yang.
+\newblock {DLI}-bench cannot draw its own frontier.
+\newblock \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026harnessscaling}
+Chengshuai Yang.
+\newblock Engineering higher-intelligence agents: Harness scaling under a
+  frozen model, 2026{\natexlab{b}}.
+\newblock Companion paper, draft v0.1.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026hilbench}
+Chengshuai Yang.
+\newblock {HIL-Bench} v0.1: the harness intelligence level benchmark (code,
+  generators, public split, private-split commitment), 2026{\natexlab{c}}.
+\newblock
+  \url{https://github.com/integritynoble/AI4Science/tree/main/sarsi_intelligence_level/hil_bench_v01}.
+
+\bibitem[Yang(2026{\natexlab{d}})]{yang2026uab}
+Chengshuai Yang.
+\newblock Unified agent benchmark v0.1: Specification, coverage, and what is
+  bound.
+\newblock Draft v0.1,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{d}}.
+
+\bibitem[Yang and Xue(2026)]{yang2026unified}
+Chengshuai Yang and Ting Xue.
+\newblock Unified intelligence theory and the harness intelligence level: A
+  cumulative, harness-measurable hierarchy.
+\newblock \emph{Version 2.4,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}}, 2026.
+
+\bibitem[Yao et~al.(2024)Yao, Shinn, Razavi, and Narasimhan]{yao2024taubench}
+Shunyu Yao, Noah Shinn, Pedram Razavi, and Karthik Narasimhan.
+\newblock {$\tau$-bench}: A benchmark for tool-agent-user interaction in
+  real-world domains.
+\newblock \emph{arXiv:2406.12045}, 2024.
+
+\end{thebibliography}
