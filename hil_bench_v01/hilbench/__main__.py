@@ -91,6 +91,8 @@ def _build_parser() -> argparse.ArgumentParser:
     g.add_argument("--root", type=Path, required=True); g.add_argument("--exec", dest="executor", default=None); g.add_argument("--limit", type=int, default=300)
     g.add_argument("--split", choices=("public", "private"), default="public"); g.add_argument("--salt-file"); g.add_argument("--band", default=None)
     g.add_argument("--base", default=os.environ.get("HILBENCH_LLM_BASE")); g.add_argument("--key", default=os.environ.get("HILBENCH_LLM_KEY")); g.add_argument("--model", default=os.environ.get("HILBENCH_LLM_MODEL"))
+    i5 = sub.add_parser("i5", help="run the I5-DISC development campaign on the cancer field agent"); i5.add_argument("--label", required=True); i5.add_argument("--exec", dest="executor", required=True); i5.add_argument("--root", type=Path, required=True)
+    i5.add_argument("--limit-a", type=int, default=1800); i5.add_argument("--limit-b", type=int, default=600)
     c = sub.add_parser("commit-private"); c.add_argument("--salt-file", required=True)
     return ap
 
@@ -109,6 +111,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if a.key: core.LLM_KEY = a.key
         if a.model: core.LLM_MODEL = a.model
         core.rerun_gating(a.root, seeds, a.executor, a.limit, band=a.band); return 0
+    if a.cmd == "i5":
+        from . import i5_campaign
+        i5_campaign.run_i5(a.label, a.executor, a.root, a.limit_a, a.limit_b); return 0
     if a.cmd == "o":
         core.rerun_o(a.root, a.executor, a.limit, tag=a.tag); return 0
     if a.cmd == "m1":
