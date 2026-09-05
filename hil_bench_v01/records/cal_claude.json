@@ -1,0 +1,96 @@
+{
+ "label": "claude-default",
+ "executor": "claude -p {prompt} --permission-mode acceptEdits --allowedTools Read,Edit,Write,Glob,Grep,Bash",
+ "seeds": [
+  0,
+  1
+ ],
+ "rows": [
+  {
+   "item": "hc_rule",
+   "seed": 0,
+   "pass": false,
+   "accuracy": 0.0,
+   "mode": "wrong_rule",
+   "termination": "normal",
+   "seconds": 194.2,
+   "failed_checks": [
+    "all_predictions_exact",
+    "switch_named"
+   ]
+  },
+  {
+   "item": "hc_rule",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 45.3,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_sched",
+   "seed": 0,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 15.0,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_sched",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 13.5,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_contra",
+   "seed": 0,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 25.3,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_contra",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 29.0,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_decoy",
+   "seed": 0,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 13.7,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_decoy",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 18.4,
+   "failed_checks": []
+  }
+ ],
+ "passed": 7,
+ "n": 8,
+ "finished": "2026-09-03T21:42:48Z"
+}

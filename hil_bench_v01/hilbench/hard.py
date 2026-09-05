@@ -233,3 +233,17 @@ def selftest(seeds=range(12)):
         assert n == 1, ("hc_rule", s, f"{n} rules consistent with the observations; the item is not fair")
     return (f"hard selftest ok: {len(ITEMS)} items x {len(list(seeds))} seeds (reference passes, named wrong "
             f"method fails); hc_rule uniquely identifiable on 4 seeds")
+
+
+class _Witness:
+    """A family as a witness form: the interface hilbench.laws.check_family verifies against a law."""
+    def __init__(self, name):
+        self.name = name; g, v, r, n, _l = ITEMS[name]
+        self.generate, self.verify, self.reference_solve, self.naive_solve = g, v, r, n
+    def public_checks(self, ws, files):
+        from .harness import public_checks
+        return public_checks(self.name, ws, files)
+    def identifiable(self, files):
+        return hc_rule_identifiable(files)
+
+WITNESS_LEVEL = {"hc_rule": "C5", "hc_sched": "C2", "hc_contra": "DI", "hc_decoy": "C4"}

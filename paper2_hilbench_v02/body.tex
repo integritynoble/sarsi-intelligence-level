@@ -11,7 +11,7 @@ with a Reference Harness Ladder and Public and Private Splits}\\[16pt]
 \end{center}
 
 \begin{abstract}
-An agent is a model inside a harness, and a language model on its own is not yet an agent. A benchmark that wants to say how intelligent either one is has to measure both, and has to measure them in the same coordinates. HIL-Bench is one instrument with two subjects. It measures a frozen model--harness pair \emph{as it is} and returns a profile in every coordinate of the Unified Intelligence framework \citep{yang2026unified} --- cognition $C$, individual learning $I$ with memory $M$ beside it, delegation $T$ at intervention budget $H$, self-awareness $SA$, and organizational $O$ named as omitted for an individual --- together with the gated Unified level $U^{*}$ and the continuous score HLIS. It measures a base model by running the same items through a ladder of reference harnesses that ship with the benchmark, HG0 (bare), HG1 (a registered acceptance criterion checked in a separate process) and HG2 (snapshot, restore and retry with the failed check named), and from the resulting curve returns the model's HIL-Level, HIL-AUC, HIL-Ceiling, Harness Gain and a single HIL-Score. The design constraints were given in order and are met in order: the Core is 46 executor calls for an agent and 36 for a model, covers every coordinate the framework defines for an individual, runs unattended in about ten to twenty minutes on today's coding agents, costs what those calls cost and nothing else, and is real in the only sense that matters for a benchmark --- every item has a computed key the executor never sees, the plausible wrong method is named and shown to fail on every seed, memory and learning are scored against an ablated arm of the same pair, and a delivered wrong answer costs more than a withheld one. Public seeds ship with keys; private seeds are derived from a withheld salt whose hash is published, so a private reading can later be checked and cannot be prepared for. First results: the Claude Code default pair reads C3, $M1$, SA1 (the blocked-twin probe was missed on one of two seeds), an $I2$ transfer reading, a calibrated forecast, and a T1 frontier at H0 with no false completion, U1 and HLIS 77.5; run as a base model through HG0--HG2 it scores 100 at every rung, HIL-Score 90.0, which is the ceiling of the Core and says that the discriminating headroom for frontier models lies in the extended tier (T2--T5 generator families, where the same pair fails two of four discovery seeds) rather than in the Core. Two defects the first live runs exposed in the instrument itself --- a convention verifier that rejected a correct paraphrase and a run root that let an executor's path-keyed memory survive into the ablated arm --- are reported and repaired, because a benchmark that cannot be wrong cannot be trusted either.
+An agent is a model inside a harness, and a language model on its own is not yet an agent. A benchmark that wants to say how intelligent either one is has to measure both, and has to measure them in the same coordinates. HIL-Bench is one instrument with two subjects. It measures a frozen model--harness pair \emph{as it is} and returns a profile in every coordinate of the Unified Intelligence framework \citep{yang2026unified} --- cognition $C$, individual learning $I$ with memory $M$ beside it, delegation $T$ at intervention budget $H$, self-awareness $SA$, and organizational $O$ named as omitted for an individual --- together with the gated Unified level $U^{*}$ and the continuous score HLIS. It measures a base model by running the same items through a ladder of reference harnesses that ship with the benchmark, HG0 (bare), HG1 (a registered acceptance criterion checked in a separate process) and HG2 (snapshot, restore and retry with the failed check named), and from the resulting curve returns the model's HIL-Level, HIL-AUC, HIL-Ceiling, Harness Gain and a single HIL-Score. The design constraints were given in order and are met in order: the Core is 46 executor calls for an agent and 36 for a model, covers every coordinate the framework defines for an individual, runs unattended in about ten to twenty minutes on today's coding agents, costs what those calls cost and nothing else, and is real in the only sense that matters for a benchmark --- every item has a computed key the executor never sees, the plausible wrong method is named and shown to fail on every seed, memory and learning are scored against an ablated arm of the same pair, and a delivered wrong answer costs more than a withheld one. Public seeds ship with keys; private seeds are derived from a withheld salt whose hash is published, so a private reading can later be checked and cannot be prepared for. First results: on the Core alone, two models a tenfold cost apart both score HIL 90.0 --- the instrument's ceiling, not theirs --- so four harder items were designed, calibrated against both pairs, and admitted only after a program verified each satisfies its level's law. With them the same two models separate by 46 points (37.3 against 83.2), and they separate through the quantity the framework says should carry the information: the cheaper model's failures are ones a registered acceptance criterion can catch, worth 50 points of harness gain, and the frontier model's are not. Read as a pair rather than a model, the Claude Code harness reaches C4, $M1$, an $I2$ transfer reading, SA2, a calibrated forecast and a T1 delegation frontier at H0 with no false completion: U1, HLIS 84.5. Levels are held fixed by construction rather than by promise: each is stated as a contrast that must hold or a structural property of the item --- never as a difficulty threshold, which is a percentile of the contemporary frontier --- and each carries admissibility conditions a program checks before a witness form is admitted, so new datasets extend the evidence for a level and cannot move it. Three defects the live runs exposed in the instrument itself are reported and repaired, because a benchmark that cannot be wrong cannot be trusted either.
 \end{abstract}
 
 \noindent\textbf{Keywords:} intelligence level; harness; HIL score; agent benchmark; language-model benchmark; false completion; restart test; ablated control; public and private splits; ARC-AGI
@@ -87,6 +87,63 @@ An executor is any command that accepts a prompt and works in a directory. Every
 \subsection{The four outcomes and the record}
 
 Every delegation episode records \texttt{harness\_accepted} and \texttt{verifier\_pass} separately and derives, never types, one of four outcomes: delivered-correct, false completion (handed back as done, and wrong), held back (a correct refusal; a load cost, not a reliability cost), and false rejection. The record carries family, band, seed, budget, rung, attempts, seconds, termination reason, the forecast made before the episode where one was asked for, and the last 160 characters of executor output for inspection. The record is written after every phase, so an instrument crash in the last phase --- which happened, \S\ref{sec:defects} --- loses no episodes.
+
+\section{Invariance: What a Level Means Must Not Move With the Frontier}\label{sec:invariance}
+
+A benchmark whose levels are pinned to contemporary capability measures a percentile, not a property: when the frontier moves, a level that was ``expert'' becomes routine and every past certificate silently changes meaning. The standard this paper implements therefore separates three objects, following the companion revision of the theory:
+\[
+\text{level semantics} \;\neq\; \text{canonical test law} \;\neq\; \text{test form}.
+\]
+The theory fixes what a level \emph{means}; this paper fixes the \emph{law} by which the claim is tested; a dataset is a \emph{witness} to that law. New witness forms extend the evidence for a level and never move it. Saturation moves the research frontier, not the ruler.
+
+\subsection{The condition under which a law is invariant}
+
+Newton's laws survived the quantum era in their domain because they are relations between quantities, not a table of measured planetary positions. A test law survives frontier progress on exactly the same condition, and it gives a usable criterion:
+
+\begin{claimbox}{Invariance criterion}
+A test law is invariant if and only if it is stated as a \emph{contrast that must hold} or a \emph{structural property of the item}. A law stated as a difficulty threshold is a percentile of the contemporary frontier and will move when the frontier moves.
+\end{claimbox}
+
+By that criterion the framework's laws divide cleanly, and two of them had to be rewritten.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llY@{}}
+\toprule
+Level & Law & Status \\
+\midrule
+$I1$ & recovery with provenance after a real discontinuity \emph{and} failure of the same pair with no record & already a contrast; the ablated arm defines the floor permanently \\
+$I2$ & $P(\text{held-out} \mid \text{experience}) - P(\text{held-out} \mid \text{ablated}) = 1$, learning mechanism frozen & already a contrast \\
+$SA2$ & the solvable twin completed \emph{and} the impossible twin declared blocked with nothing fabricated & already a contrast \\
+$DI$ & delivered $\wedge$ $\neg$verified is a false completion, priced at $\rho$ & already a contrast \\
+$C0$--$C3$ & the named wrong method fails on every instance, against a computed key & already structural \\
+$C4$ & \emph{was} ``difficult, ambiguous, expert problems with adversarially relevant distractors'' & \textbf{rewritten}: the item contains a decoy that satisfies every publicly checkable criterion and is not the key \\
+$C5$ & \emph{was} ``the method is not given; predict sealed cases'' & \textbf{strengthened}: plus a search over the declared hypothesis class must find exactly one consistent rule, so a failure is a failure of induction and not an ambiguity in the item \\
+\bottomrule
+\end{tabularx}
+\caption{Laws by the invariance criterion. ``Expert'' and ``difficult'' are percentiles; the decoy and the uniqueness condition are properties of the item, and a program can check both.}
+\label{tab:invariance}
+\end{table}
+
+\subsection{Invariance enforced, not promised}
+
+Each law carries admissibility conditions a program verifies before a witness form is admitted to a level (\texttt{hilbench/laws.py}, \texttt{check\_family}), and they run in the package self-test: the key is computed from the seed rather than stored; the named wrong method fails on every seed; the rule is uniquely identifiable; a deliverable can pass every publicly checkable criterion and still fail the key; the ablated arm exists; the twin pair exists. On the current witness forms all four Core-H items are admissible under their laws, and the self-test says which condition each one satisfies. A benchmark that merely asserted stability would have nothing to run here.
+
+\subsection{What is not a law}
+
+The reliability $p = 0.80$, the loss ratio $\rho = 1$ and the band weights $1,2,4,8,16,32$ are \emph{ratified constants}, not laws --- like the definition of a unit. They are fixed by the standard, amendable only at a version boundary, and a change re-versions every score. They are listed in one place (\texttt{laws.CONVENTIONS}) so that no reading can quietly use a different one.
+
+\subsection{$\Theta$: the mutable policy surface, and why $I3$ needs it defined}
+
+$I3$ asks whether the mechanism the individual uses can itself become an object of governed improvement. That is untestable until the boundary of the mechanism is fixed, because without a boundary self-improvement cannot be distinguished from ordinary in-episode learning or from a person editing the agent between runs. The definition used here:
+
+\begin{claimbox}{$\Theta$}
+$\Theta$ is the pair's declared \emph{mutable policy surface}: the artifacts that (1) persist across a process discontinuity, (2) causally determine behaviour on tasks not yet seen, and (3) the pair is permitted to write.
+\end{claimbox}
+
+All three clauses are checked before a run (\texttt{THETA.json}, \texttt{laws.theta\_check}). \emph{Persistence}: something that lives only in a context window is not $\Theta$ --- that is $I1$. \emph{Disjointness}: $\Theta \cap (\text{hidden suite} \cup \text{verifier} \cup \text{promoter}) = \emptyset$, checked as path disjointness, which is how ``the system must not control the criterion that declares it successful'' becomes an enforced condition rather than a promise. \emph{Causal efficacy}: reverting $\Theta$ must lower the frozen suite's score, or a no-op change could be promoted and called self-improvement.
+
+For the harnesses measured in this paper, $\Theta$ is everything the agent loads before it sees the task: the instruction file, the skills directory, the memory directory, hooks and settings, startup scripts. Never in $\Theta$: the generators, the keys, the verifier, the promoter, the hidden suite, or the resource envelope --- otherwise ``improvement'' is only more compute. Finally $\Psi$, the process that proposes and selects changes to $\Theta$, must be declared and is frozen at $I3$; if it is not, an $I3$ run and an $I4$ run are indistinguishable, since $I4$ is exactly the case where $\Psi$ improves.
 
 \section{The Core}\label{sec:core}
 
@@ -194,6 +251,42 @@ Public seeds are $\{0,1,2,3\}$ and ship with keys, generators and verifiers; the
 
 This is the ARC-AGI arrangement \citep{arc2026} with one difference: ARC's private set is a corpus that must be guarded; HIL-Bench's private set is a function of a secret, and rotating the secret rotates the set at no cost.
 
+\section{What Is Free, What Is Paid, and What Needs a Human}\label{sec:governance}
+
+\subsection{What the private split is actually for}
+
+HIL-Bench's private split is not a guarded corpus. The generators are public, so anyone can produce unlimited instances of every family; what is withheld is 32 bytes of salt. It is worth being exact about what that buys, because the usual argument for a private set --- the items would leak --- does not apply here.
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{The instances are unknown at submission time.} Practising on a family is legitimate and is what training is; fitting a harness to the four public seeds is not, and a private seed the submitter cannot compute forecloses it.
+\item \textbf{Someone other than the submitter runs the pair.} This is the substantive part. An episode's termination reason, whether a process group was killed at the limit, how many attempts a rung took, and which deliverable actually appeared are all things a self-reporting submitter can decline to mention. The frontier pair in \S\ref{sec:results} produced one crash after twenty-one minutes with nothing delivered; a self-report that omitted it would have raised the reading.
+\item \textbf{A past reading can be checked.} \texttt{PRIVATE\_SPLIT\_COMMITMENT.json} publishes $\text{sha256}(\text{salt})$; at a version boundary the retired salt is revealed, and any third party can regenerate the exact instances and re-run them.
+\end{enumerate}
+
+The value is the independent evaluator, not the secrecy. What can honestly be sold is therefore an evaluation service, and the conflict this creates --- the evaluator is paid by the party being measured --- is answered by publishing every episode record with the score and by the salt reveal that makes the run reproducible by someone with no stake in it. A benchmark that publishes only a number cannot make that promise.
+
+\subsection{The coordinates a computed key cannot reach}
+
+Every verifier in v0.2 is a computed key, which is what makes an unattended seventeen-minute reading possible. That is also the ceiling of the free tier. Four things the framework defines cannot be scored this way:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Coordinate & Why a key cannot score it & Locus required \\
+\midrule
+$O$, organizational & needs several agents and a real workflow, not one pair against one item & a human-run suite \\
+$SA3$, naming the mechanism of one's own failure & the answer is free text about a causal claim & a judge \\
+$I3$, $U3$, self-improvement & needs a governed promotion decided at a locus the pair cannot write to, over several cycles; the policy call is human in practice & a human acceptance locus \\
+open-ended T4--T5 work & ``correct'' is not computable for a real results section or a real investigation & a judge \\
+\bottomrule
+\end{tabularx}
+\caption{What the free tier cannot reach, and why. These are named as omitted in every v0.2 profile and never scored as zero.}
+\label{tab:human}
+\end{table}
+
+The tiers follow from the table rather than from a business plan. A run on the public split, self-serve and self-reported, is a \emph{reading}. A run on the private split, executed by an evaluator who did not build the pair, is a \emph{certified reading}, and it costs what an evaluator and the machine time cost. The human-locus coordinates are a third tier, slower and dearer, and they are the only route to a level above U2 --- so the honest form of the sentence is that free HIL-Bench can never certify U3, because U3 requires an acceptance locus that is not code. A benchmark that claimed otherwise would be certifying self-improvement on the say-so of the thing improving itself.
+
 \section{Cost}\label{sec:cost}
 
 \begin{table}[H]
@@ -218,28 +311,29 @@ The Core was designed to a budget of under fifty calls because that is what make
 
 One pair was read in full in agent mode, one base model in LLM mode, and two more pairs were started; every number here is a public reading taken by the author, and none is a certification.
 
-\subsection{LLM mode: Claude Code default model through HG0--HG2}
+\subsection{LLM mode: two models through HG0--HG2}
+
+The Core alone saturates. Read on the six domain families only, the Claude Code default model delivered 12/12 at every rung --- HG0, HG1 and HG2 all at 100.0 net, no false completion, no held-back delivery, about 205 seconds a rung --- for $\text{HIL-Score } 90.0$, which is the Core's ceiling: with no headroom above the bare rung there is no harnessability to award, and $0.55 + 0.35 = 0.90$. DeepSeek (\texttt{deepseek-chat}, reached through an Anthropic-compatible endpoint and the same harness code) produced exactly the same figure at 153, 128 and 123 seconds a rung. Two models of very different cost, indistinguishable. That is what motivated Core-H (\S\ref{sec:coreh}); the readings that follow add its four items to each rung.
 
 \begin{table}[H]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}lcccccY@{}}
+\begin{tabularx}{\textwidth}{@{}lccccccY@{}}
 \toprule
-Rung & $\text{HLIS}_{DI}$ net & gross & false completions & held back & seconds & reading \\
+Model & HG0 & HG1 & HG2 & Level & AUC / Ceiling / Gain & \textbf{HIL-Score} & seconds per rung \\
 \midrule
-HG0 & 100.0 & 100.0 & 0 & 0 & 204.8 & 12/12 delivered-correct \\
-HG1 & 100.0 & 100.0 & 0 & 0 & 204.6 & every public check passed on the first attempt \\
-HG2 & 100.0 & 100.0 & 0 & 0 & 208.9 & no correction was ever issued \\
+Claude Code default & 42.9 & 42.9 & 35.7 & HG2 & 40.5 / 42.9 / 0.0 & \textbf{37.3} & 397, 304, 369 \\
+DeepSeek \texttt{deepseek-chat} & 42.9 & 92.9 & 92.9 & HG2 & 76.2 / 92.9 / 50.0 & \textbf{83.2} & 450, 780, 1116 \\
 \midrule
-\multicolumn{7}{l}{HIL-Level HG2 \quad HIL-AUC 100.0 \quad HIL-Ceiling 100.0 \quad Harness Gain 0.0 \quad \textbf{HIL-Score 90.0}} \\
+\multicolumn{8}{l}{\emph{Core only, both models}: 100.0 / 100.0 / 100.0, gain 0.0, HIL-Score 90.0.} \\
 \bottomrule
 \end{tabularx}
-\caption{The first HIL reading. The score is the Core's ceiling: with no headroom above HG0 there is no harnessability to award, and $0.55 + 0.35 = 0.90$.}
-\label{tab:hil_claude}
+\caption{HIL curves on the Core plus Core-H, sixteen episodes a rung, public seeds. The instrument that could not tell these two models apart now separates them by 46 points, and it does so through the quantity the framework says should carry the information: the harness gain.}
+\label{tab:hil}
 \end{table}
 
-A second model was read through the same ladder to see whether the ceiling was the model's or the instrument's. DeepSeek (\texttt{deepseek-chat}, reached through an Anthropic-compatible endpoint and the same harness code) also delivered 12/12 at every rung with no false completion and no held-back delivery: $\text{HIL-Score } 90.0$, identical to the frontier pair's, at 153, 128 and 123 seconds per rung against 205, 205 and 209. The ceiling is the instrument's. Two models of very different cost are indistinguishable on the Core's delegation surface, which is the finding that motivates \S\ref{sec:coreh}: a benchmark whose top rank is shared by everything competent has stopped measuring, and the fix is harder items rather than more of the same ones.
+The episodes behind the numbers say what the aggregate cannot. Both models fail the same item at the bare rung: \texttt{hc\_rule} seed 0, delivered with a wrong rule --- a false completion, priced at $\rho$, and one the harness cannot catch, because a wrong rule stated in the required form passes every publicly checkable criterion. What separates them is what happens next. DeepSeek's remaining failure at HG0 was an unsatisfiable-specification item it delivered on; at HG1 the registered criterion held that delivery back and its net rose from 42.9 to 92.9, a harness gain of 50 points that persists at HG2. The Claude pair gains nothing, because its one failure is precisely the kind no acceptance step can see. A model that fails in ways a harness can catch is worth building on; a model that fails invisibly is not, and the HIL curve is the instrument that tells the two apart.
 
-The reading is correct and uninformative in the way a saturated instrument is: it says the model does not need a harness for T0/T1 work, which the budget-cross runs of UAB v0.1 had already shown for this pair (71 of 72 episodes were H0 episodes whatever their declared budget). It also fixes the meaning of the score's top: a model that needs no harness on the Core scores 90, not 100, and the remaining ten points belong to models that gain from one. Discrimination among frontier models must come from the extended tier at HG1 and HG2, which v0.1 defines and the next version binds.
+One reading must not be over-interpreted. The Claude curve dips at HG2 (35.7 against 42.9) because a single episode --- \texttt{hc\_contra}, one seed --- came back with a refusal that did not name the conflicting clauses on that run and had named them at the two lower rungs. With one seed per Core-H family, 7.1 points is one episode, and this is run-to-run variation rather than evidence that the harness hurt. Confidence intervals need the private split and more seeds; \S\ref{sec:limits} says so.
 
 \subsection{Agent mode: profiles}
 
@@ -251,19 +345,19 @@ The Claude Code default pair (Claude Code 2.1.258, headless, file tools only, it
 \toprule
 Coordinate & Reading & Evidence \\
 \midrule
-$C$ & C3 & 8/8 exact across the four bands; the fewest-hops path, the greedy schedule and the single-step answer all fail on every seed by construction \\
+$C$ & \textbf{C4} & 12/12 exact: the four Core bands plus the Core-H C4 band (\texttt{hc\_rule} and \texttt{hc\_sched}, two seeds each); every named wrong method fails on every seed by construction \\
 $M$ & $M1$ & after the restart the pair recalled the code name, the parameter and the convention and named the memory file it had written them to; the ablated arm, run first from a separate parent, wrote \texttt{none} rather than guessing \\
 $I$ & I1, with $I2$ transfer evidence & transfer $= 1$: the pair failed task A, was given verified feedback, corrected it, and then applied the same convention to a different task after a restart; the ablated arm failed that task. $M3$ is not certified by one pair of episodes and the profile says so \\
 $SA$ & SA2 & SA1 2/2 (files reported from the directory, the stale note marked inaccurate, the phantom tool not listed); SA2 2/2 (the solvable twin completed, the blocked twin declared blocked with no fabricated total) \\
 $SA4$ & calibrated & a forecast before all twelve delegated episodes, 0.80--0.97, all of which passed; Brier 0.010 against 0.0 for the post-hoc constant, inside the predeclared 0.05 tolerance \\
-$T \cdot H$ & $F_A(\text{H0}, 0.8) = $ T1 & 12/12 delivered-correct in 301 s, $A^{\text{net}}_{DI} = 100$, no false completion \\
+$T \cdot H$ & $F_A(\text{H0}, 0.8) = $ T1 & 14/14 delivered-correct, $A^{\text{net}}_{DI} = 100$, no false completion --- including the two Core-H traps, the unsatisfiable specification and the decoy, which this pair handled \\
 $O$ & N/A (individual) & named as omitted, never scored as zero \\
 \midrule
-$U^{*}$ & \textbf{U1} & C3, $M1$, I1, SA2 and T1 at H0 all hold; U2 is refused because $I2$ requires $M3$, which the Core does not certify \\
+$U^{*}$ & \textbf{U1} & C4, $M1$, I1, SA2 and T1 at H0 all hold; U2 is refused because $I2$ requires $M3$, which the Core does not certify \\
 HLIS & \textbf{84.5} & geometric mean over $C{=}1.00$, $I{=}0.60$, $DI{=}1.00$, $SA{=}0.85$ \\
 \bottomrule
 \end{tabularx}
-\caption{Agent-mode profile of the Claude Code default pair, public split, 46 executor calls, about 17 minutes. The gate is where the profile earns its keep: a pair that scores 100 on delegation is still U1, because the Unified level is not an average.}
+\caption{Agent-mode profile of the Claude Code default pair, public split, 52 executor calls, about 24 minutes. The gate is where the profile earns its keep: a pair that scores 100 on delegation is still U1, because the Unified level is not an average.}
 \label{tab:profile_claude}
 \end{table}
 

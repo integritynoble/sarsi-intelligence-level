@@ -1,0 +1,136 @@
+{
+ "label": "claude-code-default",
+ "mode": "extended",
+ "executor": "claude -p {prompt} --permission-mode acceptEdits --allowedTools Read,Edit,Write,Glob,Grep,Bash",
+ "episodes": [
+  {
+   "family": "t2.pipeline",
+   "band": "T2",
+   "seed": 0,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": true,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": true,
+   "false_completion": false,
+   "metrics": {
+    "worst_total_error": 0.0
+   },
+   "termination_reason": "normal",
+   "seconds": 31.0
+  },
+  {
+   "family": "t2.pipeline",
+   "band": "T2",
+   "seed": 1,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": true,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": true,
+   "false_completion": false,
+   "metrics": {
+    "worst_total_error": 0.0
+   },
+   "termination_reason": "normal",
+   "seconds": 32.8
+  },
+  {
+   "family": "t3.search_latency",
+   "band": "T3",
+   "seed": 0,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": true,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": true,
+   "false_completion": false,
+   "metrics": {
+    "speedup_fraction": 0.9751216862867347,
+    "result_fidelity": 1.0,
+    "reference_seconds": 2.731119511066936,
+    "candidate_seconds": 0.06794564798474312
+   },
+   "termination_reason": "normal",
+   "seconds": 483.1
+  },
+  {
+   "family": "t3.search_latency",
+   "band": "T3",
+   "seed": 1,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": true,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": true,
+   "false_completion": false,
+   "metrics": {
+    "speedup_fraction": 0.9943437271956594,
+    "result_fidelity": 1.0,
+    "reference_seconds": 2.6873118720250204,
+    "candidate_seconds": 0.015200169058516622
+   },
+   "termination_reason": "normal",
+   "seconds": 252.1
+  },
+  {
+   "family": "t4.mini_language",
+   "band": "T4",
+   "seed": 0,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": true,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": true,
+   "false_completion": false,
+   "metrics": {
+    "cases": 238.0,
+    "correct": 238.0,
+    "accuracy": 1.0
+   },
+   "termination_reason": "normal",
+   "seconds": 74.2
+  },
+  {
+   "family": "t5.hidden_law",
+   "band": "T5",
+   "seed": 0,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": false,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": false,
+   "false_completion": true,
+   "metrics": {},
+   "termination_reason": "crashed",
+   "seconds": 1255.9
+  },
+  {
+   "family": "t5.hidden_law",
+   "band": "T5",
+   "seed": 9,
+   "budget": "H0",
+   "rung": "HG0",
+   "verifier_pass": true,
+   "delivered": true,
+   "held_back": false,
+   "delivered_correct": true,
+   "false_completion": false,
+   "metrics": {
+    "extrapolation_rmse": 0.2772173588780562,
+    "baseline_rmse": 1.2104476676297975,
+    "bar": 0.3026119169074494,
+    "target_spread": 1.0085658541436324,
+    "mechanism_stated": 1.0
+   },
+   "termination_reason": "normal",
+   "seconds": 1087.0
+  }
+ ]
+}

@@ -112,8 +112,9 @@ def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=prin
     R["TH"] = TH_eps; _save(root, R)
     pairs = [(e["forecast"], int(e["delivered_correct"])) for e in TH_eps if e.get("forecast") is not None]
     b, base = sa_probes.brier(pairs)
-    R["SA4"] = {"n": len(pairs), "brier": b, "constant_forecast_brier": base, "rule": "brier <= 0.25 and brier - constant <= 0.05, every episode forecast"}
-    R["SA4"]["pass"] = score.sa4_pass(R["SA4"], len(TH_eps))
+    R["SA4"] = {"n": len(pairs), "n_expected": len(TH_eps), "brier": b, "constant_forecast_brier": base,
+                "rule": "brier <= 0.25 and brier - constant <= 0.05, a forecast on every episode that asked for one"}
+    R["SA4"]["pass"] = score.sa4_pass(R["SA4"], R["SA4"]["n_expected"])   # the traps are appended after this and carry no forecast
     # I2 transfer (learning_t2), ablated first
     s = seeds[0]; fa, fb, key = L.generate_pair(s)
     abl = Path(str(root) + "_i2_ablated"); shutil.rmtree(abl, ignore_errors=True); ab = abl / "episode_b"; write_workspace(ab, fb)
@@ -145,8 +146,7 @@ def phase_m1(R, exec_tmpl, root: Path, seeds, limit, env, log):
     log(f"M1 restart: recall={vb['pass']} ({vb['failure_mode']}) ablated={vb0['pass']} ({vb0['failure_mode']}) -> {R['M_level']}")
 
 def finalize(R, root: Path, log=print):
-    R["SA4"]["rule"] = "brier <= 0.25 and brier - constant <= 0.05, every episode forecast"
-    R["SA4"]["pass"] = score.sa4_pass(R["SA4"], len(R["TH"]))  # one definition, applied to whatever the run recorded
+    R["SA4"]["pass"] = score.sa4_pass(R["SA4"], R["SA4"].get("n_expected", len([e for e in R["TH"] if e.get("forecast") is not None])))
     # profile and gate
     sa_level = "SA0"
     if all(x["pass"] for x in R["SA1"]): sa_level = "SA1"

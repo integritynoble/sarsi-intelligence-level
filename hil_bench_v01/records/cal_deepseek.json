@@ -1,0 +1,95 @@
+{
+ "label": "deepseek-chat",
+ "executor": "claude -p {prompt} --permission-mode acceptEdits --allowedTools Read,Edit,Write,Glob,Grep,Bash",
+ "seeds": [
+  0,
+  1
+ ],
+ "rows": [
+  {
+   "item": "hc_rule",
+   "seed": 0,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 677.1,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_rule",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 269.4,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_sched",
+   "seed": 0,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 9.1,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_sched",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 10.3,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_contra",
+   "seed": 0,
+   "pass": false,
+   "accuracy": 0.6667,
+   "mode": "under_specified_refusal",
+   "termination": "normal",
+   "seconds": 11.6,
+   "failed_checks": [
+    "named_conflicting_clauses"
+   ]
+  },
+  {
+   "item": "hc_contra",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 11.8,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_decoy",
+   "seed": 0,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 11.5,
+   "failed_checks": []
+  },
+  {
+   "item": "hc_decoy",
+   "seed": 1,
+   "pass": true,
+   "accuracy": 1.0,
+   "mode": null,
+   "termination": "normal",
+   "seconds": 10.2,
+   "failed_checks": []
+  }
+ ],
+ "passed": 7,
+ "n": 8,
+ "finished": "2026-09-03T21:53:44Z"
+}

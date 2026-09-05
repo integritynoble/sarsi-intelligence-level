@@ -34,6 +34,11 @@ def main():
             assert not ver(d, k)["pass"], (name, "trap did not fire")
             print(f"  {name}: named wrong method -> public checks {'pass' if pub else 'FAIL'}, hidden verifier FAIL"
                   f"{'  (a false completion the harness cannot catch)' if pub else '  (the harness catches this one)'}")
+        from . import laws
+        for name, lvl in hard.WITNESS_LEVEL.items():                 # the law, checked rather than promised
+            r = laws.check_family(lvl, hard._Witness(name), range(6))
+            assert r["admissible"], (name, lvl, [c for c in r["checks"] if not c["ok"]])
+            print(f"  {name}: admissible witness for {lvl} -- " + ", ".join(c["name"] for c in r["checks"]))
         print("selftest ok: c_items 4 bands x 12 seeds (reference passes, naive fails); sa1/sa2/m1 generators consistent"); return 0
     seeds = split.PUBLIC_SEEDS if getattr(a, "split", "public") == "public" else split.private_seeds(Path(a.salt_file).read_bytes())
     if getattr(a, "split", "public") == "private": assert split.check_commitment(Path(a.salt_file).read_bytes()), "salt does not match the published commitment"
