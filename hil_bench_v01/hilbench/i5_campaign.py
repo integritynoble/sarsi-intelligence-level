@@ -27,7 +27,8 @@ AI4 = Path(os.environ.get("AI4SCIENCE_PKG", "/home/spiritai/pwm/Physics_World_Mo
 PY = str(AI4 / ".venv" / "bin" / "python") if (AI4 / ".venv" / "bin" / "python").exists() else sys.executable
 ONCO = AI4 / "ai4science" / "harness" / "agents" / "research_agents" / "runners" / "payload" / "onco"
 DISC_SEEDS, SEALED_SEEDS, TRANSFER_SEEDS = list(range(0, 4)), list(range(4, 12)), list(range(12, 16))
-STATS = ("stage_mix_distance", "age_mix_distance", "male_mix_distance", "prior_mix_distance", "ext_n", "ext_event_rate", "dev_event_rate", "event_rate_gap", "ext_n_sites")
+STATS = ("stage_mix_distance", "age_mix_distance", "male_mix_distance", "prior_mix_distance", "ext_n", "ext_event_rate", "dev_event_rate", "event_rate_gap", "ext_n_sites",
+         "beta_shift", "stage_beta_ext", "stage_beta_dev")   # v0.3: coefficient statistics, so a mechanism claim about non-transport can be staked on sealed seeds
 DELTA_INC = 0.01     # preregistered minimum mean gain in external C-index for the incorporation gate (development value)
 
 # ---------------------------------------------------------------- the benchmark's own statistics (independent of the pair)
@@ -40,6 +41,17 @@ def c_index(risk, time, event):
                 n += 1; conc += 1.0 if risk[i] > risk[j] else (0.5 if risk[i] == risk[j] else 0.0)
     return conc / n if n else float("nan")
 
+def _cox_fit():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("onco_run_solver", ONCO / "run_solver.py"); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m.cox_fit
+
+def coefficient_stats(ws: Path) -> dict:
+    """The development fit and an ORACLE refit on the external cohort itself (its outcomes are the verifier's to use):
+    beta_shift = ||beta_ext - beta_dev||, and the stage coefficient in each. Columns: age, male, stage, prior."""
+    d = lambda n: np.load(ws / "data" / (n + ".npy")); cox = _cox_fit()
+    bd = cox(d("dev_X"), d("dev_time"), d("dev_event")); be = cox(d("ext_X"), d("ext_time"), d("ext_event"))
+    return {"beta_shift": float(np.linalg.norm(be - bd)), "stage_beta_ext": float(be[2]), "stage_beta_dev": float(bd[2])}
+
 def per_seed_stats(ws: Path) -> dict:
     d = lambda n: np.load(ws / "data" / (n + ".npy"))
     Xd, Xe = d("dev_X"), d("ext_X")                     # standardized on dev; columns age, male, stage, prior
@@ -48,7 +60,7 @@ def per_seed_stats(ws: Path) -> dict:
     return {"stage_mix_distance": float(abs(Xe[:, 2].mean() - Xd[:, 2].mean())), "age_mix_distance": float(abs(Xe[:, 0].mean() - Xd[:, 0].mean())),
             "male_mix_distance": float(abs(Xe[:, 1].mean() - Xd[:, 1].mean())), "prior_mix_distance": float(abs(Xe[:, 3].mean() - Xd[:, 3].mean())),
             "ext_n": float(len(ee)), "ext_event_rate": float(ee.mean()), "dev_event_rate": float(ed.mean()), "event_rate_gap": float(abs(ee.mean() - ed.mean())),
-            "ext_n_sites": float(len(meta.get("held_out_sites", [])))}
+            "ext_n_sites": float(len(meta.get("held_out_sites", []))), **coefficient_stats(ws)}
 
 def default_fit_drop(ws: Path) -> dict:
     """Fit the reference solver at its defaults and return internal, external C-index and the drop."""
@@ -99,7 +111,13 @@ def per_seed_stats(ws):
     return {"stage_mix_distance": float(abs(Xe[:,2].mean()-Xd[:,2].mean())), "age_mix_distance": float(abs(Xe[:,0].mean()-Xd[:,0].mean())),
             "male_mix_distance": float(abs(Xe[:,1].mean()-Xd[:,1].mean())), "prior_mix_distance": float(abs(Xe[:,3].mean()-Xd[:,3].mean())),
             "ext_n": float(len(ee)), "ext_event_rate": float(ee.mean()), "dev_event_rate": float(ed.mean()), "event_rate_gap": float(abs(ee.mean()-ed.mean())),
-            "ext_n_sites": float(len(meta.get("held_out_sites", [])))}
+            "ext_n_sites": float(len(meta.get("held_out_sites", []))), **coefficient_stats(ws)}
+def coefficient_stats(ws):
+    """Oracle refit on the external cohort (its outcomes are visible on discovery seeds) against the development fit."""
+    import importlib.util; ws = Path(ws)
+    spec = importlib.util.spec_from_file_location("rs", Path(__file__).resolve().parent / "solver" / "run_solver.py"); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    d = lambda n: np.load(ws / "data" / (n + ".npy")); bd = m.cox_fit(d("dev_X"), d("dev_time"), d("dev_event")); be = m.cox_fit(d("ext_X"), d("ext_time"), d("ext_event"))
+    return {"beta_shift": float(np.linalg.norm(be - bd)), "stage_beta_ext": float(be[2]), "stage_beta_dev": float(bd[2])}
 def c_index(risk, time, event):
     n = 0; conc = 0.0
     for i in range(len(time)):
