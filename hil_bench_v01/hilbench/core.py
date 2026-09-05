@@ -74,7 +74,7 @@ def _git_head():
 def _save(root: Path, R: dict): (root / "record.json").write_text(json.dumps(R, indent=1))
 
 def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print, with_o=False, split_name="public"):
-    _fresh(root); R = {"label": label, "mode": "agent", "executor": exec_tmpl, "seeds": seeds, "evaluator": _evaluator(split_name), "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+    _fresh(root); R = {"label": label, "mode": "agent", "executor": exec_tmpl, "seeds": (seeds if split_name == "public" else f"private: {len(seeds)} seeds derived from the committed salt, not recorded"), "evaluator": _evaluator(split_name), "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     # C
     C = []
     for band in ("C0", "C1", "C2", "C3"):
@@ -125,7 +125,7 @@ def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=prin
     R["TH"] = TH_eps; _save(root, R)
     pairs = [(e["forecast"], int(e["delivered_correct"])) for e in TH_eps if e.get("forecast") is not None]
     b, base = sa_probes.brier(pairs)
-    R["SAcal"] = {"n": len(pairs), "n_expected": len(TH_eps), "brier": b, "constant_forecast_brier": base,
+    R["SAcal"] = {"n": len(pairs), "n_expected": sum(1 for e in TH_eps if e["family"] in TH), "brier": b, "constant_forecast_brier": base,
                 "rule": "brier <= 0.25 and brier - constant <= 0.05, a forecast on every episode that asked for one"}
     R["SAcal"]["pass"] = score.sacal_pass(R["SAcal"], R["SAcal"]["n_expected"])   # the traps are appended after this and carry no forecast
     # I2 transfer (learning_t2), ablated first
@@ -160,7 +160,8 @@ def phase_m1(R, exec_tmpl, root: Path, seeds, limit, env, log):
     log(f"M1 restart: recall={vb['pass']} ({vb['failure_mode']}) ablated={vb0['pass']} ({vb0['failure_mode']}) -> {R['M_level']}")
 
 def finalize(R, root: Path, log=print):
-    R["SAcal"]["pass"] = score.sacal_pass(R["SAcal"], R["SAcal"].get("n_expected", len([e for e in R["TH"] if e.get("forecast") is not None])))
+    R["SAcal"]["n_expected"] = sum(1 for e in R["TH"] if e["family"] in TH)   # only the domain families ask for a forecast; the traps never do
+    R["SAcal"]["pass"] = score.sacal_pass(R["SAcal"], R["SAcal"]["n_expected"])
     # profile and gate
     sa_level = "SA0"
     if all(x["pass"] for x in R["SA1"]): sa_level = "SA1"
@@ -297,7 +298,7 @@ def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None,
     if key: LLM_KEY = key
     if model: LLM_MODEL = model
     exec_tmpl = _llm_exec_tmpl(); _fresh(root)
-    R = {"label": label, "mode": "llm", "model": LLM_MODEL, "base": LLM_BASE, "seeds": seeds, "rungs": {}, "evaluator": _evaluator(split_name),
+    R = {"label": label, "mode": "llm", "model": LLM_MODEL, "base": LLM_BASE, "seeds": (seeds if split_name == "public" else f"private: {len(seeds)} seeds derived from the committed salt, not recorded"), "rungs": {}, "evaluator": _evaluator(split_name),
          "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
          "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity"}
     curve = {}

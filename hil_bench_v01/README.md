@@ -94,3 +94,11 @@ levels that need long-horizon sealed environments, machine-readable schemas (`th
 `i3_theta`, `i4_psi`), and `verifiers/hil_scoring.py` (also importable as `hilbench.i3i4_scoring`) computing the
 I3/I4 gate products. Everything in it is public development material and must not be treated as a private
 witness form; `laws.theta_check` accepts its manifest schema.
+
+## Private-split readings (2026-09-05)
+
+`records/private_agent_claude.json` and `records/private_llm_deepseek.json`: seeds derived from the committed salt
+(verified at start), fresh roots, evaluator block in the record, seeds scrubbed. Claude Code pair: C3, M1, I1(+I2),
+O1, SA2, **T0** (one false completion on the unsatisfiable-specification trap), U0, HLIS 65.8 (public: T1, U1, 71.3).
+Bare DeepSeek: HLIS 31.3/39.2/39.2, HIL 35.0 (public 35.2), frontier T0 at every rung. Contrast-type coordinates
+reproduced exactly; the delegation gate at p=0.80 over four T1 episodes moved on one delivery.

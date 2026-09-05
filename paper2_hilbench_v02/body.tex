@@ -287,7 +287,7 @@ The Core's delegation ceiling is T1, and the first frontier pair sits on it (\S\
 
 Public seeds are $\{0,\ldots,5\}$ and ship with keys, generators and verifiers; they are for development, and a public reading is labelled as one. Private seeds are derived per family by HMAC-SHA256 from a withheld salt; the salt's SHA-256 is published in the repository (\texttt{PRIVATE\_SPLIT\_COMMITMENT.json}, commitment \texttt{53e202f4\ldots}), and the runner refuses a salt whose hash does not match. Because items are generated rather than stored, the private split contains no files to leak: what is withheld is 32 bytes. A private reading is valid only when the evaluator did not build the pair and the run root was fresh, and a reveal of the salt at a version boundary lets any past private reading be re-run and checked.
 
-\paragraph{How a private reading is taken.} The runner refuses to start unless the salt file hashes to the published commitment; the seeds it derives are never written to the record, only the fact that the split was private. The run root must not exist. Every record carries an \texttt{evaluator} block --- user, host, split, the instrument's git commit, and two explicit booleans, \texttt{built\_pair} and \texttt{built\_instrument} --- so that the independence the reading claims is a statement in the record rather than an inference from the byline. For the private readings reported in \S\ref{sec:results} the instrument's author took the reading and did not build either pair; the record says so. A reading whose evaluator built the pair is a development reading whatever split it used.
+\paragraph{How a private reading is taken.} The runner refuses to start unless the salt file hashes to the published commitment; the seeds it derives are never written to the record, only the fact that the split was private. The run root must not exist. Every record carries an \texttt{evaluator} block --- user, host, split, the instrument's git commit, and two explicit booleans, \texttt{built\_pair} and \texttt{built\_instrument} --- so that the independence the reading claims is a statement in the record rather than an inference from the byline. For the private readings of \S\ref{sec:privateresults} the instrument's author took the reading and did not build either pair; the record says so. A reading whose evaluator built the pair is a development reading whatever split it used.
 
 This is the ARC-AGI arrangement \citep{arc2026} with one difference: ARC's private set is a corpus that must be guarded; HIL-Bench's private set is a function of a secret, and rotating the secret rotates the set at no cost.
 
@@ -428,6 +428,28 @@ Family & Band & Seeds & Seconds & Outcome \\
 \end{table}
 
 This is the discrimination the Core lacks. The same pair that scores 100 on the Core's delegation surface and shares the top HIL score with a much cheaper model fails half of the T5 discovery seeds --- and one of those failures was a crash after twenty-one minutes with no deliverable, which the contract records as a failed delivery and not as a refusal. The tier costs about an hour per pair; the Core costs seventeen minutes. Both are needed, and v0.2 binds the reference rungs on the extended tier so that a model's HIL curve has headroom where its Core curve has none.
+
+\subsection{The private split, taken}\label{sec:privateresults}
+
+Both subjects were then read on the private split: four seeds derived from the committed salt, verified against \texttt{PRIVATE\_SPLIT\_COMMITMENT.json} at start, fresh roots, and the evaluator block stamped into each record (\texttt{built\_pair: false}, \texttt{built\_instrument: true}, instrument commit \texttt{ec62cad}). The seeds are not in the published records.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llccY@{}}
+\toprule
+Subject & Reading & Public & Private & What moved \\
+\midrule
+Claude Code pair (agent, with O) & profile & C3, M1, I1(+I2), O1, SA2, T1 & C3, M1, I1(+I2), O1, SA2, \textbf{T0} & one delivery: on the private seed the pair filtered the rows of the unsatisfiable specification and handed the result back as done --- a false completion, priced at $\rho$, which drops the T1 band from 4/4 to 3/4, under the 0.80 gate \\
+ & $U^{*}$, HLIS & U1, 71.3 & \textbf{U0}, 65.8 & the gate refuses U1 at T0; every other coordinate held, and the calibration diagnostic held (Brier 0.011 on 12/12 forecasts) \\
+DeepSeek, bare (llm) & HIL curve & 35.9 / 40.0 / 35.9 & 31.3 / 39.2 / 39.2 & one false completion at HG0 (a wrong rule delivered in 24 s, not a truncation) that HG1 and HG2 held back: harness gain 7.9 \\
+ & HIL-Score & 35.2 & \textbf{35.0} & stable to 0.2; the frontier moved from T1 to T0 at every rung \\
+\bottomrule
+\end{tabularx}
+\caption{Public against private readings for the same two subjects. Every coordinate that is a contrast --- memory, transfer, organizational memory, the twin pair --- reproduced across splits; what moved was delegation at the single band where one delivered wrong answer decides it.}
+\label{tab:private}
+\end{table}
+
+The readings say two things worth separating. The scores are stable: 35.2 against 35.0 for the bare model, and for the pair every contrast-type coordinate identical. And the \emph{levels} are not, because a gate at $p = 0.80$ over four T1 episodes is decided by a single delivery: the pair that was U1 on the public seeds is U0 on the private ones, on the strength of one unsatisfiable specification it should have refused. That is not noise to be averaged away; it is the outcome the delivered-outcome primitive exists to price, and it is the reason the private split is run by someone else --- a self-report would have had every incentive to call that episode a near-miss. It is also the clearest statement yet of the cost of two seeds per band: a certification needs enough episodes at the gating band for one delivery not to move the level, and v0.2 does not have them.
 
 \subsection{Where the frontier pair fails: the sealed discovery family}
 
