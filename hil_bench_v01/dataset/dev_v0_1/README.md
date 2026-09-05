@@ -82,3 +82,11 @@ I4 is NOT certified by repeated Theta updates under an unchanged Psi.
 4. Generate fresh private witnesses under the same canonical laws.
 5. Preregister thresholds and uncertainty rules before official evaluation.
 
+## Changelog
+
+- **v0.1.1 (2026-09-05, in `hil_bench_v01`):** the two I4 meta-campaign rows aligned to the reflexive v2 law
+  (`plan/1/HIL_Bench_Canonical_Testing_Methods_v1_0_Revised_I3_I4_v2.pdf`): `required_checks` gain
+  `agent_generated` and `meta_behavior_signature`, a self-diagnosis step is required before the Psi change, hidden
+  meta-behavior probes and the recursive-depth diagnostic `d_Psi` are declared, and the pass formula states
+  `M_psi = diff * scope * active * behavior`. Everything else is as packaged. `tools/validate_dataset.py` refuses an
+  I4 row without the v2 checks.

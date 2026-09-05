@@ -31,6 +31,10 @@ def validate(root: Path) -> list:
             if r.get("level") not in KNOWN_LEVELS: problems.append(f"{f.name}:{n} unknown level {r.get('level')!r}")
             if r.get("level") == "I3" and any(k not in r for k in I3_PARTS): problems.append(f"{f.name}:{n} I3 campaign lacks {[k for k in I3_PARTS if k not in r]}")
             if r.get("level") == "I4" and any(k not in r for k in I4_PARTS): problems.append(f"{f.name}:{n} I4 meta-campaign lacks {[k for k in I4_PARTS if k not in r]}")
+            if r.get("level") == "I4":                      # v2 law: reflexive, agent-generated, shown on meta-behavior probes
+                need = {"agent_generated", "meta_behavior_signature"}; have = set((r.get("psi_change_contract") or {}).get("required_checks", []))
+                if not need <= have: problems.append(f"{f.name}:{n} I4 contract lacks v2 checks {sorted(need - have)}")
+                if "recursive_depth" not in r: problems.append(f"{f.name}:{n} I4 row does not say how recursive depth d_Psi is reported")
     dup = [i for i, v in per.items() if len(v) > 1]
     if dup: problems.append(f"duplicate form ids: {dup}")
     i3_ids = {i for i, v in per.items() if v[0][2].get("level") == "I3"}
