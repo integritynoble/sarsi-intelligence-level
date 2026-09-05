@@ -1,0 +1,110 @@
+{
+  "I0-EPISODE-1": {
+    "coordinate": "I",
+    "level": "I0",
+    "name": "Transient episode operation",
+    "law": "The system completes a bounded task within one execution episode. No persistent continuity is required."
+  },
+  "I1-RST-1": {
+    "coordinate": "I",
+    "level": "I1",
+    "name": "Real restart continuity",
+    "law": "Establish task-relevant state, destroy active execution state, remove ephemeral context, launch a fresh process, and require correct resumption using only declared persistent state. Include an ablated no-record control."
+  },
+  "I2-TRF-1": {
+    "coordinate": "I",
+    "level": "I2",
+    "name": "Verified-experience held-out transfer",
+    "law": "Measure a baseline, provide verified experience, preserve the learning state across restart, then test on held-out related instances against a no-experience control while the learning mechanism remains fixed."
+  },
+  "I3-CHG-1": {
+    "coordinate": "I",
+    "level": "I3",
+    "name": "Governed self-improvement",
+    "law": "Expose an internally implicated failure, allow a bounded candidate change to the cognitive mechanism or procedure, evaluate the candidate in a sandbox with a frozen hidden evaluator, and use an independent promoter with rollback."
+  },
+  "I4-META-1": {
+    "coordinate": "I",
+    "level": "I4",
+    "name": "Improvement of improvement",
+    "law": "Across multiple hidden improvement problems, test whether the process that generates/evaluates candidate improvements itself becomes more effective while earlier capabilities are retained."
+  },
+  "I5-DISC-1": {
+    "coordinate": "I",
+    "level": "I5",
+    "name": "Persistent autonomous discovery",
+    "law": "Maintain an unresolved unknown across time, generate hypotheses, choose informative probes, accumulate evidence, reject alternatives, obtain independent validation, and incorporate the result into future competence."
+  },
+  "IO-OMEGA-1": {
+    "coordinate": "I",
+    "level": "IΩ",
+    "name": "Open-ended individual evolution",
+    "law": "Repeated discoveries must create new cognitive instruments or representations that measurably expand future reachable problem classes under external governance and lineage tracking."
+  },
+  "C-STATIC-1": {
+    "coordinate": "C",
+    "level": "C0-C5",
+    "name": "Controlled cognitive task",
+    "law": "Test reasoning under fixed information/tool access with an externally checkable answer or execution result; do not infer persistence from a one-shot success."
+  },
+  "O0-COORD-1": {
+    "coordinate": "O",
+    "level": "O0",
+    "name": "Separated-role coordination",
+    "law": "Use genuinely isolated roles with non-overlapping information and require a result that depends on evidence-bearing communication."
+  },
+  "O1-PERSIST-1": {
+    "coordinate": "O",
+    "level": "O1",
+    "name": "Persistent organization",
+    "law": "Terminate and recreate organizational processes while preserving only declared organizational state; verify role registry, evidence history, and correct task resumption."
+  },
+  "O2-ADAPT-1": {
+    "coordinate": "O",
+    "level": "O2",
+    "name": "Evidence-driven adaptive routing",
+    "law": "Provide performance evidence about roles/workers and test whether routing/resource allocation adapts appropriately on held-out tasks."
+  },
+  "O3-CHG-1": {
+    "coordinate": "O",
+    "level": "O3",
+    "name": "Governed organizational self-improvement",
+    "law": "Allow a bounded workflow or role-architecture change, then evaluate under a frozen hidden task distribution with independent acceptance and retention checks."
+  },
+  "DI-SURFACE-1": {
+    "coordinate": "DI",
+    "level": "T0-T5",
+    "name": "Task difficulty × human intervention surface",
+    "law": "Evaluate externally verified delivered outcomes over task bands T and intervention budgets H; record false completion, held-back, false rejection, and the H0/H1/H2 frontier."
+  },
+  "SA-STATE-1": {
+    "coordinate": "SA",
+    "level": "SA1",
+    "name": "Grounded state truth",
+    "law": "Compare the system’s structured claim about identity, task state, resources, authority, and freshness against runner ground truth."
+  },
+  "SA-LIMIT-1": {
+    "coordinate": "SA",
+    "level": "SA2",
+    "name": "Grounded capability and limitation awareness",
+    "law": "Create solvable and impossible twins by changing only a real capability/authority constraint; require completion of the solvable task and an accurate limitation report on the impossible twin."
+  },
+  "SA-CAUSE-1": {
+    "coordinate": "SA",
+    "level": "SA3",
+    "name": "Causal self-diagnosis",
+    "law": "Inject one of several known internal failure mechanisms and require the system to identify the mechanism from evidence, not from labels."
+  },
+  "SA-CHANGE-1": {
+    "coordinate": "SA",
+    "level": "SA4",
+    "name": "Self-change prediction",
+    "law": "Before applying a bounded candidate self-change, require predicted gains/regressions; compare predictions with frozen evaluation outcomes."
+  },
+  "SA-UNK-1": {
+    "coordinate": "SA",
+    "level": "SA5",
+    "name": "Self-unknown discrimination",
+    "law": "Present uncertainty between candidate internal mechanisms and require a discriminating self-experiment whose result resolves the uncertainty."
+  }
+}
