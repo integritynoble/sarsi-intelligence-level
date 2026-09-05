@@ -87,6 +87,10 @@ def _build_parser() -> argparse.ArgumentParser:
     e.add_argument("--ai4science", default="/home/spiritai/pwm/Physics_World_Model/AI4Science")
     m = sub.add_parser("m1"); m.add_argument("--root", type=Path, required=True); m.add_argument("--exec", dest="executor", required=True); m.add_argument("--limit", type=int, default=300); m.add_argument("--tag", default="r2")
     om = sub.add_parser("o"); om.add_argument("--root", type=Path, required=True); om.add_argument("--exec", dest="executor", required=True); om.add_argument("--limit", type=int, default=300); om.add_argument("--tag", default="o2")
+    g = sub.add_parser("gating", help="append episodes at the gating band to an existing record and re-finalize")
+    g.add_argument("--root", type=Path, required=True); g.add_argument("--exec", dest="executor", default=None); g.add_argument("--limit", type=int, default=300)
+    g.add_argument("--split", choices=("public", "private"), default="public"); g.add_argument("--salt-file"); g.add_argument("--band", default=None)
+    g.add_argument("--base", default=os.environ.get("HILBENCH_LLM_BASE")); g.add_argument("--key", default=os.environ.get("HILBENCH_LLM_KEY")); g.add_argument("--model", default=os.environ.get("HILBENCH_LLM_MODEL"))
     c = sub.add_parser("commit-private"); c.add_argument("--salt-file", required=True)
     return ap
 
@@ -99,6 +103,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         split.COMMITMENT_FILE.write_text(json.dumps({"commitment": split.commitment(salt), "n_private_seeds": 4,
                                                       "derivation": "HMAC-SHA256(salt, 'hilbench:i')[:4] as int mod 1e6 + 1000, i in 0..3"}, indent=1))
         print("committed", split.commitment(salt)); return 0
+    if a.cmd == "gating":
+        seeds = _selected_seeds(a.split, a.salt_file)
+        if a.base: core.LLM_BASE = a.base
+        if a.key: core.LLM_KEY = a.key
+        if a.model: core.LLM_MODEL = a.model
+        core.rerun_gating(a.root, seeds, a.executor, a.limit, band=a.band); return 0
     if a.cmd == "o":
         core.rerun_o(a.root, a.executor, a.limit, tag=a.tag); return 0
     if a.cmd == "m1":

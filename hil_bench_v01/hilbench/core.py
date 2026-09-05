@@ -160,7 +160,10 @@ def phase_m1(R, exec_tmpl, root: Path, seeds, limit, env, log):
     log(f"M1 restart: recall={vb['pass']} ({vb['failure_mode']}) ablated={vb0['pass']} ({vb0['failure_mode']}) -> {R['M_level']}")
 
 def finalize(R, root: Path, log=print):
-    R["SAcal"]["n_expected"] = sum(1 for e in R["TH"] if e["family"] in TH)   # only the domain families ask for a forecast; the traps never do
+    pairs = [(e["forecast"], int(e["delivered_correct"])) for e in R["TH"] if e.get("forecast") is not None]
+    b, base = sa_probes.brier(pairs)
+    R["SAcal"].update({"n": len(pairs), "brier": b, "constant_forecast_brier": base,
+                       "n_expected": sum(1 for e in R["TH"] if e["family"] in TH)})   # only the domain families ask for a forecast; the traps never do
     R["SAcal"]["pass"] = score.sacal_pass(R["SAcal"], R["SAcal"]["n_expected"])
     # profile and gate
     sa_level = "SA0"
@@ -213,6 +216,57 @@ def _phase_o(R, exec_tmpl, root: Path, seeds, limit, env, log):
                "transfer": int(o1b["pass"]) - int(o1_abl["pass"])}
     log(f"O: o0={R['O0']['pass']} o1 a={o1a['pass']} b={o1b['pass']} ablated={o1_abl['pass']} -> transfer {R['O1']['transfer']}")
     _save(root, R)
+
+def gating_band(R: dict) -> str:
+    """The band the delegation gate is decided at: the lowest band whose net rate is below p, else the highest band present."""
+    eps = R["TH"] if "TH" in R else R["rungs"]["HG0"]["episodes"]
+    bands = sorted({e["band"] for e in eps}, key=lambda b: int(b[1:]))
+    for b in bands:
+        rate, n = score.band_rate(eps, b)
+        if rate is not None and rate < score.P_GATE: return b
+    return bands[-1]
+
+def rerun_gating(root: Path, seeds, exec_tmpl=None, limit=300, env=None, log=print, band=None):
+    """Append episodes at the gating band for every (family, seed) not yet in the record, then re-finalize. Works on an
+    agent record (one surface) and on a bare-model record (every rung). Existing episodes are never re-run."""
+    R = json.loads((root / "record.json").read_text()); band = band or gating_band(R)
+    fams = [f for f, b in BAND.items() if b == band and (f in TH or f in HARD)]
+    log(f"gating band {band}: families {fams}; seeds {list(seeds)}")
+    if R.get("mode") == "agent":
+        have = {(e["family"], e["seed"]) for e in R["TH"]}; n0 = len(R["TH"])
+        for fam in fams:
+            for s in seeds:
+                if (fam, s) in have: continue
+                if fam in TH:
+                    e = th_episode(fam, s, root, exec_tmpl, limit, env, "HG0", forecast=True)
+                else:
+                    gen, ver, _s, _n, hlimit = hard.ITEMS[fam]; files, key = gen(s); ws = _ws(root, f"{fam}_s{s}_gating"); write_workspace(ws, files)
+                    r = run_exec(exec_tmpl, TASK, ws, hlimit, env); v = ver(ws, key); ok = v["pass"] and r["termination_reason"] != "timed_out"
+                    e = {"family": fam, "band": band, "seed": s, "budget": "H0", "rung": "HG0", "verifier_pass": v["pass"], "delivered": True, "held_back": False,
+                         "delivered_correct": ok, "false_completion": (not v["pass"]) and r["termination_reason"] != "timed_out",
+                         "termination_reason": r["termination_reason"], "seconds": r["seconds"], "failure_mode": v["failure_mode"], "forecast": None, "gating_rerun": True}
+                e["gating_rerun"] = True; R["TH"].append(e)
+                log(f"GATING {fam} s{s}: {'pass' if e['delivered_correct'] else 'FAIL'} fc={e['false_completion']} {e['seconds']}s")
+        R.setdefault("gating_reruns", []).append({"band": band, "added": len(R["TH"]) - n0, "seeds": [s for s in seeds]})
+        return finalize(R, root, log)
+    # bare-model record: every rung
+    exec_tmpl = exec_tmpl or _llm_exec_tmpl(); added = 0
+    for rung, V in R["rungs"].items():
+        have = {(e["family"], e["seed"]) for e in V["episodes"]}
+        for fam in fams:
+            for s in seeds:
+                if (fam, s) in have: continue
+                e = llm_episode(fam, s, root, exec_tmpl, limit, env, rung); e["gating_rerun"] = True; V["episodes"].append(e); added += 1
+                log(f"{rung} GATING {fam} s{s}: {'pass' if e['delivered_correct'] else ('HELD' if e['held_back'] else 'FAIL')} fc={e['false_completion']} {e['seconds']}s")
+        eps = V["episodes"]; prof = V["profile"]
+        prof.update({"T_frontier": score.frontier(eps), "A_DI_net": score.net_surface(eps), "A_DI_gross": score.gross_surface(eps),
+                     "false_completions": sum(e["false_completion"] for e in eps), "held_back": sum(e["held_back"] for e in eps)})
+        prof["U"], prof["U_bottleneck"] = score.gate(prof)
+        A = dict(V["achievement"]); A["DI"] = (prof["A_DI_net"] or 0) / 100; V["achievement"] = A
+        V["HLIS"], V["HLIS_dims"] = score.hlis(A); V["seconds"] = round(sum(e["seconds"] for e in eps), 1)
+        log(f"{rung}: HLIS={V['HLIS']} U={prof['U']} T={prof['T_frontier']} A_DI={prof['A_DI_net']} fc={prof['false_completions']} hb={prof['held_back']}")
+    R["HIL"] = score.hil({r: V["HLIS"] for r, V in R["rungs"].items()}); R.setdefault("gating_reruns", []).append({"band": band, "added": added, "seeds": [s for s in seeds]})
+    (root / "record.json").write_text(json.dumps(R, indent=1)); log("HIL " + json.dumps(R["HIL"])); return R
 
 def rerun_o(root: Path, exec_tmpl, limit=300, env=None, log=print, tag="o2"):
     """Rerun only the O suite of an existing agent record (after an item repair) and re-finalize."""
