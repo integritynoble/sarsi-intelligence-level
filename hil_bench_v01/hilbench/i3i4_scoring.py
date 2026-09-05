@@ -1,4 +1,4 @@
-"""Development scoring helpers for HIL-Bench public reference forms v0.5 (+ the agent-generated requirement of the reflexive I4 law).
+"""Development scoring helpers for HIL-Bench public reference forms v0.4.
 
 Point-estimate gates are for runner development only. Official certification should
 use preregistered uncertainty rules and independent promotion.

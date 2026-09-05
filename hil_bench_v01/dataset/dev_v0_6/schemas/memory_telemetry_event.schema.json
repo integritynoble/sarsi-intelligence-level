@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hil-bench.dev/schemas/memory_telemetry_event.schema.json",
+  "title": "M-Bench memory instrumentation event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "run_id",
+    "agent_id",
+    "phi_version",
+    "event_type",
+    "timestamp"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "agent_id": {
+      "type": "string"
+    },
+    "phi_version": {
+      "type": "string"
+    },
+    "event_type": {
+      "enum": [
+        "memory_write",
+        "memory_retrieve",
+        "memory_update",
+        "memory_consolidate",
+        "memory_demote",
+        "memory_prune",
+        "memory_merge",
+        "memory_repair",
+        "memory_snapshot",
+        "memory_restore",
+        "memory_migrate",
+        "phi_activate",
+        "phi_deactivate"
+      ]
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "component_version": {
+      "type": "string"
+    },
+    "details": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

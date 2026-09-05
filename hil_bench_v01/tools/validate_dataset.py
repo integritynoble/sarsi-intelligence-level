@@ -63,6 +63,16 @@ def validate(root: Path) -> list:
                 if k not in r: problems.append(f"{f.parent.name}:{n} memory form lacks {k}")
             if not (f.parent / "metric_contract.json").exists() or not (f.parent / "difficulty_grid.json").exists(): problems.append(f"{f.parent.name}: missing metric_contract.json or difficulty_grid.json")
     if mb:
+        lat = root / "memory_level_lattice.json"
+        if not lat.exists(): problems.append("memory_level_lattice.json missing")
+        else:
+            L = json.loads(lat.read_text())
+            if L.get("ordering") != ["M0", "M1", "M2", "M3", "M4", "M5", "MΩ"]: problems.append("memory lattice ordering is not M0..M5,MΩ")
+            for lv, spec in (L.get("levels") or {}).items():
+                exp = ["M0", "M1", "M2", "M3", "M4", "M5", "MΩ"]; want = exp[:exp.index(lv)] if lv in exp else None
+                if want is not None and spec.get("required_lower_levels") != want: problems.append(f"lattice: {lv} must require {want}")
+        for c in ("interface_contract.json", "permission_contract.json"):
+            if not (root / "M_Bench" / "MOMEGA_EVOLVE" / c).exists(): problems.append(f"MOMEGA_EVOLVE lacks {c}")
         pub_m = {i for i, v in per.items() if v[0][2].get("coordinate") == "M"}
         if pub_m != set(mb): problems.append(f"public/m*.jsonl and M_Bench/*/public_forms.jsonl disagree on ids: {sorted(pub_m ^ set(mb))[:6]}")
     comb = root / "hil_bench_public_dev_combined.jsonl"
@@ -72,7 +82,7 @@ def validate(root: Path) -> list:
     return problems
 
 if __name__ == "__main__":
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_5")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_6")
     probs = validate(root)
     print("\n".join(probs) if probs else f"dataset ok: {root}")
     sys.exit(1 if probs else 0)

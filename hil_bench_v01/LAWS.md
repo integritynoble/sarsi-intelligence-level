@@ -57,7 +57,7 @@ stress (difficulty vector); is the level sufficient for an I claim (prerequisite
 ## Memory is a one-way prerequisite, never a promotion
 
 μ = (M0, M1, M3, M4, M4, M5) for I0–I5; IΩ needs M ≥ M5, MΩ only when the memory architecture is claimed to evolve.
-`A ⊨ I_n ⟺ V_{I,n}(A) ∧ A ⊨ M_{μ_n} ∧ K_{I,<n}(A)`; `A ⊨ M_k ⟺ V^M_k(A) ∧ K^M_{<k}(A)`. The M-Bench score is reported
+`A ⊨ I_n ⟺ V_{I,n}(A) ∧ A ⊨ M_{μ_n} ∧ K_{I,<n}(A)`; `Pass(M_k) = V_new,k ∧ ∏_{j<k} K_Mj` — **no level skipping**: M5 is refused if M3 was lost, and the runner names the level; retention is of capability, not implementation (an architecture may be replaced at MΩ and must pass M0–M5 again). MΩ needs the instrumented interface I_Φ: contents fixed at D*, agent-generated Φ₀→Φ₁, fixed-content pair, delta ablation A(D*,Φ₁−ΔΦ), migration guard; a black box gets diagnostic evidence only. The M-Bench score is reported
 beside I, never inside it (`laws.i_certification_with_memory`).
 
 ## What is *not* a law

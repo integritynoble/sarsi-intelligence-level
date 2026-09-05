@@ -1,0 +1,124 @@
+{
+  "version": "0.6",
+  "coordinate": "M",
+  "ordering": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "MΩ"
+  ],
+  "certification_semantics": "cumulative capability retention",
+  "implementation_retention_required": false,
+  "capability_retention_required": true,
+  "rule": "M_(k+1) implies M_k for every adjacent finite level; MΩ implies M5 and therefore all M0-M5.",
+  "formal_gate": "Pass(M_k) = V_new,k AND product_j<k K_Mj",
+  "levels": {
+    "M0": {
+      "canonical_method": "M0-EPH",
+      "new_capability": "correct use and update of task-relevant working state inside one live episode",
+      "required_lower_levels": [],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode"
+      ]
+    },
+    "M1": {
+      "canonical_method": "M1-RST",
+      "new_capability": "persistence of declared state across genuine execution discontinuity",
+      "required_lower_levels": [
+        "M0"
+      ],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode",
+        "persistence of declared state across genuine execution discontinuity"
+      ]
+    },
+    "M2": {
+      "canonical_method": "M2-PROV",
+      "new_capability": "structured episodic memory with provenance, temporal order, relevance, and stale-state suppression",
+      "required_lower_levels": [
+        "M0",
+        "M1"
+      ],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode",
+        "persistence of declared state across genuine execution discontinuity",
+        "structured episodic memory with provenance, temporal order, relevance, and stale-state suppression"
+      ]
+    },
+    "M3": {
+      "canonical_method": "M3-CONSOL",
+      "new_capability": "semantic/procedural consolidation with update, supersession, and demotion",
+      "required_lower_levels": [
+        "M0",
+        "M1",
+        "M2"
+      ],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode",
+        "persistence of declared state across genuine execution discontinuity",
+        "structured episodic memory with provenance, temporal order, relevance, and stale-state suppression",
+        "semantic/procedural consolidation with update, supersession, and demotion"
+      ]
+    },
+    "M4": {
+      "canonical_method": "M4-MGMT",
+      "new_capability": "self-management of memory through conflict handling, repair, pruning, snapshots, and recovery",
+      "required_lower_levels": [
+        "M0",
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode",
+        "persistence of declared state across genuine execution discontinuity",
+        "structured episodic memory with provenance, temporal order, relevance, and stale-state suppression",
+        "semantic/procedural consolidation with update, supersession, and demotion",
+        "self-management of memory through conflict handling, repair, pruning, snapshots, and recovery"
+      ]
+    },
+    "M5": {
+      "canonical_method": "M5-LONG",
+      "new_capability": "longitudinal knowledge/evidence lineage across projects, restarts, and long horizons",
+      "required_lower_levels": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4"
+      ],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode",
+        "persistence of declared state across genuine execution discontinuity",
+        "structured episodic memory with provenance, temporal order, relevance, and stale-state suppression",
+        "semantic/procedural consolidation with update, supersession, and demotion",
+        "self-management of memory through conflict handling, repair, pruning, snapshots, and recovery",
+        "longitudinal knowledge/evidence lineage across projects, restarts, and long horizons"
+      ]
+    },
+    "MΩ": {
+      "canonical_method": "MOMEGA-EVOLVE",
+      "new_capability": "governed externally validated improvement of the behaviorally active memory mechanism Φ",
+      "required_lower_levels": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5"
+      ],
+      "cumulative_capability_set": [
+        "correct use and update of task-relevant working state inside one live episode",
+        "persistence of declared state across genuine execution discontinuity",
+        "structured episodic memory with provenance, temporal order, relevance, and stale-state suppression",
+        "semantic/procedural consolidation with update, supersession, and demotion",
+        "self-management of memory through conflict handling, repair, pruning, snapshots, and recovery",
+        "longitudinal knowledge/evidence lineage across projects, restarts, and long horizons",
+        "governed externally validated improvement of the behaviorally active memory mechanism Φ"
+      ]
+    }
+  }
+}

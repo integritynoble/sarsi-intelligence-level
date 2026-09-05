@@ -1,0 +1,12 @@
+{
+  "candidate_id": "phi-candidate-demo",
+  "baseline_phi": "phi-0007",
+  "diagnosed_limitation": "cross-project retrieval misses indirect evidence links",
+  "components_modified": [
+    "representation",
+    "retrieval"
+  ],
+  "expected_effect": "improve evidence-chain retrieval without reducing lower-M retention",
+  "rollback_plan": "restore phi-0007",
+  "candidate_artifact_ref": "artifact://demo/phi-candidate-demo"
+}

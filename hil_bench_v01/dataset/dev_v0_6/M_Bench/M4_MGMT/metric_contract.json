@@ -1,0 +1,33 @@
+{
+  "level": "M4",
+  "canonical_method": "M4-MGMT",
+  "metrics": [
+    "repair_precision",
+    "q_conf",
+    "harmful_prune_rate",
+    "q_recover",
+    "protected_retention_drop"
+  ],
+  "illustrative_thresholds_not_official": {
+    "repair_precision_min": 0.8,
+    "q_conf_min": 0.8,
+    "harmful_prune_rate_max": 0.1,
+    "q_recover_min": 0.8,
+    "protected_retention_drop_max": 0.1
+  },
+  "retention": [
+    "M0",
+    "M1",
+    "M2",
+    "M3"
+  ],
+  "cumulative_rule": "retain_all_lower_M_capabilities",
+  "required_lower_levels": [
+    "M0",
+    "M1",
+    "M2",
+    "M3"
+  ],
+  "new_capability": "self-management of memory through conflict handling, repair, pruning, snapshots, and recovery",
+  "pass_law": "new_capability_gate AND all required_lower_levels pass"
+}

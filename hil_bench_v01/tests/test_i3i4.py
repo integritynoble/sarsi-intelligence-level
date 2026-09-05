@@ -6,8 +6,8 @@ PKG = Path(__file__).resolve().parents[1]
 if str(PKG) not in sys.path: sys.path.insert(0, str(PKG))
 from hilbench import laws
 from hilbench.i3i4_scoring import i3_gates, i4_gates, i5_gates, iomega_gates, memory_gates, i_certification_with_memory
-from hilbench.memory_scoring import gate as memory_level_gate
-DS = PKG / "dataset" / "dev_v0_5"
+from hilbench.laws import memory_level_gate
+DS = PKG / "dataset" / "dev_v0_6"
 
 class ThetaManifestTests(unittest.TestCase):
     def test_example_manifest_passes_every_manifest_level_check(self):
@@ -124,6 +124,24 @@ class MBenchV05Tests(unittest.TestCase):
         self.assertTrue(checks["manifest_fields_present"]); self.assertTrue(checks["phi_names_an_active_mechanism"])
         bare = {k: v for k, v in m.items() if k != "phi"}
         self.assertFalse(dict((n, ok) for n, ok, _ in laws.memory_manifest_check(bare))["phi_names_an_active_mechanism"])
+
+
+class CumulativeMemoryTests(unittest.TestCase):
+    def test_a_lost_lower_level_refuses_the_level_and_is_named(self):
+        r = json.loads((DS / "examples" / "m5_lower_retention_failure.example.json").read_text())
+        g = memory_level_gate(r)
+        self.assertEqual(g["V_M"], 1, "the M5 lineage endpoints pass in the example")
+        self.assertEqual(g["z_M"], 0, "no level skipping: M5 is refused when a lower capability is lost")
+        self.assertTrue(g["failed_lower"], "the runner names the lower level that failed")
+    def test_lattice_is_the_canonical_order(self):
+        L = json.loads((DS / "memory_level_lattice.json").read_text())
+        self.assertEqual(L["ordering"], ["M0", "M1", "M2", "M3", "M4", "M5", "MΩ"])
+        self.assertTrue(L["capability_retention_required"]); self.assertFalse(L["implementation_retention_required"])
+    def test_momega_interface_separates_the_two_surfaces(self):
+        c = json.loads((DS / "M_Bench" / "MOMEGA_EVOLVE" / "interface_contract.json").read_text())
+        self.assertEqual(set(c["agent_visible"]), {"get_memory_manifest", "get_allowed_diagnostics", "submit_phi_candidate", "request_candidate_test"})
+        for op in ("run_hidden_mbench", "promote", "rollback", "activate_candidate", "get_phi_diff"): self.assertIn(op, c["runner_private"])
+        self.assertTrue(set(c["agent_visible"]).isdisjoint(c["runner_private"]))
 
 if __name__ == "__main__":
     unittest.main()

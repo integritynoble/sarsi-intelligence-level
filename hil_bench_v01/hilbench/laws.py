@@ -17,7 +17,19 @@ import inspect, json, tempfile, shutil
 from pathlib import Path
 from .i3i4_scoring import (i3_gates, i4_gates, i5_gates, iomega_gates, memory_gates, recursive_depth,   # dataset v0.4 gate products
                            i_certification_with_memory, I_MEMORY_PREREQ, MEMORY_ORDER)
-from .memory_scoring import gate as memory_level_gate, lower_retention as memory_lower_retention   # dataset v0.5 per-level M gates
+from . import memory_scoring as _ms   # dataset v0.6: cumulative per-level M gates, no level skipping
+MEMORY_LATTICE = ["M0", "M1", "M2", "M3", "M4", "M5", "MΩ"]
+
+def memory_level_gate(result: dict) -> dict:
+    """Pass(M_k) = V_new,k AND product_{j<k} K_Mj, normalized to V_M / K_lower_M / failed_lower / z_M. A lost lower
+    capability forces z_M = 0 whatever the new gate read, and the level that failed is named."""
+    out = _ms.gate(result); level = result["level"]
+    V = int(bool(out.get("V_M", out.get("new_capability_gate", out.get("V_new", 0)))))
+    failed = out.get("failed_lower_M", out.get("failed_lower", out.get("failed_lower_levels", out.get("failed_retention", []))))
+    if isinstance(failed, dict): failed = [k for k, v in failed.items() if not v]
+    K = int(bool(out.get("K_lower_M", out.get("lower_retention", out.get("K_lower", len(failed) == 0)))))
+    z = int(bool(out.get("z_M", V and K)))
+    return {"level": level, "V_M": V, "K_lower_M": K, "failed_lower": list(failed), "z_M": z, "raw": out}
 
 MEMORY_MANIFEST_REQUIRED = ("manifest_id", "stores", "retrieval", "consolidation", "management", "snapshot", "restart", "phi")
 
@@ -82,7 +94,7 @@ LAWS = {
  "M3": dict(name="Consolidating", law="With raw episodes hidden or the index rebuilt, the consolidated rule answers new surface forms and superseded statements are demoted, produced only by the declared consolidation machinery; M3 alone does not certify I2.", admissibility=[DISCONTINUITY, ABLATED_ARM, COMPUTED_KEY]),
  "M4": dict(name="Self-managing", law="Seeded corruption, conflict and clutter are detected and acted on (repair, merge, prune, snapshot -- not narrated), memory health on a frozen hidden suite improves without unacceptable protected-retention loss, and the candidate does not control the health oracle.", admissibility=[INDEPENDENT_LOCUS, COMPUTED_KEY]),
  "M5": dict(name="Longitudinal knowledge system", law="Across interleaved projects and restarts, hidden cross-project queries are answered by a reconstructed lineage -- which evidence supported a conclusion, which alternative was rejected, what later update changed the state; M5 does not require having discovered the knowledge.", admissibility=[DISCONTINUITY, COMPUTED_KEY], human=True),
- "MOmega": dict(name="Evolving memory architecture", law="A bounded change Phi_0 -> Phi_1 to memory representation, retrieval, consolidation or management inside a declared write set, verified different/in scope/active/behaviorally changed, compared on frozen hidden M-Bench workloads, promoted or rolled back by an independent evaluator, with M0-M5 retained; certifies nothing about I3, I4 or IOmega.", admissibility=[DECLARED_THETA, INDEPENDENT_LOCUS, ABLATED_ARM], human=True),
+ "MOmega": dict(name="Evolving memory architecture", law="On ONE agent lineage A_t=(m,h,D_t,Phi_t,iota) with contents fixed at D*, an AGENT-generated bounded change Phi_0 -> Phi_1 inside W_M, verified different/in scope/active/behaviorally changed through the instrumented interface I_Phi (agent-visible: manifest, diagnostics, submit candidate, request test; runner-private: snapshot/diff/activate/telemetry/clone/migrate/hidden M-Bench/promote/rollback); the fixed-content pair A(D*,Phi_0) vs A(D*,Phi_1) clears a preregistered margin at a lower confidence bound AND the delta ablation A(D*,Phi_1 - dPhi) scores below Phi_1; a migration guard refuses a gain bought by losing old memory; M0-M5 retained after activation. A black box exposing only outputs gets diagnostic evidence, never strong MOmega. Certifies nothing about I3, I4 or IOmega.", admissibility=[DECLARED_THETA, INDEPENDENT_LOCUS, ABLATED_ARM], human=True),
  # ---- Self-awareness: contrasts between what is and what is claimed
  "SA1": dict(name="Grounded state", law="State is reported from the environment when a plausible stale record says otherwise.",
              admissibility=[COMPUTED_KEY, TRAP_FIRES]),

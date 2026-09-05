@@ -1,0 +1,51 @@
+{
+  "run_id": "RUN-M5-RETENTION-FAIL-EXAMPLE",
+  "form_id": "PUB-M5-D03",
+  "level": "M5",
+  "benchmark_version": "0.6",
+  "memory_manifest_hash": "sha256:demo",
+  "difficulty_vector": {},
+  "metrics": {
+    "q_chain": 0.92,
+    "q_source": 0.93,
+    "q_cross": 0.9,
+    "q_scope": 0.91,
+    "q_stale": 0.92,
+    "q_repro": 0.9
+  },
+  "thresholds": {
+    "q_chain_min": 0.8,
+    "q_source_min": 0.8,
+    "q_cross_min": 0.8,
+    "q_scope_min": 0.8,
+    "q_stale_min": 0.8,
+    "q_repro_min": 0.8
+  },
+  "new_capability_gate": true,
+  "required_lower_levels": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ],
+  "retention": {
+    "M0": true,
+    "M1": true,
+    "M2": true,
+    "M3": false,
+    "M4": true
+  },
+  "verifier": {
+    "independent": true
+  },
+  "promotion": {
+    "accepted": false
+  },
+  "expected_scoring": {
+    "V_new": 1,
+    "K_lower_M": 0,
+    "z_M": 0,
+    "reason": "M5 cannot be certified because M3 retention failed"
+  }
+}
