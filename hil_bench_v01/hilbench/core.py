@@ -244,7 +244,9 @@ def llm_episode(fam, seed, root, exec_tmpl, limit, env, rung="HG0"):
         attempts, delivered, held = out["attempts"], out["delivered"], out["held_back"]
         v = mod.verify(ws, key) if delivered else {"pass": False, "failure_mode": "held_back", "accuracy": 0.0, "checks": []}
     something = delivered and (ws / DELIV[fam]).exists()
+    if delivered and (ws / "DECLINED.json").exists() and not something: delivered, held = False, True   # the model declined: held back
     term = attempts[-1]["termination_reason"]
+    if held and not delivered: v = {"pass": False, "failure_mode": "declined", "accuracy": 0.0, "checks": []}
     rec.update({"delivered": delivered, "held_back": held, "verifier_pass": bool(delivered and v["pass"]),
                 "delivered_correct": bool(delivered and v["pass"]), "false_completion": bool(delivered and something and not v["pass"]),
                 "failure_mode": v.get("failure_mode"), "attempts": len(attempts), "termination_reason": term,

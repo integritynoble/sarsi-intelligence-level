@@ -99,7 +99,7 @@ def finish_json_only(base, key, model, prior_text, cwd, timeout=300):
     resp = _call(base, key, model, {"model": model, "temperature": 0.0, "max_tokens": 3000, "messages": [
         {"role": "system", "content": "Output exactly one JSON object and nothing else. No reasoning, no prose, no code fence."},
         {"role": "user", "content": "Here is your previous work on the task (it may be cut off):\n\n" + prior_text[-12000:] +
-         "\n\nNow output ONLY the final JSON object with the deliverable. If you are not certain, give your best complete answer anyway."}]}, timeout)
+         "\n\nNow output ONLY the final JSON object with the deliverable. If you did not finish the work and cannot state the deliverable with confidence, output exactly {\"blocked\": true, \"reason\": \"<why>\"} instead of guessing."}]}, timeout)
     LAST["finish_reason"] = resp["choices"][0].get("finish_reason")
     return resp["choices"][0]["message"].get("content") or ""
 

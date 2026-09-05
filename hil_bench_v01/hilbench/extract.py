@@ -101,6 +101,9 @@ def _collect(fam: str, ws: Path, files: dict) -> dict:
         for k, v in list(r.items()):
             if isinstance(k, str) and "." in k and (isinstance(v, str) or isinstance(v, (dict, list))):
                 out[k] = v if isinstance(v, str) else json.dumps(v)
+        if r.get("blocked") is True and fam not in ("hc_contra", "sa2") and not out:
+            (ws / "DECLINED.json").write_text(json.dumps(r), encoding="utf-8")   # held back: nothing delivered, nothing priced
+            return out
         if deliv and deliv not in out and r:
             if fam == "hc_contra" and r.get("blocked") is True: out["blocked.json"] = json.dumps(r)
             elif fam == "sa2" and r.get("blocked") is True: out["blocked.json"] = json.dumps(r)
