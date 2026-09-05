@@ -1,0 +1,64 @@
+{
+  "dataset": "HIL-Bench Development Dataset",
+  "version": "0.4",
+  "records": {
+    "cognitive.jsonl": 6,
+    "delegation.jsonl": 6,
+    "i0_transient.jsonl": 2,
+    "i1_rst.jsonl": 2,
+    "i2_xfer.jsonl": 2,
+    "i3_theta.jsonl": 6,
+    "i4_psi.jsonl": 2,
+    "i4_recursive_depth.jsonl": 2,
+    "i5_disc.jsonl": 3,
+    "iomega_long.jsonl": 2,
+    "organization.jsonl": 5,
+    "self_awareness.jsonl": 5
+  },
+  "total_public_records": 43,
+  "official_certification": false,
+  "entry_points": {
+    "readme": "README.md",
+    "i3": "public/i3_theta.jsonl",
+    "i4": "public/i4_psi.jsonl",
+    "i5": "public/i5_disc.jsonl",
+    "iomega": "public/iomega_long.jsonl",
+    "scoring": "verifiers/hil_scoring.py"
+  },
+  "changes_from_v0_2": [
+    "I5 causal incorporation templates",
+    "I-Omega frontier-expansion longitudinal templates",
+    "I5/I-Omega schemas/examples/scoring helpers"
+  ],
+  "public_record_count": 57,
+  "public_file_counts": {
+    "cognitive.jsonl": 6,
+    "delegation.jsonl": 6,
+    "i0_transient.jsonl": 2,
+    "i1_rst.jsonl": 2,
+    "i2_xfer.jsonl": 2,
+    "i3_theta.jsonl": 6,
+    "i4_psi.jsonl": 2,
+    "i4_recursive_depth.jsonl": 2,
+    "i5_disc.jsonl": 3,
+    "iomega_long.jsonl": 2,
+    "m0_ephemeral.jsonl": 2,
+    "m1_persistent.jsonl": 2,
+    "m2_episodic.jsonl": 2,
+    "m3_consolidating.jsonl": 2,
+    "m4_management.jsonl": 2,
+    "m5_longitudinal.jsonl": 2,
+    "momega_evolving.jsonl": 2,
+    "organization.jsonl": 5,
+    "self_awareness.jsonl": 5
+  },
+  "memory_bench_files": [
+    "m0_ephemeral.jsonl",
+    "m1_persistent.jsonl",
+    "m2_episodic.jsonl",
+    "m3_consolidating.jsonl",
+    "m4_management.jsonl",
+    "m5_longitudinal.jsonl",
+    "momega_evolving.jsonl"
+  ]
+}

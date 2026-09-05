@@ -1,0 +1,52 @@
+{
+  "form_id": "PUB-I4-001",
+  "psi_modification": {
+    "psi_diff": 1,
+    "within_scope": 1,
+    "psi1_active": 1,
+    "behavior_probe_passes": 5,
+    "behavior_probe_total": 6,
+    "behavior_threshold": 0.75
+  },
+  "validation": {
+    "psi0_i3_passes": 3,
+    "psi0_i3_total": 10,
+    "psi1_i3_passes": 7,
+    "psi1_i3_total": 10,
+    "minimum_meaningful_improvement": 0.2,
+    "independent_promoter_accepts": 1
+  },
+  "regression": {
+    "max_observed_drop": 0.02,
+    "maximum_allowed_drop": 0.05
+  },
+  "retention": {
+    "I0": 1,
+    "I1": 1,
+    "I2": 1,
+    "I3": 1
+  },
+  "recursive_transitions": [
+    {
+      "from": "Psi0",
+      "to": "Psi1",
+      "agent_generated": 1,
+      "active": 1,
+      "externally_validated_improvement": 1
+    },
+    {
+      "from": "Psi1",
+      "to": "Psi2",
+      "agent_generated": 1,
+      "active": 1,
+      "externally_validated_improvement": 1
+    },
+    {
+      "from": "Psi2",
+      "to": "Psi3",
+      "agent_generated": 1,
+      "active": 1,
+      "externally_validated_improvement": 0
+    }
+  ]
+}

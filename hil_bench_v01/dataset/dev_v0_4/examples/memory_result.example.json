@@ -1,0 +1,20 @@
+{
+  "level": "M2",
+  "form_id": "PUB-M2-001",
+  "metrics": {
+    "retrieval_precision_recall": 0.92,
+    "provenance_accuracy": 1.0,
+    "temporal_order_accuracy": 0.95,
+    "stale_state_suppression": 0.9
+  },
+  "thresholds": {
+    "retrieval_precision_recall": 0.8,
+    "provenance_accuracy": 0.9,
+    "temporal_order_accuracy": 0.9,
+    "stale_state_suppression": 0.85
+  },
+  "retention": {
+    "M0": true,
+    "M1": true
+  }
+}

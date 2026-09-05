@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I-OMEGA-LONG development program v0.3",
+  "type": "object",
+  "required": [
+    "form_id",
+    "coordinate",
+    "level",
+    "canonical_method",
+    "bounded_charter",
+    "frontier_definition",
+    "cycle_contract",
+    "frontier_test_contract",
+    "minimum_validated_expansion_cycles",
+    "retention"
+  ],
+  "properties": {
+    "level": {
+      "const": "IΩ"
+    },
+    "canonical_method": {
+      "const": "I-OMEGA-LONG"
+    },
+    "cycles": {
+      "type": "array",
+      "minItems": 2
+    },
+    "minimum_validated_expansion_cycles": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "retention": {
+      "type": "array",
+      "contains": {
+        "const": "I5"
+      }
+    }
+  }
+}

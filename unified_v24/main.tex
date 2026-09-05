@@ -279,9 +279,34 @@ M\Om{} & Evolving memory architecture: representation, retrieval, consolidation 
 \label{tab:m}
 \end{table}
 
+\textbf{Cumulative memory rule.} Memory levels are cumulative for certification: a claim $M_k$ must retain every required lower memory capability under the same declared resource envelope, so the benchmark tests the behaviour of the memory system and not the presence of its components. Long context is not an $M1$ result --- a large context makes information available while an executor remains live, and $M1$ begins only when declared state survives a real discontinuity --- and an installed vector store, database or memory API is architecture, not evidence that the corresponding capability works.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llY@{}}
+\toprule
+Level & Canonical witness & Minimum evidence \\
+\midrule
+M0 & \textsc{M0-Eph} & correct use of hidden within-episode state; no unsupported durability claim \\
+M1 & \textsc{M1-Rst} & store declared state, terminate the executor, invalidate ephemeral context, restart, recover the state with provenance; an ablated-state arm must not explain success \\
+M2 & \textsc{M2-Prov} & retrieve the correct episode under distractors, identify its source and time, prefer the current superseding fact, suppress stale state \\
+M3 & \textsc{M3-Consol} & consolidate several episodes into a correct reusable semantic or procedural record; after raw episodes are hidden or the index rebuilt, preserve the current rule and demote superseded statements \\
+M4 & \textsc{M4-Mgmt} & detect seeded corruption, conflict and clutter; repair or prune; recover from a snapshot; improve hidden memory-health measures without unacceptable retention loss \\
+M5 & \textsc{M5-Long} & maintain a multi-project evidence graph linking hypotheses, experiments, evidence, decisions and rejected alternatives across restarts; support cross-project retrieval and reproducible decision lineage \\
+M\Om{} & \textsc{MOmega-Evolve} & a bounded change to memory representation, retrieval, consolidation or management under frozen hidden evaluation, independent promotion and rollback, with M0--M5 retained \\
+\bottomrule
+\end{tabularx}
+\caption{The M-Bench witness families, one per memory level; the companion benchmark paper specifies the canonical protocols.}
+\label{tab:mbench}
+\end{table}
+
 \subsubsection{Memory prerequisites for Individual Intelligence}
 
-I and M are evaluated separately and then joined by a gate. The thresholds below are working definitions requiring calibration, and they deliberately permit profiles such as I1/M4.
+I and M are evaluated separately and then joined by a gate. The compact certification law is
+\begin{equation}
+A \models I_n \iff V_{I,n}(A) = 1 \;\wedge\; A \models M_{\mu_n} \;\wedge\; K_{I,<n}(A) = 1,
+\end{equation}
+where $V_{I,n}$ is the level-specific Individual verifier and $K_{I,<n}$ is lower-I retention; a high $M$ can satisfy the prerequisite and can never promote $I$ by itself, and the M-Bench score is reported separately from $I$ so that storage or sophisticated management cannot masquerade as learning, self-improvement or discovery. The thresholds below are working definitions requiring calibration, and they deliberately permit profiles such as I1/M4.
 
 \begin{table}[H]
 \centering\small
@@ -335,11 +360,11 @@ Repeated validated transitions $\Psi_0 \to \Psi_1 \to \cdots \to \Psi_k$ are str
 
 \subsubsection{C5 versus I5: a discovery capability versus a persistent discovery process}
 
-Both ladders contain a discovery stage and they measure different things. C5 asks whether the system can derive a new method or explanatory model from evidence inside one bounded cognitive problem. I5 asks whether one persistent individual can recognize or maintain an unresolved unknown, generate hypotheses, select or design informative probes, accumulate evidence, reject alternatives, obtain independent validation, and incorporate the result into its future competence. A one-shot model can in principle be C5 and I0: it discovers when handed a well-posed problem and has no discovery process. I5 is longitudinal.
+Both ladders contain a discovery stage and they measure different things. C5 asks whether the system can derive a new method or explanatory model from evidence inside one bounded cognitive problem. I5 asks whether one persistent individual can recognize or maintain an unresolved unknown, generate hypotheses, select or design informative probes, accumulate evidence, reject alternatives, obtain independent validation, and incorporate the result into its future competence. Incorporation is stronger than retaining a transcript or repeating a conclusion. Let $K^{\mathrm{new}}$ be independently validated new knowledge and $M^{\mathrm{val}}_t$ the individual's persistent validated-knowledge state; the minimal incorporation transition is $M^{\mathrm{val}}_{t+1} = \mathrm{Update}(M^{\mathrm{val}}_t, K^{\mathrm{new}})$, followed by a genuine execution discontinuity and a hidden transfer test. The I5 claim requires that the restarted individual behaves appropriately differently on related unseen situations \emph{because of} $K^{\mathrm{new}}$, against a matched control from the same pre-discovery checkpoint. Such incorporation need not modify $\Theta$ or $\Psi$; any claimed mechanism change remains governed by the I3 or I4 laws. A one-shot model can in principle be C5 and I0: it discovers when handed a well-posed problem and has no discovery process. I5 is longitudinal and cumulative.
 
 \subsubsection{I5 $\to$ I\Om{}: knowledge growth versus expansion of cognitive reach}
 
-I5 converts unknowns into validated knowledge. I\Om{} is stronger: validated discoveries create new cognitive instruments, representations or methods that measurably expand the classes of problems the individual can subsequently reach, with the external validation lineage preserved. It cannot be certified by one impressive discovery; it is a longitudinal research certification.
+I5 converts unknowns into validated knowledge. I\Om{} is stronger: validated discoveries create new cognitive instruments, representations or methods that measurably expand the classes of problems the individual can subsequently reach, with the external validation lineage preserved. Let $F(A_t; R)$ be the set of held-out problem or discovery classes reachable by agent state $A_t$ under a fixed resource envelope $R$. A characteristic I\Om{} cycle is $K^{\mathrm{new}}_t \to J^{\mathrm{new}}_t \to A_{t+1}$ with $F(A_{t+1}; R) \supset F(A_t; R)$, where $J^{\mathrm{new}}_t$ is a validated cognitive instrument, representation or method generated from the discovery. One impressive instrument is insufficient: the claim requires repeated, externally governed frontier-expansion cycles with lower-level retention and provenance, and because no finite experiment proves literal infinity, a report states its evidence over a declared horizon $H$ and domain set $D$. It cannot be certified by one impressive discovery; it is a longitudinal research certification.
 
 \subsection{Organizational Intelligence (O)}
 

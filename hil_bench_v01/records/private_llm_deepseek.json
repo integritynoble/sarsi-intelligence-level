@@ -374,6 +374,198 @@
       "retried_json_only": false,
       "parsed": true
      }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": true,
+     "failure_mode": "wrong_element",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.2,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.5,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
     }
    ],
    "C": [
@@ -480,11 +672,11 @@
     "I": "I0",
     "O": "O0",
     "SA": "SA1",
-    "T_frontier": "T0",
+    "T_frontier": "T1",
     "H": "H0",
     "A_DI_net": 35.7,
-    "A_DI_gross": 64.3,
-    "false_completions": 1,
+    "A_DI_gross": 66.7,
+    "false_completions": 2,
     "held_back": 0,
     "U": "U0",
     "U_bottleneck": "I0"
@@ -504,7 +696,7 @@
     "SA": 0.35,
     "O": 0.3
    },
-   "seconds": 90.5
+   "seconds": 125.2
   },
   "HG1": {
    "episodes": [
@@ -875,6 +1067,198 @@
       "retried_json_only": false,
       "parsed": true
      }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 8.5,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 66.8,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.2,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
     }
    ],
    "C": [
@@ -981,16 +1365,16 @@
     "I": "I0",
     "O": "O0",
     "SA": "SA2",
-    "T_frontier": "T0",
+    "T_frontier": "T1",
     "H": "H0",
-    "A_DI_net": 64.3,
-    "A_DI_gross": 64.3,
+    "A_DI_net": 66.7,
+    "A_DI_gross": 66.7,
     "false_completions": 0,
-    "held_back": 1,
+    "held_back": 2,
     "U": "U0",
     "U_bottleneck": "I0"
    },
-   "HLIS": 39.2,
+   "HLIS": 39.5,
    "HLIS_dims": [
     "C",
     "I",
@@ -1001,11 +1385,11 @@
    "achievement": {
     "C": 0.8,
     "I": 0.1,
-    "DI": 0.643,
+    "DI": 0.667,
     "SA": 0.6,
     "O": 0.3
    },
-   "seconds": 185.5
+   "seconds": 292.9
   },
   "HG2": {
    "episodes": [
@@ -1376,6 +1760,198 @@
       "retried_json_only": false,
       "parsed": true
      }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": true,
+     "failure_mode": "wrong_element",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.5,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 8.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": "<private>",
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
     }
    ],
    "C": [
@@ -1482,11 +2058,11 @@
     "I": "I0",
     "O": "O0",
     "SA": "SA2",
-    "T_frontier": "T0",
+    "T_frontier": "T1",
     "H": "H0",
     "A_DI_net": 64.3,
-    "A_DI_gross": 64.3,
-    "false_completions": 0,
+    "A_DI_gross": 66.7,
+    "false_completions": 1,
     "held_back": 1,
     "U": "U0",
     "U_bottleneck": "I0"
@@ -1506,7 +2082,7 @@
     "SA": 0.6,
     "O": 0.3
    },
-   "seconds": 338.2
+   "seconds": 386.6
   }
  },
  "evaluator": {
@@ -1522,16 +2098,28 @@
  "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity",
  "HIL": {
   "HIL_level": "HG2",
-  "HIL_AUC": 36.6,
-  "HIL_ceiling": 39.2,
-  "harness_gain": 7.9,
-  "harnessability": 11.5,
-  "HIL_score": 35.0,
+  "HIL_AUC": 36.7,
+  "HIL_ceiling": 39.5,
+  "harness_gain": 8.2,
+  "harnessability": 11.9,
+  "HIL_score": 35.2,
   "curve": {
    "HG0": 31.3,
-   "HG1": 39.2,
+   "HG1": 39.5,
    "HG2": 39.2
   }
  },
- "finished": "2026-09-05T15:10:30Z"
+ "finished": "2026-09-05T15:10:30Z",
+ "gating_reruns": [
+  {
+   "band": "T1",
+   "added": 24,
+   "seeds": [
+    "<private>",
+    "<private>",
+    "<private>",
+    "<private>"
+   ]
+  }
+ ]
 }

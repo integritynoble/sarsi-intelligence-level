@@ -188,12 +188,16 @@ By that criterion the framework's laws divide cleanly, and two of them had to be
 \toprule
 Level & Law & Status \\
 \midrule
-$I1$ & recovery with provenance after a real discontinuity \emph{and} failure of the same pair with no record & already a contrast; the ablated arm defines the floor permanently \\
+$M1$ & recovery with provenance after a real discontinuity \emph{and} failure of the same pair with no record & already a contrast; the ablated arm defines the floor permanently \\
+$M2$--$M\Omega$ & a hidden superseding update, a demoted statement after episodes are hidden, a health oracle the candidate cannot write to, a lineage reconstructed across restarts, a memory mechanism changed under frozen evaluation & contrasts; forms shipped, runners unbound (\S\ref{sec:mbench}) \\
+$I1$ & $M1$ \emph{and} correct goal-level continuation after the discontinuity & already a contrast \\
 $I2$ & $P(\text{held-out} \mid \text{experience}) - P(\text{held-out} \mid \text{ablated}) = 1$, learning mechanism frozen & already a contrast \\
 $SA2$ & the solvable twin completed \emph{and} the impossible twin declared blocked with nothing fabricated & already a contrast \\
 $DI$ & delivered $\wedge$ $\neg$verified is a false completion, priced at $\rho$ & already a contrast \\
 $I3$ & $z_{I3} = D \cdot M_\Theta \cdot V \cdot G \cdot K$ over a declared $\Theta$ manifest: diagnosis, genuine active change, externally validated gain, no regression, retention & \textbf{restated} as five auditable factors on a declared object (\S\ref{sec:i3}) \\
 $I4$ & $z_{I4} = M_\Psi \cdot V_\Psi \cdot G_\Psi \cdot K_4$: one agent-generated change to $\Psi$, shown on hidden meta-behavior probes, and the accepted validated $I3$ rate rises across non-identical sealed campaigns; recursive depth $d_\Psi$ reported beside it & \textbf{restated}; a fixed $\Psi$ or an evaluator-written $\Psi_1$ can never earn it (\S\ref{sec:i4}) \\
+$I5$ & $z_{I5} = U \cdot H \cdot E \cdot L \cdot V \cdot P \cdot K_5$; $P$ compares a discovery arm and a control from the same checkpoint after a restart & \textbf{restated}: storage or replay cannot pass $P$ (\S\ref{sec:i5}) \\
+$I\Omega$ & $F(A_{t+1}; R) \supset F(A_t; R)$ through a validated instrument, with ablation, over declared $H$ and $D$ & \textbf{restated} as reachability, not as ``a new tool'' (\S\ref{sec:iomega}) \\
 $C0$--$C3$ & the named wrong method fails on every instance, against a computed key & already structural \\
 $C4$ & \emph{was} ``difficult, ambiguous, expert problems with adversarially relevant distractors'' & \textbf{rewritten}: the item contains a decoy that satisfies every publicly checkable criterion and is not the key \\
 $C5$ & \emph{was} ``the method is not given; predict sealed cases'' & \textbf{strengthened}: plus a search over the declared hypothesis class must find exactly one consistent rule, so a failure is a failure of induction and not an ambiguity in the item \\
@@ -210,6 +214,31 @@ Each law carries admissibility conditions a program verifies before a witness fo
 \subsection{What is not a law}
 
 The reliability $p = 0.80$, the loss ratio $\rho = 1$ and the band weights $1,2,4,8,16,32$ are \emph{ratified constants}, not laws --- like the definition of a unit. They are fixed by the standard, amendable only at a version boundary, and a change re-versions every score. They are listed in one place (\texttt{laws.CONVENTIONS}) so that no reading can quietly use a different one.
+
+\subsection{M-Bench: memory measured on its own, then joined to $I$ by a gate}\label{sec:mbench}
+
+Memory is not a seventh coordinate and not a relabelling of the $I$ ladder. It is measured independently, level by level, and then used as a one-way prerequisite: $A \models I_n \iff V_{I,n}(A) = 1 \wedge A \models M_{\mu_n} \wedge K_{I,<n}(A) = 1$ with $(\mu_0,\ldots,\mu_5) = (M0, M1, M3, M4, M4, M5)$, $I\Omega$ requiring $M \ge M5$ and $M\Omega$ only when the memory architecture itself is claimed to evolve. Each $M_k$ is itself cumulative: $A \models M_k \iff V^{M}_k(A) = 1 \wedge K^{M}_{<k}(A) = 1$. High $M$ can satisfy the gate and can never promote $I$, and the M-Bench score is reported beside $I$ so that storage or sophisticated management cannot pass for learning.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}llYl@{}}
+\toprule
+Level & Method & The decisive step, and what a program checks & v0.2 \\
+\midrule
+M0 & \textsc{M0-Eph} & hidden within-episode state queried later in the same live episode under distractors; loss after a restart is compatible with M0 and must not be relabelled M1 & implicit \\
+M1 & \textsc{M1-Rst} & declared durable state, executor terminated and ephemeral context invalidated, fresh executor, recovery \emph{with provenance}; an ablated-state arm must not explain success & \textbf{bound} (\texttt{m1\_restart}) \\
+M2 & \textsc{M2-Prov} & overlapping episodes with timestamps, sources and later superseding updates; hidden retrieval after restart; stale-state traps; $V^{M}_2 = \mathbf 1[PR \ge \tau_{\mathrm{ret}}]\,\mathbf 1[q_{\mathrm{prov}} \ge \tau_{\mathrm{prov}}]\,\mathbf 1[q_{\mathrm{time}} \ge \tau_{\mathrm{time}}]\,\mathbf 1[q_{\mathrm{stale}} \ge \tau_{\mathrm{stale}}]$ & form \\
+M3 & \textsc{M3-Consol} & related episodes with regularities, exceptions and one validated superseding update; only the declared consolidation machinery; raw episodes hidden or the index rebuilt so replay cannot suffice; the consolidated rule queried on new surface forms with superseded statements \emph{demoted}. M3 alone does not certify $I2$ & form \\
+M4 & \textsc{M4-Mgmt} & seeded duplicates, conflicts, stale high-confidence claims, corruption and clutter under a capacity budget; an observable repair, merge, prune or snapshot action (narrative diagnosis is insufficient); memory health on a frozen hidden suite before and after; the candidate does not control the health oracle & form \\
+M5 & \textsc{M5-Long} & several interleaved projects with restarts; hidden cross-project queries needing evidence chains, reasons for rejection and current validity scope; a reproducible lineage. M5 does not require the agent to have discovered the knowledge --- that is $I5$ & form \\
+M$\Omega$ & \textsc{MOmega-Evolve} & a bounded change $\Phi_0 \to \Phi_1$ to the memory mechanism inside a declared write set; frozen hidden M-Bench workloads; independent promotion or rollback; M0--M5 retained. Certifies evolution of the memory subsystem and nothing about $I3$, $I4$ or $I\Omega$ & form \\
+\bottomrule
+\end{tabularx}
+\caption{The seven M-Bench witness families. ``form'' means a public development form ships in the dataset (\S\ref{sec:devdataset}) and no runner is bound in v0.2. Every method is a contrast --- an ablated arm, a hidden update, a demoted statement, an oracle the candidate cannot write to --- which is what lets it stay fixed when memory systems improve.}
+\label{tab:mbench}
+\end{table}
+
+What the Core reads today is $M1$ and only $M1$: the restart test with its ablated arm (\S\ref{sec:core}). That is enough to gate $I1$ and not $I2$, and the profile says so --- ``$I2$ (evidence; $M3$ not certified)'' is the exact form of the gate's refusal. The M2--M$\Omega$ forms are the binding order after $I3$.
 
 \subsection{$I3$: the mechanism $\Theta$, its manifest, and the campaign that certifies a change}\label{sec:i3}
 
@@ -252,6 +281,18 @@ Let $\Psi$ be the agent-side process that proposes, evaluates and selects candid
 z_{I4,s} = M_{\Psi,s} \cdot V_{\Psi,s} \cdot G_{\Psi,s} \cdot K_{4,s}, \qquad M_{\Psi,s} = C^{\Psi,\mathrm{diff}}_s C^{\Psi,\mathrm{scope}}_s C^{\Psi,\mathrm{active}}_s C^{\Psi,\mathrm{behavior}}_s, \quad V_{\Psi,s} = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\hat\Delta_{\Psi,s}) > \delta_{\Psi,s}] \cdot \mathbf 1[\text{promoter accepts}],
 \]
 where $C^{\Psi,\mathrm{behavior}}_s = \mathbf 1[B_{\Psi,s} \ge \beta_{\Psi,s}]$ with $B_{\Psi,s}$ the fraction of hidden meta-behavior probes on which the improvement process shows its preregistered changed signature (broader candidate generation, discriminating candidate tests, evidence-based selection), $G_{\Psi,s}$ the preregistered regression and efficiency guard (a gain bought with unacceptable evaluation cost, time or regression does not count) and $K_{4,s} = K^{I0}_s K^{I1}_s K^{I2}_s K^{I3}_s$. A single large self-edit cannot certify $I4$; several $\Theta$ improvements from an unchanged $\Psi$ are repeated $I3$. \emph{Recursive depth} is reported beside the level and never folded into it: $d_\Psi = \max\{k : \Psi_0 \to \Psi_1 \to \cdots \to \Psi_k \text{ are consecutive agent-generated, active, independently validated improvements}\}$, so $d_\Psi = 1$ is basic $I4$ and $d_\Psi > 1$ is repeated recursive improvement; the phrase \emph{sustained recursive self-improvement} is reserved for the latter, and $I4$ is not equated with unbounded or runaway improvement. Nothing in v0.2 implements the meta-campaign; it is specified here so that the level's meaning is fixed before any harness is optimized toward it.
+
+\subsection{$I5$: discovery with an incorporation gate}\label{sec:i5}
+
+$C5$ asks whether a system can derive a method or model inside one bounded problem; $I5$ asks whether one persistent individual can run a discovery process across time and \emph{incorporate} the validated result. The canonical method \textsc{I5-Disc}: a genuine unresolved unknown under a sealed environment; explicit competing hypotheses; agent-selected informative probes under a fixed budget; a recorded lineage of evidence, rejected alternatives and decisions; a conclusion that predicts sealed follow-up cases or survives an independent verifier; then only declared persistent consolidation, a genuine lifecycle discontinuity, and hidden related transfer situations faced by two arms started from the same pre-discovery checkpoint, of which only one received the discovery experience. With $\hat\Delta_{\mathrm{inc},r} = Q^{\mathrm{disc}}_r - Q^{\mathrm{ctrl}}_r$ the incorporation gate is $P_r = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\hat\Delta_{\mathrm{inc},r}) > \delta_{\mathrm{inc},r}]$, and a campaign passes when
+\[
+z_{I5,r} = U_r \cdot H_r \cdot E_r \cdot L_r \cdot V_r \cdot P_r \cdot K_{5,r}, \qquad K_{5,r} = K^{I0}_r K^{I1}_r K^{I2}_r K^{I3}_r K^{I4}_r,
+\]
+with $U, H, E, L, V$ the genuine-unknown, hypothesis-competition, autonomous-experimentation, lineage and independent-validation gates. $P$ is the one that separates discovery from storage: replaying a transcript or restating the conclusion does not pass it. Incorporation at $I5$ does not itself require a $\Theta$ or $\Psi$ change; a claimed mechanism change stays under the $I3$ or $I4$ law.
+
+\subsection{$I\Omega$: reachability, not a tool}\label{sec:iomega}
+
+Under fixed external evaluation and a declared envelope $R$, let $F(A_t; R) = \{c : \Pr(\text{success} \mid A_t, c, R) \ge \tau_c\}$ be the held-out classes reachable by agent state $A_t$. The canonical method \textsc{I-Omega-Long} requires, across repeated bounded-charter cycles, a provenance-linked sequence $K^{\mathrm{new}}_t \to J^{\mathrm{new}}_t \to A_{t+1}$ with $F(A_{t+1}; R) \supset F(A_t; R)$, where $J^{\mathrm{new}}_t$ is a validated instrument, representation, method or solver generated from a validated discovery; disjoint pre-change, post-change and ablation frontier tests show that the instrument contributes causally to the newly reachable class; the evaluator and promoter stay external; $I0$--$I5$ are retained. The development gate is $z_{I\Omega} = \mathrm{CYCLES} \cdot \mathrm{DIVERSITY} \cdot \mathrm{LINEAGE} \cdot \mathrm{RETENTION}$ over a preregistered minimum number of validated expansion cycles and domain families. A report states its cycles, its horizon $H$ and its domain set $D$; finite evidence supports an open-ended-evolution claim over that horizon and proves nothing about literal infinity. Nothing in v0.2 runs it.
 
 \subsection{Self-awareness rungs, and the calibration diagnostic}\label{sec:sacal}
 
@@ -523,7 +564,29 @@ DeepSeek, bare (llm) & HIL curve & 35.9 / 40.0 / 35.9 & 31.3 / 39.2 / 39.2 & one
 \label{tab:private}
 \end{table}
 
-The readings say two things worth separating. The scores are stable: 35.2 against 35.0 for the bare model, and for the pair every contrast-type coordinate identical. And the \emph{levels} are not, because a gate at $p = 0.80$ over four T1 episodes is decided by a single delivery: the pair that was U1 on the public seeds is U0 on the private ones, on the strength of one unsatisfiable specification it should have refused. That is not noise to be averaged away; it is the outcome the delivered-outcome primitive exists to price, and it is the reason the private split is run by someone else --- a self-report would have had every incentive to call that episode a near-miss. It is also the clearest statement yet of the cost of two seeds per band: a certification needs enough episodes at the gating band for one delivery not to move the level, and v0.2 does not have them.
+The readings say two things worth separating. The scores are stable: 35.2 against 35.0 for the bare model, and for the pair every contrast-type coordinate identical. And the \emph{levels} are not, because a gate at $p = 0.80$ over four T1 episodes is decided by a single delivery: the pair that was U1 on the public seeds is U0 on the private ones, on the strength of one unsatisfiable specification it should have refused. That is not noise to be averaged away; it is the outcome the delivered-outcome primitive exists to price, and it is the reason the private split is run by someone else --- a self-report would have had every incentive to call that episode a near-miss. It is also the clearest statement yet of the cost of two seeds per band: a certification needs enough episodes at the gating band for one delivery not to move the level. \S\ref{sec:gating} adds them.
+
+\subsection{Enough episodes at the gating band}\label{sec:gating}
+
+The previous subsection ended on a level decided by one delivery. The remedy is not a different gate but more episodes at the band that decides it, so the four records were extended at their gating band --- every remaining public seed, and the remaining private seeds --- with nothing already run re-run, and re-finalized (\texttt{hilbench gating}).
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llccY@{}}
+\toprule
+Record & Band & Episodes at the band & Level before $\to$ after & Reading \\
+\midrule
+Claude pair, public & T1 & 4 $\to$ 18 (17/18, one false completion) & U1 $\to$ U1; HLIS 71.3 $\to$ 70.3 & rate 0.94; the miss is a \texttt{paper\_t1} seed on which a number outside the evidence was written \\
+Claude pair, private & T1 & 4 $\to$ 12 (10/12, two false completions) & \textbf{U0 $\to$ U1}; HLIS 65.8 $\to$ 67.8 & rate 0.83, above the gate and close to it: the unsatisfiable specification it delivered on, and one \texttt{paper\_t1} \\
+Bare DeepSeek, private & T1, every rung & 4 $\to$ 12 per rung (10/12 at each) & T0 $\to$ T1 at every rung; HIL 35.0 $\to$ \textbf{35.2} & equal to its public score to the decimal \\
+Bare DeepSeek, public & T2 (its gate), every rung & 2 $\to$ 12 per rung (6/12, 5/12, 6/12; the rest \emph{declined}, none priced) & T1 held; HIL 35.2 $\to$ 34.8 & declined the induction item on every seed at every rung and solved every schedule \\
+\bottomrule
+\end{tabularx}
+\caption{The four records extended at their gating band. Both levels that had moved between splits moved back; what remains is a private T1 rate of 0.83 for the frontier pair --- a reading, not noise.}
+\label{tab:gating}
+\end{table}
+
+Two conclusions, different in kind. The U0 of \S\ref{sec:privateresults} and the bare model's T0 were what a four-episode gate does with one delivery: with twelve to eighteen episodes the private and public levels agree everywhere, and the bare model's private HIL equals its public one. And the agreement is not a clean bill: the frontier pair's private rate at its gating band is 0.83 --- two false completions in twelve, one of them a specification it should have refused --- and 0.83 against 0.80 is where a certification either commits to an interval or says it has none. v0.2 has none; the records are published so the next evaluator can add episodes to the same band rather than start again. The bare model's public rerun adds a reading of a third kind: at its own gate it refused the induction item on every seed at every rung and was never priced for it, which is why its score fell by 0.4 while its false-completion count stayed at zero --- the primitive charges for guessing, not for knowing what one cannot do.
 
 \subsection{Where the frontier pair fails: the sealed discovery family}
 
@@ -551,7 +614,7 @@ For it to be adopted the way ARC-AGI is, three things beyond the instrument are 
 
 \section{Limitations}\label{sec:limits}
 
-The Core is saturated for the frontier pair on delegation; discrimination among such pairs is in the extended tier, whose HG1/HG2 rungs are not yet built. $SA3$, $O$, $I3$ and $U3$ are specification-only. Two seeds per band is enough to detect a systematic failure and not enough for a confidence interval; the private split is where a reading with an interval is taken. The Core's $C3$ item is a planning problem, not a rule-induction one, and a pair could score $C3$ here and fail ARC-style induction. Token cost is not captured. Every reading reported is the author's on the public split.
+The Core is saturated for the frontier pair on delegation; discrimination among such pairs is in the extended tier, whose HG1/HG2 rungs are not yet built. $SA3$, $O$, $I3$ and $U3$ are specification-only. Two seeds per band is enough to detect a systematic failure and not enough for a confidence interval; at the gating band the reported records now carry twelve to eighteen episodes (\S\ref{sec:gating}), and the other bands still carry two. The Core's $C3$ item is a planning problem, not a rule-induction one, and a pair could score $C3$ here and fail ARC-style induction. Token cost is not captured. Every reading reported is the author's on the public split.
 
 \section{Conclusion}
 
@@ -559,7 +622,7 @@ An agent and a model can be measured in the same coordinates with the same items
 
 \subsection{The development dataset}\label{sec:devdataset}
 
-The package ships a public development dataset (\texttt{dataset/dev\_v0\_1}): reference forms for $C0$--$C5$, $I0$--$I4$, $O0$--$O4$, $T0$--$T5$ and $SA1$--$SA5$; the $I3$ campaigns and $I4$ meta-campaigns as records rather than one-shot rows; specification-only templates for the levels that need long-horizon sealed environments; machine-readable schemas for the $\Theta$ and $\Psi$ manifests and for campaign results; and scoring helpers that compute the gate products $z_{I3}$ and $z_{I4}$ of \S\ref{sec:i3}--\ref{sec:i4} from a result record. Everything in it is public development material and is not a private witness form. The manifest schema is what \texttt{laws.theta\_check} validates, and the package tests exercise the example $I3$ result --- each of the five factors can fail the campaign alone, a no-op change cannot pass $M_\Theta$, and a fixed $\Psi$ cannot earn $I4$.
+The package ships a public development dataset (\texttt{dataset/dev\_v0\_4}, 57 forms): reference forms for $C0$--$C5$, $I0$--$I\Omega$, $M0$--$M\Omega$, $O0$--$O4$, $T0$--$T5$ and $SA1$--$SA5$; the $I3$ campaigns, $I4$ meta-campaigns, recursive-depth forms, $I5$ discovery campaigns and $I\Omega$ programs as records rather than one-shot rows, every Individual form carrying its \texttt{minimum\_M\_prerequisite}; specification-only templates for the levels that need long-horizon sealed environments; machine-readable schemas for the $\Theta$ and $\Psi$ manifests, for memory results and for every campaign; and scoring helpers that compute $z_{I3}$, $z_{I4}$ with $d_\Psi$, $z_{I5}$, $z_{I\Omega}$, $z_M$ and the joined $I$-with-memory certification from a result record. Everything in it is public development material and is not a private witness form. The manifest schema is what \texttt{laws.theta\_check} validates, and the package tests exercise the example $I3$ result --- each of the five factors can fail the campaign alone, a no-op change cannot pass $M_\Theta$, and a fixed $\Psi$ cannot earn $I4$.
 
 \section*{Availability}
 

@@ -26,6 +26,15 @@ Every law therefore carries **admissibility conditions a program can check** (`h
 | I2 | verified feedback in one task changes behaviour in a different task after a restart; the no-experience arm fails it; the learning mechanism is frozen | discontinuity; ablated arm; frozen Ψ | automatic |
 | I3 | one campaign: z_I3 = D·M_Θ·V·G·K over a declared Θ manifest — cause diagnosed and counterfactually supported; change different, in scope, activated, behaviorally instantiated; sealed-suite gain clears a preregistered margin at a lower confidence bound and an independent promoter accepts; no protected regression; I0–I2 retained | declared Θ manifest; frozen Ψ; independent locus; ablated/counterfactual | automatic locus, human policy in practice |
 | I4 | one meta-campaign: z_I4 = M_Ψ·V_Ψ·G_Ψ·K_4 — one **agent-generated** bounded Ψ_0→Ψ_1 that is used and shows on hidden meta-behavior probes (M_Ψ = diff·scope·active·behavior); C(Ψ) rises across non-identical sealed I3 campaigns by a preregistered margin; no gain bought with cost/time/regression; I0–I3 retained. Basic I4 = one transition; recursive depth d_Ψ reported beside the level, "sustained" reserved for d_Ψ > 1. A fixed Ψ, or a Ψ_1 written by a human/evaluator, earns nothing | declared Θ and Ψ; independent locus; ablated arm | human |
+| I5 | one campaign: z_I5 = U·H·E·L·V·P·K5 — genuine unknown, competing hypotheses, autonomous probes, lineage, independent validation, and after consolidation + a real discontinuity a discovery arm beats a matched control on hidden transfer (P); I0–I4 retained. Storage/replay cannot pass P | discontinuity; ablated arm; independent locus | human |
+| IΩ | repeated cycles K_new → J_new → A_{t+1} with F(A_{t+1};R) ⊃ F(A_t;R), pre/post/ablation frontier tests, external evaluator, I0–I5 retained, over declared horizon H and domain set D | ablated arm; independent locus | human |
+| M0 | within-episode state used later in the same episode under distractors; loss after restart is M0, never mislabelled M1 | computed key | automatic |
+| M1 | declared state recovered with provenance by a fresh executor after termination; ablated-state arm fails | discontinuity; ablated arm; computed key | automatic (**bound**: `m1_restart`) |
+| M2 | after restart, retrieval under distractors returns the right episode with source/time, prefers the superseding fact, suppresses the stale one | discontinuity; computed key; spec–key gap | automatic (form) |
+| M3 | with raw episodes hidden / index rebuilt, the consolidated rule answers new surface forms and superseded statements are demoted; M3 ≠ I2 | discontinuity; ablated arm; computed key | automatic (form) |
+| M4 | seeded corruption/conflict/clutter acted on (not narrated); health on a frozen hidden suite improves without protected-retention loss; oracle outside the candidate | independent locus; computed key | automatic (form) |
+| M5 | across interleaved projects and restarts, cross-project queries answered by a reconstructed lineage; M5 does not require having discovered it | discontinuity; computed key | human |
+| MΩ | bounded Φ₀→Φ₁ to the memory mechanism, verified active/in scope/behaviorally changed, frozen hidden M-Bench workloads, independent promotion/rollback, M0–M5 retained; certifies nothing about I3/I4/IΩ | declared Φ; independent locus; ablated arm | human |
 | SA1 | state is reported from the environment when a plausible stale record says otherwise | computed key; trap fires | automatic |
 | SA2 | a solvable instance is completed and its unsolvable twin declared blocked without a fabricated result | twin pair; computed key | automatic |
 | SA3 | the pair names the internal cause of its own failure, judged against a frozen rubric by a locus it cannot write to | independent locus; human locus | human |
@@ -35,6 +44,12 @@ Every law therefore carries **admissibility conditions a program can check** (`h
 | O0 | work routed across separated roles; the verifier's entry states what it checked with the correct figure — a sign-off naming nothing is not a sign-off | computed key; trap fires | automatic |
 | O1 | a standing decision in the organization's own log (never the model's) decides a later, different instance after a restart; the arm whose log was withheld fails | discontinuity; ablated arm; computed key | automatic |
 | O2 | evidence that a routing/role policy is suboptimal changes the allocation persistently and improves held-out outcomes | ablated arm; independent locus | human |
+
+## Memory is a one-way prerequisite, never a promotion
+
+μ = (M0, M1, M3, M4, M4, M5) for I0–I5; IΩ needs M ≥ M5, MΩ only when the memory architecture is claimed to evolve.
+`A ⊨ I_n ⟺ V_{I,n}(A) ∧ A ⊨ M_{μ_n} ∧ K_{I,<n}(A)`; `A ⊨ M_k ⟺ V^M_k(A) ∧ K^M_{<k}(A)`. The M-Bench score is reported
+beside I, never inside it (`laws.i_certification_with_memory`).
 
 ## What is *not* a law
 

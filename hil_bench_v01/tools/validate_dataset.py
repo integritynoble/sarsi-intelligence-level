@@ -13,7 +13,8 @@ from hilbench import laws
 
 I3_PARTS = ("theta_contract", "diagnostic_tasks", "acceptable_causal_diagnoses", "behavior_probes", "paired_evaluation", "regression_suite", "campaign_pass_formula")
 I4_PARTS = ("baseline_i3_refs", "psi_change_contract", "primary_metric", "minimum_meaningful_improvement", "meta_campaign_pass_formula")
-KNOWN_LEVELS = set(laws.LAWS) | {f"C{i}" for i in range(6)} | {f"I{i}" for i in range(6)} | {f"O{i}" for i in range(5)} | {f"SA{i}" for i in range(7)} | {f"T{i}" for i in range(6)}
+KNOWN_LEVELS = set(laws.LAWS) | {f"C{i}" for i in range(6)} | {f"I{i}" for i in range(6)} | {"IΩ", "MΩ"} | {f"M{i}" for i in range(6)} | {f"O{i}" for i in range(5)} | {f"SA{i}" for i in range(7)} | {f"T{i}" for i in range(6)}
+M_METHODS = {"M0-EPH", "M1-RST", "M2-PROV", "M3-CONSOL", "M4-MGMT", "M5-LONG", "MOMEGA-EVOLVE"}
 
 def load(p: Path):
     rows = []
@@ -30,11 +31,21 @@ def validate(root: Path) -> list:
                 if k not in r: problems.append(f"{f.name}:{n} missing {k}")
             if r.get("level") not in KNOWN_LEVELS: problems.append(f"{f.name}:{n} unknown level {r.get('level')!r}")
             if r.get("level") == "I3" and any(k not in r for k in I3_PARTS): problems.append(f"{f.name}:{n} I3 campaign lacks {[k for k in I3_PARTS if k not in r]}")
-            if r.get("level") == "I4" and any(k not in r for k in I4_PARTS): problems.append(f"{f.name}:{n} I4 meta-campaign lacks {[k for k in I4_PARTS if k not in r]}")
-            if r.get("level") == "I4":                      # v2 law: reflexive, agent-generated, shown on meta-behavior probes
-                need = {"agent_generated", "meta_behavior_signature"}; have = set((r.get("psi_change_contract") or {}).get("required_checks", []))
-                if not need <= have: problems.append(f"{f.name}:{n} I4 contract lacks v2 checks {sorted(need - have)}")
-                if "recursive_depth" not in r: problems.append(f"{f.name}:{n} I4 row does not say how recursive depth d_Psi is reported")
+            depth_form = r.get("level") == "I4" and "LONG" in str(r.get("canonical_method", ""))   # recursive-depth diagnostic, not a meta-campaign
+            if depth_form and not any(k in r for k in ("recursive_depth_metric", "reporting_rule", "recursive_depth_reporting", "depth_semantics")):
+                problems.append(f"{f.name}:{n} recursive-depth form does not say how d_Psi is measured or reported")
+            if r.get("level") == "I4" and not depth_form and any(k not in r for k in I4_PARTS): problems.append(f"{f.name}:{n} I4 meta-campaign lacks {[k for k in I4_PARTS if k not in r]}")
+            if r.get("level") == "I4" and not depth_form:   # v2 law: reflexive, agent-diagnosed, shown on meta-behavior probes, depth reported
+                ok = (r.get("psi_behavior_probes") and r.get("psi_diagnostic_requirement")) or {"agent_generated", "meta_behavior_signature"} <= set((r.get("psi_change_contract") or {}).get("required_checks", []))
+                if not ok: problems.append(f"{f.name}:{n} I4 row lacks the meta-behavior probes / self-diagnosis requirement")
+                if not (r.get("recursive_depth_reporting") or r.get("recursive_depth")): problems.append(f"{f.name}:{n} I4 row does not say how recursive depth d_Psi is reported")
+            if r.get("coordinate") == "I" and r.get("level") != "I0" and "minimum_M_prerequisite" not in r: problems.append(f"{f.name}:{n} Individual form lacks minimum_M_prerequisite")
+            if r.get("level") == "I5" and any(k not in r for k in ("incorporation_test", "control_design", "campaign_pass_formula")): problems.append(f"{f.name}:{n} I5 campaign lacks incorporation_test/control_design/formula")
+            if r.get("coordinate") == "M":
+                if r.get("canonical_method") not in M_METHODS: problems.append(f"{f.name}:{n} unknown memory method {r.get('canonical_method')!r}")
+                evaluated = "verifier" in r or ("paired_evaluation" in r and "independent_promotion_and_rollback" in r)   # MOmega: paired evaluation + independent promotion
+                if "retention" not in r or not evaluated: problems.append(f"{f.name}:{n} memory form lacks retention or an evaluation locus")
+    if not per: problems.append(f"no forms found under {root}/public")
     dup = [i for i, v in per.items() if len(v) > 1]
     if dup: problems.append(f"duplicate form ids: {dup}")
     i3_ids = {i for i, v in per.items() if v[0][2].get("level") == "I3"}
@@ -50,7 +61,7 @@ def validate(root: Path) -> list:
     return problems
 
 if __name__ == "__main__":
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_1")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_4")
     probs = validate(root)
     print("\n".join(probs) if probs else f"dataset ok: {root}")
     sys.exit(1 if probs else 0)

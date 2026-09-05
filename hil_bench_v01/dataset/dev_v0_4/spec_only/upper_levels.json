@@ -1,6 +1,10 @@
 {
-  "status": "specification_only",
-  "reason": "These claims require longitudinal sealed environments or mission/open-ended evidence that cannot be faithfully represented as a static public row dataset.",
+  "status": "formal_certification_requires_private_or_longitudinal_environment",
+  "reason": "Public development templates can exercise runner logic, but upper-level claims require sealed dynamic witnesses, longitudinal evidence, or mission/open-ended environments that a static public corpus cannot secure.",
+  "public_development_templates_now_included": {
+    "I5": "public/i5_disc.jsonl",
+    "IΩ": "public/iomega_long.jsonl"
+  },
   "levels": {
     "C6": {
       "requirement": "interconnected cross-domain controlled episode"
@@ -9,10 +13,10 @@
       "requirement": "longitudinal creation of representations/methods that expand reachable problem classes"
     },
     "I5": {
-      "requirement": "persistent unknown -> hypothesis -> experiment -> evidence -> independent validation -> later incorporation"
+      "requirement": "private sealed unknown -> hypotheses -> agent-selected experiments -> independent validation -> restart -> causal transfer/incorporation"
     },
     "IΩ": {
-      "requirement": "repeated bounded-charter cycles expanding future reachable problem/discovery space"
+      "requirement": "private repeated bounded-charter discovery-to-instrument cycles with pre/post/ablation frontier expansion and I0-I5 retention"
     },
     "O5": {
       "requirement": "collective discovery requiring genuinely distributed evidence/roles"

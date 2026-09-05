@@ -381,6 +381,246 @@
       "retried_json_only": false,
       "parsed": true
      }
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 81.7,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 2,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 83.4,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 3,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 82.9,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 4,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 85.2,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 5,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 85.1,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 2,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 11.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 3,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 11.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 4,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 5,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
     }
    ],
    "C": [
@@ -492,7 +732,7 @@
     "A_DI_net": 71.4,
     "A_DI_gross": 71.4,
     "false_completions": 0,
-    "held_back": 1,
+    "held_back": 6,
     "U": "U0",
     "U_bottleneck": "I0"
    },
@@ -511,7 +751,7 @@
     "SA": 0.35,
     "O": 0.3
    },
-   "seconds": 152.0
+   "seconds": 615.4
   },
   "HG1": {
    "episodes": [
@@ -882,6 +1122,246 @@
       "retried_json_only": false,
       "parsed": true
      }
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 82.7,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 2,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 86.6,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 3,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 82.8,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 4,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 19.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 5,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 80.7,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 12.2,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 2,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 15.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 3,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 15.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 4,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 9.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 5,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 15.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
     }
    ],
    "C": [
@@ -990,14 +1470,14 @@
     "SA": "SA2",
     "T_frontier": "T1",
     "H": "H0",
-    "A_DI_net": 71.4,
-    "A_DI_gross": 71.4,
+    "A_DI_net": 66.7,
+    "A_DI_gross": 66.7,
     "false_completions": 0,
-    "held_back": 1,
+    "held_back": 7,
     "U": "U0",
     "U_bottleneck": "I0"
    },
-   "HLIS": 40.0,
+   "HLIS": 39.5,
    "HLIS_dims": [
     "C",
     "I",
@@ -1008,11 +1488,11 @@
    "achievement": {
     "C": 0.8,
     "I": 0.1,
-    "DI": 0.7140000000000001,
+    "DI": 0.667,
     "SA": 0.6,
     "O": 0.3
    },
-   "seconds": 167.2
+   "seconds": 587.2
   },
   "HG2": {
    "episodes": [
@@ -1383,6 +1863,246 @@
       "retried_json_only": false,
       "parsed": true
      }
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 3,
+     "termination_reason": "normal",
+     "seconds": 250.6,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 2,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 3,
+     "termination_reason": "normal",
+     "seconds": 253.7,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 3,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 3,
+     "termination_reason": "normal",
+     "seconds": 246.5,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 4,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 3,
+     "termination_reason": "normal",
+     "seconds": 256.9,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 5,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 3,
+     "termination_reason": "normal",
+     "seconds": 238.8,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 9.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 2,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 15.5,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 3,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 14.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 4,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 10.1,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     },
+     "gating_rerun": true
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 5,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     },
+     "gating_rerun": true
     }
    ],
    "C": [
@@ -1494,7 +2214,7 @@
     "A_DI_net": 71.4,
     "A_DI_gross": 71.4,
     "false_completions": 0,
-    "held_back": 1,
+    "held_back": 6,
     "U": "U0",
     "U_bottleneck": "I0"
    },
@@ -1513,23 +2233,37 @@
     "SA": 0.35,
     "O": 0.3
    },
-   "seconds": 334.2
+   "seconds": 1638.1
   }
  },
  "started": "2026-09-05T14:02:29Z",
  "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity",
  "HIL": {
   "HIL_level": "HG2",
-  "HIL_AUC": 37.3,
-  "HIL_ceiling": 40.0,
-  "harness_gain": 4.1,
-  "harnessability": 6.4,
-  "HIL_score": 35.2,
+  "HIL_AUC": 37.1,
+  "HIL_ceiling": 39.5,
+  "harness_gain": 3.6,
+  "harnessability": 5.6,
+  "HIL_score": 34.8,
   "curve": {
    "HG0": 35.9,
-   "HG1": 40.0,
+   "HG1": 39.5,
    "HG2": 35.9
   }
  },
- "finished": "2026-09-05T14:16:11Z"
+ "finished": "2026-09-05T14:16:11Z",
+ "gating_reruns": [
+  {
+   "band": "T2",
+   "added": 30,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  }
+ ]
 }
