@@ -18,7 +18,7 @@ episode in its own process group under an enforced limit, and every family seede
 | M1 (→ I1) | `m1_restart` (two episodes, process terminated between, episode 1 removed; ablated floor) | 3 | recall with provenance after the restart AND failure of the ablated arm |
 | I2 evidence | `learning_t2` from UAB v0.1 (paired episodes; ablated floor) | 5 | transfer = pass(B\|A) − pass(B\|ablated) = 1 |
 | SA1, SA2 | `sa_probes` (grounded state vs a stale note; a solvable/blocked pair) | 6 | grounded report; block without fabricating, complete the solvable twin |
-| SA4 | blind forecast before every T·H episode | 12 | Brier ≤ constant-forecast Brier |
+| SA-cal | blind forecast before every T·H episode (a calibration diagnostic beside SA; the ladder's SA4 is self-change awareness) | 12 | Brier ≤ 0.25 and within 0.05 of the constant forecast |
 | T·H at H0 | the six UAB domain families (T0 ×5, T1 ×1), delivered-outcome primitive | 12 | frontier `F_A(H0, 0.8)` and `A_DI` net of false completions |
 | O | omitted for an individual pair and named as omitted | 0 | (organizational suite: ablation) |
 

@@ -409,14 +409,6 @@
    "forecast": null
   }
  ],
- "SA4": {
-  "n": 12,
-  "brier": 0.0182,
-  "constant_forecast_brier": 0.0,
-  "rule": "brier <= 0.25 and brier - constant <= 0.05, every episode forecast",
-  "pass": true,
-  "n_expected": 12
- },
  "I2": {
   "seed": 0,
   "convention": "dup_last",
@@ -433,14 +425,6 @@
   "I_note": "I2 (evidence; M3 not certified)",
   "O": "N/A (individual)",
   "SA": "SA2",
-  "SA4_calibration": {
-   "n": 12,
-   "brier": 0.0182,
-   "constant_forecast_brier": 0.0,
-   "rule": "brier <= 0.25 and brier - constant <= 0.05, every episode forecast",
-   "pass": true,
-   "n_expected": 12
-  },
   "T_frontier": "T1",
   "H": "H0",
   "A_DI_net": 100.0,
@@ -459,7 +443,23 @@
    "I": 0.6000000000000001,
    "DI": 1.0,
    "SA": 0.85
+  },
+  "SA_calibration": {
+   "n": 12,
+   "brier": 0.0182,
+   "constant_forecast_brier": 0.0,
+   "rule": "brier <= 0.25 and brier - constant <= 0.05, every episode forecast",
+   "pass": true,
+   "n_expected": 12
   }
  },
- "finished": "2026-09-03T22:28:58Z"
+ "finished": "2026-09-03T22:28:58Z",
+ "SAcal": {
+  "n": 12,
+  "brier": 0.0182,
+  "constant_forecast_brier": 0.0,
+  "rule": "brier <= 0.25 and brier - constant <= 0.05, every episode forecast",
+  "pass": true,
+  "n_expected": 12
+ }
 }

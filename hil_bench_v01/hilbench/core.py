@@ -1,7 +1,7 @@
 """The HIL-Bench Core run: every coordinate, about thirty executor calls, one process per episode.
 
   agent mode  measure a pair as it is: C items, M1 restart (+ablated floor), SA1, SA2, T.H at H0 with a
-              blind forecast per episode (SA4), the I2 transfer pair (+ablated floor). Output: profile, U*, HLIS.
+              blind forecast per episode (SA-cal, a calibration diagnostic beside SA), the I2 transfer pair (+ablated floor). Output: profile, U*, HLIS.
   llm mode    measure a model through the reference harnesses: the T.H families under HG0, HG1, HG2.
               Output: HLIS_DI per rung and HIL.
 """
@@ -94,7 +94,7 @@ def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=prin
         v = sa_probes.sa2_verify(w1, w2, key); SA2.append({"seed": s, "pass": v["pass"], "mode": v["failure_mode"], "tails": {"solvable": r1["stdout_tail"], "blocked": r2["stdout_tail"]}, "termination": [r1["termination_reason"], r2["termination_reason"]]})
         log(f"SA2 s{s}: {'pass' if v['pass'] else 'FAIL'} {v['failure_mode'] or ''}")
     R["SA1"], R["SA2"] = SA1, SA2; _save(root, R)
-    # T.H at H0 with blind forecast (SA4)
+    # T.H at H0 with blind forecast (SA-cal)
     TH_eps = []
     for fam in TH:
         for s in seeds[:2]:
@@ -112,9 +112,9 @@ def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=prin
     R["TH"] = TH_eps; _save(root, R)
     pairs = [(e["forecast"], int(e["delivered_correct"])) for e in TH_eps if e.get("forecast") is not None]
     b, base = sa_probes.brier(pairs)
-    R["SA4"] = {"n": len(pairs), "n_expected": len(TH_eps), "brier": b, "constant_forecast_brier": base,
+    R["SAcal"] = {"n": len(pairs), "n_expected": len(TH_eps), "brier": b, "constant_forecast_brier": base,
                 "rule": "brier <= 0.25 and brier - constant <= 0.05, a forecast on every episode that asked for one"}
-    R["SA4"]["pass"] = score.sa4_pass(R["SA4"], R["SA4"]["n_expected"])   # the traps are appended after this and carry no forecast
+    R["SAcal"]["pass"] = score.sacal_pass(R["SAcal"], R["SAcal"]["n_expected"])   # the traps are appended after this and carry no forecast
     # I2 transfer (learning_t2), ablated first
     s = seeds[0]; fa, fb, key = L.generate_pair(s)
     abl = Path(str(root) + "_i2_ablated"); shutil.rmtree(abl, ignore_errors=True); ab = abl / "episode_b"; write_workspace(ab, fb)
@@ -168,7 +168,7 @@ def phase_m1(R, exec_tmpl, root: Path, seeds, limit, env, log):
     log(f"M1 restart: recall={vb['pass']} ({vb['failure_mode']}) ablated={vb0['pass']} ({vb0['failure_mode']}) -> {R['M_level']}")
 
 def finalize(R, root: Path, log=print):
-    R["SA4"]["pass"] = score.sa4_pass(R["SA4"], R["SA4"].get("n_expected", len([e for e in R["TH"] if e.get("forecast") is not None])))
+    R["SAcal"]["pass"] = score.sacal_pass(R["SAcal"], R["SAcal"].get("n_expected", len([e for e in R["TH"] if e.get("forecast") is not None])))
     # profile and gate
     sa_level = "SA0"
     if all(x["pass"] for x in R["SA1"]): sa_level = "SA1"
@@ -177,14 +177,14 @@ def finalize(R, root: Path, log=print):
     if R["M_level"] == "M1": i_level = "I1"
     if i_level == "I1" and R["I2"]["transfer"] == 1: i_level = "I2 (evidence; M3 not certified)"
     prof = {"C": R["C_level"], "M": R["M_level"], "I": i_level.split(" ")[0] if not i_level.startswith("I2") else "I1", "I_note": i_level, "O": (score.o_level(R["O0"]["pass"], R["O1"]["transfer"]) if "O0" in R else "N/A (individual)"),
-            "SA": sa_level, "SA4_calibration": R["SA4"], "T_frontier": score.frontier(R["TH"]), "H": "H0",
+            "SA": sa_level, "SA_calibration": R["SAcal"], "T_frontier": score.frontier(R["TH"]), "H": "H0",
             "O_note": "measured" if "O0" in R else "omitted: no organizational suite was run",
             "A_DI_net": score.net_surface(R["TH"]), "A_DI_gross": score.gross_surface(R["TH"]), "false_completions": sum(e["false_completion"] for e in R["TH"])}
     prof["U"], prof["U_bottleneck"] = score.gate(prof)
     A = {"C": score.C_ANCHOR[prof["C"]],
          "I": score.I_ANCHOR["I1" if prof["I"] == "I1" else "I0"] + (0.25 if R["I2"]["transfer"] == 1 else 0),
          "DI": (prof["A_DI_net"] or 0) / 100,
-         "SA": score.SA_ANCHOR[sa_level] + (0.1 if R["SA4"]["pass"] else 0)}
+         "SA": score.SA_ANCHOR[sa_level] + (0.1 if R["SAcal"]["pass"] else 0)}
     if "O0" in R: A["O"] = score.O_ANCHOR[score.o_level(R["O0"]["pass"], R["O1"]["transfer"])]
     prof["HLIS"], prof["HLIS_dims"] = score.hlis(A); prof["achievement"] = A
     R["profile"] = prof; R["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())

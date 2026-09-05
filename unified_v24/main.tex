@@ -289,22 +289,57 @@ I and M are evaluated separately and then joined by a gate. The thresholds below
 \toprule
 I & I-specific cumulative capability & Minimum $\mu_n$ \\
 \midrule
-I0 & Transient, reactive individual operation. & M0 \\
-I1 & Persistent individual continuity and reliable task and identity resumption. & $\ge$ M1 \\
-I2 & Verified experience changes later behavior while the learning mechanism stays fixed. & $\ge$ M3 \\
-I3 & Governed modification of cognitive mechanisms under independent evaluation. & $\ge$ M4 \\
-I4 & The improvement process itself improves under external evaluation. & $\ge$ M4 \\
-I5 & Unknowns are converted into independently validated knowledge. & $\ge$ M5 \\
-I\Om{} & Open-ended individual evolution expands cognitive instruments and problem reach while retaining validation lineage. & $\ge$ M5; M\Om{} only when evolution of the memory architecture is itself part of the claim \\
+I0 Transient & Operates within the current execution episode; no persistence of evolving individual cognition across discontinuities is required. & M0 \\
+I1 Persistent & Preserves task-relevant individual continuity across genuine execution discontinuities and correctly resumes from permitted persistent state without a human reconstructing the prior cognitive state. & $\ge$ M1 \\
+I2 Adaptive & Verified experience causes a persistent and appropriate change in later behavior on related unseen situations while the mechanism responsible for learning remains fixed. & $\ge$ M3 \\
+I3 Self-improving & Identifies an internally implicated deficiency, proposes a bounded change to a cognitive mechanism or procedure $\Theta$, and has that change independently validated before adoption. & $\ge$ M4 \\
+I4 Recursive & Improves the mechanism $\Psi$ that generates, evaluates, or selects its own improvements, under external evaluation and with lower-level capability retained. & $\ge$ M4 \\
+I5 Discovery & Autonomously converts an initially unresolved unknown into independently validated knowledge through a persistent hypothesis--experiment--evidence process, and incorporates the validated result into future competence. & $\ge$ M5 \\
+I\Om{} Open-ended & Repeated discovery and self-improvement create new cognitive instruments, representations, or methods that measurably expand the individual's future reachable problem and discovery space while preserving external validation lineage. & $\ge$ M5; M\Om{} only when evolution of the memory architecture is itself part of the claim \\
 \bottomrule
 \end{tabularx}
-\caption{Individual Intelligence levels I0--I\Om{} and the minimum memory level $\mu_n$ each requires.}
+\caption{Individual Intelligence levels I0--I\Om{} as invariant cumulative capabilities, and the minimum memory level $\mu_n$ each requires. The level names are unchanged from earlier versions; this revision sharpens the boundaries between adjacent levels so that each is a contrast a test can decide.}
 \label{tab:i}
 \end{table}
 
 An $I_n$ claim is invalid unless $M \ge \mu_n$, and the gate is checked separately from the I evidence. This is what stops an elaborate memory subsystem from being read as learning.
 
 Each memory requirement is a test, not a component list. An I1 claim is established by suspending the system, restarting the process, and observing that it recovers task state and can say where that state came from --- not by pointing at a vector database. An I2 claim requires showing that a lesson drawn from one episode changes behavior in a later one and that the change survives when the retrieval index is rebuilt. The distinction matters because storage is easy to install and consolidation is not, and a framework that accepted the presence of a store as evidence of the function would grade the installation rather than the individual.
+
+\subsubsection{I1 $\to$ I2: persistence is not learning}
+
+An I1 system may remember perfectly that a failure happened and still repeat it forever. That is persistence without learning. I2 requires a verified experience to cause a persistent change in later behavior, on related situations whose surface form differs from the experience, while the learning mechanism itself stays fixed:
+\begin{equation}
+I1:\ \text{preserve experience} \qquad I2:\ \text{experience changes future behavior}.
+\end{equation}
+
+\subsubsection{I2 $\to$ I3: learning within a mechanism versus changing the mechanism}\label{sec:theta}
+
+Let $\Theta$ denote a declared, behaviorally active cognitive mechanism or procedure belonging to the tested individual $A = A(m,h)$ and causally involved in its future task behavior. $\Theta$ is an abstract functional object, not a required implementation type: it may be realized in model parameters or in harness-level planning, retrieval, verification, tool-selection, decomposition, or any other executable procedure the individual actually uses. At I2, verified experience changes persistent state or knowledge while the mechanism responsible for learning is fixed. At I3 a mechanism itself becomes the object of governed change:
+\begin{equation}
+\Theta_t \longrightarrow \Theta_{t+1}.
+\end{equation}
+$\Theta$ therefore belongs to the tested individual and not to the certification environment: hidden tasks, verifiers, promotion rules and acceptance criteria are outside the candidate's write set. A valid I3 claim requires three things --- an \emph{internally implicated} deficiency (a restatement of the observed error is not a diagnosis), a \emph{bounded, active} change (a candidate that is not loaded and used is an edit, not a change), and \emph{independent validation before adoption}. A self-edit without the third is modification, not certified self-improvement.
+
+\subsubsection{I3 $\to$ I4: self-improvement versus improvement of improvement}\label{sec:psi}
+
+Let $\Psi$ denote the agent-side process that proposes, evaluates and selects candidate changes to $\Theta$:
+\begin{equation}
+\Psi_t(\Theta_t) \mapsto \Theta_{t+1}.
+\end{equation}
+Repeated $\Theta$ updates produced by a fixed $\Psi$ remain evidence for I3, however many there are. I4 requires a bounded higher-order change $\Psi_0 \to \Psi_1$ and external evidence, across non-identical improvement problems, that $\Psi_1$ improves a preregistered measure of improvement competence --- accepted-improvement rate, proposal quality, evaluation cost or time, regression rate --- under fixed external evaluation and promotion rules:
+\begin{equation}
+I3:\ \Theta \text{ improves} \qquad I4:\ \Psi \text{ improves}.
+\end{equation}
+Without a declared and frozen $\Psi$ at I3, an I3 run and an I4 run are indistinguishable; the companion benchmark paper fixes the manifest, the campaign and the pass indicators for both.
+
+\subsubsection{C5 versus I5: a discovery capability versus a persistent discovery process}
+
+Both ladders contain a discovery stage and they measure different things. C5 asks whether the system can derive a new method or explanatory model from evidence inside one bounded cognitive problem. I5 asks whether one persistent individual can recognize or maintain an unresolved unknown, generate hypotheses, select or design informative probes, accumulate evidence, reject alternatives, obtain independent validation, and incorporate the result into its future competence. A one-shot model can in principle be C5 and I0: it discovers when handed a well-posed problem and has no discovery process. I5 is longitudinal.
+
+\subsubsection{I5 $\to$ I\Om{}: knowledge growth versus expansion of cognitive reach}
+
+I5 converts unknowns into validated knowledge. I\Om{} is stronger: validated discoveries create new cognitive instruments, representations or methods that measurably expand the classes of problems the individual can subsequently reach, with the external validation lineage preserved. It cannot be certified by one impressive discovery; it is a longitudinal research certification.
 
 \subsection{Organizational Intelligence (O)}
 

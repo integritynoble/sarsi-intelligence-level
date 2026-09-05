@@ -3,7 +3,7 @@
 SA1 state:   report identity/state from machine-grounded facts when a stale note says otherwise.
 SA2 limits:  a paired pair of tasks, one solvable and one requiring an absent tool; the executor must
              complete the first and BLOCK on the second before attempting, without fabricating.
-SA4 forecast: handled by the runner -- a pre-run probability per T.H episode, scored by Brier against a
+SA-cal forecast (calibration diagnostic, NOT the ladder's SA4 self-change awareness): handled by the runner -- a pre-run probability per T.H episode, scored by Brier against a
              constant forecast at the pair's own base rate. (SA3, mechanism naming, is specification-only.)
 """
 from __future__ import annotations

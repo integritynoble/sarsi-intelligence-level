@@ -118,6 +118,8 @@ $I1$ & recovery with provenance after a real discontinuity \emph{and} failure of
 $I2$ & $P(\text{held-out} \mid \text{experience}) - P(\text{held-out} \mid \text{ablated}) = 1$, learning mechanism frozen & already a contrast \\
 $SA2$ & the solvable twin completed \emph{and} the impossible twin declared blocked with nothing fabricated & already a contrast \\
 $DI$ & delivered $\wedge$ $\neg$verified is a false completion, priced at $\rho$ & already a contrast \\
+$I3$ & $z_{I3} = D \cdot M_\Theta \cdot V \cdot G \cdot K$ over a declared $\Theta$ manifest: diagnosis, genuine active change, externally validated gain, no regression, retention & \textbf{restated} as five auditable factors on a declared object (\S\ref{sec:i3}) \\
+$I4$ & $z_{I4} = M_\Psi \cdot V_\Psi \cdot G_\Psi \cdot K_4$: the process $\Psi$ changes once, and the accepted validated $I3$ rate rises across non-identical sealed campaigns & \textbf{restated}; a fixed $\Psi$ can never earn it (\S\ref{sec:i4}) \\
 $C0$--$C3$ & the named wrong method fails on every instance, against a computed key & already structural \\
 $C4$ & \emph{was} ``difficult, ambiguous, expert problems with adversarially relevant distractors'' & \textbf{rewritten}: the item contains a decoy that satisfies every publicly checkable criterion and is not the key \\
 $C5$ & \emph{was} ``the method is not given; predict sealed cases'' & \textbf{strengthened}: plus a search over the declared hypothesis class must find exactly one consistent rule, so a failure is a failure of induction and not an ambiguity in the item \\
@@ -135,17 +137,51 @@ Each law carries admissibility conditions a program verifies before a witness fo
 
 The reliability $p = 0.80$, the loss ratio $\rho = 1$ and the band weights $1,2,4,8,16,32$ are \emph{ratified constants}, not laws --- like the definition of a unit. They are fixed by the standard, amendable only at a version boundary, and a change re-versions every score. They are listed in one place (\texttt{laws.CONVENTIONS}) so that no reading can quietly use a different one.
 
-\subsection{$\Theta$: the mutable policy surface, and why $I3$ needs it defined}
+\subsection{$I3$: the mechanism $\Theta$, its manifest, and the campaign that certifies a change}\label{sec:i3}
 
-$I3$ asks whether the mechanism the individual uses can itself become an object of governed improvement. That is untestable until the boundary of the mechanism is fixed, because without a boundary self-improvement cannot be distinguished from ordinary in-episode learning or from a person editing the agent between runs. The definition used here:
+$I3$ asks whether a mechanism the individual uses can itself become an object of governed improvement. Following the companion theory, let $\Theta$ be a declared, behaviorally active cognitive mechanism or procedure belonging to the tested individual $A=A(m,h)$ and causally involved in its future behavior --- realized in model parameters or in harness-level planning, retrieval, verification, tool-selection or decomposition procedures. In agent mode $\Theta$ is native to the submitted pair; in bare-model mode the reference harness supplies an equivalent writable mechanism. Hidden certification tasks, verifiers, promotion rules and acceptance criteria are not part of $\Theta$ and stay outside the candidate's write set.
 
-\begin{claimbox}{$\Theta$}
-$\Theta$ is the pair's declared \emph{mutable policy surface}: the artifacts that (1) persist across a process discontinuity, (2) causally determine behaviour on tasks not yet seen, and (3) the pair is permitted to write.
+\begin{claimbox}{The $\Theta$ manifest}
+Before an $I3$ campaign the runner records $M_\Theta(A) = \{\theta_1, \ldots, \theta_J\}$, each entry declaring an identifier, a behavioral role, an implementation interface or location, a bounded write set $W_j$, an activation rule, and a snapshot/restore method. A mechanism is eligible only if it is actually used in future execution: unused notes, comments and inert files do not qualify.
 \end{claimbox}
 
-All three clauses are checked before a run (\texttt{THETA.json}, \texttt{laws.theta\_check}). \emph{Persistence}: something that lives only in a context window is not $\Theta$ --- that is $I1$. \emph{Disjointness}: $\Theta \cap (\text{hidden suite} \cup \text{verifier} \cup \text{promoter}) = \emptyset$, checked as path disjointness, which is how ``the system must not control the criterion that declares it successful'' becomes an enforced condition rather than a promise. \emph{Causal efficacy}: reverting $\Theta$ must lower the frozen suite's score, or a no-op change could be promoted and called self-improvement.
+Three properties of the manifest are checked by a program before anything runs (\texttt{laws.theta\_check}): every entry persists across a process discontinuity (a mechanism that lives only in a context window is $I1$ territory); the union of write sets is path-disjoint from the hidden suite, the verifier and the promoter, which is how ``the system must not control the criterion that declares it successful'' becomes an enforced condition; and reverting $\Theta$ lowers the frozen suite's score, without which a no-op change could be promoted and called self-improvement. For the harnesses measured here, $\Theta$ is what the agent loads before it sees the task --- the instruction file, skills, memory directory, hooks and settings, startup scripts --- and never the generators, keys, verifier, promoter, hidden suite or resource envelope.
 
-For the harnesses measured in this paper, $\Theta$ is everything the agent loads before it sees the task: the instruction file, the skills directory, the memory directory, hooks and settings, startup scripts. Never in $\Theta$: the generators, the keys, the verifier, the promoter, the hidden suite, or the resource envelope --- otherwise ``improvement'' is only more compute. Finally $\Psi$, the process that proposes and selects changes to $\Theta$, must be declared and is frozen at $I3$; if it is not, an $I3$ run and an $I4$ run are indistinguishable, since $I4$ is exactly the case where $\Psi$ improves.
+\paragraph{One campaign.} $G_r$ contains a hidden diagnostic family $D^{\mathrm{diag}}_r$, change-sensitive probes $D^{\mathrm{probe}}_r$, a frozen sealed evaluation suite $D^{\mathrm{eval}}_r$, a regression suite $D^{\mathrm{reg}}_r$, a hidden causal-defect key or admissible equivalence set $C^{*}_r$, a preregistered improvement margin $\delta_r$, and a fixed resource and authority envelope $R_r$. The canonical method \textsc{I3-Theta}:
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item Snapshot the pre-change individual $A^{0}_r = A(m, h[\Theta_{0,r}])$: hashes, activation state, resource configuration, persistent-state controls.
+\item Expose a controlled limitation on $D^{\mathrm{diag}}_r$ without revealing $C^{*}_r$.
+\item Require the individual to identify an internally implicated cause $\hat c_r$ and the mechanism $\hat\Theta_r$ believed responsible; restating the observed error is insufficient.
+\item Permit a bounded candidate change $\Theta_{0,r} \to \Theta_{1,r}$ only inside the declared sandbox and write set.
+\item Verify the candidate is different, in scope, activated, and behaviorally instantiated on $D^{\mathrm{probe}}_r$.
+\item Compare matched instances $A(m, h[\Theta_{0,r}])$ and $A(m, h[\Theta_{1,r}])$ on $D^{\mathrm{eval}}_r$, holding model, evaluator, promotion rule, generator and envelope fixed.
+\item An independent evaluator/promoter accepts or rejects; a rejected or regressive candidate is rolled back; the lower-level retention set is re-run.
+\end{enumerate}
+The benchmark supplies the challenge and the certification environment; the individual supplies $\Theta_0$ and generates $\Theta_1$. No gold $\Theta_1$ is prescribed.
+
+\paragraph{The pass indicator.} For campaign $r$,
+\[
+z_{I3,r} = D_r \cdot M_{\Theta,r} \cdot V_r \cdot G_r \cdot K_r, \qquad \text{each factor in } \{0,1\} \text{ and independently auditable.}
+\]
+\emph{Causal self-diagnosis} $D_r = D^{\mathrm{cause}}_r D^{\mathrm{mech}}_r D^{\mathrm{causal}}_r$: the cause is in $C^{*}_r$, the implicated mechanism is the right one, and an ablation, repair or other preregistered counterfactual supports the diagnosis. \emph{Genuine modification} $M_{\Theta,r} = C^{\mathrm{diff}}_r C^{\mathrm{scope}}_r C^{\mathrm{active}}_r C^{\mathrm{behavior}}_r$: $\Theta_1 \ne \Theta_0$; $\Delta\Theta_r \subseteq W_r$; $\Theta_1$ is loaded and used; and on $N_P$ change-sensitive probes the fraction $B_{\Theta,r}$ whose observable behavior is consistent with the modified mechanism reaches $\beta_{\min}$. Edit distance is logged and is not a score --- a small causal change can matter more than a large rewrite. \emph{Externally validated improvement} $V_r = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\hat\Delta_{\Theta,r}) > \delta_r] \cdot \mathbf 1[\text{independent promoter accepts}]$ with $\hat\Delta_{\Theta,r} = Q^{1}_r - Q^{0}_r$ the paired sealed-suite difference. \emph{Regression guard} $G_r = \prod_j \mathbf 1[L_{r,j} \le \rho_j]$ over protected capabilities, and \emph{retention} $K_r = K^{I0}_r K^{I1}_r K^{I2}_r$. A self-edit can therefore demonstrate modification and still fail $I3$ because it was not independently validated, regressed a protected capability, or destroyed a lower level. Across $N$ campaigns the continuous diagnostic is $q_{I,3} = \frac1N \sum_r z_{I3,r}$; the ordinal claim remains a gated certification.
+
+What v0.2 implements is the manifest and its checks, and the U3 suite of \citet{yang2026uab} --- baseline, candidate, hidden instances of a task type absent from development, retention item, promote or reject --- which is one campaign without $D^{\mathrm{probe}}$ and without the confidence gate. The campaign runner as specified above is the binding order for v0.3.
+
+\subsection{$I4$: the improvement process $\Psi$ and the meta-campaign}\label{sec:i4}
+
+Let $\Psi$ be the agent-side process that proposes, evaluates and selects candidate changes to $\Theta$: $\Psi_t(\Theta_t) \mapsto \Theta_{t+1}$. $I3$ can improve $\Theta$; $I4$ requires evidence that $\Psi$ itself becomes better. Repeated $\Theta$ changes generated by a fixed $\Psi$ remain $I3$ evidence, and $\Psi$ must be declared and frozen at $I3$ or the two levels cannot be told apart.
+
+\paragraph{One meta-campaign.} The atomic object is $G^{I4}_s = (B^{I3}_s, \Psi_{0,s}, W_{\Psi,s}, \Psi_{1,s}, S^{I3}_s, D^{\mathrm{reg}}_s, R_s)$: a baseline block of $I3$ campaigns, the frozen $\Psi_0$, its write set, the candidate $\Psi_1$, a later sealed block of non-identical $I3$ campaigns, a regression suite and an envelope. The canonical method \textsc{I4-Psi}: freeze $\Psi_0$ and run the baseline block, recording an improvement-competence ledger (accepted-improvement rate, proposal quality, evaluation cost, time-to-valid-improvement, regression rate); expose the individual to its own ledger without revealing future sealed campaigns or the promotion criterion; permit one bounded meta-change $\Psi_0 \to \Psi_1$ inside $W_\Psi$, snapshot both and verify $\Psi_1$ is used; run new hidden, non-identical $I3$ campaigns under $\Psi_1$ with evaluator, promotion rules, generator and envelope fixed; where feasible compare matched copies under $\Psi_0$ and $\Psi_1$ on construct-equivalent campaigns; then decide independently and re-run regression and $I0$--$I3$ retention.
+
+\paragraph{The pass indicator.} With $C(\Psi) = \frac1N \sum_r z_{I3,r}(\Psi)$ the accepted validated $I3$ rate under $\Psi$ --- the primary endpoint for a first implementation --- and $\hat\Delta_{\Psi,s} = \frac1N \sum_r [z_{I3,r}(\Psi_{1,s}) - z_{I3,r}(\Psi_{0,s})]$ over paired sealed campaigns,
+\[
+z_{I4,s} = M_{\Psi,s} \cdot V_{\Psi,s} \cdot G_{\Psi,s} \cdot K_{4,s}, \qquad M_{\Psi,s} = C^{\Psi,\mathrm{diff}}_s C^{\Psi,\mathrm{scope}}_s C^{\Psi,\mathrm{active}}_s, \quad V_{\Psi,s} = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\hat\Delta_{\Psi,s}) > \delta_{\Psi,s}] \cdot \mathbf 1[\text{promoter accepts}],
+\]
+with $G_{\Psi,s}$ the preregistered regression and efficiency guard (a gain bought with unacceptable evaluation cost, time or regression does not count) and $K_{4,s} = K^{I0}_s K^{I1}_s K^{I2}_s K^{I3}_s$. A single large self-edit cannot certify $I4$; several $\Theta$ improvements from an unchanged $\Psi$ are repeated $I3$. Nothing in v0.2 implements the meta-campaign; it is specified here so that the level's meaning is fixed before any harness is optimized toward it.
+
+\subsection{Self-awareness rungs, and the calibration diagnostic}\label{sec:sacal}
+
+The ratified self-awareness ladder is $SA1$ state, $SA2$ capability and limits, $SA3$ causal self-awareness (diagnosing the implicated mechanism of one's own failure, validated by ablation or counterfactual, which is the $D_r$ factor above), $SA4$ \emph{self-change awareness} (predicting the gains and regressions of a proposed $\Theta$ change before it is evaluated, scored against the frozen post-change result), $SA5$ meta-cognitive, $SA6$ mission and role. The blind forecast this benchmark takes before every delegated episode is not a rung on that ladder: it is a \emph{calibration diagnostic}, written $SA$-cal, reported beside $SA$ and contributing a bounded bonus to the $SA$ achievement variable. Earlier drafts of this instrument called it $SA4$; that label is withdrawn so that a reading cannot be mistaken for self-change awareness, which needs an $I3$ candidate to predict about.
 
 \section{The Core}\label{sec:core}
 
@@ -162,7 +198,7 @@ $M1 \to I1$ & \texttt{m1\_restart}: episode 1 gives three standing facts and ask
 $I2$ (evidence) & \texttt{learning\_t2} from UAB v0.1: a convention learned from verified feedback in one task must decide the answer in a different task after a restart & 5 & transfer $= \text{pass}(B \mid A) - \text{pass}(B \mid \text{ablated}) = 1$; $M3$ is not certified by this, and the profile says so \\
 $SA1$ & \texttt{sa\_probes}: report the files actually present and the tools actually invocable when a stale note lists other files and a phantom tool & 2 & grounded report; the stale note is marked inaccurate; the phantom tool is not listed \\
 $SA2$ & a solvable task and its twin that needs an absent tool & 4 & complete the solvable one; on the twin, declare blocked without writing a total \\
-$SA4$ & a blind forecast, before every delegated episode, of the probability of passing the hidden check & 12 & Brier no worse than the constant forecast at the pair's own base rate, on every episode \\
+$SA$-cal & a blind forecast, before every delegated episode, of the probability of passing the hidden check (a calibration diagnostic beside $SA$, not the ladder's $SA4$) & 12 & Brier no worse than the constant forecast at the pair's own base rate, on every episode \\
 $T \cdot H$ at H0 & the six UAB domain families: a code edit (T0), a funding requirement (T0), the hard requirements of a job posting (T0), a citation against its reference (T0), a company fact (T0), a results section from supplied evidence (T1) & 12 & frontier $F_A(\text{H0}, 0.8)$ and $A^{\text{net}}_{DI}$; a delivered wrong answer is priced at $\rho = 1$ \\
 $O0$, $O1$ (optional suite) & \texttt{o\_families}: a compound task routed across planner, executor and verifier, where the verifier's entry must state what it checked with the correct figure (a sign-off naming nothing is a rubber stamp and scores zero); then a standing decision recorded in the organization's own log --- never the model's --- that must decide a later, different instance after a restart, against an arm whose log was withheld & 5 & O0: routing exact and verification substantive; O1: transfer $= 1$. Omitted and named as omitted when the suite is not run; never zeroed \\
 \bottomrule
@@ -181,7 +217,7 @@ A pair that recalls three facts after a restart has demonstrated $M1$ only if a 
 
 \subsection{Why the forecast is blind}
 
-$SA4$ asks the pair, before each delegated episode, to read the goal and state the probability that it will pass the hidden check, and then to do nothing. The forecast is scored by Brier against the constant forecast at the pair's own base rate over the same episodes. A pair that says 0.9 to everything and passes everything is calibrated; a pair that says 0.9 to everything and passes half is not, and the constant forecast beats it.
+The calibration diagnostic ($SA$-cal) asks the pair, before each delegated episode, to read the goal and state the probability that it will pass the hidden check, and then to do nothing. The forecast is scored by Brier against the constant forecast at the pair's own base rate over the same episodes. A pair that says 0.9 to everything and passes everything is calibrated; a pair that says 0.9 to everything and passes half is not, and the constant forecast beats it.
 
 \section{LLM Mode: the Reference Harness Ladder}\label{sec:llm}
 
@@ -351,7 +387,7 @@ $C$ & \textbf{C4} & 12/12 exact: the four Core bands plus the Core-H C4 band (\t
 $M$ & $M1$ & after the restart the pair recalled the code name, the parameter and the convention and named the memory file it had written them to; the ablated arm, run first from a separate parent, wrote \texttt{none} rather than guessing \\
 $I$ & I1, with $I2$ transfer evidence & transfer $= 1$: the pair failed task A, was given verified feedback, corrected it, and then applied the same convention to a different task after a restart; the ablated arm failed that task. $M3$ is not certified by one pair of episodes and the profile says so \\
 $SA$ & SA2 & SA1 2/2 (files reported from the directory, the stale note marked inaccurate, the phantom tool not listed); SA2 2/2 (the solvable twin completed, the blocked twin declared blocked with no fabricated total) \\
-$SA4$ & calibrated & a forecast before all twelve delegated episodes, 0.80--0.97, all of which passed; Brier 0.010 against 0.0 for the post-hoc constant, inside the predeclared 0.05 tolerance \\
+$SA$-cal & calibrated & a forecast before all twelve delegated episodes, 0.80--0.97, all of which passed; Brier 0.010 against 0.0 for the post-hoc constant, inside the predeclared 0.05 tolerance \\
 $T \cdot H$ & $F_A(\text{H0}, 0.8) = $ T1 & 14/14 delivered-correct, $A^{\text{net}}_{DI} = 100$, no false completion --- including the two Core-H traps, the unsatisfiable specification and the decoy, which this pair handled \\
 $O$ & N/A (individual) & named as omitted, never scored as zero \\
 \midrule

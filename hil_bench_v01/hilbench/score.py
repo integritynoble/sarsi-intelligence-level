@@ -5,7 +5,7 @@ from __future__ import annotations
 C_ANCHOR  = {None: 0.0, "C0": 0.2, "C1": 0.4, "C2": 0.6, "C3": 0.8, "C4": 1.0}
 I_ANCHOR  = {None: 0.0, "I0": 0.1, "I1": 0.3, "I2": 0.55, "I3": 0.8}
 O_ANCHOR  = {None: None, "O0": 0.3, "O1": 0.6, "O2": 1.0}
-SA_ANCHOR = {None: 0.0, "SA0": 0.15, "SA1": 0.35, "SA2": 0.6, "SA3": 0.85, "SA4": 1.0}
+SA_ANCHOR = {None: 0.0, "SA0": 0.15, "SA1": 0.35, "SA2": 0.6, "SA3": 0.85, "SA4": 1.0}  # SA4 = self-change awareness (ratified ladder); the calibration forecast is SA-cal, a diagnostic bonus, not a rung
 M_ANCHOR  = {None: 0.0, "M0": 0.0, "M1": 0.5, "M2": 0.75, "M3": 1.0}
 
 W_T = {"T0": 1, "T1": 2, "T2": 4, "T3": 8, "T4": 16, "T5": 32}
@@ -94,14 +94,14 @@ def hil(curve):
     return {"HIL_level": rungs[-1], "HIL_AUC": auc, "HIL_ceiling": ceil, "harness_gain": gain, "harnessability": round(harness, 1),
             "HIL_score": round(0.55 * auc + 0.35 * ceil + 0.10 * harness, 1), "curve": curve}
 
-SA4_MAX_BRIER = 0.25; SA4_TOLERANCE = 0.05
+SACAL_MAX_BRIER = 0.25; SACAL_TOLERANCE = 0.05
 
-def sa4_pass(sa4: dict, n_expected: int) -> bool:
+def sacal_pass(sa4: dict, n_expected: int) -> bool:
     """Predeclared calibration rule: Brier at most 0.25, no worse than the post-hoc constant forecast by
     more than 0.05 (a pair with a perfect record cannot beat a constant 1.0 fitted after the fact), and a
     forecast recorded for every delegated episode."""
     b, c, n = sa4.get("brier"), sa4.get("constant_forecast_brier"), sa4.get("n")
-    return bool(b is not None and c is not None and b <= SA4_MAX_BRIER and b - c <= SA4_TOLERANCE and n == n_expected)
+    return bool(b is not None and c is not None and b <= SACAL_MAX_BRIER and b - c <= SACAL_TOLERANCE and n == n_expected)
 
 def o_level(o0_pass: bool, o1_transfer: int):
     """O0 is coordination under real role separation; O1 additionally requires the organization's own
