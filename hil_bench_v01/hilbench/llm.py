@@ -67,7 +67,7 @@ def run(base, key, model, prompt, cwd, timeout=300, max_turns=5):
     for turn in range(max_turns):
         resp = _call(base, key, model,
                      {"model": model, "messages": messages, "temperature": 0.0,
-                      "max_tokens": 4000, "tools": tools, "tool_choice": "auto"}, timeout)
+                      "max_tokens": 8000, "tools": tools, "tool_choice": "auto"}, timeout)
         msg = resp["choices"][0]["message"]
         calls = msg.get("tool_calls") or []
         if not calls:
@@ -87,7 +87,7 @@ def run(base, key, model, prompt, cwd, timeout=300, max_turns=5):
     else:
         resp = _call(base, key, model,
                      {"model": model, "messages": messages + [{"role": "user", "content": "Finish now: reply with exactly one JSON object containing the deliverable."}],
-                      "temperature": 0.0, "max_tokens": 4000, "tools": None}, timeout)
+                      "temperature": 0.0, "max_tokens": 8000, "tools": None}, timeout)
         text = resp["choices"][0]["message"].get("content") or ""
     return text
 
@@ -113,6 +113,7 @@ def main():
     if err:
         text2 = run(base, key, model, text + "\n\nRestate ONLY the final answer as one JSON object, no prose.", cwd, timeout=timeout)
         obj, err2 = _parse(text2)
+    (cwd / "response_raw.txt").write_text(text or "", encoding="utf-8")   # kept so a truncation can be told from a refusal
     if obj is None:
         (cwd / "response.json").write_text("null")
         print("PARSE_FAIL")

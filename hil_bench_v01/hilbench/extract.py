@@ -96,7 +96,8 @@ def _collect(fam: str, ws: Path, files: dict) -> dict:
         # deliverable file carries that file's content (string) or object (JSON); otherwise the whole
         # response is written as the family's single deliverable. Verifiers are unchanged.
         from .core import DELIV
-        deliv = DELIV.get(fam)
+        deliv = {**DELIV, "c_items": "answer.json", "sa1": "state.json", "sa2": "total.json",
+                 "o0_routing": "org_record.json", "o1_orgmem": "report.json"}.get(fam)
         for k, v in list(r.items()):
             if isinstance(k, str) and "." in k and (isinstance(v, str) or isinstance(v, (dict, list))):
                 out[k] = v if isinstance(v, str) else json.dumps(v)
