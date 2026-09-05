@@ -31,7 +31,9 @@ Every law therefore carries **admissibility conditions a program can check** (`h
 | SA3 | the pair names the internal cause of its own failure, judged against a frozen rubric by a locus it cannot write to | independent locus; human locus | human |
 | SA4 | a forecast made before each episode, scored against the post-hoc constant forecast at the pair's own base rate | computed key | automatic |
 | DI | four outcomes; the surface is P(delivered ∧ verified) − ρ·P(false completion) | computed key; specification–key gap | automatic |
-| O0 | information or capability really partitioned across loci, so no single locus can finish under the same information | ablated arm | human |
+| O0 | work routed across separated roles; the verifier's entry states what it checked with the correct figure — a sign-off naming nothing is not a sign-off | computed key; trap fires | automatic |
+| O1 | a standing decision in the organization's own log (never the model's) decides a later, different instance after a restart; the arm whose log was withheld fails | discontinuity; ablated arm; computed key | automatic |
+| O2 | evidence that a routing/role policy is suboptimal changes the allocation persistently and improves held-out outcomes | ablated arm; independent locus | human |
 
 ## What is *not* a law
 
@@ -71,6 +73,6 @@ restores the prior hash.
   evaluator who did not build the pair. The result is a *certified reading*. What this buys is the independent
   runner, not secrecy: the generators are public, so anyone can make instances; what they cannot do is witness
   their own termination reasons.
-- **Private, human locus** — the laws marked human above (SA3, I4, O, open-ended bands). The rubric, blinding
+- **Private, human locus** — the laws marked human above (SA3, I4, O2 and above, open-ended bands). The rubric, blinding
   and acceptance rule are part of the standard, not the judge's discretion. These are the only route to a level
   above U2, so free HIL-Bench can never certify U3.

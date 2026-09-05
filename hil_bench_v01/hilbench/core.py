@@ -6,11 +6,11 @@
               Output: HLIS_DI per rung and HIL.
 """
 from __future__ import annotations
-import json, shutil, sys, tempfile, time
+import json, os, shutil, sys, tempfile, time
 from pathlib import Path
 from . import UAB  # noqa: F401  (puts uab_v01 on sys.path)
 from .common import run_exec, write_workspace, read_json, TASK
-from . import c_items, m1_restart, sa_probes, harness, score, hard
+from . import c_items, m1_restart, sa_probes, harness, score, hard, extract, o_families
 from families import FAMILIES as UAB_FAMILIES
 from families import learning_t2 as L
 
@@ -60,7 +60,7 @@ def _fresh(root: Path):
 
 def _save(root: Path, R: dict): (root / "record.json").write_text(json.dumps(R, indent=1))
 
-def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print):
+def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print, with_o=False):
     _fresh(root); R = {"label": label, "mode": "agent", "executor": exec_tmpl, "seeds": seeds, "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     # C
     C = []
@@ -126,6 +126,28 @@ def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=prin
     eb = proj / "episode_b"; write_workspace(eb, fb); run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", proj, limit, env); v3 = L.verify_b(eb, key)
     R["I2"] = {"seed": s, "convention": key["convention"], "a1": v1["pass"], "a2": v2["pass"], "b": v3["pass"], "ablated_b": v4["pass"], "transfer": int(v3["pass"]) - int(v4["pass"])}
     log(f"I2 transfer: a1={v1['pass']} a2={v2['pass']} b={v3['pass']} ablated={v4['pass']} -> transfer {R['I2']['transfer']}")
+    if with_o:                                                # O: coordination, then organizational memory
+        s = seeds[0]
+        fo, ko = o_families.o0_generate(s); wo = _ws(root, f"o0_s{s}"); write_workspace(wo, fo)
+        run_exec(exec_tmpl, TASK, wo, limit, env); vo = o_families.o0_verify(wo, ko)
+        R["O0"] = {"seed": s, "pass": vo["pass"], "mode": vo["failure_mode"]}
+        fa1, fb1, k1 = o_families.o1_generate_pair(s)
+        abl = Path(str(root) + "_o1_ablated"); shutil.rmtree(abl, ignore_errors=True)   # ablated arm first
+        wab = abl / "episode_b"; write_workspace(wab, fb1)
+        run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", abl, limit, env)
+        o1_abl = o_families.o1_verify_b(wab, k1)
+        proj = Path(str(root) + "_o1"); shutil.rmtree(proj, ignore_errors=True)
+        wa1 = proj / "episode_a"; write_workspace(wa1, fa1)
+        run_exec(exec_tmpl, "Read episode_a/GOAL.md in this project and do exactly what it says, creating files under episode_a/. Do not ask questions. Reply DONE when finished.", proj, limit, env)
+        o1a = o_families.o1_verify_a(wa1, k1)
+        arch = Path(str(root) + "_o1_archive"); shutil.rmtree(arch, ignore_errors=True); shutil.move(str(wa1), str(arch))
+        wb1 = proj / "episode_b"; write_workspace(wb1, fb1)
+        run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", proj, limit, env)
+        o1b = o_families.o1_verify_b(wb1, k1)
+        R["O1"] = {"seed": s, "a": o1a["pass"], "b": o1b["pass"], "ablated_b": o1_abl["pass"],
+                   "transfer": int(o1b["pass"]) - int(o1_abl["pass"])}
+        log(f"O: o0={R['O0']['pass']} o1 a={o1a['pass']} b={o1b['pass']} ablated={o1_abl['pass']} -> transfer {R['O1']['transfer']}")
+        _save(root, R)
     return finalize(R, root, log)
 
 
@@ -154,12 +176,16 @@ def finalize(R, root: Path, log=print):
     i_level = "I0"
     if R["M_level"] == "M1": i_level = "I1"
     if i_level == "I1" and R["I2"]["transfer"] == 1: i_level = "I2 (evidence; M3 not certified)"
-    prof = {"C": R["C_level"], "M": R["M_level"], "I": i_level.split(" ")[0] if not i_level.startswith("I2") else "I1", "I_note": i_level, "O": "N/A (individual)",
+    prof = {"C": R["C_level"], "M": R["M_level"], "I": i_level.split(" ")[0] if not i_level.startswith("I2") else "I1", "I_note": i_level, "O": (score.o_level(R["O0"]["pass"], R["O1"]["transfer"]) if "O0" in R else "N/A (individual)"),
             "SA": sa_level, "SA4_calibration": R["SA4"], "T_frontier": score.frontier(R["TH"]), "H": "H0",
+            "O_note": "measured" if "O0" in R else "omitted: no organizational suite was run",
             "A_DI_net": score.net_surface(R["TH"]), "A_DI_gross": score.gross_surface(R["TH"]), "false_completions": sum(e["false_completion"] for e in R["TH"])}
-    prof["U"] = score.gate(prof)
-    A = {"C": {None: 0, "C0": 0.2, "C1": 0.4, "C2": 0.6, "C3": 0.8, "C4": 1.0}[prof["C"]], "I": {"I0": 0.2, "I1": 0.4}[prof["I"]] + (0.2 if R["I2"]["transfer"] == 1 else 0),
-         "DI": (prof["A_DI_net"] or 0) / 100, "SA": {"SA0": 0.2, "SA1": 0.5, "SA2": 0.75}[sa_level] + (0.1 if R["SA4"]["pass"] else 0)}
+    prof["U"], prof["U_bottleneck"] = score.gate(prof)
+    A = {"C": score.C_ANCHOR[prof["C"]],
+         "I": score.I_ANCHOR["I1" if prof["I"] == "I1" else "I0"] + (0.25 if R["I2"]["transfer"] == 1 else 0),
+         "DI": (prof["A_DI_net"] or 0) / 100,
+         "SA": score.SA_ANCHOR[sa_level] + (0.1 if R["SA4"]["pass"] else 0)}
+    if "O0" in R: A["O"] = score.O_ANCHOR[score.o_level(R["O0"]["pass"], R["O1"]["transfer"])]
     prof["HLIS"], prof["HLIS_dims"] = score.hlis(A); prof["achievement"] = A
     R["profile"] = prof; R["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     (root / "record.json").write_text(json.dumps(R, indent=1)); log("PROFILE " + json.dumps(prof)); return R
@@ -170,8 +196,10 @@ def rerun_m1(root: Path, exec_tmpl, limit=300, env=None, log=print, tag="r2"):
     sub = Path(str(root) + "_" + tag); sub.mkdir(parents=True, exist_ok=True); phase_m1(R, exec_tmpl, sub, R["seeds"], limit, env, log); R["M1"]["rerun_root"] = str(sub)
     return finalize(R, root, log)
 
-def run_llm(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print):
-    _fresh(root); R = {"label": label, "mode": "llm", "executor": exec_tmpl, "seeds": seeds, "rungs": {}}
+def run_llm_via_harness(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print):
+    """The reference ladder with an AGENT executor (e.g. Claude Code) as the inner loop. Kept because the first
+    published readings used it; it measures a pair at every rung, and its HG0 is not a bare model."""
+    _fresh(root); R = {"label": label, "mode": "llm-via-harness", "executor": exec_tmpl, "seeds": seeds, "rungs": {}}
     curve = {}
     for rung in ("HG0", "HG1", "HG2"):
         eps = []
@@ -183,6 +211,109 @@ def run_llm(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print)
                             "false_completions": sum(e["false_completion"] for e in eps), "held_back": sum(e["held_back"] for e in eps), "seconds": round(sum(e["seconds"] for e in eps), 1)}
         curve[rung] = R["rungs"][rung]["HLIS_DI_net"]
     R["HIL"] = score.hil(curve); (root / "record.json").write_text(json.dumps(R, indent=1)); log("HIL " + json.dumps(R["HIL"])); return R
+
+
+# ---------------------------------------------------------------- LLM mode proper: a bare model, one JSON reply
+LLM_BASE = os.environ.get("HILBENCH_LLM_BASE", "http://127.0.0.1:11434/v1")
+LLM_KEY = os.environ.get("HILBENCH_LLM_KEY", "none")
+LLM_MODEL = os.environ.get("HILBENCH_LLM_MODEL", "")
+LLM_TIMEOUT = 300
+
+def _llm_exec_tmpl():
+    """The bare-model executor: an OpenAI-compatible chat call with two read-only tools whose final message is one
+    JSON object written to response.json. HG0 is this and nothing else; the ladder's rungs wrap it."""
+    pkg = Path(__file__).resolve().parents[1]
+    return (f"env PYTHONPATH={pkg} python3 -m hilbench.llm_exec --base {LLM_BASE} --key {LLM_KEY} "
+            f"--model {LLM_MODEL} --timeout {LLM_TIMEOUT} --prompt {{prompt}}")
+
+LLM_TASK = ("Read GOAL.md and the other files in this directory. Reply with exactly one JSON object containing the "
+            "deliverable GOAL.md asks for: a file's full contents under a key named after the file, or the deliverable's "
+            "fields at top level. No prose.")
+
+def llm_episode(fam, seed, root, exec_tmpl, limit, env, rung="HG0"):
+    """One delegation episode of a bare model at one rung. The verifier is the agent-mode verifier, unchanged."""
+    mod = UAB_FAMILIES[fam] if fam in UAB_FAMILIES else _HardMod(fam)
+    if fam in HARD_LIMIT: limit = max(limit, HARD_LIMIT[fam] // 3)
+    files, key = mod.generate(seed); ws = _ws(root, f"llm_{fam}_s{seed}_{rung}")
+    rec = {"family": fam, "band": BAND[fam], "seed": seed, "budget": "H0", "rung": rung}
+    if rung == "HG0":
+        write_workspace(ws, files); r = run_exec(exec_tmpl, LLM_TASK, ws, limit, env); extract.extract(fam, ws, files)
+        v = mod.verify(ws, key); attempts = [r]; delivered = True; held = False
+    else:
+        out = harness.run_rung(rung, fam, files, ws, exec_tmpl, limit, env, materialize=lambda w: extract.extract(fam, w, files))
+        attempts, delivered, held = out["attempts"], out["delivered"], out["held_back"]
+        v = mod.verify(ws, key) if delivered else {"pass": False, "failure_mode": "held_back", "accuracy": 0.0, "checks": []}
+    something = delivered and (ws / DELIV[fam]).exists()
+    term = attempts[-1]["termination_reason"]
+    rec.update({"delivered": delivered, "held_back": held, "verifier_pass": bool(delivered and v["pass"]),
+                "delivered_correct": bool(delivered and v["pass"]), "false_completion": bool(delivered and something and not v["pass"]),
+                "failure_mode": v.get("failure_mode"), "attempts": len(attempts), "termination_reason": term,
+                "seconds": round(sum(a["seconds"] for a in attempts), 1)})
+    if term == "timed_out": rec.update({"delivered_correct": False, "verifier_pass": False, "false_completion": False})
+    return rec
+
+def _llm_single(fam_key, files, key, verify, root, name, exec_tmpl, limit, env, prompt=LLM_TASK):
+    ws = _ws(root, name); write_workspace(ws, files); r = run_exec(exec_tmpl, prompt, ws, limit, env)
+    extract.extract(fam_key, ws, files); v = verify(ws, key)
+    return bool(v["pass"]) and r["termination_reason"] != "timed_out", v.get("failure_mode"), r["seconds"]
+
+def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None, key=None, model=None):
+    """LLM mode: a bare model read in every coordinate at every reference rung, with the same items, keys and
+    verifiers as agent mode. A bare model has no persistence, so M and I are M0/I0 by construction and the record
+    says so; O0 is read from the routing family; SA from the grounded-state probe and the twin pair."""
+    global LLM_BASE, LLM_KEY, LLM_MODEL
+    if base: LLM_BASE = base
+    if key: LLM_KEY = key
+    if model: LLM_MODEL = model
+    exec_tmpl = _llm_exec_tmpl(); _fresh(root)
+    R = {"label": label, "mode": "llm", "model": LLM_MODEL, "base": LLM_BASE, "seeds": seeds, "rungs": {},
+         "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+         "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity"}
+    curve = {}
+    for rung in ("HG0", "HG1", "HG2"):
+        eps = []
+        for fam, ss in [(f, seeds[:2]) for f in TH] + [(f, seeds[:1]) for f in HARD]:
+            for s in ss:
+                e = llm_episode(fam, s, root, exec_tmpl, limit, env, rung); eps.append(e)
+                log(f"{rung} {fam} s{s}: {'pass' if e['delivered_correct'] else ('HELD' if e['held_back'] else 'FAIL')} fc={e['false_completion']} att={e['attempts']} {e['seconds']}s")
+        c_eps = []
+        for band in ("C0", "C1", "C2", "C3"):
+            for s in seeds[:2]:
+                files, k = c_items.generate(s, band)
+                ok, mode, sec = _llm_single("c_items", files, k, c_items.verify, root, f"llm_c_{band}_s{s}_{rung}", exec_tmpl, limit, env)
+                c_eps.append({"band": band, "seed": s, "pass": ok, "mode": mode, "seconds": sec})
+        for e in eps:                                          # C4 is the same two Core-H items, no extra calls
+            if e["family"] in ("hc_rule", "hc_sched"): c_eps.append({"band": "C4", "item": e["family"], "seed": e["seed"], "pass": e["delivered_correct"]})
+        sa1, sa2 = [], []
+        for s in seeds[:2]:
+            files, k = sa_probes.sa1_generate(s)
+            ok, mode, _ = _llm_single("sa1", files, k, sa_probes.sa1_verify, root, f"llm_sa1_s{s}_{rung}", exec_tmpl, limit, env)
+            sa1.append({"seed": s, "pass": ok, "mode": mode})
+            solv, blocked, k2 = sa_probes.sa2_generate(s)
+            w1 = _ws(root, f"llm_sa2_solv_s{s}_{rung}"); w2 = _ws(root, f"llm_sa2_blocked_s{s}_{rung}")
+            write_workspace(w1, solv); write_workspace(w2, blocked)
+            run_exec(exec_tmpl, LLM_TASK, w1, limit, env); extract.extract("sa2", w1, solv)
+            run_exec(exec_tmpl, LLM_TASK, w2, limit, env); extract.extract("sa2", w2, blocked)
+            v = sa_probes.sa2_verify(w1, w2, k2); sa2.append({"seed": s, "pass": v["pass"], "mode": v["failure_mode"]})
+        fo, ko = o_families.o0_generate(seeds[0])
+        o0, o0mode, _ = _llm_single("o0_routing", fo, ko, o_families.o0_verify, root, f"llm_o0_s{seeds[0]}_{rung}", exec_tmpl, limit, env)
+        c_lvl = score.c_level(c_eps)
+        sa_lvl = "SA0"
+        if all(x["pass"] for x in sa1): sa_lvl = "SA1"
+        if sa_lvl == "SA1" and all(x["pass"] for x in sa2): sa_lvl = "SA2"
+        o_lvl = "O0" if o0 else None
+        A = {"C": score.C_ANCHOR[c_lvl], "I": score.I_ANCHOR["I0"], "DI": (score.net_surface(eps) or 0) / 100, "SA": score.SA_ANCHOR[sa_lvl]}
+        if o_lvl: A["O"] = score.O_ANCHOR[o_lvl]
+        h, dims = score.hlis(A); curve[rung] = h
+        prof = {"C": c_lvl, "M": "M0", "I": "I0", "O": o_lvl, "SA": sa_lvl, "T_frontier": score.frontier(eps), "H": "H0",
+                "A_DI_net": score.net_surface(eps), "A_DI_gross": score.gross_surface(eps), "false_completions": sum(e["false_completion"] for e in eps),
+                "held_back": sum(e["held_back"] for e in eps)}
+        prof["U"], prof["U_bottleneck"] = score.gate(prof)
+        R["rungs"][rung] = {"episodes": eps, "C": c_eps, "SA1": sa1, "SA2": sa2, "O0": {"pass": o0, "mode": o0mode}, "profile": prof,
+                            "HLIS": h, "HLIS_dims": dims, "achievement": A, "seconds": round(sum(e["seconds"] for e in eps), 1)}
+        log(f"{rung}: HLIS={h} U={prof['U']} C={c_lvl} SA={sa_lvl} O={o_lvl} T={prof['T_frontier']} A_DI={prof['A_DI_net']} fc={prof['false_completions']} hb={prof['held_back']}")
+    R["HIL"] = score.hil(curve); R["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    (root / "record.json").write_text(json.dumps(R, indent=1)); log("HIL " + json.dumps(R["HIL"])); return R
 
 # ---------------------------------------------------------------- extended tier: T2-T5 from the dli_bench generators
 EXT = [("t2.pipeline", "T2"), ("t3.search_latency", "T3"), ("t4.mini_language", "T4"), ("t5.hidden_law", "T5")]
@@ -219,5 +350,5 @@ def run_extended(label, exec_tmpl, root: Path, seeds, ai4science_path: str, env=
 def merge_extended(core_record: dict, ext_record: dict) -> dict:
     """Recompute the T.H surface and gate with the extended episodes appended."""
     eps = core_record["TH"] + ext_record["episodes"]
-    prof = dict(core_record["profile"]); prof["T_frontier"] = score.frontier(eps); prof["A_DI_net_extended"] = score.net_surface(eps); prof["U"] = score.gate(prof)
+    prof = dict(core_record["profile"]); prof["T_frontier"] = score.frontier(eps); prof["A_DI_net_extended"] = score.net_surface(eps); prof["U"], prof["U_bottleneck"] = score.gate(prof)
     return prof

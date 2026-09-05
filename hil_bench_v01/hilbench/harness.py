@@ -97,7 +97,7 @@ def _hard_public_checks(fam: str, ws: Path, files: dict) -> list:
         return [("shape_and_cycle", bool(ok), ""), ("amount_occurs_in_file", bool(inf), ""), ("source_line_is_a_line_of_the_file", bool(ln), "")]
     return []
 
-def run_rung(rung: str, fam: str, files: dict, ws: Path, exec_tmpl: str, limit: int, env=None) -> dict:
+def run_rung(rung: str, fam: str, files: dict, ws: Path, exec_tmpl: str, limit: int, env=None, materialize=None) -> dict:
     """Runs the executor under the rung's mechanism; returns attempts, delivered flag, held_back flag, checks."""
     from .common import write_workspace
     write_workspace(ws, files); attempts = []; delivered = True; held = False
@@ -110,6 +110,7 @@ def run_rung(rung: str, fam: str, files: dict, ws: Path, exec_tmpl: str, limit: 
             shutil.rmtree(snap, ignore_errors=True); shutil.copytree(ws, snap)
         prompt = TASK if i == 0 else (f"CORRECTION.md in this directory names the acceptance check your delivery failed. Read GOAL.md again, correct your delivery, and reply DONE.")
         attempts.append(run_exec(exec_tmpl, prompt, ws, limit, env))
+        if materialize: materialize(ws)                    # LLM mode: turn response.json into the deliverable files first
         pc = public_checks(fam, ws, files); failed = [n for n, ok, _ in pc if not ok]
         if not failed: return {"attempts": attempts, "delivered": True, "held_back": False, "public": pc}
         if rung == "HG2" and i < max_att - 1:

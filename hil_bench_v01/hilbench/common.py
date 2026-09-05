@@ -34,3 +34,30 @@ def run_exec(cmd_tmpl: str, prompt: str, cwd: Path, limit: int, env: dict | None
 
 TASK = ("Read GOAL.md in this directory and do exactly what it says, creating or editing files in this directory. "
         "Do not ask questions. Reply DONE when finished.")
+
+def parse_llm_json(text: str):
+    """Tolerant parse of an LLM's 'reply with one JSON object' contract.
+    Returns (dict, error_str). Accepts a bare object, a fenced block, or an object with
+    an object-valued key in a wrapper (e.g. {"response": {...}})."""
+    if not text or not text.strip():
+        return None, "empty_response"
+    t = text.strip()
+    m = __import__("re").search(r"```(?:json)?\s*(\{.*?\})\s*```", t, __import__("re").S)
+    if m:
+        t = m.group(1)
+    elif t.startswith("```"):
+        t = t.strip("`").strip()
+    try:
+        obj = json.loads(t)
+        if isinstance(obj, dict):
+            return obj, None
+    except json.JSONDecodeError:
+        i, j = t.find("{"), t.rfind("}")
+        if 0 <= i < j:
+            try:
+                obj = json.loads(t[i:j + 1])
+                if isinstance(obj, dict):
+                    return obj, None
+            except json.JSONDecodeError:
+                pass
+    return None, "invalid_json"

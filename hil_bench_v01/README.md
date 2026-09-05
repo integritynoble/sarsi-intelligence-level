@@ -50,6 +50,15 @@ weights are ratified constants, not laws. Every law carries admissibility condit
 I3 -- is declared in `THETA.json` and checked for persistence, disjointness from the criterion, and ablation
 sensitivity.
 
+## Merged from `hil_bench_v2` (2026-09-05)
+
+The parallel tree was merged here at the owner's direction: **O0/O1** organizational families (`o_families.py`,
+`agent --with-o`), a **bare-model executor** (`llm_exec.py`: OpenAI-compatible chat, two read-only tools, one JSON
+reply) with `extract.py` turning the reply into the deliverable files so the *same verifiers* score both
+subjects, named scoring anchors with O omitted-not-zeroed, `band_rate`, `harnessability`, and a test suite
+(`python3 -m pytest -q tests`). `llm` is now the bare model in every coordinate; the ladder with an agent
+executor as the inner loop is `llm-harness`, which is how the first published readings were taken.
+
 ## LLM mode: the reference harnesses
 
 Same six families, same seeds, under HG0 (one attempt, no acceptance), HG1 (one attempt; the harness's

@@ -3,7 +3,7 @@ by HMAC; only the commitment (sha256 of the salt) is published, so a later revea
 from __future__ import annotations
 import hashlib, hmac, json
 from pathlib import Path
-PUBLIC_SEEDS = [0, 1, 2, 3]
+PUBLIC_SEEDS = [0, 1, 2, 3, 4, 5]
 COMMITMENT_FILE = Path(__file__).resolve().parents[1] / "PRIVATE_SPLIT_COMMITMENT.json"
 
 def private_seeds(salt: bytes, n: int = 4, family: str = "hilbench") -> list:

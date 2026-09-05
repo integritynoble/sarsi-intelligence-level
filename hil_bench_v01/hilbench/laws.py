@@ -69,8 +69,12 @@ LAWS = {
  "DI": dict(name="Delivered outcome", law="An episode is delivered-correct, a false completion, held back, or falsely rejected; the surface is P(delivered and verified) minus rho times P(false completion).",
             admissibility=[COMPUTED_KEY, SPEC_KEY_GAP]),
  # ---- Organization
- "O0": dict(name="Coordination", law="Information or capability is really partitioned across loci, so that no single locus can complete the task under the same information.",
-            admissibility=[ABLATED_ARM], human=True),
+ "O0": dict(name="Coordination", law="Work is routed across separated roles and the verifier's entry states what it checked with the correct figure; a sign-off that names nothing is not a sign-off.",
+            admissibility=[COMPUTED_KEY, TRAP_FIRES]),
+ "O1": dict(name="Organizational memory", law="A standing decision recorded in the organization's own log -- never the model's -- decides a later, different instance after a restart; the arm whose log was withheld fails it.",
+            admissibility=[DISCONTINUITY, ABLATED_ARM, COMPUTED_KEY]),
+ "O2": dict(name="Organizational adaptation", law="Performance evidence that one routing or role policy is suboptimal changes the allocation persistently and improves held-out outcomes.",
+            admissibility=[ABLATED_ARM, INDEPENDENT_LOCUS], human=True),
 }
 
 def theta_check(theta: dict, criterion_paths: list) -> list:
