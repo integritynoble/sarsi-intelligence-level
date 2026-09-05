@@ -250,6 +250,11 @@ def llm_episode(fam, seed, root, exec_tmpl, limit, env, rung="HG0"):
                 "failure_mode": v.get("failure_mode"), "attempts": len(attempts), "termination_reason": term,
                 "seconds": round(sum(a["seconds"] for a in attempts), 1)})
     if term == "timed_out": rec.update({"delivered_correct": False, "verifier_pass": False, "false_completion": False})
+    meta = read_json(ws / "response_meta.json")
+    if isinstance(meta, dict):
+        rec["reply"] = meta
+        if not rec["delivered_correct"] and not meta.get("parsed") and meta.get("first_finish_reason") == "length":
+            rec["failure_mode"] = "truncated_output"       # the model was cut off thinking; not a wrong rule, not a refusal
     return rec
 
 def _llm_single(fam_key, files, key, verify, root, name, exec_tmpl, limit, env, prompt=LLM_TASK):

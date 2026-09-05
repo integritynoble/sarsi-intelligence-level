@@ -47,7 +47,9 @@ def _parse(text):
             pass
     return None, "invalid_json"
 
-def run(base, key, model, prompt, cwd, timeout=300, max_turns=5):
+LAST = {"finish_reason": None, "turns": 0}
+
+def run(base, key, model, prompt, cwd, timeout=300, max_turns=5, max_tokens=16000):
     def tool(name, args):
         if name == "list_files":
             fs = sorted(str(p.relative_to(cwd)) for p in cwd.rglob("*") if p.is_file())
@@ -67,8 +69,8 @@ def run(base, key, model, prompt, cwd, timeout=300, max_turns=5):
     for turn in range(max_turns):
         resp = _call(base, key, model,
                      {"model": model, "messages": messages, "temperature": 0.0,
-                      "max_tokens": 8000, "tools": tools, "tool_choice": "auto"}, timeout)
-        msg = resp["choices"][0]["message"]
+                      "max_tokens": max_tokens, "tools": tools, "tool_choice": "auto"}, timeout)
+        msg = resp["choices"][0]["message"]; LAST["finish_reason"] = resp["choices"][0].get("finish_reason"); LAST["turns"] = turn + 1
         calls = msg.get("tool_calls") or []
         if not calls:
             text = msg.get("content") or ""
@@ -87,9 +89,19 @@ def run(base, key, model, prompt, cwd, timeout=300, max_turns=5):
     else:
         resp = _call(base, key, model,
                      {"model": model, "messages": messages + [{"role": "user", "content": "Finish now: reply with exactly one JSON object containing the deliverable."}],
-                      "temperature": 0.0, "max_tokens": 8000, "tools": None}, timeout)
-        text = resp["choices"][0]["message"].get("content") or ""
+                      "temperature": 0.0, "max_tokens": max_tokens, "tools": None}, timeout)
+        text = resp["choices"][0]["message"].get("content") or ""; LAST["finish_reason"] = resp["choices"][0].get("finish_reason")
     return text
+
+def finish_json_only(base, key, model, prior_text, cwd, timeout=300):
+    """After a reply that was not one JSON object: ONE call, no tools, small budget, the prior text as context.
+    Re-entering the tool loop would let a reasoning model think its way to the cap a second time."""
+    resp = _call(base, key, model, {"model": model, "temperature": 0.0, "max_tokens": 3000, "messages": [
+        {"role": "system", "content": "Output exactly one JSON object and nothing else. No reasoning, no prose, no code fence."},
+        {"role": "user", "content": "Here is your previous work on the task (it may be cut off):\n\n" + prior_text[-12000:] +
+         "\n\nNow output ONLY the final JSON object with the deliverable. If you are not certain, give your best complete answer anyway."}]}, timeout)
+    LAST["finish_reason"] = resp["choices"][0].get("finish_reason")
+    return resp["choices"][0]["message"].get("content") or ""
 
 def main():
     a = sys.argv[1:]
@@ -109,11 +121,13 @@ def main():
         return 2
     cwd = Path.cwd()
     text = run(base, key, model, prompt, cwd, timeout=timeout)
-    obj, err = _parse(text)
+    obj, err = _parse(text); first_finish = LAST["finish_reason"]; retried = False
     if err:
-        text2 = run(base, key, model, text + "\n\nRestate ONLY the final answer as one JSON object, no prose.", cwd, timeout=timeout)
-        obj, err2 = _parse(text2)
+        retried = True; text2 = finish_json_only(base, key, model, text, cwd, timeout=timeout)
+        obj, err2 = _parse(text2); text = text + "\n\n===== JSON-ONLY RETRY =====\n" + text2
     (cwd / "response_raw.txt").write_text(text or "", encoding="utf-8")   # kept so a truncation can be told from a refusal
+    (cwd / "response_meta.json").write_text(json.dumps({"first_finish_reason": first_finish, "final_finish_reason": LAST["finish_reason"],
+                                                         "turns": LAST["turns"], "retried_json_only": retried, "parsed": obj is not None}), encoding="utf-8")
     if obj is None:
         (cwd / "response.json").write_text("null")
         print("PARSE_FAIL")
