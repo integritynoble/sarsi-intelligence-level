@@ -11,7 +11,7 @@ Self-Model and Mission Manager as the Mechanisms That Earn a Level}\\[16pt]
 \end{center}
 
 \begin{abstract}
-An agent's intelligence level is a property of a frozen model--harness pair, and the executor is the part of the pair that is easiest to replace. This paper describes the other part: a general intelligence harness whose modules --- identity and task state, episodic, semantic and procedural memory, planner, evidence log, verifier, rollback, learner, competence model, self-model, self-improvement, organization and mission manager --- are the mechanisms that earn each coordinate of the Unified Intelligence scale $[C,I,O,T,H,SA]$ with its memory prerequisite $M$. The harness has one runtime instantiated by a manifest that declares which memories exist, what the agent may write, which loops are enabled and which external services evaluate and promote; a domain agent is that runtime plus a domain profile. For each module the paper states in three columns what the agent contains, what must live outside its write set, and the test that promotes it, and maps the module to the harness generation HG0--HG6 that introduces it. Every mechanism that exists is named with its released implementation and its measured status; every mechanism that is only specified is named as specified. The built core --- class reading, criterion registration, snapshot and restore, separate-process acceptance, escalation, routing from independent verdicts, compression --- has been measured on a harness ladder and on a benchmark whose learning-transfer and self-improvement suites it passed under an ablated control; the mission manager, the organization and the meta-improvement engine are specified and not built. The executor sits behind one protocol, and four executor families are characterised as adapters. The paper's claim is not that this harness is intelligent; it is that every part of it is either measured or named as unmeasured, and that a reader can build the same thing from the released code.
+An agent's intelligence level is a property of a frozen model--harness pair, and the executor is the part of the pair that is easiest to replace. This paper describes the other part: a general intelligence harness whose modules --- identity and task state, episodic, semantic and procedural memory, planner, evidence log, verifier, rollback, learner, competence model, self-model, self-improvement, organization and mission manager --- are the mechanisms that earn each coordinate of the Unified Intelligence scale $[C,I,O,T,H,SA]$ with its memory prerequisite $M$. The harness has one runtime instantiated by a manifest that declares which memories exist, what the agent may write, which loops are enabled and which external services evaluate and promote; a domain agent is that runtime plus a domain profile. For each module the paper states in three columns what the agent contains, what must live outside its write set, and the test that promotes it, and maps the module to the harness generation HG0--HG6 that introduces it. Every mechanism that exists is named with its released implementation and its measured status; every mechanism that is only specified is named as specified. The built core --- class reading, criterion registration, snapshot and restore, separate-process acceptance, escalation, routing from independent verdicts, compression --- has been measured on a harness ladder and on a benchmark whose learning-transfer and self-improvement suites it passed under an ablated control; the mission manager, the organization and the meta-improvement engine are specified and not built. The executor sits behind one protocol, and four executor families are characterised as adapters. The architecture is then mapped module by module onto the runtime that implements it: the plan--execute--verify loop with its bounded step and boundary detector, the verdict that separates repairable from wrong, the per-agent improvement search that appears identically in six agent packages, the group whose ceiling is the lowest of its \emph{acting} members', and the hashed task contract --- objective, capability profile, interaction mode, authority, budget and the operations requiring an owner --- which is what makes two readings of the same agent commensurable and refuses an inactive profile at compile time rather than accepting it silently. Tools belong to capability bundles rather than to agents, eleven built in and the rest registered by installed packages and plug-ins, so a contributed agent or tool arrives as a pure-data manifest with its code behind an MCP server and the tool grant stays a closed registry: twenty agent specifications are instantiated by that one runtime and add no runtime code between them. The paper's claim is not that this harness is intelligent; it is that every part of it is either measured or named as unmeasured, and that a reader can build the same thing from the released code.
 \end{abstract}
 
 \noindent\textbf{Keywords:} agent harness; memory; planner; verifier; learner; self-improvement; organization; self-model; mission manager; Unified Intelligence
@@ -168,6 +168,54 @@ HG\Om{} & knowledge-to-instrument transduction; new roles under frozen governanc
 \end{table}
 
 Each rung is a strict superset of the one below, enforced by a test, because otherwise a difference between rungs is attributable to nothing. Two rungs that differ only in post-hoc machinery are scored from the same executor outputs.
+
+\section{The Harness as Built: the AI4Science Runtime}\label{sec:ai4science}
+
+The architecture of \S\ref{sec:arch} is not a proposal. One runtime implements it and instantiates every agent in the fleet from a manifest; this section maps each module to the code that supplies it, and reports what that code covers and what it does not.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Module (\S\ref{sec:arch}) & Implementation & What it fixes \\
+\midrule
+Identity and task state & \texttt{harness/runtime/task\_store.py}; \texttt{persistence.py}; \texttt{session.py} & the durable state a restart must recover \\
+Planner and decomposition & \texttt{harness/runtime/pev.py}: a plan--execute--verify loop with one bounded step at a time, a \texttt{MAX\_STEPS} ceiling and a boundary detector & the step is the unit; an unbounded loop is not a plan \\
+Tools and evidence log & \texttt{harness/tools/}, \texttt{permissions.py}, \texttt{mcp\_client.py} & the tool grant is a closed registry, not a shell \\
+Verifier interface & \texttt{harness/runtime/verifier.py}, returning a \texttt{Verdict(complete, repairable, evidence)} & repairable is separated from wrong, which is what a retry may act on \\
+Rollback and retry & the PEV loop's replan path on a repairable verdict & a retry names the failed check or it is a re-roll \\
+Learner & \texttt{agents/learning/}, \texttt{agents/process\_learning/} (extract, grade, examine, quiz-check) & a lesson must survive an evidence check \\
+Competence model and router & \texttt{harness/registry\_router.py}, \texttt{agents/manager/routing\_policy.py} & routing is a policy object, not a prompt \\
+Self-model & \texttt{agents/sarsi/competence.py}, \texttt{forecast.py}, \texttt{evidence.py} & a forecast made before the attempt \\
+Self-improvement & \texttt{rsi\_search.py}, present identically in \texttt{imaging/}, \texttt{learning/}, \texttt{machine/}, \texttt{manager/}, \texttt{pocket/} and \texttt{process\_learning/} & the improvement loop is per-agent and uniform, so a candidate is scoped to one agent's policy \\
+Organization & \texttt{agents/research\_agents/group.py} with reasoning, judging and embodied members & the group's ceiling is the lowest of its \emph{acting} members' \\
+Mission manager & \texttt{agents/manager/} (scope, monitor, console) & proposes; holds no authority \\
+Provenance & \texttt{TaskContract.hash()}: sha256 over the canonicalised contract & the envelope a run claimed is a hash, not a recollection \\
+\bottomrule
+\end{tabularx}
+\caption{The general harness, module by module, as implemented in the AI4Science runtime.}
+\label{tab:asbuilt}
+\end{table}
+
+\subsection{The task contract is the freeze}
+
+Every run compiles a \texttt{TaskContract}: objective, capability profile, interaction mode, deliverables, constraints, authority (workspace and network), success criteria, budget in tool calls and runtime minutes, and \texttt{approval\_required\_for} --- the operations that may not proceed without an owner. The contract is hashed, so the envelope a reading was taken under is a value that can be compared rather than a claim in prose, and an inactive interaction mode is refused at compile time rather than silently accepted. This is the mechanism \S\ref{sec:manifest} calls the manifest, and it is what makes two readings of the same agent commensurable.
+
+Interaction modes $I0$, $I1$ and $I2$ are active; the higher profiles are declared and refused, which is the correct behaviour for a runtime whose harness does not yet implement them. Nineteen of the twenty shipped agent specs declare \texttt{supported\_profiles} explicitly, and the profile a run used is part of its contract hash.
+
+\subsection{Capabilities are bundles, and an agent is a manifest over them}
+
+Tools do not belong to agents; they belong to \emph{capability bundles} that agents reference by name. The runtime ships eleven built-in bundles --- \texttt{pwm-actions}, \texttt{pwm-data}, \texttt{paper-review}, \texttt{computational-imaging}, \texttt{compute-providers}, \texttt{ci-algorithms}, \texttt{optics-design}, \texttt{forward-model}, \texttt{science-router}, \texttt{drug-design}, \texttt{cancer} --- and unions them with bundles registered by installed agent packages and by plug-ins, rebuilt whenever either set changes. One bundle, \texttt{compute-providers}, is always on: GPU compute is a property of the runtime rather than an opt-in.
+
+An \texttt{AgentSpec} is therefore a small declarative object --- name, tier (\texttt{open} with no PWM, or \texttt{science} behind the dataset moat), category (\texttt{core}, \texttt{specific}, \texttt{hidden}), system prompt, the bundles it adds on top of the Claude Code base, supported profiles, default backend, the operations requiring approval, and a wallet and price for a contributed agent. Adding an agent adds no runtime code. That is the sense in which this is one harness instantiated by manifest, and it is why the library of \citet{yang2026library} can be a catalogue rather than a set of forks.
+
+\subsection{Plug-ins: an agent or a tool arrives as data}
+
+The plug-in standard admits a contributed agent or tool as a pure-data manifest, with tool code plugging in as an MCP server rather than as an import. A contributor writes a manifest, tests it by embedding it into an existing agent, and earns when others use it. Two consequences matter for measurement. First, a plug-in agent's provenance is recorded (\texttt{source = "plugin"}), so a certification can say whether the thing measured shipped with the runtime. Second, because the tool is an MCP server, the tool grant remains a closed registry: the harness knows the exact set of operations the pair could perform, which is a precondition for the resource envelope in the contract to mean anything.
+
+\subsection{What the as-built runtime does not supply}
+
+The self-improvement loop exists per agent, but the frozen hidden evaluation and the independent promoter that make a promotion certifiable live outside it, in the benchmark. The organization module has real member kinds and a ceiling rule, and no ablation suite. The mission manager proposes and never decides. These are the same three gaps \S\ref{sec:rungs} records at HG3, HG4 and HG6, and naming them against modules that exist is more useful than naming them against modules that do not.
 
 \section{One Runtime, Instantiated by Manifest}\label{sec:manifest}
 

@@ -11,7 +11,7 @@ with Worked Designs, Measured Status and Download Links}\\[16pt]
 \end{center}
 
 \begin{abstract}
-A domain agent is a general harness plus a domain profile: the same runtime, instantiated by a manifest that fixes the domain's task bands, tools, authority envelope, verifier types and irreversibility floors. This paper is the library of such profiles for six domains --- paper development, funding, job search, software engineering, research and business workflows --- and the record of what exists for each. For every domain it states the profile, the reference agent the development plan specifies, the worked design where one has been written, and the measured status under the Unified Agent Benchmark, which now has at least one runnable cell in every domain. It then catalogues every agent the fleet repository defines --- two default-installed agents, six executors, five sub-agents, four role-shaped workers, ten research agents, the seven built roster agents, three platform singletons, five console agents, nine delegation lanes, the roles inside organizations, and fourteen level manifests --- grouped by tier with the status the repository itself states, and notes that these rosters share names and are not reconciled. It also catalogues what a user can download today: the framework and its delegation harness, eight standalone field agents on PyPI, four delegation-level executors shipped as binaries whose lowest level runs with no model and no network, and the executor builds. The status is stated at its real strength. Three of the six reference agents exist only as specifications; two exist as private designs that bind no runtime; the research agent's machinery is built and runs on real corpora while its fleet deployment is a design. No agent in the library has a certified Unified level, and the paper lists, per domain, the single cheapest run that would change its row.
+A domain agent is a general harness plus a domain profile: the same runtime, instantiated by a manifest that fixes the domain's task bands, tools, authority envelope, verifier types and irreversibility floors. This paper is the library of such profiles for six domains --- paper development, funding, job search, software engineering, research and business workflows --- and the record of what exists for each. For every domain it states the profile, the reference agent the development plan specifies, the worked design where one has been written, and the measured status under the Unified Agent Benchmark, which now has at least one runnable cell in every domain. It then catalogues every agent the fleet repository defines --- two default-installed agents, six executors, five sub-agents, four role-shaped workers, ten research agents, the seven built roster agents, three platform singletons, five console agents, nine delegation lanes, the roles inside organizations, and fourteen level manifests --- grouped by tier with the status the repository itself states, and notes that these rosters share names and are not reconciled. It also catalogues what a user can download today: the framework and its delegation harness, eight standalone field agents on PyPI, four delegation-level executors shipped as binaries whose lowest level runs with no model and no network, and the executor builds. The status is stated at its real strength. Three of the six reference agents exist only as specifications; two exist as private designs that bind no runtime; the research agent's machinery is built and runs on real corpora while its fleet deployment is a design. Against those rosters it sets the shipped registry --- the twenty agent specifications the runtime actually instantiates, with the tier that decides whether an agent costs PWM, the category that decides whether it appears in the menu, the interaction profiles it supports and the operations that stop at the owner --- and observes that in most of them the refusal, not the capability, is the specification: the medical-physics agent produces candidates and a physicist signs, the low-dose-CT agent refuses a fidelity result without acceptor-owned detectability, the manager holds no authority, the social agent drafts and never posts. It records how an agent arrives, as one of nine distributions whose name is a table entry rather than a fork, and how a field agent is composed: ten fields ship a roster object over nine core roles that a field may add to and may not remove from, each member declaring whether it reasons, judges or acts, and why it is separate --- the sentences that give the organizational coordinate its content, written where the code can read them. No agent in the library has a certified Unified level, and the paper lists, per domain, the single cheapest run that would change its row.
 \end{abstract}
 
 \noindent\textbf{Keywords:} domain agents; funding agent; job agent; paper agent; code agent; research agent; business agent; downloadable agents; Unified Intelligence
@@ -279,6 +279,82 @@ outward posting & org. & C2, I1/M1, O1, \textbf{T1$\cdot$H2 capped}, SA2 & corre
 \caption{Target and measured profiles for the agents that have them. Every $U$ cell is empty.}
 \label{tab:fleet}
 \end{table}
+
+\subsection{The AI4Science registry: every shipped agent, and what it is allowed to do}\label{sec:registry}
+
+The previous subsection catalogued the fleet as the singularity documents define it. That is the deployment view. The \emph{shipped} view is the AI4Science agent registry: twenty \texttt{AgentSpec} manifests that the one runtime of \citet{yang2026harness} instantiates, each declaring a tier, a category, the interaction profiles it supports, the capability bundles it adds, and the operations that require an owner's approval. Everything in this table is installed code, not a design.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lllcY@{}}
+\toprule
+Spec & Tier & Category & Profiles & What it is, and what stops at the owner \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Core: the general capabilities every user gets}}\\
+\texttt{work} & open & core & I0--I2 & general work --- coding, data, files --- in an A1 sandbox; dual-mode \\
+\texttt{machine} & open & core & I0--I2 & the local machine and Claude Code bootstrap as a \emph{closed registry} of vetted, owner-gated operations: install, permission, login. Deliberately not an autonomous computer-use agent \\
+\texttt{manager} & open & core & I0--I2 & the owner console: scope-routes demands, monitors the fleet read-only, proposes owner-gated actions. \textbf{No authority}; approval gates create-agent, run-agent, promote \\
+\texttt{pocket} & open & core & I0--I2 & the on-device (Tier-D) agent: a closed, permission-gated tool registry run directly, no sandbox \\
+\texttt{learning} & open & core & I0--I2 & governed tutor: grounded study guide and quiz over staged material; approval gates publish, deploy, spend \\
+\texttt{process-learning} & open & core & I0--I2 & governed trace-explainer: a grounded tutorial or postmortem of a \emph{verified} agent trace \\
+\texttt{research2} & science & core & I0--I2 & governed research: grounded synthesis over staged sources \\
+\texttt{openclaw} & open & core & --- & the ACP bridge: drives the openclaw binary over stdio JSON-RPC to the gateway \\
+\texttt{opencode} & open & core & --- & drives the OpenCode binary through tmux \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Specific: one field, one vocabulary}}\\
+\texttt{imaging} (\texttt{computational-imaging}) & science & specific & I0--I2 & reconstruction and bounded system-design candidates across CASSI, CACTI and CT \\
+\texttt{low-dose-ct} & science & specific & I0--I2 & diagnostic CT from fewer photons; a fidelity result without acceptor-owned detectability is refused \\
+\texttt{medical-physics} & science & specific & I0--I2 & radiotherapy planning, dose, adaptive RT, QA --- produces candidates, \emph{a physicist signs} \\
+\texttt{pill-camera} & science & specific & I0--I2 & capsule endoscopy: lesion detection, reading-time reduction, cross-vendor evaluation \\
+\texttt{virtual-cell} & science & specific & --- & audits perturbation predictions against control- and batch-aware holdouts \\
+\texttt{reverse-aging} & science & specific & --- & audits ageing clocks and reversal claims against modality-separated evidence \\
+\texttt{human-brain-llm} & science & specific & --- & audits neural-alignment protocols against stimulus controls; refuses without a stimulus-only floor and subject-disjoint evaluation \\
+\texttt{social} & open & specific & I0--I2 & timeline read plus owner-gated post (A2); \textbf{posting} stops at the owner \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Hidden: sub-agents, never listed in the menu}}\\
+\texttt{general-purpose} & open & hidden & --- & a focused sub-agent for one delegated task \\
+\texttt{physics-reviewer} & science & hidden & --- & reviews a submission for physical consistency \\
+\texttt{schema-validator} & open & hidden & --- & checks artifacts against their schemas \\
+\bottomrule
+\end{tabularx}
+\caption{The twenty agent specs in the AI4Science registry. \emph{Tier} decides whether the agent costs PWM: \texttt{open} never does, \texttt{science} sits behind the dataset moat. \emph{Category} decides whether it appears in \texttt{/agent}: hidden specs are sub-agents. Four of the seven field agents are auditors rather than producers --- they exist to refuse a claim, which is why their descriptions name the control they require rather than the result they deliver.}
+\label{tab:registry}
+\end{table}
+
+Two things in the table are worth reading twice. The first is how often the refusal, and not the capability, is the specification: \texttt{medical-physics} produces candidates and a physicist signs; \texttt{low-dose-ct} refuses a fidelity result without acceptor-owned detectability; \texttt{human-brain-llm} refuses without a stimulus-only floor and subject-disjoint evaluation; \texttt{manager} monitors and proposes and holds no authority; \texttt{social} drafts and never posts. An agent library whose entries are defined by what they hand back is measurable in the delegation coordinate; one defined by what they can attempt is not. The second is that \texttt{machine} and \texttt{pocket} are described as \emph{closed registries} of operations rather than as general computer use. That is the same design decision as the tool grant in the harness, taken at the level of the product: an agent whose action set is enumerable can have a resource envelope, and one that drives a desktop cannot.
+
+\subsection{How an agent arrives: distributions and modes}\label{sec:dists}
+
+The registry ships with the framework; the field agents ship as their own distributions, so a user installs only what they use and a contributor can publish without touching the runtime.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llY@{}}
+\toprule
+Spec name & Distribution & Note \\
+\midrule
+\texttt{ai4sci} (was \texttt{unified-LLM}) & \texttt{pwm-agent-unified} & both names resolve to the same distribution, so an install hint is right whichever the installed package declares \\
+\texttt{research} & \texttt{pwm-agent-research} & \\
+\texttt{paper} & \texttt{pwm-agent-paper} & the deterministic peer-review panel \\
+\texttt{computational-imaging} & \texttt{pwm-agent-imaging} & \\
+\texttt{drug-design} & \texttt{pwm-agent-drug} & \\
+\texttt{cancer} & \texttt{pwm-agent-cancer} & \\
+\texttt{claude-code} & \texttt{pwm-agent-claude-gpu} & \\
+\texttt{codex} & \texttt{pwm-agent-codex-gpu} & \\
+\texttt{opencode} & \texttt{pwm-agent-opencode} & \\
+\bottomrule
+\end{tabularx}
+\caption{Spec name to distribution. A name that is not in this table installs as \texttt{pwm-agent-<name>}, which is also what the install hint says, so the failure mode of an unknown agent is a \texttt{pip} command that either works or names the package that does not exist.}
+\label{tab:dists}
+\end{table}
+
+The renaming in the first row is a small piece of evidence for a claim this library makes elsewhere: a mode is a manifest, so renaming one is a table edit and an alias, not a fork. The same is true of \texttt{research} versus \texttt{research2} and of \texttt{imaging} versus \texttt{computational-imaging} --- one field with two names, declared once with a stated reason, rather than two agents.
+
+\subsection{The field roster: nine roles, ten fields}\label{sec:fieldroster}
+
+A field agent is a group, and the group's composition is data. Ten fields ship a roster object --- \texttt{cancer}, \texttt{computational-imaging}, \texttt{drug-design}, \texttt{human-brain-llm}, \texttt{longevity}, \texttt{low-dose-ct}, \texttt{medical-physics}, \texttt{pill-camera}, \texttt{reverse-aging}, \texttt{virtual-cell} --- each declaring its members against the nine core roles, which are a floor: \emph{a field may add and may not remove}. Every member carries three fields that decide what it may do and what it caps: \texttt{kind} (reasoning, judging or embodied), \texttt{core}, and \texttt{why\_separate} --- a stated reason, so that a merge of two roles has to argue against a recorded argument.
+
+The ceiling rule is where this becomes measurement rather than organisation. A group's autonomy ceiling is the lowest of its \emph{acting} members' --- reasoning members touch a file, embodied members touch the world and cannot be undone, and judging members are skipped because a verdict is not an act. Skipping them is not a convenience: every research agent has judging members, so counting them would pin every group at $A0$ and make the rule vacuous. The roster for computational imaging states the reason for each separation in the object itself: literature is separate because ``reading and doing must not share a context, or the agent finds what it set out to find''; the twin is separate because ``the twin is what a method is graded against; the method's author may not own it''. Those two sentences are the organizational coordinate's content, written where the code can read them.
 
 \subsection{Where the fleet sits on the terminal scale}
 
