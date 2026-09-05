@@ -58,10 +58,23 @@ def _fresh(root: Path):
     if root.exists(): raise SystemExit(f"refusing to run in an existing root {root}; choose a fresh path")
     root.mkdir(parents=True)
 
+def _evaluator(split_name="public"):
+    """Provenance of the reading: who ran it, where, on which split, and whether they built the pair or the instrument.
+    A private reading is valid only when the evaluator did not build the pair; the record states it rather than implying it."""
+    import getpass, socket
+    return {"user": getpass.getuser(), "host": socket.gethostname(), "split": split_name,
+            "built_pair": False, "built_instrument": True, "instrument_commit": _git_head(),
+            "note": "the instrument's author ran the reading; the pairs measured (Claude Code default, DeepSeek) were built by their vendors"}
+
+def _git_head():
+    import subprocess
+    try: return subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=str(Path(__file__).resolve().parents[2])).stdout.strip()
+    except Exception: return None
+
 def _save(root: Path, R: dict): (root / "record.json").write_text(json.dumps(R, indent=1))
 
-def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print, with_o=False):
-    _fresh(root); R = {"label": label, "mode": "agent", "executor": exec_tmpl, "seeds": seeds, "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print, with_o=False, split_name="public"):
+    _fresh(root); R = {"label": label, "mode": "agent", "executor": exec_tmpl, "seeds": seeds, "evaluator": _evaluator(split_name), "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     # C
     C = []
     for band in ("C0", "C1", "C2", "C3"):
@@ -275,7 +288,7 @@ def _llm_single(fam_key, files, key, verify, root, name, exec_tmpl, limit, env, 
     extract.extract(fam_key, ws, files); v = verify(ws, key)
     return bool(v["pass"]) and r["termination_reason"] != "timed_out", v.get("failure_mode"), r["seconds"]
 
-def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None, key=None, model=None):
+def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None, key=None, model=None, split_name="public"):
     """LLM mode: a bare model read in every coordinate at every reference rung, with the same items, keys and
     verifiers as agent mode. A bare model has no persistence, so M and I are M0/I0 by construction and the record
     says so; O0 is read from the routing family; SA from the grounded-state probe and the twin pair."""
@@ -284,7 +297,7 @@ def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None,
     if key: LLM_KEY = key
     if model: LLM_MODEL = model
     exec_tmpl = _llm_exec_tmpl(); _fresh(root)
-    R = {"label": label, "mode": "llm", "model": LLM_MODEL, "base": LLM_BASE, "seeds": seeds, "rungs": {},
+    R = {"label": label, "mode": "llm", "model": LLM_MODEL, "base": LLM_BASE, "seeds": seeds, "rungs": {}, "evaluator": _evaluator(split_name),
          "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
          "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity"}
     curve = {}

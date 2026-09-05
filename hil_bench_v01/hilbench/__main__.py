@@ -108,9 +108,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     try: seeds = _selected_seeds(a.split, a.salt_file)
     except ValueError as exc: ap.error(str(exc))
     if a.cmd == "agent":
-        core.run_agent(a.label, a.executor, a.root, seeds, a.limit, **({"with_o": True} if a.with_o else {})); return 0
+        core.run_agent(a.label, a.executor, a.root, seeds, a.limit, **({"with_o": True} if a.with_o else {}), **({"split_name": a.split} if a.split != "public" else {})); return 0
     if a.cmd == "llm":
-        core.run_llm(a.label, a.root, seeds, a.limit, base=a.base, key=a.key, model=a.model); return 0
+        core.run_llm(a.label, a.root, seeds, a.limit, base=a.base, key=a.key, model=a.model, **({"split_name": a.split} if a.split != "public" else {})); return 0
     if a.cmd == "llm-harness":
         core.run_llm_via_harness(a.label, a.executor, a.root, seeds, a.limit); return 0
     if a.cmd == "extended":
