@@ -57,5 +57,18 @@ class I3I4GateTests(unittest.TestCase):
         no_rise = copy.deepcopy(base); no_rise["validation"]["psi1_i3_passes"] = 2
         self.assertEqual(i4_gates(no_rise)["z_I4"], 0)
 
+    def test_i4_v2_requires_an_agent_generated_change_shown_on_meta_behavior_probes(self):
+        base = {"psi_modification": {"psi_diff": 1, "within_scope": 1, "psi1_active": 1, "agent_generated": 1,
+                                     "meta_behavior_probe_passes": 4, "meta_behavior_probe_total": 5, "meta_behavior_threshold": 0.75},
+                "validation": {"psi0_i3_passes": 2, "psi0_i3_total": 6, "psi1_i3_passes": 4, "psi1_i3_total": 6,
+                               "minimum_meaningful_improvement": 0.2, "independent_promoter_accepts": 1},
+                "regression": {"max_observed_drop": 0.0, "maximum_allowed_drop": 0.05},
+                "retention": {"I0": 1, "I1": 1, "I2": 1, "I3": 1}, "recursive_depth": 1}
+        g = i4_gates(base); self.assertEqual((g["z_I4"], g["recursive_depth"]), (1, 1))
+        human_written = copy.deepcopy(base); human_written["psi_modification"]["agent_generated"] = 0
+        self.assertEqual(i4_gates(human_written)["z_I4"], 0, "an evaluator-written Psi1 establishes nothing about the individual")
+        no_signature = copy.deepcopy(base); no_signature["psi_modification"]["meta_behavior_probe_passes"] = 2
+        self.assertEqual(i4_gates(no_signature)["z_I4"], 0, "the changed process must show on the probes")
+
 if __name__ == "__main__":
     unittest.main()

@@ -48,7 +48,14 @@ def i3_gates(result):
 
 def i4_gates(result):
     m = result["psi_modification"]
-    M = int(bool(m["psi_diff"] and m["within_scope"] and m["psi1_active"]))
+    # v2: the candidate must be AGENT-generated (an evaluator-written Psi1 establishes nothing about the individual), and
+    # the changed improvement process must show on hidden meta-behavior probes; both default to satisfied when absent so
+    # the v1 example record still scores, and both are reported.
+    agent_generated = int(bool(m.get("agent_generated", 1)))
+    probe_total = m.get("meta_behavior_probe_total", 0)
+    behavior_rate = (m.get("meta_behavior_probe_passes", 0) / probe_total) if probe_total else 1.0
+    behavior = int(behavior_rate >= m.get("meta_behavior_threshold", 0.0))
+    M = int(bool(m["psi_diff"] and m["within_scope"] and m["psi1_active"] and agent_generated and behavior))
 
     v = result["validation"]
     baseline = v["psi0_i3_passes"] / max(1, v["psi0_i3_total"])
@@ -68,6 +75,9 @@ def i4_gates(result):
     z = M * V * G * K4
     return {
         "M_psi": M,
+        "agent_generated": agent_generated,
+        "meta_behavior_rate": behavior_rate,
+        "recursive_depth": int(result.get("recursive_depth", 1 if z else 0)),   # d_Psi: reported beside the level, never folded into it
         "Q_psi0": baseline,
         "Q_psi1": after,
         "delta_psi": delta,
