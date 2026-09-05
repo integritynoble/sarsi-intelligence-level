@@ -373,6 +373,10 @@ The episodes behind the numbers say what the aggregate cannot. Both models fail 
 
 One reading must not be over-interpreted. The Claude curve dips at HG2 (35.7 against 42.9) because a single episode --- \texttt{hc\_contra}, one seed --- came back with a refusal that did not name the conflicting clauses on that run and had named them at the two lower rungs. With one seed per Core-H family, 7.1 points is one episode, and this is run-to-run variation rather than evidence that the harness hurt. Confidence intervals need the private split and more seeds; \S\ref{sec:limits} says so.
 
+\subsection{LLM mode proper: a bare model in every coordinate}
+
+The readings above were taken through \texttt{llm-harness}, with an agent as the inner loop. The bare mode --- one chat call, two read-only tools, one JSON object --- was run on DeepSeek across all three rungs with the full coordinate set at each. It read HLIS 35.9 / 40.0 / 35.9 at HG0, HG1 and HG2; at every rung C3, O0 and a T1 delegation frontier, with SA1 or SA2 depending on the twin-pair probe; $U0$ throughout, because a bare model has no memory and $I0$ refuses $U1$. HIL-Level HG2, AUC 37.3, Ceiling 40.0, Harness Gain 4.1, \textbf{HIL-Score 35.2}. Two readings from this run matter beyond the number. The induction item was \emph{declined} at every rung --- the model, cut off while reasoning, said so and delivered nothing, which the primitive scores as held back rather than priced as a false completion; the same model, forced to answer by an earlier retry prompt, had guessed and been priced, which is why the retry contract was changed. And the same model through the agent harness read HIL 83.2: the difference between 35.2 and 83.2 is the harness, measured on one model, which is the quantity the HIL was defined to expose.
+
 \subsection{Agent mode: profiles}
 
 The Claude Code default pair (Claude Code 2.1.258, headless, file tools only, its own persistent memory left as shipped) was read twice: once before the instrument repairs of \S\ref{sec:defects} and once after, on a fresh root, and the $M1$ phase was re-run after the goal wording was repaired. The OpenCode pair with the free Muse Spark 1.3 model could not be read while its sealed extended-tier run was in progress, because the OpenCode runtime serializes: a trivial prompt took ninety seconds while the other run held it, and every Core item hit its limit. Its profile is taken after that run and reported in the repository record.
@@ -383,19 +387,19 @@ The Claude Code default pair (Claude Code 2.1.258, headless, file tools only, it
 \toprule
 Coordinate & Reading & Evidence \\
 \midrule
-$C$ & \textbf{C4} & 12/12 exact: the four Core bands plus the Core-H C4 band (\texttt{hc\_rule} and \texttt{hc\_sched}, two seeds each); every named wrong method fails on every seed by construction \\
+$C$ & C3 (C4 on the earlier run) & 11/12 exact on this run: the four Core bands clean, and on the C4 band \texttt{hc\_sched} 2/2 and \texttt{hc\_rule} 1/2 --- the same seed the calibration run failed --- so the 0.80 gate refuses C4 here where the previous run of the same pair passed it 4/4; two seeds per band is enough to see a systematic failure and not enough for a stable band reading \\
 $M$ & $M1$ & after the restart the pair recalled the code name, the parameter and the convention and named the memory file it had written them to; the ablated arm, run first from a separate parent, wrote \texttt{none} rather than guessing \\
 $I$ & I1, with $I2$ transfer evidence & transfer $= 1$: the pair failed task A, was given verified feedback, corrected it, and then applied the same convention to a different task after a restart; the ablated arm failed that task. $M3$ is not certified by one pair of episodes and the profile says so \\
 $SA$ & SA2 & SA1 2/2 (files reported from the directory, the stale note marked inaccurate, the phantom tool not listed); SA2 2/2 (the solvable twin completed, the blocked twin declared blocked with no fabricated total) \\
 $SA$-cal & calibrated & a forecast before all twelve delegated episodes, 0.80--0.97, all of which passed; Brier 0.010 against 0.0 for the post-hoc constant, inside the predeclared 0.05 tolerance \\
 $T \cdot H$ & $F_A(\text{H0}, 0.8) = $ T1 & 14/14 delivered-correct, $A^{\text{net}}_{DI} = 100$, no false completion --- including the two Core-H traps, the unsatisfiable specification and the decoy, which this pair handled \\
-$O$ & N/A (individual) & named as omitted, never scored as zero \\
+$O$ & \textbf{O1} & O0: the task routed across planner, executor and verifier with the verifier's entry naming the checked figure; O1: the organization's standing decision, held in its own log at the project root, applied to a different instance after the restart, while the arm whose log was withheld reported under the baseline --- transfer $= 1$ \\
 \midrule
-$U^{*}$ & \textbf{U1} & C4, $M1$, I1, SA2 and T1 at H0 all hold; U2 is refused because $I2$ requires $M3$, which the Core does not certify \\
-HLIS & \textbf{84.5} & geometric mean over $C{=}1.00$, $I{=}0.60$, $DI{=}1.00$, $SA{=}0.85$ \\
+$U^{*}$ & \textbf{U1} & C3, $M1$, I1, O1, SA2 and T1 at H0 all hold; U2 is refused because $I2$ requires $M3$, which the Core does not certify \\
+HLIS & \textbf{71.3} & geometric mean over $C{=}0.80$, $I{=}0.55$, $O{=}0.60$, $DI{=}1.00$, $SA{=}0.70$ \\
 \bottomrule
 \end{tabularx}
-\caption{Agent-mode profile of the Claude Code default pair, public split, 52 executor calls, about 24 minutes. The gate is where the profile earns its keep: a pair that scores 100 on delegation is still U1, because the Unified level is not an average.}
+\caption{Agent-mode profile of the Claude Code default pair with the organizational suite, public split, 57 executor calls. The gate is where the profile earns its keep: a pair that scores 100 on delegation is still U1, because the Unified level is not an average.}
 \label{tab:profile_claude}
 \end{table}
 
