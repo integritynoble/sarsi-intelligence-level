@@ -1,0 +1,60 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Yang(2026{\natexlab{a}})]{ai4science2026}
+Chengshuai Yang.
+\newblock {AI4Science}: the {PWM} agent framework, research agents and
+  delegation harness.
+\newblock \url{https://github.com/integritynoble/AI4Science}; PyPI
+  \texttt{pwm-ai4science}, 2026{\natexlab{a}}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{ai4science_research_agents}
+Chengshuai Yang.
+\newblock The governor's research agents: how they are designed (and the field
+  documents, lifecycle, harness ladder, delegation agent and dli-bench notes),
+  2026{\natexlab{b}}.
+\newblock
+  \url{https://github.com/integritynoble/AI4Science/tree/main/docs/research-agents}.
+
+\bibitem[Yang(2026{\natexlab{c}})]{yang2026harness}
+Chengshuai Yang.
+\newblock The general intelligence harness: One runtime, instantiated by
+  manifest.
+\newblock Draft v0.1,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{c}}.
+
+\bibitem[Yang(2026{\natexlab{d}})]{yang2026hilbench}
+Chengshuai Yang.
+\newblock {HIL-Bench} v0.1: the harness intelligence level benchmark (code,
+  generators, laws, public split, private-split commitment),
+  2026{\natexlab{d}}.
+\newblock
+  \url{https://github.com/integritynoble/sarsi-intelligence-level/tree/main/hil_bench_v01}.
+
+\bibitem[Yang(2026{\natexlab{e}})]{yang2026hilbenchpaper}
+Chengshuai Yang.
+\newblock {HIL-Bench}: Measuring the intelligence level of agents and language
+  models in every coordinate, 2026{\natexlab{e}}.
+\newblock Draft v0.1,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}.
+
+\bibitem[Yang(2026{\natexlab{f}})]{yang2026library}
+Chengshuai Yang.
+\newblock The domain agent library: Six agents on one harness.
+\newblock Draft v0.1,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level},
+  2026{\natexlab{f}}.
+
+\bibitem[Yang and Xue(2026)]{yang2026unified}
+Chengshuai Yang and Ting Xue.
+\newblock Measuring the unified intelligence level: A cumulative,
+  harness-measurable hierarchy.
+\newblock \emph{Version 2.3,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}}, 2026.
+
+\end{thebibliography}

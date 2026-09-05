@@ -1,0 +1,288 @@
+% arXiv: force the pdflatex path. All content is text, tables and PDF figures; there are no
+% .eps files (figures are PDF), and this must stay within the first few lines to take effect.
+\pdfoutput=1
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do.\do\_\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={The AI4Science Layer: Scientific Research on the General Harness},
+  pdfauthor={Chengshuai Yang},
+  pdfsubject={Paper, funding, job, code, research and business agents as domain profiles on one general harness, with their worked designs, status and download links},
+  pdfkeywords={domain agents, funding agent, job agent, paper agent, code agent, research agent, business agent, downloadable agents}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small The AI4Science Layer v0.1}
+\fancyhead[R]{\small Yang}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\FA}{\ensuremath{F_A(H,p)}}
+\newcommand{\rhov}{\ensuremath{\rho_V}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries The AI4Science Layer:}\\[4pt]
+{\LARGE\bfseries Scientific Research on the General Harness}\\[8pt]
+{\large\bfseries Seven Field Agents on Measured Corpora, the Acceptance Locus a Science Needs,\\[2pt]
+and What Would Count as Transfer of General Intelligence to Research}\\[16pt]
+{\large Chengshuai Yang$^{1,*}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 5, 2026 --- draft v0.1}
+\end{center}
+
+\begin{abstract}
+The program this paper closes has five layers: a theory of intelligence levels, a benchmark that reads them, a general harness that earns them, a library of domain agents instantiated on it, and --- the layer the plan named last --- scientific research. The plan's question for this layer is whether general-agent intelligence mechanisms, validated independently of any science, transfer to research. This paper states what the layer is made of, what has been measured on it, and what would count as an answer. What is built: seven field agents --- computational imaging, low-dose CT, medical physics, pill-camera endoscopy, drug design, cancer, reverse aging --- each a group of nine core roles plus the field's own additions, each reading a \emph{measured corpus} and refusing to run without it, each with a charter, a self-model, a budget, a field map and an autonomous night loop that proposes and never adopts; two more fields exist as designs and one as a specification. What the layer taught first is about the acceptance locus: every reference method passed on synthetic data its author had written, and two of seven still fail on real data --- a clinical-only model does not transport across histologies, a 2D planner cannot spare a cord that abuts the target --- so the science-layer instance of ``never the doer'' is a real corpus and a reference method that can lose. What has been measured: with the model held fixed, a bare solver passed 0 of 15 science-class tasks and the same solver harnessed passed 15 of 15, while an executor that cannot succeed returned 15 of 15 wrong results as done bare and 0 of 15 harnessed; a first harness scaling curve of 93.3, 93.3, 96.7, 96.7; the sealed discovery family --- a regime-switching law to be induced from observations, the layer's $C5$-class witness --- passed by the frontier pair on two of four seeds, by a free-model pair on one, by a 27B local model on none; and one self-improvement that went propose, measure, explain, sign, adopt, with the signature a person's. Read in the framework's coordinates, the layer measures $C5$ and delegation and reads $O$, $SA$ and $M5$ from objects it already keeps; it does not yet measure $I5$, because no field has run a discovery campaign with an incorporation gate, and every field sits at lifecycle stage one, proposing, with independent verifier agents not built. The transfer question therefore has a partial answer --- the delegation mechanisms transfer, measured --- and a stated protocol for the rest.
+\end{abstract}
+
+\noindent\textbf{Keywords:} AI for science; research agents; acceptance locus; measured corpus; delegation; discovery; incorporation gate; verifier independence; lifecycle
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+The development plan behind this program places scientific research at the bottom of a five-layer stack: theory \citep{yang2026unified}, benchmark \citep{yang2026hilbenchpaper}, harness \citep{yang2026harness}, library \citep{yang2026library}, and then the AI4Science layer --- ``scientific research, benchmarks, experiments, labs.'' It asks one question of that layer: \emph{do independently validated general-agent intelligence mechanisms transfer to scientific research?} The question is well posed only if the mechanisms were validated somewhere other than science first, which the four papers above did, and only if the science layer has an acceptance locus of its own that the mechanisms cannot reach into, which is the first thing this paper is about.
+
+The layer is not a proposal. Seven field agents run on real corpora, with 113 tests, verified on two machines and from a published wheel \citep{ai4science_research_agents}. The temptation with such a layer is to describe its ambitions; the discipline this program has kept is to describe what is built, what was measured, and what each measurement can and cannot say. That discipline produced the layer's most useful result so far, which is a negative one about the layer's own early evidence.
+
+\subsection{Contributions}
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{The layer, as built.} A field agent as a group with a scope, a charter, a roster, a field map, two functions and an owner-held switch; the measured-corpus rule; the seven fields and their reference methods (\S\ref{sec:made}, \S\ref{sec:locus}).
+\item \textbf{The acceptance locus a science needs.} Every reference method passed on synthetic data and two of seven fail on real data; the seed-capacity defects that made a night's validation validate on its own search set; the refusal that now runs before money is spent (\S\ref{sec:locus}).
+\item \textbf{The coordinates, read on a field agent.} Which of $C$, $I$, $M$, $O$, $T\cdot H$, $SA$ the layer measures, reads, or has no witness for (\S\ref{sec:coords}).
+\item \textbf{What has been measured.} The delegation-agent arms, the first harness scaling curve, the sealed discovery family across three executors, one signed self-improvement, and the seeds-capacity audit (\S\ref{sec:measured}).
+\item \textbf{Useful and accepted.} Two tests no agent passes yet, the first objection a field expert raises to each, and which are blocked on things compute cannot buy (\S\ref{sec:useful}).
+\item \textbf{Lifecycle and verifier independence.} Five stages, all seven at the first; the independence rule for stage two --- temporal and authorial, not informational (\S\ref{sec:lifecycle}).
+\item \textbf{Labs.} The embodied members every roster declares and none instantiates, and what the memory and discovery laws demand of a laboratory before it can be a member (\S\ref{sec:labs}).
+\item \textbf{The answer, and the protocol for the rest.} Transfer is measured at the delegation coordinate and unmeasured at $I5$; the campaign that would measure it is specified per field (\S\ref{sec:answer}).
+\end{enumerate}
+
+\subsection{What this paper does not claim}
+
+No field agent has a certified Unified level; no field has run an $I5$ campaign; no embodied member exists; no agent passes both the useful and the accepted test. Numbers reported for reference methods are the field benchmarks' own readings on public corpora, taken by the author, and are not comparable across fields. Where a field document says ``not built'', so does this paper.
+
+\section{What the Layer Is Made Of}\label{sec:made}
+
+A field agent is a \emph{group} \citep{yang2026library}: from outside, one worker id on the roster --- a field, never a person; from inside, a membership of three kinds. \emph{Reasoning} members touch files; \emph{judging} members produce a verdict and never act; \emph{embodied} members touch the world and cannot be undone. The group's autonomy ceiling is the lowest of its acting members', and judging members are skipped in that minimum because a verdict is not an act. Every field ships four objects, all data: a \textbf{scope} (agent, field, principle, what is in and what is out), a \textbf{charter} (what the agent may pursue and what it may never touch), a \textbf{roster} over nine core roles --- literature, twin, corpus, method, runner; verifier, reproducer, teacher, writer --- which a field may add to and may not remove from, and a \textbf{field map} (what the field claims, and which of those claims nobody has checked). Each member carries a \texttt{why\_separate}: the roster for computational imaging separates literature from doing because ``reading and doing must not share a context, or the agent finds what it set out to find'', and separates the twin from the method because ``the twin is what a method is graded against; the method's author may not own it''.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lcYl@{}}
+\toprule
+Field & Members & Additions beyond the nine core roles (kind) & Status \\
+\midrule
+computational imaging & 13 & system-designer (r); optical bench, calibration rig, fabrication path (e) & built 2026-08-04 \\
+low-dose CT & 12 & observer (r); phantom stage, scanner console (e) & built, real data \\
+medical physics & 12 & feasibility (r); linac + phantom, dosimetry stage (e) & built; planner rewritten 08-05 \\
+pill camera & 11 & statistician (r); capsule rig (e) & built; improved by its own night loop \\
+drug design & 12 & synthesis-planner (r); synthesis platform, assay platform (e) & built, real data \\
+cancer & 11 & currency (r); assay and sequencing platform (e) & built; external cohort corrected 08-05 \\
+reverse aging & 11 & null-registrar (r); methylation assay platform (e) & built, real data \\
+longevity & 11 & floor (r); collection robot (e) & design; nothing built \\
+human-brain--LLM & 10 & floor (r) & design; nothing built \\
+virtual cell & 9 & --- & specification \\
+\bottomrule
+\end{tabularx}
+\caption{The ten field rosters. r = reasoning, e = embodied. Every embodied member is declared and none is instantiated (\S\ref{sec:labs}); the additions are what distinguishes a field, and they are deliberately few, because a role every field has does not describe any of them.}
+\label{tab:rosters}
+\end{table}
+
+\textbf{Two functions, one switch.} Every research agent has an on-demand function --- a person asks, it does and reports, and this works with the autonomous switch \emph{off}, because ordinary help must not require permission to spend someone's money unasked --- and an autonomous function that searches its declared parameter space against its field's benchmark and \emph{proposes}. The autonomous loop refuses to start without an owner-set switch and budget, and the agent's own attempt to turn the switch on raises by construction; every night's log opens with the agent trying and being refused. Adoption is always the owner's signature. Three ledgers --- \texttt{owner\_set}, \texttt{benchmark}, \texttt{self\_directed} --- are never summed, because summing them is how an agent reports a hundred successes that are all its own homework.
+
+\textbf{The measured-corpus rule.} A benchmark whose corpus is absent refuses and names the command that fetches it; it never falls back to generated data, because a synthetic substitute produces numbers that look like results and are not. Corpora live outside the package, because data is not source.
+
+\section{The Acceptance Locus a Science Needs}\label{sec:locus}
+
+The harness papers established that acceptance cannot be delegated to the doer. In science the doer is the method, and its acceptance locus is a corpus it did not choose and a reference it can lose to.
+
+\begin{table}[H]
+\centering\scriptsize
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Field & Corpus (real) & Reference method against the corpus \\
+\midrule
+low-dose CT & TCIA LDCT-and-Projection-data: real paired full and low dose & \textbf{passes}; a higher-PSNR blur fails, which is what a task-based criterion is for \\
+drug design & DUD-E: 15,288 molecules, 6 targets & \textbf{passes}: EF@1\% 41--56, at 51--77\% of ceiling, 2.4--2.9$\times$ the property baseline, series-disjoint split \\
+cancer & TCGA via the GDC API: 978 cases, site-disjoint validation & \textbf{passes} internally (0.66--0.68) and on held-out hospitals (0.58--0.67); 0.577 across histologies, reported and not granted \\
+medical physics & OpenKBP: 8 real head-and-neck plans & \textbf{2 of 4 slices}; one is unreachable by these beams (a D99 ceiling of 62.6 against a 66.5 floor), one reachable and missed \\
+pill camera & Kvasir-Capsule: 4,443 frames, 46 videos & \textbf{passes}, 0.624 against 0.614, after its own night loop found the fix \\
+computational imaging & CAVE: real hyperspectral scenes, CASSI measurement simulated & \textbf{passes}, after a sign error in the reference solver was found and fixed \\
+reverse aging & GEO GSE40279: 656 whole-blood methylation samples, ages 19--101 & \textbf{13 of 28} on seed-varied institutional splits; 55\% of the clock's gain is bulk structure \\
+longevity & NHANES + CDC linked mortality & \textbf{not fetched}; design only \\
+\bottomrule
+\end{tabularx}
+\caption{What each field benchmark reads and what its reference method does against it. Every one of these methods had passed on synthetic data. Two still fail on real data, and each failure is a statement about the method, not a defect in the benchmark.}
+\label{tab:corpora}
+\end{table}
+
+\begin{cautionbox}{Every synthetic pass had been arranged}
+Each reference method was a \emph{pass} on synthetic data before the corpora were fetched, and each was overturned or qualified by real data. The synthetic generators had been written by the same author as the methods, to agree with the story the design already told. This is the science-layer form of the failure the benchmark paper calls a specification--key gap: the generator and the key were the same hand. The corpus rule exists because the alternative had already produced a full table of results that were not results.
+\end{cautionbox}
+
+\textbf{A seed is a request for a different problem, not a guarantee of one.} Every field benchmark maps its seed into a finite corpus, so past some width more seeds means the same data under a new number. Measured across 16 seeds: cancer, pill camera and drug design produce 16 distinct problems; medical physics 8 (one per patient, then it repeats); reverse aging 7, irregularly; low-dose CT 4 (seeds 0, 4, 8 and 12 are byte-identical). A night that split search $(0,1)$ from validation $(2,3,4,5)$ therefore had low-dose CT validate on its own search set, and reverse aging count one measurement twice. Neither failed loudly; every number stayed plausible. The loop now hashes the data behind each seed before a round runs and refuses when a validation seed matches a search seed or another validation seed, naming the seeds and how many distinct problems the agent can actually produce. Four agents pass; two are refused until their seed sets are drawn inside their real capacity. More seeds buys evidence only up to each agent's capacity, and beyond it buys the appearance of evidence.
+
+\section{The Coordinates, Read on a Field Agent}\label{sec:coords}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Coordinate & Where the layer has it, or does not & Status \\
+\midrule
+$C5$ discovery & the sealed \texttt{t5.hidden\_law} family: a regime-switching generating rule induced from observations and extrapolated past the switch, with a bar set by an archived reference & \textbf{measured} (\S\ref{sec:measured}) \\
+$T\cdot H$ delegation & the delegation agent's four arms on science-class tasks; DLI-Bench's 120 instances in four families; the harness ladder & \textbf{measured} \\
+$O$ & the group: real role separation, the ceiling rule, the separate verifier; stage 2 would supply $O1$--$O2$ content & read from the roster; no ablation suite \\
+$SA$ & the self-model (``what it refuses to say''), the three ledgers, the refusal to run without a corpus, the switch that refuses the agent & read; $SA1$--$SA2$ content, no witness run \\
+$M5$ lineage & the field map (claims and which are unchecked) and the search log with mechanism, paired comparison, validation seeds and Holm correction & read; the objects an \textsc{M5-Long} witness would query exist, the witness does not \\
+$I3$ self-improvement & the night loop: propose, cite the measurement, explain the mechanism, and a person signs and adopts & one cycle, human locus (\S\ref{sec:measured}) \\
+$I5$ persistent discovery & no field has run a campaign with an incorporation gate & \textbf{unmeasured} (\S\ref{sec:answer}) \\
+\bottomrule
+\end{tabularx}
+\caption{The framework's coordinates on the science layer. ``Read'' means the object the coordinate is defined on exists and is inspected; ``measured'' means a witness with a key was run.}
+\label{tab:coords}
+\end{table}
+
+\section{What Has Been Measured}\label{sec:measured}
+
+\textbf{The delegation arms.} One solver held fixed across four arms on science-class tasks: bare, the capable-but-careless solver passed \textbf{0 of 15}; harnessed, the same solver passed \textbf{15 of 15}. An executor that cannot succeed returned \textbf{15 of 15 wrong results as done} bare, and harnessed returned \textbf{0} wrong results as done and escalated 15 of 15; routed over both and learning from verdicts, 15 of 15 passed. Nothing about the solvers differed between arms; what differed is that the class was made checkable before the work started and restartable while it ran. This is the transfer measurement the plan asked for, at the one coordinate where it has been taken: the delegation mechanisms validated on the general harness produce the same effect on science tasks.
+
+\textbf{The first harness scaling curve.} One frozen model, six classes, two seeds, 48 episodes, only the harness changing: $A_{DI}$ of 93.3, 93.3, 96.7, 96.7 across HG0--HG3, with false completions going from 2 to 0 at HG1 while the score did not move --- the observation that made the benchmark paper put ``delivered'' in the first term of its primitive.
+
+\textbf{The sealed discovery family.} The layer's $C5$-class witness was run by the companion harness-scaling paper on three executors, everything but the executor fixed, twelve seeds across three generator families: the frontier pair passed 10 of 12, a free-model pair 9 of 12, a 27B local model 4 of 12, and almost all of the separation was on the discovery family --- 2 of 4, 1 of 4 and 0 of 4 --- where the frontier pair's failures include an extrapolation worse than predicting the mean. The two strong pairs are indistinguishable on the T4 families; discovery is where they part.
+
+\textbf{One signed self-improvement.} The pill-camera agent's night loop found that its frame summary took the wrong quantile; the mechanism was tested rather than asserted, the paired comparison and validation seeds were reported, and the owner signed the adoption. This is the layer's one $I3$-shaped cycle, and it is the human-locus form: the promoter was a person. Under the benchmark's $I3$ law it is a campaign with $D$, $M_\Theta$ and $V$ present and no frozen hidden suite, so it is evidence and not a certification.
+
+\textbf{The seeds-capacity audit} (\S\ref{sec:locus}) is a measurement of the instrument rather than of an agent, and it is reported for the same reason the benchmark paper reports its own defects.
+
+\section{Useful, and Accepted}\label{sec:useful}
+
+The goal is the best agent in each field --- \emph{useful}, meaning a practitioner would run it, and \emph{accepted}, meaning a reviewer for the field would not dismiss it. They are different tests and no agent passes both.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Field & The first objection a field expert raises & The next action \\
+\midrule
+computational imaging & ``You have done one modality and called it a field'' & fill two cells of the transfer table, under the receiving subfield's baselines \\
+low-dose CT & ``Detectability is your proxy, not a reader'' & the dose--detectability curve at four or more doses, knee named \\
+medical physics & ``This is a student project'' --- correctly, at their altitude & run the 3D planner, then re-measure the ceiling \emph{before} judging it \\
+drug design & ``Held-out molecules are not held-out targets'' & held-out targets as a first-class number, then calibrated uncertainty \\
+cancer & ``Show me calibration'' & a calibration curve beside every c-index \\
+pill camera & ``An abnormality is not a finding I can put in a report'' & a sequence model on the same split, then localisation \\
+reverse aging & ``So what?'' --- the correct question & outcome linkage, blocked on an agreement, not on method \\
+longevity & ``You have a document'' --- correct & fetch the corpus; an age-and-sex-only model first \\
+\bottomrule
+\end{tabularx}
+\caption{Where each agent fails the accepted test. Three are blocked on things compute cannot buy --- a data agreement, a reader study, more videos --- and naming which is which keeps the queue from being reordered toward whatever is tractable, which is how a year of easy rungs comes to look like a year of progress.}
+\label{tab:objections}
+\end{table}
+
+\section{The Lifecycle, and Verifier Independence}\label{sec:lifecycle}
+
+Every field agent is at stage 1 of 5: \emph{assisted} (the person verifies everything; passed), \emph{proposing} (the benchmark verifies and the person signs; here), \emph{delegated} (independent verifier agents, the person audits a sample; not built), \emph{autonomous} (agents verify agents under a signed policy; not built), \emph{collapse or fission} (the field is finished or splits; not built). The ordering is not a roadmap; each stage is unreachable until the one before it holds, for one reason: verification is the bottleneck, never generation.
+
+Stage 2 needs verifier agents independent of the proposer, and the independence has to be structural. It is \emph{temporal} --- the criterion is fixed before the result exists --- and \emph{authorial} --- the verdict is written by the verifier and never by the worker. It is not informational: hiding the workspace from the verifier buys nothing, because independence was never carried by what the verifier could see. A verifier is prompted to refute, with ``not established'' as its default; verifiers are perspective-diverse where a claim can fail in more than one way; and the proposer may never improve the verifier, for the same reason a benchmark is never improvable by what it measures. The record says which of four kinds each verdict was --- a person, the group's own verifier, another field's agent reproducing the claim on a different twin and corpus (the strongest available), or a person taught to verify --- because $N$ agents from one lineage confirming each other is one opinion with $N$ signatures. This is the organizational coordinate's content for the layer, and the $O1$--$O2$ witnesses of the benchmark would be run on exactly these objects.
+
+\section{Labs: the Embodied Members}\label{sec:labs}
+
+Every roster but one declares embodied members --- an optical bench, a calibration rig and a fabrication path; a phantom stage and a scanner console; a linac with a phantom and a dosimetry stage; a capsule rig; synthesis and assay platforms; an assay and sequencing platform; a methylation assay platform; a collection robot --- and none is instantiated. They are in the rosters because the ceiling rule needs them there: an embodied act cannot be undone, so a group with a real bench has its ceiling set by physics rather than by its verifier, and a roster that omitted the bench would report a ceiling it does not have.
+
+What the laws of the benchmark demand of a laboratory before it can be a member is concrete. A lab is a store whose entries are experiments, and the \textsc{M5-Long} witness --- interleaved projects and restarts, hidden cross-project queries, a reconstructed lineage of which evidence supported which conclusion and which alternative was rejected --- is the memory test a lab must pass before an $I5$ campaign can be run on it, because the incorporation gate $P$ compares a discovery arm and a control from the same checkpoint after a restart, and a lab whose lineage does not survive the restart cannot supply the checkpoint. The field map and the search log are the two objects the layer already keeps that an \textsc{M5-Long} witness would query; the witness is not built.
+
+\section{The Answer, and the Protocol for the Rest}\label{sec:answer}
+
+\emph{Do validated general mechanisms transfer to research?} At the delegation coordinate, yes, and it is measured: criterion-before-work, separate acceptance, restart and routing --- validated on the general harness --- turn 0 of 15 into 15 of 15 on science-class tasks with the model held fixed, and turn 15 wrong results delivered as done into none. At $C5$, the frontier pair discovers on half the sealed seeds and weaker pairs on fewer, which is a reading of models on a science-shaped witness rather than of transfer. At $I3$, one cycle exists and its promoter was a person. At $I5$ the question is open, because the witness has not been run, and the protocol that would run it is fixed by the benchmark's law: a genuine unknown in a field --- the field map lists which claims nobody has checked --- competing hypotheses, agent-selected probes under the night budget, the lineage the search log already keeps, independent validation by another field's agent on a different twin, consolidation only through the declared machinery, a real restart, and hidden transfer against a control from the same checkpoint, with $z_{I5} = U \cdot H \cdot E \cdot L \cdot V \cdot P \cdot K_5$. Every object that campaign needs exists in the layer except the control arm and the hidden transfer set, and those are the benchmark's to supply.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+Field & The single run that would change its row \\
+\midrule
+cancer, pill camera, drug design & an $I5$ campaign: these three produce 16 distinct problems per 16 seeds and can supply the hidden transfer set from their own capacity \\
+computational imaging & the two transfer-table cells, then the \textsc{M5-Long} witness on its field map and search log \\
+low-dose CT & the dose--detectability curve; its seed capacity of four bars an $I5$ campaign until the corpus grows \\
+medical physics & the 3D planner and a re-measured ceiling; the reachable slice is the honest target \\
+reverse aging & nothing computational: the outcome linkage waits on an agreement \\
+longevity, human-brain--LLM, virtual cell & fetch a corpus; nothing else applies until the reference method has a corpus to lose to \\
+\bottomrule
+\end{tabularx}
+\caption{Per field, the cheapest run that would change what this paper can say.}
+\label{tab:next}
+\end{table}
+
+\section{Limitations}\label{sec:limits}
+
+The layer is one author's; every reference-method number is a public-corpus reading taken by the person who wrote the method and the benchmark, and the corpus rule is a partial cure for that, not a full one. Fields are not comparable to each other, and the paper does not rank them. The delegation measurement is on science-\emph{class} tasks, not on a field benchmark. No embodied member exists, so nothing here is about a laboratory except what one would have to be.
+
+\section{Conclusion}
+
+The fifth layer exists, on real data, at stage one. Its first lesson was about itself: a table of synthetic passes written by the same hand as the methods, overturned by corpora that could say no. Its first transferable result is at the delegation coordinate, measured with the model fixed. What it has not yet done --- run a discovery campaign with an incorporation gate on a field --- is specified to the factor, and three fields can supply the data for it today.
+
+\section*{Availability}
+
+The field agents, their scope, charter, roster and field-map objects, the delegation agent, DLI-Bench and the harness ladder are in the AI4Science repository \citep{ai4science2026,ai4science_research_agents}; the sealed-family readings are in the harness-scaling paper's records and the benchmark laws in \citet{yang2026hilbench}.
+
+\section*{Conflicts and funding}
+
+The author built the layer, the harness and the benchmark. No external funding.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

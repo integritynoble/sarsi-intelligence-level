@@ -4,7 +4,7 @@
 
 ## Harness Intelligence Level: the papers, and which benchmark to run
 
-Five papers and one instrument sit on top of the framework above. If you came here to measure an agent or a
+Six papers and one instrument sit on top of the framework above. If you came here to measure an agent or a
 model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
 
 | What | Where | Status |
@@ -14,6 +14,7 @@ model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
 | **Paper 3 — harness scaling.** Harness scaling curves under a frozen model, budget-cross runs, the executor comparison on sealed families. | [`paper3_harness_scaling_v01/`](paper3_harness_scaling_v01/) | current |
 | **Paper 4 — the general harness.** One runtime instantiated by manifest, mapped module-by-module onto the AI4Science code. | [`paper4_harness_v01/`](paper4_harness_v01/) | current |
 | **Paper 5 — the agent library.** Six domain profiles, every agent the fleet defines, the twenty shipped specs. | [`paper5_agent_library_v01/`](paper5_agent_library_v01/) | current; [`agent_design_v01/`](agent_design_v01/) superseded |
+| **Paper 6 — the AI4Science layer.** Seven field agents on measured corpora, the acceptance locus a science needs (two reference methods still fail on real data), the coordinates read on a field agent, the delegation transfer measurement (0/15 → 15/15 with the model fixed), and the I5 campaign that would answer the plan's question. | [`paper6_ai4science_layer_v01/`](paper6_ai4science_layer_v01/) · [PDF](paper6_ai4science_layer_v01/The_AI4Science_Layer_v0_1.pdf) | current |
 
 ### The benchmark: one canonical tree, two kept as history
 
