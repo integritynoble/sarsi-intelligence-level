@@ -2,6 +2,27 @@
 
 **Self-Aware Recursively Self-Improving Intelligence Levels** — a theoretical framework for recursive self-improvement across substrate domains, from language models to stellar-scale engineering.
 
+## Harness Intelligence Level: the papers, and which benchmark to run
+
+Five papers and one instrument sit on top of the framework above. If you came here to measure an agent or a
+model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
+
+| What | Where | Status |
+|---|---|---|
+| **Paper 1 — theory.** *Unified Intelligence Theory and the Harness Intelligence Level* v2.4: coordinates [C, I, O, T, H, SA], memory M beside I, the gated U0–UΩ hierarchy, HLIS, and the HIL of a base model across a harness ladder; §5.1 defines Θ (the mechanism I3 changes) and Ψ (the process I4 improves). | [`unified_v24/`](unified_v24/) · [PDF](unified_v24/Unified_Intelligence_Theory_and_HIL_v2_4.pdf) | current; `unified_v22` is the original, `unified_v23` the fixed edition it grew from, `unified_v14`–`v21` history |
+| **Paper 2 — the benchmark.** *HIL-Bench*: one instrument, two subjects (an agent as the pair it is; a bare model through reference harnesses HG0–HG2), levels fixed by law rather than difficulty, Core + Core-H, the O suite, the I3-Theta campaign and I4-Psi meta-campaign, public/private splits, first readings. | [`paper2_hilbench_v02/`](paper2_hilbench_v02/) · [PDF](paper2_hilbench_v02/HIL_Bench_v0_1.pdf) | current; supersedes [`paper2_uab_v01/`](paper2_uab_v01/), whose contract it keeps |
+| **Paper 3 — harness scaling.** Harness scaling curves under a frozen model, budget-cross runs, the executor comparison on sealed families. | [`paper3_harness_scaling_v01/`](paper3_harness_scaling_v01/) | current |
+| **Paper 4 — the general harness.** One runtime instantiated by manifest, mapped module-by-module onto the AI4Science code. | [`paper4_harness_v01/`](paper4_harness_v01/) | current |
+| **Paper 5 — the agent library.** Six domain profiles, every agent the fleet defines, the twenty shipped specs. | [`paper5_agent_library_v01/`](paper5_agent_library_v01/) | current; [`agent_design_v01/`](agent_design_v01/) superseded |
+
+### The benchmark: one canonical tree, two kept as history
+
+- **[`hil_bench_v01/`](hil_bench_v01/) — canonical.** `python3 -m hilbench selftest` · `agent` · `llm` (bare model) · `llm-harness` · `extended` · `agent --with-o`. `LAWS.md` states each level as a contrast a program can check; `dataset/dev_v0_1/` is the public development dataset; `records/` holds every run the papers report; `tests/` (34) must pass. The private split is derived from a withheld salt whose SHA-256 is published in `PRIVATE_SPLIT_COMMITMENT.json`.
+- [`hil_bench_v2/`](hil_bench_v2/) — a parallel implementation, **merged into `hil_bench_v01` on 2026-09-05** (O0/O1, the bare-model executor, the test suite). Kept as it stood behind `MERGED_INTO_hil_bench_v01.md`; do not run it.
+- [`unified_v23/hil_benchmark_v1/`](unified_v23/hil_benchmark_v1/) — an earlier benchmark package written alongside the v2.3 paper, with its own protocol and scoring notes. History; its `organizer_private/` material is public by virtue of being here and cannot serve as a private split.
+- [`uab_v01/`](uab_v01/) — the Unified Agent Benchmark contract and families that HIL-Bench is built on; still imported by `hil_bench_v01`.
+- [`plan/`](plan/) and [`chatgpt/`](chatgpt/) — the development plan, the I3/I4 revised manuscripts, and the drafts and dataset packs they came from.
+
 ## Start here
 
 Eleven papers and fourteen supporting documents, one program — a system scale, an agent scale, a fleet scale, a deployment report, a console design, the console again once it spans machines, the worker layer between a person's request and a session on their machine, and then the three scales the papers left open: what an agent may change about *itself*, what bounds a single mind, what a mind made of minds must contain, and where the whole trajectory ends — plus one map of all of it, one crossing of that map against the substrate circles, one placement of real systems on it, a reconciliation of the two level frameworks written in parallel, a paper drawing the individual and organizational scales together, and the first measurement of the quantity they all turn on.
