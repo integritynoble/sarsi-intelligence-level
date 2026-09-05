@@ -67,16 +67,18 @@ where Harnessability is the gain normalized by the headroom above the bare rung.
  & Agent mode & LLM mode \\
 \midrule
 Subject & a frozen pair $(m,h)$, run exactly as shipped & a base model $m$ inside the benchmark's own harnesses \\
-Executor contract & one command template with a \texttt{\{prompt\}} slot, run in the item's directory, killed as a process group at the limit & the same template, pointed at the model under test (an API base, a model name, a local shim) \\
-Items & Core (\S\ref{sec:core}), optionally the extended tier & the six Core delegation families at every rung \\
-Output & profile $[C, I(M), O{=}\text{N/A}, T, H, SA]$, $U^{*}$, HLIS, $A^{\text{net}}_{DI}$, false completions, calibration & $\text{HLIS}_{DI}$ per rung, HIL-Level, HIL-AUC, HIL-Ceiling, Harness Gain, HIL-Score \\
-Calls, Core & 46 & 36 (12 per rung) \\
-Wall clock, first runs & 17--18 min (Claude Code default) & 10.3 min (Claude Code default) \\
+Executor contract & one command template with a \texttt{\{prompt\}} slot, run in the item's directory, killed as a process group at the limit & a \emph{bare} model: one OpenAI-compatible chat call with two read-only tools (\texttt{list\_files}, \texttt{read\_file}, confined to the workspace) whose final message is one JSON object; the benchmark materializes it into the deliverable files, so the verifiers are the agent-mode verifiers unchanged \\
+Items & Core, Core-H, optionally the O suite and the extended tier & the six domain families and Core-H at every rung, plus $C0$--$C3$, $SA1$, the $SA2$ twin pair and $O0$ at every rung \\
+Output & profile $[C, I(M), O, T, H, SA]$, $U^{*}$ with its bottleneck, HLIS, $A^{\text{net}}_{DI}$, false completions, calibration & a full profile \emph{per rung}, HLIS per rung, HIL-Level, HIL-AUC, HIL-Ceiling, Harness Gain, Harnessability, HIL-Score; $M0/I0$ by construction and stated \\
+Calls, Core & 52 (+5 with the O suite) & 34 per rung \\
+Wall clock, first runs & 17--24 min (Claude Code default) & 3--6 s per T0/T1 episode for a hosted model \\
 \bottomrule
 \end{tabularx}
 \caption{The two modes. The same generators, seeds, keys, verifiers and scoring code serve both; only what surrounds the model differs.}
 \label{tab:modes}
 \end{table}
+
+A third mode, \texttt{llm-harness}, runs the reference ladder with an \emph{agent} executor as the inner loop. It is how the first readings in \S\ref{sec:results} were taken, and it is kept and labelled for what it measures: a pair at every rung, whose HG0 is not a bare model. The bare mode is the one that answers the second question below.
 
 The distinction matters because the two questions the public asks are different. \emph{Which agent should I install} is a question about a pair, and the pair's own memory, retry policy and tool set are part of the answer; the benchmark must not strip them away. \emph{Which model should I build on} is a question about the model, and the only way to separate the model from an evaluator's harness is to hold the harness fixed and published. A model's HIL curve is therefore measured through harnesses the benchmark itself defines, which are deliberately plain: they contain no prompt engineering beyond the item text, and the only thing that changes between rungs is what happens after the model says it is done.
 
@@ -162,7 +164,7 @@ $SA1$ & \texttt{sa\_probes}: report the files actually present and the tools act
 $SA2$ & a solvable task and its twin that needs an absent tool & 4 & complete the solvable one; on the twin, declare blocked without writing a total \\
 $SA4$ & a blind forecast, before every delegated episode, of the probability of passing the hidden check & 12 & Brier no worse than the constant forecast at the pair's own base rate, on every episode \\
 $T \cdot H$ at H0 & the six UAB domain families: a code edit (T0), a funding requirement (T0), the hard requirements of a job posting (T0), a citation against its reference (T0), a company fact (T0), a results section from supplied evidence (T1) & 12 & frontier $F_A(\text{H0}, 0.8)$ and $A^{\text{net}}_{DI}$; a delivered wrong answer is priced at $\rho = 1$ \\
-$O$ & omitted for an individual pair and named as omitted & 0 & --- \\
+$O0$, $O1$ (optional suite) & \texttt{o\_families}: a compound task routed across planner, executor and verifier, where the verifier's entry must state what it checked with the correct figure (a sign-off naming nothing is a rubber stamp and scores zero); then a standing decision recorded in the organization's own log --- never the model's --- that must decide a later, different instance after a restart, against an arm whose log was withheld & 5 & O0: routing exact and verification substantive; O1: transfer $= 1$. Omitted and named as omitted when the suite is not run; never zeroed \\
 \bottomrule
 \end{tabularx}
 \caption{The Core: 46 executor calls. Every family exposes \texttt{generate}, \texttt{verify}, \texttt{reference\_solve}, \texttt{naive\_solve} and a specification--key test; the self-test asserts on 12 seeds per band that the reference passes and the wrong method fails.}
@@ -247,7 +249,7 @@ The Core's delegation ceiling is T1, and the first frontier pair sits on it (\S\
 
 \section{Public and Private Splits}\label{sec:splits}
 
-Public seeds are $\{0,1,2,3\}$ and ship with keys, generators and verifiers; they are for development, and a public reading is labelled as one. Private seeds are derived per family by HMAC-SHA256 from a withheld salt; the salt's SHA-256 is published in the repository (\texttt{PRIVATE\_SPLIT\_COMMITMENT.json}, commitment \texttt{53e202f4\ldots}), and the runner refuses a salt whose hash does not match. Because items are generated rather than stored, the private split contains no files to leak: what is withheld is 32 bytes. A private reading is valid only when the evaluator did not build the pair and the run root was fresh, and a reveal of the salt at a version boundary lets any past private reading be re-run and checked.
+Public seeds are $\{0,\ldots,5\}$ and ship with keys, generators and verifiers; they are for development, and a public reading is labelled as one. Private seeds are derived per family by HMAC-SHA256 from a withheld salt; the salt's SHA-256 is published in the repository (\texttt{PRIVATE\_SPLIT\_COMMITMENT.json}, commitment \texttt{53e202f4\ldots}), and the runner refuses a salt whose hash does not match. Because items are generated rather than stored, the private split contains no files to leak: what is withheld is 32 bytes. A private reading is valid only when the evaluator did not build the pair and the run root was fresh, and a reveal of the salt at a version boundary lets any past private reading be re-run and checked.
 
 This is the ARC-AGI arrangement \citep{arc2026} with one difference: ARC's private set is a corpus that must be guarded; HIL-Bench's private set is a function of a secret, and rotating the secret rotates the set at no cost.
 
@@ -399,7 +401,9 @@ A benchmark's first live runs are a test of the benchmark. Three defects were fo
 \item \textbf{The gate crashed on a two-letter coordinate.} The gate parsed a level label by dropping its first character, which turns \texttt{SA2} into \texttt{A2}; the profile phase of the first agent run raised on it after 46 episodes had completed, and the episodes were lost because the record was written only at the end. The parser now takes the digits, and the record is written after every phase.
 \end{enumerate}
 
-A fourth observation is a label rather than a defect: the $SA2$ blocked twin on one seed received neither a total nor a declaration, which the verifier reported as \texttt{attempted\_impossible}; the mode is now \texttt{no\_declaration}, and the executor's output tail is kept so that a silent episode can be told from a refusal made in prose.
+The bare-model mode's first live run added two more of the same kind, both apparatus and both flattering the model's failure rather than its success: the organizational item came back with a correct answer in the model's reply and read $O = \text{None}$, because the extractor's deliverable map covered the six domain families and not the coordinate probes, so nothing was written for the verifier to read; and the induction item came back \texttt{null} with no record of the model's text, so a truncation at the token limit could not be told from a refusal of the one-object contract. The map now covers every family the mode runs, the raw reply is kept beside the parsed one, and a reasoning model is given room before the object. Merging the parallel implementation of the organizational families found two defects of the generator kind the self-test exists to catch: a standing-decision rule that named the alphabetical order and so could never change an answer, and amounts that were multiples of one hundred so a rounding rule could never fire --- the trap fired on four of twenty-four seeds. The rules were rewritten and instances are regenerated until the decision changes both episodes, asserted per seed.
+
+A further observation is a label rather than a defect: the $SA2$ blocked twin on one seed received neither a total nor a declaration, which the verifier reported as \texttt{attempted\_impossible}; the mode is now \texttt{no\_declaration}, and the executor's output tail is kept so that a silent episode can be told from a refusal made in prose.
 
 \section{Relation to ARC-AGI and the Public Benchmarks}\label{sec:relation}
 
