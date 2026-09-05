@@ -86,6 +86,7 @@ def _build_parser() -> argparse.ArgumentParser:
     e = sub.add_parser("extended"); e.add_argument("--exec", dest="executor", required=True); common(e, 0)
     e.add_argument("--ai4science", default="/home/spiritai/pwm/Physics_World_Model/AI4Science")
     m = sub.add_parser("m1"); m.add_argument("--root", type=Path, required=True); m.add_argument("--exec", dest="executor", required=True); m.add_argument("--limit", type=int, default=300); m.add_argument("--tag", default="r2")
+    om = sub.add_parser("o"); om.add_argument("--root", type=Path, required=True); om.add_argument("--exec", dest="executor", required=True); om.add_argument("--limit", type=int, default=300); om.add_argument("--tag", default="o2")
     c = sub.add_parser("commit-private"); c.add_argument("--salt-file", required=True)
     return ap
 
@@ -98,6 +99,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         split.COMMITMENT_FILE.write_text(json.dumps({"commitment": split.commitment(salt), "n_private_seeds": 4,
                                                       "derivation": "HMAC-SHA256(salt, 'hilbench:i')[:4] as int mod 1e6 + 1000, i in 0..3"}, indent=1))
         print("committed", split.commitment(salt)); return 0
+    if a.cmd == "o":
+        core.rerun_o(a.root, a.executor, a.limit, tag=a.tag); return 0
     if a.cmd == "m1":
         core.rerun_m1(a.root, a.executor, a.limit, tag=a.tag); return 0
     if getattr(a, "executor", None) is not None and "{prompt}" not in a.executor:

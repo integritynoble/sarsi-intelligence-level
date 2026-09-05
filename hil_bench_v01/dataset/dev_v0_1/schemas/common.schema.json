@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL-Bench common public form",
+  "type": "object",
+  "required": [
+    "form_id",
+    "coordinate",
+    "level",
+    "canonical_method",
+    "development_only"
+  ],
+  "properties": {
+    "form_id": {
+      "type": "string"
+    },
+    "coordinate": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "canonical_method": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "development_only": {
+      "const": true
+    },
+    "resource_envelope": {
+      "type": "object"
+    },
+    "human_intervention": {
+      "type": "string"
+    },
+    "verifier": {
+      "type": "object"
+    }
+  }
+}

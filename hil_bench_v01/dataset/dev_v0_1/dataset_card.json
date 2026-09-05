@@ -1,0 +1,38 @@
+{
+  "name": "HIL-Bench Development Dataset",
+  "version": "0.1",
+  "date": "2026-09",
+  "status": "development_public_not_official_certification",
+  "purpose": "Reference test forms and campaign templates for implementing the HIL-Bench canonical testing methods.",
+  "scope": {
+    "runnable_public_forms": [
+      "C0-C5",
+      "I0-I4",
+      "O0-O4",
+      "T0-T5",
+      "SA1-SA5"
+    ],
+    "specification_only": [
+      "C6",
+      "CΩ",
+      "I5",
+      "IΩ",
+      "O5",
+      "OΩ",
+      "T6",
+      "TΩ",
+      "SA6",
+      "SAΩ"
+    ]
+  },
+  "principles": [
+    "external verification",
+    "model-harness separation",
+    "longitudinal causal evidence",
+    "bounded write sets",
+    "independent promotion",
+    "lower-level retention",
+    "public/private witness separation"
+  ],
+  "warning": "Public tasks and keys are development material. Official private witness forms must be regenerated and protected server-side."
+}

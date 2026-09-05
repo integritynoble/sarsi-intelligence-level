@@ -455,6 +455,10 @@ The Core is saturated for the frontier pair on delegation; discrimination among 
 
 An agent and a model can be measured in the same coordinates with the same items, and it can be done in under fifty calls. The Core reads every individual coordinate with a computed key and an ablated control; the reference ladder turns a model's reading into a HIL curve and a single score; the extended tier is where frontier pairs separate; the private split is a secret whose hash is public. The first runs gave one saturated reading, one profile, and three defects in the instrument, all repaired. That is what a benchmark's first day should produce.
 
+\subsection{The development dataset}\label{sec:devdataset}
+
+The package ships a public development dataset (\texttt{dataset/dev\_v0\_1}): reference forms for $C0$--$C5$, $I0$--$I4$, $O0$--$O4$, $T0$--$T5$ and $SA1$--$SA5$; the $I3$ campaigns and $I4$ meta-campaigns as records rather than one-shot rows; specification-only templates for the levels that need long-horizon sealed environments; machine-readable schemas for the $\Theta$ and $\Psi$ manifests and for campaign results; and scoring helpers that compute the gate products $z_{I3}$ and $z_{I4}$ of \S\ref{sec:i3}--\ref{sec:i4} from a result record. Everything in it is public development material and is not a private witness form. The manifest schema is what \texttt{laws.theta\_check} validates, and the package tests exercise the example $I3$ result --- each of the five factors can fail the campaign alone, a no-op change cannot pass $M_\Theta$, and a fixed $\Psi$ cannot earn $I4$.
+
 \section*{Availability}
 
 HIL-Bench v0.1 --- generators, verifiers, reference harnesses, scoring, the public split, the private-split commitment and the run records reported here --- is at \citet{yang2026hilbench}, built on the UAB v0.1 contract and families \citep{yang2026uab} and the Unified Intelligence framework v2.4 \citep{yang2026unified}. A run is \texttt{python3 -m hilbench agent|llm|extended --label NAME --exec 'CMD \{prompt\}' --root FRESHDIR}.

@@ -126,28 +126,7 @@ def run_agent(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=prin
     eb = proj / "episode_b"; write_workspace(eb, fb); run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", proj, limit, env); v3 = L.verify_b(eb, key)
     R["I2"] = {"seed": s, "convention": key["convention"], "a1": v1["pass"], "a2": v2["pass"], "b": v3["pass"], "ablated_b": v4["pass"], "transfer": int(v3["pass"]) - int(v4["pass"])}
     log(f"I2 transfer: a1={v1['pass']} a2={v2['pass']} b={v3['pass']} ablated={v4['pass']} -> transfer {R['I2']['transfer']}")
-    if with_o:                                                # O: coordination, then organizational memory
-        s = seeds[0]
-        fo, ko = o_families.o0_generate(s); wo = _ws(root, f"o0_s{s}"); write_workspace(wo, fo)
-        run_exec(exec_tmpl, TASK, wo, limit, env); vo = o_families.o0_verify(wo, ko)
-        R["O0"] = {"seed": s, "pass": vo["pass"], "mode": vo["failure_mode"]}
-        fa1, fb1, k1 = o_families.o1_generate_pair(s)
-        abl = Path(str(root) + "_o1_ablated"); shutil.rmtree(abl, ignore_errors=True)   # ablated arm first
-        wab = abl / "episode_b"; write_workspace(wab, fb1)
-        run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", abl, limit, env)
-        o1_abl = o_families.o1_verify_b(wab, k1)
-        proj = Path(str(root) + "_o1"); shutil.rmtree(proj, ignore_errors=True)
-        wa1 = proj / "episode_a"; write_workspace(wa1, fa1)
-        run_exec(exec_tmpl, "Read episode_a/GOAL.md in this project and do exactly what it says, creating files under episode_a/. Do not ask questions. Reply DONE when finished.", proj, limit, env)
-        o1a = o_families.o1_verify_a(wa1, k1)
-        arch = Path(str(root) + "_o1_archive"); shutil.rmtree(arch, ignore_errors=True); shutil.move(str(wa1), str(arch))
-        wb1 = proj / "episode_b"; write_workspace(wb1, fb1)
-        run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", proj, limit, env)
-        o1b = o_families.o1_verify_b(wb1, k1)
-        R["O1"] = {"seed": s, "a": o1a["pass"], "b": o1b["pass"], "ablated_b": o1_abl["pass"],
-                   "transfer": int(o1b["pass"]) - int(o1_abl["pass"])}
-        log(f"O: o0={R['O0']['pass']} o1 a={o1a['pass']} b={o1b['pass']} ablated={o1_abl['pass']} -> transfer {R['O1']['transfer']}")
-        _save(root, R)
+    if with_o: _phase_o(R, exec_tmpl, root, seeds, limit, env, log)
     return finalize(R, root, log)
 
 
@@ -194,6 +173,38 @@ def rerun_m1(root: Path, exec_tmpl, limit=300, env=None, log=print, tag="r2"):
     """Rerun only the M1 phase of an existing agent record (after an item repair), into fresh sibling roots, and re-finalize."""
     R = json.loads((root / "record.json").read_text()); R.setdefault("M1_history", []).append(R.get("M1"))
     sub = Path(str(root) + "_" + tag); sub.mkdir(parents=True, exist_ok=True); phase_m1(R, exec_tmpl, sub, R["seeds"], limit, env, log); R["M1"]["rerun_root"] = str(sub)
+    return finalize(R, root, log)
+
+def _phase_o(R, exec_tmpl, root: Path, seeds, limit, env, log):
+    """O: coordination (O0), then organizational memory (O1) with the ablated arm run first."""
+    s = seeds[0]
+    fo, ko = o_families.o0_generate(s); wo = _ws(root, f"o0_s{s}"); write_workspace(wo, fo)
+    run_exec(exec_tmpl, TASK, wo, limit, env); vo = o_families.o0_verify(wo, ko)
+    R["O0"] = {"seed": s, "pass": vo["pass"], "mode": vo["failure_mode"]}
+    fa1, fb1, k1 = o_families.o1_generate_pair(s)
+    abl = Path(str(root) + "_o1_ablated"); shutil.rmtree(abl, ignore_errors=True)   # ablated arm first
+    wab = abl / "episode_b"; write_workspace(wab, fb1)
+    run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", abl, limit, env)
+    o1_abl = o_families.o1_verify_b(wab, k1)
+    proj = Path(str(root) + "_o1"); shutil.rmtree(proj, ignore_errors=True)
+    wa1 = proj / "episode_a"; write_workspace(wa1, fa1)
+    (proj / "DECISION_LOG.md").write_text(k1["decision_log"], encoding="utf-8")   # the organization's memory: harness-held, survives episode A's removal, absent in the ablated arm
+    run_exec(exec_tmpl, "Read episode_a/GOAL.md in this project and do exactly what it says, creating files under episode_a/. Do not ask questions. Reply DONE when finished.", proj, limit, env)
+    o1a = o_families.o1_verify_a(wa1, k1)
+    arch = Path(str(root) + "_o1_archive"); shutil.rmtree(arch, ignore_errors=True); shutil.move(str(wa1), str(arch))
+    wb1 = proj / "episode_b"; write_workspace(wb1, fb1)
+    run_exec(exec_tmpl, "Read episode_b/GOAL.md in this project and do exactly what it says, creating files under episode_b/. Do not ask questions. Reply DONE when finished.", proj, limit, env)
+    o1b = o_families.o1_verify_b(wb1, k1)
+    R["O1"] = {"seed": s, "a": o1a["pass"], "b": o1b["pass"], "ablated_b": o1_abl["pass"],
+               "transfer": int(o1b["pass"]) - int(o1_abl["pass"])}
+    log(f"O: o0={R['O0']['pass']} o1 a={o1a['pass']} b={o1b['pass']} ablated={o1_abl['pass']} -> transfer {R['O1']['transfer']}")
+    _save(root, R)
+
+def rerun_o(root: Path, exec_tmpl, limit=300, env=None, log=print, tag="o2"):
+    """Rerun only the O suite of an existing agent record (after an item repair) and re-finalize."""
+    R = json.loads((root / "record.json").read_text()); R.setdefault("O_history", []).append({"O0": R.get("O0"), "O1": R.get("O1")})
+    sub = Path(str(root) + "_" + tag); sub.mkdir(parents=True, exist_ok=True)
+    _phase_o(R, exec_tmpl, sub, R["seeds"], limit, env, log); R["O1"]["rerun_root"] = str(sub)
     return finalize(R, root, log)
 
 def run_llm_via_harness(label, exec_tmpl, root: Path, seeds, limit=300, env=None, log=print):

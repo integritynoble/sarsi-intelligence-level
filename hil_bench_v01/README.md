@@ -85,3 +85,12 @@ Weights are predeclared (`hilbench/score.py`): band weights 1, 2, 4, 8, 16, 32; 
 outcome primitive at ρ = 1; HLIS an equal-weight geometric mean over the coordinates present; HIL-Score
 = 0.55·AUC + 0.35·Ceiling + 0.10·Harnessability. A level is a reading on the public split until the
 private split is run by an evaluator who did not build the pair.
+
+## Development dataset (`dataset/dev_v0_1/`)
+
+The public development/reference forms shipped with the September 2026 draft: C0–C5, I0–I4 (I3-THETA campaigns
+and I4-PSI meta-campaigns as records, not one-shot rows), O0–O4, T0–T5, SA1–SA5, the `spec_only/` templates for
+levels that need long-horizon sealed environments, machine-readable schemas (`theta_manifest`, `psi_manifest`,
+`i3_theta`, `i4_psi`), and `verifiers/hil_scoring.py` (also importable as `hilbench.i3i4_scoring`) computing the
+I3/I4 gate products. Everything in it is public development material and must not be treated as a private
+witness form; `laws.theta_check` accepts its manifest schema.

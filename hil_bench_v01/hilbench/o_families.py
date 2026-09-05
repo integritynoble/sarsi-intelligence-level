@@ -159,13 +159,19 @@ def o1_generate_pair(seed: int):
         "# GOAL (episode A, O1)", "",
         "Report `regional_total` on `data.csv` and write `report.json` as",
         '`{"kept_rows": <int>, "grand_total": <int>, "top_region": "<region or null>"}`.', "",
-        "After you are done, the organization asks you to state, in `standing_decision.json` as",
-        '`{"decision": "<the one report convention for this task family that this organization requires>", "scope": "this task family"}`.', "",
+        "This organization has a STANDING DECISION for this task family, recorded in its decision log at",
+        "`../DECISION_LOG.md` (held by the organization, outside this episode's directory). It overrides the",
+        "baseline convention below on exactly one item. Apply it to this report.", "",
+        "After you are done, restate it in `standing_decision.json` as",
+        '`{"decision": "<the standing decision, in your own words>", "scope": "this task family"}`.', "",
         *split_para(baseline)]), "data.csv": data(rows_a)}
     files_b = {"GOAL.md": "\n".join([
         "# GOAL (episode B, O1)", "",
         "Report `regional_total` on `data.csv` and write `report.json` as",
         '`{"kept_rows": <int>, "grand_total": <int>, "top_region": "<region or null>"}`.', "",
+        "If this organization has recorded a standing decision for this task family in its decision log",
+        "(`../DECISION_LOG.md`, if present), it overrides the baseline convention below; if there is no",
+        "such record, apply the baseline exactly and do not invent a decision.", "",
         *split_para(baseline)]), "data.csv": data(rows_b)}
     def report(rows):
         k, t, top = answer(rows)
@@ -181,6 +187,8 @@ def o1_generate_pair(seed: int):
            "b_default": default_report(rows_b),
            "decision_norm": "5000" if "5000" in rule else ("nearest 100" if "nearest 100" in rule else "row count")}
     key["decision_token"] = "5000" if "5000" in rule else ("100" if "nearest 100" in rule else "count")
+    key["decision_log"] = ("# DECISION LOG (held by the organization)\n\n"
+                           f"- {r.choice(['2026-03-04','2026-05-19','2026-07-02'])} standing decision, task family `regional_total`: {rule}.\n")
     return files_a, files_b, key
 
 def split_para(t):

@@ -15,6 +15,7 @@ boundary with re-certification, like the definition of a unit.
 from __future__ import annotations
 import inspect, json, tempfile, shutil
 from pathlib import Path
+from .i3i4_scoring import i3_gates, i4_gates   # z_I3 = D*M_Theta*V*G*K and z_I4 = M_Psi*V_Psi*G_Psi*K_4, from the development dataset
 
 CONVENTIONS = {"p_reliability": 0.80, "rho_false_completion": 1.0, "band_weights": [1, 2, 4, 8, 16, 32],
                "note": "ratified constants, not laws; changing one changes the standard's version and requires re-certification"}
@@ -85,10 +86,12 @@ def theta_check(theta: dict, criterion_paths: list) -> list:
     theta: {"paths": [...], "persists_across_restart": bool, "ablation_delta": float or None,
             "psi_paths": [...]}  -- ablation_delta is the drop on the frozen suite when Theta is reverted.
     """
-    mech = theta.get("mechanisms"); missing = []
-    if mech is not None:                      # manifest form: every mechanism declares what a campaign needs to bound it
-        theta = dict(theta); theta["paths"] = [p for m in mech for p in (m.get("write_set") or [])]
-        missing = [m.get("id", "?") for m in mech if not all(m.get(k) for k in ("id", "role", "interface", "write_set", "activation", "snapshot"))]
+    mech = theta.get("mechanisms", theta.get("theta_components")); missing = []
+    if mech is not None:                      # manifest form (dataset schema theta_manifest.schema.json): every component declares
+        theta = dict(theta)                   # id, role, interface, write_scope|write_set, activation, snapshot, restore
+        theta["paths"] = [p for m in mech for p in (m.get("write_scope") or m.get("write_set") or [])]
+        need = ("id", "role", "interface", "activation", "snapshot")
+        missing = [m.get("id", "?") for m in mech if not all(m.get(k) for k in need) or not (m.get("write_scope") or m.get("write_set"))]
     paths = {str(Path(p).resolve()) for p in theta.get("paths", [])}
     crit = {str(Path(p).resolve()) for p in criterion_paths}
     overlap = sorted(p for p in paths for c in crit if p == c or p.startswith(c + "/") or c.startswith(p + "/"))

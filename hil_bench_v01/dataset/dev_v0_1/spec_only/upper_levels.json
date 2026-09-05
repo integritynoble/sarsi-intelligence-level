@@ -1,0 +1,36 @@
+{
+  "status": "specification_only",
+  "reason": "These claims require longitudinal sealed environments or mission/open-ended evidence that cannot be faithfully represented as a static public row dataset.",
+  "levels": {
+    "C6": {
+      "requirement": "interconnected cross-domain controlled episode"
+    },
+    "CΩ": {
+      "requirement": "longitudinal creation of representations/methods that expand reachable problem classes"
+    },
+    "I5": {
+      "requirement": "persistent unknown -> hypothesis -> experiment -> evidence -> independent validation -> later incorporation"
+    },
+    "IΩ": {
+      "requirement": "repeated bounded-charter cycles expanding future reachable problem/discovery space"
+    },
+    "O5": {
+      "requirement": "collective discovery requiring genuinely distributed evidence/roles"
+    },
+    "OΩ": {
+      "requirement": "repeated validated expansion via new roles/tools/agent types/suborganizations"
+    },
+    "T6": {
+      "requirement": "mission-to-project-to-task execution under changing conditions"
+    },
+    "TΩ": {
+      "requirement": "bounded charter with repeated autonomous mission generation and expansion"
+    },
+    "SA6": {
+      "requirement": "grounded mission/role self-model across projects/organizational change"
+    },
+    "SAΩ": {
+      "requirement": "longitudinal evidence/provenance-linked self-model across continued evolution"
+    }
+  }
+}
