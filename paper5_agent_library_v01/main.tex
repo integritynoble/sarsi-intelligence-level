@@ -285,7 +285,7 @@ machine agent (by hostname; id \texttt{sarsi-machine}) & agent / service & the o
 \texttt{learning} & organizational & acquire and retain a skill, graded from outside & declared & unfilled template; the $I$-coordinate agent \\
 \midrule
 \multicolumn{5}{@{}l}{\textbf{Research agents (group agents; each is one worker id on the roster, its sub-agents its members)}} \\
-\texttt{computational-imaging} & organizational & known forward operator, learned prior & no & real corpus, no charter; memory 0 bytes \\
+\texttt{computational-\allowbreak imaging} & organizational & known forward operator, learned prior & no & real corpus, no charter; memory 0 bytes \\
 \texttt{research-imaging} & organizational & the charter half of the above & no & unresolved: may be the same agent under another account \\
 \texttt{low-dose-ct}, \texttt{medical-physics}, \texttt{pill-camera}, \texttt{drug-design}, \texttt{cancer}, \texttt{reverse-aging} & organizational & one field each; each with a stated principle and a problem queue & no (workspaces declared) & designs; ninety section pages filled; machinery built in the public framework (\S\ref{sec:domains}) \\
 \texttt{human-brain-llm} & organizational & measured against what the stimulus alone predicts & no & declared nowhere: 40\,KB of design, no agent \\
@@ -376,7 +376,7 @@ Spec & Tier & Category & Profiles & What it is, and what stops at the owner \\
 \texttt{opencode} & open & core & --- & drives the OpenCode binary through tmux \\
 \midrule
 \multicolumn{5}{@{}l}{\emph{Specific: one field, one vocabulary}}\\
-\texttt{imaging} (\texttt{computational-imaging}) & science & specific & I0--I2 & reconstruction and bounded system-design candidates across CASSI, CACTI and CT \\
+\texttt{imaging} (\texttt{computational-\allowbreak imaging}) & science & specific & I0--I2 & reconstruction and bounded system-design candidates across CASSI, CACTI and CT \\
 \texttt{low-dose-ct} & science & specific & I0--I2 & diagnostic CT from fewer photons; a fidelity result without acceptor-owned detectability is refused \\
 \texttt{medical-physics} & science & specific & I0--I2 & radiotherapy planning, dose, adaptive RT, QA --- produces candidates, \emph{a physicist signs} \\
 \texttt{pill-camera} & science & specific & I0--I2 & capsule endoscopy: lesion detection, reading-time reduction, cross-vendor evaluation \\
@@ -410,7 +410,7 @@ Spec name & Distribution & Note \\
 \texttt{ai4sci} (was \texttt{unified-LLM}) & \texttt{pwm-agent-unified} & both names resolve to the same distribution, so an install hint is right whichever the installed package declares \\
 \texttt{research} & \texttt{pwm-agent-research} & \\
 \texttt{paper} & \texttt{pwm-agent-paper} & the deterministic peer-review panel \\
-\texttt{computational-imaging} & \texttt{pwm-agent-imaging} & \\
+\texttt{computational-\allowbreak imaging} & \texttt{pwm-agent-imaging} & \\
 \texttt{drug-design} & \texttt{pwm-agent-drug} & \\
 \texttt{cancer} & \texttt{pwm-agent-cancer} & \\
 \texttt{claude-code} & \texttt{pwm-agent-claude-gpu} & \\
@@ -422,11 +422,11 @@ Spec name & Distribution & Note \\
 \label{tab:dists}
 \end{table}
 
-The renaming in the first row is a small piece of evidence for a claim this library makes elsewhere: a mode is a manifest, so renaming one is a table edit and an alias, not a fork. The same is true of \texttt{research} versus \texttt{research2} and of \texttt{imaging} versus \texttt{computational-imaging} --- one field with two names, declared once with a stated reason, rather than two agents.
+The renaming in the first row is a small piece of evidence for a claim this library makes elsewhere: a mode is a manifest, so renaming one is a table edit and an alias, not a fork. The same is true of \texttt{research} versus \texttt{research2} and of \texttt{imaging} versus \texttt{computational-\allowbreak imaging} --- one field with two names, declared once with a stated reason, rather than two agents.
 
 \subsection{The field roster: nine roles, ten fields}\label{sec:fieldroster}
 
-A field agent is a group, and the group's composition is data. Ten fields ship a roster object --- \texttt{cancer}, \texttt{computational-imaging}, \texttt{drug-design}, \texttt{human-brain-llm}, \texttt{longevity}, \texttt{low-dose-ct}, \texttt{medical-physics}, \texttt{pill-camera}, \texttt{reverse-aging}, \texttt{virtual-cell} --- each declaring its members against the nine core roles, which are a floor: \emph{a field may add and may not remove}. Every member carries three fields that decide what it may do and what it caps: \texttt{kind} (reasoning, judging or embodied), \texttt{core}, and \texttt{why\_separate} --- a stated reason, so that a merge of two roles has to argue against a recorded argument.
+A field agent is a group, and the group's composition is data. Ten fields ship a roster object --- \texttt{cancer}, \texttt{computational-\allowbreak imaging}, \texttt{drug-design}, \texttt{human-brain-llm}, \texttt{longevity}, \texttt{low-dose-ct}, \texttt{medical-physics}, \texttt{pill-camera}, \texttt{reverse-aging}, \texttt{virtual-cell} --- each declaring its members against the nine core roles, which are a floor: \emph{a field may add and may not remove}. Every member carries three fields that decide what it may do and what it caps: \texttt{kind} (reasoning, judging or embodied), \texttt{core}, and \texttt{why\_separate} --- a stated reason, so that a merge of two roles has to argue against a recorded argument.
 
 The ceiling rule is where this becomes measurement rather than organisation. A group's autonomy ceiling is the lowest of its \emph{acting} members' --- reasoning members touch a file, embodied members touch the world and cannot be undone, and judging members are skipped because a verdict is not an act. Skipping them is not a convenience: every research agent has judging members, so counting them would pin every group at $A0$ and make the rule vacuous. The roster for computational imaging states the reason for each separation in the object itself: literature is separate because ``reading and doing must not share a context, or the agent finds what it set out to find''; the twin is separate because ``the twin is what a method is graded against; the method's author may not own it''. Those two sentences are the organizational coordinate's content, written where the code can read them.
 

@@ -131,7 +131,7 @@ The first public view is one number; the page beneath it shows the interval, $\t
 \[
 \mathrm{AILI} \mid \text{AIL-Level} \mid [C, I, T/H, SA] \mid M, \qquad \text{e.g. } 154 \mid U_{I3} \mid [C5, I3, T4/H1, SA3] \mid M4,
 \]
-and a standalone value is never the complete result. Versioning names the semantic standard, the index version, the reference-harness version and the witness generation, e.g. \texttt{AI-Level-1.0/Index-1.1/HRH-1/2026Q3}; semantic revisions require a new major standard, calibration changes a new index version, witness renewal neither; historical scores are archived, never overwritten. Governance separates the party funding an evaluation, the runner, the owner of hidden witnesses, the verifier, and the certification authority; a Standards Council with external evaluators should follow adoption, and payment or participation must not affect tasks, seeds, thresholds, rubrics, promotion or calibration.
+and a standalone value is never the complete result. Versioning names the semantic standard, the index version, the reference-harness version and the witness generation, e.g. \texttt{AIL-1.0/\allowbreak Index-1.1/\allowbreak HRH-1/\allowbreak 2026Q3}; semantic revisions require a new major standard, calibration changes a new index version, witness renewal neither; historical scores are archived, never overwritten. Governance separates the party funding an evaluation, the runner, the owner of hidden witnesses, the verifier, and the certification authority; a Standards Council with external evaluators should follow adoption, and payment or participation must not affect tasks, seeds, thresholds, rubrics, promotion or calibration.
 
 \section{Publication Speed, Coverage, Product}\label{sec:product}
 
@@ -163,7 +163,7 @@ The AI-Level Index is a measurement and communication layer above Unified Intell
 \item \textbf{Rapid tier.} $0.55\cdot\mathrm{AUC} + 0.35\cdot\mathrm{Ceiling} + 0.10\cdot\mathrm{Harnessability}$ in $[0, 100]$; $\rho = 1$; three seeds per family; \texttt{index.json} with curve, rates, bare profile, evaluator.
 \item \textbf{Beside the headline.} AIL-Level, $[C, I, T/H, SA]$, $M$, FCR, decline rate, Harness Gain, Delegation Frontier, resources, interval, version string.
 \item \textbf{Splits.} Public seeds $\{0..5\}$; private seeds by HMAC of a withheld salt whose SHA-256 is published; a certified row is private-split, run by someone who did not build the model, with an evaluator block.
-\item \textbf{Versioning.} \texttt{AI-Level-1.0/Index-1.1/HRH-1/2026Q3}; frozen historical index; current-fit diagnostic separate.
+\item \textbf{Versioning.} \texttt{AIL-1.0/\allowbreak Index-1.1/\allowbreak HRH-1/\allowbreak 2026Q3}; frozen historical index; current-fit diagnostic separate.
 \end{itemize}
 
 \section{Illustrative Machine-Readable Result}\label{app:json}
