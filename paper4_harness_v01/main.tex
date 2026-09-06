@@ -381,6 +381,8 @@ The harness is the part of the pair that earns the level, and this paper has wri
 
 Each harness generation this design realizes is a cell in the benchmark's grid with a conformance witness of its own: the mechanism must exist in the frozen contract, fire on the witness, and change the outcome against the previous rung on the same seeds. A generation that is described and not probed is a design, not a rung.
 
+A generation is cumulative in the engineering sense --- each rung keeps every lower mechanism and adds one --- and in no other: a harness at HG4 can carry an I2 system, and the design never lets a rung stand in for a level.
+
 \section*{Availability}
 
 The delegation harness, the chassis and the research-agent modules are in \url{https://github.com/integritynoble/AI4Science}. The benchmark suites that measure them, with run records, are in \url{https://github.com/integritynoble/sarsi-intelligence-level} under \texttt{uab\_v01/}.
