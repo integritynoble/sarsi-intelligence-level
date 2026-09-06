@@ -46,7 +46,7 @@ Write-set depth bounds the individual level: D0 nothing persistent, the natural 
 
 \section{The Architecture}\label{sec:arch}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}lYYYl@{}}
 \toprule
@@ -118,7 +118,7 @@ One sentence carries the built architecture: the brain plans, the executor execu
 \]
 observations and evidence references, episodic memory, semantic memory, procedural memory, intentional state, self-model, world and task model, and $\Theta$, the mutable cognitive instrument (gate, retrieval and learning policies); beside it a bounded recent-dialogue buffer $R_t$ that is not another long-term store. The model's context is never $\Sigma$ itself but a bounded projection $W_t = \text{Gate}_B(\cdot)$: long-term memory is inactive until selected into $W_t$, and in \textsc{chat} mode the projection is small and conversational, in \textsc{reason} mode it retrieves, and in \textsc{action} mode it additionally requires protected directives, readiness checks, a prediction, an executor path and verification.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lY@{}}
 \toprule
@@ -149,7 +149,7 @@ The unit is $A_i = \text{Runtime}_i + \text{Brain}_i + \text{DomainContract}_i +
 
 \section{The Rung Map}\label{sec:rungs}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -176,7 +176,7 @@ Each rung is a strict superset of the one below, enforced by a test, because oth
 
 The architecture of \S\ref{sec:arch} is not a proposal. One runtime implements it and instantiates every agent in the fleet from a manifest; this section maps each module to the code that supplies it, and reports what that code covers and what it does not.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -208,7 +208,9 @@ Interaction modes $I0$, $I1$ and $I2$ are active; the higher profiles are declar
 
 \subsection{Capabilities are bundles, and an agent is a manifest over them}
 
-Tools do not belong to agents; they belong to \emph{capability bundles} that agents reference by name. The runtime ships eleven built-in bundles --- \texttt{pwm-\allowbreak actions}, \texttt{pwm-\allowbreak data}, \texttt{paper-\allowbreak review}, \texttt{computational-\allowbreak imaging}, \texttt{compute-\allowbreak providers}, \texttt{ci-\allowbreak algorithms}, \texttt{optics-\allowbreak design}, \texttt{forward-\allowbreak model}, \texttt{science-\allowbreak router}, \texttt{drug-\allowbreak design}, \texttt{cancer} --- and unions them with bundles registered by installed agent packages and by plug-ins, rebuilt whenever either set changes. One bundle, \texttt{compute-\allowbreak providers}, is always on: GPU compute is a property of the runtime rather than an opt-in.
+\begin{sloppypar}
+Tools do not belong to agents; they belong to \emph{capability bundles} that agents reference by name. The runtime ships eleven built-in bundles --- \texttt{pwm-\allowbreak actions}, \texttt{pwm-\allowbreak data}, \texttt{paper-\allowbreak review}, \texttt{computational-\allowbreak imaging}, \texttt{compute-\allowbreak providers}, \texttt{ci-\allowbreak algorithms}, \texttt{optics-\allowbreak design}, \texttt{forward-\allowbreak model}, \allowbreak \texttt{science-\allowbreak router}, \texttt{drug-\allowbreak design}, \texttt{cancer} --- and unions them with bundles registered by installed agent packages and by plug-ins, rebuilt whenever either set changes. One bundle, \texttt{compute-\allowbreak providers}, is always on: GPU compute is a property of the runtime rather than an opt-in.
+\end{sloppypar}
 
 An \texttt{AgentSpec} is therefore a small declarative object --- name, tier (\texttt{open} with no PWM, or \texttt{science} behind the dataset moat), category (\texttt{core}, \texttt{specific}, \texttt{hidden}), system prompt, the bundles it adds on top of the Claude Code base, supported profiles, default backend, the operations requiring approval, and a wallet and price for a contributed agent. Adding an agent adds no runtime code. That is the sense in which this is one harness instantiated by manifest, and it is why the library of \citet{yang2026library} can be a catalogue rather than a set of forks.
 
@@ -225,7 +227,8 @@ The self-improvement loop exists per agent, but the frozen hidden evaluation and
 A domain agent is $A_d = (m, h, d, B_d, r)$: an executor, this harness, a domain profile, a domain benchmark, and a resource and authority envelope \citep{yang2026plan}. The harness is one runtime, and the manifest declares which memories exist, what the agent may write, which loops are enabled, and which external services evaluate and promote:
 
 {\small\begin{verbatim}
-agent_id: funding-01     base: general-harness     modes: [CHAT, REASON, ACTION]
+agent_id: funding-01   base: general-harness
+modes: [CHAT, REASON, ACTION]
 state:     episodic_memory: true    semantic_memory: true
            procedural_memory: true  intentional_memory: true
            self_model: true         world_model: true
@@ -246,7 +249,7 @@ A different manifest instantiates a D0 verifier, an $I2$ specialist, an $I3$ sel
 
 The executor sits behind one protocol; the harness sends a contract and receives an episode record and never learns which vendor produced it. A motor is characterised by four things only: what tools it can be granted, whether it can be sandboxed, whether it exposes a headless call, and what it costs.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -266,7 +269,7 @@ A fifth ``executor'' is not in the table because it is not a runtime: plain Pyth
 
 \section{Built, Measured, Specified}\label{sec:status}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule

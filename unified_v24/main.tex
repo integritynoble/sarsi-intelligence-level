@@ -171,7 +171,7 @@ Conceptual core $= [C, I, O, DI, SA]$\\
 Measured core $= [C, I, O, T, H, SA]$, with DI derived from $(T, H, p)$
 \end{center}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -192,7 +192,7 @@ SA --- Self-Awareness & How accurately can the system model its own state, capab
 
 Cognitive Intelligence isolates the quality of reasoning itself from persistence, autonomy, organization and self-modification. This distinction matters because a highly capable base model may reason at an expert level while remaining a transient tool, whereas a weaker model embedded in an excellent harness may complete long projects through memory, planning, retries and verification.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -228,7 +228,7 @@ D_C = \{\text{general}, \text{science}, \text{mathematics}, \text{abstract}, \te
 \]
 and a score in one domain never silently substitutes for another. Until ratification calibrates mandatory domain floors, a system without image or screen access reports $C^{\mathrm{GUI}} = \text{N/A}$ rather than zero, and a broad multimodal $C$ claim must state whether GUI/screen is required.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -250,7 +250,7 @@ $C^{\mathrm{GUI}}_{\Omega}$ & Open-ended & Create a new interface representation
 
 GUI perception is broader than OCR. A screen-reading system must recognise text and icons, identify interface objects, ground them spatially, interpret interface state, track change across frames, and generalise to layouts it has never seen. $GP$ measures the fidelity and generality of that representation and must not be mapped one-to-one onto $C$ levels: no rule of the form $GP3 \equiv C3$ is permitted, although a form may declare a minimum $GP$ prerequisite for native-image variants.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -312,7 +312,7 @@ M stays outside the default HLIS product, because I already carries the learning
 
 Long context and long-term memory remain separate, and the separation now has two consequences rather than one. Long context makes more information available \emph{inside} one inference episode. Long-term memory preserves information \emph{across} episodes, restarts and elapsed time; retrieves it with provenance; distinguishes current from obsolete state; and consolidates when consolidation is claimed. RULER- and LongBench-style evidence contributes to the context component of C, and certifies neither M1 nor I1: nothing in it survives a restart.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYZ@{}}
 \toprule
@@ -333,7 +333,7 @@ M\Om{} & Evolving memory architecture: representation, retrieval, consolidation 
 
 \textbf{Cumulative memory rule.} Memory levels are cumulative for certification: a claim $M_k$ must retain every required lower memory capability under the same declared resource envelope, so the benchmark tests the behaviour of the memory system and not the presence of its components. Long context is not an $M1$ result --- a large context makes information available while an executor remains live, and $M1$ begins only when declared state survives a real discontinuity --- and an installed vector store, database or memory API is architecture, not evidence that the corresponding capability works.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -368,7 +368,7 @@ A \models I_n \iff V_{I,n}(A) = 1 \;\wedge\; A \models M_{\mu_n} \;\wedge\; K_{I
 \end{equation}
 where $V_{I,n}$ is the level-specific Individual verifier and $K_{I,<n}$ is lower-I retention; a high $M$ can satisfy the prerequisite and can never promote $I$ by itself, and the M-Bench score is reported separately from $I$ so that storage or sophisticated management cannot masquerade as learning, self-improvement or discovery. The thresholds below are working definitions requiring calibration, and they deliberately permit profiles such as I1/M4.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lY>{\raggedright\arraybackslash}p{2.1cm}@{}}
 \toprule
@@ -430,7 +430,7 @@ I5 converts unknowns into validated knowledge. I\Om{} is stronger: validated dis
 
 Organizational Intelligence belongs to the coordination structure, not merely to the strongest member. It depends on role differentiation, evidence-bearing communication, proposer/evaluator/promoter separation, persistent organizational state, and the ability to learn or redesign the organization itself.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lY@{}}
 \toprule
@@ -466,7 +466,7 @@ Equation (2) reads \SA{} as non-increasing in $T$. Where a measured surface is n
 
 \subsection{Task Difficulty (T)}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -488,7 +488,7 @@ T\Om{} & Open-ended charter & Human supplies a bounded charter; the system repea
 
 \subsection{Human Cognitive Intervention (H)}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -516,7 +516,7 @@ One successful run is insufficient. Claims should be expressed at a reliability 
 
 Self-awareness is defined operationally rather than phenomenologically. The framework makes no claim about subjective consciousness. SA measures the evidence-grounded ability of a system to represent, monitor, predict and reason about its own state, capabilities, limits, authority, failures, modifications, role and identity lineage.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -545,7 +545,7 @@ U_n \iff C \ge C_n \ \wedge\ I \ge I_n \ \wedge\ O \ge O_n \ \wedge\ SA \ge SA_n
 \end{equation}
 \begin{center}Retention condition: $U_n \Rightarrow U_{n-1}$\end{center}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llllllY@{}}
 \toprule
@@ -605,7 +605,7 @@ Two consequences follow. No level can be skipped in any capability ladder, becau
 
 \subsection{Cognitive Intelligence}
 The witness at every $C_k$ is a generated instance carrying the level's trap; the control arm is the trap itself --- the named wrong method a competent system takes, which admissibility proves fails on every seed. The common factors are $S$ (the sealed key is matched) and $\mathcal A$ (admissibility: computed key, trap fires, unique identifiability). The same gate is instantiated once per domain of $D_C$, and $C^{\mathrm{GUI}}$ adds the oracle-screen and perfect-actuator arms of \S\ref{sec:gp}.
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYl@{}}
 \toprule
@@ -626,7 +626,7 @@ C\Om{} & $R_{\mathrm{reach}}$: the post-frontier strictly contains the pre-front
 \end{table}
 
 \subsection{Operational Self-Awareness}
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYYl@{}}
 \toprule
@@ -647,7 +647,7 @@ SA\Om{} & $L$: a provenance-linked self-model survives continued cognitive or ob
 
 \subsection{Organizational Intelligence}
 The $O$ ladder mirrors $I$ level for level, with one factor that $I$ never needs: $N_O$, organizational necessity --- the single-role arm, one prompt role-playing several agents, must fail. An organization is a structural property of the witness (real state, authority and evidence boundaries), checked by admissibility, and $N_O$ is what stops parallel individual work from certifying collective intelligence.
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYYl@{}}
 \toprule
@@ -675,7 +675,7 @@ where $\Delta$ is delivery, $V$ the verifier's pass, $\neg FC$ that no false com
 
 \subsection{Harness generations}
 A rung is a property of the harness, not of the model, and is certified in the same form. The factors are $E$, the mechanism exists in the frozen harness contract; $U$, the mechanism \emph{fires} on the witness; and $\Delta_g$, the rung's contrast with the previous rung on the same seeds --- the outcome the mechanism is supposed to change does change. The witness is the harness-scaling curve; the control arm is the previous rung with the same model and the same seeds, which is why the curve is measured that way (\S\ref{sec:measured}).
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYl@{}}
 \toprule
@@ -704,7 +704,7 @@ with the minima $X_n$ and the delegation gate $(T_n, H_n)$ from Table~\ref{tab:u
 \subsection{Cumulative structure is typed, not universal}\label{sec:typed}
 The schema's retention factor $K_{X,<n}$ must not be applied to every ordered object as if all were ladders of the same kind. Four relations hide under the word ``cumulative'', and each object in the framework has exactly one of them.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llYY@{}}
 \toprule
@@ -736,7 +736,7 @@ The measurement standard's harmonized method record --- capability being tested,
 
 The levels-of-automation tradition \citep{sheridan1978,parasuraman2000,endsley1999} established that autonomy is graded and multi-stage; \citet{klein2004} and \citet{amershi2019} add the requirement that automation acting as a team member be predictable and directable; and \citet{lee2004} supplies the account of reliance this framework's intervention axis operationalizes. The framework is designed to be realized by a harness. The LLM supplies generative cognition; the harness supplies persistence, permissions, evidence flow, learning, self-modification gates, organizational boundaries, delegation, external verification and self-modeling. The same base LLM can therefore instantiate different intelligence profiles depending on the architecture around it.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -764,7 +764,7 @@ Neither factor has a level on its own. A benchmark result is a property of the p
 
 \subsection{Level-by-Level Harness Realization}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}p{0.075\textwidth}ZZZ@{}}
 \toprule
@@ -788,7 +788,7 @@ U\Om{} / HG\Om{} & HG6 + bounded charter, opportunity model, knowledge-to-instru
 
 The table above states \emph{required structure}. A measurement needs a specific instantiation, and one is recorded here so that reported curves are comparable. The reference ladder used in \S\ref{sec:measured} instantiates the first four rungs from delegation-harness mechanisms, under one rule: \textbf{each rung is a strict superset of the one below}. Without that, a difference between rungs is attributable to nothing.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYllll@{}}
 \toprule
@@ -836,7 +836,7 @@ Real applications need not weight every coordinate equally. For a persistent sci
 
 \subsection{Every Coordinate Level Requires a Harness Contract and a Dataset}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -880,7 +880,7 @@ Each $A_d$ is normalized within declared families before aggregation, so that a 
 
 A simple arithmetic mean allows an exceptional score in one dimension to compensate too easily for a severe weakness in another.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lllY@{}}
 \toprule
@@ -951,7 +951,7 @@ It is also worse than blind. A harness that accepts everything scores at least a
 
 The repair is to define the primitive on what was \emph{delivered} rather than on what succeeded. Four outcomes are distinguished, and only the two in bold are failures of the same kind:
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -1054,7 +1054,7 @@ A base LLM should not be judged only in a minimal chat harness, because some mod
 
 \subsection{AIL-Level, AIL-AUC, AIL-Ceiling and Harness Gain}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -1115,7 +1115,7 @@ Until calibration settles this, \textbf{the curve itself is the primary result} 
 
 \subsection{Recommended LLM Scorecard}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -1138,7 +1138,7 @@ HDS / HDG & LLM as harness designer under frozen external evaluation. & Ability 
 
 A harness intelligence program should maintain a versioned benchmark registry rather than one monolithic test set. The minimal unit is a task manifest containing target coordinate/level, frozen model and harness hashes, tool/resource/authority budget, intervention policy, hidden verifier, success threshold and required retention suites.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -1183,7 +1183,7 @@ The ladder measurement reported saturation: frontier executors had little headro
 
 They worked as traps and failed as measurements.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccY@{}}
 \toprule
@@ -1214,7 +1214,7 @@ Two DL4 families were built on those two axes. Neither conceals anything: both p
 
 The second family separates two failure modes that a boolean verdict reports identically. Measured against its own reference solvers across four seeds:
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccY@{}}
 \toprule
@@ -1234,7 +1234,7 @@ The greedy solver is the plausible wrong answer, and it is wrong in a way that a
 
 The expression-language family was then run against two executors of deliberately different capability. The purpose was to see whether a scale-difficulty item discriminates. It did something more useful first.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccY@{}}
 \toprule
@@ -1254,7 +1254,7 @@ Read as a measurement, this is a discriminating item: two tiers, different score
 
 Both cases were defects in the item.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}YY@{}}
 \toprule
@@ -1309,7 +1309,7 @@ The argument for separating failure modes is that they call for different repair
 
 With both defects repaired, the expression-language family was re-run across six seeds per executor.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lcccY@{}}
 \toprule
@@ -1331,7 +1331,7 @@ But the frontier executor scored 1.000 on every seed. \textbf{The suite is still
 
 The covering family was built on the search axis for exactly that reason, and it has now been run.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccY@{}}
 \toprule
@@ -1419,7 +1419,7 @@ On the three single-form families originally implemented --- a damped wave, an i
 
 So the axis is right and the instances were too easy: all three families are standard closed forms, recognisable on sight by anything that has read a physics textbook. A fourth family was added in which the generating rule is two mechanisms and a latent boundary between them, none of the three being observable directly.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lcY@{}}
 \toprule
@@ -1439,7 +1439,7 @@ The control is a real solver, not a strawman: least squares over all three close
 
 Every common-protocol regime-switch instance was run against each executor: twelve episodes per executor, each given a 7200-second limit. All 24 episodes exited normally with a stated mechanism, so none is a timeout and none is a non-delivery.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccccY@{}}
 \toprule
@@ -1471,7 +1471,7 @@ seeds are $0,9,11,17,24,25,27,38,40,41,44,50$; seed 12 is excluded because it wa
 under the earlier protocol. The archived frontier CSV does not contain a frontier model
 ID or executor version, so the label ``frontier'' is retained without inventing one.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}lccrrrY@{}}
 \toprule
@@ -1563,7 +1563,7 @@ Two consequences for the reporting standard. An episode terminated by the harnes
 
 The requirements of \S\ref{sec:concordance}--\S\ref{sec:graded} were applied to two independently constructed benchmark libraries built against this framework. Both pass their own validators with zero errors. Those validators check that identifiers are unique and that required columns are populated: real checks, and not the question of whether an item can do the job it is filed under.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccY@{}}
 \toprule
@@ -1601,7 +1601,7 @@ AI-Level does not replace these. Let $B(m)$ denote the vector of contemporary re
 
 \subsection{Mapping Contemporary Benchmarks into the Architecture}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}lZZZ@{}}
 \toprule
@@ -1648,7 +1648,7 @@ For frozen $m$ and generation $HG_k$, $HSC_m(k) = HLIS(m,HG_k)$. The ordered set
 
 The curve was specified before anything instantiated the ladder. The reference ladder of \S\ref{sec:built} was built to HG3 and \textbf{three executors from two vendor families} were run across it. Held identical at every rung and across executors: the six task classes, the two seeds per class, the verifiers, the resource ceiling and the intervention budget (H1, governance only). Only the harness changed between rungs; only the executor changed between curves. Every $A_{DI}$ in this section uses the predeclared band weights $w_{T0}{=}1$, $w_{T1}{=}2$, $w_{T2}{=}4$, $w_{T3}{=}8$; with one intervention budget the $v_h$ term drops out, and the released episode rows reproduce every entry of Table~\ref{tab:hsc} under that schedule. Figure~\ref{fig:hsc} plots the three curves under both primitives.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}p{0.16\textwidth}lrrrrY@{}}
 \toprule
@@ -1693,7 +1693,7 @@ This is Proposition~\ref{prop:blind} observed twice, independently. The proposit
 
 Scored with the delivered-outcome primitive of Equation~\eqref{eq:net} on the same episodes:
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}p{0.07\textwidth}YYYYYY@{}}
 \toprule
@@ -1714,7 +1714,7 @@ Gain & 3.3 & \textbf{10.0} & 3.3 & \textbf{10.0} & 15.0 & \textbf{36.6} \\
 
 \subsubsection{Result 2: Harness Gain separates the executors, and AUC does not}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lrrrY@{}}
 \toprule
@@ -1805,7 +1805,7 @@ artifacts. HG0 takes the verifier's verdict with no acceptance step, so anything
 wrong is delivered; HG1 runs the registered criteria against a copy, so anything
 rejected is held back instead. Twelve episodes per executor, one execution each.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lrrrrY@{}}
 \toprule
@@ -1853,7 +1853,7 @@ The HG1$\to$HG2 rise, where present, is the first rung whose mechanism requires 
 
 \subsection{Why AI-Level Adds Information Beyond a Benchmark Average}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -1875,7 +1875,7 @@ Model versus harness & Conflated in the final score. & HLIS measures a pair; Har
 
 \subsection{Recommended Two-Layer Scorecard}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -1917,7 +1917,7 @@ Morris et al.\ separate performance, generality and autonomy and argue for stage
 
 Not every important property should be renamed as another intelligence.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lY@{}}
 \toprule
@@ -2073,7 +2073,7 @@ Unified headline: $U_n\ [C_x, I_y, O_z, T_k/H_h, SA_s]$\\
 Extended system profile: $[U;\ C,I,O,DI,SA;\ \lambda;\ D,A,R,V,S;\ \text{resources},\ \varphi]$
 \end{center}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lY@{}}
 \toprule
@@ -2096,7 +2096,7 @@ Resource profile & declared compute, time, memory, energy/cost budget \\
 
 \section{Suggested Unified Promotion Tests}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lY@{}}
 \toprule

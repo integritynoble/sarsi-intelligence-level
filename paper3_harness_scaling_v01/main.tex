@@ -111,7 +111,7 @@ This paper is the pre-registration of that program and the report of its first m
 
 \section{Hypotheses and Falsifiers}\label{sec:hypotheses}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -190,7 +190,7 @@ All measurements below are in one domain (software and data tasks), on six task 
 
 \subsection{Three harness scaling curves}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYcccccc@{}}
 \toprule
@@ -216,14 +216,14 @@ Family A, weaker & HG0 & 0.783 & 78.3 & 56.7 & 4 & 0 & 12 \\
 \label{tab:hsc}
 \end{table}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_hsc.pdf}
 \caption{The three curves under the success-only primitive (left) and the delivered-outcome primitive at $\rho=1$ (right). The two frontier executors coincide on both panels.}
 \label{fig:hsc}
 \end{figure}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lcccY@{}}
 \toprule
@@ -250,7 +250,7 @@ AIL-AUC & 95.0 & 95.0 & 88.8 & ranks by baseline, not by harness response \\
 
 \subsection{The paired rung comparison}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lcccYc@{}}
 \toprule
@@ -268,7 +268,7 @@ The weaker executor's earlier independent-run curve showed HG0 $\to$ HG1 rising 
 
 \subsection{The arms study}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYl@{}}
 \toprule
@@ -295,7 +295,7 @@ On the sealed regime-switch family, with harness, protocol, timeout and twelve c
 
 The six in-package T0/T1 families of the benchmark \citep{yang2026uab} were run on identical seeds at H0, H1 and H2 --- 72 episodes per pair --- by three pairs. Two are a true executor swap at fixed harness: Claude Code 2.1.258 with its default model, and the same Claude Code with Qwen 3.8 (27B) behind it, reached through a local proxy that rewrites the model name and hoists system messages for the serving shim. The third is a different pair, not an executor swap: OpenCode 1.18.27 with the free Muse Spark 1.3 model, so its harness differs as well and it is reported as a pair rather than as a row of Experiment A.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lcccccclccY@{}}
 \toprule
@@ -321,7 +321,7 @@ OpenCode, Muse Spark 1.3 & 20 & 20 & 19 & 4 & 4 & 4 & 71/72 & 1 & 22.5 & differe
 
 The matched comparison of \S\ref{sec:execcmp} was saturated: three pairs, seventy-two episodes, the same score. The sealed families are where the previous subsection said the comparison should be run, and it was. Three executors, the same three generator-bound families, the same twelve seeds, the same harness, the same enforced limits (1800\,s for the T4 families, 7200\,s for T5), each episode in its own process group and killed at the limit.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llcccY@{}}
 \toprule
@@ -356,7 +356,7 @@ Any cross-domain transfer (H4): one domain. Any intervention reduction (H2): one
 
 \section{Coverage of the Pre-registered Matrix}\label{sec:coverage}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule

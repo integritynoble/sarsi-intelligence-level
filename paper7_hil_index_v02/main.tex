@@ -160,7 +160,8 @@ After the coordinate scales are anchored, $\theta_H(m) = \sum_{d \in \{C, I, DI,
 
 \textbf{Procedurally generated witnesses.} $x_r \sim G_{d,k}(s_r, \lambda_r)$ with a hidden seed and calibrated difficulty; for $C5$ a synthetic world $\omega_r \sim G_{C5}$ with a latent law that did not exist before the run. Every AI-Level Bench family is such a generator with a computed key and a trap that the self-test proves fires on every seed.
 
-\textbf{Three surfaces.} Public reference forms teach the interface; permanent private anchors preserve continuity; fresh hidden witnesses preserve headroom and contamination resistance. Two of the three are built: the public generators, and a private split derived by HMAC from a withheld salt whose SHA-256 is published, so the private instances can be rotated at no cost and any certified row re-run after the reveal.
+\textbf{Three evidence surfaces.} The index rests on three surfaces of evidence, and each
+carries a different burden. Public reference forms teach the interface; permanent private anchors preserve continuity; fresh hidden witnesses preserve headroom and contamination resistance. Two of the three are built: the public generators, and a private split derived by HMAC from a withheld salt whose SHA-256 is published, so the private instances can be rotated at no cost and any certified row re-run after the reveal.
 
 \section{The Components}\label{sec:components}
 
@@ -174,7 +175,7 @@ Until a weak-to-frontier population exists, the latent scale cannot be calibrate
 \]
 over three seeds per family and both Core-H seeds, about 150 calls and minutes for a hosted model, with $\rho = 1$ so that a delivered wrong answer scores a full unit below a declared inability. Its rows are a strict subset of the latent tier's evidence units, so nothing measured for the rapid tier is discarded when the latent tier is ratified.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccccccY@{}}
 \toprule
@@ -259,6 +260,31 @@ Level-skipping prevention in the index is typed the way the benchmark types it: 
                "split": "public"}}
 \end{verbatim}
 \noindent The record key \texttt{HIL\_Index} is kept from v1 so that archived rows parse unchanged.
+
+\section{Recommended Public Navigation}\label{app:navigation}
+
+A single number is the entry point, not the product. A site publishing this index should
+expose at least the following views, so that a reader who arrives at the headline can
+reach the evidence under it:
+
+\begin{itemize}\itemsep2pt
+\item the overall AI-Level Index leaderboard;
+\item index against cost;
+\item index against latency;
+\item cognition, $\theta_C$;
+\item individual intelligence, $\theta_I$;
+\item delegation frontiers;
+\item self-awareness and false completion;
+\item memory capability;
+\item harness gain;
+\item historical model progress;
+\item methodology, versions and confidence intervals.
+\end{itemize}
+
+\noindent Three of these are not in the page described in \S\ref{sec:public} and are
+required here: the delegation frontiers, memory capability, and historical progress. The
+last view is the one that makes the others auditable, and the interval belongs beside every
+number rather than in a footnote.
 
 \section*{Availability}
 \texttt{hilbench index}, \texttt{hilbench latent}, the leaderboard page \texttt{AI\_LEVEL\_INDEX.md}, every record and the salt commitment are in \citet{yang2026hilbench}; the instrument in \citet{yang2026hilbenchpaper}; the framework in \citet{yang2026unified}.

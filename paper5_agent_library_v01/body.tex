@@ -51,7 +51,7 @@ The six domains fall into three shapes that decide their profiles. \emph{Extract
 
 \section{The Six Domains}\label{sec:domains}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}lYYYYYY@{}}
 \toprule
@@ -98,7 +98,7 @@ T6 & mission to submission package & mission to funding portfolio & mission to c
 
 Not a domain, but the agent every domain profile is instantiated on: the reference instantiation of the harness \citep{yang2026harness}, and the only agent in the library with a real memory substrate. \textbf{Unit: individual}, one persistent decision lineage; the trio it anchors --- worker, motor, acceptor --- is organizational and is levelled as a separate unit, and reporting one number for both is a category error.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lllY@{}}
 \toprule
@@ -141,7 +141,7 @@ Any design that gives this agent a posting capability is wrong regardless of the
 
 \section{The Catalogue}\label{sec:catalogue}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -181,9 +181,9 @@ The product specifications fix how agents are classified and how they reach a us
 
 The six domain profiles above are the library's target shape. The fleet that exists is larger and less tidy, and this subsection catalogues all of it, from the private \texttt{singularity} repository at its current head, with the status the repository itself states for each entry. Two facts organise the catalogue. First, the product specification fixes \textbf{three tiers}: \emph{sub-agents}, shared by every agent and never listed; \emph{agents}, of which exactly two are installed by default on a user's machine --- the general \texttt{sarsi-worker} and the machine agent, listed by the machine's hostname --- and the rest arrive from the marketplace; and \emph{executors}, driven by a worker and never listed or entered. Second, the repository holds \textbf{several rosters that share names and are not reconciled}: the eighteen agents of the coordinate table, the seven built agents of the \texttt{sarsi/} runtime, the nine delegation lanes that are Unix accounts, the five console agents, and fourteen level manifests that are one runtime rather than fourteen agents. \texttt{funding} appears in two rosters; \texttt{job}/\texttt{jobs}, \texttt{social-media}/\texttt{social} and \texttt{learning} collide across them. No file reconciles them, and the catalogue keeps them apart rather than merging what the repository does not.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
-\begin{tabularx}{\textwidth}{@{}p{2.6cm}p{1.6cm}YYp{2.9cm}@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{1.7cm}Y>{\raggedright\arraybackslash}p{1.2cm}>{\raggedright\arraybackslash}p{2.9cm}@{}}
 \toprule
 Agent & Tier / unit & Purpose & Runtime & Status, as the repository states it \\
 \midrule
@@ -258,7 +258,7 @@ pocket, manager, developer agent group, general work, personal learning, work-pr
 \label{tab:everyagent}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}p{2.3cm}p{1.1cm}YYp{2.4cm}@{}}
 \toprule
@@ -284,7 +284,7 @@ outward posting & org. & C2, I1/M1, O1, \textbf{T1$\cdot$H2 capped}, SA2 & corre
 
 The previous subsection catalogued the fleet as the singularity documents define it. That is the deployment view. The \emph{shipped} view is the AI4Science agent registry: twenty \texttt{AgentSpec} manifests that the one runtime of \citet{yang2026harness} instantiates, each declaring a tier, a category, the interaction profiles it supports, the capability bundles it adds, and the operations that require an owner's approval. Everything in this table is installed code, not a design.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}lllcY@{}}
 \toprule
@@ -327,7 +327,7 @@ Two things in the table are worth reading twice. The first is how often the refu
 
 The registry ships with the framework; the field agents ship as their own distributions, so a user installs only what they use and a contributor can publish without touching the runtime.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
