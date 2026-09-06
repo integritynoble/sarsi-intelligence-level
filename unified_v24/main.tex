@@ -83,7 +83,7 @@ and the AI-Level Score of a Base Model Across a Standardized Harness Ladder}\\[1
 \end{center}
 
 \begin{abstract}
-Intelligence labels often conflate reasoning, persistent learning, collective organization, autonomous task completion, and evidence-grounded self-modeling. We present a measurement framework with five conceptual families---Cognitive, Individual, Organizational, Delegation, and Self-Awareness---and six directly measured coordinates $[C,I,O,T,H,SA]$, where Delegation is derived from task difficulty $T$, human cognitive intervention $H$, and externally verified reliability. Memory Capability $M$ is not a sixth family and not a relabelling of $I$: it is certified on its own ladder $M0$--$M\Om{}$, each level a witness with a control --- recovery with provenance against an ablated-state arm, stale-state suppression under supersession, consolidation that survives hiding the raw episodes, repair against a health oracle the pair cannot write to, cross-project lineage, and a governed change to the memory mechanism itself --- and is then joined to $I$ by a one-way prerequisite gate, so that storage never promotes learning. Memory certification is cumulative in capability rather than in implementation, and no level may be skipped. The Unified Intelligence scale U0--U\Om{} is cumulative and gated, and the experimental unit is a frozen model--harness pair. GUI/screen understanding enters as a domain of $C$ --- witnesses $C^{\mathrm{GUI}}_k$ of the existing levels with a diagnostic perceptual subscale $GP0$--$GP5$ beside them, matched oracle-screen and perfect-actuator arms attributing a failure to perception, cognition or action --- so that computer use is measured without a new family or a new ladder. Levels are stated as invariant operational definitions: each is a contrast that must hold or a structural property of the item, never a difficulty threshold, so that models move through the scale and the scale does not move with the models. On that principle the paper fixes the boundaries the upper levels turn on: $\Theta$, the declared mutable mechanism whose governed change is $I3$; $\Psi$, the process that proposes such changes, whose own improvement is $I4$; incorporation, which separates $I5$ from remembering a discovery; and reachability, which separates $I\Om{}$ from one impressive instrument. Two preliminary programs test the instrument. Across three 48-episode harness curves, a success-only delegation score was invariant to an acceptance-only step for both stronger executors even as each one's false completions fell from 2/12 to 0/12; a delivered-outcome correction restores sensitivity. In a sealed, post-freeze mechanism probe, one executor passed 5/12 instances versus 1/12 for another and had lower RMSE on 11/12 pairs (two-sided sign test $p=0.00635$); the binary comparison was not significant (McNemar $p=0.125$). This discriminates the archived configurations on these instances, not model tiers in general. Auditing also found four answer-key defects and two apparatus defects. We therefore require specification--key tests, cross-tier concordance audits, graded failure modes, per-coordinate headroom, longitudinal evidence, and explicit resource envelopes. The level thresholds remain working definitions requiring broader calibration.
+Intelligence labels often conflate reasoning, persistent learning, collective organization, autonomous task completion, and evidence-grounded self-modeling. We present a measurement framework with five conceptual families---Cognitive, Individual, Organizational, Delegation, and Self-Awareness---and six directly measured coordinates $[C,I,O,T,H,SA]$, where Delegation is derived from task difficulty $T$, human cognitive intervention $H$, and externally verified reliability. Memory Capability $M$ is not a sixth family and not a relabelling of $I$: it is certified on its own ladder $M0$--$M\Om{}$, each level a witness with a control --- recovery with provenance against an ablated-state arm, stale-state suppression under supersession, consolidation that survives hiding the raw episodes, repair against a health oracle the pair cannot write to, cross-project lineage, and a governed change to the memory mechanism itself --- and is then joined to $I$ by a one-way prerequisite gate, so that storage never promotes learning. Memory certification is cumulative in capability rather than in implementation, and no level may be skipped. The Unified Intelligence scale U0--U\Om{} is cumulative and gated, and the experimental unit is a frozen model--harness pair. GUI/screen understanding enters as a domain of $C$ --- witnesses $C^{\mathrm{GUI}}_k$ of the existing levels with a diagnostic perceptual subscale $GP0$--$GP5$ beside them, matched oracle-screen and perfect-actuator arms attributing a failure to perception, cognition or action --- so that computer use is measured without a new family or a new ladder. Every ladder is tested in one style, the one in which Individual Intelligence was already written: a construct stated as a contrast, a prerequisite that can block and never promote, a witness with a control arm, a gate that is a product of named factors times lower-level retention, and a certification law. Levels are stated as invariant operational definitions: each is a contrast that must hold or a structural property of the item, never a difficulty threshold, so that models move through the scale and the scale does not move with the models. On that principle the paper fixes the boundaries the upper levels turn on: $\Theta$, the declared mutable mechanism whose governed change is $I3$; $\Psi$, the process that proposes such changes, whose own improvement is $I4$; incorporation, which separates $I5$ from remembering a discovery; and reachability, which separates $I\Om{}$ from one impressive instrument. Two preliminary programs test the instrument. Across three 48-episode harness curves, a success-only delegation score was invariant to an acceptance-only step for both stronger executors even as each one's false completions fell from 2/12 to 0/12; a delivered-outcome correction restores sensitivity. In a sealed, post-freeze mechanism probe, one executor passed 5/12 instances versus 1/12 for another and had lower RMSE on 11/12 pairs (two-sided sign test $p=0.00635$); the binary comparison was not significant (McNemar $p=0.125$). This discriminates the archived configurations on these instances, not model tiers in general. Auditing also found four answer-key defects and two apparatus defects. We therefore require specification--key tests, cross-tier concordance audits, graded failure modes, per-coordinate headroom, longitudinal evidence, and explicit resource envelopes. The level thresholds remain working definitions requiring broader calibration.
 \end{abstract}
 
 \noindent\emph{Naming.} The AI-Level was called the Harness Intelligence Level (HIL) in earlier versions of these papers; archived records, the \texttt{hilbench} package and its record keys keep that name, and \texttt{ailevel} is the same instrument under the current one.
@@ -136,6 +136,7 @@ The general point is that every claim in this framework rests on items whose key
 \item A continuous pair score HLIS with a fully specified construction, and a harness-indexed characterization AI-Level of a base model across a standardized ladder (\S13--\S14).
 \item The first instantiation of the ladder, the first measured harness scaling curves, and a proposition and repair concerning the delegation achievement variable that the measurement exposed (\S\ref{sec:built}, \S\ref{sec:adi}, \S\ref{sec:measured}).
 \item Memory Capability as an independently certified ladder $M0$--$M\Om{}$ with a witness per level, a cumulative certification law that forbids level skipping, and a one-way prerequisite gate to Individual Intelligence, together with the objects that make it measurable --- a published memory manifest, a difficulty vector inside a level rather than pseudo-levels, per-level gates, and an instrumented interface for a governed change of the memory mechanism --- and an explicit separation of long context from persistence (\S\ref{sec:memory}, \S\ref{sec:mops}).
+\item One testing method for every ladder: the six-part schema in which $I$ was already written --- construct as contrast, separate prerequisite, witness with a control arm, factor gate times retention, certification law, continuous relaxation --- instantiated for $C$, $SA$, $O$, the $(T,H)$ surface, $HG$ and $U$, and enforced as data in the benchmark (\S\ref{sec:onestyle}).
 \item Invariant level semantics, with a criterion that decides them: a law is invariant if and only if it is stated as a contrast that must hold or a structural property of the item, and the boundaries the upper Individual levels turn on are fixed accordingly --- $\Theta$ and $\Psi$ for $I3$ and $I4$, incorporation for $I5$, reachability for $I\Om{}$ (\S\ref{sec:theta}--\S\ref{sec:iomega}).
 \item A validity protocol for benchmark items: cross-tier concordance auditing, specification--key consistency tests for parameterised families, and graded scoring with separated failure modes (\S\ref{sec:validity}).
 \item A search for a difficulty axis with frontier headroom, the mechanically-derivable envelope argument that explains why three axes saturate, and a same-seed executor comparison on the one axis that does not, reported with exact tests and explicit variance limitations (\S\ref{sec:envelope}, \S\ref{sec:discovery}).
@@ -585,6 +586,124 @@ UO_n &\iff UI_n \wedge O \ge O_n \wedge \text{organization-level delegation and 
 
 For a multi-agent organization, member capabilities are reported alongside $O$ rather than collapsed into a fictitious ``average individual.'' Organizational intelligence can arise from heterogeneous roles, and lower self-write roles can be essential as independent evaluators or promoters.
 
+\section{One Testing Method for Every Ladder}\label{sec:onestyle}
+
+The Individual ladder is written in a particular style, and it is the style that makes its levels invariant rather than the particular capabilities it names. Each $I_n$ is (i) a construct stated as a contrast that must hold; (ii) a prerequisite that is checked separately and can never promote; (iii) a witness with a control arm that the construct must beat --- the no-record arm at I1, the no-experience arm at I2, the ablated $\Theta$ at I3, the frozen $\Psi$ at I4, the matched control after restart at I5, the pre-frontier at I\Om{}; (iv) a gate that is a product of named binary factors, each computed by a locus outside the pair's write set, times retention of every lower level; (v) a certification law that says a level is held iff the gate is one at the ratified reliability; and (vi) a continuous relaxation of the same product for the pair score. Nothing in that list is specific to Individual Intelligence, and a framework in which one ladder is tested this way and the others by description has two standards. This section states the schema once and instantiates it for every ladder, sub-ladder and gate in the framework: $C$, $SA$, $O$, the delegation surface $(T, H)$, the harness generations $HG$, and $U$ itself. $I$ and $M$ already have the form (\S\ref{sec:memory}, \S\ref{sec:mops}).
+
+\begin{claimbox}{The schema}
+For a ladder $X$ and a level $n$, with $A$ the tested pair (or, for $HG$, the tested harness):
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item \textbf{Construct} $\Phi_{X,n}$: a contrast that must hold, or a structural property of the item; never a difficulty threshold.
+\item \textbf{Prerequisite} $\pi_{X,n}$: what must already be certified --- lower-level retention $K_{X,<n} = \prod_{j<n} K_{X,j}$ always, plus any cross-ladder prerequisite ($M_{\mu_n}$ for $I_n$; every coordinate for $U_n$; the previous rung's mechanism for $HG_g$). A prerequisite can block and can never promote.
+\item \textbf{Witness} $W_{X,n}$ with a \textbf{control arm} $\bar W_{X,n}$: the canonical episode, and the arm the construct must separate from --- ablated, withheld, twin, previous rung, single role, or oracle. A witness without a control arm tests an assertion, not a contrast.
+\item \textbf{Factor gate} $z_{X,n}(A) = \prod_{f \in F_{X,n}} f(A) \cdot K_{X,<n}(A)$, every factor binary and computed by a locus the pair cannot write to.
+\item \textbf{Certification law} $A \models X_n \iff \pi_{X,n}(A) \wedge z_{X,n}(A) = 1$ at reliability $p$ over the ratified number of episodes; $p$, the episode count and any margin are ratified constants, not laws.
+\item \textbf{Continuous achievement} $q_{X,n} \in [0,1]$, the mean over episodes of the same product with each factor relaxed to its score, cumulated as $q^{*}_{X,n} = \min_{j \le n} q_{X,j}$ for HLIS (\S\ref{sec:hlis}).
+\end{enumerate}
+Two consequences follow. No level can be skipped in any ladder, because $K_{X,<n}$ is a factor. And no ladder is certified by a description, because a factor that no locus computes is not a factor.
+\end{claimbox}
+
+\subsection{Cognitive Intelligence}
+The witness at every $C_k$ is a generated instance carrying the level's trap; the control arm is the trap itself --- the named wrong method a competent system takes, which admissibility proves fails on every seed. The common factors are $S$ (the sealed key is matched) and $\mathcal A$ (admissibility: computed key, trap fires, unique identifiability). The same gate is instantiated once per domain of $D_C$, and $C^{\mathrm{GUI}}$ adds the oracle-screen and perfect-actuator arms of \S\ref{sec:gp}.
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Level & Level-specific factor (the contrast the control arm fails) & Gate \\
+\midrule
+C0 & --- (one explicit operation; admissibility alone) & $S\cdot\mathcal A$ \\
+C1 & $I$: the literal-parse arm fails; the statement must be interpreted before a short procedure applies & $S\cdot I\cdot\mathcal A\cdot K$ \\
+C2 & $J$: the one-constraint-at-a-time arm fails; the constraints interact & $S\cdot J\cdot\mathcal A\cdot K$ \\
+C3 & $G$: the local-rule arm fails; the obvious local rule and the global answer disagree on every instance & $S\cdot G\cdot\mathcal A\cdot K$ \\
+C4 & $D$: the publicly-checkable arm returns the decoy; the decoy satisfies every visible criterion and is not the key & $S\cdot D\cdot\mathcal A\cdot K$ \\
+C5 & $P$: sealed cases are predicted; $R$: the generating rule is uniquely recoverable from what is shown & $P\cdot R\cdot\mathcal A\cdot K$ \\
+C6 & $N$: every single-domain ablation fails; the domains are genuinely necessary & $S\cdot N\cdot\mathcal A\cdot K$ \\
+C\Om{} & $R_{\mathrm{reach}}$: the post-frontier strictly contains the pre-frontier on disjoint tests & $R_{\mathrm{reach}}\cdot\mathcal A\cdot K$ \\
+\bottomrule
+\end{tabularx}
+\caption{The $C$ ladder in the schema. $K = K_{C,<k}$ throughout. C0--C5 are implemented as generators with a trap that the self-test proves fires; C6 and C\Om{} are specified.}
+\label{tab:cstyle}
+\end{table}
+
+\subsection{Operational Self-Awareness}
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYl@{}}
+\toprule
+Level & Factors & Control arm & Gate \\
+\midrule
+SA1 & $G$: state reported from the environment; $\neg S$: the stale record is not repeated & a plausible stale record that says otherwise & $G\cdot\neg S\cdot K$ \\
+SA2 & $C$: the solvable twin is completed; $B$: the unsolvable twin is declared blocked; $\neg F$: no fabricated result & the twin & $C\cdot B\cdot\neg F\cdot K$ \\
+SA3 & $N$: the internal cause of its own failure is named; $R$: judged against a frozen rubric by a locus it cannot write to; $X$: fixing the named cause changes the outcome & a decoy cause that is plausible and not causal & $N\cdot R\cdot X\cdot K$ \\
+SA4 & $P$: gains, regressions and affected capabilities predicted before a $\Theta$ change is evaluated; $M$: measured after; $A$: agreement above margin & the post-hoc constant forecast at the pair's base rate & $P\cdot M\cdot A\cdot K$ \\
+SA5 & $U$: an unknown about its own cognition is represented; $E$: a self-experiment is designed; $D$: the experiment discriminates (outcomes differ across the hypotheses) & a non-discriminating experiment & $U\cdot E\cdot D\cdot K$ \\
+SA6 & $R$: role, responsibility and relationship self-model consistent across projects; $C$: coherent under a role change & the role-swap arm & $R\cdot C\cdot K$ \\
+SA\Om{} & $L$: a provenance-linked self-model survives continued cognitive or objective evolution & the pre-evolution self-model & $L\cdot K$ \\
+\bottomrule
+\end{tabularx}
+\caption{The $SA$ ladder in the schema. SA-cal, the blind forecast scored by Brier, is a diagnostic beside the ladder and not a rung. SA1--SA4 are implemented; SA5--SA\Om{} are specified.}
+\label{tab:sastyle}
+\end{table}
+
+\subsection{Organizational Intelligence}
+The $O$ ladder mirrors $I$ level for level, with one factor that $I$ never needs: $N_O$, organizational necessity --- the single-role arm, one prompt role-playing several agents, must fail. An organization is a structural property of the witness (real state, authority and evidence boundaries), checked by admissibility, and $N_O$ is what stops parallel individual work from certifying collective intelligence.
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYl@{}}
+\toprule
+Level & Factors & Control arm & Gate \\
+\midrule
+O0 & $R$: work routed across separated roles; $V$: the verifier's entry names what it checked with the correct figure & the single-role arm & $R\cdot V\cdot N_O$ \\
+O1 & $L$: a standing decision recorded in the organization's own log, never the model's; $D$: it decides a later, different instance after a restart & the log-withheld arm & $L\cdot D\cdot N_O\cdot K$ \\
+O2 & $E$: evidence that a routing or role policy is suboptimal; $P$: the allocation changes persistently; $H$: held-out outcomes improve & the evidence-withheld arm & $E\cdot P\cdot H\cdot N_O\cdot K$ \\
+O3 & $\Theta_O$ declared; $M$: modified, in scope, activated; $V$: sealed-suite gain at margin; $G$: proposer, evaluator and promoter separated & the ablated $\Theta_O$ & $M\cdot V\cdot G\cdot N_O\cdot K$ \\
+O4 & $\Psi_O$ improves: the mechanism that discovers organizational improvements is itself changed and the change is used on hidden meta-probes & the frozen $\Psi_O$ & $M_{\Psi}\cdot V_{\Psi}\cdot G_{\Psi}\cdot N_O\cdot K$ \\
+O5 & the I5 factors $U\cdot H\cdot E\cdot L\cdot V\cdot P$ with the discovery genuinely collective & the parallel-individual arm & $U H E L V P\cdot N_O\cdot K$ \\
+O\Om{} & $R_{\mathrm{reach}}$: new agent types, roles, tools or organizations expand the collective frontier on disjoint tests & the pre-frontier organization & $R_{\mathrm{reach}}\cdot N_O\cdot K$ \\
+\bottomrule
+\end{tabularx}
+\caption{The $O$ ladder in the schema. O0--O2 are implemented (the Core's coordination, log and adaptation families); O3--O\Om{} are specified as mirrors of I3--I\Om{}.}
+\label{tab:ostyle}
+\end{table}
+
+\subsection{Delegation: the \texorpdfstring{$(T, H)$}{(T, H)} surface}
+Delegation has no ladder of the pair's own; it has a surface, and the ``level'' is the frontier $DF_{h,p}(A) = \max\{T : S_{\mathrm{net}}(A, T, H \le h) \ge p\}$. The schema applies to each cell $(b, h)$ of the surface. A band $T_b$ is a structural property of the item and is checked by admissibility, not by pass rates: T1 a small procedure must be inferred; T2 dependent steps with a verifier; T3 strategy choice, uncertainty or recovery required; T4 several planning cycles and a verification burden; T5 the method initially unknown; T6 a mission that must be turned into projects; T\Om{} a charter that must be turned into missions. A class $H_h$ is a property of the transcript: every human intervention is classified by the cognition it supplied --- H0 none; H1 an unavailable fact or narrow clarification; H2 bounded clarification or local correction; H3 periodic review; H4 repeated guidance; H5 most major steps --- by a locus outside the pair.
+\[
+z_{DI,(b,h)}(A) = \Delta \cdot V \cdot \neg FC \cdot L_h \cdot K_{T,<b \mid h},
+\]
+where $\Delta$ is delivery, $V$ the verifier's pass, $\neg FC$ that no false completion was charged (at $\rho$), $L_h$ that the intervention ledger contains nothing above class $h$, and $K_{T,<b\mid h}$ that every lower band is retained at the same class. The witness is the four-outcome record of \S\ref{sec:adi}; the control arms are two: the \emph{held-back arm}, in which a refusal must score above a false completion (the contrast the success-only primitive could not see), and the \emph{ledger}, in which an intervention that supplied strategy is class H3 or above whatever the pair calls it. $A \models T_b/H_h \iff z_{DI,(b,h)} = 1$ at reliability $p$, and the frontier is the largest $b$ for which that holds at $h$.
+
+\subsection{Harness generations}
+A rung is a property of the harness, not of the model, and is certified in the same form. The factors are $E$, the mechanism exists in the frozen harness contract; $U$, the mechanism \emph{fires} on the witness; and $\Delta_g$, the rung's contrast with the previous rung on the same seeds --- the outcome the mechanism is supposed to change does change. The witness is the harness-scaling curve; the control arm is the previous rung with the same model and the same seeds, which is why the curve is measured that way (\S\ref{sec:measured}).
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Rung & $U$ (the mechanism fires) and $\Delta_g$ (what must change against the previous rung) & Gate \\
+\midrule
+HG0 & --- (one attempt; the baseline arm) & $E$ \\
+HG1 & a failing public check holds back a delivery; false completions fall against HG0 on the same seeds & $E\cdot U\cdot\Delta_1\cdot K$ \\
+HG2 & a rejected mutation is restored from the snapshot and retried with the failed check named; delivered-correct rises where HG1 held back & $E\cdot U\cdot\Delta_2\cdot K$ \\
+HG3 & a failure is classified by kind and routed across executors; the competence model changes routing on evidence & $E\cdot U\cdot\Delta_3\cdot K$ \\
+HG4--HG6 & the governed $\Theta$ loop, the $\Psi$ engine, the unknown--hypothesis--experiment loop, the organization exist and fire; each enables the matching $I$/$O$/$SA$ campaign and earns none of it & $E\cdot U\cdot\Delta_g\cdot K$ \\
+HG\Om{} & validated discovery is transduced into a new instrument, agent or organization that the frontier tests reach & $E\cdot U\cdot\Delta_\Omega\cdot K$ \\
+\bottomrule
+\end{tabularx}
+\caption{The $HG$ ladder in the schema. $K = K_{HG,<g}$: a rung keeps every lower mechanism. HG0--HG3 are built; HG4--HG\Om{} are specified. Architecture enables a claim; only the model's own campaign earns it.}
+\label{tab:hgstyle}
+\end{table}
+
+\subsection{The Unified level}
+$U_n$ is the schema applied to the coordinate certificates themselves: the factors are the coordinate gates, the witness is the set of certificates, the control arm is the bottleneck report, and there is no averaging.
+\[
+z_{U,n}(A) = \prod_{X \in \{C, I, O, SA\}} \mathbb 1[X(A) \ge X_n] \cdot \mathbb 1[S_{\mathrm{net}}(A, T_n, H \le H_n) \ge p_n] \cdot K_{U,<n}(A),
+\qquad A \models U_n \iff z_{U,n}(A) = 1,
+\]
+with the minima $X_n$ and the delegation gate $(T_n, H_n)$ from Table~\ref{tab:ugates}. The report names the coordinate that fails: \texttt{U2 [C5, I4, O2, T4/H1, SA4] --- bottleneck: O2} is the control arm made visible.
+
+\subsection{What the uniform style buys}
+Three things. First, every ladder now fails in the same way --- a named factor is zero --- so a failed certification is a diagnosis, not a score. Second, the levels of every ladder are invariant for the same reason $I$'s are: a contrast does not move when the frontier moves. Third, the implementation can enforce the form: in the benchmark, every law carries its factors, its control arm and its prerequisite as data, and a test refuses a law without them. The entries for ladders this work has not run --- C6, C\Om{}, SA5--SA\Om{}, O3--O\Om{}, HG4--HG\Om{}, the upper $U$ --- are marked specification, which is the same word \S\ref{sec:limitations} uses for them.
+
 \section{Harness Realization of the Unified Hierarchy}
 
 The levels-of-automation tradition \citep{sheridan1978,parasuraman2000,endsley1999} established that autonomy is graded and multi-stage; \citet{klein2004} and \citet{amershi2019} add the requirement that automation acting as a team member be predictable and directable; and \citet{lee2004} supplies the account of reliance this framework's intervention axis operationalizes. The framework is designed to be realized by a harness. The LLM supplies generative cognition; the harness supplies persistence, permissions, evidence flow, learning, self-modification gates, organizational boundaries, delegation, external verification and self-modeling. The same base LLM can therefore instantiate different intelligence profiles depending on the architecture around it.
@@ -707,7 +826,7 @@ Circle / $\lambda$ & Substrate adapter with observe-propose-implement-validate-d
 \label{tab:contracts}
 \end{table}
 
-\section{Overall Scoring for One Harness-LLM Pair}
+\section{Overall Scoring for One Harness-LLM Pair}\label{sec:hlis}
 
 \subsection{Keep the Ordinal U-Level and Add a Continuous Pair Score}
 

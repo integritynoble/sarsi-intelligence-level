@@ -115,3 +115,21 @@ Q(native_actuator)` (`gui_laws.failure_record`); oracle-arm success is diagnosti
 counts once, as C or as DI. Difficulty varies *within* a level along `(N_e, N_p, d_h, r_d, ρ_o, N_w, N_s, d_t, ν_l,
 B_res)` and never creates a pseudo-level. `C6`/`CΩ` GUI records are specification-only templates. No GUI form has been
 run through the Core yet: the bare-model executor has no image channel.
+
+
+## One testing method for every ladder
+
+The Individual ladder's style is the standard for all of them. For ladder X and level n: (1) a **construct** stated as
+a contrast or a structural property; (2) a **prerequisite** that can block and never promote (`K_lower` always; `M_mu_n`
+for I; every coordinate for U; the previous rung's mechanism for HG); (3) a **witness with a control arm** — ablated,
+withheld, twin, previous rung, single role, oracle; (4) a **factor gate** `z_X,n = ∏ factors · K_X,<n`, each factor
+binary and computed outside the pair's write set; (5) the **law** `A ⊨ X_n ⟺ prereq ∧ z = 1` at reliability p; (6) a
+**continuous relaxation** `q_X,n`, cumulated as `min_{j≤n}` for HLIS. In code every entry of `laws.LAWS` carries
+`factors`, `control`, `prereq` (`laws.FACTORS`), the unrun ladders are in `laws.LADDERS` with `status`, and
+`tests/test_schema.py` refuses a law without them and a level whose last factor is not `K`. Per-ladder factor
+tables are in the theory paper, "One Testing Method for Every Ladder". Delegation's "level" is the frontier
+`DF_{h,p}`: a T band is a structural property of the item, an H class a property of the transcript's intervention
+ledger, and the cell gate is `Δ · V · ¬FC · L_h · K_{T,<b|h}` with the held-back arm as control. HG rungs are
+certified as `E · U · Δ_g · K` — the mechanism exists, fires, and changes the outcome against the previous rung on the
+same seeds — which is why the harness-scaling curve is measured that way. `U_n` is the product of the coordinate gates
+with the bottleneck report as its control arm.

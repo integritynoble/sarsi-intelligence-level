@@ -179,3 +179,57 @@ def check_family(level: str, mod, seeds=range(8)) -> dict:
 def public_or_private(level: str) -> str:
     """Where a law's witnesses belong: an automatic law can be public; a law needing a judge cannot."""
     return "private_human" if LAWS[level].get("human") else "public_and_private"
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# One testing method for every ladder (theory paper, "One Testing Method for Every Ladder").  Each law carries its
+# factor gate, the control arm the construct must beat, and its prerequisite, as DATA; test_schema refuses a law
+# without them.  z_{X,n} = product(factors) * K_{X,<n}; A |= X_n  iff  prereq and z = 1 at reliability p.
+SCHEMA = ("construct", "prereq", "witness+control", "factor_gate", "certification_law", "continuous_q")
+FACTORS = {
+    "C0": (["S", "A"], "the trap procedure (admissibility alone)"), "C1": (["S", "I", "A", "K"], "the literal-parse arm"),
+    "C2": (["S", "J", "A", "K"], "the one-constraint-at-a-time arm"), "C3": (["S", "G", "A", "K"], "the local-rule arm"),
+    "C4": (["S", "D", "A", "K"], "the publicly-checkable arm returns the decoy"), "C5": (["P", "R", "A", "K"], "the given-method arm; sealed cases unpredicted"),
+    "I1": (["Rec", "Prov", "K"], "the no-record arm"), "I2": (["Chg", "Xfer", "Frz", "K"], "the no-experience arm"),
+    "I3": (["D", "M_Theta", "V", "G", "K"], "the ablated Theta"), "I4": (["M_Psi", "V_Psi", "G_Psi", "K"], "the frozen Psi"),
+    "I5": (["U", "H", "E", "L", "V", "P", "K"], "the matched control after restart"), "IOmega": (["R_reach", "K"], "the pre-frontier"),
+    "M0": (["Use", "K"], "the post-restart arm (loss is M0, never M1)"), "M1": (["Surv", "Prov", "K"], "the ablated-state arm"),
+    "M2": (["PR", "q_prov", "q_time", "q_stale", "K"], "the stale superseded fact"), "M3": (["Rule", "Demote", "Mach", "K"], "raw episodes hidden / index rebuilt"),
+    "M4": (["Det", "Act", "Health", "Ret", "K"], "the unrepaired store against the health oracle"), "M5": (["Lineage", "K"], "the single-project arm"),
+    "MOmega": (["diff", "scope", "act", "beh", "Delta_abl", "Mig", "K"], "Phi_0 on fixed contents D*"),
+    "SA1": (["G", "notS", "K"], "a plausible stale record"), "SA2": (["C", "B", "notF", "K"], "the unsolvable twin"),
+    "SA3": (["N", "R", "X", "K"], "a decoy cause"), "SA4": (["P", "M", "A", "K"], "the post-hoc constant forecast"),
+    "SA-cal": (["Brier"], "the constant forecast at the base rate (diagnostic)"),
+    "DI": (["Delta", "V", "notFC", "L_h", "K"], "the held-back arm (a refusal outscores a false completion) and the intervention ledger"),
+    "O0": (["R", "V", "N_O"], "the single-role arm"), "O1": (["L", "D", "N_O", "K"], "the log-withheld arm"), "O2": (["E", "P", "H", "N_O", "K"], "the evidence-withheld arm"),
+}
+for _k, (_f, _c) in FACTORS.items():
+    LAWS[_k]["factors"] = _f; LAWS[_k]["control"] = _c; LAWS[_k]["prereq"] = "K_lower" + (" and M_mu_n" if _k.startswith("I") else "")
+
+# Ladders the instrument has not run: the same form, marked specification.
+LADDERS = {
+    "C6": {"name": "Frontier-generalising", "factors": ["S", "N", "A", "K"], "control": "every single-domain ablation", "prereq": "K_lower", "status": "specification"},
+    "COmega": {"name": "Open-ended", "factors": ["R_reach", "A", "K"], "control": "the pre-frontier", "prereq": "K_lower", "status": "specification"},
+    "SA5": {"name": "Meta-cognitive", "factors": ["U", "E", "D", "K"], "control": "a non-discriminating self-experiment", "prereq": "K_lower", "status": "specification"},
+    "SA6": {"name": "Mission/role", "factors": ["R", "C", "K"], "control": "the role-swap arm", "prereq": "K_lower", "status": "specification"},
+    "SAOmega": {"name": "Reflexive open-ended", "factors": ["L", "K"], "control": "the pre-evolution self-model", "prereq": "K_lower", "status": "specification"},
+    "O3": {"name": "Self-improving organization", "factors": ["M", "V", "G", "N_O", "K"], "control": "the ablated Theta_O", "prereq": "K_lower", "status": "specification"},
+    "O4": {"name": "Recursive organization", "factors": ["M_Psi", "V_Psi", "G_Psi", "N_O", "K"], "control": "the frozen Psi_O", "prereq": "K_lower", "status": "specification"},
+    "O5": {"name": "Collective discovery", "factors": ["U", "H", "E", "L", "V", "P", "N_O", "K"], "control": "the parallel-individual arm", "prereq": "K_lower", "status": "specification"},
+    "OOmega": {"name": "Open-ended organization", "factors": ["R_reach", "N_O", "K"], "control": "the pre-frontier organization", "prereq": "K_lower", "status": "specification"},
+    **{f"T{b}": {"name": n, "factors": ["Delta", "V", "notFC", "L_h", "K"], "control": "the held-back arm; band is a structural property checked by admissibility", "prereq": "K_lower at the same H", "status": "implemented" if b <= 1 else "specification"}
+       for b, n in [(0, "Trivial"), (1, "Routine"), (2, "Multi-step"), (3, "Complex"), (4, "Expert project"), (5, "Frontier"), (6, "Mission")]},
+    "TOmega": {"name": "Open-ended charter", "factors": ["Delta", "V", "notFC", "L_h", "K"], "control": "the held-back arm", "prereq": "K_lower at H0", "status": "specification"},
+    **{f"H{h}": {"name": n, "factors": ["L_h"], "control": "the intervention ledger, classified by the cognition supplied, by a locus outside the pair", "prereq": "none", "status": "implemented" if h == 0 else "specification"}
+       for h, n in [(0, "None"), (1, "Exception-only"), (2, "Occasional"), (3, "Periodic"), (4, "Frequent"), (5, "Continuous")]},
+    **{f"HG{g}": {"name": n, "factors": ["E", "U", f"Delta_{g}", "K"] if g else ["E"], "control": "the previous rung, same model, same seeds", "prereq": "K_lower (every lower mechanism kept)", "status": "built" if g <= 3 else "specification"}
+       for g, n in [(0, "Baseline"), (1, "Acceptance"), (2, "Snapshot/retry"), (3, "Classify/route"), (4, "Theta loop"), (5, "Psi engine"), (6, "Discovery loop")]},
+    "HGOmega": {"name": "Transduction", "factors": ["E", "U", "Delta_Omega", "K"], "control": "the previous rung", "prereq": "K_lower", "status": "specification"},
+    **{f"U{n}": {"name": nm, "factors": ["C>=C_n", "I>=I_n", "O>=O_n", "SA>=SA_n", "S_net(T_n,H<=H_n)>=p", "K"], "control": "the bottleneck report (no averaging)", "prereq": "every coordinate certificate", "status": "implemented" if n <= 2 else "specification"}
+       for n, nm in [(0, "Reactive"), (1, "Persistent"), (2, "Adaptive"), (3, "Self-improving"), (4, "Recursive"), (5, "Discovery"), (6, "Mission")]},
+    "UOmega": {"name": "Open-ended", "factors": ["C>=COmega", "I>=IOmega", "O>=OOmega", "SA>=SAOmega", "S_net(TOmega,H0)>=p", "K"], "control": "the bottleneck report", "prereq": "every coordinate certificate", "status": "specification"},
+}
+
+def factor_gate(values: dict, factors: list) -> bool:
+    """z = product of the named factors; a factor that is absent is zero, never assumed."""
+    return all(bool(values.get(f, False)) for f in factors)
