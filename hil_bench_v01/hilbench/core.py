@@ -323,7 +323,8 @@ def llm_episode(fam, seed, root, exec_tmpl, limit, env, rung="HG0"):
         out = harness.run_rung(rung, fam, files, ws, exec_tmpl, limit, env, materialize=lambda w: extract.extract(fam, w, files))
         attempts, delivered, held = out["attempts"], out["delivered"], out["held_back"]
         v = mod.verify(ws, key) if delivered else {"pass": False, "failure_mode": "held_back", "accuracy": 0.0, "checks": []}
-    something = delivered and (ws / DELIV[fam]).exists()
+    dp = ws / DELIV[fam]
+    something = delivered and dp.exists() and (DELIV[fam] not in files or dp.read_text(encoding="utf-8", errors="replace") != files[DELIV[fam]])   # an untouched input file is not a delivery
     if delivered and (ws / "DECLINED.json").exists() and not something: delivered, held = False, True   # the model declined: held back
     term = attempts[-1]["termination_reason"]
     if held and not delivered: v = {"pass": False, "failure_mode": "declined", "accuracy": 0.0, "checks": []}

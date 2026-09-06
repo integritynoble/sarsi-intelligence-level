@@ -21,9 +21,12 @@ def _call(base, key, model, payload, timeout):
     if API["kind"] == "anthropic": return _call_anthropic(base, key, model, payload, timeout)
     req = urllib.request.Request(base.rstrip("/") + "/chat/completions",
                                  data=json.dumps(payload).encode(),
-                                 headers={"Content-Type": "application/json", "Authorization": "Bearer " + key})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode())
+                                 headers={"Content-Type": "application/json", "Authorization": "Bearer " + key, "User-Agent": "hilbench/0.2 (+https://github.com/integritynoble/sarsi-intelligence-level)"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:            # an endpoint error is recorded, never mistaken for a model's answer
+        raise EndpointError(f"HTTP {e.code} from {base}: {e.read().decode(errors='replace')[:200]}")
 
 def _call_anthropic(base, key, model, payload, timeout):
     """Anthropic Messages API, same two read-only tools, translated to and from the OpenAI-shaped payload run() builds."""
@@ -41,13 +44,19 @@ def _call_anthropic(base, key, model, payload, timeout):
     if system: body["system"] = system
     if payload.get("tools"): body["tools"] = [{"name": t["function"]["name"], "description": t["function"]["description"], "input_schema": t["function"]["parameters"]} for t in payload["tools"]]
     req = urllib.request.Request(base.rstrip("/") + "/v1/messages", data=json.dumps(body).encode(),
-                                 headers={"Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01"})
-    with urllib.request.urlopen(req, timeout=timeout) as r: out = json.loads(r.read().decode())
+                                 headers={"Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01", "User-Agent": "hilbench/0.2"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r: out = json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        raise EndpointError(f"HTTP {e.code} from {base}: {e.read().decode(errors='replace')[:200]}")
     text = "".join(b.get("text", "") for b in out.get("content", []) if b.get("type") == "text")
     calls = [{"id": b["id"], "type": "function", "function": {"name": b["name"], "arguments": json.dumps(b.get("input") or {})}} for b in out.get("content", []) if b.get("type") == "tool_use"]
     return {"choices": [{"message": {"content": text, "tool_calls": calls or None}, "finish_reason": "length" if out.get("stop_reason") == "max_tokens" else "stop"}]}
 
 API = {"kind": "openai"}
+
+class EndpointError(Exception):
+    """The endpoint refused or failed; the episode is recorded as crashed with the code, not as a wrong answer."""
 
 def _parse(text):
     if not text or not text.strip():
@@ -146,7 +155,11 @@ def main():
         print("usage: -m hilbench.llm --base URL --key K --model M --prompt P", file=sys.stderr)
         return 2
     cwd = Path.cwd()
-    text = run(base, key, model, prompt, cwd, timeout=timeout)
+    try:
+        text = run(base, key, model, prompt, cwd, timeout=timeout)
+    except EndpointError as e:
+        (cwd / "response.json").write_text("null"); (cwd / "response_meta.json").write_text(json.dumps({"endpoint_error": str(e), "parsed": False}))
+        print("ENDPOINT_ERROR", str(e)[:120], file=sys.stderr); return 3
     obj, err = _parse(text); first_finish = LAST["finish_reason"]; retried = False
     if err:
         retried = True; text2 = finish_json_only(base, key, model, text, cwd, timeout=timeout)
