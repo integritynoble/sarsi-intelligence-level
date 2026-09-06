@@ -1,0 +1,75 @@
+coordinate,level_or_band,public_records,canonical_methods,binding_status
+C,C0,2,C0-ATOM | C0-GUI-ATOM,development-bound
+C,C1,2,C1-CTX | C1-GUI-CTX,development-bound
+C,C2,2,C2-COMP | C2-GUI-COMP,development-bound
+C,C3,2,C3-GUI-STRAT | C3-STRAT,development-bound
+C,C4,2,C4-EXPERT | C4-GUI-EXPERT,development-bound
+C,C5,2,C5-DISC | C5-GUI-DISC,development-bound
+C,C6,2,C6-GUI-XDOM | C6-XDOM,specification-only
+C,CΩ,2,COMEGA-GUI-REACH | COMEGA-REACH,specification-only
+C,GP0,1,GP0-PIXEL,development-bound
+C,GP1,1,GP1-ELEMENT,development-bound
+C,GP2,1,GP2-GROUND,development-bound
+C,GP3,1,GP3-STATE,development-bound
+C,GP4,1,GP4-DYNAMIC,development-bound
+C,GP5,1,GP5-NOVEL,development-bound
+DI,DI-surface,1,DI-FRONTIER,development-bound
+H,H0,1,H0-NONE,development-bound
+H,H1,1,H1-EXCEPTION,development-bound
+H,H2,1,H2-OCCASIONAL,development-bound
+H,H3,1,H3-PERIODIC,development-bound
+H,H4,1,H4-FREQUENT,development-bound
+H,H5,1,H5-CONTINUOUS,development-bound
+HG,HG0,1,HG0-CONFORM,development-bound
+HG,HG1,1,HG1-CONFORM,development-bound
+HG,HG2,1,HG2-CONFORM,development-bound
+HG,HG3,1,HG3-CONFORM,development-bound
+HG,HG4,1,HG4-CONFORM,specification-only
+HG,HG5,1,HG5-CONFORM,specification-only
+HG,HG6,1,HG6-CONFORM,specification-only
+HG,HGΩ,1,HGOMEGA-CONFORM,specification-only
+I,I0,2,I0-EPISODE,development-bound
+I,I1,2,I1-RST,development-bound
+I,I2,2,I2-XFER,development-bound
+I,I3,6,I3-THETA,development-bound
+I,I4,4,I4-PSI | I4-PSI-LONG-DIAGNOSTIC,development-bound
+I,I5,3,I5-DISC,development-bound
+I,IΩ,2,I-OMEGA-LONG,development-bound
+M,M0,5,M0-EPH,development-bound
+M,M1,5,M1-RST,development-bound
+M,M2,5,M2-PROV,development-bound
+M,M3,5,M3-CONSOL,development-bound
+M,M4,5,M4-MGMT,development-bound
+M,M5,5,M5-LONG,development-bound
+M,MΩ,5,MOMEGA-EVOLVE,development-bound
+O,O0,1,O0-COORD,development-bound
+O,O1,1,O1-PERSIST,development-bound
+O,O2,1,O2-ADAPT,development-bound
+O,O3,1,O3-THETA,specification-only
+O,O4,1,O4-PSI,specification-only
+O,O5,1,O5-DISC,specification-only
+O,OΩ,1,OOMEGA-EVOLVE,specification-only
+SA,SA0,1,SA0-BASE,development-bound
+SA,SA1,1,SA1-STATE,development-bound
+SA,SA2,1,SA2-CAPABILITY,development-bound
+SA,SA3,1,SA3-CAUSAL,development-bound
+SA,SA4,1,SA4-SELF-CHANGE,development-bound
+SA,SA5,1,SA5-META,development-bound
+SA,SA6,1,SA6-MISSION-ROLE,specification-only
+SA,SAΩ,1,SAOMEGA-REFLEX,specification-only
+T,T0,1,T0-ATOMIC,development-bound
+T,T1,1,T1-ROUTINE,development-bound
+T,T2,1,T2-MULTISTEP,development-bound
+T,T3,1,T3-COMPLEX,development-bound
+T,T4,1,T4-EXPERT-PROJECT,development-bound
+T,T5,1,T5-FRONTIER,development-bound
+T,T6,1,T6-MISSION,specification-only
+T,TΩ,1,TOMEGA-CHARTER,specification-only
+U,U0,1,U0-GATE,development-bound
+U,U1,1,U1-GATE,development-bound
+U,U2,1,U2-GATE,development-bound
+U,U3,1,U3-GATE,specification-only
+U,U4,1,U4-GATE,specification-only
+U,U5,1,U5-GATE,specification-only
+U,U6,1,U6-GATE,specification-only
+U,UΩ,1,UOMEGA-GATE,specification-only

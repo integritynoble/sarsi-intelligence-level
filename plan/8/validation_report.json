@@ -1,0 +1,23 @@
+{
+  "dataset_name": "HIL-Bench Benchmark Dataset",
+  "dataset_version": "0.8",
+  "public_development_record_count": 124,
+  "coordinate_counts": {
+    "C": 22,
+    "DI": 1,
+    "H": 6,
+    "HG": 8,
+    "I": 21,
+    "M": 35,
+    "O": 7,
+    "SA": 8,
+    "T": 8,
+    "U": 8
+  },
+  "coverage_missing": {},
+  "json_errors": [],
+  "jsonl_errors": [],
+  "python_compile_errors": [],
+  "validation_passed": true,
+  "note": "Public development forms are not official hidden certification material. Upper/open-ended forms may remain specification-only as declared by their records."
+}
