@@ -4,7 +4,7 @@
 
 ## Harness Intelligence Level: the papers, and which benchmark to run
 
-Six papers and one instrument sit on top of the framework above. If you came here to measure an agent or a
+Seven papers and one instrument sit on top of the framework above. If you came here to measure an agent or a
 model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
 
 | What | Where | Status |
@@ -15,6 +15,7 @@ model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
 | **Paper 4 — the general harness.** One runtime instantiated by manifest, mapped module-by-module onto the AI4Science code. | [`paper4_harness_v01/`](paper4_harness_v01/) | current |
 | **Paper 5 — the agent library.** Six domain profiles, every agent the fleet defines, the twenty shipped specs. | [`paper5_agent_library_v01/`](paper5_agent_library_v01/) | current; [`agent_design_v01/`](agent_design_v01/) superseded |
 | **Paper 6 — the AI4Science layer.** Seven field agents on measured corpora, the acceptance locus a science needs (two reference methods still fail on real data), the coordinates read on a field agent, the delegation transfer measurement (0/15 → 15/15 with the model fixed), and the I5 campaign that would answer the plan's question. | [`paper6_ai4science_layer_v01/`](paper6_ai4science_layer_v01/) · [PDF](paper6_ai4science_layer_v01/The_AI4Science_Layer_v0_1.pdf) | current |
+| **Paper 7 — the HIL Index.** One number per bare model over the reference ladder: prices a bluff (ρ = 1), reports harness gain, cannot saturate by construction (generated items, a named trap per family, a versioning rule instead of re-weighting, a salt-derived private split), costs cents to reproduce with one command; the plan for release-day coverage, an independent evaluator, intervals, and agent rows. | [`paper7_hil_index_v01/`](paper7_hil_index_v01/) · [PDF](paper7_hil_index_v01/The_HIL_Index_v1.pdf) · leaderboard [`hil_bench_v01/HIL_INDEX.md`](hil_bench_v01/HIL_INDEX.md) | current |
 
 ### The benchmark: one canonical tree, two kept as history
 

@@ -1,0 +1,221 @@
+% arXiv: force the pdflatex path. All content is text, tables and PDF figures; there are no
+% .eps files (figures are PDF), and this must stay within the first few lines to take effect.
+\pdfoutput=1
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black,breaklinks]{hyperref}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do.\do\_\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  pdftitle={The HIL Index: One Number per Model That Goes Down When It Bluffs},
+  pdfauthor={Chengshuai Yang},
+  pdfsubject={A frozen measurement contract for U0--U3 agent certification across six domains, with a generated coverage matrix},
+  pdfkeywords={agent benchmark, delegation, false completion, restart test, verifier separation, coverage}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small The HIL Index v1}
+\fancyhead[R]{\small Yang}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{14pt}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{bluec}{HTML}{2B6CB0}
+\definecolor{greenc}{HTML}{3A7D44}
+\definecolor{orangec}{HTML}{C05621}
+\definecolor{lightblue}{HTML}{EAF2F8}
+\definecolor{lightgreen}{HTML}{EDF7ED}
+\definecolor{lightorange}{HTML}{FFF4E6}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash\small}X}
+\setlist{itemsep=2pt,parsep=0pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtcolorbox{claimbox}[1]{breakable,colback=lightgreen,colframe=greenc,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{cautionbox}[1]{breakable,colback=lightorange,colframe=orangec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+\newtcolorbox{addedbox}[1]{breakable,colback=lightblue,colframe=bluec,boxrule=0.7pt,arc=2pt,left=7pt,right=7pt,top=6pt,bottom=6pt,title=\textbf{#1},fonttitle=\normalsize,before skip=8pt,after skip=8pt}
+
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\SA}{\ensuremath{S_A(T,H)}}
+\newcommand{\FA}{\ensuremath{F_A(H,p)}}
+\newcommand{\rhov}{\ensuremath{\rho_V}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries The HIL Index:}\\[4pt]
+{\LARGE\bfseries One Number per Model That Goes Down When It Bluffs}\\[8pt]
+{\large\bfseries How to Build a Model Index That Does Not Saturate, Prices a Wrong Answer,\\[2pt]
+Reports What a Harness Adds, and Can Be Reproduced by Anyone for Cents}\\[16pt]
+{\large Chengshuai Yang$^{1,*}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 6, 2026 --- draft v1.0}
+\end{center}
+
+\begin{abstract}
+Public model indices --- the Artificial Analysis Intelligence Index and the Epoch Capabilities Index among them --- have become the number a release is judged by, and they are saturating: an equal-weighted average of accuracy scores on fixed corpora rises as models learn the corpora, ties at the top, and charges nothing for a confident wrong answer. This paper specifies a different index and states what it would take for it to displace them. The HIL Index is one number per \emph{bare} model, computed from HIL-Bench's reference harness ladder: the model is called through its own API with two read-only tools, answers each item with one JSON object, and is scored by the same hidden verifiers that score agents, at three rungs that differ only in what the harness does with a delivery. Four properties follow from the construction rather than from a weighting choice. It \emph{prices a bluff}: the delegation surface is $P(\text{delivered} \wedge \text{verified}) - \rho\,P(\text{false completion})$, so a delivered wrong answer scores below a declared inability. It \emph{reports harnessability}: the gain from HG0 to HG2 is a number no accuracy index carries, and it separated two models that tied on every item. It \emph{does not saturate by construction}: items are seeded generators with computed keys and a named wrong method that must fail on every seed; a version whose top rows tie is replaced by one with headroom under a published rule, never re-weighted; the private split is a function of a withheld salt whose hash is public. And it \emph{costs cents}: about a hundred calls and ten minutes, so a row is a command anyone can run. The paper gives the formula, the item families, the ladder, the reproduction command, the public/certified distinction, the versioning and saturation rules, the first rows, and the adoption plan --- release-day coverage of every frontier model, an evaluator who did not build the model, intervals at the gating band, and agent rows for the harnesses people actually use. It also says what is not yet true: two rows exist, both from one author, and the spread of the frontier under this index is the first thing the plan has to establish.
+\end{abstract}
+
+\noindent\textbf{Keywords:} model index; leaderboard; saturation; false completion; harness gain; reproducibility; private split; Artificial Analysis; Epoch Capabilities Index
+
+\tableofcontents
+\bigskip
+
+\section{What an Index Is For, and Why the Current Ones Saturate}\label{sec:why}
+
+An index is a number a reader can carry: one figure per model, updated on release, comparable across labs. The two most cited today are built the same way. The Artificial Analysis Intelligence Index averages a model's accuracy across roughly ten public evaluations run by the index's authors \citep{aa2026index}; the Epoch Capabilities Index fits a common scale across benchmarks so that scores on different tests can be placed on one axis \citep{epoch2026eci}. Both are honest and useful, and both have the same three structural limits.
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{They saturate.} Fixed corpora are learned. When the top ten models sit within a few points of each other, the index has stopped ranking and started reporting noise, and the only remedy available --- adding harder corpora --- restarts the clock without changing the mechanism.
+\item \textbf{A wrong answer is free.} Accuracy counts the right ones. A model that guesses on every hard item and a model that declines on them can score identically, though one of them is dangerous to deploy.
+\item \textbf{The harness is invisible.} Every score is taken through the evaluator's own scaffolding, which is undeclared, so the number is a property of a pair --- model and harness --- attributed to the model. Nothing in the index says how much the scaffolding contributed or how much a better one would.
+\end{enumerate}
+
+An index that fixed all three would be measuring something the current ones cannot, at the same cost, and would have a story to tell on every release that theirs cannot. That is the whole case for building one, and it is a case about construction, not marketing.
+
+\section{The Construction}\label{sec:construction}
+
+\subsection{The subject: a bare model}
+
+The HIL Index is defined on a bare model: one chat call through the model's own API, a system prompt that says the reply must be one JSON object, and two read-only tools, \texttt{list\_files} and \texttt{read\_file}, confined to the item's directory. No planning scaffold, no retry, no memory. The benchmark materializes the JSON reply into the deliverable files each item's verifier expects, so the verifiers are the agent-mode verifiers, unchanged: what is compared across the index is the model, and what is compared between an index row and an agent row in HIL-Bench \citep{yang2026hilbenchpaper} is the harness.
+
+\subsection{The items}
+
+Every item is a seeded generator with a computed key the model never sees, and every family carries a \emph{named wrong method} that the self-test proves fails on every seed --- a trap that does not fire is a generator bug, not a lucky seed. The index runs the Core and Core-H of HIL-Bench v0.2:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llY@{}}
+\toprule
+Coordinate & Items & What a pass takes \\
+\midrule
+$C0$--$C3$ & one operation; a two-step word problem; a five-slot schedule under three interacting constraints; a weighted shortest path with a fewest-hops trap & exact answer; the named wrong method fails on every seed \\
+$C4$--$C5$ & a latent switching rule with a hidden period, uniquely identifiable by a brute-force check; a constrained plan whose four cheapest tasks are infeasible & exact extrapolation with the switch and period named; an optimal feasible plan \\
+$SA1$, $SA2$ & the files actually present against a stale note naming others and a phantom tool; a solvable task and its twin that needs an absent tool & grounded report; the twin declared blocked with nothing fabricated \\
+$O0$ & a task routed across planner, executor and verifier, the verifier's entry naming the checked figure & routing exact and verification substantive; a sign-off that names nothing is a rubber stamp \\
+$T\cdot H$ & six domain families (code edit, funding requirement, job requirements, citation check, company fact, results section) and two Core-H traps: an unsatisfiable specification, and an amount that appears twice & delivered-outcome primitive at $\rho = 1$; the traps are false completions a harness cannot catch \\
+\bottomrule
+\end{tabularx}
+\caption{The index's items at v1. Memory is $M0$ and learning $I0$ by construction for a bare model, and the record says so; those coordinates belong to the agent rows.}
+\label{tab:items}
+\end{table}
+
+\subsection{The ladder}
+
+Each item is run at three reference rungs that differ only in what the harness does after the model says it is done. \textbf{HG0}: one attempt, delivered as is. \textbf{HG1}: the harness runs the family's \emph{public checks} --- criteria derivable from the visible specification and never from the key --- and holds back a failing delivery. \textbf{HG2}: snapshot, restore on rejection, retry with the failed check named, up to three attempts. Three of the four Core-H items pass every public check while failing the key, so they are false completions no rung can catch; the fourth is caught at HG1, which is where harness gain can appear at all.
+
+\subsection{The number}
+
+At each rung the model receives a full profile and an HLIS --- an equal-weight geometric mean over the achievement variables present, with the delegation term $A_{DI} = P(\text{delivered} \wedge \text{verified}) - \rho\,P(\text{false completion})$ clamped at zero. Over the three rungs,
+\[
+\text{HIL-Index} = 0.55\cdot\mathrm{AUC} + 0.35\cdot\mathrm{Ceiling} + 0.10\cdot\mathrm{Harnessability},
+\qquad \mathrm{Harnessability} = \frac{\mathrm{Ceiling} - \mathrm{HG0}}{100 - \mathrm{HG0}},
+\]
+and the row carries beside it the curve, the delivered-correct, false-completion and decline rates over every episode, the bare profile at HG0, the best profile on the ladder, and the evaluator block. The weights, $\rho = 1$ and the gate $p = 0.80$ are ratified constants of the version, not laws \citep{yang2026unified}.
+
+\subsection{Cost and reproduction}
+
+Three seeds per family and both Core-H seeds: 46 episodes per rung, retries at HG2, about 150 calls, ten to twenty minutes for a hosted model, cents. One command reproduces a row:
+\begin{verbatim}
+python3 -m hilbench index --label <model> --root <fresh dir> \
+    --base https://api.example.com/v1 --key $KEY --model <name>
+\end{verbatim}
+with \texttt{--api anthropic} for the Messages API. The record carries every episode; \texttt{index.json} carries the row.
+
+\section{The Four Properties, and Where They Came From}\label{sec:properties}
+
+\textbf{It prices a bluff.} With $\rho = 1$, a delivered wrong answer is a full unit below a declared inability. A bare DeepSeek model, cut off while reasoning about the induction item, was first forced by a retry prompt to answer anyway and was priced for the guess; the retry contract was changed to allow \texttt{\{"blocked": true\}}, and on every later seed the model declined and was held back for free. Its index rose by that change while its accuracy did not, which is the sign the index is measuring what it claims.
+
+\textbf{It reports harnessability.} On the Core alone, the Claude Code model and DeepSeek both scored 100 at every rung and 90.0 on the index --- the instrument's ceiling. Core-H separated them by 46 points, and the separation came through the harness gain: DeepSeek's failure was one a registered acceptance criterion could catch (gain 50), the frontier model's was a specification--key gap no acceptance step can see (gain 0). A model that fails in ways a harness can catch is worth building on; the index is the first that says so.
+
+\textbf{It does not saturate by construction.} Items are generated, not stored, so the item count is a parameter; the trap must fire on every seed; the private split is an HMAC of a withheld salt whose SHA-256 is published, so it can be rotated at no cost and any past certified row re-run after the reveal. And the rule is written down: a version whose top rows tie is replaced by one with headroom --- Core-H was that replacement for v0.2 --- and never re-weighted. The number is named by its version.
+
+\textbf{It costs cents.} This is the property the others depend on for adoption. An index only its authors can run is an assertion; an index a lab can run on release morning, before the announcement, is a standard.
+
+\section{Public Rows and Certified Rows}\label{sec:rows}
+
+A \emph{public} row is self-reported on the public seeds. A \emph{certified} row was run on the private split by an evaluator who did not build the model, from a fresh root, with the salt verified against the commitment at start, and the record says so in its evaluator block --- user, host, split, instrument commit, \texttt{built\_model}, \texttt{built\_instrument}. The value of the private split is the independent runner, not secrecy: the generators are public, so anyone can make instances; what a submitter cannot do is witness their own termination reasons. The two rows that exist agree to the decimal across splits once the gating band carried twelve episodes, which is the reproducibility claim the index makes and the reason it publishes every episode.
+
+\section{The First Rows}\label{sec:first}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lcccccY@{}}
+\toprule
+Model & Split & \textbf{HIL-Index} & HG0 / HG1 / HG2 & Gain & FC / decline & Bare profile at HG0 \\
+\midrule
+DeepSeek \texttt{deepseek-chat} & public & \textbf{35.2} & 35.9 / 40.0 / 35.9 & 4.1 & 0.00 / 0.06 & C3 · SA1 · O0 · T1 \\
+DeepSeek \texttt{deepseek-chat} & private, 12 at T1 & \textbf{35.2} & 31.3 / 39.5 / 39.2 & 8.2 & 0.02 / 0.02 & C3 · SA1 · O0 · T1 \\
+Qwen 3.8 27B & public & \emph{running at the time of writing} & & & & \\
+\bottomrule
+\end{tabularx}
+\caption{HIL-Index v1, first rows. Both by the instrument's author, who did not build either model. Pair readings (Claude Code default 37.3; DeepSeek through Claude Code 83.2) are agent rows in HIL-Bench and not index rows.}
+\label{tab:rows}
+\end{table}
+
+Two rows are not a leaderboard, and the paper does not pretend otherwise. What they establish is that the pipeline runs end to end on a hosted endpoint for cents, that the number is stable across splits, and that the components explain it.
+
+\section{How It Becomes the Index}\label{sec:plan}
+
+Popularity is downstream of four things the construction already permits and the program has not yet done.
+
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+\item \textbf{Coverage on release day.} Every frontier model, every release, within the day: the run is minutes, so the constraint is API access. The first milestone is the spread --- whether the index places today's frontier between 20 and 90 or between 30 and 40 --- and it must be measured before any claim about ranking is made. If the spread is narrow, the versioning rule says what to do, and it is not to re-weight.
+\item \textbf{An evaluator who is not the author.} Certified rows need a second party with the salt. Until one exists every row is public, and the leaderboard says so on every row.
+\item \textbf{Intervals at the gating band.} A level decided by four episodes moved on one delivery; twelve to eighteen made it stable. A certified row carries an interval at the band that decides its level, or says it has none.
+\item \textbf{Agent rows beside model rows.} The harnesses people actually use --- Claude Code, Codex, OpenCode, and the fleet harness --- measured with each model, in every coordinate including memory and learning, on the same items. No other index has a column for ``what does this model become inside this harness'', and it is the column a buyer needs.
+\end{enumerate}
+
+And one thing to refuse: an index that tunes its weights to produce an interesting ranking. The weights are constants of the version, published before the rows.
+
+\section{Limitations}\label{sec:limits}
+
+Two rows, one author, one version. The $C$ bands are routine and the induction family is one item, so this is not a rule-induction index in the ARC sense. A bare model with a small output budget can be cut off while reasoning, and the index scores the decline it is allowed to make rather than the answer it might have given with more room; the budget is a constant of the version. Token cost is not captured, only calls and seconds.
+
+\section{Conclusion}
+
+An index that charges for a wrong answer, reports what a harness adds, cannot be learned because its items are generated, and costs cents to reproduce is a different instrument from an average of accuracies, and it can be run on any model today. Whether it becomes the number a release is judged by is a question of coverage and an independent evaluator, and both are stated here as the plan rather than as the result.
+
+\section*{Availability}
+
+\texttt{hilbench index}, the items, laws, records and the leaderboard page \texttt{HIL\_INDEX.md} are in \citet{yang2026hilbench}; the instrument is specified in \citet{yang2026hilbenchpaper} and the framework in \citet{yang2026unified}.
+
+\section*{Conflicts and funding}
+
+The author built the instrument and neither model measured. No external funding.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}
