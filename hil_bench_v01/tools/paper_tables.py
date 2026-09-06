@@ -69,7 +69,7 @@ def main(ds: Path, out: Path):
             m = cat.get(c["method"] or "", {})
             proc = m.get("procedure", []); ctrl = m.get("controls_or_ablations", []); met = m.get("primary_metrics", [])
             method = (r"\textbf{Intervention:} " + tex(m.get("experimental_intervention") or c["witness"]) +
-                      (r" \textbf{Procedure:} " + tex(" $\\to$ ".join(proc)) if proc else "") +
+                      (r" \textbf{Procedure:} " + " $\\to$ ".join(tex(x) for x in proc) if proc else "") +
                       r" \textbf{Verifier:} " + tex(", ".join(met) if met else "; ".join(f["symbol"] + " (" + f["locus"] + ")" for f in c["factors"])) +
                       r" \textbf{Control:} " + tex(c["control_arm"]) + (" [" + tex("; ".join(ctrl)) + "]" if ctrl else ""))
             fids = forms_for(c, forms)
