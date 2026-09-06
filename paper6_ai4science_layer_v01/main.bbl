@@ -30,8 +30,8 @@ Chengshuai Yang.
 
 \bibitem[Yang(2026{\natexlab{d}})]{yang2026hilbench}
 Chengshuai Yang.
-\newblock {HIL-Bench} v0.1: the artificial intelligence level benchmark (code,
-  generators, laws, public split, private-split commitment),
+\newblock {AI-Level Bench} v0.1: the artificial intelligence level benchmark
+  (code, generators, laws, public split, private-split commitment),
   2026{\natexlab{d}}.
 \newblock
   \url{https://github.com/integritynoble/sarsi-intelligence-level/tree/main/hil_bench_v01}.
