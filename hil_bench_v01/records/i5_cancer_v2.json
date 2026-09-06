@@ -187,7 +187,11 @@
  ],
  "consolidation": {
   "termination": "normal",
-  "seconds": 143.3
+  "seconds": 143.3,
+  "restored_from_staging": [
+   "MEMORY.md",
+   "luad-site-drop-is-coefficient-non-transport.md"
+  ]
  },
  "B": [
   {
@@ -195,105 +199,113 @@
    "arm": "ctrl",
    "Q": 0.48940809968847354,
    "termination": "normal",
-   "seconds": 191.6,
+   "seconds": 117.0,
    "choice": {
-    "approach": "Ridge Cox proportional-hazards (solver's cox_fit, ridge=10) on the development cohort using age + ordinal stage only (fit.py; risk = 0.099*age_z + 0.436*stage_z). Rationale from 10x repeated 5-fold CV on dev (explore.py): the 'male' column is constant in this split (zero variance, no information); dropping prior_malignancy raised CV C-index (0.681 vs 0.674 for all four features) and it is a records item whose ascertainment plausibly differs by institution, so it is the covariate most likely to shift across sites; ordinal stage beat one-hot stage in CV (0.681 vs 0.673) because the categorical fit learns per-level coefficients from few stage-IV cases and overfits; ridge strength barely changes the ranking with two features. Apparent dev C-index 0.690, CV 0.681, LUSC cross-histology 0.574. The external cohort's stage distribution is compressed (mean -0.34 SD, sd 0.80 vs 1.0 in dev), so the dominant predictor has less spread there and the C-index should fall; with only 29 external events the realised value is also noisy.",
-    "predicted_external_drop": 0.06
+    "approach": "Cox proportional-hazards model (Breslow partial likelihood, BFGS, ridge=1) fitted on all 370 development cases using age, overall stage (treated as a linear ordinal; the 4 unknown-stage cases mapped to stage I rather than to a fictitious lowest-risk level) and prior malignancy. The sex column is constant in this split and was dropped. Encodings (stage-only, age+stage, stage dummies, age^2, with/without prior malignancy) were compared by 20x5-fold CV on the development cohort and all fell within 0.66-0.68 C-index, i.e. within noise, so the simplest monotone, well-regularised model was chosen because it transports best across institutions with different staging practice. Risk score = X @ beta; higher = higher hazard. Development CV C-index 0.679, apparent 0.688, LUSC cross-histology 0.578.",
+    "predicted_external_drop": 0.04
    }
   },
   {
    "seed": 12,
    "arm": "disc",
-   "Q": 0.5155763239875389,
+   "Q": 0.4869158878504673,
    "termination": "normal",
-   "seconds": 215.0,
+   "seconds": 160.3,
    "choice": {
-    "approach": "Own fit (fit_final.py, shared code in coxlib.py; model search in compare.py): ridge Cox proportional-hazards fitted by Newton-Raphson on the Breslow partial likelihood, development cohort only (370 cases, 151 events). Covariates re-encoded rather than used as given: sex is constant in this split and dropped; stage is treated as categorical with stage I as reference, a stage II indicator, and stage III and IV pooled into one indicator because their fitted hazards were nearly identical in dev (0.45 vs 0.45) and the external cohort has a single stage-IV case; the 'unknown' stage level (4 dev, 5 ext cases) is imputed to stage II instead of being its own reference category so those five external patients are not ranked by a coefficient estimated from 4 cases; age enters as linear plus quadratic; prior malignancy is kept (coefficient 0.21, ridge-shrunk). Choices were made by 40x repeated 5-fold CV on dev (mean Harrell C): linear-stage Cox as in run_solver.py 0.678, one-hot stage 0.685, grouped III/IV with unknown->II 0.690, plus age^2 0.693; ridge 0.25 chosen from a small grid (differences <0.003). Pooling the TCGA-LUSC cohort (xh_*) into training was tested and lowered CV C by ~0.002, so it was not used. In-sample dev C 0.702, out-of-fold ~0.685, cross-histology (LUSC) C 0.575. Expected external C: the external cohort is skewed to stage I (72/121) with only 29 events, so most scored pairs are early-vs-early where only age and prior malignancy separate patients; reweighting out-of-fold dev predictions to the external stage mix gave ~0.69 (bootstrap sd 0.05), and a site shift in staging/follow-up practice should cost a little more, so I expect roughly 0.66-0.68 externally, i.e. a drop of about 0.03 from the in-sample dev C, with a +/-0.05 noise band from 29 events.",
-    "predicted_external_drop": 0.03
+    "approach": "Ridge Cox (ridge=1) on the 370-case development cohort, then shrink the prior-malignancy coefficient to half (0.208 -> 0.104) and keep age (0.084) and stage (0.495) at their fitted values; sex is constant in both cohorts so its weight is zero. Risk = ext_X @ beta (fit.py; params.json records beta). Why: the validated episode-A finding is that the site-disjoint drop is coefficient non-transport concentrated in the stage slope and in weak secondary terms whose sign can flip across hospitals, so stage is kept as the signal and prior malignancy is shrunk until its span (0.32 risk units) is below one stage step (0.51), making it a within-stage tie-breaker that cannot reorder cases across stages if its sign does not hold at the 10 held-out sites. Age is small, near-universally positive in LUAD, and breaks ties among the 72/121 external cases at the modal stage. This configuration was best or tied-best on dev (C 0.691), 5-fold dev CV (0.694) and the independent LUSC cohort (0.577). Case-mix reweighting was not attempted because it carried no signal for the drop in episode A. Predicted drop reflects a lower-stage, lower-variance external mix (stage sd 0.80 vs 1.00) and a low external event rate (29/121 = 0.24 vs dev 0.41), the regime where transport failed worst before.",
+    "predicted_external_drop": 0.06
    }
   },
   {
    "seed": 13,
+   "arm": "ctrl",
+   "Q": 0.6485593220338983,
+   "termination": "normal",
+   "seconds": 256.9,
+   "choice": {
+    "approach": "Ridge Cox proportional-hazards model on age, stage (ordinal, linear) and prior malignancy; the 'male' covariate is constant zero in every cohort and was dropped. The LUSC cross-histology cohort (whose outcomes are visible) was pooled into the fit as a second stratum with its own baseline hazard, sharing coefficients with the LUAD development cohort. Model form and pooling were chosen by repeated 5-fold cross-validation scored only on LUAD development folds: dev-only linear Cox gave C=0.644, stage-as-categorical, age*stage interaction and quadratic terms did not help, and pooling LUSC raised CV C to 0.655 with lower fold-to-fold variance by stabilising the age and stage coefficients (280 extra events). Ridge strength barely matters at p=3. Risk score is the linear predictor X @ beta, higher = higher hazard.",
+    "predicted_external_drop": 0.02,
+    "apparent_dev_cindex": 0.6603,
+    "cv_dev_cindex": 0.655,
+    "lusc_cindex": 0.5767,
+    "coefficients": {
+     "age": 0.12418491952925545,
+     "stage": 0.32947423921197666,
+     "prior_malignancy": 0.1546423220925459
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "arm": "disc",
+   "Q": 0.6761864406779661,
+   "termination": "normal",
+   "seconds": 200.7,
+   "choice": {
+    "approach": "Cox proportional-hazards fit on the 308-case development cohort (Newton-Raphson on the Breslow partial likelihood, ridge=1; own fit in fit_final.py rather than solver/run_solver.py, though the solver's gradient fit gives the same coefficients to 0.05). Sex is constant so the model is stage + age + prior malignancy. Development fit: stage 0.430, prior malignancy 0.255, age 0.060 (standardized units). Final score keeps the stage coefficient at its fitted value and shrinks age and prior malignancy to half their fitted values (final beta: age 0.030, stage 0.430, prior 0.127). Why: the validated finding for this dataset (episode A, sealed-seed r=-0.871) is that the site-disjoint C-index drop is coefficient non-transport, concentrated in the stage slope and in weak secondary terms whose sign can flip at held-out hospitals; case-mix reweighting carries no signal, so I did not do any. Stage direction transports at every hospital, so it carries the score; the secondary terms are kept at half weight as within-stage tie-breakers (stage has only 5 levels, so a stage-only score leaves roughly half the external pairs tied and costs ~0.02 C even when everything transports) while capping the loss if their sign does not hold externally. Evidence for the half-shrinkage: bootstrap on dev shows prior malignancy stable (sign flip 0.6%) but age unstable (sign flip 23%); both terms are positive in the LUSC cohort as well; 5-fold CV on dev favours keeping the terms (0.651-0.655 vs 0.648 stage-only); simulated external outcomes on ext_X under seven scenarios (full transport, weaker stage slope, prior-malignancy sign flip, both, age flip, LUSC-like coefficients, stage-only truth) put shrinkage 0.5 at the best mean C-index (0.5955) and within 0.002 of the best worst case, versus full weights (0.5940 mean, worst 0.546) and stage-only (0.5860 mean). Apparent development C-index of the delivered score is 0.663; the external event rate (56/183 = 0.31) is below development (0.40), which in episode A marked the seeds where transport failed worst, so I expect a real drop.",
+    "predicted_external_drop": 0.045
+   }
+  },
+  {
+   "seed": 14,
+   "arm": "ctrl",
+   "Q": 0.567741935483871,
+   "termination": "normal",
+   "seconds": 127.3,
+   "choice": {
+    "approach": "Ridge Cox proportional-hazards model (Newton-Raphson, ridge=5) on two covariates: age and ordinal overall stage, fitted on all 381 development cases (146 events). The 'male' column is constant zero in every cohort so it carries no information. Prior malignancy was dropped: 20x repeated 5-fold CV on the development cohort gave C=0.686 for age+stage versus 0.681 with prior malignancy added, i.e. no gain, and its prevalence differs between cohorts (15% dev vs 7% ext) so a coefficient on it would only add site-shift sensitivity. Stage as dummies, an age^2 term and an age x stage interaction were also tried in CV and were all within noise of or below the linear age+stage model, so the simplest, most transportable encoding was kept. Ridge strength made no material difference in CV (0.1 to 20). Scores are linear predictors X @ beta; higher = higher risk. Cross-validated development C-index ~0.686; in-sample 0.688; cross-histology (LUSC) 0.574 reported for the record.",
+    "predicted_external_drop": 0.03
+   }
+  },
+  {
+   "seed": 14,
+   "arm": "disc",
+   "Q": 0.5671554252199413,
+   "termination": "normal",
+   "seconds": 434.6,
+   "choice": {
+    "approach": "Cox proportional-hazards on the development cohort using only age and linear (ordinal) stage, near-unpenalised (ridge 0.001, gradient ascent on Breslow partial likelihood, 2000 iters); betas age=0.153, stage=0.464. Dropped `male` because it is constant (all zero) in both cohorts, and dropped `prior_malignancy` because it is a weak secondary term whose sign was shown in episode A (validated on sealed seeds, r=-0.871) to flip across hospitals and to be the main carrier of the site-disjoint drop; here it also lowers random-split CV C-index (0.6788 with vs 0.6834 without) and has half the external prevalence (7% vs 15%). Stage kept linear because categorical stage, remapping the rare lowest level, and adding age^2 did not beat linear in 300 random 1/3 holdouts (0.6833 linear vs 0.6766 categorical). Development apparent C-index 0.688, random-split CV 0.683. External cohort event rate is 0.31 vs development 0.38, a moderate ascertainment gap, so I expect a smaller drop than the worst discovery seeds; the residual drop should come from the stage slope not transporting to the held-out hospitals, which cannot be corrected without their outcomes. Scores written to results/risk_ext.npy (higher = higher risk); fit.py reproduces it.",
+    "predicted_external_drop": 0.04
+   }
+  },
+  {
+   "seed": 15,
    "arm": "ctrl",
    "Q": NaN,
    "termination": "timed_out",
-   "seconds": 600.2,
+   "seconds": 600.1,
    "choice": null
   },
   {
-   "seed": 13,
-   "arm": "disc",
-   "Q": 0.666864406779661,
-   "termination": "normal",
-   "seconds": 294.0,
-   "choice": {
-    "approach": "Cox proportional-hazards model on age, ordinal stage (I-IV, the few 'stage not reported' cases set to I) and prior malignancy; 'male' is constant in every cohort and was dropped. Fitted by Newton-Raphson on the Breslow partial likelihood with the TCGA-LUSC cohort (outcomes visible) included as a separate stratum with its own baseline hazard and 0.5 case weight, so the shared coefficients borrow strength (age effect in particular) without squamous baseline survival influencing the LUAD ranking. Chosen by repeated 5-fold CV on the development cohort: stage-only, one-hot stage, quadratic age/stage, III+IV merged, and ridge variants all sat within ~0.01 C of each other (fold-wise CV C about 0.650-0.661); the stratified pooled linear model was consistently slightly better and had the lowest bootstrap optimism (0.006 vs 0.010 dev-only, 0.017 one-hot). Fitted coefficients per SD (age, stage, prior) = [0.11, 0.403, 0.187]; apparent dev C = 0.660. The predicted drop combines that optimism with an allowance for site shift (external cohort is ~0.2 SD younger with a similar stage mix); with only 56 external events the realised C has an SE of roughly 0.04, so the drop is a central estimate.",
-    "predicted_external_drop": 0.03
-   }
-  },
-  {
-   "seed": 14,
-   "arm": "ctrl",
-   "Q": 0.5718475073313783,
-   "termination": "normal",
-   "seconds": 392.4,
-   "choice": {
-    "approach": "Ridge Cox proportional-hazards model (the solver's cox_fit, ridge=20) on two covariates: age and overall stage, both linear on the development-cohort standardised scale (fit_final.py). Sex was dropped because it is constant in this split (sd 0 in dev). Prior malignancy was dropped because it is near-null in the development cohort (event rate 0.36 with vs 0.39 without) and its prevalence differs between cohorts (15% dev vs 7% ext), so it adds noise and a shift with no signal. Model selection used 20x repeated 5-fold CV on the development cohort (no site labels are available, so folds are random): age+stage C=0.687 vs full 4-covariate model 0.682, stage alone 0.672, categorical stage dummies 0.66-0.68 (worse, over-fit at 5 levels with 146 events), quadratic age no gain. Ridge from 1 to 50 changed CV C by <0.001, so a moderate value was kept. Apparent dev C-index 0.687; cross-histology (LUSC) 0.574, reported but not the target.",
-    "predicted_external_drop": 0.03
-   }
-  },
-  {
-   "seed": 14,
-   "arm": "disc",
-   "Q": 0.547800586510264,
-   "termination": "normal",
-   "seconds": 246.7,
-   "choice": {
-    "approach": "Cox proportional-hazards model (own Newton-Raphson implementation, Breslow ties) on two covariates, age and stage, both linear. The 'male' column is constant in every cohort (std 0 after standardisation) so it carries no information and was dropped. prior_malignancy was dropped because 30x repeated 5-fold CV on the development cohort showed it adds nothing (age+stage 0.681 vs age+stage+prior_malignancy 0.676) and its prevalence is visibly lower in the held-out sites (ext mean -0.21 SD vs 0 in dev), so it is a site-varying covariate that would transport poorly. Ridge made no difference at p=2. Quadratic terms and a categorical stage encoding did not beat the linear model in CV and either had higher fold variance or would extrapolate on the external cohort's wider age spread (ext age SD 1.16 vs 1.0), so they were rejected. The training set is the development LUAD cohort pooled with the LUSC cross-histology cohort (whose outcomes are visible) at half weight per case: this gave the best mean CV C-index (0.682) and the lowest fold-to-fold variance, and the LUSC coefficients point the same direction as the LUAD ones (age and stage both increase hazard), so pooling acts as a shrinkage toward a more general lung-cancer prognostic model. Final coefficients on standardised scale: age 0.169, stage 0.389. Apparent development C-index 0.687; CV estimate 0.68; predicted external ~0.65 given only 34 events in the external cohort and the usual site-disjoint shift in staging practice and follow-up.",
-    "predicted_external_drop": 0.03
-   }
-  },
-  {
-   "seed": 15,
-   "arm": "ctrl",
-   "Q": 0.6757818896348453,
-   "termination": "normal",
-   "seconds": 388.7,
-   "choice": {
-    "approach": "Ridge Cox proportional-hazards (ridge=5, dev-standardised covariates) on age + ordinal stage only. Selected by 20x repeated 5-fold CV on the development cohort: age+stage gave out-of-fold C=0.651, beating the full 4-covariate model (0.639-0.642), stage-only (0.634), stage one-hot (<=0.641), and age^2 / age*stage terms. Prior malignancy hurt out-of-fold and was dropped; 'male' is constant in this split. With 104 events a 2-parameter linear-in-stage model is the least overfit thing that captures the signal, and it uses no site-specific information, so it should transport across hospitals. Apparent dev C=0.661. The external cohort has more stage III/IV and a wider stage spread, which partly offsets the usual site-shift penalty, so I expect only a small drop.",
-    "predicted_external_drop": 0.015
-   }
-  },
-  {
    "seed": 15,
    "arm": "disc",
-   "Q": 0.6796299328639266,
+   "Q": 0.6762731291960046,
    "termination": "normal",
-   "seconds": 266.9,
+   "seconds": 495.6,
    "choice": {
-    "approach": "Ridge Cox proportional-hazards model (solver/run_solver.py cox_fit, ridge=10, lr=0.5, 800 iters) on the four standardised covariates as given; sex is constant zero in this split so effectively age + ordinal stage + prior malignancy. Coefficients (age 0.109, male 0, stage 0.384, prior_malignancy 0.105); risk_ext = ext_X @ beta. Why: 10x repeated 5-fold CV on the 342-case / 104-event development cohort put every variant tried (stage only, age+stage, linear, stage as categorical, stage^2, stage>=III indicator, age^2, ridge 0.1-30) within ~0.015 C-index of each other (CV 0.635-0.653; linear ridge-10 = 0.639, apparent 0.657). The only variants that edged ahead did so by ranking dev stage III below stage II (stage III event rate 0.42 vs stage II 0.46 in dev), a small-sample quirk of the development sites that is clinically implausible and unlikely to transport to held-out sites that contribute proportionally 2x more stage III cases (34/149 vs 45/342). A monotone linear stage effect plus age and prior malignancy is the most robust choice; ridge level barely matters for a 3-effective-variable model. Cross-histology (LUSC) C = 0.579, reported as context only.",
-    "predicted_external_drop": 0.02
+    "approach": "Cox proportional-hazards on the development cohort using stage + age only (beta age 0.118, stage 0.374; ridge 10 on the solver's per-n scale, 3000 gradient steps), written by fit.py; params.json records the settings. Sex is constant (sd 0) in all cohorts so it is dead weight. Prior malignancy was dropped: the validated episode-A finding is that the site-disjoint C-index loss is coefficient non-transport concentrated in the stage slope and in weak secondary terms whose sign flips across hospitals (prior malignancy carried 0.066 of an 0.082 drop in one seed), and on this split prior malignancy also lowers the development out-of-bag bootstrap C-index (0.642 with it vs 0.653 without, 200 resamples). Age was kept because it raises OOB C over stage-only (0.653 vs 0.647), its coefficient has the same sign and similar size in an independent LUSC fit (0.18 vs 0.14), and the age/stage weight ratio (~0.3) is stable from ridge 1 to 30. Categorical stage did not beat linear stage out-of-bag (0.650 vs 0.653) and adds four site-sensitive parameters, so stage stays linear. Since external outcomes are hidden, no external tuning was possible; the model is chosen for transport robustness (fewest hospital-sensitive terms) rather than in-sample fit (dev in-sample C 0.661). The external cohort is stage-heavier (31% stage III/IV vs 17%) with a higher event rate (0.51 vs 0.30), which should preserve or aid discrimination on a stage-dominated score.",
+    "predicted_external_drop": 0.03
    }
   }
  ],
  "P": {
   "P": 0,
-  "delta_inc": 0.001989782235677436,
+  "delta_inc": 0.00818279884737729,
   "Q_disc": [
-   0.5155763239875389,
-   0.666864406779661,
-   0.547800586510264,
-   0.6796299328639266
+   0.4869158878504673,
+   0.6761864406779661,
+   0.5671554252199413,
+   0.6762731291960046
   ],
   "Q_ctrl": [
    0.48940809968847354,
-   NaN,
-   0.5718475073313783,
-   0.6757818896348453
+   0.6485593220338983,
+   0.567741935483871,
+   NaN
   ],
   "delta_min": 0.01,
   "n": 4,
-  "note": "no confidence bound at n=4; development gate on the mean"
+  "note": "transfer re-run with the consolidated note in the project root; no confidence bound at n=4"
  },
  "K5": {
   "K5": 0,
@@ -309,5 +321,94 @@
   "P": 0,
   "K5": 0
  },
- "finished": "2026-09-06T00:33:24Z"
+ "finished": "2026-09-06T01:17:04Z",
+ "B_history": [
+  [
+   {
+    "seed": 12,
+    "arm": "ctrl",
+    "Q": 0.48940809968847354,
+    "termination": "normal",
+    "seconds": 191.6,
+    "choice": {
+     "approach": "Ridge Cox proportional-hazards (solver's cox_fit, ridge=10) on the development cohort using age + ordinal stage only (fit.py; risk = 0.099*age_z + 0.436*stage_z). Rationale from 10x repeated 5-fold CV on dev (explore.py): the 'male' column is constant in this split (zero variance, no information); dropping prior_malignancy raised CV C-index (0.681 vs 0.674 for all four features) and it is a records item whose ascertainment plausibly differs by institution, so it is the covariate most likely to shift across sites; ordinal stage beat one-hot stage in CV (0.681 vs 0.673) because the categorical fit learns per-level coefficients from few stage-IV cases and overfits; ridge strength barely changes the ranking with two features. Apparent dev C-index 0.690, CV 0.681, LUSC cross-histology 0.574. The external cohort's stage distribution is compressed (mean -0.34 SD, sd 0.80 vs 1.0 in dev), so the dominant predictor has less spread there and the C-index should fall; with only 29 external events the realised value is also noisy.",
+     "predicted_external_drop": 0.06
+    }
+   },
+   {
+    "seed": 12,
+    "arm": "disc",
+    "Q": 0.5155763239875389,
+    "termination": "normal",
+    "seconds": 215.0,
+    "choice": {
+     "approach": "Own fit (fit_final.py, shared code in coxlib.py; model search in compare.py): ridge Cox proportional-hazards fitted by Newton-Raphson on the Breslow partial likelihood, development cohort only (370 cases, 151 events). Covariates re-encoded rather than used as given: sex is constant in this split and dropped; stage is treated as categorical with stage I as reference, a stage II indicator, and stage III and IV pooled into one indicator because their fitted hazards were nearly identical in dev (0.45 vs 0.45) and the external cohort has a single stage-IV case; the 'unknown' stage level (4 dev, 5 ext cases) is imputed to stage II instead of being its own reference category so those five external patients are not ranked by a coefficient estimated from 4 cases; age enters as linear plus quadratic; prior malignancy is kept (coefficient 0.21, ridge-shrunk). Choices were made by 40x repeated 5-fold CV on dev (mean Harrell C): linear-stage Cox as in run_solver.py 0.678, one-hot stage 0.685, grouped III/IV with unknown->II 0.690, plus age^2 0.693; ridge 0.25 chosen from a small grid (differences <0.003). Pooling the TCGA-LUSC cohort (xh_*) into training was tested and lowered CV C by ~0.002, so it was not used. In-sample dev C 0.702, out-of-fold ~0.685, cross-histology (LUSC) C 0.575. Expected external C: the external cohort is skewed to stage I (72/121) with only 29 events, so most scored pairs are early-vs-early where only age and prior malignancy separate patients; reweighting out-of-fold dev predictions to the external stage mix gave ~0.69 (bootstrap sd 0.05), and a site shift in staging/follow-up practice should cost a little more, so I expect roughly 0.66-0.68 externally, i.e. a drop of about 0.03 from the in-sample dev C, with a +/-0.05 noise band from 29 events.",
+     "predicted_external_drop": 0.03
+    }
+   },
+   {
+    "seed": 13,
+    "arm": "ctrl",
+    "Q": NaN,
+    "termination": "timed_out",
+    "seconds": 600.2,
+    "choice": null
+   },
+   {
+    "seed": 13,
+    "arm": "disc",
+    "Q": 0.666864406779661,
+    "termination": "normal",
+    "seconds": 294.0,
+    "choice": {
+     "approach": "Cox proportional-hazards model on age, ordinal stage (I-IV, the few 'stage not reported' cases set to I) and prior malignancy; 'male' is constant in every cohort and was dropped. Fitted by Newton-Raphson on the Breslow partial likelihood with the TCGA-LUSC cohort (outcomes visible) included as a separate stratum with its own baseline hazard and 0.5 case weight, so the shared coefficients borrow strength (age effect in particular) without squamous baseline survival influencing the LUAD ranking. Chosen by repeated 5-fold CV on the development cohort: stage-only, one-hot stage, quadratic age/stage, III+IV merged, and ridge variants all sat within ~0.01 C of each other (fold-wise CV C about 0.650-0.661); the stratified pooled linear model was consistently slightly better and had the lowest bootstrap optimism (0.006 vs 0.010 dev-only, 0.017 one-hot). Fitted coefficients per SD (age, stage, prior) = [0.11, 0.403, 0.187]; apparent dev C = 0.660. The predicted drop combines that optimism with an allowance for site shift (external cohort is ~0.2 SD younger with a similar stage mix); with only 56 external events the realised C has an SE of roughly 0.04, so the drop is a central estimate.",
+     "predicted_external_drop": 0.03
+    }
+   },
+   {
+    "seed": 14,
+    "arm": "ctrl",
+    "Q": 0.5718475073313783,
+    "termination": "normal",
+    "seconds": 392.4,
+    "choice": {
+     "approach": "Ridge Cox proportional-hazards model (the solver's cox_fit, ridge=20) on two covariates: age and overall stage, both linear on the development-cohort standardised scale (fit_final.py). Sex was dropped because it is constant in this split (sd 0 in dev). Prior malignancy was dropped because it is near-null in the development cohort (event rate 0.36 with vs 0.39 without) and its prevalence differs between cohorts (15% dev vs 7% ext), so it adds noise and a shift with no signal. Model selection used 20x repeated 5-fold CV on the development cohort (no site labels are available, so folds are random): age+stage C=0.687 vs full 4-covariate model 0.682, stage alone 0.672, categorical stage dummies 0.66-0.68 (worse, over-fit at 5 levels with 146 events), quadratic age no gain. Ridge from 1 to 50 changed CV C by <0.001, so a moderate value was kept. Apparent dev C-index 0.687; cross-histology (LUSC) 0.574, reported but not the target.",
+     "predicted_external_drop": 0.03
+    }
+   },
+   {
+    "seed": 14,
+    "arm": "disc",
+    "Q": 0.547800586510264,
+    "termination": "normal",
+    "seconds": 246.7,
+    "choice": {
+     "approach": "Cox proportional-hazards model (own Newton-Raphson implementation, Breslow ties) on two covariates, age and stage, both linear. The 'male' column is constant in every cohort (std 0 after standardisation) so it carries no information and was dropped. prior_malignancy was dropped because 30x repeated 5-fold CV on the development cohort showed it adds nothing (age+stage 0.681 vs age+stage+prior_malignancy 0.676) and its prevalence is visibly lower in the held-out sites (ext mean -0.21 SD vs 0 in dev), so it is a site-varying covariate that would transport poorly. Ridge made no difference at p=2. Quadratic terms and a categorical stage encoding did not beat the linear model in CV and either had higher fold variance or would extrapolate on the external cohort's wider age spread (ext age SD 1.16 vs 1.0), so they were rejected. The training set is the development LUAD cohort pooled with the LUSC cross-histology cohort (whose outcomes are visible) at half weight per case: this gave the best mean CV C-index (0.682) and the lowest fold-to-fold variance, and the LUSC coefficients point the same direction as the LUAD ones (age and stage both increase hazard), so pooling acts as a shrinkage toward a more general lung-cancer prognostic model. Final coefficients on standardised scale: age 0.169, stage 0.389. Apparent development C-index 0.687; CV estimate 0.68; predicted external ~0.65 given only 34 events in the external cohort and the usual site-disjoint shift in staging practice and follow-up.",
+     "predicted_external_drop": 0.03
+    }
+   },
+   {
+    "seed": 15,
+    "arm": "ctrl",
+    "Q": 0.6757818896348453,
+    "termination": "normal",
+    "seconds": 388.7,
+    "choice": {
+     "approach": "Ridge Cox proportional-hazards (ridge=5, dev-standardised covariates) on age + ordinal stage only. Selected by 20x repeated 5-fold CV on the development cohort: age+stage gave out-of-fold C=0.651, beating the full 4-covariate model (0.639-0.642), stage-only (0.634), stage one-hot (<=0.641), and age^2 / age*stage terms. Prior malignancy hurt out-of-fold and was dropped; 'male' is constant in this split. With 104 events a 2-parameter linear-in-stage model is the least overfit thing that captures the signal, and it uses no site-specific information, so it should transport across hospitals. Apparent dev C=0.661. The external cohort has more stage III/IV and a wider stage spread, which partly offsets the usual site-shift penalty, so I expect only a small drop.",
+     "predicted_external_drop": 0.015
+    }
+   },
+   {
+    "seed": 15,
+    "arm": "disc",
+    "Q": 0.6796299328639266,
+    "termination": "normal",
+    "seconds": 266.9,
+    "choice": {
+     "approach": "Ridge Cox proportional-hazards model (solver/run_solver.py cox_fit, ridge=10, lr=0.5, 800 iters) on the four standardised covariates as given; sex is constant zero in this split so effectively age + ordinal stage + prior malignancy. Coefficients (age 0.109, male 0, stage 0.384, prior_malignancy 0.105); risk_ext = ext_X @ beta. Why: 10x repeated 5-fold CV on the 342-case / 104-event development cohort put every variant tried (stage only, age+stage, linear, stage as categorical, stage^2, stage>=III indicator, age^2, ridge 0.1-30) within ~0.015 C-index of each other (CV 0.635-0.653; linear ridge-10 = 0.639, apparent 0.657). The only variants that edged ahead did so by ranking dev stage III below stage II (stage III event rate 0.42 vs stage II 0.46 in dev), a small-sample quirk of the development sites that is clinically implausible and unlikely to transport to held-out sites that contribute proportionally 2x more stage III cases (34/149 vs 45/342). A monotone linear stage effect plus age and prior malignancy is the most robust choice; ridge level barely matters for a 3-effective-variable model. Cross-histology (LUSC) C = 0.579, reported as context only.",
+     "predicted_external_drop": 0.02
+    }
+   }
+  ]
+ ]
 }
