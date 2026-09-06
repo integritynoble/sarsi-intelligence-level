@@ -99,6 +99,8 @@ def _build_parser() -> argparse.ArgumentParser:
     i5t = sub.add_parser("i5-transfer", help="re-run only the transfer arms of a validated I5 campaign, restoring the pair's own staged note as project memory"); i5t.add_argument("--root", type=Path, required=True); i5t.add_argument("--exec", dest="executor", required=True); i5t.add_argument("--limit-b", type=int, default=600); i5t.add_argument("--staged-from", type=Path, default=None)
     lt = sub.add_parser("latent", help="fit the unbounded latent AI-Level Index over every bare-model record (current-fit diagnostic until anchors are ratified)")
     lt.add_argument("--records", type=Path, default=Path(__file__).resolve().parents[1] / "records"); lt.add_argument("--split", choices=("public", "private"), default="public"); lt.add_argument("--out", type=Path, default=None)
+    hg = sub.add_parser("hg-conform", help="certify the reference harness rungs HG0-HG2 offline: E * U * Delta_g * K against the previous rung on the same seeds"); hg.add_argument("--root", type=Path, required=True); hg.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
+    ce = sub.add_parser("cells", help="print the cell grid coverage: one witness per level of every ladder, with status"); ce.add_argument("--json", action="store_true")
     c = sub.add_parser("commit-private"); c.add_argument("--salt-file", required=True)
     return ap
 
@@ -117,6 +119,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         if a.key: core.LLM_KEY = a.key
         if a.model: core.LLM_MODEL = a.model
         core.rerun_gating(a.root, seeds, a.executor, a.limit, band=a.band); return 0
+    if a.cmd == "hg-conform":
+        from . import hg_conform
+        a.root.mkdir(parents=True, exist_ok=True); s = hg_conform.run_all(a.root, seeds=tuple(a.seeds)); print(json.dumps(s, indent=1, ensure_ascii=False)); return 0
+    if a.cmd == "cells":
+        from . import cells
+        if a.json: print(json.dumps(cells.CELLS, indent=1, ensure_ascii=False)); return 0
+        for r in cells.coverage(): print(f"{r['ladder']:6s} {r['cell']:9s} {r['status']:14s} {r['key']:28s} {r['generator']:40s} {r['gate']}")
+        print(json.dumps(cells.counts(), ensure_ascii=False)); return 0
     if a.cmd == "latent":
         from . import latent
         recs = latent.load_records(a.records, a.split); out = latent.latent_index(recs)

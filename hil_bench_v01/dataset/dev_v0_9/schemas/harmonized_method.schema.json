@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HIL Harmonized Canonical Method Record",
+  "type": "object",
+  "required": [
+    "form_id",
+    "coordinate",
+    "level",
+    "canonical_method",
+    "protocol_style_version",
+    "capability_being_tested",
+    "experimental_intervention",
+    "procedure",
+    "controls_or_ablations",
+    "primary_metrics",
+    "certification_gate",
+    "required_lower_levels",
+    "resource_envelope",
+    "binding_status",
+    "dataset_version"
+  ],
+  "properties": {
+    "form_id": {
+      "type": "string"
+    },
+    "coordinate": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "canonical_method": {
+      "type": "string"
+    },
+    "protocol_style_version": {
+      "const": "HIL-Method-1.0"
+    },
+    "capability_being_tested": {
+      "type": "string"
+    },
+    "experimental_intervention": {
+      "type": "string"
+    },
+    "procedure": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "controls_or_ablations": {
+      "type": "array"
+    },
+    "primary_metrics": {
+      "type": "array"
+    },
+    "certification_gate": {},
+    "required_lower_levels": {
+      "type": "array"
+    },
+    "resource_envelope": {
+      "type": "object"
+    },
+    "binding_status": {
+      "enum": [
+        "bound",
+        "development-bound",
+        "specification-only"
+      ]
+    },
+    "dataset_version": {
+      "const": "0.8"
+    }
+  }
+}

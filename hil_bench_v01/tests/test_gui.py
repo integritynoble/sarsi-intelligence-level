@@ -17,9 +17,9 @@ class GuiTests(unittest.TestCase):
         r = gui_laws.failure_record(0.3, 0.32, 0.33); self.assertEqual(r["limit"], "cognition")
         d = gui_scoring.failure_attribution(0.2, 0.9, 0.25); self.assertAlmostEqual(d["delta_GP"], 0.7)
     def test_dataset_v0_7_validates_with_the_gui_package(self):
-        out = subprocess.run([sys.executable, str(PKG / "tools" / "validate_dataset.py"), str(PKG / "dataset" / "dev_v0_7")], capture_output=True, text=True)
+        out = subprocess.run([sys.executable, str(PKG / "tools" / "validate_dataset.py"), str(PKG / "dataset" / "dev_v0_9")], capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stdout + out.stderr)
-        forms = (PKG / "dataset" / "dev_v0_7" / "C_Bench" / "GUI_SCREEN" / "public_forms.jsonl").read_text().splitlines()
+        forms = (PKG / "dataset" / "dev_v0_9" / "C_Bench" / "GUI_SCREEN" / "public_forms.jsonl").read_text().splitlines()
         self.assertEqual(len(forms), 14)
     def test_ailevel_alias_is_the_same_instrument(self):
         import ailevel, hilbench
