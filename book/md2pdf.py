@@ -41,7 +41,9 @@ while i < len(lines):
     elif re.match(r'^\d+\. ', l):
         if not in_ol: close(); body.append(r'\begin{enumerate}[leftmargin=1.6em,itemsep=2pt]'); in_ol = True
         body.append(r'\item ' + inline(re.sub(r'^\d+\. ', '', l)))
-    elif l.strip() == '': close(); body.append('')
+    elif l.strip() == '':
+        close()
+        if any(b.strip() for b in body): body.append('')
     elif not body and l.startswith('**') and len(title_block) < 8: title_block.append(inline(l) + r'\\[2pt]')
     elif not body and l.startswith('*') and len(title_block) < 9: title_block.append(r'\\[4pt]' + inline(l) + r'\\[14pt]')
     else: body.append(inline(l))
