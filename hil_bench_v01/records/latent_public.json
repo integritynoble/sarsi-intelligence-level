@@ -1,0 +1,98 @@
+{
+ "scale": {
+  "origin": "mean item difficulty = 0 per coordinate",
+  "s": 10.0,
+  "weights_v1": {
+   "C": 0.25,
+   "I": 0.25,
+   "DI": 0.25,
+   "SA": 0.25
+  },
+  "status": "CURRENT-FIT DIAGNOSTIC: anchors not yet ratified; the scale moves when rows are added, and a frozen historical index is published only after ratification"
+ },
+ "coordinates": {
+  "C": {
+   "n_items": 0,
+   "dropped_no_variance": 42,
+   "difficulty_range": null
+  },
+  "DI": {
+   "n_items": 6,
+   "dropped_no_variance": 72,
+   "difficulty_range": [
+    0.0,
+    0.0
+   ]
+  },
+  "SA": {
+   "n_items": 4,
+   "dropped_no_variance": 14,
+   "difficulty_range": [
+    0.0,
+    0.0
+   ]
+  },
+  "O": {
+   "n_items": 0,
+   "dropped_no_variance": 3,
+   "difficulty_range": null
+  }
+ },
+ "models": {
+  "deepseek-chat": {
+   "theta": {
+    "C": 0.0,
+    "DI": 4.817,
+    "SA": 4.48,
+    "O": 0.0
+   },
+   "se": {
+    "C": 10.0,
+    "DI": 4.16,
+    "SA": 4.291,
+    "O": 10.0
+   },
+   "theta_H": 3.099,
+   "se_H": 3.883,
+   "HILIndex_latent": 131.0,
+   "HILIndex_latent_ci95": [
+    54.9,
+    207.1
+   ],
+   "weights_used": {
+    "C": 0.333,
+    "DI": 0.333,
+    "SA": 0.333
+   },
+   "I": "I0 by construction (bare model); theta_I not estimated"
+  },
+  "qwen3.8:27b": {
+   "theta": {
+    "C": 0.0,
+    "DI": -4.817,
+    "SA": -4.48,
+    "O": 0.0
+   },
+   "se": {
+    "C": 10.0,
+    "DI": 4.16,
+    "SA": 4.291,
+    "O": 10.0
+   },
+   "theta_H": -3.099,
+   "se_H": 3.883,
+   "HILIndex_latent": 69.0,
+   "HILIndex_latent_ci95": [
+    -7.1,
+    145.1
+   ],
+   "weights_used": {
+    "C": 0.333,
+    "DI": 0.333,
+    "SA": 0.333
+   },
+   "I": "I0 by construction (bare model); theta_I not estimated",
+   "compact": "69.0 | U0 | [C3, I0, T0/H0, SA1] | M0"
+  }
+ }
+}

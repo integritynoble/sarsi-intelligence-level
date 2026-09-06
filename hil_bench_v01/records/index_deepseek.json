@@ -1,0 +1,1706 @@
+{
+ "label": "deepseek-chat",
+ "mode": "llm",
+ "model": "deepseek-chat",
+ "base": "https://api.deepseek.com/v1",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "rungs": {
+  "HG0": {
+   "episodes": [
+    {
+     "family": "code_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "code_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.1,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "funding_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "funding_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "job_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "job_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "business_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "business_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 83.6,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.1,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG0",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    }
+   ],
+   "C": [
+    {
+     "band": "C0",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.6
+    },
+    {
+     "band": "C0",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.7
+    },
+    {
+     "band": "C0",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.6
+    },
+    {
+     "band": "C1",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.7
+    },
+    {
+     "band": "C1",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.7
+    },
+    {
+     "band": "C1",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.5
+    },
+    {
+     "band": "C2",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.5
+    },
+    {
+     "band": "C2",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.7
+    },
+    {
+     "band": "C2",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.5
+    },
+    {
+     "band": "C3",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.0
+    },
+    {
+     "band": "C3",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.0
+    },
+    {
+     "band": "C3",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.4
+    },
+    {
+     "band": "C4",
+     "item": "hc_rule",
+     "seed": 0,
+     "pass": false
+    },
+    {
+     "band": "C4",
+     "item": "hc_sched",
+     "seed": 0,
+     "pass": true
+    }
+   ],
+   "SA1": [
+    {
+     "seed": 0,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 1,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 2,
+     "pass": true,
+     "mode": null
+    }
+   ],
+   "SA2": [
+    {
+     "seed": 0,
+     "pass": false,
+     "mode": "fabricated"
+    },
+    {
+     "seed": 1,
+     "pass": false,
+     "mode": "fabricated"
+    },
+    {
+     "seed": 2,
+     "pass": true,
+     "mode": null
+    }
+   ],
+   "O0": {
+    "pass": true,
+    "mode": null
+   },
+   "profile": {
+    "C": "C3",
+    "M": "M0",
+    "I": "I0",
+    "O": "O0",
+    "SA": "SA1",
+    "T_frontier": "T1",
+    "H": "H0",
+    "A_DI_net": 71.4,
+    "A_DI_gross": 71.4,
+    "false_completions": 0,
+    "held_back": 1,
+    "U": "U0",
+    "U_bottleneck": "I0"
+   },
+   "HLIS": 35.9,
+   "HLIS_dims": [
+    "C",
+    "I",
+    "DI",
+    "SA",
+    "O"
+   ],
+   "achievement": {
+    "C": 0.8,
+    "I": 0.1,
+    "DI": 0.7140000000000001,
+    "SA": 0.35,
+    "O": 0.3
+   },
+   "seconds": 146.4
+  },
+  "HG1": {
+   "episodes": [
+    {
+     "family": "code_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "code_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "funding_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "funding_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "job_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.0,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "job_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "business_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 7.2,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "business_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 82.5,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 9.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 12.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG1",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.2,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    }
+   ],
+   "C": [
+    {
+     "band": "C0",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.7
+    },
+    {
+     "band": "C0",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.3
+    },
+    {
+     "band": "C0",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.3
+    },
+    {
+     "band": "C1",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.6
+    },
+    {
+     "band": "C1",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.4
+    },
+    {
+     "band": "C1",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.6
+    },
+    {
+     "band": "C2",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 3.3
+    },
+    {
+     "band": "C2",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 3.7
+    },
+    {
+     "band": "C2",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.5
+    },
+    {
+     "band": "C3",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.0
+    },
+    {
+     "band": "C3",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 5.0
+    },
+    {
+     "band": "C3",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.2
+    },
+    {
+     "band": "C4",
+     "item": "hc_rule",
+     "seed": 0,
+     "pass": false
+    },
+    {
+     "band": "C4",
+     "item": "hc_sched",
+     "seed": 0,
+     "pass": true
+    }
+   ],
+   "SA1": [
+    {
+     "seed": 0,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 1,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 2,
+     "pass": true,
+     "mode": null
+    }
+   ],
+   "SA2": [
+    {
+     "seed": 0,
+     "pass": false,
+     "mode": "fabricated"
+    },
+    {
+     "seed": 1,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 2,
+     "pass": false,
+     "mode": "fabricated"
+    }
+   ],
+   "O0": {
+    "pass": true,
+    "mode": null
+   },
+   "profile": {
+    "C": "C3",
+    "M": "M0",
+    "I": "I0",
+    "O": "O0",
+    "SA": "SA1",
+    "T_frontier": "T1",
+    "H": "H0",
+    "A_DI_net": 71.4,
+    "A_DI_gross": 71.4,
+    "false_completions": 0,
+    "held_back": 1,
+    "U": "U0",
+    "U_bottleneck": "I0"
+   },
+   "HLIS": 35.9,
+   "HLIS_dims": [
+    "C",
+    "I",
+    "DI",
+    "SA",
+    "O"
+   ],
+   "achievement": {
+    "C": 0.8,
+    "I": 0.1,
+    "DI": 0.7140000000000001,
+    "SA": 0.35,
+    "O": 0.3
+   },
+   "seconds": 172.2
+  },
+  "HG2": {
+   "episodes": [
+    {
+     "family": "code_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.6,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "code_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "funding_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 2.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "funding_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.8,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "job_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "job_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.5,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.3,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "business_t0",
+     "band": "T0",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 4.5,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "business_t0",
+     "band": "T0",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 5.1,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.2,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "paper_t1",
+     "band": "T1",
+     "seed": 1,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 6.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_rule",
+     "band": "T2",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": false,
+     "held_back": true,
+     "verifier_pass": false,
+     "delivered_correct": false,
+     "false_completion": false,
+     "failure_mode": "declined",
+     "attempts": 3,
+     "termination_reason": "normal",
+     "seconds": 253.7,
+     "reply": {
+      "first_finish_reason": "length",
+      "final_finish_reason": "stop",
+      "turns": 3,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_sched",
+     "band": "T2",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 12.9,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": true,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_contra",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 8.4,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 5,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    },
+    {
+     "family": "hc_decoy",
+     "band": "T1",
+     "seed": 0,
+     "budget": "H0",
+     "rung": "HG2",
+     "delivered": true,
+     "held_back": false,
+     "verifier_pass": true,
+     "delivered_correct": true,
+     "false_completion": false,
+     "failure_mode": null,
+     "attempts": 1,
+     "termination_reason": "normal",
+     "seconds": 3.7,
+     "reply": {
+      "first_finish_reason": "stop",
+      "final_finish_reason": "stop",
+      "turns": 4,
+      "retried_json_only": false,
+      "parsed": true
+     }
+    }
+   ],
+   "C": [
+    {
+     "band": "C0",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.5
+    },
+    {
+     "band": "C0",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.6
+    },
+    {
+     "band": "C0",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.8
+    },
+    {
+     "band": "C1",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.6
+    },
+    {
+     "band": "C1",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.5
+    },
+    {
+     "band": "C1",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 2.2
+    },
+    {
+     "band": "C2",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 3.6
+    },
+    {
+     "band": "C2",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 3.8
+    },
+    {
+     "band": "C2",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.8
+    },
+    {
+     "band": "C3",
+     "seed": 0,
+     "pass": true,
+     "mode": null,
+     "seconds": 3.9
+    },
+    {
+     "band": "C3",
+     "seed": 1,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.5
+    },
+    {
+     "band": "C3",
+     "seed": 2,
+     "pass": true,
+     "mode": null,
+     "seconds": 4.8
+    },
+    {
+     "band": "C4",
+     "item": "hc_rule",
+     "seed": 0,
+     "pass": false
+    },
+    {
+     "band": "C4",
+     "item": "hc_sched",
+     "seed": 0,
+     "pass": true
+    }
+   ],
+   "SA1": [
+    {
+     "seed": 0,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 1,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 2,
+     "pass": true,
+     "mode": null
+    }
+   ],
+   "SA2": [
+    {
+     "seed": 0,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 1,
+     "pass": true,
+     "mode": null
+    },
+    {
+     "seed": 2,
+     "pass": false,
+     "mode": "fabricated"
+    }
+   ],
+   "O0": {
+    "pass": true,
+    "mode": null
+   },
+   "profile": {
+    "C": "C3",
+    "M": "M0",
+    "I": "I0",
+    "O": "O0",
+    "SA": "SA1",
+    "T_frontier": "T1",
+    "H": "H0",
+    "A_DI_net": 71.4,
+    "A_DI_gross": 71.4,
+    "false_completions": 0,
+    "held_back": 1,
+    "U": "U0",
+    "U_bottleneck": "I0"
+   },
+   "HLIS": 35.9,
+   "HLIS_dims": [
+    "C",
+    "I",
+    "DI",
+    "SA",
+    "O"
+   ],
+   "achievement": {
+    "C": 0.8,
+    "I": 0.1,
+    "DI": 0.7140000000000001,
+    "SA": 0.35,
+    "O": 0.3
+   },
+   "seconds": 338.8
+  }
+ },
+ "evaluator": {
+  "user": "spiritai",
+  "host": "agent-prod-restored",
+  "split": "public",
+  "built_pair": false,
+  "built_instrument": true,
+  "instrument_commit": "8fb8b5d",
+  "note": "the instrument's author ran the reading; the pairs measured (Claude Code default, DeepSeek) were built by their vendors"
+ },
+ "started": "2026-09-06T03:00:10Z",
+ "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity",
+ "n_seeds": 3,
+ "n_hard": 2,
+ "HIL": {
+  "HIL_level": "HG2",
+  "HIL_AUC": 35.9,
+  "HIL_ceiling": 35.9,
+  "harness_gain": 0.0,
+  "harnessability": 0.0,
+  "HIL_score": 32.3,
+  "curve": {
+   "HG0": 35.9,
+   "HG1": 35.9,
+   "HG2": 35.9
+  }
+ },
+ "finished": "2026-09-06T03:15:09Z",
+ "index": {
+  "version": "HIL-Index v1 (HIL-Bench v0.2 Core+Core-H, reference ladder HG0-HG2)",
+  "model": "deepseek-chat",
+  "endpoint": "https://api.deepseek.com/v1",
+  "split": "public",
+  "HIL_Index": 32.3,
+  "curve": {
+   "HG0": 35.9,
+   "HG1": 35.9,
+   "HG2": 35.9
+  },
+  "AUC": 35.9,
+  "ceiling": 35.9,
+  "harness_gain": 0.0,
+  "harnessability": 0.0,
+  "delivered_correct_rate": 0.938,
+  "false_completion_rate": 0.0,
+  "decline_rate": 0.062,
+  "episodes": 48,
+  "bare": {
+   "C": "C3",
+   "SA": "SA1",
+   "O": "O0",
+   "T_frontier": "T1",
+   "U": "U0"
+  },
+  "best_rung": {
+   "C": "C3",
+   "SA": "SA1",
+   "O": "O0",
+   "T_frontier": "T1",
+   "U": "U0"
+  },
+  "memory": "M0 by construction: a bare model persists nothing across a restart",
+  "seeds_per_family": 3,
+  "evaluator": {
+   "user": "spiritai",
+   "host": "agent-prod-restored",
+   "split": "public",
+   "built_pair": false,
+   "built_instrument": true,
+   "instrument_commit": "8fb8b5d",
+   "note": "the instrument's author ran the reading; the pairs measured (Claude Code default, DeepSeek) were built by their vendors"
+  },
+  "finished": "2026-09-06T03:15:09Z"
+ }
+}

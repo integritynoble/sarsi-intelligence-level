@@ -42,13 +42,24 @@ on the private split (`--split private --salt-file ...`), and says so.
 
 | Model | Endpoint | Split | HIL-Index | HG0 / HG1 / HG2 | Gain | False-completion rate | Decline rate | Bare profile at HG0 | Evaluator |
 |---|---|---|---|---|---|---|---|---|---|
-| DeepSeek `deepseek-chat` (V4-flash) | api.deepseek.com/v1 | public, 2 seeds | **35.2** | 35.9 / 40.0 / 35.9 | 4.1 | 0.00 | 0.06 | C3 · SA1 · O0 · T1 · U0 | author (built the instrument, not the model) |
+| DeepSeek `deepseek-chat` (V4-flash) | api.deepseek.com/v1 | public, 3 seeds/family | **32.3** | 35.9 / 35.9 / 35.9 | 0.0 | 0.00 | 0.05 | C3 · SA1 · O0 · T1 · U0 | author (built the instrument, not the model) |
 | DeepSeek `deepseek-chat` (V4-flash) | api.deepseek.com/v1 | **private**, 12 at T1 | **35.2** | 31.3 / 39.5 / 39.2 | 8.2 | 0.02 | 0.02 | C3 · SA1 · O0 · T1 · U0 | author |
-| Qwen 3.8 27B `qwen3.8:27b` | physicsworldmodel.org/qwen/v1 | public, 3 seeds | *running* | | | | | | author |
+| Qwen 3.8 27B `qwen3.8:27b` | physicsworldmodel.org/qwen/v1 | public, 3 seeds/family | **30.3** | 26.1 / 34.9 / 31.3 | 8.8 | 0.08 | 0.06 | C3 · SA1 · O0 · T0 · U0 | author |
 | Claude (bare, Anthropic API) | api.anthropic.com | — | *pending an API key* | | | | | | |
 
 Pair readings are **not** index rows — a pair's HIL-Score is a property of model *and* harness — and are reported
 separately in the paper: Claude Code default 37.3, DeepSeek-through-Claude-Code 83.2 (`llm-harness`).
+
+
+## Two scales, one construction
+
+The rows above are the **bounded** v1 composite (0.55·AUC + 0.35·Ceiling + 0.10·Harnessability, in [0, 100]). The
+index paper's headline is an **unbounded, difficulty-calibrated latent** scale: for each evidence unit
+P(Y = 1) = σ(θ_md − b_i), θ_H = Σ w_d θ_md, HILIndex = 100 + 10·θ_H. `python3 -m hilbench latent` fits it over every
+bare-model record in `records/` (current-fit diagnostic: anchors are not ratified, so the scale moves as rows are added;
+a frozen historical index is published only after ratification). With few rows most items carry no between-model
+variance and are dropped, which the output reports; the latent scale becomes meaningful with a weak-to-frontier
+population, which is the roadmap's step 7. Output: `records/latent_public.json`.
 
 ## Versioning
 

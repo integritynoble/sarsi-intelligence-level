@@ -97,6 +97,8 @@ def _build_parser() -> argparse.ArgumentParser:
     i5 = sub.add_parser("i5", help="run the I5-DISC development campaign on the cancer field agent"); i5.add_argument("--label", required=True); i5.add_argument("--exec", dest="executor", required=True); i5.add_argument("--root", type=Path, required=True)
     i5.add_argument("--limit-a", type=int, default=1800); i5.add_argument("--limit-b", type=int, default=600)
     i5t = sub.add_parser("i5-transfer", help="re-run only the transfer arms of a validated I5 campaign, restoring the pair's own staged note as project memory"); i5t.add_argument("--root", type=Path, required=True); i5t.add_argument("--exec", dest="executor", required=True); i5t.add_argument("--limit-b", type=int, default=600); i5t.add_argument("--staged-from", type=Path, default=None)
+    lt = sub.add_parser("latent", help="fit the unbounded latent HIL Index over every bare-model record (current-fit diagnostic until anchors are ratified)")
+    lt.add_argument("--records", type=Path, default=Path(__file__).resolve().parents[1] / "records"); lt.add_argument("--split", choices=("public", "private"), default="public"); lt.add_argument("--out", type=Path, default=None)
     c = sub.add_parser("commit-private"); c.add_argument("--salt-file", required=True)
     return ap
 
@@ -115,6 +117,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         if a.key: core.LLM_KEY = a.key
         if a.model: core.LLM_MODEL = a.model
         core.rerun_gating(a.root, seeds, a.executor, a.limit, band=a.band); return 0
+    if a.cmd == "latent":
+        from . import latent
+        recs = latent.load_records(a.records, a.split); out = latent.latent_index(recs)
+        for lab, R in recs:
+            if "index" in R: out["models"][lab]["compact"] = latent.compact_string(R["index"], out, lab)
+        text = json.dumps(out, indent=1); print(text)
+        if a.out: a.out.write_text(text)
+        return 0
     if a.cmd == "i5-transfer":
         from . import i5_campaign
         i5_campaign.rerun_transfer(a.root, a.executor, a.limit_b, staged_from=a.staged_from); return 0
