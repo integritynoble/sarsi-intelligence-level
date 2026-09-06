@@ -1,0 +1,40 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Artificial Analysis}(2026)]{aa2026index}
+{Artificial Analysis}.
+\newblock Artificial analysis intelligence index: methodology, 2026.
+\newblock
+  \url{https://artificialanalysis.ai/methodology/intelligence-benchmarking}.
+
+\bibitem[{Epoch AI}(2026)]{epoch2026eci}
+{Epoch AI}.
+\newblock Epoch capabilities index (eci), 2026.
+\newblock \url{https://epoch.ai/benchmarks/eci}.
+
+\bibitem[Yang(2026{\natexlab{a}})]{yang2026hilbench}
+Chengshuai Yang.
+\newblock {HIL-Bench} v0.1: the harness intelligence level benchmark (code,
+  generators, public split, private-split commitment), 2026{\natexlab{a}}.
+\newblock
+  \url{https://github.com/integritynoble/AI4Science/tree/main/sarsi_intelligence_level/hil_bench_v01}.
+
+\bibitem[Yang(2026{\natexlab{b}})]{yang2026hilbenchpaper}
+Chengshuai Yang.
+\newblock {HIL-Bench}: Measuring the intelligence level of agents and language
+  models in every coordinate, 2026{\natexlab{b}}.
+\newblock Draft v0.1,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}.
+
+\bibitem[Yang and Xue(2026)]{yang2026unified}
+Chengshuai Yang and Ting Xue.
+\newblock Unified intelligence theory and the harness intelligence level: A
+  cumulative, harness-measurable hierarchy.
+\newblock \emph{Version 2.4,
+  \url{https://github.com/integritynoble/sarsi-intelligence-level}}, 2026.
+
+\end{thebibliography}

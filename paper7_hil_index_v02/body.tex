@@ -1,0 +1,181 @@
+\begin{document}
+\begin{center}
+{\LARGE\bfseries The HIL Index}\\[6pt]
+{\large\bfseries A Non-Saturating, Harness-Standardized Capability Index for AI Models and Agents}\\[14pt]
+{\large Chengshuai Yang$^{1,*}$ \quad Ting Xue$^{1}$}\\[5pt]
+{\normalsize $^{1}$NextGen PlatformAI C Corp, USA}\\[4pt]
+{\normalsize $^{*}$Correspondence: \href{mailto:spiritai@platformai.org}{spiritai@platformai.org}}\\[10pt]
+{\small September 6, 2026 --- working draft v1.1 (supersedes v1.0; the rapid tier and the latent tier are both implemented in \texttt{hil\_bench\_v01})}
+\end{center}
+
+\begin{abstract}
+Model comparison is dominated by composite indices --- the Artificial Analysis Intelligence Index and the Epoch Capabilities Index among them --- that compress many evaluations into one number. They are useful for that reason and they share recurring problems: component benchmarks saturate and are swapped, static public tasks become optimization targets, historical scores lose their meaning, a confident wrong answer costs nothing, and raw model capability is conflated with the harness through which it was measured. This paper proposes the \emph{Harness Intelligence Level Index}, a public model-comparison index built on Unified Intelligence Theory and HIL-Bench that complements the invariant capability levels rather than redefining them. For a singleton model the headline is derived from latent achievements in cognition $C$, individual intelligence $I$, delegation $DI$ and operational self-awareness $SA$, with memory $M$ reported beside it to avoid double counting; the categorical level and the full profile remain primary and the index exists for ranking, trend analysis and communication. The architecture combines invariant semantic levels; difficulty-calibrated latent scores with no fixed maximum; permanent anchors plus fresh procedurally generated hidden witnesses; a frozen reference-harness family; and validation against downstream outcomes. Two tiers are implemented. The \emph{rapid} tier is a bounded composite over a three-rung reference ladder, reproducible for cents with one command, that prices a delivered wrong answer below a declared inability and reports harness gain; it has three rows. The \emph{latent} tier fits the unbounded scale by maximum likelihood over every published row; with two models it is degenerate, as the design predicts for a tiny population, and the paper reports that rather than a number. The intended public result is a structured string --- $\text{HILIndex} \mid \text{HIL-Level} \mid [C, I, T/H, SA] \mid M$ --- with uncertainty, cost, false-completion rate, resource envelope and Harness Gain beside it. The central hypothesis is that a standardized agent-realization index measures something neither a weighted collection of contemporary benchmarks nor a general latent benchmark scale captures: how much verified intelligence a model realizes as a controlled agent, and how much work can consequently be delegated to it with limited human cognitive intervention. Whether it becomes more widely used than the incumbents is to be earned by reliability, contamination resistance, coverage and predictive validity, and the plan for each is stated.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Harness Intelligence Level; HIL Index; latent capability; item response theory; benchmark saturation; false completion; harness gain; delegation frontier; reference harness; leaderboard; governance
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}\label{sec:intro}
+
+Capability measurement faces a tension between simplicity and fidelity. Users, researchers, journalists and buyers benefit from one number that makes frontier models easy to compare; yet the capabilities that matter for deployed systems are not one-dimensional. Solving a hard mathematics problem is different from keeping useful state across a restart; persistence is different from learning from verified experience; learning is different from improving the mechanism responsible for cognition; strong one-shot reasoning is different from finishing a long task with little human intervention. Unified Intelligence Theory \citep{yang2026unified} separates these families rather than collapsing them: the measured core is $[C, I, O, T, H, SA]$, delegation is the joint surface of task difficulty $T$ and human cognitive intervention $H$ at verified reliability $p$, memory $M$ is a prerequisite ladder measured on its own, and every behavioural capability is a property of a pair $A = A(m, h)$ --- a frozen model $m$ inside a harness $h$. Attributing a pair's intelligence to the model alone confounds the model with persistence, tools, verification, retry and memory.
+
+This paper asks a narrower practical question: \emph{can that framework produce one public index as simple to use as the existing leaderboards while remaining non-saturating, harness-controlled, interpretable and predictive of real agent performance?} We propose that it can, provided the public index is treated as a distinct measurement layer above the theory and the benchmark \citep{yang2026hilbenchpaper}, never as a replacement for the profile beneath it.
+
+\subsection{Contributions}
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item a non-saturating latent HIL Index with no fixed maximum, and a bounded rapid tier that any lab can reproduce for cents;
+\item a fixed HIL Reference Harness family for fair base-model comparison, of which three rungs are built and measured;
+\item anchored coordinate scales for $C$, $I$, $DI$ and $SA$, with memory reported beside them;
+\item a separation between semantic capability level and difficulty within the level, so saturation never redefines a level;
+\item a three-surface evidence model --- public references, permanent private anchors, fresh hidden witnesses --- of which the first and third are implemented as seeded generators and a salt-derived private split;
+\item a public Delegation Frontier and Harness Gain beside the headline, both measured;
+\item a validation tournament against external outcomes and competing indices, and falsifiable predictions;
+\item versioning and governance rules that keep historical scores interpretable;
+\item the first rows, and the honest state of the latent tier at a population of two.
+\end{enumerate}
+
+\section{Relationship to Existing Capability Indices}\label{sec:related}
+
+\textbf{Artificial Analysis Intelligence Index.} As of September 2026, v4.2 combines ten evaluations across four weighted categories --- Agents 30\%, Coding 20\%, Scientific Reasoning 20\%, General 30\% \citep{aa2026index} --- is independently run, reports uncertainty, and keeps cost and speed separate from intelligence, a product principle this index preserves. Its maintenance history is the argument for a different design: GPQA Diamond was removed as saturated, new components were added, and private held-out weighting was doubled to reduce gaming. These are reasonable moves, and they show that frontier discrimination on a fixed mixture requires recurring changes to the suite. Our response: \emph{semantic capability stays fixed while witness difficulty may increase.}
+
+\textbf{Epoch Capabilities Index.} ECI addresses saturation directly: a general capability scale over roughly sixty benchmarks with an item-response model, $\text{performance}(m, b) = \sigma(\alpha_b[C_m - D_b])$, explicitly unbounded, with bootstrap uncertainty, rescaled through fixed calibration points \citep{epoch2026eci}. It is a strong response and this index does not compete with it by aggregating more benchmarks; its measurement object is different.
+
+\textbf{Three questions.} AAI asks how strong a model is on a curated current suite; ECI asks where a model sits on a cross-benchmark latent scale; the HIL Index asks \emph{how much verified intelligence this model can realize as a standardized agent}.
+
+\section{Measurement Target}\label{sec:target}
+
+The HIL Index is a standardized, non-saturating estimate of how much verified intelligence a frozen model realizes when evaluated through the HIL reference-harness family. For a singleton model the latent vector is $\Theta_m = [\theta_C, \theta_I, \theta_{DI}, \theta_{SA}]$: cognitive problem solving through discovery and cross-domain integration; persistent continuity, adaptation, governed improvement and discovery where demonstrated; verified task difficulty under bounded human intervention; grounded self-modeling, calibration and failure recognition. Memory is reported separately, $M(m) \in \{M0, \ldots, M5, M\Omega\}$; organizations may later add $\theta_O$.
+
+\section{Three Measurement Objects Must Remain Distinct}\label{sec:three}
+
+\textbf{HIL-Level} is an ordinal, semantically invariant claim --- $U_{I3}$, $C5$, $T4/H1$, $SA3$ --- earned by canonical evidence with lower-level retention. \textbf{HLIS} is the continuous achievement of one frozen pair, the geometric aggregation $\text{HLIS} = 100\,(\prod_d A_d^{\alpha_d})^{1/\sum\alpha_d}$ with bottleneck sensitivity and no substitute for the hard gate. \textbf{The HIL Index} is the public, model-level, statistically calibrated comparison scale. \emph{What has been demonstrated; how strong is this pair; where does this base model sit on a common non-saturating scale} --- three questions, three objects.
+
+\section{The Reference Harness Family}\label{sec:harness}
+
+A fair base-model comparison needs a standardized runtime: $H^{\mathrm{ref}}_1 = \{\mathrm{HG0}, \ldots, \mathrm{HG6}, \mathrm{HG\Omega}\}$, the ladder in which progressively richer mechanisms enable persistence, consolidation, governed modification, meta-improvement, discovery, organization and frontier expansion, where architecture enables a claim and external evidence earns it. For every model the reference harness standardizes context and call budgets, code and file interfaces, search permissions, persistent-state capacity and retrieval, the verification and retry interface, time and compute ceilings, the restart mechanism, the human-intervention allowance, and authority. A result is indexed by the harness version, $\text{HILIndex}_{1.1}(m; H^{\mathrm{ref}}_1)$, and a construct-relevant harness change requires a new version or demonstrated equivalence.
+
+\textbf{As built.} Three rungs exist and are measured \citep{yang2026hilbench}: HG0, one attempt through the model's own API with two read-only tools and a one-JSON-object reply; HG1, the family's public checks --- derivable from the visible specification, never from the key --- with a failing delivery held back; HG2, snapshot, restore and retry with the failed check named. The benchmark materializes the reply into the deliverable files, so the verifiers are the agent-mode verifiers unchanged.
+
+\section{Latent Capability Estimation}\label{sec:latent}
+
+A bounded percentage loses discrimination near its ceiling, so the index uses an unbounded latent scale. For a binary canonical evidence unit $i$ on coordinate $d$,
+\[
+P(Y_{mdi} = 1) = \sigma\!\left[a_i(\theta_{md} - b_i)\right],
+\]
+with $\theta_{md}$ the model's capability, $b_i$ calibrated difficulty and $a_i$ discrimination; graded, partial-credit, binomial or hierarchical forms may replace it without changing the architecture. The atomic unit need not be a question: for longitudinal coordinates it is a campaign --- $I2$: baseline $\to$ verified experience $\to$ restart $\to$ held-out transfer; $I3$: $\Theta_0 \to \Theta_1 \to$ independent sealed evaluation --- and the calibrated observation is the canonical evidence unit.
+
+\textbf{As implemented.} \texttt{hilbench latent} fits the one-parameter form ($a_i = 1$ in v1) by joint maximum likelihood over every published bare-model record, one scale per coordinate, origin at mean item difficulty, standard errors from the observed information, and drops --- and counts --- every item that every model passed or every model failed, since such an item cannot rank models. The output is labelled a \emph{current-fit diagnostic} until anchors are ratified.
+
+\section{Preventing Level Skipping}\label{sec:skip}
+
+A high score on upper-level witnesses cannot compensate for a lost lower capability. HIL-Bench formalizes retention as $A \models_F d_n \iff V_{d,n} = 1 \wedge K_{d,n} = 1$, and for continuous evidence a cumulative transformation such as $q^{*}_{d,k} = \min_{j \le k} q_{d,j}$ or its probabilistic equivalent. The latent estimator may use strength within passed constructs; categorical certification remains constrained by the gate. This keeps \emph{task difficulty} and \emph{capability type} apart.
+
+\section{Headline Index}\label{sec:headline}
+
+After the coordinate scales are anchored, $\theta_H(m) = \sum_{d \in \{C, I, DI, SA\}} w_d\,\theta_{md}$ with $\sum_d w_d = 1$; v1 begins with equal weights, a transparent convention and not a law. The public scale is $\text{HILIndex}(m) = 100 + s\,\theta_H(m)$ with a provisional $s = 10$, so $\theta_H = 0$ maps to 100 and $\theta_H = 1$ to 110, and $\text{HILIndex} \in (-\infty, \infty)$. Origin and scale must be calibrated on a weak-to-frontier population before v1 ratification. For a bare model $\theta_I$ is not estimable --- $I0$ by construction --- and the implementation renormalizes the weights over the coordinates present and says so in the record.
+
+\section{Anchors, Saturation, Witnesses, Surfaces}\label{sec:anchors}
+
+\textbf{Permanent anchors.} For each coordinate a permanent anchor set $\mathcal A_d$ whose $\{a_i, b_i\}$ are fixed after ratification; new forms are calibrated against anchors and reference systems; and a two-track policy --- a \emph{frozen historical} index never recomputed under the same version, and a \emph{current-fit diagnostic} using all contemporary data, clearly separated.
+
+\textbf{Saturation.} The index separates capability level from difficulty within the level. A stress vector $d_{C3} = (N_{\mathrm{states}}, d_{\mathrm{dependency}}, b_{\mathrm{branch}}, \nu_{\mathrm{novelty}}, r_{\mathrm{distractor}})$ lets one model solve $C3@d{=}4$ today and another $C3@d{=}18$ later while both remain $C3$; $C4$ is a different construct, not harder $C3$. \emph{Anchor saturation is not construct obsolescence}: a saturated witness stays a historical anchor and frontier discrimination moves to harder construct-equivalent forms. The benchmark's own history is the worked example: the Core saturated at 90.0 for two models a tenfold cost apart, and Core-H --- four items with a named wrong method a competent model actually takes --- restored a 46-point spread without touching a level \citep{yang2026hilbenchpaper}.
+
+\textbf{Procedurally generated witnesses.} $x_r \sim G_{d,k}(s_r, \lambda_r)$ with a hidden seed and calibrated difficulty; for $C5$ a synthetic world $\omega_r \sim G_{C5}$ with a latent law that did not exist before the run. Every HIL-Bench family is such a generator with a computed key and a trap that the self-test proves fires on every seed.
+
+\textbf{Three surfaces.} Public reference forms teach the interface; permanent private anchors preserve continuity; fresh hidden witnesses preserve headroom and contamination resistance. Two of the three are built: the public generators, and a private split derived by HMAC from a withheld salt whose SHA-256 is published, so the private instances can be rotated at no cost and any certified row re-run after the reveal.
+
+\section{The Components}\label{sec:components}
+
+\textbf{Cognition} uses the family panel --- general, science, mathematics, abstract reasoning, code, multimodal and spatial, long-context --- with the $C0 \to C\Omega$ ladder as qualitative structure and difficulty calibration within each level; strength in one family does not substitute for another. \textbf{Individual intelligence} is the strongest differentiator: one persistent individual through $I0 \to I\Omega$, in controlled longitudinal experiments rather than quiz items --- \emph{can this model merely answer hard questions, or function as an improving persistent agent?} \textbf{Delegation} is a surface over $(T, H, p)$ with the public frontier $DF_{h,p}(A) = \max\{T : P(\text{delivered success} \mid A, T, H \le h) \ge p\}$, reported as e.g. $T4/H1@p{=}0.80$ and kept visible beside the scalar. \textbf{Self-awareness and false completion}: the pilot found two harness conditions with identical raw success and different false-completion behaviour, which is why the delivered outcome is the unit; the false completion rate $\mathrm{FCR} = N_{\text{incorrect delivered as complete}} / N_{\text{attempted}}$ is reported prominently. \emph{The index measures what a model can be trusted to deliver, not what it generates.} \textbf{Memory} stays outside the headline and is reported as its level. \textbf{Harness Gain} $= \max_k \text{HLIS}(m, \mathrm{HG}_k) - \text{HLIS}(m, \mathrm{HG0})$ appears beside the index and is never merged into it. \textbf{Resources} --- tokens, calls, wall time, compute class, state capacity, tool access, human load, sub-agents --- are recorded, and capability, cost and speed are shown together and never conflated.
+
+\section{The Rapid Tier, and What It Has Measured}\label{sec:rapid}
+
+Until a weak-to-frontier population exists, the latent scale cannot be calibrated, and a public index with no rows is a proposal. The rapid tier is the bounded composite implemented in \texttt{hilbench index}:
+\[
+\text{HIL-Index}_{\mathrm{rapid}} = 0.55\cdot\mathrm{AUC}_{\mathrm{HG0..HG2}} + 0.35\cdot\mathrm{Ceiling} + 0.10\cdot\mathrm{Harnessability},
+\]
+over three seeds per family and both Core-H seeds, about 150 calls and minutes for a hosted model, with $\rho = 1$ so that a delivered wrong answer scores a full unit below a declared inability. Its rows are a strict subset of the latent tier's evidence units, so nothing measured for the rapid tier is discarded when the latent tier is ratified.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lccccccY@{}}
+\toprule
+Model & Split & \textbf{Index} & HG0 / HG1 / HG2 & Gain & FCR & Decline & Bare profile at HG0 \\
+\midrule
+DeepSeek \texttt{deepseek-chat} & public, 3 seeds & \textbf{32.3} & 35.9 / 35.9 / 35.9 & 0.0 & 0.00 & 0.05 & C3 · SA1 · O0 · T1 \\
+DeepSeek \texttt{deepseek-chat} & private, 12 at T1 & \textbf{35.2} & 31.3 / 39.5 / 39.2 & 8.2 & 0.02 & 0.02 & C3 · SA1 · O0 · T1 \\
+Qwen 3.8 27B & public, 3 seeds & \textbf{30.3} & 26.1 / 34.9 / 31.3 & 8.8 & 0.08 & 0.10 & C3 · SA1 · O0 · T0 \\
+\bottomrule
+\end{tabularx}
+\caption{Rapid-tier rows, all taken by the instrument's author, who built neither model. The smaller model bluffs three times bare (FCR 0.08) and gains 8.8 points from a harness that catches some of it; the larger one bluffs once nowhere and gains nothing. That pattern --- a harness helps the model that fails catchably --- is the first prediction of \S\ref{sec:predictions}, on two rows.}
+\label{tab:rapid}
+\end{table}
+
+\textbf{The latent tier at $N = 2$.} Fitting the unbounded scale over these rows gives $\theta_H = +3.1$ and $-3.1$ with standard errors of 3.9 --- intervals wider than the scale --- because 42 of 42 cognition items, 72 of 78 delegation items and 14 of 18 self-awareness items showed no between-model variance and were dropped. This is not a defect of the estimator; it is what a two-model population is, and the reason the roadmap places a broad reference population before ratification. The number is published as a diagnostic and not as a row.
+
+\section{Evaluation Tiers, Uncertainty, Validation}\label{sec:validation}
+
+Leaderboard entries are \emph{Preliminary} (HIL-Core evidence, limited to tested capabilities) or \emph{Certified} (HIL-Cert with Extended or Omega evidence where required); a preliminary score never infers untested longitudinal capabilities. Every score carries uncertainty, e.g. $154.2\,[151.8, 156.6]$, from the preregistered reliability rule for levels and a bootstrap or posterior for the latent scale, and the interface avoids implying order where intervals overlap. The validation program adds test--retest reliability across hidden runs, alternate-form reliability across construct-equivalent generated forms, provider stability for the same frozen weights, construct validity by mechanism-selective ablation, and rank robustness under seed-set change. One instance of each already exists in the benchmark's record: the bare DeepSeek row read 35.2 on both the public and the private split once the gating band carried twelve episodes, and a pair's level moved from U0 to U1 on that same extension --- the reason intervals at the gating band are a requirement rather than a nicety.
+
+\section{Predictive-Validity Tournament}\label{sec:tournament}
+
+The strongest evidence is external prediction. For models $m = 1..N$ collect $H_m$, $E_m$, $A_m$ --- HIL Index, ECI, AAI --- and an independent downstream suite $D_{\mathrm{external}}$ used to construct none of them: repository-scale software work, research and analysis workflows, document-intensive professional work, long-horizon completion, error recovery, human intervention required, delivered correctness, failure recognition. Compare $\rho(H, Y)$, $\rho(E, Y)$, $\rho(A, Y)$ and the explained variances. The central test is whether the HIL Index predicts important external outcomes better; only repeated independent evidence of that kind justifies a claim to be the better selection instrument for deployed agents.
+
+\section{Leaderboard, Reporting String, Versioning, Governance}\label{sec:public}
+
+The first public view is one number; the page beneath it shows the interval, $\theta_C, \theta_I, \theta_{DI}, \theta_{SA}$, the Harness Scaling Curve, Harness Gain, FCR, verification responsiveness, cost, latency and tokens, and the version and envelope. Every official result supports the compact string
+\[
+\text{HILIndex} \mid \text{HIL-Level} \mid [C, I, T/H, SA] \mid M, \qquad \text{e.g. } 154 \mid U_{I3} \mid [C5, I3, T4/H1, SA3] \mid M4,
+\]
+and a standalone value is never the complete result. Versioning names the semantic standard, the index version, the reference-harness version and the witness generation, e.g. \texttt{HIL-1.0/Index-1.1/HRH-1/2026Q3}; semantic revisions require a new major standard, calibration changes a new index version, witness renewal neither; historical scores are archived, never overwritten. Governance separates the party funding an evaluation, the runner, the owner of hidden witnesses, the verifier, and the certification authority; a Standards Council with external evaluators should follow adoption, and payment or participation must not affect tasks, seeds, thresholds, rubrics, promotion or calibration.
+
+\section{Publication Speed, Coverage, Product}\label{sec:product}
+
+A technically excellent index is irrelevant if it covers few models or reports slowly. Requirements: rapid preliminary evaluation of major releases --- the rapid tier makes release-day rows a matter of API access; broad provider and open-weight coverage; reproducible model-version identifiers; a public historical time series; transparent handling of retired models; a simple web interface and a machine-readable API exposing models, history, coordinate scores, delegation frontiers, memory levels and metadata. The first milestone the plan must reach is the \emph{spread}: whether the frontier lands between 20 and 90 on this index or within a few points --- and if the latter, the versioning rule applies, not a re-weighting.
+
+\section{Falsifiable Predictions}\label{sec:predictions}
+
+(1) Models with similar raw cognition will differ materially in Harness Gain. (2) $\theta_I + \theta_{DI}$ will predict long-horizon agent performance better than cognition-only scores. (3) The Delegation Frontier will predict required human intervention better than generic agent accuracy. (4) False-completion-aware metrics will explain deployment reliability beyond raw success. (5) Dynamic construct-equivalent witnesses will retain discrimination without semantic redefinition. (6) The complete index will predict selected real-world agent outcomes at least as well as competing indices. If these systematically fail, the index is revised before ratification.
+
+\section{Limitations}\label{sec:limits}
+
+No scalar is a law of intelligence; weights and scale are conventions; coordinate equating must be validated before aggregation is defensible; upper $I$ levels need expensive longitudinal evidence; generators can develop artefacts and need auditing; a standardized harness cannot represent every production architecture; human-reviewed tasks add evaluator variance; specialized systems are poorly summarized by a general singleton index; governance and incentives remain problems under any methodology. Three rows exist, from one author, and the latent tier is degenerate at that population. Superior conceptual structure demonstrates nothing about practical validity; that is earned empirically.
+
+\section{Development Roadmap}\label{sec:roadmap}
+
+Freeze the v1 specification; complete cognition difficulty calibration and generators; complete the longitudinal $I$ and $M$ infrastructure; implement systematic $T \times H \times p$ measurement; build the $SA$ and false-completion suites; establish permanent anchors; evaluate a broad weak-to-frontier reference population; fit and validate the latent scales; test alternate-form and test--retest reliability; release a public beta leaderboard; run the external tournament; commission independent audit; ratify v1 only after the evidence is satisfactory. Steps one, four, five and the public half of six are done in the benchmark; step seven is the next.
+
+\section{Conclusion}
+
+The HIL Index is a measurement and communication layer above Unified Intelligence Theory and HIL-Bench: a scalar where a scalar is useful, with the structured capability evidence underneath and the result format $\text{HILIndex} \mid \text{HIL-Level} \mid [C, I, T/H, SA] \mid M$. It differs from a weighted benchmark average by separating stable semantics from difficulty, and from a generic latent scale by measuring standardized agent realization --- cognition, persistent individual intelligence, delegation and grounded self-awareness --- under a published harness, with a wrong answer priced. Its rapid tier exists and has rows; its latent tier exists and awaits a population. Whether it becomes the number a release is judged by will be decided by reliability, contamination resistance, historical stability, coverage and external prediction --- \emph{does it better predict what a system can be trusted to do?} --- and that is to be earned, not asserted.
+
+\appendix
+\section{Provisional HIL Index v1 Specification}\label{app:spec}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{Subject.} A frozen model $m$ through the reference harness family $H^{\mathrm{ref}}_1$; rows are model rows. Pair readings are HLIS and are reported in HIL-Bench, never as index rows.
+\item \textbf{Evidence units.} Binary outcomes of canonical witnesses: delegation episodes (family, seed, rung) under the delivered-outcome primitive; $C$ items (band, seed, rung); $SA1$ and $SA2$ probes; $O0$; for agent rows, the $M1$, $I2$, $I3$ and $I5$ campaigns.
+\item \textbf{Model.} $P(Y=1) = \sigma[a_i(\theta_{md} - b_i)]$, $a_i = 1$ in v1; per-coordinate scales; origin at mean anchor difficulty; standard errors from the information; uninformative items dropped and counted.
+\item \textbf{Headline.} $\theta_H = \sum w_d \theta_{md}$, $w = 1/4$ each, renormalized over coordinates present; $\text{HILIndex} = 100 + 10\,\theta_H$; interval $\pm 1.96\,\mathrm{SE}$.
+\item \textbf{Rapid tier.} $0.55\cdot\mathrm{AUC} + 0.35\cdot\mathrm{Ceiling} + 0.10\cdot\mathrm{Harnessability}$ in $[0, 100]$; $\rho = 1$; three seeds per family; \texttt{index.json} with curve, rates, bare profile, evaluator.
+\item \textbf{Beside the headline.} HIL-Level, $[C, I, T/H, SA]$, $M$, FCR, decline rate, Harness Gain, Delegation Frontier, resources, interval, version string.
+\item \textbf{Splits.} Public seeds $\{0..5\}$; private seeds by HMAC of a withheld salt whose SHA-256 is published; a certified row is private-split, run by someone who did not build the model, with an evaluator block.
+\item \textbf{Versioning.} \texttt{HIL-1.0/Index-1.1/HRH-1/2026Q3}; frozen historical index; current-fit diagnostic separate.
+\end{itemize}
+
+\section{Illustrative Machine-Readable Result}\label{app:json}
+\begin{verbatim}
+{"version": "HIL-1.0/Index-1.1/HRH-1/2026Q3", "model": "deepseek-chat", "split": "public",
+ "rapid": {"HIL_Index": 32.3, "curve": {"HG0": 35.9, "HG1": 35.9, "HG2": 35.9}, "harness_gain": 0.0,
+           "false_completion_rate": 0.00, "decline_rate": 0.05},
+ "latent": {"HILIndex": null, "status": "current-fit diagnostic; population too small to calibrate"},
+ "compact": "32.3 | U0 | [C3, I0, T1/H0, SA1] | M0",
+ "evaluator": {"built_model": false, "built_instrument": true, "split": "public"}}
+\end{verbatim}
+
+\section*{Availability}
+\texttt{hilbench index}, \texttt{hilbench latent}, the leaderboard page \texttt{HIL\_INDEX.md}, every record and the salt commitment are in \citet{yang2026hilbench}; the instrument in \citet{yang2026hilbenchpaper}; the framework in \citet{yang2026unified}.
+
+\section*{Conflicts and funding}
+The authors built the instrument and neither model measured. No external funding.

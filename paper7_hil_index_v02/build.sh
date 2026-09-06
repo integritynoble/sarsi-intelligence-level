@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")"
+{ cat preamble.tex body.tex; printf '\n\\bibliographystyle{plainnat}\n\\bibliography{references}\n\\end{document}\n'; } > main.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+cp main.pdf The_HIL_Index_v1_1.pdf
