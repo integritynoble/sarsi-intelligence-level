@@ -18,11 +18,36 @@ SYSTEM = (
 )
 
 def _call(base, key, model, payload, timeout):
+    if API["kind"] == "anthropic": return _call_anthropic(base, key, model, payload, timeout)
     req = urllib.request.Request(base.rstrip("/") + "/chat/completions",
                                  data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json", "Authorization": "Bearer " + key})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode())
+
+def _call_anthropic(base, key, model, payload, timeout):
+    """Anthropic Messages API, same two read-only tools, translated to and from the OpenAI-shaped payload run() builds."""
+    msgs = []; system = None
+    for m in payload["messages"]:
+        if m["role"] == "system": system = m["content"]; continue
+        if m["role"] == "assistant" and m.get("tool_calls"):
+            blocks = ([{"type": "text", "text": m["content"]}] if m.get("content") else []) + [
+                {"type": "tool_use", "id": c["id"], "name": c["function"]["name"], "input": json.loads(c["function"]["arguments"]) if isinstance(c["function"].get("arguments"), str) else (c["function"].get("arguments") or {})} for c in m["tool_calls"]]
+            msgs.append({"role": "assistant", "content": blocks}); continue
+        if m["role"] == "tool":
+            msgs.append({"role": "user", "content": [{"type": "tool_result", "tool_use_id": m["tool_call_id"], "content": m["content"]}]}); continue
+        msgs.append({"role": m["role"], "content": m["content"]})
+    body = {"model": model, "max_tokens": payload.get("max_tokens", 4000), "messages": msgs}
+    if system: body["system"] = system
+    if payload.get("tools"): body["tools"] = [{"name": t["function"]["name"], "description": t["function"]["description"], "input_schema": t["function"]["parameters"]} for t in payload["tools"]]
+    req = urllib.request.Request(base.rstrip("/") + "/v1/messages", data=json.dumps(body).encode(),
+                                 headers={"Content-Type": "application/json", "x-api-key": key, "anthropic-version": "2023-06-01"})
+    with urllib.request.urlopen(req, timeout=timeout) as r: out = json.loads(r.read().decode())
+    text = "".join(b.get("text", "") for b in out.get("content", []) if b.get("type") == "text")
+    calls = [{"id": b["id"], "type": "function", "function": {"name": b["name"], "arguments": json.dumps(b.get("input") or {})}} for b in out.get("content", []) if b.get("type") == "tool_use"]
+    return {"choices": [{"message": {"content": text, "tool_calls": calls or None}, "finish_reason": "length" if out.get("stop_reason") == "max_tokens" else "stop"}]}
+
+API = {"kind": "openai"}
 
 def _parse(text):
     if not text or not text.strip():
@@ -114,6 +139,7 @@ def main():
         elif a[i] == "--model": model = a[i + 1]; i += 2
         elif a[i] == "--timeout": timeout = int(a[i + 1]); i += 2
         elif a[i] == "--prompt": prompt = a[i + 1]; i += 2
+        elif a[i] == "--api": API["kind"] = a[i + 1]; i += 2
         elif a[i].startswith("-"): i += 1
         else: prompt = a[i]; i += 1
     if not (base and key and model and prompt):

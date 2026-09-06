@@ -80,7 +80,10 @@ def _build_parser() -> argparse.ArgumentParser:
         p.add_argument("--limit", type=int, default=limit); p.add_argument("--split", choices=("public", "private"), default="public"); p.add_argument("--salt-file")
     a = sub.add_parser("agent"); a.add_argument("--exec", dest="executor", required=True, help="command template containing {prompt}"); common(a, 300)
     a.add_argument("--with-o", action="store_true", help="also run the organizational suite (O0 routing, O1 org-memory with ablated arm)")
-    l = sub.add_parser("llm"); common(l, 120)
+    l = sub.add_parser("llm"); common(l, 120); l.add_argument("--api", choices=("openai", "anthropic"), default="openai"); l.add_argument("--seeds-per-family", type=int, default=2)
+    ix = sub.add_parser("index", help="the HIL Index: one number per bare model over the reference ladder, three seeds per family"); common(ix, 120)
+    ix.add_argument("--api", choices=("openai", "anthropic"), default="openai"); ix.add_argument("--seeds-per-family", type=int, default=3)
+    ix.add_argument("--base", default=os.environ.get("HILBENCH_LLM_BASE")); ix.add_argument("--key", default=os.environ.get("HILBENCH_LLM_KEY")); ix.add_argument("--model", default=os.environ.get("HILBENCH_LLM_MODEL"))
     l.add_argument("--base", default=os.environ.get("HILBENCH_LLM_BASE")); l.add_argument("--key", default=os.environ.get("HILBENCH_LLM_KEY")); l.add_argument("--model", default=os.environ.get("HILBENCH_LLM_MODEL"))
     lh = sub.add_parser("llm-harness"); lh.add_argument("--exec", dest="executor", required=True); common(lh, 300)
     e = sub.add_parser("extended"); e.add_argument("--exec", dest="executor", required=True); common(e, 0)
@@ -128,8 +131,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     except ValueError as exc: ap.error(str(exc))
     if a.cmd == "agent":
         core.run_agent(a.label, a.executor, a.root, seeds, a.limit, **({"with_o": True} if a.with_o else {}), **({"split_name": a.split} if a.split != "public" else {})); return 0
-    if a.cmd == "llm":
-        core.run_llm(a.label, a.root, seeds, a.limit, base=a.base, key=a.key, model=a.model, **({"split_name": a.split} if a.split != "public" else {})); return 0
+    if a.cmd in ("llm", "index"):
+        extra = {}
+        if a.api != "openai": extra["api"] = a.api
+        if a.cmd == "index": extra.update(n_seeds=a.seeds_per_family, n_hard=2)
+        elif a.seeds_per_family != 2: extra["n_seeds"] = a.seeds_per_family
+        if a.split != "public": extra["split_name"] = a.split
+        core.run_llm(a.label, a.root, seeds, a.limit, base=a.base, key=a.key, model=a.model, **extra); return 0
     if a.cmd == "llm-harness":
         core.run_llm_via_harness(a.label, a.executor, a.root, seeds, a.limit); return 0
     if a.cmd == "extended":

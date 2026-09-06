@@ -282,7 +282,7 @@ def run_llm_via_harness(label, exec_tmpl, root: Path, seeds, limit=300, env=None
     curve = {}
     for rung in ("HG0", "HG1", "HG2"):
         eps = []
-        for fam, ss in [(f, seeds[:2]) for f in TH] + [(f, seeds[:1]) for f in HARD]:
+        for fam, ss in [(f, seeds[:n_seeds]) for f in TH] + [(f, seeds[:n_hard]) for f in HARD]:
             for s in ss:
                 e = th_episode(fam, s, root, exec_tmpl, limit, env, rung); eps.append(e)
                 log(f"{rung} {fam} s{s}: {'pass' if e['delivered_correct'] else 'FAIL'} fc={e['false_completion']} hb={e['held_back']} att={e['attempts']} {e['seconds']}s")
@@ -297,12 +297,13 @@ LLM_BASE = os.environ.get("HILBENCH_LLM_BASE", "http://127.0.0.1:11434/v1")
 LLM_KEY = os.environ.get("HILBENCH_LLM_KEY", "none")
 LLM_MODEL = os.environ.get("HILBENCH_LLM_MODEL", "")
 LLM_TIMEOUT = 300
+LLM_API = "openai"
 
 def _llm_exec_tmpl():
     """The bare-model executor: an OpenAI-compatible chat call with two read-only tools whose final message is one
     JSON object written to response.json. HG0 is this and nothing else; the ladder's rungs wrap it."""
     pkg = Path(__file__).resolve().parents[1]
-    return (f"env PYTHONPATH={pkg} python3 -m hilbench.llm_exec --base {LLM_BASE} --key {LLM_KEY} "
+    return (f"env PYTHONPATH={pkg} python3 -m hilbench.llm_exec --api {LLM_API} --base {LLM_BASE} --key {LLM_KEY} "
             f"--model {LLM_MODEL} --timeout {LLM_TIMEOUT} --prompt {{prompt}}")
 
 LLM_TASK = ("Read GOAL.md and the other files in this directory. Reply with exactly one JSON object containing the "
@@ -343,18 +344,19 @@ def _llm_single(fam_key, files, key, verify, root, name, exec_tmpl, limit, env, 
     extract.extract(fam_key, ws, files); v = verify(ws, key)
     return bool(v["pass"]) and r["termination_reason"] != "timed_out", v.get("failure_mode"), r["seconds"]
 
-def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None, key=None, model=None, split_name="public"):
+def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None, key=None, model=None, split_name="public", n_seeds=2, n_hard=1, api="openai"):
     """LLM mode: a bare model read in every coordinate at every reference rung, with the same items, keys and
     verifiers as agent mode. A bare model has no persistence, so M and I are M0/I0 by construction and the record
     says so; O0 is read from the routing family; SA from the grounded-state probe and the twin pair."""
-    global LLM_BASE, LLM_KEY, LLM_MODEL
+    global LLM_BASE, LLM_KEY, LLM_MODEL, LLM_API
     if base: LLM_BASE = base
     if key: LLM_KEY = key
     if model: LLM_MODEL = model
+    LLM_API = api
     exec_tmpl = _llm_exec_tmpl(); _fresh(root)
     R = {"label": label, "mode": "llm", "model": LLM_MODEL, "base": LLM_BASE, "seeds": (seeds if split_name == "public" else f"private: {len(seeds)} seeds derived from the committed salt, not recorded"), "rungs": {}, "evaluator": _evaluator(split_name),
          "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-         "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity"}
+         "note": "M0/I0 by construction: a bare model persists nothing across a process discontinuity", "n_seeds": n_seeds, "n_hard": n_hard}
     curve = {}
     for rung in ("HG0", "HG1", "HG2"):
         eps = []
@@ -364,14 +366,14 @@ def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None,
                 log(f"{rung} {fam} s{s}: {'pass' if e['delivered_correct'] else ('HELD' if e['held_back'] else 'FAIL')} fc={e['false_completion']} att={e['attempts']} {e['seconds']}s")
         c_eps = []
         for band in ("C0", "C1", "C2", "C3"):
-            for s in seeds[:2]:
+            for s in seeds[:n_seeds]:
                 files, k = c_items.generate(s, band)
                 ok, mode, sec = _llm_single("c_items", files, k, c_items.verify, root, f"llm_c_{band}_s{s}_{rung}", exec_tmpl, limit, env)
                 c_eps.append({"band": band, "seed": s, "pass": ok, "mode": mode, "seconds": sec})
         for e in eps:                                          # C4 is the same two Core-H items, no extra calls
             if e["family"] in ("hc_rule", "hc_sched"): c_eps.append({"band": "C4", "item": e["family"], "seed": e["seed"], "pass": e["delivered_correct"]})
         sa1, sa2 = [], []
-        for s in seeds[:2]:
+        for s in seeds[:n_seeds]:
             files, k = sa_probes.sa1_generate(s)
             ok, mode, _ = _llm_single("sa1", files, k, sa_probes.sa1_verify, root, f"llm_sa1_s{s}_{rung}", exec_tmpl, limit, env)
             sa1.append({"seed": s, "pass": ok, "mode": mode})
@@ -399,7 +401,25 @@ def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None,
                             "HLIS": h, "HLIS_dims": dims, "achievement": A, "seconds": round(sum(e["seconds"] for e in eps), 1)}
         log(f"{rung}: HLIS={h} U={prof['U']} C={c_lvl} SA={sa_lvl} O={o_lvl} T={prof['T_frontier']} A_DI={prof['A_DI_net']} fc={prof['false_completions']} hb={prof['held_back']}")
     R["HIL"] = score.hil(curve); R["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    (root / "record.json").write_text(json.dumps(R, indent=1)); log("HIL " + json.dumps(R["HIL"])); return R
+    R["index"] = hil_index(R); (root / "index.json").write_text(json.dumps(R["index"], indent=1))
+    (root / "record.json").write_text(json.dumps(R, indent=1)); log("HIL " + json.dumps(R["HIL"])); log("INDEX " + json.dumps(R["index"])); return R
+
+INDEX_VERSION = "HIL-Index v1 (HIL-Bench v0.2 Core+Core-H, reference ladder HG0-HG2)"
+
+def hil_index(R: dict) -> dict:
+    """One number per MODEL: the HIL-Score of the bare model across the reference ladder, with the components that
+    explain it. It is the first index whose number goes DOWN when a model bluffs: a delivered wrong answer is priced
+    at rho, a declared inability is held back for free, and the harness gain says how much accountability adds."""
+    rungs = R["rungs"]; eps_all = [e for V in rungs.values() for e in V["episodes"]]
+    n = len(eps_all); fc = sum(e["false_completion"] for e in eps_all); hb = sum(e["held_back"] for e in eps_all); dc = sum(e["delivered_correct"] for e in eps_all)
+    prof0 = rungs["HG0"]["profile"]; top = rungs[max(rungs, key=lambda r: rungs[r]["HLIS"])]["profile"]
+    return {"version": INDEX_VERSION, "model": R.get("model"), "endpoint": R.get("base"), "split": R.get("evaluator", {}).get("split", "public"),
+            "HIL_Index": R["HIL"]["HIL_score"], "curve": R["HIL"]["curve"], "AUC": R["HIL"]["HIL_AUC"], "ceiling": R["HIL"]["HIL_ceiling"],
+            "harness_gain": R["HIL"]["harness_gain"], "harnessability": R["HIL"].get("harnessability"),
+            "delivered_correct_rate": round(dc / n, 3), "false_completion_rate": round(fc / n, 3), "decline_rate": round(hb / n, 3), "episodes": n,
+            "bare": {k: prof0.get(k) for k in ("C", "SA", "O", "T_frontier", "U")}, "best_rung": {k: top.get(k) for k in ("C", "SA", "O", "T_frontier", "U")},
+            "memory": "M0 by construction: a bare model persists nothing across a restart", "seeds_per_family": R.get("n_seeds"),
+            "evaluator": R.get("evaluator"), "finished": R.get("finished")}
 
 # ---------------------------------------------------------------- extended tier: T2-T5 from the dli_bench generators
 EXT = [("t2.pipeline", "T2"), ("t3.search_latency", "T3"), ("t4.mini_language", "T4"), ("t5.hidden_law", "T5")]
