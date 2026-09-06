@@ -1,0 +1,22 @@
+ML Engineer, Inference -- Orrery Systems
+Location: Boston, MA (on-site)
+
+About the role
+You will build and evaluate agent systems with a small team.
+
+Nice to have
+  - open-source contributions
+  - familiarity with Python
+
+Preferred qualifications
+  - Kubernetes
+  - PyTorch
+  - experience with Python in production
+  - publications in a relevant venue
+
+Required qualifications
+  - MS in computer science or equivalent
+  - 7+ years of relevant experience
+  - computational imaging
+  - SQL
+  - ability to obtain a security clearance

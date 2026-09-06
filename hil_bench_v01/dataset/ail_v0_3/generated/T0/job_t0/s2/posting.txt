@@ -1,0 +1,21 @@
+Research Scientist, Agents -- Vantage Compute
+Location: Austin, TX (hybrid)
+
+About the role
+You will build and evaluate agent systems with a small team.
+
+Nice to have
+  - open-source contributions
+  - familiarity with signal processing
+
+Preferred qualifications
+  - computational imaging
+  - JAX
+  - experience with signal processing in production
+  - publications in a relevant venue
+
+Required qualifications
+  - BS in engineering or equivalent
+  - 5+ years of relevant experience
+  - PyTorch
+  - CUDA

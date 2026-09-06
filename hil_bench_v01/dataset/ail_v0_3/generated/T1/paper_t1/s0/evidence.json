@@ -1,0 +1,25 @@
+{
+ "metric": "PSNR",
+ "direction": "higher is better",
+ "table": "Table 2",
+ "results": {
+  "ARAD": {
+   "DGSMP": 28.9,
+   "MST-L": 33.57,
+   "HDNet": 29.16,
+   "PnP-DIP": 33.42
+  },
+  "Harvard": {
+   "DGSMP": 29.73,
+   "MST-L": 34.11,
+   "HDNet": 33.3,
+   "PnP-DIP": 28.48
+  },
+  "KAIST": {
+   "DGSMP": 30.03,
+   "MST-L": 37.23,
+   "HDNet": 33.93,
+   "PnP-DIP": 36.41
+  }
+ }
+}

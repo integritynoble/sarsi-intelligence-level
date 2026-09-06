@@ -1,0 +1,14 @@
+{
+ "family": "funding_t0",
+ "seed": 1,
+ "field": "loi_deadline",
+ "value": "2027-02-16",
+ "all": {
+  "full_proposal_deadline": "2027-04-15",
+  "loi_deadline": "2027-02-16",
+  "pi_eligibility": "a faculty appointment at the rank of assistant professor or above",
+  "institution_eligibility": "any organization with a registered research office, including small businesses",
+  "citizenship_requirement": "the PI must be a citizen or permanent resident",
+  "budget_cap": "150000"
+ }
+}

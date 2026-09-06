@@ -1,0 +1,14 @@
+{
+ "family": "code_t0",
+ "seed": 2,
+ "symbol": "MAX_RETRIES",
+ "old": 250,
+ "new": 2,
+ "target_file": "config.py",
+ "snapshot": {
+  "GOAL.md": "e735faa531fe16f053fc2f127f7083a535d470af5c8ed213d00da02bd17b4f29",
+  "config.py": "bac485639498fc21e42e21e430915efc1f7c41209941813a6d0ec1e1bdb0c3b5",
+  "service.py": "1f7e78e1587e01f7fa3e613668e190b88d3a8ee8a69898a7a9b441eec873b879",
+  "test_service.py": "c2dac5110a68c7d3c111e8b73dc845c7f7f5abc2e942c4957b85627d0aab544f"
+ }
+}

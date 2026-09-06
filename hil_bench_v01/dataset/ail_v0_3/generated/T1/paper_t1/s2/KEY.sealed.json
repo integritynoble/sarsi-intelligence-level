@@ -1,0 +1,26 @@
+{
+ "family": "paper_t1",
+ "seed": 2,
+ "dataset": "Harvard",
+ "metric": "SAM",
+ "best": "DGSMP",
+ "best_value": 0.111,
+ "second": "ADMM-Net",
+ "margin": 0.131,
+ "table": "Table 2",
+ "allowed_numbers": [
+  0.111,
+  0.131,
+  0.143,
+  0.15,
+  0.228,
+  0.242,
+  0.287,
+  0.316,
+  0.37,
+  0.387,
+  0.397,
+  0.488,
+  0.574
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "family": "code_t0",
+ "seed": 0,
+ "symbol": "TIMEOUT_SECONDS",
+ "old": 30,
+ "new": 500,
+ "target_file": "config.py",
+ "snapshot": {
+  "GOAL.md": "51e59e0d0c99be0d53959d9a394b75b760292300a4f28d35b34bf0d9093c6be1",
+  "config.py": "02515c5605b014ddac1571dc8cdc1fa468b6f69a4b013fe9117f86f73e55d7b2",
+  "service.py": "e9f0a75e3e97ba8c075177cec73510515d56c27114fbd604ed08eec61e61358d",
+  "test_service.py": "2309bd5dc80e9f82a33564b168849af26c9d77fd0f59a799a0ab97385c45129f"
+ }
+}

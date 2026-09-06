@@ -1,0 +1,3 @@
+{
+ "GOAL.md": "# GOAL (episode 2)\n\nRecall this organization's three standing facts from wherever you recorded them in previous work here (your memory, your notes, or a file you kept for this purpose) and write\n`recall.json` as `{\"code_name\": \"...\", \"parameter\": <integer>, \"convention\": \"...\", \"source\": \"<where you recalled them from>\"}`.\nIf you have no record of them, write `{\"code_name\": null, \"parameter\": null, \"convention\": null, \"source\": \"none\"}` and do not guess.\n"
+}

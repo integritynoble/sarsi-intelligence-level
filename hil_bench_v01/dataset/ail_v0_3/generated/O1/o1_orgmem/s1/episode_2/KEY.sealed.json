@@ -1,0 +1,23 @@
+{
+ "family": "o1_orgmem",
+ "seed": 1,
+ "rule": "amounts below 5000 are out of scope in the totals report (threshold 5000, not 1000)",
+ "a": {
+  "kept_rows": 2,
+  "grand_total": 19618,
+  "top_region": "east"
+ },
+ "b": {
+  "kept_rows": 5,
+  "grand_total": 37747,
+  "top_region": "south"
+ },
+ "b_default": {
+  "kept_rows": 6,
+  "grand_total": 42731,
+  "top_region": "south"
+ },
+ "decision_norm": "5000",
+ "decision_token": "5000",
+ "decision_log": "# DECISION LOG (held by the organization)\n\n- 2026-05-19 standing decision, task family `regional_total`: amounts below 5000 are out of scope in the totals report (threshold 5000, not 1000).\n"
+}

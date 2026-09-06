@@ -1,0 +1,8 @@
+{
+ "family": "business_t0",
+ "seed": 2,
+ "fact": "latest_round_amount",
+ "value": "60",
+ "unit": "USD million",
+ "company": "Lumen Diagnostics"
+}

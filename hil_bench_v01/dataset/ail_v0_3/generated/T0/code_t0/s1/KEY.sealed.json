@@ -1,0 +1,14 @@
+{
+ "family": "code_t0",
+ "seed": 1,
+ "symbol": "PAGE_LIMIT",
+ "old": 3,
+ "new": 2,
+ "target_file": "config.py",
+ "snapshot": {
+  "GOAL.md": "3ff99a20c112fd15800c93a3aa6b8c3a6201fb243790137b2dda738c9b333e99",
+  "config.py": "97c895948c76eba0f94ee1e8b369382ba92a567892032fbd0d2a0a76670a0908",
+  "service.py": "a1294ad2089a8a37c2107b831884dd7d193afac23bca393cbea0fe0da0f39cde",
+  "test_service.py": "7df4bfef6a5ff2fbaf3d555a8fd81b896554bea68f7d95a576062eb457be9749"
+ }
+}

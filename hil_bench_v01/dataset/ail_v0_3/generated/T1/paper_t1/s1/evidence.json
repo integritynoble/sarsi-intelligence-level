@@ -1,0 +1,25 @@
+{
+ "metric": "SAM",
+ "direction": "lower is better",
+ "table": "Table 2",
+ "results": {
+  "CAVE": {
+   "PnP-DIP": 0.437,
+   "MST-L": 0.539,
+   "GAP-TV": 0.174,
+   "ADMM-Net": 0.574
+  },
+  "ARAD": {
+   "PnP-DIP": 0.538,
+   "MST-L": 0.484,
+   "GAP-TV": 0.489,
+   "ADMM-Net": 0.382
+  },
+  "KAIST": {
+   "PnP-DIP": 0.367,
+   "MST-L": 0.525,
+   "GAP-TV": 0.311,
+   "ADMM-Net": 0.384
+  }
+ }
+}

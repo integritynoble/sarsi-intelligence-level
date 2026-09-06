@@ -1,0 +1,32 @@
+{
+ "family": "hc_sched",
+ "seed": 2,
+ "total": 44,
+ "cost": {
+  "alpha": 15,
+  "bravo": 16,
+  "charlie": 13,
+  "delta": 16,
+  "echo": 8,
+  "foxtrot": 5
+ },
+ "before": [
+  "alpha",
+  "delta"
+ ],
+ "apart": [
+  "bravo",
+  "echo"
+ ],
+ "exclusive": [
+  "charlie",
+  "foxtrot"
+ ],
+ "slots": 4,
+ "example": [
+  "alpha",
+  "bravo",
+  "foxtrot",
+  "echo"
+ ]
+}

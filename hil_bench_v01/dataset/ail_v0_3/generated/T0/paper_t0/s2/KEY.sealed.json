@@ -1,0 +1,27 @@
+{
+ "family": "paper_t0",
+ "seed": 2,
+ "citation": 4,
+ "discrepancies": [
+  "pages",
+  "year"
+ ],
+ "all": {
+  "1": [
+   "author",
+   "year"
+  ],
+  "2": [],
+  "3": [
+   "pages"
+  ],
+  "4": [
+   "pages",
+   "year"
+  ],
+  "5": [
+   "author",
+   "venue"
+  ]
+ }
+}

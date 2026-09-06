@@ -1,0 +1,21 @@
+Senior Research Engineer -- Lumen Diagnostics
+Location: Austin, TX (hybrid)
+
+About the role
+You will build and evaluate agent systems with a small team.
+
+Nice to have
+  - open-source contributions
+  - familiarity with distributed training
+
+Preferred qualifications
+  - statistics
+  - C++
+  - experience with distributed training in production
+  - publications in a relevant venue
+
+Required qualifications
+  - PhD in a quantitative field
+  - 5+ years of relevant experience
+  - computational imaging
+  - SQL

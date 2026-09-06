@@ -1,0 +1,13 @@
+{
+ "family": "job_t0",
+ "seed": 2,
+ "required": [
+  "BS in engineering or equivalent",
+  "5+ years of relevant experience",
+  "PyTorch",
+  "CUDA"
+ ],
+ "work_authorization_required": false,
+ "clearance_required": false,
+ "location": "Austin, TX (hybrid)"
+}

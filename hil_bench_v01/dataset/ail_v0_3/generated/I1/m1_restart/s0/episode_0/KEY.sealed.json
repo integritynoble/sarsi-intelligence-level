@@ -1,0 +1,3 @@
+{
+ "GOAL.md": "# GOAL (episode 1)\n\nThis organization has three standing facts you will need in later work, possibly after a restart:\n\n- project code name: `Nimbus-53`\n- calibration parameter: `2957`\n- convention: amounts are in cents\n\nRecord them wherever you will be able to find them after this process ends and this directory is removed.\nThen write `ack.json` as `{\"recorded\": true, \"where\": \"<where you stored them>\"}`.\n"
+}

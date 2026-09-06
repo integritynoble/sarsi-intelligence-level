@@ -1,0 +1,124 @@
+{
+ "family": "learning_t2",
+ "seed": 0,
+ "convention": "dup_last",
+ "a_expected": [
+  {
+   "id": "100",
+   "name": "Ada",
+   "date": "2025-05-03",
+   "amount": "76196"
+  },
+  {
+   "id": "101",
+   "name": "Chloe",
+   "date": "2025-05-02",
+   "amount": "14495"
+  },
+  {
+   "id": "102",
+   "name": "Greta",
+   "date": "2025-08-06",
+   "amount": "9744"
+  },
+  {
+   "id": "103",
+   "name": "Hugo",
+   "date": "2025-06-12",
+   "amount": "58150"
+  },
+  {
+   "id": "104",
+   "name": "Dev",
+   "date": "2025-07-06",
+   "amount": "102872"
+  },
+  {
+   "id": "105",
+   "name": "Hugo",
+   "date": "2025-05-12",
+   "amount": "94814"
+  }
+ ],
+ "b_expected": {
+  "per_id": [
+   {
+    "id": "100",
+    "amount": "23564"
+   },
+   {
+    "id": "101",
+    "amount": "30919"
+   },
+   {
+    "id": "102",
+    "amount": "22664"
+   },
+   {
+    "id": "103",
+    "amount": "52164"
+   },
+   {
+    "id": "104",
+    "amount": "12152"
+   },
+   {
+    "id": "105",
+    "amount": "996"
+   },
+   {
+    "id": "106",
+    "amount": "83206"
+   }
+  ],
+  "per_month": {
+   "2025-01": 22664.0,
+   "2025-02": 996.0,
+   "2025-04": 106770.0,
+   "2025-07": 12152.0,
+   "2025-08": 52164.0,
+   "2025-11": 30919.0
+  }
+ },
+ "b_default": {
+  "per_id": [
+   {
+    "id": "100",
+    "amount": "23564"
+   },
+   {
+    "id": "101",
+    "amount": "30919"
+   },
+   {
+    "id": "102",
+    "amount": "22664"
+   },
+   {
+    "id": "103",
+    "amount": "52164"
+   },
+   {
+    "id": "104",
+    "amount": "12152"
+   },
+   {
+    "id": "105",
+    "amount": "996"
+   },
+   {
+    "id": "106",
+    "amount": "80624"
+   }
+  ],
+  "per_month": {
+   "2025-01": 22664.0,
+   "2025-02": 996.0,
+   "2025-04": 104188.0,
+   "2025-07": 12152.0,
+   "2025-08": 52164.0,
+   "2025-11": 30919.0
+  }
+ },
+ "lesson": "In this organization a repeated id is a correction: when an id appears more than once, the LAST row is the valid one and earlier rows are superseded."
+}

@@ -1,0 +1,24 @@
+{
+ "family": "c_items",
+ "band": "C3",
+ "seed": 1,
+ "key": {
+  "path": [
+   "A",
+   "C",
+   "D",
+   "E",
+   "F"
+  ],
+  "cost": 8
+ },
+ "naive_name": "fewest hops",
+ "naive": {
+  "path": [
+   "A",
+   "B",
+   "F"
+  ],
+  "cost": 18
+ }
+}

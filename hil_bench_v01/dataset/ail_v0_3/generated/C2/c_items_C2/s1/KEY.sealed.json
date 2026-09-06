@@ -1,0 +1,14 @@
+{
+ "family": "c_items",
+ "band": "C2",
+ "seed": 1,
+ "key": [
+  "Ana",
+  "Bo",
+  "Ed",
+  "Di",
+  "Cy"
+ ],
+ "naive_name": "ignoring the adjacency constraint",
+ "naive": null
+}

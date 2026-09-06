@@ -1,0 +1,23 @@
+{
+ "family": "o1_orgmem",
+ "seed": 2,
+ "rule": "the top region is the one with the highest in-scope total after rounding each amount to the nearest 100",
+ "a": {
+  "kept_rows": 5,
+  "grand_total": 37000,
+  "top_region": "south"
+ },
+ "b": {
+  "kept_rows": 5,
+  "grand_total": 84700,
+  "top_region": "west"
+ },
+ "b_default": {
+  "kept_rows": 5,
+  "grand_total": 84656,
+  "top_region": "west"
+ },
+ "decision_norm": "nearest 100",
+ "decision_token": "100",
+ "decision_log": "# DECISION LOG (held by the organization)\n\n- 2026-03-04 standing decision, task family `regional_total`: the top region is the one with the highest in-scope total after rounding each amount to the nearest 100.\n"
+}

@@ -1,0 +1,14 @@
+{
+ "family": "sa1_state",
+ "seed": 2,
+ "real": [
+  "alpha.csv",
+  "delta.md",
+  "epsilon.py"
+ ],
+ "stale": [
+  "kappa.md",
+  "omega.csv",
+  "theta.json"
+ ]
+}

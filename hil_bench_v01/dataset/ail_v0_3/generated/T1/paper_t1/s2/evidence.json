@@ -1,0 +1,25 @@
+{
+ "metric": "SAM",
+ "direction": "lower is better",
+ "table": "Table 2",
+ "results": {
+  "ARAD": {
+   "HDNet": 0.15,
+   "GAP-TV": 0.387,
+   "DGSMP": 0.228,
+   "ADMM-Net": 0.397
+  },
+  "Harvard": {
+   "HDNet": 0.287,
+   "GAP-TV": 0.37,
+   "DGSMP": 0.111,
+   "ADMM-Net": 0.242
+  },
+  "KAIST": {
+   "HDNet": 0.574,
+   "GAP-TV": 0.316,
+   "DGSMP": 0.143,
+   "ADMM-Net": 0.488
+  }
+ }
+}

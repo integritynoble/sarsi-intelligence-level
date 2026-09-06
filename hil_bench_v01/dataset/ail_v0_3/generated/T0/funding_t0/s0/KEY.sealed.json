@@ -1,0 +1,14 @@
+{
+ "family": "funding_t0",
+ "seed": 0,
+ "field": "full_proposal_deadline",
+ "value": "2028-01-23",
+ "all": {
+  "full_proposal_deadline": "2028-01-23",
+  "loi_deadline": "2027-11-12",
+  "pi_eligibility": "an independent research position with institutional PI eligibility",
+  "institution_eligibility": "accredited institutions of higher education and non-profit research organizations",
+  "citizenship_requirement": "no citizenship requirement",
+  "budget_cap": "400000"
+ }
+}

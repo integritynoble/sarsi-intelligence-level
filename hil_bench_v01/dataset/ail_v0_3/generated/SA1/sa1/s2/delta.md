@@ -1,0 +1,1 @@
+content of delta.md

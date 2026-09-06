@@ -1,0 +1,26 @@
+{
+ "family": "paper_t1",
+ "seed": 1,
+ "dataset": "KAIST",
+ "metric": "SAM",
+ "best": "GAP-TV",
+ "best_value": 0.311,
+ "second": "PnP-DIP",
+ "margin": 0.056,
+ "table": "Table 2",
+ "allowed_numbers": [
+  0.056,
+  0.174,
+  0.311,
+  0.367,
+  0.382,
+  0.384,
+  0.437,
+  0.484,
+  0.489,
+  0.525,
+  0.538,
+  0.539,
+  0.574
+ ]
+}

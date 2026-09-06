@@ -1,0 +1,26 @@
+{
+ "family": "paper_t1",
+ "seed": 0,
+ "dataset": "KAIST",
+ "metric": "PSNR",
+ "best": "MST-L",
+ "best_value": 37.23,
+ "second": "PnP-DIP",
+ "margin": 0.82,
+ "table": "Table 2",
+ "allowed_numbers": [
+  0.82,
+  28.48,
+  28.9,
+  29.16,
+  29.73,
+  30.03,
+  33.3,
+  33.42,
+  33.57,
+  33.93,
+  34.11,
+  36.41,
+  37.23
+ ]
+}

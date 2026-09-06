@@ -1,0 +1,14 @@
+{
+ "family": "sa1_state",
+ "seed": 0,
+ "real": [
+  "alpha.csv",
+  "beta.txt",
+  "gamma.json"
+ ],
+ "stale": [
+  "kappa.md",
+  "sigma.txt",
+  "theta.json"
+ ]
+}

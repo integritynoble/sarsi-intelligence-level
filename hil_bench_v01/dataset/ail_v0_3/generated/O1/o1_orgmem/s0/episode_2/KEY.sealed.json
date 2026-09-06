@@ -1,0 +1,23 @@
+{
+ "family": "o1_orgmem",
+ "seed": 0,
+ "rule": "the top region is the region with the most in-scope rows (a row count, not a total); ties alphabetical",
+ "a": {
+  "kept_rows": 5,
+  "grand_total": 82054,
+  "top_region": "north"
+ },
+ "b": {
+  "kept_rows": 6,
+  "grand_total": 60040,
+  "top_region": "west"
+ },
+ "b_default": {
+  "kept_rows": 6,
+  "grand_total": 60040,
+  "top_region": "south"
+ },
+ "decision_norm": "row count",
+ "decision_token": "count",
+ "decision_log": "# DECISION LOG (held by the organization)\n\n- 2026-07-02 standing decision, task family `regional_total`: the top region is the region with the most in-scope rows (a row count, not a total); ties alphabetical.\n"
+}

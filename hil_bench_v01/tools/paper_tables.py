@@ -72,8 +72,8 @@ def main(ds: Path, out: Path):
                       (r" \textbf{Procedure:} " + " $\\to$ ".join(tex(x) for x in proc) if proc else "") +
                       r" \textbf{Verifier:} " + tex(", ".join(met) if met else "; ".join(f["symbol"] + " (" + f["locus"] + ")" for f in c["factors"])) +
                       r" \textbf{Control:} " + tex(c["control_arm"]) + (" [" + tex("; ".join(ctrl)) + "]" if ctrl else ""))
-            fids = forms_for(c, forms)
-            bench = (r"\textbf{Witness:} " + tex(c["witness"]) + r" \textbf{Forms:} " + (tex(", ".join(fids)) if fids else "---") +
+            fids = forms_for(c, forms); gen = (json.loads((ds / "generated" / "INDEX.json").read_text()) if (ds / "generated" / "INDEX.json").exists() else {}).get(c["cell"], [])
+            bench = (r"\textbf{Witness:} " + tex(c["witness"]) + r" \textbf{Dataset:} " + tex(", ".join(fids + gen) if (fids or gen) else "---") +
                      r" \textbf{Generator:} " + (r"\texttt{" + tex(c["generator"]) + "}" if c["generator"] else "---") +
                      r" \textbf{Key:} " + tex(c["key"]) + (r" \textbf{Retention:} " + tex(c["retention"]) if c["retention"] else "") +
                      (r" \textbf{Prerequisite:} " + tex(c["prereq"]) if c["prereq"] not in ("K_lower", "none") else ""))

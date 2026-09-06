@@ -6,7 +6,7 @@
  "gui_integration": "Method B: C^GUI uses original C semantics; GP0-GP5 diagnostic perception subscale",
  "harmonization": "C, I, M, O, SA, T, H, DI, HG, and U now expose a common canonical testing-method record grammar.",
  "official_certification_note": "Public forms are not secure hidden witnesses.",
- "dataset_version": "0.9",
+ "dataset_version": "ail-0.3+grid",
  "cells": 83,
  "cell_status_counts": {
   "C": {

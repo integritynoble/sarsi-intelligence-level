@@ -1,0 +1,45 @@
+{
+ "family": "hc_contra",
+ "seed": 0,
+ "conflict": [
+  1,
+  2,
+  3
+ ],
+ "rows": [
+  {
+   "id": 0,
+   "value": 48
+  },
+  {
+   "id": 1,
+   "value": 50
+  },
+  {
+   "id": 2,
+   "value": 44
+  },
+  {
+   "id": 3,
+   "value": 57
+  },
+  {
+   "id": 4,
+   "value": 72
+  },
+  {
+   "id": 5,
+   "value": 29
+  },
+  {
+   "id": 6,
+   "value": 57
+  },
+  {
+   "id": 7,
+   "value": 85
+  }
+ ],
+ "lo": 5,
+ "hi": 15
+}

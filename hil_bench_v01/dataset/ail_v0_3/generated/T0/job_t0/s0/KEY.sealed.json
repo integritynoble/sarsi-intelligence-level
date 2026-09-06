@@ -1,0 +1,13 @@
+{
+ "family": "job_t0",
+ "seed": 0,
+ "required": [
+  "PhD in a quantitative field",
+  "5+ years of relevant experience",
+  "computational imaging",
+  "SQL"
+ ],
+ "work_authorization_required": false,
+ "clearance_required": false,
+ "location": "Austin, TX (hybrid)"
+}
