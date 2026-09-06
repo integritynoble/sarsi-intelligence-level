@@ -1,0 +1,514 @@
+{
+ "sample_requirements": [
+  {
+   "n_models": 2,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 0.9999999999999999,
+   "rmse_logit": 0.8004005910247616,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 1.0,
+   "median_se": 0.6083395417033485,
+   "items_dropped": 0.575,
+   "adjacent_pairs_separated": 1.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 2,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 0.9999999999999999,
+   "rmse_logit": 0.6486833735948048,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 1.0,
+   "median_se": 0.41381628034896767,
+   "items_dropped": 0.6,
+   "adjacent_pairs_separated": 1.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 2,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 0.9999999999999999,
+   "rmse_logit": 0.5822061123671679,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 0.5,
+   "median_se": 0.3066122577979815,
+   "items_dropped": 0.58125,
+   "adjacent_pairs_separated": 1.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 2,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 0.9999999999999999,
+   "rmse_logit": 0.3639411460557875,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 1.0,
+   "median_se": 0.19276112037094706,
+   "items_dropped": 0.596875,
+   "adjacent_pairs_separated": 1.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 3,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 1.0,
+   "rmse_logit": 0.5745335175363818,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 1.0,
+   "median_se": 0.47121556332227466,
+   "items_dropped": 0.375,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 3,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 1.0,
+   "rmse_logit": 0.4824025826233142,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 1.0,
+   "median_se": 0.3538809948381901,
+   "items_dropped": 0.375,
+   "adjacent_pairs_separated": 0.5,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 3,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 1.0,
+   "rmse_logit": 0.38128429588146484,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 0.8333333333333333,
+   "median_se": 0.23633404483519305,
+   "items_dropped": 0.378125,
+   "adjacent_pairs_separated": 0.5,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 3,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 1.0,
+   "rmse_logit": 0.28225338273707334,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 0.6666666666666666,
+   "median_se": 0.1648736686419539,
+   "items_dropped": 0.3625,
+   "adjacent_pairs_separated": 0.5,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 5,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 0.8999999999999998,
+   "rmse_logit": 0.4804952727723141,
+   "rank_error_rate": 0.4,
+   "ci95_coverage": 1.0,
+   "median_se": 0.4374507836805568,
+   "items_dropped": 0.1875,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 5,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 0.8999999999999998,
+   "rmse_logit": 0.35779912368073613,
+   "rank_error_rate": 0.4,
+   "ci95_coverage": 1.0,
+   "median_se": 0.29936726962835425,
+   "items_dropped": 0.16249999999999998,
+   "adjacent_pairs_separated": 0.25,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 5,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 0.9999999999999999,
+   "rmse_logit": 0.2988858855346719,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 0.8,
+   "median_se": 0.20952509356017096,
+   "items_dropped": 0.16874999999999996,
+   "adjacent_pairs_separated": 0.5,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 5,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 0.9999999999999999,
+   "rmse_logit": 0.20807241616315697,
+   "rank_error_rate": 0.0,
+   "ci95_coverage": 0.8,
+   "median_se": 0.14821910707397737,
+   "items_dropped": 0.20468750000000002,
+   "adjacent_pairs_separated": 0.5,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 8,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 0.8333333333333335,
+   "rmse_logit": 0.43165669746348706,
+   "rank_error_rate": 0.5625,
+   "ci95_coverage": 0.875,
+   "median_se": 0.4009826849938522,
+   "items_dropped": 0.07499999999999996,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 8,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 0.9285714285714287,
+   "rmse_logit": 0.33936536616997515,
+   "rank_error_rate": 0.5,
+   "ci95_coverage": 1.0,
+   "median_se": 0.28502640438812055,
+   "items_dropped": 0.08750000000000002,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 8,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 0.9523809523809524,
+   "rmse_logit": 0.273856895536815,
+   "rank_error_rate": 0.375,
+   "ci95_coverage": 0.875,
+   "median_se": 0.19955304443716873,
+   "items_dropped": 0.09999999999999998,
+   "adjacent_pairs_separated": 0.14285714285714285,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 8,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 0.9761904761904763,
+   "rmse_logit": 0.209218020059944,
+   "rank_error_rate": 0.25,
+   "ci95_coverage": 0.875,
+   "median_se": 0.14062664344938725,
+   "items_dropped": 0.08750000000000002,
+   "adjacent_pairs_separated": 0.2857142857142857,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 12,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 0.9195804195804197,
+   "rmse_logit": 0.4153388334605218,
+   "rank_error_rate": 0.625,
+   "ci95_coverage": 0.9166666666666666,
+   "median_se": 0.39022772106845893,
+   "items_dropped": 0.050000000000000044,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 12,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 0.9370629370629372,
+   "rmse_logit": 0.3194418603176947,
+   "rank_error_rate": 0.5833333333333334,
+   "ci95_coverage": 0.9166666666666666,
+   "median_se": 0.2779554582878073,
+   "items_dropped": 0.03749999999999998,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 12,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 0.965034965034965,
+   "rmse_logit": 0.2396202038510564,
+   "rank_error_rate": 0.45833333333333337,
+   "ci95_coverage": 0.9166666666666666,
+   "median_se": 0.19600392324809068,
+   "items_dropped": 0.043749999999999956,
+   "adjacent_pairs_separated": 0.09090909090909091,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 12,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 0.9790209790209792,
+   "rmse_logit": 0.16288238227787294,
+   "rank_error_rate": 0.3333333333333333,
+   "ci95_coverage": 0.9166666666666666,
+   "median_se": 0.13633672327681626,
+   "items_dropped": 0.04062500000000002,
+   "adjacent_pairs_separated": 0.13636363636363635,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 20,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 0.9375939849624059,
+   "rmse_logit": 0.40612395594390494,
+   "rank_error_rate": 0.75,
+   "ci95_coverage": 0.975,
+   "median_se": 0.38841158464440606,
+   "items_dropped": 0.0,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 20,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 0.955639097744361,
+   "rmse_logit": 0.2740967172542359,
+   "rank_error_rate": 0.7,
+   "ci95_coverage": 0.975,
+   "median_se": 0.27119529962314937,
+   "items_dropped": 0.012499999999999956,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 20,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 0.9714285714285713,
+   "rmse_logit": 0.1990952763498147,
+   "rank_error_rate": 0.55,
+   "ci95_coverage": 0.95,
+   "median_se": 0.18893236766442378,
+   "items_dropped": 0.012499999999999956,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 20,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 0.9857142857142855,
+   "rmse_logit": 0.1452161237374448,
+   "rank_error_rate": 0.45,
+   "ci95_coverage": 0.95,
+   "median_se": 0.13457147651789503,
+   "items_dropped": 0.012499999999999956,
+   "adjacent_pairs_separated": 0.10526315789473684,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 40,
+   "n_items": 40,
+   "reps": 30,
+   "spearman": 0.926266416510319,
+   "rmse_logit": 0.4096173853871724,
+   "rank_error_rate": 0.9,
+   "ci95_coverage": 0.95,
+   "median_se": 0.3809909783593187,
+   "items_dropped": 0.0,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 40,
+   "n_items": 80,
+   "reps": 30,
+   "spearman": 0.95515947467167,
+   "rmse_logit": 0.2968285816023941,
+   "rank_error_rate": 0.85,
+   "ci95_coverage": 0.9624999999999999,
+   "median_se": 0.2661105991589189,
+   "items_dropped": 0.0,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 40,
+   "n_items": 160,
+   "reps": 30,
+   "spearman": 0.977767354596623,
+   "rmse_logit": 0.19819711167696136,
+   "rank_error_rate": 0.75,
+   "ci95_coverage": 0.95,
+   "median_se": 0.18731476009803733,
+   "items_dropped": 0.0,
+   "adjacent_pairs_separated": 0.0,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  },
+  {
+   "n_models": 40,
+   "n_items": 320,
+   "reps": 30,
+   "spearman": 0.9863977485928705,
+   "rmse_logit": 0.1434842074206487,
+   "rank_error_rate": 0.7,
+   "ci95_coverage": 0.95,
+   "median_se": 0.132820400703209,
+   "items_dropped": 0.0015625000000000222,
+   "adjacent_pairs_separated": 0.02564102564102564,
+   "note": "Spearman is uninformative below about eight models: with two or three, any estimator orders them almost surely. The quantity a leaderboard needs is the share of ADJACENT pairs whose 95% intervals do not overlap -- and that falls as the population grows, because neighbours crowd faster than errors shrink. There is no per-cell 'usable' verdict: ordering, interval and separation are three different questions and a single flag would hide which one a cell fails."
+  }
+ ],
+ "equating": {
+  "n_old": 8,
+  "n_new": 8,
+  "shift": 0.8,
+  "reps": 30,
+  "drift_free_recalibration": 0.568,
+  "drift_frozen_anchors": 0.355,
+  "systematic_free": -0.532,
+  "systematic_frozen": -0.006,
+  "measurement_noise_se": 0.327,
+  "reading": "absolute drift mixes noise with bias; the signed drift is the bias. Under free recalibration the first cohort's published scores move systematically when a stronger cohort is added; under frozen anchors the movement is at the level of the standard error."
+ },
+ "saturation": [
+  {
+   "year": 0,
+   "frontier_logits": 0.0,
+   "separation_fixed": 0.96,
+   "separation_refreshed": 0.964,
+   "at_ceiling_fixed": 0.0,
+   "at_ceiling_refreshed": 0.0,
+   "composite_mean_fixed": 0.521,
+   "composite_spread_fixed": 0.162,
+   "composite_spread_refreshed": 0.176
+  },
+  {
+   "year": 1,
+   "frontier_logits": 0.6,
+   "separation_fixed": 0.966,
+   "separation_refreshed": 0.964,
+   "at_ceiling_fixed": 0.0,
+   "at_ceiling_refreshed": 0.0,
+   "composite_mean_fixed": 0.579,
+   "composite_spread_fixed": 0.167,
+   "composite_spread_refreshed": 0.174
+  },
+  {
+   "year": 2,
+   "frontier_logits": 1.2,
+   "separation_fixed": 0.95,
+   "separation_refreshed": 0.96,
+   "at_ceiling_fixed": 0.0,
+   "at_ceiling_refreshed": 0.0,
+   "composite_mean_fixed": 0.698,
+   "composite_spread_fixed": 0.147,
+   "composite_spread_refreshed": 0.168
+  },
+  {
+   "year": 3,
+   "frontier_logits": 1.8,
+   "separation_fixed": 0.95,
+   "separation_refreshed": 0.97,
+   "at_ceiling_fixed": 0.0,
+   "at_ceiling_refreshed": 0.0,
+   "composite_mean_fixed": 0.764,
+   "composite_spread_fixed": 0.133,
+   "composite_spread_refreshed": 0.181
+  },
+  {
+   "year": 4,
+   "frontier_logits": 2.4,
+   "separation_fixed": 0.917,
+   "separation_refreshed": 0.96,
+   "at_ceiling_fixed": 0.167,
+   "at_ceiling_refreshed": 0.0,
+   "composite_mean_fixed": 0.856,
+   "composite_spread_fixed": 0.085,
+   "composite_spread_refreshed": 0.166
+  },
+  {
+   "year": 5,
+   "frontier_logits": 3.0,
+   "separation_fixed": 0.87,
+   "separation_refreshed": 0.971,
+   "at_ceiling_fixed": 0.333,
+   "at_ceiling_refreshed": 0.0,
+   "composite_mean_fixed": 0.906,
+   "composite_spread_fixed": 0.074,
+   "composite_spread_refreshed": 0.184
+  }
+ ],
+ "bluff": {
+  "rho": 1.0,
+  "cells": 441,
+  "share_where_net_reverses_the_order": 0.385,
+  "reading": "the share of the (competence, discrimination) grid on which a success-only index ranks the bluffer at least as high while the delivered-outcome primitive prefers the system that declines",
+  "cost_identity": "E[cost to the delegator] = c_wrong*P(false completion) + c_redo*P(held back); S_net is the linear proxy with rho = c_wrong/c_redo",
+  "rows": []
+ },
+ "coverage": [
+  {
+   "coverage": "complete",
+   "spearman": 0.965,
+   "median_se": 0.192,
+   "median_se_partial_models": 0.192
+  },
+  {
+   "coverage": "missing at random, 40%",
+   "spearman": 0.951,
+   "median_se": 0.264,
+   "median_se_partial_models": 0.264
+  },
+  {
+   "coverage": "blocked by difficulty, items shared",
+   "spearman": 0.965,
+   "median_se": 0.244,
+   "median_se_partial_models": 0.276
+  },
+  {
+   "coverage": "disjoint: the halves share no item",
+   "spearman": 0.853,
+   "median_se": 0.293,
+   "median_se_partial_models": 0.299
+  }
+ ],
+ "resolution": {
+  "target_separation": 0.5,
+  "rows": [
+   {
+    "n_models": 4,
+    "items_for_50%_separation": 128,
+    "capped": false
+   },
+   {
+    "n_models": 6,
+    "items_for_50%_separation": 512,
+    "capped": false
+   },
+   {
+    "n_models": 8,
+    "items_for_50%_separation": 1024,
+    "capped": false
+   },
+   {
+    "n_models": 12,
+    "items_for_50%_separation": 2048,
+    "capped": false
+   },
+   {
+    "n_models": 16,
+    "items_for_50%_separation": 4096,
+    "capped": false
+   }
+  ],
+  "log_log_slope": 2.41,
+  "reading": "the exponent of items against models; near 2 means resolving twice as many models costs four times the evidence, which is why a dense leaderboard should publish bands rather than ranks"
+ }
+}

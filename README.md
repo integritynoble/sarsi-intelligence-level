@@ -16,6 +16,7 @@ model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
 | **Paper 5 — the agent library.** Six domain profiles, every agent the fleet defines, the twenty shipped specs. | [`paper5_agent_library_v01/`](paper5_agent_library_v01/) | current; [`agent_design_v01/`](agent_design_v01/) superseded |
 | **Paper 6 — the AI4Science layer.** Seven field agents on measured corpora, the acceptance locus a science needs (two reference methods still fail on real data), the coordinates read on a field agent, the delegation transfer measurement (0/15 → 15/15 with the model fixed), and the I5 campaign that would answer the plan's question. | [`paper6_ai4science_layer_v01/`](paper6_ai4science_layer_v01/) · [PDF](paper6_ai4science_layer_v01/The_AI4Science_Layer_v0_1.pdf) | current |
 | **Paper 7 — the AI-Level Index.** *A Non-Saturating, Harness-Standardized Capability Index for AI Models and Agents*: an unbounded, difficulty-calibrated latent scale (\mathrm{AILI} = 100 + 10·θ_H) with a bounded rapid tier reproducible for cents; anchors, three evidence surfaces, the reference-harness family, level/difficulty separation, the Delegation Frontier and Harness Gain beside the headline, tiers, validation program, predictive-validity tournament, governance, falsifiable predictions; three rows and the latent tier's honest state at N = 2. | [`paper7_hil_index_v02/`](paper7_hil_index_v02/) · [PDF](paper7_hil_index_v02/The_AI_Level_Index_v1_1.pdf) · leaderboard [`hil_bench_v01/AI_LEVEL_INDEX.md`](hil_bench_v01/AI_LEVEL_INDEX.md) | current; [`paper7_hil_index_v01/`](paper7_hil_index_v01/) superseded |
+| **Paper 7 (this line's second entry) — the index, version 2.** *The AI-Level Index: a harness-standardized capability scale, with the estimator validated and the cost of a rank measured*: six studies on populations with known truth — recovery, the resolution law (items to separate neighbours grow as M^2.4, so the leaderboard publishes bands not ranks), anchoring (free recalibration moves published scores −0.53 logits, frozen anchors −0.01), saturation (a fixed suite loses half its spread over three logits, refreshed witnesses do not), pricing a bluff (38.5% of the grid inverts), and coverage (linking needs common items, not complete ones) — plus the three measured rapid-tier rows. | [`ail_index_v2/`](ail_index_v2/) · [PDF](ail_index_v2/The_AI_Level_Index_v2.pdf) · studies `hilbench/index_sim.py` | current |
 
 ### The benchmark: one canonical tree, two kept as history
 
@@ -24,6 +25,11 @@ model, run **[`hil_bench_v01/`](hil_bench_v01/)** and nothing else.
 - [`unified_v23/hil_benchmark_v1/`](unified_v23/hil_benchmark_v1/) — an earlier benchmark package written alongside the v2.3 paper, with its own protocol and scoring notes. History; its `organizer_private/` material is public by virtue of being here and cannot serve as a private split.
 - [`uab_v01/`](uab_v01/) — the Unified Agent Benchmark contract and families that AI-Level Bench is built on; still imported by `hil_bench_v01`.
 - [`plan/`](plan/) and [`chatgpt/`](chatgpt/) — the development plan, the I3/I4 revised manuscripts, and the drafts and dataset packs they came from.
+
+
+> **Two homes for the index paper.** `ail_index_v2/` is this line of work: the index with its estimator measured.
+> `paper7_hil_index_v02/` is a parallel draft maintained by another session. They share the framework and the
+> benchmark and are not copies of each other; neither should be edited from the other's session.
 
 ## Start here
 

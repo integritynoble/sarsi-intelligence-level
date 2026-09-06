@@ -1,0 +1,71 @@
+{
+ "equating": {
+  "n_old": 8,
+  "n_new": 8,
+  "shift": 0.8,
+  "reps": 30,
+  "drift_free_recalibration": 0.568,
+  "drift_frozen_anchors": 0.355,
+  "systematic_free": -0.532,
+  "systematic_frozen": -0.006,
+  "measurement_noise_se": 0.327,
+  "reading": "absolute drift mixes noise with bias; the signed drift is the bias. Under free recalibration the first cohort's published scores move systematically when a stronger cohort is added; under frozen anchors the movement is at the level of the standard error."
+ },
+ "resolution_slope": 2.41,
+ "resolution_rows": {
+  "4": 128,
+  "6": 512,
+  "8": 1024,
+  "12": 2048,
+  "16": 4096
+ },
+ "bluff_share": 0.385,
+ "saturation_first": {
+  "year": 0,
+  "frontier_logits": 0.0,
+  "separation_fixed": 0.96,
+  "separation_refreshed": 0.964,
+  "at_ceiling_fixed": 0.0,
+  "at_ceiling_refreshed": 0.0,
+  "composite_mean_fixed": 0.521,
+  "composite_spread_fixed": 0.162,
+  "composite_spread_refreshed": 0.176
+ },
+ "saturation_last": {
+  "year": 5,
+  "frontier_logits": 3.0,
+  "separation_fixed": 0.87,
+  "separation_refreshed": 0.971,
+  "at_ceiling_fixed": 0.333,
+  "at_ceiling_refreshed": 0.0,
+  "composite_mean_fixed": 0.906,
+  "composite_spread_fixed": 0.074,
+  "composite_spread_refreshed": 0.184
+ },
+ "coverage": {
+  "complete": {
+   "coverage": "complete",
+   "spearman": 0.965,
+   "median_se": 0.192,
+   "median_se_partial_models": 0.192
+  },
+  "missing at random, 40%": {
+   "coverage": "missing at random, 40%",
+   "spearman": 0.951,
+   "median_se": 0.264,
+   "median_se_partial_models": 0.264
+  },
+  "blocked by difficulty, items shared": {
+   "coverage": "blocked by difficulty, items shared",
+   "spearman": 0.965,
+   "median_se": 0.244,
+   "median_se_partial_models": 0.276
+  },
+  "disjoint: the halves share no item": {
+   "coverage": "disjoint: the halves share no item",
+   "spearman": 0.853,
+   "median_se": 0.293,
+   "median_se_partial_models": 0.299
+  }
+ }
+}
