@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-level-bench.dev/schemas/memory_bench_v2.schema.json",
+  "title": "AI-Level Bench M-Bench v0.6 development form",
+  "type": "object",
+  "required": [
+    "form_id",
+    "coordinate",
+    "level",
+    "canonical_method",
+    "development_only",
+    "binding_status",
+    "difficulty_vector",
+    "metrics",
+    "memory_manifest_required",
+    "retention",
+    "new_capability",
+    "required_lower_levels",
+    "cumulative_rule"
+  ],
+  "properties": {
+    "form_id": {
+      "type": "string"
+    },
+    "coordinate": {
+      "const": "M"
+    },
+    "level": {
+      "enum": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "MΩ"
+      ]
+    },
+    "canonical_method": {
+      "enum": [
+        "M0-EPH",
+        "M1-RST",
+        "M2-PROV",
+        "M3-CONSOL",
+        "M4-MGMT",
+        "M5-LONG",
+        "MOMEGA-EVOLVE"
+      ]
+    },
+    "development_only": {
+      "const": true
+    },
+    "binding_status": {
+      "enum": [
+        "development-bound",
+        "specification-only",
+        "bound"
+      ]
+    },
+    "difficulty_tier": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "difficulty_vector": {
+      "type": "object"
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "memory_manifest_required": {
+      "type": "boolean"
+    },
+    "retention": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resource_envelope": {
+      "type": "object"
+    },
+    "verifier": {
+      "type": "object"
+    },
+    "new_capability": {
+      "type": "string"
+    },
+    "required_lower_levels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "M0",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M5",
+          "MΩ"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "cumulative_rule": {
+      "const": "retain_all_lower_M_capabilities"
+    },
+    "instrumented_interface_required": {
+      "type": "boolean"
+    },
+    "dataset_version": "0.3",
+    "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+    "benchmark_basis": "AI-Level Bench v0.3",
+    "naming_standard": "AI-Level"
+  },
+  "additionalProperties": true
+}

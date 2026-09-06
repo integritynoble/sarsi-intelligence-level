@@ -1,0 +1,36 @@
+{
+  "graph_id": "gp0_status.json",
+  "nodes": [
+    {
+      "id": "status_label",
+      "type": "label",
+      "bbox": [
+        40,
+        165,
+        100,
+        190
+      ],
+      "text": "Status"
+    },
+    {
+      "id": "status_value",
+      "type": "text",
+      "bbox": [
+        210,
+        162,
+        275,
+        190
+      ],
+      "text": "Ready",
+      "state": "visible"
+    }
+  ],
+  "edges": [
+    {
+      "type": "labels",
+      "source": "status_label",
+      "target": "status_value"
+    }
+  ],
+  "meta": {}
+}

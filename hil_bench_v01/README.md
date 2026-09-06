@@ -86,7 +86,7 @@ outcome primitive at ρ = 1; HLIS an equal-weight geometric mean over the coordi
 = 0.55·AUC + 0.35·Ceiling + 0.10·Harnessability. A level is a reading on the public split until the
 private split is run by an evaluator who did not build the pair.
 
-## Development dataset (`dataset/dev_v0_9/`)
+## Development dataset (`dataset/ail_v0_3/`)
 
 The public development/reference forms of the memory-integrated v6 revision (92 forms; the canonical memory-level lattice, the MΩ interface and permission contracts, Φ-candidate and telemetry schemas, a worked no-level-skipping refusal; 35 parameterized M-Bench
 forms — five per level M0–MΩ, each with a difficulty grid, a metric contract, a memory-manifest schema, a result

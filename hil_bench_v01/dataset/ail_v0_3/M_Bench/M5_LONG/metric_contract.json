@@ -1,0 +1,41 @@
+{
+  "level": "M5",
+  "canonical_method": "M5-LONG",
+  "metrics": [
+    "q_chain",
+    "q_source",
+    "q_cross",
+    "q_scope",
+    "q_stale",
+    "q_repro"
+  ],
+  "illustrative_thresholds_not_official": {
+    "q_chain_min": 0.8,
+    "q_source_min": 0.8,
+    "q_cross_min": 0.8,
+    "q_scope_min": 0.8,
+    "q_stale_min": 0.8,
+    "q_repro_min": 0.8
+  },
+  "retention": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ],
+  "cumulative_rule": "retain_all_lower_M_capabilities",
+  "required_lower_levels": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ],
+  "new_capability": "longitudinal knowledge/evidence lineage across projects, restarts, and long horizons",
+  "pass_law": "new_capability_gate AND all required_lower_levels pass",
+  "dataset_version": "0.3",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.3",
+  "naming_standard": "AI-Level"
+}

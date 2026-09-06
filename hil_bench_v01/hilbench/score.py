@@ -108,3 +108,16 @@ def o_level(o0_pass: bool, o1_transfer: int):
     memory to decide a later, different instance, with the ablated arm failing it."""
     if not o0_pass: return None
     return "O1" if o1_transfer == 1 else "O0"
+
+
+def frontier_cumulative(eps, p=P_GATE, rho=1.0, budget=None):
+    """DF(h,p) = max{T_b : every T_j, j<=b, meets S_net >= p at H<=h}.  A pass at a hard band cannot leap over a failed
+    easier band: lower-T retention is a property of the FRONTIER, not of a T item certificate (T is an ordered axis)."""
+    bands = [b for b in W_T]; best = None
+    for b in bands:
+        sub = [e for e in eps if e.get("band") == b and (budget is None or e.get("budget", "H0") <= budget)]
+        if not sub: break
+        s_net = sum(1.0 for e in sub if e.get("delivered_correct")) / len(sub) - rho * sum(1.0 for e in sub if e.get("false_completion")) / len(sub)
+        if s_net >= p: best = b
+        else: break
+    return best

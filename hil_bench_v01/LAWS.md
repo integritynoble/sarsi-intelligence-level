@@ -133,3 +133,21 @@ ledger, and the cell gate is `Δ · V · ¬FC · L_h · K_{T,<b|h}` with the hel
 certified as `E · U · Δ_g · K` — the mechanism exists, fires, and changes the outcome against the previous rung on the
 same seeds — which is why the harness-scaling curve is measured that way. `U_n` is the product of the coordinate gates
 with the bottleneck report as its control arm.
+
+
+## Cumulative structure is typed, not universal
+
+Four relations hide under one word, and `laws.CUMULATIVE` names which applies to each object:
+
+| Object | Type | Rule |
+|---|---|---|
+| C, I, M, O, U, C^GUI | `hard_capability` | retention: a level-k certificate requires every lower witness still passed (capability, not implementation) |
+| SA | `hard_capability_from_SA1` | SA_k retains SA1..SA(k−1); SA0 is an absence and is not retained |
+| GP0–GP5 | `cumulative_diagnostic` | retention inside GP; never promotes C^GUI, C or U |
+| DI | `cumulative_frontier` | `DF(h,p) = max{T_b : every T_j, j ≤ b, meets S_net ≥ p at H ≤ h}` — lower-T retention lives here and nowhere else (`score.frontier_cumulative`) |
+| T, H | `ordered_axis` | not cumulative: T labels the item, H the transcript; a T1 item never requires a T0 certificate |
+| HG | `cumulative_engineering` | `HG_g = HG_{g−1} + Δ_g`, a strict mechanism superset; architecture, not intelligence |
+
+Floors (X0) are structural baselines, not retained capabilities. Cross-ladder prerequisites (I needs M_μn; U needs every
+coordinate) are one-way gates, not cumulativity. Every cell in `cells.jsonl` carries `cumulative_type` and `retention`;
+`tests/test_cumulative.py` refuses a T or H cell with a K factor, a GP cell without one, and a frontier that leaps a failed band.

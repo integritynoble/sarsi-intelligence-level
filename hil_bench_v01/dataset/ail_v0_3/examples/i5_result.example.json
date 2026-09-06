@@ -1,0 +1,36 @@
+{
+  "form_id": "PUB-I5-001",
+  "unknown": {
+    "genuine": true
+  },
+  "hypotheses": {
+    "competing_and_discriminable": true
+  },
+  "experimentation": {
+    "autonomous_and_informative": true
+  },
+  "lineage": {
+    "pass": true
+  },
+  "validation": {
+    "independent_pass": true
+  },
+  "incorporation": {
+    "discovery_successes": 18,
+    "control_successes": 9,
+    "paired_total": 20,
+    "minimum_meaningful_improvement": 0.2,
+    "independent_transfer_verifier": true
+  },
+  "retention": {
+    "I0": true,
+    "I1": true,
+    "I2": true,
+    "I3": true,
+    "I4": true
+  },
+  "dataset_version": "0.3",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.3",
+  "naming_standard": "AI-Level"
+}

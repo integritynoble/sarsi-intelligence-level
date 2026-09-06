@@ -1,0 +1,42 @@
+{
+  "graph_id": "upload_before.json",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "list_item",
+      "bbox": [
+        70,
+        125,
+        220,
+        155
+      ],
+      "text": "report.pdf"
+    },
+    {
+      "id": "status",
+      "type": "text",
+      "bbox": [
+        500,
+        125,
+        590,
+        155
+      ],
+      "text": "Waiting",
+      "state": "pending"
+    },
+    {
+      "id": "upload",
+      "type": "button",
+      "bbox": [
+        70,
+        210,
+        220,
+        255
+      ],
+      "text": "Upload",
+      "state": "enabled"
+    }
+  ],
+  "edges": [],
+  "meta": {}
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "records": 20,
+    "conflicts": 1,
+    "corruptions": 1,
+    "clutter_ratio": 0.2,
+    "capacity_pressure": 0.1
+  },
+  {
+    "records": 50,
+    "conflicts": 3,
+    "corruptions": 2,
+    "clutter_ratio": 0.4,
+    "capacity_pressure": 0.25
+  },
+  {
+    "records": 120,
+    "conflicts": 6,
+    "corruptions": 4,
+    "clutter_ratio": 0.7,
+    "capacity_pressure": 0.4
+  },
+  {
+    "records": 300,
+    "conflicts": 12,
+    "corruptions": 8,
+    "clutter_ratio": 1.0,
+    "capacity_pressure": 0.6
+  },
+  {
+    "records": 800,
+    "conflicts": 25,
+    "corruptions": 16,
+    "clutter_ratio": 1.5,
+    "capacity_pressure": 0.8
+  }
+]

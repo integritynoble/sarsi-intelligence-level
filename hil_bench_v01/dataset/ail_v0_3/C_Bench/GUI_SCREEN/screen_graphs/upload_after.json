@@ -1,0 +1,54 @@
+{
+  "graph_id": "upload_after.json",
+  "nodes": [
+    {
+      "id": "file",
+      "type": "list_item",
+      "bbox": [
+        70,
+        125,
+        220,
+        155
+      ],
+      "text": "report.pdf"
+    },
+    {
+      "id": "status",
+      "type": "text",
+      "bbox": [
+        500,
+        125,
+        600,
+        155
+      ],
+      "text": "Uploaded",
+      "state": "success"
+    },
+    {
+      "id": "upload",
+      "type": "button",
+      "bbox": [
+        70,
+        210,
+        220,
+        255
+      ],
+      "text": "Upload",
+      "state": "disabled"
+    },
+    {
+      "id": "success",
+      "type": "message",
+      "bbox": [
+        70,
+        295,
+        360,
+        330
+      ],
+      "text": "1 file uploaded successfully.",
+      "state": "success"
+    }
+  ],
+  "edges": [],
+  "meta": {}
+}

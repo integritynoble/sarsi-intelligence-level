@@ -1,0 +1,36 @@
+{
+  "level": "M3",
+  "canonical_method": "M3-CONSOL",
+  "metrics": [
+    "q_sem",
+    "q_proc",
+    "q_update",
+    "q_demote",
+    "q_persist",
+    "delta_cons_diagnostic"
+  ],
+  "illustrative_thresholds_not_official": {
+    "q_sem_min": 0.8,
+    "q_proc_min": 0.8,
+    "q_update_min": 0.8,
+    "q_demote_min": 0.8,
+    "q_persist_min": 0.8
+  },
+  "retention": [
+    "M0",
+    "M1",
+    "M2"
+  ],
+  "cumulative_rule": "retain_all_lower_M_capabilities",
+  "required_lower_levels": [
+    "M0",
+    "M1",
+    "M2"
+  ],
+  "new_capability": "semantic/procedural consolidation with update, supersession, and demotion",
+  "pass_law": "new_capability_gate AND all required_lower_levels pass",
+  "dataset_version": "0.3",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.3",
+  "naming_standard": "AI-Level"
+}

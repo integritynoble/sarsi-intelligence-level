@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-Level Bench common public form",
+  "type": "object",
+  "required": [
+    "form_id",
+    "coordinate",
+    "level",
+    "canonical_method",
+    "development_only"
+  ],
+  "properties": {
+    "form_id": {
+      "type": "string"
+    },
+    "coordinate": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "canonical_method": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "development_only": {
+      "const": true
+    },
+    "resource_envelope": {
+      "type": "object"
+    },
+    "human_intervention": {
+      "type": "string"
+    },
+    "verifier": {
+      "type": "object"
+    },
+    "dataset_version": "0.3",
+    "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+    "benchmark_basis": "AI-Level Bench v0.3",
+    "naming_standard": "AI-Level"
+  }
+}

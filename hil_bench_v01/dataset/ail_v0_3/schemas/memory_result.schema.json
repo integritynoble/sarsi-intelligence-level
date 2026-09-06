@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-level-bench.dev/schemas/memory_result.schema.json",
+  "title": "AI-Level Bench M-Bench v0.6 result record",
+  "type": "object",
+  "required": [
+    "run_id",
+    "form_id",
+    "level",
+    "benchmark_version",
+    "memory_manifest_hash",
+    "difficulty_vector",
+    "metrics",
+    "retention",
+    "verifier",
+    "promotion",
+    "new_capability_gate",
+    "required_lower_levels"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "form_id": {
+      "type": "string"
+    },
+    "level": {
+      "enum": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "MΩ"
+      ]
+    },
+    "benchmark_version": {
+      "const": "0.6"
+    },
+    "model_hash": {
+      "type": "string"
+    },
+    "harness_hash": {
+      "type": "string"
+    },
+    "memory_manifest_hash": {
+      "type": "string"
+    },
+    "difficulty_vector": {
+      "type": "object"
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "thresholds": {
+      "type": "object"
+    },
+    "uncertainty_rule": {
+      "type": "object"
+    },
+    "control_result": {
+      "type": "object"
+    },
+    "retention": {
+      "type": "object"
+    },
+    "verifier": {
+      "type": "object"
+    },
+    "promotion": {
+      "type": "object"
+    },
+    "new_capability_gate": {
+      "type": "boolean"
+    },
+    "required_lower_levels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "M0",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M5",
+          "MΩ"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "instrumentation": {
+      "type": "object"
+    },
+    "dataset_version": "0.3",
+    "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+    "benchmark_basis": "AI-Level Bench v0.3",
+    "naming_standard": "AI-Level"
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "event_id": "evt-1",
+    "run_id": "MOMEGA-DEMO",
+    "agent_id": "agent-A",
+    "phi_version": "phi-0008",
+    "event_type": "phi_activate",
+    "timestamp": "2026-09-05T20:00:00Z",
+    "component_version": "hybrid-graph-retriever-v1"
+  },
+  {
+    "event_id": "evt-2",
+    "run_id": "MOMEGA-DEMO",
+    "agent_id": "agent-A",
+    "phi_version": "phi-0008",
+    "event_type": "memory_retrieve",
+    "timestamp": "2026-09-05T20:00:01Z",
+    "record_ids": [
+      "H2",
+      "X5",
+      "E11",
+      "K3"
+    ],
+    "component_version": "hybrid-graph-retriever-v1"
+  }
+]

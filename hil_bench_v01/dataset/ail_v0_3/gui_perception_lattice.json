@@ -1,0 +1,229 @@
+{
+  "version": "0.3",
+  "parent_coordinate": "C",
+  "parent_domain": "GUI/screen",
+  "diagnostic_subscale": "GP",
+  "not_a_top_level_family": true,
+  "not_a_c_level_replacement": true,
+  "levels": [
+    {
+      "level": "GP0",
+      "name": "Pixel and text recognition",
+      "method": "GP0-PIXEL",
+      "coordinate": "GP",
+      "parent_coordinate": "C",
+      "parent_domain": "GUI/screen",
+      "object_type": "diagnostic_capability_subscale",
+      "cumulative_type": "cumulative_diagnostic",
+      "cumulative": true,
+      "required_lower_levels": [],
+      "retention_rule": "K_GP,<g",
+      "no_promotion_targets": [
+        "C^GUI",
+        "C",
+        "U"
+      ],
+      "certification_law": "A |= GP0 iff V_GP,0=1 and K_GP,<g=1",
+      "controls_or_ablations": [
+        "visual perturbation/noise with preserved target"
+      ],
+      "primary_metrics": [
+        "primitive_accuracy",
+        "text_accuracy"
+      ],
+      "certification_gate": [
+        "factors P0 pass",
+        "no lower GP retention required"
+      ]
+    },
+    {
+      "level": "GP1",
+      "name": "UI-element recognition",
+      "method": "GP1-ELEMENT",
+      "coordinate": "GP",
+      "parent_coordinate": "C",
+      "parent_domain": "GUI/screen",
+      "object_type": "diagnostic_capability_subscale",
+      "cumulative_type": "cumulative_diagnostic",
+      "cumulative": true,
+      "required_lower_levels": [
+        "GP0"
+      ],
+      "retention_rule": "K_GP,<g",
+      "no_promotion_targets": [
+        "C^GUI",
+        "C",
+        "U"
+      ],
+      "certification_law": "A |= GP1 iff V_GP,1=1 and K_GP,<g=1",
+      "controls_or_ablations": [
+        "same label rendered as a different object type",
+        "GP0 retention"
+      ],
+      "primary_metrics": [
+        "object_type_accuracy"
+      ],
+      "certification_gate": [
+        "factors O pass",
+        "retain GP0"
+      ]
+    },
+    {
+      "level": "GP2",
+      "name": "Spatial grounding and hierarchy",
+      "method": "GP2-GROUND",
+      "coordinate": "GP",
+      "parent_coordinate": "C",
+      "parent_domain": "GUI/screen",
+      "object_type": "diagnostic_capability_subscale",
+      "cumulative_type": "cumulative_diagnostic",
+      "cumulative": true,
+      "required_lower_levels": [
+        "GP0",
+        "GP1"
+      ],
+      "retention_rule": "K_GP,<g",
+      "no_promotion_targets": [
+        "C^GUI",
+        "C",
+        "U"
+      ],
+      "certification_law": "A |= GP2 iff V_GP,2=1 and K_GP,<g=1",
+      "controls_or_ablations": [
+        "same labels with shuffled spatial/hierarchical layout",
+        "GP0-GP1 retention"
+      ],
+      "primary_metrics": [
+        "bbox_iou",
+        "relation_accuracy",
+        "hierarchy_accuracy"
+      ],
+      "certification_gate": [
+        "factors G,R pass",
+        "retain GP0, GP1"
+      ]
+    },
+    {
+      "level": "GP3",
+      "name": "Interface-state understanding",
+      "method": "GP3-STATE",
+      "coordinate": "GP",
+      "parent_coordinate": "C",
+      "parent_domain": "GUI/screen",
+      "object_type": "diagnostic_capability_subscale",
+      "cumulative_type": "cumulative_diagnostic",
+      "cumulative": true,
+      "required_lower_levels": [
+        "GP0",
+        "GP1",
+        "GP2"
+      ],
+      "retention_rule": "K_GP,<g",
+      "no_promotion_targets": [
+        "C^GUI",
+        "C",
+        "U"
+      ],
+      "certification_law": "A |= GP3 iff V_GP,3=1 and K_GP,<g=1",
+      "controls_or_ablations": [
+        "matched object with opposite state",
+        "GP0-GP2 retention"
+      ],
+      "primary_metrics": [
+        "state_accuracy"
+      ],
+      "certification_gate": [
+        "factors S pass",
+        "retain GP0, GP1, GP2"
+      ]
+    },
+    {
+      "level": "GP4",
+      "name": "Dynamic GUI understanding",
+      "method": "GP4-DYNAMIC",
+      "coordinate": "GP",
+      "parent_coordinate": "C",
+      "parent_domain": "GUI/screen",
+      "object_type": "diagnostic_capability_subscale",
+      "cumulative_type": "cumulative_diagnostic",
+      "cumulative": true,
+      "required_lower_levels": [
+        "GP0",
+        "GP1",
+        "GP2",
+        "GP3"
+      ],
+      "retention_rule": "K_GP,<g",
+      "no_promotion_targets": [
+        "C^GUI",
+        "C",
+        "U"
+      ],
+      "certification_law": "A |= GP4 iff V_GP,4=1 and K_GP,<g=1",
+      "controls_or_ablations": [
+        "frame-order permutation",
+        "static single-frame arm",
+        "GP0-GP3 retention"
+      ],
+      "primary_metrics": [
+        "change_set_accuracy",
+        "effect_recognition"
+      ],
+      "certification_gate": [
+        "factors D,E pass",
+        "retain GP0, GP1, GP2, GP3"
+      ]
+    },
+    {
+      "level": "GP5",
+      "name": "Novel-interface perceptual generalization",
+      "method": "GP5-NOVEL",
+      "coordinate": "GP",
+      "parent_coordinate": "C",
+      "parent_domain": "GUI/screen",
+      "object_type": "diagnostic_capability_subscale",
+      "cumulative_type": "cumulative_diagnostic",
+      "cumulative": true,
+      "required_lower_levels": [
+        "GP0",
+        "GP1",
+        "GP2",
+        "GP3",
+        "GP4"
+      ],
+      "retention_rule": "K_GP,<g",
+      "no_promotion_targets": [
+        "C^GUI",
+        "C",
+        "U"
+      ],
+      "certification_law": "A |= GP5 iff V_GP,5=1 and K_GP,<g=1",
+      "controls_or_ablations": [
+        "familiar-family comparison",
+        "application-specific path disabled",
+        "GP0-GP4 retention"
+      ],
+      "primary_metrics": [
+        "heldout_interface_accuracy",
+        "transfer_accuracy"
+      ],
+      "certification_gate": [
+        "factors N,X pass",
+        "retain GP0, GP1, GP2, GP3, GP4"
+      ]
+    }
+  ],
+  "relation": "GP ⊂ C^GUI ⊂ C (diagnostic containment shorthand); GP_g != C_g",
+  "cumulative": true,
+  "cumulative_type": "cumulative_diagnostic",
+  "retention_rule": "GPg requires GP0..GP(g-1)",
+  "certification_law": "A |= GP_g iff V_GP,g=1 and K_GP,<g=1",
+  "no_promotion_targets": [
+    "C^GUI",
+    "C",
+    "U"
+  ],
+  "dataset_version": "0.3",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.3"
+}

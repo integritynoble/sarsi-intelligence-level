@@ -1,0 +1,175 @@
+{
+  "graph_id": "accounts_table.json",
+  "nodes": [
+    {
+      "id": "row_0_0",
+      "type": "table_cell",
+      "bbox": [
+        40,
+        150,
+        190,
+        185
+      ],
+      "text": "Alpha",
+      "row": 0,
+      "column": "Account"
+    },
+    {
+      "id": "row_0_1",
+      "type": "table_cell",
+      "bbox": [
+        290,
+        150,
+        440,
+        185
+      ],
+      "text": "Free",
+      "row": 0,
+      "column": "Plan"
+    },
+    {
+      "id": "row_0_2",
+      "type": "table_cell",
+      "bbox": [
+        450,
+        150,
+        600,
+        185
+      ],
+      "text": "Active",
+      "row": 0,
+      "column": "Status"
+    },
+    {
+      "id": "row_0_3",
+      "type": "table_cell",
+      "bbox": [
+        610,
+        150,
+        760,
+        185
+      ],
+      "text": "Sep 5",
+      "row": 0,
+      "column": "Last update"
+    },
+    {
+      "id": "row_1_0",
+      "type": "table_cell",
+      "bbox": [
+        40,
+        215,
+        190,
+        250
+      ],
+      "text": "Beta",
+      "row": 1,
+      "column": "Account"
+    },
+    {
+      "id": "row_1_1",
+      "type": "table_cell",
+      "bbox": [
+        290,
+        215,
+        440,
+        250
+      ],
+      "text": "Pro",
+      "row": 1,
+      "column": "Plan"
+    },
+    {
+      "id": "row_1_2",
+      "type": "table_cell",
+      "bbox": [
+        450,
+        215,
+        600,
+        250
+      ],
+      "text": "Pending",
+      "row": 1,
+      "column": "Status"
+    },
+    {
+      "id": "row_1_3",
+      "type": "table_cell",
+      "bbox": [
+        610,
+        215,
+        760,
+        250
+      ],
+      "text": "Aug 29",
+      "row": 1,
+      "column": "Last update"
+    },
+    {
+      "id": "row_2_0",
+      "type": "table_cell",
+      "bbox": [
+        40,
+        280,
+        190,
+        315
+      ],
+      "text": "Gamma",
+      "row": 2,
+      "column": "Account"
+    },
+    {
+      "id": "row_2_1",
+      "type": "table_cell",
+      "bbox": [
+        290,
+        280,
+        440,
+        315
+      ],
+      "text": "Pro",
+      "row": 2,
+      "column": "Plan"
+    },
+    {
+      "id": "row_2_2",
+      "type": "table_cell",
+      "bbox": [
+        450,
+        280,
+        600,
+        315
+      ],
+      "text": "Active",
+      "row": 2,
+      "column": "Status"
+    },
+    {
+      "id": "row_2_3",
+      "type": "table_cell",
+      "bbox": [
+        610,
+        280,
+        760,
+        315
+      ],
+      "text": "Aug 20",
+      "row": 2,
+      "column": "Last update"
+    }
+  ],
+  "edges": [],
+  "meta": {
+    "rows": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "columns": [
+      "Account",
+      "Plan",
+      "Status",
+      "Last update"
+    ]
+  }
+}

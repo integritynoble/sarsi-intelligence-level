@@ -1,0 +1,22 @@
+{
+  "version": "0.7",
+  "coordinate": "C",
+  "domains": [
+    "general",
+    "science",
+    "mathematics",
+    "abstract",
+    "code",
+    "multimodal/spatial",
+    "GUI/screen",
+    "long-context"
+  ],
+  "gui_domain_label": "C^GUI",
+  "gui_perception_diagnostic": "GP0-GP5 cumulative diagnostic sub-ladder",
+  "policy": "GP is cumulative within GP, diagnostic only, and never promotes C^GUI/C/U; C^GUI preserves original C semantics and ordinary C retention",
+  "missing_modality": "report N/A rather than zero unless the claimed profile explicitly requires GUI/screen",
+  "dataset_version": "0.3",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.3",
+  "naming_standard": "AI-Level"
+}

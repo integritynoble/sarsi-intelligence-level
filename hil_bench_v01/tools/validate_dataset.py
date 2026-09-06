@@ -83,7 +83,7 @@ def validate(root: Path) -> list:
     return problems
 
 if __name__ == "__main__":
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_9")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "ail_v0_3")
     probs = validate(root)
     print("\n".join(probs) if probs else f"dataset ok: {root}")
     sys.exit(1 if probs else 0)

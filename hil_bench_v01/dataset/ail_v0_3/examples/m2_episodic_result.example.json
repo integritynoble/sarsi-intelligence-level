@@ -1,0 +1,58 @@
+{
+  "run_id": "RUN-M2-EXAMPLE",
+  "form_id": "PUB-M2-D03",
+  "level": "M2",
+  "benchmark_version": "0.6",
+  "model_hash": "sha256:demo",
+  "harness_hash": "sha256:demo",
+  "memory_manifest_hash": "sha256:demo",
+  "difficulty_vector": {
+    "episodes": 50,
+    "entities": 10,
+    "distractor_ratio": 1.5,
+    "supersession_depth": 3,
+    "restarts": 2
+  },
+  "metrics": {
+    "retrieval_precision": 0.92,
+    "retrieval_recall": 0.9,
+    "q_prov": 0.94,
+    "q_time": 0.91,
+    "q_stale": 0.9
+  },
+  "thresholds": {
+    "retrieval_precision_min": 0.8,
+    "retrieval_recall_min": 0.8,
+    "q_prov_min": 0.8,
+    "q_time_min": 0.8,
+    "q_stale_min": 0.8
+  },
+  "uncertainty_rule": {
+    "development_example_only": true
+  },
+  "control_result": {
+    "passed": true
+  },
+  "retention": {
+    "M0": true,
+    "M1": true
+  },
+  "verifier": {
+    "independent": true,
+    "id": "dev-oracle"
+  },
+  "promotion": {
+    "accepted": true,
+    "development_only": true
+  },
+  "required_lower_levels": [
+    "M0",
+    "M1"
+  ],
+  "new_capability_gate": true,
+  "cumulative_rule": "retain_all_lower_M_capabilities",
+  "dataset_version": "0.3",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.3",
+  "naming_standard": "AI-Level"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-level-bench.dev/schemas/phi_interface.schema.json",
+  "title": "MΩ instrumented memory interface contract",
+  "type": "object",
+  "required": [
+    "interface_version",
+    "agent_visible",
+    "runner_private",
+    "protected_assets"
+  ],
+  "properties": {
+    "interface_version": {
+      "const": "0.6"
+    },
+    "agent_visible": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runner_private": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "protected_assets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "telemetry_events": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

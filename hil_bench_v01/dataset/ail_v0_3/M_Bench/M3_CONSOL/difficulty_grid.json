@@ -1,0 +1,37 @@
+[
+  {
+    "episodes": 8,
+    "regularities": 2,
+    "exceptions": 1,
+    "updates": 1,
+    "raw_episode_access": "hidden"
+  },
+  {
+    "episodes": 20,
+    "regularities": 3,
+    "exceptions": 2,
+    "updates": 2,
+    "raw_episode_access": "hidden"
+  },
+  {
+    "episodes": 50,
+    "regularities": 5,
+    "exceptions": 4,
+    "updates": 3,
+    "raw_episode_access": "index_rebuilt"
+  },
+  {
+    "episodes": 120,
+    "regularities": 8,
+    "exceptions": 8,
+    "updates": 5,
+    "raw_episode_access": "index_rebuilt"
+  },
+  {
+    "episodes": 300,
+    "regularities": 12,
+    "exceptions": 15,
+    "updates": 8,
+    "raw_episode_access": "withheld"
+  }
+]

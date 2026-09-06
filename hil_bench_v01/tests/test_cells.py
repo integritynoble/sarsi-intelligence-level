@@ -15,7 +15,7 @@ class GridTests(unittest.TestCase):
         for c in cells.CELLS:
             for k in ("construct","prereq","witness","control_arm","factors","gate","law","key","status"): self.assertTrue(c[k], (c["cell"], k))
             for f in c["factors"]: self.assertIn(f["locus"], cells.LOCI, c["cell"])
-            if c["prereq"] != "none" and c["ladder"] not in ("H","DI","GP"): self.assertEqual(c["factors"][-1]["symbol"], "K", c["cell"])
+            if c["cumulative_type"] in ("hard_capability", "cumulative_diagnostic", "cumulative_engineering", "hard_capability_from_SA1") and c["retention"]: self.assertEqual(c["factors"][-1]["symbol"], "K", c["cell"])
     def test_a_runs_cell_names_a_generator_that_resolves(self):
         for c in cells.CELLS:
             if c["status"] == "runs":

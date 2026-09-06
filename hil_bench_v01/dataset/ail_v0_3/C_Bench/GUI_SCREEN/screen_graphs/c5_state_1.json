@@ -1,0 +1,44 @@
+{
+  "graph_id": "c5_state_1.json",
+  "nodes": [
+    {
+      "id": "mode",
+      "type": "button",
+      "bbox": [
+        60,
+        105,
+        205,
+        150
+      ],
+      "text": "Inspect",
+      "state": "selected"
+    },
+    {
+      "id": "toggle",
+      "type": "button",
+      "bbox": [
+        230,
+        105,
+        375,
+        150
+      ],
+      "text": "Toggle",
+      "state": "enabled"
+    },
+    {
+      "id": "detail",
+      "type": "panel",
+      "bbox": [
+        60,
+        250,
+        700,
+        470
+      ],
+      "state": "open"
+    }
+  ],
+  "edges": [],
+  "meta": {
+    "synthetic_rule_family": "toggle_then_mode"
+  }
+}

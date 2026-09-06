@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export the cell grid as dataset v0.9 on top of the v0.8 harmonized tree.
 
-    python3 tools/export_cells.py <v0.8 tree> dataset/dev_v0_9
+    python3 tools/export_cells.py <v0.8 tree> dataset/ail_v0_3
 
 Adds cells.jsonl (one record per cell, the I-style schema), coverage.csv (regenerated from the grid), hg_conform.json
 (a real run of the offline HG0-HG2 conformance probe), and stamps the card.  Every v0.8 record is kept unchanged so the

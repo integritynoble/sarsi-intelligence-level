@@ -11,7 +11,7 @@ class SchemaTests(unittest.TestCase):
             self.assertTrue(v.get("factors"), k); self.assertTrue(v.get("control"), k); self.assertIn("prereq", v, k)
     def test_retention_is_a_factor_of_every_level_above_the_floor(self):
         floors = {"C0", "SA-cal", "O0"}
-        for k, v in {**laws.LAWS, **{kk: vv for kk, vv in laws.LADDERS.items() if not kk.startswith("H")}}.items():
+        for k, v in {**laws.LAWS, **{kk: vv for kk, vv in laws.LADDERS.items() if not kk.startswith("H") and not kk.startswith("T")}}.items():
             if k in floors or k in ("HG0",): continue
             self.assertEqual(v["factors"][-1], "K", k)
     def test_every_ladder_is_present_in_one_form(self):

@@ -217,9 +217,9 @@ LADDERS = {
     "O4": {"name": "Recursive organization", "factors": ["M_Psi", "V_Psi", "G_Psi", "N_O", "K"], "control": "the frozen Psi_O", "prereq": "K_lower", "status": "specification"},
     "O5": {"name": "Collective discovery", "factors": ["U", "H", "E", "L", "V", "P", "N_O", "K"], "control": "the parallel-individual arm", "prereq": "K_lower", "status": "specification"},
     "OOmega": {"name": "Open-ended organization", "factors": ["R_reach", "N_O", "K"], "control": "the pre-frontier organization", "prereq": "K_lower", "status": "specification"},
-    **{f"T{b}": {"name": n, "factors": ["Delta", "V", "notFC", "L_h", "K"], "control": "the held-back arm; band is a structural property checked by admissibility", "prereq": "K_lower at the same H", "status": "implemented" if b <= 1 else "specification"}
+    **{f"T{b}": {"name": n, "factors": ["Delta", "V", "notFC", "L_h", "B"], "control": "the held-back arm; band is a structural property checked by admissibility", "prereq": "none: ordered axis; lower-band retention lives in the DI frontier", "status": "implemented" if b <= 1 else "specification"}
        for b, n in [(0, "Trivial"), (1, "Routine"), (2, "Multi-step"), (3, "Complex"), (4, "Expert project"), (5, "Frontier"), (6, "Mission")]},
-    "TOmega": {"name": "Open-ended charter", "factors": ["Delta", "V", "notFC", "L_h", "K"], "control": "the held-back arm", "prereq": "K_lower at H0", "status": "specification"},
+    "TOmega": {"name": "Open-ended charter", "factors": ["Delta", "V", "notFC", "L_h", "B"], "control": "the held-back arm", "prereq": "none: ordered axis", "status": "specification"},
     **{f"H{h}": {"name": n, "factors": ["L_h"], "control": "the intervention ledger, classified by the cognition supplied, by a locus outside the pair", "prereq": "none", "status": "implemented" if h == 0 else "specification"}
        for h, n in [(0, "None"), (1, "Exception-only"), (2, "Occasional"), (3, "Periodic"), (4, "Frequent"), (5, "Continuous")]},
     **{f"HG{g}": {"name": n, "factors": ["E", "U", f"Delta_{g}", "K"] if g else ["E"], "control": "the previous rung, same model, same seeds", "prereq": "K_lower (every lower mechanism kept)", "status": "built" if g <= 3 else "specification"}
@@ -233,3 +233,27 @@ LADDERS = {
 def factor_gate(values: dict, factors: list) -> bool:
     """z = product of the named factors; a factor that is absent is zero, never assumed."""
     return all(bool(values.get(f, False)) for f in factors)
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Cumulative structure is TYPED, not universal (theory v2.6 / Bench v0.3).  Four relations hide under one word:
+#   retention  -- the K factor: a level-k certificate requires every lower witness still passed (capability, not
+#                 implementation).  C, I, M, O, SA from SA1, U; and the diagnostic sub-ladder GP (which never promotes C).
+#   frontier   -- a max over a retained set: DI across T at fixed H and p.  Lower-T retention lives HERE and nowhere else.
+#   nesting    -- HG_g = HG_{g-1} + Delta_g, a strict mechanism superset; cumulative architecture, not intelligence.
+#   axis       -- T and H are ordered axes (item structure, transcript interventions), never abilities: no retention.
+# Floors are not retained capabilities (SA0 is an absence; X0 elsewhere is a structural baseline), and cross-ladder
+# prerequisites (I needs M_mu_n; U needs every coordinate) are one-way gates, not cumulativity.
+CUMULATIVE = {
+    "C": "hard_capability", "I": "hard_capability", "M": "hard_capability", "O": "hard_capability", "U": "hard_capability",
+    "SA": "hard_capability_from_SA1", "GP": "cumulative_diagnostic", "C^GUI": "hard_capability",
+    "DI": "cumulative_frontier", "T": "ordered_axis", "H": "ordered_axis", "HG": "cumulative_engineering",
+}
+def retention_rule(ladder: str, level: str) -> str:
+    """What K means for this cell, as text; '' when the object carries no retention of its own."""
+    t = CUMULATIVE[ladder]; floor = level.rstrip("Ω").rstrip("0123456789") + "0"
+    if t in ("hard_capability", "cumulative_diagnostic"): return "" if level == floor else f"every lower {ladder} level retained on its own witness"
+    if t == "hard_capability_from_SA1": return "" if level in ("SA0", "SA1", "SA-cal") else "SA1..SA(k-1) retained; SA0 is an absence and is not retained"
+    if t == "cumulative_frontier": return "every lower T band meets the delivered-outcome reliability at the same H ceiling and p"
+    if t == "cumulative_engineering": return "" if level == "HG0" else "every lower rung's mechanism present: HG_g = HG_{g-1} + Delta_g"
+    return ""   # ordered axes: T labels the item, H the transcript; neither is an ability of the system

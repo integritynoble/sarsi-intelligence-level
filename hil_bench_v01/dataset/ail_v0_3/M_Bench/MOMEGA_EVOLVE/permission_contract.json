@@ -1,0 +1,27 @@
+{
+  "version": "0.6",
+  "rule": "agent access is a strict subset of runner access",
+  "agent_may": [
+    "inspect declared memory manifest",
+    "receive bounded diagnostics",
+    "generate candidate deltaPhi inside WM",
+    "request non-hidden candidate tests"
+  ],
+  "agent_may_not": [
+    "inspect hidden certification forms",
+    "run or select hidden certification tasks",
+    "change verifier",
+    "change thresholds",
+    "change promoter",
+    "change control assignment"
+  ],
+  "runner_only": [
+    "hidden evaluation",
+    "snapshot/restore",
+    "diff/hash",
+    "activation verification",
+    "telemetry audit",
+    "ablation",
+    "promotion/rollback"
+  ]
+}
