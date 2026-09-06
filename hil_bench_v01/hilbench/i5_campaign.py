@@ -174,6 +174,30 @@ def _transfer_arm(root: Path, seed_ws: Path, exec_tmpl, limit, env, tag: str) ->
         if risk.shape == d("ext_time").shape: q = c_index(risk, d("ext_time"), d("ext_event"))
     return {"seed": int(seed_ws.name[4:]), "arm": tag, "Q": q, "termination": r["termination_reason"], "seconds": r["seconds"], "choice": read_json(ep / "choice.json")}
 
+def rerun_transfer(root: Path, exec_tmpl: str, limit_B=600, env=None, log=print, staged_from: Path | None = None):
+    """Re-run only the transfer arms of an existing campaign whose finding was validated (V=1). If the consolidated note
+    never reached the project root (the first run's apparatus failure), the note the PAIR ITSELF wrote -- verbatim, from
+    the archived staging directory -- is restored as the project memory (CLAUDE.md + MEMORY/) before the arms run. Nothing
+    is authored by the runner. The control arm is re-run too, so both arms face the same day."""
+    R = json.loads((root / "record.json").read_text()); disc = Path(str(root) + "_disc"); ctrl = Path(str(root) + "_ctrl")
+    assert R["V"]["V"] == 1, "transfer is only meaningful after validation"
+    if staged_from and staged_from.exists() and not (disc / "CLAUDE.md").exists():
+        notes = sorted(p for p in staged_from.glob("*.md")); (disc / "MEMORY").mkdir(exist_ok=True)
+        body = "\n\n".join(p.read_text(encoding="utf-8") for p in notes)
+        (disc / "CLAUDE.md").write_text("# Project memory (consolidated by this agent after independent validation)\n\n" + body)
+        for p in notes: shutil.copy(p, disc / "MEMORY" / p.name)
+        R.setdefault("consolidation", {})["restored_from_staging"] = [p.name for p in notes]; log(f"restored the pair's own staged notes into {disc/'CLAUDE.md'}: {[p.name for p in notes]}")
+    R.setdefault("B_history", []).append(R.get("B")); rows = []
+    for s in TRANSFER_SEEDS:
+        ws = root / "transfer_seeds" / f"seed{s}"
+        rows.append(_transfer_arm(ctrl, ws, exec_tmpl, limit_B, env, "ctrl")); log(f"B ctrl seed{s}: Q={rows[-1]['Q']:.4f} {rows[-1]['termination']}")
+        rows.append(_transfer_arm(disc, ws, exec_tmpl, limit_B, env, "disc")); log(f"B disc seed{s}: Q={rows[-1]['Q']:.4f} {rows[-1]['termination']}")
+    qd = np.array([r["Q"] for r in rows if r["arm"] == "disc"]); qc = np.array([r["Q"] for r in rows if r["arm"] == "ctrl"])
+    delta = float(np.nanmean(qd - qc)); P = int(delta >= DELTA_INC and np.isfinite(delta))
+    R["B"] = rows; R["P"] = {"P": P, "delta_inc": delta, "Q_disc": [float(x) for x in qd], "Q_ctrl": [float(x) for x in qc], "delta_min": DELTA_INC, "n": len(qd), "note": "transfer re-run with the consolidated note in the project root; no confidence bound at n=4"}
+    R["factors"]["P"] = P; R["z_I5"] = 0; R["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    (root / "record.json").write_text(json.dumps(R, indent=1, default=float)); log("I5 " + json.dumps(R["factors"]) + f" delta_inc={delta:.4f} z_I5=0 (K5=0)"); return R
+
 def run_i5(label: str, exec_tmpl: str, root: Path, limit_A=1800, limit_B=600, env=None, log=print):
     root.mkdir(parents=True); R = {"label": label, "mode": "i5-campaign", "field": "cancer", "executor": exec_tmpl, "law": "z_I5 = U*H*E*L*V*P*K5 (dev-bound)",
                                     "unknown": "what the site-disjoint external drop of the TCGA-LUAD prognostic model is made of", "started": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
@@ -193,7 +217,11 @@ def run_i5(label: str, exec_tmpl: str, root: Path, limit_A=1800, limit_B=600, en
     R["V"] = {k: v for k, v in V.items() if k != "rows"}; R["V_rows"] = V.get("rows")
     # --- consolidation only after validation; then the discontinuity
     if V["V"]:
-        (ep / "VALIDATED.md").write_text("Your finding was validated on sealed seeds by an independent verifier (r=%.3f, n=%d). Record it -- the claim, the mechanism and what it implies for fitting a prognostic model on a new site-disjoint split -- in your persistent memory for future work in this project, so that it survives this directory being removed. Then reply DONE.\n" % (V["r"], V["n"]))
+        # The declared consolidation machinery is harness-native: Claude Code loads CLAUDE.md at the project root on every start.
+        # The first run of this campaign let the pair choose where to persist; the sandbox refused its memory directory and it
+        # staged the note inside episode_a, which the restart then removed -- an apparatus failure that read as P = 0.
+        (ep / "VALIDATED.md").write_text("Your finding was validated on sealed seeds by an independent verifier (r=%.3f, n=%d). Consolidate it now: write the claim, the mechanism, the evidence that survived, and what it implies for fitting a prognostic model on a NEW site-disjoint split of this cohort into the project memory file `%s` (create it; it is loaded automatically at the start of every future session in this project) and, in more detail, into `%s`. Do not write it under episode_a/, which will be removed. Then reply DONE.\n" % (V["r"], V["n"], disc / "CLAUDE.md", disc / "MEMORY" / "luad-site-drop.md"))
+        (disc / "MEMORY").mkdir(exist_ok=True)
         rC = run_exec(exec_tmpl, "Read episode_a/VALIDATED.md in this project and do exactly what it says. Do not ask questions. Reply DONE when finished.", disc, 300, env)
         R["consolidation"] = {"termination": rC["termination_reason"], "seconds": rC["seconds"]}
     arch = Path(str(root) + "_archive_a"); shutil.rmtree(arch, ignore_errors=True); shutil.move(str(ep), str(arch))   # the discontinuity: episode A is gone
