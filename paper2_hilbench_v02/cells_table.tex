@@ -25,12 +25,12 @@ C5\textsuperscript{GUI} & A GUI-domain witness of the existing level C5; the sam
 C6\textsuperscript{GUI} & A GUI-domain witness of the existing level C6; the same contrast, grounded in a screen. & the oracle-screen arm and the perfect-actuator arm (diagnostic); the trap of C6 & S $\cdot$ $\Delta$\_GP $\cdot$ A $\cdot$ K & forms\\
 C$\Omega$\textsuperscript{GUI} & A new interface representation expands the reachable GUI problem classes. & the pre-frontier & R\_reach $\cdot$ A $\cdot$ K & spec.\\
 \midrule\multicolumn{5}{@{}l}{\textbf{GUI perception $GP$ (diagnostic sub-ladder)} --- cumulative diagnostic; never promotes $C$}\\*
-GP0 & Diagnostic of the screen representation; never promotes C. & the oracle graph & P\_text $\cdot$ $\neg$promote & forms\\
-GP1 & Diagnostic of the screen representation; never promotes C. & the oracle graph & P\_object $\cdot$ $\neg$promote $\cdot$ K & forms\\
-GP2 & Diagnostic of the screen representation; never promotes C. & the oracle graph & P\_layout $\cdot$ $\neg$promote $\cdot$ K & forms\\
-GP3 & Diagnostic of the screen representation; never promotes C. & the oracle graph & P\_state $\cdot$ $\neg$promote $\cdot$ K & forms\\
-GP4 & Diagnostic of the screen representation; never promotes C. & the oracle graph & P\_transition $\cdot$ $\neg$promote $\cdot$ K & forms\\
-GP5 & Diagnostic of the screen representation; never promotes C. & the oracle graph & P\_goal $\cdot$ $\neg$promote $\cdot$ K & forms\\
+GP0 & Visible text, icons, colours and elementary features are recognised under visual perturbation that preserves the target. & visual perturbation / noise with the target preserved & P0 $\cdot$ $\neg$promote & forms\\
+GP1 & Interface object types are told apart: the same label rendered as a different object type is classified differently. & the same label rendered as a different object type & O $\cdot$ $\neg$promote $\cdot$ K & forms\\
+GP2 & A referred element is grounded to the correct region with containment, adjacency, ownership and target relations; a shuffled layout with the same labels defeats a label-only reader. & the same labels with the spatial/hierarchical layout shuffled & G $\cdot$ R $\cdot$ $\neg$promote $\cdot$ K & forms\\
+GP3 & Enabled/disabled, selected, focused, open/closed, loading, error and modal states are read; the matched object in the opposite state is read differently. & the matched object with the opposite enabled/selected/modal state & S $\cdot$ $\neg$promote $\cdot$ K & forms\\
+GP4 & Across frames, what changed and whether the intended effect occurred are recognised; a permuted frame order or a single static frame defeats a reader that does not track change. & frame-order permutation, or the static single-frame arm & D $\cdot$ E $\cdot$ $\neg$promote $\cdot$ K & forms\\
+GP5 & An unfamiliar application family is grounded and interpreted without an application-specific script or a memorised element path. & the familiar-family / memorised-path comparison; a held-out application family & N $\cdot$ X $\cdot$ $\neg$promote $\cdot$ K & forms\\
 \midrule\multicolumn{5}{@{}l}{\textbf{Individual $I$} --- hard cumulative}\\*
 I0 & Within-episode operation; no persistence claim. Loss after a restart is I0, never mislabelled I1. & --- & Ep & \textbf{runs}\\
 I1 & After a genuine execution discontinuity, task-relevant state is recovered with provenance, and the same pair without the record does not recover it. & the no-record (ablated-state) arm & Rec $\cdot$ Prov $\cdot$ $\neg$Abl $\cdot$ K & \textbf{runs}\\

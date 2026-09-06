@@ -23,6 +23,29 @@ def load(p: Path):
         if line.strip(): rows.append((n, json.loads(line)))
     return rows
 
+def typed_cumulative_rules(root: Path) -> list:
+    """Bench v0.3 contract: reject (i) a GP_g record missing GP0..GP(g-1); (ii) a T or H record carrying capability retention;
+    (iii) a DI frontier record without the lower-T retention law; (iv) a GP record that claims promotion into C/U;
+    (v) an HG_g rung missing a prior mechanism.  Runs over every jsonl record in the tree that has a coordinate and level."""
+    problems = []
+    for f in sorted(root.rglob("*.jsonl")):
+        for n, r in load(f):
+            co, lv, req = r.get("coordinate"), str(r.get("level", "")), r.get("required_lower_levels")
+            if co == "GP" and lv[2:].isdigit():
+                g = int(lv[2:]); want = [f"GP{j}" for j in range(g)]
+                if (req or []) != want: problems.append(f"{f.name}:{n} (i) {lv} must require {want}, has {req}")
+                if str(r.get("object_type", "")).startswith("diagnostic") is False or r.get("parent_coordinate") != "C": problems.append(f"{f.name}:{n} (iv) GP record is not a diagnostic subscale of C")
+                if r.get("promotes") or any(k in " ".join(map(str, r.get("certification_gate", []))).lower() for k in ("promotes c", "promote c", "promotes u", "c credit")): problems.append(f"{f.name}:{n} (iv) GP record claims promotion")
+            if co in ("T", "H") and r.get("cumulative_type") is not None:
+                if req: problems.append(f"{f.name}:{n} (ii) {co} record carries capability retention {req}")
+                if r.get("cumulative_type") != "ordered_axis": problems.append(f"{f.name}:{n} (ii) {co} record typed {r.get('cumulative_type')!r}, not ordered_axis")
+            if co == "DI" and r.get("cumulative_type") is not None:
+                if "K_T" not in str(r.get("retention_rule", "")): problems.append(f"{f.name}:{n} (iii) DI frontier record lacks the lower-T retention law K_T,<b|h")
+            if co == "HG" and lv[2:].isdigit() and r.get("cumulative_type") is not None:
+                g = int(lv[2:]); want = [f"HG{j}" for j in range(g)]
+                if (req or []) != want: problems.append(f"{f.name}:{n} (v) {lv} must retain {want}, has {req}")
+    return problems
+
 def validate(root: Path) -> list:
     problems = []; per = {}
     for f in sorted((root / "public").glob("*.jsonl")):
@@ -46,6 +69,7 @@ def validate(root: Path) -> list:
                 if r.get("canonical_method") not in M_METHODS: problems.append(f"{f.name}:{n} unknown memory method {r.get('canonical_method')!r}")
                 evaluated = "verifier" in r or ("paired_evaluation" in r and "independent_promotion_and_rollback" in r)   # MOmega: paired evaluation + independent promotion
                 if "retention" not in r or not evaluated: problems.append(f"{f.name}:{n} memory form lacks retention or an evaluation locus")
+    problems += typed_cumulative_rules(root)
     if not per: problems.append(f"no forms found under {root}/public")
     dup = [i for i, v in per.items() if len(v) > 1]
     if dup: problems.append(f"duplicate form ids: {dup}")
