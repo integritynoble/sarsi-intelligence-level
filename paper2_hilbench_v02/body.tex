@@ -65,7 +65,7 @@ where Harnessability is the gain normalized by the headroom above the bare rung.
 
 \section{One Instrument, Two Subjects}\label{sec:two}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYY@{}}
 \toprule
@@ -113,9 +113,9 @@ A test law is invariant if and only if it is stated as a \emph{contrast that mus
 
 By that criterion the framework's laws divide cleanly, and two of them had to be rewritten.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}llY@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.1cm}>{\raggedright\arraybackslash}p{6.2cm}Y@{}}
 \toprule
 Level & Law & Status \\
 \midrule
@@ -158,13 +158,13 @@ The grid has 83 cells: 30 run, 34 have forms, 19 are specification. Table~\ref{t
 \subsection{Cumulative structure is typed, not universal}\label{sec:typed}
 Four relations hide under the word ``cumulative'', and each ladder has exactly one of them, recorded on every cell as \texttt{cumulative\_type} and enforced by a test. \emph{Retention} --- the $K$ factor: a level-$k$ certificate requires every lower witness still passed, of capability and not of implementation --- is the rule for the capability ladders $C$, $I$, $M$, $O$, $U$, for $SA$ from SA1 upward (SA0 is an absence and cannot be retained), and for the diagnostic sub-ladder $GP$, which retains inside itself and never promotes $C$. \emph{Frontier} cumulativity is a maximum over a retained set: $DF_{h,p} = \max\{T_b : \text{every } T_j,\, j \le b, \text{ meets } S_{\mathrm{net}} \ge p \text{ at } H \le h\}$, so a pass at a hard band cannot leap a failed easier band at the same intervention ceiling; lower-$T$ retention lives here and nowhere else. \emph{Nesting} is the harness rule, $HG_g = HG_{g-1} + \Delta_g$, a strict mechanism superset that makes harness gain attributable to one mechanism --- cumulative architecture, not intelligence. And $T$ and $H$ are \emph{ordered axes}: $T$ labels the structure of the item and $H$ the interventions in the transcript; neither is an ability of the system, so a T1 item never requires a T0 certificate and a $T$ or $H$ cell carries no $K$. Floors are structural baselines, not retained capabilities; a cross-ladder prerequisite ($I_n$ needs $M_{\mu_n}$; $U_n$ needs every coordinate) is a one-way gate, not cumulativity. The dataset's \texttt{cumulative\_policy.json} states the same typing, and the validator implements five rejections --- a $GP_g$ record missing $GP0..GP(g{-}1)$; a $T$ or $H$ record carrying capability retention; a frontier record without the lower-$T$ retention law; a $GP$ record claiming promotion; an $HG_g$ rung missing a prior mechanism --- each of which \texttt{tests/test\_typed\_validator.py} proves by breaking it on a copy of the dataset and watching the refusal, since a gate that has only ever been seen to pass has not been seen to work.
 
-\subsection{Every level, a method and a benchmark}
-Tables~\ref{tab:m-C} through \ref{tab:m-U} give, for every level of every ladder, the two halves the user of the instrument needs: the \textbf{testing method} --- the evaluator's intervention, the ordered procedure, the verifier and its metrics, and the control arm --- and the \textbf{testing benchmark} --- the witness, the public development forms that instantiate it, the generator in this package, the kind of key, and what retention the cell carries. The method fields follow the canonical record of the same cell in the harmonized catalogue that ships in the dataset; the grid supplies the control arm, the locus of every factor, and the status. Every cell has at least one dataset entry: a harmonized public form for every level, and for every cell with an instance generator the public seeds 0--2 \emph{materialized} --- the files the executor would see plus the sealed key --- under \texttt{generated/<cell>/<family>/s<seed>/} (102 instances across 17 cells), so that a cell's testing dataset is literally present and not a pointer; cells whose witness is a campaign, a probe or a gate over records name the record that is their dataset. A level with a method and no runnable benchmark is a specification; a level with forms and no runner is a form; a level with a generator and a verifier here runs. The tables are generated from the data, and \texttt{tools/export\_cells.py} rebuilds the dataset, the materialized instances and the tables together.
+\subsection{Every level, a method and a benchmark}\label{sec:methods}
+The entries below give, for every level of every ladder, the two halves the user of the instrument needs: the \textbf{testing method} --- the evaluator's intervention, the ordered procedure, the verifier and its metrics, and the control arm --- and the \textbf{testing benchmark} --- the witness, the public development forms that instantiate it, the generator in this package, the kind of key, and what retention the cell carries. The method fields follow the canonical record of the same cell in the harmonized catalogue that ships in the dataset; the grid supplies the control arm, the locus of every factor, and the status. Every cell has at least one dataset entry: a harmonized public form for every level, and for every cell with an instance generator the public seeds 0--2 \emph{materialized} --- the files the executor would see plus the sealed key --- under \texttt{generated/<cell>/<family>/s<seed>/} (102 instances across 17 cells), so that a cell's testing dataset is literally present and not a pointer; cells whose witness is a campaign, a probe or a gate over records name the record that is their dataset. A level with a method and no runnable benchmark is a specification; a level with forms and no runner is a form; a level with a generator and a verifier here runs. The tables are generated from the data, and \texttt{tools/export\_cells.py} rebuilds the dataset, the materialized instances and the tables together.
 
 \input{methods_tables.tex}
 
 \subsection{Cognitive intelligence: the trap is the control arm}
-Every $C$ witness is a generated instance carrying the level's trap --- the named wrong method a competent system actually takes --- and admissibility proves on every seed that the trap fires. C0--C3 are the Core's generated bands; C4 and C5 are the Core-H decoy and switching-rule items, the second with a brute-force uniqueness check that the generating rule is recoverable from what is shown. C6 has a dataset template and no generator with a computed multi-domain key: the factor $N$, that every single-domain ablation fails, needs a runner that can ablate a domain, which this package does not have. C$\Omega$ is external by construction. The GUI/screen domain (\S\ref{sec:gui}) has the same cells with a frozen screen graph as key and the oracle-screen and perfect-actuator arms as diagnostics; a native-image $C^{\mathrm{GUI}}$ form may declare a minimum GP prerequisite $GP_{\mu(k)}$, and failing it makes the form non-certifying while passing it earns no $C$ credit. The GP sub-ladder itself is cumulative and has, at every level, a factor and an anti-shortcut control of its own (Table~\ref{tab:m-GP}): primitive recognition under perturbation that preserves the target; object type against the same label rendered as a different object; grounding and relations against the same labels with the layout shuffled; state against the matched object in the opposite state; change and effect against a permuted frame order or a static frame; a held-out application family against the familiar one and the memorised path. No GUI cell runs here because the bare executor has no image channel. A GUI-capable system reports four quantities that answer different questions and stay separately auditable: $C$ profile $\mid$ $C^{\mathrm{GUI}}$ level $\mid$ cumulative $GP$ level $\mid$ GUI task $T/H@p$, for example \texttt{C4 | C\^{}GUI3 | GP5 | T3/H1@p=0.80}.
+Every $C$ witness is a generated instance carrying the level's trap --- the named wrong method a competent system actually takes --- and admissibility proves on every seed that the trap fires. C0--C3 are the Core's generated bands; C4 and C5 are the Core-H decoy and switching-rule items, the second with a brute-force uniqueness check that the generating rule is recoverable from what is shown. C6 has a dataset template and no generator with a computed multi-domain key: the factor $N$, that every single-domain ablation fails, needs a runner that can ablate a domain, which this package does not have. C$\Omega$ is external by construction. The GUI/screen domain (\S\ref{sec:gui}) has the same cells with a frozen screen graph as key and the oracle-screen and perfect-actuator arms as diagnostics; a native-image $C^{\mathrm{GUI}}$ form may declare a minimum GP prerequisite $GP_{\mu(k)}$, and failing it makes the form non-certifying while passing it earns no $C$ credit. The GP sub-ladder itself is cumulative and has, at every level, a factor and an anti-shortcut control of its own (the $GP$ entries of \S\ref{sec:methods}): primitive recognition under perturbation that preserves the target; object type against the same label rendered as a different object; grounding and relations against the same labels with the layout shuffled; state against the matched object in the opposite state; change and effect against a permuted frame order or a static frame; a held-out application family against the familiar one and the memorised path. No GUI cell runs here because the bare executor has no image channel. A GUI-capable system reports four quantities that answer different questions and stay separately auditable: $C$ profile $\mid$ $C^{\mathrm{GUI}}$ level $\mid$ cumulative $GP$ level $\mid$ GUI task $T/H@p$, for example \texttt{C4 | C\^{}GUI3 | GP5 | T3/H1@p=0.80}.
 
 \subsection{Individual intelligence}
 I0 is structural: any Core episode; loss after a restart is I0 and never mislabelled I1. I1 and M1 share the restart pair with the ablated-state arm as control, which is why they run together. I2 is the verified-experience pair of the extended tier with the no-experience arm. I3 through I$\Omega$ are the campaigns below.
@@ -206,9 +206,11 @@ Let $\Psi$ be the agent-side process that proposes, evaluates and selects candid
 \paragraph{One meta-campaign.} The atomic object is $G^{I4}_s = (B^{I3}_s, \Psi_{0,s}, W_{\Psi,s}, D^{\Psi}_s, \Psi_{1,s}, S^{I3}_s, D^{\mathrm{reg}}_s, R_s)$: a baseline block of $I3$ campaigns, the frozen $\Psi_0$, its write set, the evidence $D^{\Psi}_s$ available to the agent about weaknesses in its own improvement process (never future sealed campaigns, hidden verifier mechanics or the acceptance threshold), the candidate $\Psi_1$, a later sealed block of non-identical $I3$ campaigns, a regression suite and an envelope. The canonical method \textsc{I4-Psi}: freeze $\Psi_0$ and run the baseline block, recording an improvement-competence ledger (accepted-improvement rate, proposal quality, evaluation cost, time-to-valid-improvement, regression rate); expose the individual to its own ledger and $D^{\Psi}_s$; require it to identify an internally implicated limitation of $\Psi_0$ and to generate one bounded meta-change $\Psi_0 \to \Psi_1$ inside $W_\Psi$ --- the candidate must be agent-generated, and a $\Psi_1$ engineered by a human or by the evaluator establishes nothing about the individual; snapshot both, verify artifact difference, write-scope compliance and activation, and verify meta-behavioral manifestation on hidden probes sensitive to how candidate $\Theta$ changes are generated, evaluated or selected; run new hidden, non-identical $I3$ campaigns under $\Psi_1$ with evaluator, promotion rules, generator and envelope fixed; where feasible compare matched copies under $\Psi_0$ and $\Psi_1$ on construct-equivalent campaigns; then decide independently and re-run regression and $I0$--$I3$ retention.
 
 \paragraph{The pass indicator.} With $C(\Psi) = \frac1N \sum_r z_{I3,r}(\Psi)$ the accepted validated $I3$ rate under $\Psi$ --- the primary endpoint for a first implementation --- and $\hat\Delta_{\Psi,s} = \frac1N \sum_r [z_{I3,r}(\Psi_{1,s}) - z_{I3,r}(\Psi_{0,s})]$ over paired sealed campaigns,
-\[
-z_{I4,s} = M_{\Psi,s} \cdot V_{\Psi,s} \cdot G_{\Psi,s} \cdot K_{4,s}, \qquad M_{\Psi,s} = C^{\Psi,\mathrm{diff}}_s C^{\Psi,\mathrm{scope}}_s C^{\Psi,\mathrm{active}}_s C^{\Psi,\mathrm{behavior}}_s, \quad V_{\Psi,s} = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\hat\Delta_{\Psi,s}) > \delta_{\Psi,s}] \cdot \mathbf 1[\text{promoter accepts}],
-\]
+\begin{align*}
+z_{I4,s} &= M_{\Psi,s} \cdot V_{\Psi,s} \cdot G_{\Psi,s} \cdot K_{4,s}, \\
+M_{\Psi,s} &= C^{\Psi,\mathrm{diff}}_s\, C^{\Psi,\mathrm{scope}}_s\, C^{\Psi,\mathrm{active}}_s\, C^{\Psi,\mathrm{behavior}}_s, \\
+V_{\Psi,s} &= \mathbf 1[\mathrm{LCB}_{1-\alpha}(\hat\Delta_{\Psi,s}) > \delta_{\Psi,s}] \cdot \mathbf 1[\text{promoter accepts}],
+\end{align*}
 where $C^{\Psi,\mathrm{behavior}}_s = \mathbf 1[B_{\Psi,s} \ge \beta_{\Psi,s}]$ with $B_{\Psi,s}$ the fraction of hidden meta-behavior probes on which the improvement process shows its preregistered changed signature (broader candidate generation, discriminating candidate tests, evidence-based selection), $G_{\Psi,s}$ the preregistered regression and efficiency guard (a gain bought with unacceptable evaluation cost, time or regression does not count) and $K_{4,s} = K^{I0}_s K^{I1}_s K^{I2}_s K^{I3}_s$. A single large self-edit cannot certify $I4$; several $\Theta$ improvements from an unchanged $\Psi$ are repeated $I3$. \emph{Recursive depth} is reported beside the level and never folded into it: $d_\Psi = \max\{k : \Psi_0 \to \Psi_1 \to \cdots \to \Psi_k \text{ are consecutive agent-generated, active, independently validated improvements}\}$, so $d_\Psi = 1$ is basic $I4$ and $d_\Psi > 1$ is repeated recursive improvement; the phrase \emph{sustained recursive self-improvement} is reserved for the latter, and $I4$ is not equated with unbounded or runaway improvement. Nothing in v0.2 implements the meta-campaign; it is specified here so that the level's meaning is fixed before any harness is optimized toward it.
 
 \subsubsection{$I5$: discovery with an incorporation gate}\label{sec:i5}
@@ -229,7 +231,7 @@ Under fixed external evaluation and a declared envelope $R$, let $F(A_t; R) = \{
 
 Memory is not a seventh coordinate and not a relabelling of the $I$ ladder. It is measured independently, level by level, and then used as a one-way prerequisite: $A \models I_n \iff V_{I,n}(A) = 1 \wedge A \models M_{\mu_n} \wedge K_{I,<n}(A) = 1$ with $(\mu_0,\ldots,\mu_5) = (M0, M1, M3, M4, M4, M5)$, $I\Omega$ requiring $M \ge M5$ and $M\Omega$ only when the memory architecture itself is claimed to evolve. Each $M_k$ is itself cumulative: $A \models M_k \iff V^{M}_k(A) = 1 \wedge K^{M}_{<k}(A) = 1$. High $M$ can satisfy the gate and can never promote $I$, and the M-Bench score is reported beside $I$ so that storage or sophisticated management cannot pass for learning.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\scriptsize
 \begin{tabularx}{\textwidth}{@{}llYl@{}}
 \toprule
@@ -248,9 +250,9 @@ M$\Omega$ & \textsc{MOmega-Evolve} & a bounded change $\Phi_0 \to \Phi_1$ to the
 \label{tab:mbench}
 \end{table}
 
-\paragraph{The protocol envelope.} Every M-Bench campaign records $\Pi^{M}_{k,r} = (A, B, R, \mathcal M, D_{k,r}, C_{k,r}, V_{k,r}, \tau_{k,r}, K_{M,<k})$: the pair, the benchmark version, the resource envelope, the \emph{memory manifest} $\mathcal M(A) = \{S, R, C, G, P, F, \Phi, W_M, \text{snapshot}, \text{restart}\}$ snapshotted before the hidden run, the generated workload, the construct-selective control or ablation, the external verifier, the preregistered thresholds and uncertainty law, and lower-M retention. Each form carries a level-preserving \emph{difficulty vector} (episode and entity counts, distractor ratio, supersession depth, temporal distance, conflict and corruption density, capacity budget, project count, evidence-graph depth, restart count): difficulty calibrates headroom inside a level and never redefines the level. The per-level gates are conjunctive over preregistered endpoints --- $V_{M0} = \mathbf 1[q_{\mathrm{state}} \ge \tau]\mathbf 1[q_{\mathrm{update}} \ge \tau]$; $V_{M1} = \mathbf 1[q_{\mathrm{dur}} \ge \tau]\mathbf 1[q_{\mathrm{prov}} \ge \tau]\mathbf 1[q_{\mathrm{abl}} \le \tau_{\mathrm{leak}}]$ with the ablated branch guarding against replay and reconstruction from non-memory cues; $V_{M2}$ over precision, recall, provenance, temporal order and stale suppression; $V_{M3}$ over semantic and procedural correctness, supersession, demotion and post-restart persistence, with $\Delta_{\mathrm{cons}} = Q(A_{\mathrm{consolidated}}) - Q(A_{\mathrm{raw\text{-}only}})$ as a diagnostic of causal value; $V_{M4}$ over repair precision, conflict correctness, harmful-prune rate, snapshot recovery and protected-retention drop; $V_{M5}$ over chain reconstruction, source, cross-project retrieval, scope, stale suppression and reproducibility on an evidence graph whose edges are \emph{supports}, \emph{contradicts}, \emph{tested-by}, \emph{supersedes}, \emph{rejected-because}, \emph{derived-from}; and $z_{M\Omega} = M_\Phi V_\Phi G_\Phi K_{M0{:}M5}$ with $M_\Phi = C^{\mathrm{diff}}C^{\mathrm{scope}}C^{\mathrm{active}}C^{\mathrm{behavior}}$ and $V_\Phi = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\Delta_\Phi) > \delta_\Phi]\cdot\mathbf 1[\text{promoter accepts}]$. A level gate is $z_{M_k,r} = V_{M_k,r} K_{M,<k,r}$, and the rule is \emph{no level skipping}: each level is scored as its newly added capability plus the retention of every lower one --- M1 retains M0; M2 retains M0--M1; \ldots; M$\Omega$ retains M0--M5 --- so a failure of any mandatory lower level forces $z_{M_k} = 0$ even when the new gate passes, and the runner reports which level failed. Retention is of capability under the same envelope, not of implementation. Every row of the dataset declares one of three binding states --- \emph{bound} (a runnable instance and verifier exist), \emph{development-bound} (a public runner-validation instance exists and is not certification material), \emph{specification-only} --- and a level may be certified only from bound private forms under the declared version and envelope. The operationalization keeps four questions apart: whether the memory architecture exists (the manifest), whether the behaviour works (the gate), how strongly under stress (the difficulty vector), and whether the level suffices for a separate Individual claim (the prerequisite).
+\paragraph{The protocol envelope.} Every M-Bench campaign records $\Pi^{M}_{k,r} = (A, B, R,$ $\mathcal M, D_{k,r}, C_{k,r},$ $V_{k,r}, \tau_{k,r}, K_{M,<k})$: the pair, the benchmark version, the resource envelope, the \emph{memory manifest} $\mathcal M(A) = \{S, R, C, G, P, F, \Phi, W_M,$ $\text{snapshot}, \text{restart}\}$ snapshotted before the hidden run, the generated workload, the construct-selective control or ablation, the external verifier, the preregistered thresholds and uncertainty law, and lower-M retention. Each form carries a level-preserving \emph{difficulty vector} (episode and entity counts, distractor ratio, supersession depth, temporal distance, conflict and corruption density, capacity budget, project count, evidence-graph depth, restart count): difficulty calibrates headroom inside a level and never redefines the level. The per-level gates are conjunctive over preregistered endpoints --- $V_{M0} = \mathbf 1[q_{\mathrm{state}} \ge \tau]\mathbf 1[q_{\mathrm{update}} \ge \tau]$; $V_{M1} = \mathbf 1[q_{\mathrm{dur}} \ge \tau]\mathbf 1[q_{\mathrm{prov}} \ge \tau]\mathbf 1[q_{\mathrm{abl}} \le \tau_{\mathrm{leak}}]$ with the ablated branch guarding against replay and reconstruction from non-memory cues; $V_{M2}$ over precision, recall, provenance, temporal order and stale suppression; $V_{M3}$ over semantic and procedural correctness, supersession, demotion and post-restart persistence, with $\Delta_{\mathrm{cons}} = Q(A_{\mathrm{consolidated}}) - Q(A_{\mathrm{raw\text{-}only}})$ as a diagnostic of causal value; $V_{M4}$ over repair precision, conflict correctness, harmful-prune rate, snapshot recovery and protected-retention drop; $V_{M5}$ over chain reconstruction, source, cross-project retrieval, scope, stale suppression and reproducibility on an evidence graph whose edges are \emph{supports}, \emph{contradicts}, \emph{tested-by}, \emph{supersedes}, \emph{rejected-because}, \emph{derived-from}; and $z_{M\Omega} = M_\Phi V_\Phi G_\Phi K_{M0{:}M5}$ with $M_\Phi = C^{\mathrm{diff}}C^{\mathrm{scope}}C^{\mathrm{active}}C^{\mathrm{behavior}}$ and $V_\Phi = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\Delta_\Phi) > \delta_\Phi]\cdot\mathbf 1[\text{promoter accepts}]$. A level gate is $z_{M_k,r} = V_{M_k,r} K_{M,<k,r}$, and the rule is \emph{no level skipping}: each level is scored as its newly added capability plus the retention of every lower one --- M1 retains M0; M2 retains M0--M1; \ldots; M$\Omega$ retains M0--M5 --- so a failure of any mandatory lower level forces $z_{M_k} = 0$ even when the new gate passes, and the runner reports which level failed. Retention is of capability under the same envelope, not of implementation. Every row of the dataset declares one of three binding states --- \emph{bound} (a runnable instance and verifier exist), \emph{development-bound} (a public runner-validation instance exists and is not certification material), \emph{specification-only} --- and a level may be certified only from bound private forms under the declared version and envelope. The operationalization keeps four questions apart: whether the memory architecture exists (the manifest), whether the behaviour works (the gate), how strongly under stress (the difficulty vector), and whether the level suffices for a separate Individual claim (the prerequisite).
 
-\paragraph{M$\Omega$ on one agent: the instrumented interface.} Write the persistent agent state as $A_t = (m, h, D_t, \Phi_t, \iota)$ --- model, non-memory harness, stored memory contents, the behaviorally active memory mechanism, and the lineage identifier of the continuing individual. A clean M$\Omega$ campaign isolates $\Phi$: contents fixed at $D^{*}$, $\Phi_0 \to \Phi_1$, everything else identical between branches; clones are controls, and the certified subject is the lineage $A_0 \to A_1$. The interface $I_\Phi$ has two permission surfaces. Agent-visible: \texttt{get\_memory\_manifest}, \texttt{get\_allowed\_diagnostics}, \texttt{submit\_phi\_candidate}, \texttt{request\_candidate\_test}. Runner-private: snapshot and restore of agent, contents and $\Phi$; hash and diff of $\Phi$; write-scope validation; candidate activation and active-$\Phi$ verification; telemetry; checkpoint cloning; enabling and disabling $\Delta\Phi$; canonical-memory import and export; migration and its validation; the hidden M-Bench run; promote and rollback. Telemetry records structured memory operations (write, retrieve, update, consolidate, demote, prune, merge, repair, snapshot, restore, migrate, activation) with operation ids, component versions and referenced memory ids, and never private chain-of-thought. The mandatory causal design: $M_\Phi = C^{\mathrm{diff}}C^{\mathrm{scope}}C^{\mathrm{active}}C^{\mathrm{behavior}}$; the fixed-content pair $A(D^{*},\Phi_0)$ against $A(D^{*},\Phi_1)$ on paired frozen hidden workloads with $\Delta_\Phi = Q(\Phi_1) - Q(\Phi_0)$ and $V_\Phi = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\Delta_\Phi) > \delta_\Phi]\cdot\mathbf 1[\text{promoter accepts}]$; a \emph{delta ablation} $A(D^{*}, \Phi_1 - \Delta\Phi)$, so that strong attribution needs $Q(\Phi_1) > Q(\Phi_0)$ \emph{and} $Q(\Phi_1) > Q(\Phi_1 - \Delta\Phi)$; a \emph{migration guard} --- if $\Phi_1$ changes the representation, the contents are migrated and content, provenance, temporal relations, supersession links and protected retention verified, because a gain bought by silently losing old memory fails $G_\Phi$; and M0--M5 re-run after activation. The campaign record carries the baseline and candidate $\Phi$ with hashes, the changed components, the scope, activation and probe verdicts, the canonical memory snapshot, baseline, candidate and ablation scores, the migration guard, the M0--M5 retention vector, the verifier identity, the uncertainty rule and the decision. Passing supports one claim --- that for this lineage an agent-generated change to the active memory mechanism produced a validated capability improvement with lower capability retained --- and not indefinite memory evolution; a black-box system exposing only outputs cannot be strongly certified at M$\Omega$ and receives diagnostic evidence only.
+\paragraph{M$\Omega$ on one agent: the instrumented interface.} Write the persistent agent state as $A_t = (m, h, D_t, \Phi_t, \iota)$ --- model, non-memory harness, stored memory contents, the behaviorally active memory mechanism, and the lineage identifier of the continuing individual. A clean M$\Omega$ campaign isolates $\Phi$: contents fixed at $D^{*}$, $\Phi_0 \to \Phi_1$, everything else identical between branches; clones are controls, and the certified subject is the lineage $A_0 \to A_1$. The interface $I_\Phi$ has two permission surfaces. Agent-visible: \texttt{get\_memory\_manifest}, \texttt{get\_allowed\_diagnostics}, \texttt{submit\_phi\_candidate}, \texttt{request\_candidate\_test}. Runner\hspace{0pt}-\hspace{0pt}private: snapshot and restore of agent, contents and $\Phi$; hash and diff of $\Phi$; write-scope validation; candidate activation and active-$\Phi$ verification; telemetry; checkpoint cloning; enabling and disabling $\Delta\Phi$; canonical-memory import and export; migration and its validation; the hidden M-Bench run; promote and rollback. Telemetry records structured memory operations (write, retrieve, update, consolidate, demote, prune, merge, repair, snapshot, restore, migrate, activation) with operation ids, component versions and referenced memory ids, and never private chain-of-thought. The mandatory causal design: $M_\Phi = C^{\mathrm{diff}}C^{\mathrm{scope}}C^{\mathrm{active}}C^{\mathrm{behavior}}$; the fixed-content pair $A(D^{*},\Phi_0)$ against $A(D^{*},\Phi_1)$ on paired frozen hidden workloads with $\Delta_\Phi = Q(\Phi_1) - Q(\Phi_0)$ and $V_\Phi = \mathbf 1[\mathrm{LCB}_{1-\alpha}(\Delta_\Phi) > \delta_\Phi]\cdot\mathbf 1[\text{promoter accepts}]$; a \emph{delta ablation} $A(D^{*}, \Phi_1 - \Delta\Phi)$, so that strong attribution needs $Q(\Phi_1) > Q(\Phi_0)$ \emph{and} $Q(\Phi_1) > Q(\Phi_1 - \Delta\Phi)$; a \emph{migration guard} --- if $\Phi_1$ changes the representation, the contents are migrated and content, provenance, temporal relations, supersession links and protected retention verified, because a gain bought by silently losing old memory fails $G_\Phi$; and M0--M5 re-run after activation. The campaign record carries the baseline and candidate $\Phi$ with hashes, the changed components, the scope, activation and probe verdicts, the canonical memory snapshot, baseline, candidate and ablation scores, the migration guard, the M0--M5 retention vector, the verifier identity, the uncertainty rule and the decision. Passing supports one claim --- that for this lineage an agent-generated change to the active memory mechanism produced a validated capability improvement with lower capability retained --- and not indefinite memory evolution; a black-box system exposing only outputs cannot be strongly certified at M$\Omega$ and receives diagnostic evidence only.
 
 What the Core reads today is $M1$ and only $M1$: the restart test with its ablated arm (\S\ref{sec:core}). That is enough to gate $I1$ and not $I2$, and the profile says so --- ``$I2$ (evidence; $M3$ not certified)'' is the exact form of the gate's refusal. The M2--M$\Omega$ forms are the binding order after $I3$.
 
@@ -282,9 +284,9 @@ It is not a claim that every level has been measured. 19 cells are specification
 
 The Core is the smallest set of items that touches every coordinate the framework defines for an individual with the two controls that make a reading real: a computed key the executor never sees, and an ablated arm wherever the claim is about memory or learning.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}llcY@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{7.4cm}cY@{}}
 \toprule
 Coordinate & Family & Calls & What a pass requires \\
 \midrule
@@ -332,7 +334,7 @@ Which harness is \emph{used to measure} a model is therefore not a choice the ev
 
 Two models with a tenfold cost difference both delivered 12/12 at every rung of the Core (\S\ref{sec:results}). An instrument whose top score is shared by everything competent has stopped measuring, and the remedy has to respect the same three constraints: cheap, exactly verifiable, and real. Core-H is four items chosen so that a plausible wrong method exists and a competent pair actually takes it.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lYYc@{}}
 \toprule
@@ -354,7 +356,7 @@ Three properties are enforced by the self-test rather than asserted. \emph{The t
 
 An item earns its place only if the runs show a spread. The four candidates were run on two pairs before being admitted.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccccY@{}}
 \toprule
@@ -404,9 +406,9 @@ The value is the independent evaluator, not the secrecy. What can honestly be so
 
 Every verifier in v0.2 is a computed key, which is what makes an unattended seventeen-minute reading possible. That is also the ceiling of the free tier. Four things the framework defines cannot be scored this way:
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.2cm}Y>{\raggedright\arraybackslash}p{2.4cm}@{}}
 \toprule
 Coordinate & Why a key cannot score it & Locus required \\
 \midrule
@@ -424,9 +426,9 @@ The tiers follow from the table rather than from a business plan. A run on the p
 
 \section{Cost}\label{sec:cost}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}lccY@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.1cm}c>{\raggedright\arraybackslash}p{3cm}Y@{}}
 \toprule
 Run & Calls & Wall clock & Note \\
 \midrule
@@ -450,7 +452,7 @@ One pair was read in full in agent mode, one base model in LLM mode, and two mor
 
 The Core alone saturates. Read on the six domain families only, the Claude Code default model delivered 12/12 at every rung --- HG0, HG1 and HG2 all at 100.0 net, no false completion, no held-back delivery, about 205 seconds a rung --- for $\text{AIL-Score } 90.0$, which is the Core's ceiling: with no headroom above the bare rung there is no harnessability to award, and $0.55 + 0.35 = 0.90$. DeepSeek (\texttt{deepseek-chat}, reached through an Anthropic-compatible endpoint and the same harness code) produced exactly the same figure at 153, 128 and 123 seconds a rung. Two models of very different cost, indistinguishable. That is what motivated Core-H (\S\ref{sec:coreh}); the readings that follow add its four items to each rung.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}lccccccY@{}}
 \toprule
@@ -478,7 +480,7 @@ The readings above were taken through \texttt{llm-harness}, with an agent as the
 
 The Claude Code default pair (Claude Code 2.1.258, headless, file tools only, its own persistent memory left as shipped) was read twice: once before the instrument repairs of \S\ref{sec:defects} and once after, on a fresh root, and the $M1$ phase was re-run after the goal wording was repaired. The OpenCode pair with the free Muse Spark 1.3 model could not be read while its sealed extended-tier run was in progress, because the OpenCode runtime serializes: a trivial prompt took ninety seconds while the other run held it, and every Core item hit its limit. Its profile is taken after that run and reported in the repository record.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
 \begin{tabularx}{\textwidth}{@{}llY@{}}
 \toprule
@@ -506,9 +508,9 @@ Two rows are properties of the pair and not of its model. The $M1$ recall was wr
 
 The extended tier was run bare on the same pair, in parallel with the Core.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}llccY@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{1.7cm}Y@{}}
 \toprule
 Family & Band & Seeds & Seconds & Outcome \\
 \midrule
@@ -528,9 +530,9 @@ This is the discrimination the Core lacks. The same pair that scores 100 on the 
 
 Both subjects were then read on the private split: four seeds derived from the committed salt, verified against \texttt{PRIVATE\_SPLIT\_COMMITMENT.json} at start, fresh roots, and the evaluator block stamped into each record (\texttt{built\_pair: false}, \texttt{built\_instrument: true}, instrument commit \texttt{ec62cad}). The seeds are not in the published records.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}llccY@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{2.9cm}Y@{}}
 \toprule
 Subject & Reading & Public & Private & What moved \\
 \midrule
@@ -550,9 +552,9 @@ The readings say two things worth separating. The scores are stable: 35.2 agains
 
 The previous subsection ended on a level decided by one delivery. The remedy is not a different gate but more episodes at the band that decides it, so the four records were extended at their gating band --- every remaining public seed, and the remaining private seeds --- with nothing already run re-run, and re-finalized (\texttt{hilbench gating}).
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}llccY@{}}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.2cm}Y@{}}
 \toprule
 Record & Band & Episodes at the band & Level before $\to$ after & Reading \\
 \midrule
@@ -581,9 +583,9 @@ The four T5 seeds whose archived readings the DLI-Bench release preserves were r
 \subsection{The reference rungs, certified by their own witness}
 Table~\ref{tab:hgconf} is the HG conformance probe of \S\ref{sec:hgcells} on public seeds 0--2 of the six Core delegation families. On the two families whose named wrong method fails a public check --- the configuration fix, whose naive edit touches a file it must not, and the results section, whose naive draft never names the dataset --- every rung passes its gate on every seed: HG0 delivers the wrong file, HG1 holds it back, HG2 restores and retries to a correct delivery. On the other four families the naive solution passes every public check, so the acceptance rung has nothing to hold: for them $U_1$ is not demonstrable on this witness, and the probe says so instead of counting them as passes. That is the fact the harness-scaling curves found from the outside --- the acceptance rung is invisible wherever the public checks cannot see the trap --- now measured from the inside in under a second and without a model.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabular}{@{}lccc@{}}
+\begin{tabularx}{\textwidth}{@{}lcc>{\raggedright\arraybackslash}X@{}}
 \toprule
 Rung & Witnesses (trap publicly visible) & $z = 1$ & Not demonstrable (trap invisible to public checks) \\
 \midrule
@@ -591,7 +593,7 @@ HG0 & 6 & 6 & --- \\
 HG1 & 6 & 6 & 12 family-seeds \\
 HG2 & 6 & 6 & 12 family-seeds \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{HG conformance on public seeds. \texttt{hilbench hg-conform --root <dir>}; the record is \texttt{HG\_Bench/hg\_conform\_public\_seeds.json} in the dataset.}
 \label{tab:hgconf}
 \end{table}
