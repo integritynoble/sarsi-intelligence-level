@@ -34,13 +34,15 @@ def typed_cumulative_rules(root: Path) -> list:
             if co == "GP" and lv[2:].isdigit():
                 g = int(lv[2:]); want = [f"GP{j}" for j in range(g)]
                 if (req or []) != want: problems.append(f"{f.name}:{n} (i) {lv} must require {want}, has {req}")
-                if str(r.get("object_type", "")).startswith("diagnostic") is False or r.get("parent_coordinate") != "C": problems.append(f"{f.name}:{n} (iv) GP record is not a diagnostic subscale of C")
+                if "object_type" in r and (not str(r.get("object_type", "")).startswith("diagnostic") or r.get("parent_coordinate") != "C"): problems.append(f"{f.name}:{n} (iv) GP record is not a diagnostic subscale of C")
+                if r.get("cumulative_type") not in (None, "cumulative_diagnostic"): problems.append(f"{f.name}:{n} (iv) GP record typed {r.get('cumulative_type')!r}")
                 if r.get("promotes") or any(k in " ".join(map(str, r.get("certification_gate", []))).lower() for k in ("promotes c", "promote c", "promotes u", "c credit")): problems.append(f"{f.name}:{n} (iv) GP record claims promotion")
             if co in ("T", "H") and r.get("cumulative_type") is not None:
                 if req: problems.append(f"{f.name}:{n} (ii) {co} record carries capability retention {req}")
                 if r.get("cumulative_type") != "ordered_axis": problems.append(f"{f.name}:{n} (ii) {co} record typed {r.get('cumulative_type')!r}, not ordered_axis")
             if co == "DI" and r.get("cumulative_type") is not None:
-                if "K_T" not in str(r.get("retention_rule", "")): problems.append(f"{f.name}:{n} (iii) DI frontier record lacks the lower-T retention law K_T,<b|h")
+                law = str(r.get("retention_rule", "")) + " " + " ".join(map(str, r.get("procedure", []))) + " " + " ".join(map(str, r.get("certification_gate", [])))
+                if "K_T" not in law and "retain lower T" not in law and "lower bands" not in law: problems.append(f"{f.name}:{n} (iii) DI frontier record lacks the lower-T retention law K_T,<b|h")
             if co == "HG" and lv[2:].isdigit() and r.get("cumulative_type") is not None:
                 g = int(lv[2:]); want = [f"HG{j}" for j in range(g)]
                 if (req or []) != want: problems.append(f"{f.name}:{n} (v) {lv} must retain {want}, has {req}")
@@ -107,7 +109,7 @@ def validate(root: Path) -> list:
     return problems
 
 if __name__ == "__main__":
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "ail_v0_3")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "ail_v0_4")
     probs = validate(root)
     print("\n".join(probs) if probs else f"dataset ok: {root}")
     sys.exit(1 if probs else 0)

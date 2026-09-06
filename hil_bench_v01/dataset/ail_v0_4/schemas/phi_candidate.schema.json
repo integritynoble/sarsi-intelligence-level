@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-level-bench.dev/schemas/phi_candidate.schema.json",
+  "title": "Agent-generated MΩ memory mechanism candidate",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "baseline_phi",
+    "diagnosed_limitation",
+    "components_modified",
+    "expected_effect",
+    "rollback_plan"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string"
+    },
+    "baseline_phi": {
+      "type": "string"
+    },
+    "diagnosed_limitation": {
+      "type": "string"
+    },
+    "components_modified": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "storage",
+          "retrieval",
+          "consolidation",
+          "representation",
+          "management",
+          "forgetting"
+        ]
+      }
+    },
+    "expected_effect": {
+      "type": "string"
+    },
+    "rollback_plan": {
+      "type": "string"
+    },
+    "candidate_artifact_ref": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate Paper 2's tables from the grid and the harmonized catalogue, so paper and dataset cannot disagree.
 
-    python3 tools/paper_tables.py dataset/ail_v0_3 ../paper2_hilbench_v02
+    python3 tools/paper_tables.py dataset/ail_v0_4 ../paper2_hilbench_v02
 
 Writes cells_table.tex (the grid summary) and methods_tables.tex (per ladder: for every level the TESTING METHOD --
 intervention, procedure, verifier/metrics, control arm, gate -- and the TESTING BENCHMARK -- witness, public forms,
@@ -22,15 +22,24 @@ NAMES = {"C": "Cognitive $C$", "C^GUI": "Cognitive, GUI/screen domain $C^{\\math
 CUMNAME = {"hard_capability": "hard cumulative", "hard_capability_from_SA1": "hard cumulative from SA1; SA0 not retained", "cumulative_diagnostic": "cumulative diagnostic; never promotes $C$", "cumulative_frontier": "cumulative frontier across $T$ at fixed $H, p$", "ordered_axis": "ordered axis; not cumulative", "cumulative_engineering": "cumulative engineering: $HG_g = HG_{g-1} + \\Delta_g$"}
 
 def load_catalog(ds: Path):
-    cat = {}
+    """The level_benchmark_matrix (v0.4): one record per (coordinate, level) with testing_benchmark, benchmark_witness,
+    external_verifier and the method fields; the canonical catalogue by method id as fallback."""
+    mat = {}
+    mp = ds / "level_benchmark_matrix.jsonl"
+    if mp.exists():
+        for l in mp.read_text(encoding="utf-8").splitlines():
+            if l.strip(): r = json.loads(l); mat[(r["coordinate"], r["level"])] = r
     for l in (ds / "canonical_method_catalog.jsonl").read_text(encoding="utf-8").splitlines():
-        if l.strip(): r = json.loads(l); cat[r["canonical_method"]] = r
+        if l.strip(): r = json.loads(l); mat.setdefault(("method", r["canonical_method"]), r)
     forms = {}
     comb = next(ds.glob("*public_dev_combined.jsonl"))
     for l in comb.read_text(encoding="utf-8").splitlines():
         if not l.strip(): continue
         r = json.loads(l); forms.setdefault((r.get("coordinate"), r.get("level")), []).append(r.get("form_id"))
-    return cat, forms
+    return mat, forms
+
+def record_for(c, mat):
+    return mat.get(tuple(c.get("matrix") or (c["ladder"], c["cell"]))) or mat.get(("method", c["method"] or "")) or {}
 
 def forms_for(c, forms):
     lad, lvl = c["ladder"], c["cell"]
@@ -66,14 +75,16 @@ def main(ds: Path, out: Path):
     for lad in cells.LADDERS:
         cs = [c for c in cells.CELLS if c["ladder"] == lad]; rows = []
         for c in cs:
-            m = cat.get(c["method"] or "", {})
+            m = record_for(c, cat)
             proc = m.get("procedure", []); ctrl = m.get("controls_or_ablations", []); met = m.get("primary_metrics", [])
             method = (r"\textbf{Intervention:} " + tex(m.get("experimental_intervention") or c["witness"]) +
                       (r" \textbf{Procedure:} " + " $\\to$ ".join(tex(x) for x in proc) if proc else "") +
-                      r" \textbf{Verifier:} " + tex(", ".join(met) if met else "; ".join(f["symbol"] + " (" + f["locus"] + ")" for f in c["factors"])) +
+                      r" \textbf{Verifier:} " + tex((m.get("external_verifier") + "; " if m.get("external_verifier") else "") + (", ".join(met) if met else "; ".join(f["symbol"] + " (" + f["locus"] + ")" for f in c["factors"]))) +
                       r" \textbf{Control:} " + tex(c["control_arm"]) + (" [" + tex("; ".join(ctrl)) + "]" if ctrl else ""))
             fids = forms_for(c, forms); gen = (json.loads((ds / "generated" / "INDEX.json").read_text()) if (ds / "generated" / "INDEX.json").exists() else {}).get(c["cell"], [])
-            bench = (r"\textbf{Witness:} " + tex(c["witness"]) + r" \textbf{Dataset:} " + tex(", ".join(fids + gen) if (fids or gen) else "---") +
+            wit = m.get("benchmark_witness") if m.get("benchmark_witness") and m.get("benchmark_witness") != m.get("experimental_intervention") else c["witness"]
+            bench = (r"\textbf{Benchmark:} " + tex(m.get("testing_benchmark") or c["witness"]) + r" \textbf{Witness:} " + tex(wit) +
+                     r" \textbf{Dataset:} " + tex(", ".join(fids + gen) if (fids or gen) else "---") +
                      r" \textbf{Generator:} " + (r"\texttt{" + tex(c["generator"]) + "}" if c["generator"] else "---") +
                      r" \textbf{Key:} " + tex(c["key"]) + (r" \textbf{Retention:} " + tex(c["retention"]) if c["retention"] else "") +
                      (r" \textbf{Prerequisite:} " + tex(c["prereq"]) if c["prereq"] not in ("K_lower", "none") else ""))
@@ -83,14 +94,14 @@ def main(ds: Path, out: Path):
         parts.append(r'''
 {\scriptsize
 \begin{longtable}{@{}p{1.1cm}p{6.6cm}p{4.5cm}p{1.9cm}p{0.7cm}@{}}
-\caption{%s --- %s. For every level: the testing method (intervention, procedure, verifier, control arm) and the testing benchmark (witness, public forms in \texttt{ail\_v0\_3}, generator, key, retention). Method fields follow the canonical record of the same cell in the harmonized catalogue; the grid supplies the control arm, the factor loci and the status.}\label{tab:m-%s}\\
+\caption{%s --- %s. For every level: the testing method (intervention, procedure, verifier, control arm) and the testing benchmark (witness, public forms in \texttt{ail\_v0\_3}, generator, key, retention). Method and benchmark fields follow the level-benchmark matrix record of the same cell (v0.4); the grid supplies the control arm, the factor loci and the status.}\label{tab:m-%s}\\
 \toprule Level & Testing method & Testing benchmark & Gate & St. \\ \midrule \endfirsthead
 \toprule Level & Testing method & Testing benchmark & Gate & St. \\ \midrule \endhead
 \midrule \multicolumn{5}{r}{\emph{continued}}\\ \endfoot
 \bottomrule \endlastfoot
 ''' % (NAMES[lad], CUMNAME[laws.CUMULATIVE[lad]], lab) + "\n".join(rows) + "\n\\end{longtable}}\n")
     (out / "methods_tables.tex").write_text("\n".join(parts))
-    print("cells_table.tex + methods_tables.tex:", N, "cells;", sum(1 for c in cells.CELLS if (c["method"] or "") in cat), "with a catalogue record")
+    print("cells_table.tex + methods_tables.tex:", N, "cells;", sum(1 for c in cells.CELLS if record_for(c, cat)), "with a matrix/catalogue record")
 
 if __name__ == "__main__":
     main(Path(sys.argv[1]), Path(sys.argv[2]))

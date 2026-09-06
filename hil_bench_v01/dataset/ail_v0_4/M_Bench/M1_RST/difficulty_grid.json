@@ -1,0 +1,32 @@
+[
+  {
+    "persisted_fields": 2,
+    "distractors": 1,
+    "restart_count": 1,
+    "elapsed_gap": "short"
+  },
+  {
+    "persisted_fields": 4,
+    "distractors": 4,
+    "restart_count": 1,
+    "elapsed_gap": "medium"
+  },
+  {
+    "persisted_fields": 8,
+    "distractors": 8,
+    "restart_count": 2,
+    "elapsed_gap": "medium"
+  },
+  {
+    "persisted_fields": 12,
+    "distractors": 16,
+    "restart_count": 3,
+    "elapsed_gap": "long"
+  },
+  {
+    "persisted_fields": 20,
+    "distractors": 30,
+    "restart_count": 4,
+    "elapsed_gap": "long"
+  }
+]

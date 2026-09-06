@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Psi Manifest",
+  "type": "object",
+  "required": [
+    "agent_id",
+    "psi_component"
+  ],
+  "properties": {
+    "agent_id": {
+      "type": "string"
+    },
+    "psi_component": {
+      "type": "object",
+      "required": [
+        "id",
+        "role",
+        "interface",
+        "write_scope",
+        "activation",
+        "snapshot",
+        "restore"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "write_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "activation": {
+          "type": "string"
+        },
+        "snapshot": {
+          "type": "string"
+        },
+        "restore": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

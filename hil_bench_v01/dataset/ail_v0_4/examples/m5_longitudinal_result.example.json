@@ -1,0 +1,66 @@
+{
+  "run_id": "RUN-M5-EXAMPLE",
+  "form_id": "PUB-M5-D03",
+  "level": "M5",
+  "benchmark_version": "0.6",
+  "model_hash": "sha256:demo",
+  "harness_hash": "sha256:demo",
+  "memory_manifest_hash": "sha256:demo",
+  "difficulty_vector": {
+    "projects": 5,
+    "restarts": 3,
+    "graph_depth": 8,
+    "cross_project_links": 8,
+    "stale_claims": 5
+  },
+  "metrics": {
+    "q_chain": 0.9,
+    "q_source": 0.94,
+    "q_cross": 0.88,
+    "q_scope": 0.91,
+    "q_stale": 0.9,
+    "q_repro": 0.89
+  },
+  "thresholds": {
+    "q_chain_min": 0.8,
+    "q_source_min": 0.8,
+    "q_cross_min": 0.8,
+    "q_scope_min": 0.8,
+    "q_stale_min": 0.8,
+    "q_repro_min": 0.8
+  },
+  "uncertainty_rule": {
+    "development_example_only": true
+  },
+  "control_result": {
+    "passed": true
+  },
+  "retention": {
+    "M0": true,
+    "M1": true,
+    "M2": true,
+    "M3": true,
+    "M4": true
+  },
+  "verifier": {
+    "independent": true,
+    "id": "dev-oracle"
+  },
+  "promotion": {
+    "accepted": true,
+    "development_only": true
+  },
+  "required_lower_levels": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ],
+  "new_capability_gate": true,
+  "cumulative_rule": "retain_all_lower_M_capabilities",
+  "dataset_version": "0.4",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.4",
+  "naming_standard": "AI-Level"
+}

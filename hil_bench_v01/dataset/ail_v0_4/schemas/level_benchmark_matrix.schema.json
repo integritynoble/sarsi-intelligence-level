@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-Level Level Benchmark Matrix v0.4",
+  "type": "object",
+  "required": [
+    "coordinate",
+    "level",
+    "canonical_method",
+    "testing_benchmark",
+    "capability_being_tested",
+    "benchmark_witness",
+    "experimental_intervention",
+    "procedure",
+    "controls_or_ablations",
+    "external_verifier",
+    "primary_metrics",
+    "certification_gate",
+    "required_lower_levels",
+    "cumulative_type",
+    "binding_status",
+    "dataset_version"
+  ],
+  "properties": {
+    "coordinate": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "canonical_method": {
+      "type": "string"
+    },
+    "testing_benchmark": {
+      "type": "string"
+    },
+    "capability_being_tested": {
+      "type": "string"
+    },
+    "benchmark_witness": {
+      "type": "string"
+    },
+    "experimental_intervention": {
+      "type": "string"
+    },
+    "procedure": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "controls_or_ablations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "external_verifier": {
+      "type": "string"
+    },
+    "primary_metrics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "certification_gate": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "required_lower_levels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cumulative_type": {
+      "type": "string"
+    },
+    "binding_status": {
+      "enum": [
+        "bound",
+        "development-bound",
+        "specification-only"
+      ]
+    },
+    "dataset_version": {
+      "const": "0.4"
+    }
+  },
+  "additionalProperties": true
+}

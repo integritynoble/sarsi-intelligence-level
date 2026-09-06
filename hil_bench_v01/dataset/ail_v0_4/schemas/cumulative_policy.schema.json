@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-Level cumulative policy v0.3",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "general_rule",
+    "objects"
+  ],
+  "properties": {
+    "name": {
+      "const": "AI-Level cumulative structure policy"
+    },
+    "version": {
+      "const": "0.3"
+    },
+    "general_rule": {
+      "type": "string"
+    },
+    "objects": {
+      "type": "object"
+    }
+  }
+}

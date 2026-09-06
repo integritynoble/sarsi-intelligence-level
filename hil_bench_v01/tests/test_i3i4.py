@@ -7,7 +7,7 @@ if str(PKG) not in sys.path: sys.path.insert(0, str(PKG))
 from hilbench import laws
 from hilbench.i3i4_scoring import i3_gates, i4_gates, i5_gates, iomega_gates, memory_gates, i_certification_with_memory
 from hilbench.laws import memory_level_gate
-DS = PKG / "dataset" / "ail_v0_3"
+DS = PKG / "dataset" / "ail_v0_4"
 
 class ThetaManifestTests(unittest.TestCase):
     def test_example_manifest_passes_every_manifest_level_check(self):

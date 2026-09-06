@@ -1,0 +1,69 @@
+{
+  "name": "AI-Level-Method-1.0",
+  "version": "AI-Level-Method-1.0",
+  "fields": {
+    "capability_being_tested": "one new capability/measurement property isolated at this level or band",
+    "canonical_method": "stable named experiment",
+    "experimental_intervention": "what the evaluator changes or withholds",
+    "hidden_or_grounded_state": "truth outside candidate write set",
+    "procedure": "ordered reproducible experimental steps",
+    "controls_or_ablations": "causal/boundary controls preventing shortcut explanations",
+    "primary_metrics": "externally scored outcomes",
+    "certification_gate": "preregistered conjunctive acceptance rule",
+    "required_lower_levels": "cumulative retention set where applicable",
+    "resource_envelope": "tokens/calls/tools/time/state/authority/human assistance",
+    "binding_status": "bound, development-bound, or specification-only",
+    "dataset_version": "0.4",
+    "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+    "benchmark_basis": "AI-Level Bench v0.4",
+    "naming_standard": "AI-Level",
+    "testing_benchmark": "named benchmark family or campaign for this exact level/band/rung",
+    "benchmark_witness": "concrete witness/task/campaign the tested system must face",
+    "external_verifier": "verifier/oracle/evaluator outside the candidate write set",
+    "testing_method": "machine-readable bundle of intervention, procedure, control, verifier, metrics, gate, retention, binding status"
+  },
+  "object_semantics": {
+    "C/I/O/SA": "intelligence coordinates/families",
+    "M": "diagnostic support coordinate",
+    "T": "ordered task difficulty band; not cumulative by itself",
+    "H": "ordered human intervention band; not cumulative by itself",
+    "DI": "derived T×H surface with cumulative lower-T frontier retention at fixed H,p",
+    "HG": "cumulative engineering conformance rung, not intelligence",
+    "U": "gated integration level, not arithmetic average",
+    "GP": "cumulative diagnostic capability sub-ladder inside GUI/screen cognition; parent C; no promotion to C/U"
+  },
+  "framework": "Unified Intelligence Theory and the Artificial Intelligence Level",
+  "benchmark": "AI-Level Bench v0.4",
+  "dataset_version": "0.4",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.4",
+  "naming_standard": "AI-Level",
+  "cumulative_semantics": {
+    "hard_capability_ladders": [
+      "C",
+      "I",
+      "M",
+      "O",
+      "SA1-SAΩ",
+      "U"
+    ],
+    "cumulative_diagnostic": [
+      "GP0-GP5"
+    ],
+    "cumulative_frontier": [
+      "DI across T at fixed H,p"
+    ],
+    "ordered_non_cumulative_axes": [
+      "T",
+      "H"
+    ],
+    "cumulative_engineering": [
+      "HG"
+    ],
+    "special_cases": [
+      "SA0 is baseline and is not retained",
+      "C^GUI inherits C retention; GP can be a blocker on native forms but never a promoter"
+    ]
+  },
+  "coverage_requirement": "Every semantic capability level and every measured band/rung/gate in the framework must have an explicit catalog record naming its benchmark witness and test method. No pointer-only entries are admissible."
+}

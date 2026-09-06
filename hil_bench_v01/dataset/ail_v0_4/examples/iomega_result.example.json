@@ -1,0 +1,53 @@
+{
+  "form_id": "PUB-IOMEGA-001",
+  "minimum_validated_expansion_cycles": 3,
+  "minimum_domain_families": 2,
+  "external_lineage_pass": true,
+  "cycles": [
+    {
+      "domain_family": "causal",
+      "discovery_pass": true,
+      "instrument_validated": true,
+      "pre_successes": 5,
+      "post_successes": 17,
+      "ablation_successes": 6,
+      "total": 20,
+      "reachability_threshold": 0.7,
+      "minimum_causal_effect": 0.2
+    },
+    {
+      "domain_family": "relational",
+      "discovery_pass": true,
+      "instrument_validated": true,
+      "pre_successes": 6,
+      "post_successes": 16,
+      "ablation_successes": 7,
+      "total": 20,
+      "reachability_threshold": 0.7,
+      "minimum_causal_effect": 0.2
+    },
+    {
+      "domain_family": "causal",
+      "discovery_pass": true,
+      "instrument_validated": true,
+      "pre_successes": 4,
+      "post_successes": 15,
+      "ablation_successes": 5,
+      "total": 20,
+      "reachability_threshold": 0.7,
+      "minimum_causal_effect": 0.2
+    }
+  ],
+  "retention": {
+    "I0": true,
+    "I1": true,
+    "I2": true,
+    "I3": true,
+    "I4": true,
+    "I5": true
+  },
+  "dataset_version": "0.4",
+  "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+  "benchmark_basis": "AI-Level Bench v0.4",
+  "naming_standard": "AI-Level"
+}

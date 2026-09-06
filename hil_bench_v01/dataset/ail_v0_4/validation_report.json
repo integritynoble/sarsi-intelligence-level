@@ -1,0 +1,25 @@
+{
+  "dataset_version": "0.4",
+  "status": "PASS",
+  "canonical_method_records": 82,
+  "level_benchmark_matrix_records": 82,
+  "json_files": 89,
+  "jsonl_files": 43,
+  "jsonl_records": 515,
+  "errors": [],
+  "coverage": {
+    "C": 8,
+    "C^GUI": 8,
+    "GP": 6,
+    "I": 7,
+    "M": 7,
+    "O": 7,
+    "SA": 8,
+    "T": 8,
+    "H": 6,
+    "DI": 1,
+    "HG": 8,
+    "U": 8
+  },
+  "note": "Every semantic level/band/rung/gate has explicit benchmark + method fields; C^GUI domain witnesses included."
+}

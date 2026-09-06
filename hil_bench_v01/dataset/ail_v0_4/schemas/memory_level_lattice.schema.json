@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-level-bench.dev/schemas/memory_level_lattice.schema.json",
+  "title": "AI-Level Bench cumulative Memory Capability lattice",
+  "type": "object",
+  "required": [
+    "version",
+    "coordinate",
+    "ordering",
+    "levels"
+  ],
+  "properties": {
+    "version": {
+      "const": "0.6"
+    },
+    "coordinate": {
+      "const": "M"
+    },
+    "ordering": {
+      "const": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "MΩ"
+      ]
+    },
+    "levels": {
+      "type": "object"
+    },
+    "dataset_version": "0.4",
+    "theory_basis": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6",
+    "benchmark_basis": "AI-Level Bench v0.4",
+    "naming_standard": "AI-Level"
+  },
+  "additionalProperties": true
+}

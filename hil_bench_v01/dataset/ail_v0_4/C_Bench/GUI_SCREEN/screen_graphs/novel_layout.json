@@ -1,0 +1,48 @@
+{
+  "graph_id": "novel_layout.json",
+  "nodes": [
+    {
+      "id": "side_panel",
+      "type": "panel",
+      "bbox": [
+        45,
+        95,
+        225,
+        500
+      ]
+    },
+    {
+      "id": "main_panel",
+      "type": "panel",
+      "bbox": [
+        270,
+        95,
+        850,
+        430
+      ]
+    },
+    {
+      "id": "publish",
+      "type": "button",
+      "bbox": [
+        580,
+        335,
+        790,
+        385
+      ],
+      "text": "Publish",
+      "state": "enabled",
+      "affordance": "confirm_publication"
+    }
+  ],
+  "edges": [
+    {
+      "type": "contains",
+      "source": "main_panel",
+      "target": "publish"
+    }
+  ],
+  "meta": {
+    "application_family": "held_out_custom_layout"
+  }
+}

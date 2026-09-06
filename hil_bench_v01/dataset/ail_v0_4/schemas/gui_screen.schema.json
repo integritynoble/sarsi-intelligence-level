@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-Level Bench GUI/screen development form v0.3",
+  "type": "object",
+  "required": [
+    "form_id",
+    "coordinate",
+    "domain",
+    "record_type",
+    "canonical_method",
+    "development_only",
+    "dataset_version",
+    "binding_status"
+  ],
+  "properties": {
+    "form_id": {
+      "type": "string"
+    },
+    "coordinate": {
+      "enum": [
+        "C",
+        "GP"
+      ]
+    },
+    "domain": {
+      "const": "GUI/screen"
+    },
+    "record_type": {
+      "enum": [
+        "gui_perception_diagnostic",
+        "c_gui_witness"
+      ]
+    },
+    "diagnostic_subscale": {
+      "type": "string"
+    },
+    "gp_level": {
+      "type": "string"
+    },
+    "gui_level_label": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "canonical_method": {
+      "type": "string"
+    },
+    "development_only": {
+      "const": true
+    },
+    "dataset_version": {
+      "const": "0.3"
+    },
+    "binding_status": {
+      "enum": [
+        "development-bound",
+        "specification-only"
+      ]
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "oracle_screen_graph": {
+      "type": "string"
+    },
+    "oracle_screen_graphs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "verifier": {
+      "type": "object"
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resource_envelope": {
+      "type": "object"
+    },
+    "human_intervention": {
+      "type": "string"
+    },
+    "theory_basis": {
+      "const": "Unified Intelligence Theory and the Artificial Intelligence Level v2.6"
+    },
+    "benchmark_basis": {
+      "const": "AI-Level Bench v0.3"
+    },
+    "naming_standard": {
+      "const": "AI-Level"
+    },
+    "parent_coordinate": {
+      "type": "string"
+    },
+    "required_lower_levels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cumulative": {
+      "type": "boolean"
+    },
+    "cumulative_type": {
+      "type": "string"
+    },
+    "no_promotion_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "gui_perception_diagnostic"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "gp_level"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "c_gui_witness"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "gui_level_label",
+          "level"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "gui_perception_diagnostic"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "coordinate": {
+            "const": "GP"
+          },
+          "parent_coordinate": {
+            "const": "C"
+          }
+        },
+        "required": [
+          "gp_level",
+          "required_lower_levels",
+          "cumulative",
+          "cumulative_type",
+          "no_promotion_targets"
+        ]
+      }
+    }
+  ]
+}

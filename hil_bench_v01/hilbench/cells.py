@@ -25,12 +25,13 @@ def F(sym, meaning, locus="verifier"):
 K = F("K", "every lower level of the ladder is retained on its own witness", "runner")
 
 def cell(ladder, level, name, construct, witness, control, factors, key, generator=None, runner=None, status="specification",
-         prereq="K_lower", method=None, split="public", episodes_min=12, note=""):
+         prereq="K_lower", method=None, split="public", episodes_min=12, note="", matrix=None):
     from .laws import CUMULATIVE, retention_rule
     gate = " · ".join(f["symbol"] for f in factors)
     return {"ladder": ladder, "cell": level, "cumulative_type": CUMULATIVE[ladder], "retention": retention_rule(ladder, level), "name": name, "construct": construct, "prereq": prereq, "witness": witness,
             "control_arm": control, "factors": factors, "gate": f"z = {gate}", "law": f"A ⊨ {level} ⟺ prereq ∧ z = 1 at p = {P} over ≥ {episodes_min} episodes",
-            "key": key, "generator": generator, "runner": runner, "status": status, "method": method, "split": split, "episodes_min": episodes_min, "note": note}
+            "key": key, "generator": generator, "runner": runner, "status": status, "method": method, "matrix": list(matrix) if matrix else [ladder, level],
+            "split": split, "episodes_min": episodes_min, "note": note}
 
 S = F("S", "the sealed key is matched on the trap-bearing instance")
 A = F("A", "computed key; the trap fires on every seed; the instance is uniquely identifiable", "admissibility")
@@ -105,7 +106,7 @@ cell("T","TΩ","Charter","A bounded charter must be turned into missions that ex
     ("None","hilbench.h_ledger:h_class","hilbench agent / llm (ledger empty by construction)","runs","H0-NONE"),
     ("Exception-only","hilbench.h_ledger:h_class",None,"forms","H1-EXCEPTION"),("Occasional","hilbench.h_ledger:h_class",None,"forms","H2-OCCASIONAL"),
     ("Periodic","hilbench.h_ledger:h_class",None,"forms","H3-PERIODIC"),("Frequent","hilbench.h_ledger:h_class",None,"forms","H4-FREQUENT"),("Continuous","hilbench.h_ledger:h_class",None,"forms","H5-CONTINUOUS")])],
-cell("DI","DF","Delegation frontier","DF_{h,p}(A) = max{T : S_net(A, T, H ≤ h) ≥ p}; the surface is P(delivered ∧ verified) − ρ·P(false completion) per cell.","the four-outcome record over every (band, class) cell","the held-back arm and the ledger",[F("S_net","S_net(T_b, H≤h) ≥ p on ≥ N episodes"),F("K_T","lower bands retained at the same class","runner")],"computed","hilbench.score:frontier_cumulative","hilbench agent / llm / index",status="runs",prereq="the cells' certificates",method="DI-FRONTIER"),
+cell("DI","DF","Delegation frontier","DF_{h,p}(A) = max{T : S_net(A, T, H ≤ h) ≥ p}; the surface is P(delivered ∧ verified) − ρ·P(false completion) per cell.","the four-outcome record over every (band, class) cell","the held-back arm and the ledger",[F("S_net","S_net(T_b, H≤h) ≥ p on ≥ N episodes"),F("K_T","lower bands retained at the same class","runner")],"computed","hilbench.score:frontier_cumulative","hilbench agent / llm / index",status="runs",prereq="the cells' certificates",method="DI-FRONTIER",matrix=("DI", "DI-surface")),
 # ---------------------------------------------------------------- HG (a property of the harness)
 cell("HG","HG0","Baseline","One attempt; no persistence, no retry; actions logged. The baseline arm.","the conformance probe: a scripted executor whose first deliverable is wrong","—",[F("E","the mechanism set is exactly the declared one: nothing undeclared persists or retries","runner")],"computed","hilbench.hg_conform:probe","hilbench hg-conform",status="runs",prereq="none",method="HG0-CONFORM"),
 cell("HG","HG1","Acceptance","A failing public check holds back a delivery; false completions fall against HG0 on the same seeds.","the same scripted executor under HG1","HG0 on the same seeds",[F("E","the acceptance mechanism exists in the frozen contract","runner"),F("U","a publicly failing deliverable is held back","runner"),F("Δ_1","false completions fall against HG0","runner"),K],"computed","hilbench.hg_conform:probe","hilbench hg-conform",status="runs",method="HG1-CONFORM"),

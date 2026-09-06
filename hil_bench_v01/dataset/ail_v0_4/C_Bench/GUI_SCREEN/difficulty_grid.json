@@ -1,0 +1,28 @@
+{
+  "version": "0.7",
+  "vector": [
+    "N_e",
+    "N_p",
+    "d_h",
+    "r_d",
+    "rho_o",
+    "N_w",
+    "N_s",
+    "d_t",
+    "nu_l",
+    "B_res"
+  ],
+  "definitions": {
+    "N_e": "visible element count",
+    "N_p": "panels/windows",
+    "d_h": "hierarchy depth",
+    "r_d": "distractor density",
+    "rho_o": "occlusion/overlap",
+    "N_w": "windows/tabs",
+    "N_s": "relevant interface states",
+    "d_t": "transition depth",
+    "nu_l": "layout novelty",
+    "B_res": "resolution/visual budget"
+  },
+  "rule": "difficulty varies within a C level; do not create pseudo-levels"
+}
