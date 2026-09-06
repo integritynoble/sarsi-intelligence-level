@@ -4,4 +4,4 @@ cd "$(dirname "$0")"
 { cat preamble.tex body.tex; printf '\n\\bibliographystyle{plainnat}\n\\bibliography{references}\n\\end{document}\n'; } > main.tex
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
-cp main.pdf The_AI_Level_Index_v2.pdf
+cp main.pdf The_AI_Level_Index_v2_0.pdf
