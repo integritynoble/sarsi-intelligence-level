@@ -1,7 +1,7 @@
-"""The latent HIL Index: an unbounded, difficulty-calibrated scale fitted over canonical evidence units.
+"""The latent AI-Level Index: an unbounded, difficulty-calibrated scale fitted over canonical evidence units.
 
 Following the index paper: for a binary evidence unit i on coordinate d, P(Y_mdi = 1) = sigma(theta_md - b_i) (the
-one-parameter form; discrimination a_i = 1 in v1), theta_H = sum_d w_d theta_md, HILIndex = 100 + s * theta_H with
+one-parameter form; discrimination a_i = 1 in v1), theta_H = sum_d w_d theta_md, \mathrm{AILI} = 100 + s * theta_H with
 s = 10 and equal weights. Items are pooled across every model record in `records/` (same benchmark version, same
 split), so the scale is a property of the population of rows and a new row is placed by the SAME item difficulties
 once anchors are frozen. Until anchors are ratified the fit is a CURRENT-FIT DIAGNOSTIC and says so in its output.
@@ -73,7 +73,7 @@ def fit_rasch(obs: dict, iters: int = 200, ridge: float = 0.01):
 def latent_index(records: list, weights: dict = WEIGHTS, s: float = S_SCALE) -> dict:
     """records: list of (label, record dict). Fits one Rasch scale per coordinate over all models and returns the
     per-coordinate thetas, the headline theta_H with renormalized weights over the coordinates present, and
-    HILIndex = 100 + s * theta_H, with standard errors."""
+    \mathrm{AILI} = 100 + s * theta_H, with standard errors."""
     per_coord = {}
     for label, R in records:
         for unit, d, y in evidence_units(R): per_coord.setdefault(d, {})[(label, unit)] = y

@@ -1,4 +1,4 @@
-"""Development scoring helpers for HIL-Bench public reference forms v0.4.
+"""Development scoring helpers for AI-Level Bench public reference forms v0.4.
 
 Point-estimate gates are for runner development only. Official certification should
 use preregistered uncertainty rules and independent promotion.

@@ -1,0 +1,12 @@
+{
+  "form_id": "PUB-CGUI3-001",
+  "native": 0.35,
+  "oracle_screen": 0.85,
+  "perfect_actuator": 0.38,
+  "oracle_strategy": 0.62,
+  "delta_GP": 0.5,
+  "delta_act": 0.03,
+  "gp_level": "GP2",
+  "c_gui_level": "C^GUI_3",
+  "interpretation": "large oracle-screen gain suggests perception/grounding is the primary bottleneck; actuator gain is small"
+}

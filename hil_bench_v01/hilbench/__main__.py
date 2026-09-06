@@ -1,4 +1,4 @@
-"""HIL-Bench command line.
+"""AI-Level Bench command line.
 
   selftest        offline: generators, computed keys, reference solvers, named traps, law admissibility
   agent           measure a frozen model-harness pair as it is (--with-o adds the organizational suite)
@@ -81,7 +81,7 @@ def _build_parser() -> argparse.ArgumentParser:
     a = sub.add_parser("agent"); a.add_argument("--exec", dest="executor", required=True, help="command template containing {prompt}"); common(a, 300)
     a.add_argument("--with-o", action="store_true", help="also run the organizational suite (O0 routing, O1 org-memory with ablated arm)")
     l = sub.add_parser("llm"); common(l, 120); l.add_argument("--api", choices=("openai", "anthropic"), default="openai"); l.add_argument("--seeds-per-family", type=int, default=2)
-    ix = sub.add_parser("index", help="the HIL Index: one number per bare model over the reference ladder, three seeds per family"); common(ix, 120)
+    ix = sub.add_parser("index", help="the AI-Level Index: one number per bare model over the reference ladder, three seeds per family"); common(ix, 120)
     ix.add_argument("--api", choices=("openai", "anthropic"), default="openai"); ix.add_argument("--seeds-per-family", type=int, default=3)
     ix.add_argument("--base", default=os.environ.get("HILBENCH_LLM_BASE")); ix.add_argument("--key", default=os.environ.get("HILBENCH_LLM_KEY")); ix.add_argument("--model", default=os.environ.get("HILBENCH_LLM_MODEL"))
     l.add_argument("--base", default=os.environ.get("HILBENCH_LLM_BASE")); l.add_argument("--key", default=os.environ.get("HILBENCH_LLM_KEY")); l.add_argument("--model", default=os.environ.get("HILBENCH_LLM_MODEL"))
@@ -97,7 +97,7 @@ def _build_parser() -> argparse.ArgumentParser:
     i5 = sub.add_parser("i5", help="run the I5-DISC development campaign on the cancer field agent"); i5.add_argument("--label", required=True); i5.add_argument("--exec", dest="executor", required=True); i5.add_argument("--root", type=Path, required=True)
     i5.add_argument("--limit-a", type=int, default=1800); i5.add_argument("--limit-b", type=int, default=600)
     i5t = sub.add_parser("i5-transfer", help="re-run only the transfer arms of a validated I5 campaign, restoring the pair's own staged note as project memory"); i5t.add_argument("--root", type=Path, required=True); i5t.add_argument("--exec", dest="executor", required=True); i5t.add_argument("--limit-b", type=int, default=600); i5t.add_argument("--staged-from", type=Path, default=None)
-    lt = sub.add_parser("latent", help="fit the unbounded latent HIL Index over every bare-model record (current-fit diagnostic until anchors are ratified)")
+    lt = sub.add_parser("latent", help="fit the unbounded latent AI-Level Index over every bare-model record (current-fit diagnostic until anchors are ratified)")
     lt.add_argument("--records", type=Path, default=Path(__file__).resolve().parents[1] / "records"); lt.add_argument("--split", choices=("public", "private"), default="public"); lt.add_argument("--out", type=Path, default=None)
     c = sub.add_parser("commit-private"); c.add_argument("--salt-file", required=True)
     return ap

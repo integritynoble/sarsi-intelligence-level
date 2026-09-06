@@ -1,0 +1,58 @@
+{
+  "graph_id": "login_screen.json",
+  "nodes": [
+    {
+      "id": "username",
+      "type": "text_field",
+      "bbox": [
+        280,
+        170,
+        620,
+        215
+      ],
+      "text": "alex@example.test",
+      "state": "enabled"
+    },
+    {
+      "id": "password",
+      "type": "password_field",
+      "bbox": [
+        280,
+        270,
+        620,
+        315
+      ],
+      "text": "********",
+      "state": "enabled"
+    },
+    {
+      "id": "signin",
+      "type": "button",
+      "bbox": [
+        360,
+        360,
+        540,
+        410
+      ],
+      "text": "Sign In",
+      "state": "enabled",
+      "affordance": "submit_login"
+    },
+    {
+      "id": "forgot",
+      "type": "link",
+      "bbox": [
+        374,
+        440,
+        540,
+        466
+      ],
+      "text": "Forgot password?",
+      "state": "enabled"
+    }
+  ],
+  "edges": [],
+  "meta": {
+    "layout_family": "login_form"
+  }
+}

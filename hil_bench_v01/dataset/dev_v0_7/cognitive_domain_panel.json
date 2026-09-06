@@ -1,0 +1,18 @@
+{
+  "version": "0.7",
+  "coordinate": "C",
+  "domains": [
+    "general",
+    "science",
+    "mathematics",
+    "abstract",
+    "code",
+    "multimodal/spatial",
+    "GUI/screen",
+    "long-context"
+  ],
+  "gui_domain_label": "C^GUI",
+  "gui_perception_diagnostic": "GP0-GP5",
+  "policy": "GP is diagnostic; C^GUI preserves original C0-C6/CΩ semantics; no one-to-one GP-to-C mapping",
+  "missing_modality": "report N/A rather than zero unless the claimed profile explicitly requires GUI/screen"
+}

@@ -6,7 +6,7 @@ cd "$script_dir"
 
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
-cp main.pdf Unified_Intelligence_Theory_and_HIL_v2_4.pdf
+cp main.pdf Unified_Intelligence_Theory_and_AI_Level_v2_4.pdf
 
 tar --sort=name \
     --mtime='UTC 2026-09-03' \
@@ -15,7 +15,7 @@ tar --sort=name \
     main.tex main.bbl references.bib fig_hsc.pdf fig_regime.pdf anc
 
 sha256sum \
-    Unified_Intelligence_Theory_and_HIL_v2_4.pdf \
+    Unified_Intelligence_Theory_and_AI_Level_v2_4.pdf \
     unified-v24-arxiv.tar.gz \
     > SHA256SUMS
 

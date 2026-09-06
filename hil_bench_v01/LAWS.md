@@ -1,4 +1,4 @@
-# Canonical test laws (HIL-1.0 candidate)
+# Canonical test laws (AI-Level-1.0 candidate)
 
 **Level semantics ≠ canonical test law ≠ test form.** A level's meaning is fixed by a *law*; a dataset is a
 *witness* to that law. New witness forms extend the evidence for a level; they never move the level.
@@ -100,4 +100,18 @@ restores the prior hash.
   their own termination reasons.
 - **Private, human locus** — the laws marked human above (SA3, I4, O2 and above, open-ended bands). The rubric, blinding
   and acceptance rule are part of the standard, not the judge's discretion. These are the only route to a level
-  above U2, so free HIL-Bench can never certify U3.
+  above U2, so free AI-Level Bench can never certify U3.
+
+
+## GUI/screen: a domain of C, not a level (dataset v0.7, Method B)
+
+`C^GUI_k` is a GUI-grounded witness of the existing level `C_k`; `GP0`–`GP5` is a diagnostic subscale of the screen
+representation supplied to cognition. **`GP ⊂ C^GUI ⊂ C` and `GP_g ≢ C_g`**: no rule of the form `GP3 = C3`, and GP
+never promotes C — the gate is the ordinary `z_CGUI,k = V_GUI,Ck · K_C,<k` with no GP input (`gui_laws.cgui_gate`).
+The Cognitive domain panel is eight domains (`gui_laws.DOMAIN_PANEL`); a system without a screen modality reports
+`C^GUI = N/A`, not zero. Failure is attributed by matched arms — native screenshot, oracle screen graph, perfect
+actuator, optional oracle strategy — with `Δ_GP = Q(oracle_screen) − Q(native)` and `Δ_act = Q(perfect_actuator) −
+Q(native_actuator)` (`gui_laws.failure_record`); oracle-arm success is diagnostic only. One delivered-success endpoint
+counts once, as C or as DI. Difficulty varies *within* a level along `(N_e, N_p, d_h, r_d, ρ_o, N_w, N_s, d_t, ν_l,
+B_res)` and never creates a pseudo-level. `C6`/`CΩ` GUI records are specification-only templates. No GUI form has been
+run through the Core yet: the bare-model executor has no image channel.

@@ -140,7 +140,7 @@ All three experiments run on the Unified Agent Benchmark contract \citep{yang202
 
 \subsection{Experiment B: the harness scaling curve}
 
-Hold the executor fixed. Vary the harness generation. For frozen $m$ and generation $HG_k$, $HSC_m(k) = HLIS(m, HG_k)$; the ordered set is the curve, and the curve is the primary result. Summaries --- HIL-Level, HIL-AUC, HIL-Ceiling, Harness Gain --- are conveniences and one of them is shown below to mislead.
+Hold the executor fixed. Vary the harness generation. For frozen $m$ and generation $HG_k$, $HSC_m(k) = HLIS(m, HG_k)$; the ordered set is the curve, and the curve is the primary result. Summaries --- AIL-Level, AIL-AUC, AIL-Ceiling, Harness Gain --- are conveniences and one of them is shown below to mislead.
 
 Each rung is a strict superset of the one below, enforced by a test, because otherwise a difference between rungs is attributable to nothing. Two rungs that differ only in post-hoc machinery (HG0 versus HG1) are scored from the same executor outputs, because independent runs introduce between-rung variance that exceeds the effect.
 
@@ -230,13 +230,13 @@ Family A, weaker & HG0 & 0.783 & 78.3 & 56.7 & 4 & 0 & 12 \\
 & A stronger & B & A weaker & Reading \\
 \midrule
 $HLIS_{DI}(HG0)$ & 93.3 & 93.3 & 78.3 & the weaker executor starts far behind \\
-HIL-Ceiling & 96.7 & 96.7 & 93.3 & and ends behind \\
+AIL-Ceiling & 96.7 & 96.7 & 93.3 & and ends behind \\
 Harness Gain (gross) & 3.3 & 3.3 & 15.0 & but is 4.5$\times$ more harnessable \\
 Harness Gain (net) & 10.0 & 10.0 & 36.6 & the acceptance rung is the largest step \\
-HIL-AUC & 95.0 & 95.0 & 88.8 & ranks by baseline, not by harness response \\
+AIL-AUC & 95.0 & 95.0 & 88.8 & ranks by baseline, not by harness response \\
 \bottomrule
 \end{tabularx}
-\caption{Curve summaries. HIL-AUC ranks the executors in the opposite order to Harness Gain, which is why the curve is primary and the composite a convenience.}
+\caption{Curve summaries. AIL-AUC ranks the executors in the opposite order to Harness Gain, which is why the curve is primary and the composite a convenience.}
 \label{tab:summary}
 \end{table}
 

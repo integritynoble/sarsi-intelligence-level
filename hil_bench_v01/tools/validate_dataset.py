@@ -9,11 +9,12 @@ from __future__ import annotations
 import json, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from hilbench import laws
+from hilbench import laws, gui_laws
 
 I3_PARTS = ("theta_contract", "diagnostic_tasks", "acceptable_causal_diagnoses", "behavior_probes", "paired_evaluation", "regression_suite", "campaign_pass_formula")
 I4_PARTS = ("baseline_i3_refs", "psi_change_contract", "primary_metric", "minimum_meaningful_improvement", "meta_campaign_pass_formula")
 KNOWN_LEVELS = set(laws.LAWS) | {f"C{i}" for i in range(6)} | {f"I{i}" for i in range(6)} | {"IΩ", "MΩ"} | {f"M{i}" for i in range(6)} | {f"O{i}" for i in range(5)} | {f"SA{i}" for i in range(7)} | {f"T{i}" for i in range(6)}
+KNOWN_LEVELS = set(KNOWN_LEVELS) | gui_laws.GUI_LEVELS   # v0.7: GP0-GP5 diagnostics and the C6/COmega GUI templates
 M_METHODS = {"M0-EPH", "M1-RST", "M2-PROV", "M3-CONSOL", "M4-MGMT", "M5-LONG", "MOMEGA-EVOLVE"}
 
 def load(p: Path):
@@ -82,7 +83,7 @@ def validate(root: Path) -> list:
     return problems
 
 if __name__ == "__main__":
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_6")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "dataset" / "dev_v0_7")
     probs = validate(root)
     print("\n".join(probs) if probs else f"dataset ok: {root}")
     sys.exit(1 if probs else 0)

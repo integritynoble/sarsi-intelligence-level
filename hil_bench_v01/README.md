@@ -1,10 +1,10 @@
-# HIL-Bench v0.1 — the Harness Intelligence Level benchmark
+# AI-Level Bench v0.1 — the Artificial Intelligence Level benchmark
 
 One instrument, two subjects. An **agent** is measured as the frozen model–harness pair it is and gets
 a per-coordinate profile `[C, I, O, T, H, SA]` with `M` beside `I`, the gated Unified level `U*`, and
 the continuous pair score **HLIS**. An **LLM** is measured through the reference harnesses HG0, HG1
-and HG2 built into this package and gets `HLIS_DI` per rung and from them **HIL-Level, HIL-AUC,
-HIL-Ceiling, Harness Gain and HIL-Score**. Framework: Unified Intelligence v2.4 (`../unified_v24`).
+and HG2 built into this package and gets `HLIS_DI` per rung and from them **AIL-Level, AIL-AUC,
+AIL-Ceiling, Harness Gain and AIL-Score**. Framework: Unified Intelligence v2.4 (`../unified_v24`).
 
 Design constraints, in the order they were given: simple; fast; cheap; real; public and private splits
 in the manner of ARC-AGI. The Core run is about thirty executor calls, no human in the loop, every
@@ -26,7 +26,7 @@ SA3 (naming the mechanism of one's own failure) and the organizational suite are
 
 ## Core-H: where a competent pair still fails
 
-Two models a tenfold cost apart both scored HIL 90.0 on the Core alone -- the instrument's ceiling, not theirs.
+Two models a tenfold cost apart both scored AI-Level 90.0 on the Core alone -- the instrument's ceiling, not theirs.
 Core-H adds four items chosen because a competent pair takes the wrong method, and admitted only after
 `hilbench/laws.py` verified each satisfies its level's law:
 
@@ -82,13 +82,13 @@ runner refuses a salt that does not match. The salt is not in this repository.
 ## Scoring
 
 Weights are predeclared (`hilbench/score.py`): band weights 1, 2, 4, 8, 16, 32; gate at 0.80; the delivered-
-outcome primitive at ρ = 1; HLIS an equal-weight geometric mean over the coordinates present; HIL-Score
+outcome primitive at ρ = 1; HLIS an equal-weight geometric mean over the coordinates present; AIL-Score
 = 0.55·AUC + 0.35·Ceiling + 0.10·Harnessability. A level is a reading on the public split until the
 private split is run by an evaluator who did not build the pair.
 
-## Development dataset (`dataset/dev_v0_6/`)
+## Development dataset (`dataset/dev_v0_7/`)
 
-The public development/reference forms of the memory-integrated v6 revision (78 forms; the canonical memory-level lattice, the MΩ interface and permission contracts, Φ-candidate and telemetry schemas, a worked no-level-skipping refusal; 35 parameterized M-Bench
+The public development/reference forms of the memory-integrated v6 revision (92 forms; the canonical memory-level lattice, the MΩ interface and permission contracts, Φ-candidate and telemetry schemas, a worked no-level-skipping refusal; 35 parameterized M-Bench
 forms — five per level M0–MΩ, each with a difficulty grid, a metric contract, a memory-manifest schema, a result
 schema and construct-selective controls; `hilbench.memory_scoring.gate` is the per-level metric gate and
 `laws.memory_manifest_check` the manifest check; every row declares bound / development-bound / specification-only): C0–C5, I0–IΩ (I3-THETA
@@ -104,5 +104,5 @@ witness form; `laws.theta_check` accepts its manifest schema.
 `records/private_agent_claude.json` and `records/private_llm_deepseek.json`: seeds derived from the committed salt
 (verified at start), fresh roots, evaluator block in the record, seeds scrubbed. Claude Code pair: C3, M1, I1(+I2),
 O1, SA2, **T0** (one false completion on the unsatisfiable-specification trap), U0, HLIS 65.8 (public: T1, U1, 71.3).
-Bare DeepSeek: HLIS 31.3/39.2/39.2, HIL 35.0 (public 35.2), frontier T0 at every rung. Contrast-type coordinates
+Bare DeepSeek: HLIS 31.3/39.2/39.2, AI-Level 35.0 (public 35.2), frontier T0 at every rung. Contrast-type coordinates
 reproduced exactly; the delegation gate at p=0.80 over four T1 episodes moved on one delivery.

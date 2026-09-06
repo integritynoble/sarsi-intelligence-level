@@ -18,21 +18,21 @@
 
 \bibitem[Yang(2026{\natexlab{a}})]{yang2026hilbench}
 Chengshuai Yang.
-\newblock {HIL-Bench} v0.1: the harness intelligence level benchmark (code,
+\newblock {HIL-Bench} v0.1: the artificial intelligence level benchmark (code,
   generators, public split, private-split commitment), 2026{\natexlab{a}}.
 \newblock
   \url{https://github.com/integritynoble/AI4Science/tree/main/sarsi_intelligence_level/hil_bench_v01}.
 
 \bibitem[Yang(2026{\natexlab{b}})]{yang2026hilbenchpaper}
 Chengshuai Yang.
-\newblock {HIL-Bench}: Measuring the intelligence level of agents and language
-  models in every coordinate, 2026{\natexlab{b}}.
+\newblock {AI-Level Bench}: Measuring the intelligence level of agents and
+  language models in every coordinate, 2026{\natexlab{b}}.
 \newblock Draft v0.1,
   \url{https://github.com/integritynoble/sarsi-intelligence-level}.
 
 \bibitem[Yang and Xue(2026)]{yang2026unified}
 Chengshuai Yang and Ting Xue.
-\newblock Unified intelligence theory and the harness intelligence level: A
+\newblock Unified intelligence theory and the artificial intelligence level: A
   cumulative, harness-measurable hierarchy.
 \newblock \emph{Version 2.4,
   \url{https://github.com/integritynoble/sarsi-intelligence-level}}, 2026.

@@ -1,9 +1,9 @@
-"""The HIL-Bench Core run: every coordinate, about thirty executor calls, one process per episode.
+"""The AI-Level Bench Core run: every coordinate, about thirty executor calls, one process per episode.
 
   agent mode  measure a pair as it is: C items, M1 restart (+ablated floor), SA1, SA2, T.H at H0 with a
               blind forecast per episode (SA-cal, a calibration diagnostic beside SA), the I2 transfer pair (+ablated floor). Output: profile, U*, HLIS.
   llm mode    measure a model through the reference harnesses: the T.H families under HG0, HG1, HG2.
-              Output: HLIS_DI per rung and HIL.
+              Output: HLIS_DI per rung and AI-Level.
 """
 from __future__ import annotations
 import json, os, shutil, sys, tempfile, time
@@ -405,10 +405,10 @@ def run_llm(label, root: Path, seeds, limit=120, env=None, log=print, base=None,
     R["index"] = hil_index(R); (root / "index.json").write_text(json.dumps(R["index"], indent=1))
     (root / "record.json").write_text(json.dumps(R, indent=1)); log("HIL " + json.dumps(R["HIL"])); log("INDEX " + json.dumps(R["index"])); return R
 
-INDEX_VERSION = "HIL-Index v1 (HIL-Bench v0.2 Core+Core-H, reference ladder HG0-HG2)"
+INDEX_VERSION = "AI-Level Index v1.1 (AI-Level Bench v0.2 Core+Core-H, reference ladder HG0-HG2; record keys keep the HIL_ prefix of v1)"
 
 def hil_index(R: dict) -> dict:
-    """One number per MODEL: the HIL-Score of the bare model across the reference ladder, with the components that
+    """One number per MODEL: the AIL-Score of the bare model across the reference ladder, with the components that
     explain it. It is the first index whose number goes DOWN when a model bluffs: a delivered wrong answer is priced
     at rho, a declared inability is held back for free, and the harness gain says how much accountability adds."""
     rungs = R["rungs"]; eps_all = [e for V in rungs.values() for e in V["episodes"]]
